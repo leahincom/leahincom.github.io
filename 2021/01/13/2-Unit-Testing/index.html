@@ -6,21 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>Archives - leah</title>
+    <title>2. Unit Testing - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{}</script>
-    <meta name="description" content="Continuously Developing Developer">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Testingnot in the production, just for element checking before a deployment\n\nAutomated Tests반복되는 test 작업을 줄임\n\n\nUnitreceives a single case input, return certain type of outputwouldn’t pass unless the entire process works oute.g. validation email &amp; password -&gt; similar word -&gt; set the function as a unit with diff. input\n\nIntegrationmultiple single inputs -&gt; integrates into a single outpute.g. email / pw -&gt; basic email : password\n\nE2Eend-to-enduser-perspective, operation on the browser, entire process without manually fixing ithard to point where the error comes out\n\n\n\nTDD\nTest Driven Developmentfail-fix-refactor\n\n\none test at a time\n\nBDD\nBahaviour Driven DevelopmentE2E\n\n\ntesting single unit, element to test entirely\nimplemented in non-technical env. -&gt; no coding\n\ndiff: technical or not\n\nTesting Frameworks: the function to run the tests (in JS - Mocha, Jasmine(React), Jest)# : e.g. #func() : recall all the elements including func()\n\ndescribe()\nit()\nHooks; rather than list singly, wrap it for organizing\nstart a server, create DB\n\n\n\n12345678910111213141516171819describe(&#39;hooks&#39;, function() &#123;  before(function() &#123;    &#x2F;&#x2F; runs once before the first test in this block  &#125;);  after(function() &#123;    &#x2F;&#x2F; runs once after the last test in this block  &#125;);  beforeEach(function() &#123;    &#x2F;&#x2F; runs before each test in this block  &#125;);  afterEach(function() &#123;    &#x2F;&#x2F; runs after each test in this block  &#125;);  &#x2F;&#x2F; test cases&#125;);\n\ninside each hooks: it()\n\n\nAssertion\nassert -&gt; technical, not readable\n\nbuilt-in in Node.js\n\n\ntypeOf(var, typeof, [msg])\nequal(var, val, [msg])\nlengthOf(var, length, [msg])\n\n\nexpect e.g. expect(foo).to.not.equal(&#39;bar&#39;)\n\nshoulde.g. foo.should.not.equal(&#39;bar&#39;)\n\n\n123456789101112131415161718192021222324252627282930313233function add (a, b) &#123;\tif (typeof a &#x3D;&#x3D;&#x3D; &#39;number&#39; &amp;&amp; b &#x3D;&#x3D;&#x3D; undefined) return a;    if (typeof a !&#x3D;&#x3D; &#39;number&#39; || typeof b !&#x3D;&#x3D; &#39;number&#39;) return undefined;\t&#x2F;&#x2F; return 8;    return a + b;&#125;&#x2F;&#x2F; write the test firstvar should &#x3D; require(&#39;chai&#39;).should();describe(&#39;Add&#39;, function () &#123;\tit(&#39;should sum two numbers&#39;, function () &#123;    \tadd(3, 5).should.equal(8);        &#x2F;&#x2F; add another ex to fail add(a,b) &#123;return 8;&#125; function        add(2, 7).should.equal(9);    &#125;);        it(&#39;should return undefined when is not passed numbers&#39;, function () &#123;    \tshould.equal(add(&#39;hello&#39;, &#39;world&#39;), undefined);        &#x2F;&#x2F; add(&#39;&#39;).should.equal이 아닌 이유:        &#x2F;&#x2F; undefined을 반환하면 undefined.should.equal()이 되고,        &#x2F;&#x2F; 이는 error(cannot read the property)를 반환 (undefined의 function 정의 불가)        &#x2F;&#x2F; 따라서 should.equal(add(&#39;&#39;))의 결과와 undefined를 matching                should.equal(add(1, &#39;world&#39;), undefined);        should.equal(add(&#39;hello&#39;, 1), undefined);    &#125;);        it(&#39;should return the number if only one is passed&#39;, function () &#123;    \tshould.equal(add(8), 8);        &#x2F;&#x2F; add(8).should.equal(8);    &#125;);&#125;);\n\nREFkent c.dodds webmochajs.com\n","dateCreated":"2021-01-13T22:46:23+00:00","dateModified":"2021-01-13T23:18:12+00:00","datePublished":"2021-01-13T22:46:23+00:00","description":"","headline":"2. Unit Testing","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/13/2-Unit-Testing/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/01/13/2-Unit-Testing/"}</script>
+    <meta name="description" content="Testingnot in the production, just for element checking before a deployment  Automated Tests반복되는 test 작업을 줄임   Unitreceives a single case input, return certain type of outputwouldn’t pass unless the e">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="leah">
-<meta property="og:url" content="http://leahincom.github.io/archives/index.html">
+<meta property="og:title" content="2. Unit Testing">
+<meta property="og:url" content="http://leahincom.github.io/2021/01/13/2-Unit-Testing/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Continuously Developing Developer">
+<meta property="og:description" content="Testingnot in the production, just for element checking before a deployment  Automated Tests반복되는 test 작업을 줄임   Unitreceives a single case input, return certain type of outputwouldn’t pass unless the e">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-13T22:46:23.000Z">
+<meta property="article:modified_time" content="2021-01-13T23:18:12.797Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="javascript">
@@ -45,6 +47,8 @@
     
 
     
+        
+    
 </head>
 
     <body>
@@ -58,7 +62,7 @@
         
     
 
-<header id="header" data-behavior="2">
+<header id="header" data-behavior="5">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -91,7 +95,7 @@
         
     
 
-<nav id="sidebar" data-behavior="2">
+<nav id="sidebar" data-behavior="5">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -285,30 +289,22 @@
 </nav>
 
             
-            <div id="main" data-behavior="2"
+            <div id="main" data-behavior="5"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/01/13/2-Unit-Testing/"
-                            aria-label=": 2. Unit Testing"
-                        >
-                            2. Unit Testing
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            2. Unit Testing
+        </h1>
+    
+    
+        <div class="post-meta">
     <time datetime="2021-01-13T22:46:23+00:00">
 	
 		    Jan 13, 2021
@@ -317,10 +313,13 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><p>not in the production, just for element checking before a deployment</p>
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><p>not in the production, just for element checking before a deployment</p>
 <blockquote>
 <p>Automated Tests<br>반복되는 test 작업을 줄임</p>
 </blockquote>
@@ -382,161 +381,114 @@
 
 <h3 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h3><p>kent c.dodds web<br>mochajs.com</p>
 
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/01/13/2-Unit-Testing/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
+
+
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/01/12/function-with-multiple-invocations/"
-                            aria-label=": JS) function with multiple invocations"
-                        >
-                            JS) function with multiple invocations
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-01-12T18:39:15+00:00">
-	
-		    Jan 12, 2021
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <blockquote>
-<p>a function that adds from two invocations.<br>e.g. twoAdds(3)(4) -&gt; 7</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function twoAdds (num) &#123;</span><br><span class="line">	return function (num2) &#123;</span><br><span class="line">		return num+num2;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; twoAdds(num1)(num2)</span><br><span class="line">&#x2F;&#x2F; twoAdds(num1) &#x2F;&#x2F; return value as a function -&gt; value(num2)</span><br></pre></td></tr></table></figure>
-<p><code>currying</code> is the technique of converting a function that takes multiple arguments into a sequence of functions that each take a single argument.</p>
-<h3 id="Closure-vs-Currying"><a href="#Closure-vs-Currying" class="headerlink" title="Closure vs Currying"></a>Closure vs Currying</h3><ul>
-<li>Closure: allows a function to access variables in a parent scope without passing them in.</li>
-<li>Currying: the pattern of functions that immediately evaluate and return other functions.</li>
-</ul>
-<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p><a target="_blank" rel="noopener" href="http://www.youtube.com/watch?v=hRJrp17WnOE&amp;feature=youtu.be">www.youtube.com/watch?v=hRJrp17WnOE&amp;feature=youtu.be</a></p>
-
-                    
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
                         
-
-
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
                     
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/01/12/function-with-multiple-invocations/"
+                    data-tooltip="JS) function with multiple invocations"
+                    aria-label="NEXT: JS) function with multiple invocations"
+                >
                     
-                        <p>
-                            <a
-                                href="/2021/01/12/function-with-multiple-invocations/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
             
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/01/11/1-Git/"
-                            aria-label=": 1. Git"
-                        >
-                            1. Git
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-01-11T23:16:22+00:00">
-	
-		    Jan 11, 2021
-    	
-    </time>
-    
-</div>
-
-            </div>
             
-                <div class="postShorten-content">
-                    <h2 id="Git-workflow"><a href="#Git-workflow" class="headerlink" title="Git workflow"></a>Git workflow</h2><p>-fork<br>-clone<br>-commit (status, diff, add)<br>-push<br>(-sync with upstream)<br>-pull requests</p>
-<hr>
-<p>cd //project root folder//<br>git clone //project url//<br>cd //project folder//<br>npm install: get the all dependencies, environment needed for the repository<br>-&gt; <em>needed for</em> npm test: debugging<br>git checkout – ./: A checkout is an operation that moves the HEAD ref pointer to a specified commit.<br>git status: check changes<br>ls -a: local machine 외에 변경 사항이 확인되는지<br>// lists all files including hidden files starting with ‘. ‘<br>💥 git add . =&gt; git status 시 여전히 modified file이 존재할 수 있음: 다른 폴더에 변경된 파일이 있을 때<br>-&gt; git status로 항상 check하기!!<br>git commit -m “first commit”<br>gs: == git status, branch HEAD 확인할 것!<br>git log: commit log 확인<br>git remote -v: branch 확인<br>git push: push everything to the repo, up-to-date<br>💥 synchronization<br>git remote -v<br>git remote add upstream //original repo url – forked one//<br>git pull upstream master: upstream -&gt; master branch로 if any change exists, pull</p>
-<blockquote>
-<p>Q. override =&gt; version conflict =&gt;<br>pull request로 merge 전 conflict 방지<br>Q. pull request, sync with upstream의 목적 =&gt;</p>
-<ol>
-<li>sync with upstream: orinigal repo의 changes 확인</li>
-<li>pull request: 💥 MERGE와 구분! feedback, review의 목적<br>=&gt; when git history gets merged, adds commit on the top and merge<br>=&gt; pull request before merge minimizes unuseful conflicts -&gt; check others’ codes<br>★ Merge: add changes of ver2. to ver1.</li>
-</ol>
-</blockquote>
-<p>git commit //file1// //file2// : individually commit 가능</p>
-<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p>velog.io/@zansol/Pull-Request-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/01/11/1-Git/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/13/2-Unit-Testing/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/13/2-Unit-Testing/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/13/2-Unit-Testing/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
         
         
-        <li class="pagination-number">page 1 of 1</li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+        
+    </div>
+</article>
 
 
 
@@ -547,6 +499,151 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/01/12/function-with-multiple-invocations/"
+                    data-tooltip="JS) function with multiple invocations"
+                    aria-label="NEXT: JS) function with multiple invocations"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/13/2-Unit-Testing/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/13/2-Unit-Testing/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/13/2-Unit-Testing/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/13/2-Unit-Testing/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/13/2-Unit-Testing/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/13/2-Unit-Testing/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
             
         </div>
         
@@ -596,6 +693,8 @@
 
 <!--SCRIPTS END-->
 
+
+    
 
 
 
