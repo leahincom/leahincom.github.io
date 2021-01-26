@@ -300,10 +300,101 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/2021/01/23/6-Algorithm/"
-                            aria-label=": 6. Algorithm"
+                            href="/2021/01/26/7-BFS-DFS/"
+                            aria-label=": 7. BFS &amp; DFS"
                         >
-                            6. Algorithm
+                            7. BFS &amp; DFS
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-26T22:40:08+00:00">
+	
+		    Jan 26, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p><strong>Breadth First Search</strong></p>
+<ul>
+<li>Queue<br> : go same level node first and go deeper</li>
+</ul>
+<blockquote>
+<ul>
+<li>push root node</li>
+<li>pop root node<ul>
+<li>push children nodes <em>From Left to Right</em></li>
+</ul>
+</li>
+<li>pop child node one by one and…<ul>
+<li>push children nodes from child (((repeat)))</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">queue.enqueue(this);</span><br><span class="line">while (queue.length &gt; 0) &#123;</span><br><span class="line">    current &#x3D; queue.dequeue();</span><br><span class="line">    children &#x3D; current.children;</span><br><span class="line">    for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    	queue.enqueue(children[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p><strong>Depth First Search</strong></p>
+<ul>
+<li>Stack<br> : go down to the leaf node first and move on to the other children</li>
+</ul>
+<blockquote>
+<ul>
+<li>push root node</li>
+<li>pop root node<ul>
+<li>push children nodes <em>From Left To Right</em></li>
+</ul>
+</li>
+<li>pop child node and…<ul>
+<li>push children nodes of child (((repeat)))</li>
+</ul>
+</li>
+<li>pop the leaf node<ul>
+<li>pop other leaf nodes on the same level / push children nodes of the node on the same level</li>
+</ul>
+</li>
+<li>pop parent node and move on (((repeat)))</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">stack.push(this);</span><br><span class="line">while (stack.length &gt; 0) &#123;</span><br><span class="line">  current &#x3D; stack.pop();</span><br><span class="line">  children &#x3D; current.children;</span><br><span class="line">  for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    stack.push(children[i]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/26/7-BFS-DFS/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/01/23/6-Complexity-Analysis/"
+                            aria-label=": 6. Complexity Analysis"
+                        >
+                            6. Complexity Analysis
                         </a>
                     
                 </h1>
@@ -378,7 +469,7 @@ e.g. mergeSort</li>
                     
                         <p>
                             <a
-                                href="/2021/01/23/6-Algorithm/#post-footer"
+                                href="/2021/01/23/6-Complexity-Analysis/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
