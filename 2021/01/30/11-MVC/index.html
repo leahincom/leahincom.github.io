@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>10. Back-end Frameworks - leah</title>
+    <title>11. MVC - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Back-end FrameworksBack-endexecuted on server\nFront-endexecuted on clinet (browser, mobile, tablet…)\nWeb serversoftware on the physical machine (hardware)\nNode JS\nserver side javascript\ninteract with file (operating) systems\nFIFO\ntime difference: 1sec ~ 28hours\n\n\nnon-blocking === asynchronous Input/Output\nallows other operation on the other side\ndelegate to someone something and do other stuff =&gt; higher efficiency\nmulti-threads (JS: single-thread) : e.g. one looking for the answer / one doing help request\n\n\nallows to use the same language on client and server\n\nNpm\nnpm init\ninitialise the packages\n\n\npackage . json\nlist all dependencies\n\n\nnpm install / uninstall (–save-dev)\nnpm publish\ncreate lib -&gt; give authority as an open source\n\n\n\n\nweekly download counts\nlast publish (updated) version\n\nAsyncSync: fs 설정 시 다른 scope에서도 접근 가능하지만Async: fs 안에서만 data 접근 가능, 밖 scope에서 접근 불가\nHTTPmsg sending to client: “Hello World”\nModules\nNode.js: common js Module\n\n\nModule: object\nrequire: read exports and take object’s properties in it, assign to the variable which is reading the require, follow the execution in the file\nmodule.exports : what the file does/ passes\n\ntouch: create filenodemon: watches the file, automatically restart (reload, update) the file\n","dateCreated":"2021-01-29T21:49:40+00:00","dateModified":"2021-01-29T21:50:02+00:00","datePublished":"2021-01-29T21:49:40+00:00","description":"","headline":"10. Back-end Frameworks","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/"}</script>
-    <meta name="description" content="Back-end FrameworksBack-endexecuted on server Front-endexecuted on clinet (browser, mobile, tablet…) Web serversoftware on the physical machine (hardware) Node JS server side javascript interact with">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Error Handlingtry {// something that might go wrong} catch (e) {// handle error}\nMVCmodel: starting making logics from herecontroller: conductor of orchestra, routerreceive the requestthe only part to communicate with the outside partcoming to the controllersending from the controllerknowing who to call and packages the content, send it to the outsideview: html structure filled in template with no datasend the filled template back to the controller.gitignore : files to be ignored when creating a reporouter.get(“/add/:var”) –&gt; req.params = {var: ‘value’}\n","dateCreated":"2021-01-30T20:03:34+00:00","dateModified":"2021-01-30T20:04:03+00:00","datePublished":"2021-01-30T20:03:34+00:00","description":"","headline":"11. MVC","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/30/11-MVC/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/01/30/11-MVC/"}</script>
+    <meta name="description" content="Error Handlingtry {&#x2F;&#x2F; something that might go wrong} catch (e) {&#x2F;&#x2F; handle error} MVCmodel: starting making logics from herecontroller: conductor of orchestra, routerreceive the requestthe only part to">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="10. Back-end Frameworks">
-<meta property="og:url" content="http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/index.html">
+<meta property="og:title" content="11. MVC">
+<meta property="og:url" content="http://leahincom.github.io/2021/01/30/11-MVC/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Back-end FrameworksBack-endexecuted on server Front-endexecuted on clinet (browser, mobile, tablet…) Web serversoftware on the physical machine (hardware) Node JS server side javascript interact with">
+<meta property="og:description" content="Error Handlingtry {&#x2F;&#x2F; something that might go wrong} catch (e) {&#x2F;&#x2F; handle error} MVCmodel: starting making logics from herecontroller: conductor of orchestra, routerreceive the requestthe only part to">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-01-29T21:49:40.000Z">
-<meta property="article:modified_time" content="2021-01-29T21:50:02.502Z">
+<meta property="article:published_time" content="2021-01-30T20:03:34.000Z">
+<meta property="article:modified_time" content="2021-01-30T20:04:03.652Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="javascript">
@@ -300,14 +300,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            10. Back-end Frameworks
+            11. MVC
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-01-29T21:49:40+00:00">
+    <time datetime="2021-01-30T20:03:34+00:00">
 	
-		    Jan 29, 2021
+		    Jan 30, 2021
     	
     </time>
     
@@ -319,54 +319,8 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="Back-end-Frameworks"><a href="#Back-end-Frameworks" class="headerlink" title="Back-end Frameworks"></a>Back-end Frameworks</h2><h3 id="Back-end"><a href="#Back-end" class="headerlink" title="Back-end"></a>Back-end</h3><p>executed on server</p>
-<h3 id="Front-end"><a href="#Front-end" class="headerlink" title="Front-end"></a>Front-end</h3><p>executed on clinet (browser, mobile, tablet…)</p>
-<h3 id="Web-server"><a href="#Web-server" class="headerlink" title="Web server"></a>Web server</h3><p>software on the physical machine (hardware)</p>
-<h3 id="Node-JS"><a href="#Node-JS" class="headerlink" title="Node JS"></a>Node JS</h3><ul>
-<li>server side javascript<ul>
-<li>interact with file (operating) systems</li>
-<li>FIFO</li>
-<li>time difference: 1sec ~ 28hours</li>
-</ul>
-</li>
-<li>non-blocking === asynchronous Input/Output<ul>
-<li>allows other operation on the other side</li>
-<li>delegate to someone something and do other stuff =&gt; higher efficiency</li>
-<li>multi-threads (<em>JS: single-thread</em>) : e.g. one looking for the answer / one doing help request</li>
-</ul>
-</li>
-<li>allows to use the same language on client and server</li>
-</ul>
-<h4 id="Npm"><a href="#Npm" class="headerlink" title="Npm"></a>Npm</h4><ul>
-<li>npm init<ul>
-<li>initialise the packages</li>
-</ul>
-</li>
-<li>package . json<ul>
-<li>list all dependencies</li>
-</ul>
-</li>
-<li>npm install / uninstall (–save-dev)</li>
-<li>npm publish<ul>
-<li>create lib -&gt; give authority as an open source</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>weekly download counts</li>
-<li>last publish (updated) version</li>
-</ul>
-<h4 id="Async"><a href="#Async" class="headerlink" title="Async"></a>Async</h4><p>Sync: fs 설정 시 다른 scope에서도 접근 가능하지만<br>Async: fs 안에서만 data 접근 가능, 밖 scope에서 접근 불가</p>
-<h4 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h4><p>msg sending to client: “Hello World”</p>
-<h4 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h4><ul>
-<li>Node.js: common js Module</li>
-</ul>
-<ul>
-<li>Module: object</li>
-<li>require: read exports and take object’s properties in it, assign to the variable which is reading the require, follow the execution in the file</li>
-<li>module.exports : what the file does/ passes</li>
-</ul>
-<p>touch: create file<br>nodemon: watches the file, automatically restart (reload, update) the file</p>
+            <h3 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h3><p>try {// something that might go wrong} catch (e) {// handle error}</p>
+<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>model: starting making logics from here<br>controller: conductor of orchestra, router<br>receive the request<br>the only part to communicate with the outside part<br>coming to the controller<br>sending from the controller<br>knowing who to call and packages the content, send it to the outside<br>view: html structure filled in template with no data<br>send the filled template back to the controller<br>.gitignore : files to be ignored when creating a repo<br>router.get(“/add/:var”) –&gt; req.params = {var: ‘value’}</p>
 
             
 
@@ -381,14 +335,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/01/30/11-MVC/"
-                    data-tooltip="11. MVC"
-                    aria-label="PREVIOUS: 11. MVC"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -398,9 +349,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/01/28/9-Networking/"
-                    data-tooltip="9. Networking"
-                    aria-label="NEXT: 9. Networking"
+                    href="/2021/01/29/10-Back-end-Frameworks/"
+                    data-tooltip="10. Back-end Frameworks"
+                    aria-label="NEXT: 10. Back-end Frameworks"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -425,7 +376,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/30/11-MVC/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -438,7 +389,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/30/11-MVC/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -451,7 +402,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/30/11-MVC/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -496,14 +447,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/01/30/11-MVC/"
-                    data-tooltip="11. MVC"
-                    aria-label="PREVIOUS: 11. MVC"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -513,9 +461,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/01/28/9-Networking/"
-                    data-tooltip="9. Networking"
-                    aria-label="NEXT: 9. Networking"
+                    href="/2021/01/29/10-Back-end-Frameworks/"
+                    data-tooltip="10. Back-end Frameworks"
+                    aria-label="NEXT: 10. Back-end Frameworks"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -540,7 +488,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/30/11-MVC/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -553,7 +501,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/30/11-MVC/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -566,7 +514,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/30/11-MVC/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -600,7 +548,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/30/11-MVC/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -613,7 +561,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/"
+                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/30/11-MVC/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -626,7 +574,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/29/10-Back-end-Frameworks/"
+                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/30/11-MVC/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
