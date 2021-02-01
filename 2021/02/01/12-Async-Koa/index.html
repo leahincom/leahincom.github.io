@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>11. MVC - leah</title>
+    <title>12. Async, Koa - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"\nLinux ‘/‘ path\n\nGET / POSTadrian0220.tistory.com/209\n\n\nError Handlingtry {// something that might go wrong} catch (e) {// handle error}\nMVCmodel: starting making logics from herecontroller: conductor of orchestra, routerreceive the requestthe only part to communicate with the outside partcoming to the controllersending from the controllerknowing who to call and packages the content, send it to the outsideview: html structure filled in template with no datasend the filled template back to the controller.gitignore : files to be ignored when creating a repo\nnpm handle-barsprogrammingsummaries.tistory.com/381\n","dateCreated":"2021-01-30T20:03:34+00:00","dateModified":"2021-01-30T20:11:31+00:00","datePublished":"2021-01-30T20:03:34+00:00","description":"","headline":"11. MVC","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/30/11-MVC/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/01/30/11-MVC/"}</script>
-    <meta name="description" content="Linux ‘&#x2F;‘ path  GET &#x2F; POSTadrian0220.tistory.com&#x2F;209   Error Handlingtry {&#x2F;&#x2F; something that might go wrong} catch (e) {&#x2F;&#x2F; handle error} MVCmodel: starting making logics from herecontroller: conductor">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Async Patterns\nCallbacks\n\ntoo complicated -&gt; simplified in ES6\n\nPromisesreduce too many handlings, make into clean code (sugar coding)\n\nPromise -&gt; invoke reject/ resolve as callbacks\nthen -&gt; happen arg first and then ‘then’ method\n\nresolve : when we find the answer\nreject : st went wrong\n\n\nAsync / Await\n\n\nasync === setTimeOut\nawait : pending promise/ valid answer from crypto.compare\n\n☝️\ncallback functions are stacked: first cb -&gt; first wait + call the second stacked callback functionsecond cb -&gt; second wait + third callback✌️\nnested callback functionswait for set time and execute the next one=&gt; create new Promise and put setTimeOut in it, use resolve function\nasync=&gt; create asyn function, use await\nprint 1 time\n\nasync itself is just a normal function, but return the value as Promise\n\nKoaSearch everything by ‘koa ~’\n\npromise based -&gt; always use ‘async’ !\napp.use() : go to the next() middleware\nexpress : req/res each send/receive info to/from the clientkoa : ctx controls everything, koa sends/receives the info all by itself, control everything related to the client\n\nawait next() -&gt; call bodyParser -&gt; call router -&gt; call allowedMethods…*** install packages needed !!\n\ncontroller -&gt; usually the end of the chain (next -&gt; next -&gt; … -&gt; ctrl)\ncontroller doesn’t send anything to the client (no res.send()) =&gt; app (koa obj) sends the info to the client after receiving everything from the chain of next &amp; controller\n\nresponse aliases : Not method!, just variables!\n\nctx.request.body -&gt; approach the request of body\n\nPre-requisitecode . // vscodenpm init –y // npm initialisetouch index.js router.js controller.js // make filesnpm i koa@ npm i “koa pkg” // search!\nindex.jsmiddleware ( 1 -&gt; 2 -&gt; 3 ) -&gt; router: doorman –&gt; controller: manager)\n\napp.use(router) : always the last, right before to the controller\n\nset the middleware next(), which is the ‘router.routes()’ in this case\nrouter.jsconst Router = require(‘koa-router’)\ncontroller.jsget the id as params.id\n\nall the vars sent via the address are saved in the ctx.request.params!e.g. /:name/:id –&gt; ctx.request.params.name, ctx.request.params.id\n\n","dateCreated":"2021-02-01T18:56:16+00:00","dateModified":"2021-02-01T18:56:37+00:00","datePublished":"2021-02-01T18:56:16+00:00","description":"","headline":"12. Async, Koa","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/01/12-Async-Koa/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/01/12-Async-Koa/"}</script>
+    <meta name="description" content="Async Patterns Callbacks  too complicated -&gt; simplified in ES6  Promisesreduce too many handlings, make into clean code (sugar coding)  Promise -&gt; invoke reject&#x2F; resolve as callbacks then -&gt;">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="11. MVC">
-<meta property="og:url" content="http://leahincom.github.io/2021/01/30/11-MVC/index.html">
+<meta property="og:title" content="12. Async, Koa">
+<meta property="og:url" content="http://leahincom.github.io/2021/02/01/12-Async-Koa/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Linux ‘&#x2F;‘ path  GET &#x2F; POSTadrian0220.tistory.com&#x2F;209   Error Handlingtry {&#x2F;&#x2F; something that might go wrong} catch (e) {&#x2F;&#x2F; handle error} MVCmodel: starting making logics from herecontroller: conductor">
+<meta property="og:description" content="Async Patterns Callbacks  too complicated -&gt; simplified in ES6  Promisesreduce too many handlings, make into clean code (sugar coding)  Promise -&gt; invoke reject&#x2F; resolve as callbacks then -&gt;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-01-30T20:03:34.000Z">
-<meta property="article:modified_time" content="2021-01-30T20:11:31.891Z">
+<meta property="article:published_time" content="2021-02-01T18:56:16.000Z">
+<meta property="article:modified_time" content="2021-02-01T18:56:37.694Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="javascript">
@@ -300,14 +300,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            11. MVC
+            12. Async, Koa
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-01-30T20:03:34+00:00">
+    <time datetime="2021-02-01T18:56:16+00:00">
 	
-		    Jan 30, 2021
+		    Feb 01, 2021
     	
     </time>
     
@@ -319,15 +319,60 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <ul>
-<li><p>Linux ‘/‘ path</p>
-</li>
-<li><p>GET / POST<br>adrian0220.tistory.com/209</p>
-</li>
+            <h3 id="Async-Patterns"><a href="#Async-Patterns" class="headerlink" title="Async Patterns"></a>Async Patterns</h3><ol>
+<li>Callbacks</li>
+</ol>
+<p>too complicated -&gt; simplified in ES6</p>
+<ol start="2">
+<li>Promises<br>reduce too many handlings, make into clean code (sugar coding)</li>
+</ol>
+<p>Promise -&gt; invoke reject/ resolve as callbacks</p>
+<p>then -&gt; happen arg first and then ‘then’ method</p>
+<ul>
+<li>resolve : when we find the answer</li>
+<li>reject : st went wrong</li>
 </ul>
-<h3 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h3><p>try {// something that might go wrong} catch (e) {// handle error}</p>
-<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>model: starting making logics from here<br>controller: conductor of orchestra, router<br>receive the request<br>the only part to communicate with the outside part<br>coming to the controller<br>sending from the controller<br>knowing who to call and packages the content, send it to the outside<br>view: html structure filled in template with no data<br>send the filled template back to the controller<br>.gitignore : files to be ignored when creating a repo</p>
-<p>npm handle-bars<br>programmingsummaries.tistory.com/381</p>
+<ol start="3">
+<li>Async / Await</li>
+</ol>
+<ul>
+<li>async === setTimeOut</li>
+<li>await : pending promise/ valid answer from crypto.compare</li>
+</ul>
+<p>☝️</p>
+<dl><dt>callback functions are stacked<br>: first cb -&gt; first wait + call the second stacked callback function</dt><dd>second cb -&gt; second wait + third callback</dd></dl><p>✌️</p>
+<dl><dt>nested callback functions</dt><dd>wait for set time and execute the next one</dd></dl><p>=&gt; create new Promise and put setTimeOut in it, use resolve function</p>
+<p>async<br>=&gt; create asyn function, use await</p>
+<p>print 1 time</p>
+<ul>
+<li>async itself is just a normal function, but return the value as Promise</li>
+</ul>
+<h2 id="Koa"><a href="#Koa" class="headerlink" title="Koa"></a>Koa</h2><p>Search everything by ‘koa ~’</p>
+<ul>
+<li>promise based -&gt; always use ‘async’ !</li>
+<li>app.use() : go to the next() middleware</li>
+<li>express : req/res each send/receive info to/from the client<br>koa : ctx controls everything, koa sends/receives the info all by itself, control everything related to the client</li>
+</ul>
+<p>await next() -&gt; call bodyParser -&gt; call router -&gt; call allowedMethods…<br>*** install packages needed !!</p>
+<ul>
+<li>controller -&gt; usually the end of the chain (next -&gt; next -&gt; … -&gt; ctrl)</li>
+<li>controller doesn’t send anything to the client (no res.send()) =&gt; app (koa obj) sends the info to the client after receiving everything from the chain of next &amp; controller</li>
+</ul>
+<p>response aliases : Not method!, just variables!</p>
+<ul>
+<li>ctx.request.body -&gt; approach the request of body</li>
+</ul>
+<h3 id="Pre-requisite"><a href="#Pre-requisite" class="headerlink" title="Pre-requisite"></a>Pre-requisite</h3><p>code . // vscode<br>npm init –y // npm initialise<br>touch index.js router.js controller.js // make files<br>npm i koa<br>@ npm i “koa pkg” // search!</p>
+<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><p>middleware ( 1 -&gt; 2 -&gt; 3 ) -&gt; router: doorman –&gt; controller: manager)</p>
+<ul>
+<li>app.use(router) : always the last, right before to the controller</li>
+</ul>
+<p>set the middleware next(), which is the ‘router.routes()’ in this case</p>
+<h4 id="router-js"><a href="#router-js" class="headerlink" title="router.js"></a>router.js</h4><p>const Router = require(‘koa-router’)</p>
+<h4 id="controller-js"><a href="#controller-js" class="headerlink" title="controller.js"></a>controller.js</h4><p>get the id as params.id</p>
+<ul>
+<li>all the vars sent via the address are saved in the ctx.request.params!<br>e.g. /:name/:id –&gt; ctx.request.params.name, ctx.request.params.id</li>
+</ul>
 
             
 
@@ -342,14 +387,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/01/12-Async-Koa/"
-                    data-tooltip="12. Async, Koa"
-                    aria-label="PREVIOUS: 12. Async, Koa"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -359,9 +401,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/01/29/10-Back-end-Frameworks/"
-                    data-tooltip="10. Back-end Frameworks"
-                    aria-label="NEXT: 10. Back-end Frameworks"
+                    href="/2021/01/30/11-MVC/"
+                    data-tooltip="11. MVC"
+                    aria-label="NEXT: 11. MVC"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -386,7 +428,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/30/11-MVC/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/01/12-Async-Koa/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -399,7 +441,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/30/11-MVC/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/01/12-Async-Koa/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -412,7 +454,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/30/11-MVC/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/01/12-Async-Koa/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -457,14 +499,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/01/12-Async-Koa/"
-                    data-tooltip="12. Async, Koa"
-                    aria-label="PREVIOUS: 12. Async, Koa"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -474,9 +513,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/01/29/10-Back-end-Frameworks/"
-                    data-tooltip="10. Back-end Frameworks"
-                    aria-label="NEXT: 10. Back-end Frameworks"
+                    href="/2021/01/30/11-MVC/"
+                    data-tooltip="11. MVC"
+                    aria-label="NEXT: 11. MVC"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -501,7 +540,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/30/11-MVC/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/01/12-Async-Koa/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -514,7 +553,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/30/11-MVC/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/01/12-Async-Koa/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -527,7 +566,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/30/11-MVC/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/01/12-Async-Koa/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -561,7 +600,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/01/30/11-MVC/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/01/12-Async-Koa/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -574,7 +613,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/01/30/11-MVC/"
+                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/01/12-Async-Koa/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -587,7 +626,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/01/30/11-MVC/"
+                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/01/12-Async-Koa/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
