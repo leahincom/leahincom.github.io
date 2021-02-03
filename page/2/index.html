@@ -300,6 +300,118 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/01/13/2-Unit-Testing/"
+                            aria-label=": 2. Unit Testing"
+                        >
+                            2. Unit Testing
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-13T22:46:23+00:00">
+	
+		    Jan 13, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><p>not in the production, just for element checking before a deployment</p>
+<blockquote>
+<p>Automated Tests<br>반복되는 test 작업을 줄임</p>
+</blockquote>
+<ol>
+<li><p>Unit<br>receives a single case input, return certain type of output<br><em>wouldn’t pass unless the entire process works out</em><br>e.g. validation email &amp; password -&gt; similar word -&gt; set the function as a unit with diff. input</p>
+</li>
+<li><p>Integration<br>multiple single inputs -&gt; integrates into a single output<br>e.g. email / pw -&gt; basic email : password</p>
+</li>
+<li><p>E2E<br><code>end-to-end</code><br>user-perspective, operation on the browser, entire process without manually fixing it<br><em>hard to point where the error comes out</em></p>
+</li>
+</ol>
+<hr>
+<h2 id="TDD"><a href="#TDD" class="headerlink" title="TDD"></a>TDD</h2><blockquote>
+<p>Test Driven Development<br><code>fail-fix-refactor</code></p>
+</blockquote>
+<ul>
+<li>one test at a time</li>
+</ul>
+<h2 id="BDD"><a href="#BDD" class="headerlink" title="BDD"></a>BDD</h2><blockquote>
+<p>Bahaviour Driven Development<br><code>E2E</code></p>
+</blockquote>
+<ul>
+<li>testing single unit, element to test entirely</li>
+<li>implemented in non-technical env. -&gt; no coding</li>
+</ul>
+<p><code>diff: technical or not</code></p>
+<hr>
+<h4 id="Testing-Frameworks-the-function-to-run-the-tests-in-JS-Mocha-Jasmine-React-Jest"><a href="#Testing-Frameworks-the-function-to-run-the-tests-in-JS-Mocha-Jasmine-React-Jest" class="headerlink" title="Testing Frameworks: the function to run the tests (in JS - Mocha, Jasmine(React), Jest)"></a>Testing Frameworks: the function to run the tests (in JS - Mocha, Jasmine(React), Jest)</h4><p><code># : e.g. #func() : recall all the elements including func()</code></p>
+<ul>
+<li>describe()</li>
+<li>it()</li>
+<li>Hooks; rather than list singly, wrap it for organizing<ul>
+<li>start a server, create DB</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">describe(&#39;hooks&#39;, function() &#123;</span><br><span class="line">  before(function() &#123;</span><br><span class="line">    &#x2F;&#x2F; runs once before the first test in this block</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  after(function() &#123;</span><br><span class="line">    &#x2F;&#x2F; runs once after the last test in this block</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  beforeEach(function() &#123;</span><br><span class="line">    &#x2F;&#x2F; runs before each test in this block</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  afterEach(function() &#123;</span><br><span class="line">    &#x2F;&#x2F; runs after each test in this block</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; test cases</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>inside each hooks: it()</em></p>
+</blockquote>
+<hr>
+<h3 id="Assertion"><a href="#Assertion" class="headerlink" title="Assertion"></a>Assertion</h3><ol>
+<li><p>assert -&gt; technical, not readable</p>
+<ul>
+<li>built-in in Node.js</li>
+</ul>
+<ul>
+<li>typeOf(var, typeof, [msg])</li>
+<li>equal(var, val, [msg])</li>
+<li>lengthOf(var, length, [msg])</li>
+</ul>
+</li>
+<li><p>expect<br><code> e.g. expect(foo).to.not.equal(&#39;bar&#39;)</code></p>
+</li>
+<li><p>should<br><code>e.g. foo.should.not.equal(&#39;bar&#39;)</code></p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">function add (a, b) &#123;</span><br><span class="line">	if (typeof a &#x3D;&#x3D;&#x3D; &#39;number&#39; &amp;&amp; b &#x3D;&#x3D;&#x3D; undefined) return a;</span><br><span class="line">    if (typeof a !&#x3D;&#x3D; &#39;number&#39; || typeof b !&#x3D;&#x3D; &#39;number&#39;) return undefined;</span><br><span class="line">	&#x2F;&#x2F; return 8;</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; write the test first</span><br><span class="line">var should &#x3D; require(&#39;chai&#39;).should();</span><br><span class="line"></span><br><span class="line">describe(&#39;Add&#39;, function () &#123;</span><br><span class="line">	it(&#39;should sum two numbers&#39;, function () &#123;</span><br><span class="line">    	add(3, 5).should.equal(8);</span><br><span class="line">        &#x2F;&#x2F; add another ex to fail add(a,b) &#123;return 8;&#125; function</span><br><span class="line">        add(2, 7).should.equal(9);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    it(&#39;should return undefined when is not passed numbers&#39;, function () &#123;</span><br><span class="line">    	should.equal(add(&#39;hello&#39;, &#39;world&#39;), undefined);</span><br><span class="line">        &#x2F;&#x2F; add(&#39;&#39;).should.equal이 아닌 이유:</span><br><span class="line">        &#x2F;&#x2F; undefined을 반환하면 undefined.should.equal()이 되고,</span><br><span class="line">        &#x2F;&#x2F; 이는 error(cannot read the property)를 반환 (undefined의 function 정의 불가)</span><br><span class="line">        &#x2F;&#x2F; 따라서 should.equal(add(&#39;&#39;))의 결과와 undefined를 matching</span><br><span class="line">        </span><br><span class="line">        should.equal(add(1, &#39;world&#39;), undefined);</span><br><span class="line">        should.equal(add(&#39;hello&#39;, 1), undefined);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    it(&#39;should return the number if only one is passed&#39;, function () &#123;</span><br><span class="line">    	should.equal(add(8), 8);</span><br><span class="line">        &#x2F;&#x2F; add(8).should.equal(8);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h3><p>kent c.dodds web<br>mochajs.com</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/13/2-Unit-Testing/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/01/12/function-with-multiple-invocations/"
                             aria-label=": JS) function with multiple invocations"
                         >
