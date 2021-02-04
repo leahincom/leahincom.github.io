@@ -301,6 +301,99 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/02/04/14-NoSQL/"
+                            aria-label=": 14. NoSQL"
+                        >
+                            14. NoSQL
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-04T20:05:54+00:00">
+	
+		    Feb 04, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><p>Non-relational databases</p>
+<ul>
+<li>don’t enforce a predeifend structure on data</li>
+<li>main families are: document, key-value, and graph</li>
+<li>offer a lot of flexibility, but less guarantees</li>
+</ul>
+<h3 id="Document-Databases"><a href="#Document-Databases" class="headerlink" title="Document Databases"></a>Document Databases</h3><ul>
+<li>document looks like JSON</li>
+<li>don’t need constraints</li>
+<li>id: automatically generated</li>
+<li>each document can be represented as a row, BUT document is document inside the collection!</li>
+<li>structured to store big data</li>
+</ul>
+<ul>
+<li>mongoDB</li>
+</ul>
+<ul>
+<li>faster than SQL</li>
+</ul>
+<h3 id="Key-Value-Databases"><a href="#Key-Value-Databases" class="headerlink" title="Key-Value Databases"></a>Key-Value Databases</h3><p>key-value pair</p>
+<ul>
+<li>faster than any other dbs</li>
+<li>set as a pair and get right away</li>
+<li>used for caching</li>
+</ul>
+<ul>
+<li>Redis<br>You can run atomic operations on these types, like appending to a string;incrementing the value in a hash; pushing an element to a list; computing set intersection, union and difference; or getting the member with highest ranking in a sorted set.</li>
+</ul>
+<p>To achieve top performance, Redis works with an in-memory dataset. Depending on your use case, you can persist your data either by periodically dumping the dataset to disk or by appending each command to a disk-based log. You can also disable persistence if you just need a feature-rich, networked, in-memory cache.<br>Redis also supports asynchronous replication, with very fast non-blocking first synchronization, auto-reconnection with partial resynchronization on net split.</p>
+<h3 id="Graph-Databases"><a href="#Graph-Databases" class="headerlink" title="Graph Databases"></a>Graph Databases</h3><ul>
+<li>arrow: who follows whom</li>
+</ul>
+<ul>
+<li>similar to ASCII Art</li>
+<li>graph structure: map, social network</li>
+</ul>
+<h3 id="Relational-vs-Non-relational"><a href="#Relational-vs-Non-relational" class="headerlink" title="Relational vs. Non-relational"></a>Relational vs. Non-relational</h3><p>Dimension    Relational    Non-relational<br>Schema    Predefined    Flexible<br>Scaling    Vertical    Horizontal<br>ACID    Yes    No guarantees</p>
+<p>In database systems, ACID (Atomicity, Consistency, Isolation, Durability) refers to a standard set of properties that guarantee database transactions are processed reliably. ACID is especially concerned with how a database recovers from any failure that might occur while processing a transaction.</p>
+<ul>
+<li>Non-relational =&gt; covers the relational databases’ constraints<br>SQL: MySQL is a relational database management system (RDBMS) from the Oracle Corporation. Like other relational systems, MySQL stores data in tables and uses structured query language (SQL) for database access. When MySQL developers need to access data in an application, they merge data from multiple tables together in a process called a join. In MySQL, you predefine your database schema and set up rules to govern the relationships between fields in your tables.</li>
+</ul>
+<p>NoSQL: MongoDB is a NoSQL database that stores data as JSON-like documents. Documents store related information together and use the MongoDB query language (MQL) for access. Fields can vary from document to document - there is no need to declare the structure of documents to the system, as documents are self-describing. Optionally, schema validation can be used to enforce data governance controls over each collection.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/04/14-NoSQL/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/02/03/13-ORM/"
                             aria-label=": 13. ORM"
                         >

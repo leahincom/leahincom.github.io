@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>13. ORM - leah</title>
+    <title>14. NoSQL - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"ORMSObject Relational Mappings\nSequelizemodel/user.jsnot need to define model.js by ourselves\n\ntable not exists: create table/ exists: send the related table\n\nmodels/task.jsconnecting db with new Sequelize.readditSync(__dirname) : return array of files in __dirname// [index.js, task.js, user.js, .hide].filter(file =&gt; {return (file.indexOf(‘.’) !== 0) &amp;&amp; (file !== ‘index.js’) &amp;&amp; (file.slice(-3) === ‘.js’);// [task.js, user.js].forEach(file =&gt; {const model = require(path.join(__dirname, file))// create absolute path to the file(sequelize, Sequelize.DataTypes);// requiring models/task.js functiondb[model.name] = model// model: task / user// each file will be the model objectdb.sequelize = sequelize;db.Sequelize = Sequelize;// take the code and put it individually// leave this code without changing anything in this filemodule.exports = dbexports db with passing db\n👇\nindex.js\nset-up everything in the db perfectly and then connect to the client\n\nrouter.jsnot changed\ncontrollers/user.jsmodels/user.jsmodels/task.js— complete declare, now run —\nmodels/index.jsmkcd [dir]npm init -ytouch [index.js] [router.js]npm i sequelize koa koa-router\ncreate table\nget the model : model/index.js, createStudent -&gt; not view, create template with the data\nget student by id, bodyparser -&gt; router.post\n* npm weekly downloads : &gt;= 7M *\n","dateCreated":"2021-02-03T21:01:17+00:00","dateModified":"2021-02-03T21:01:30+00:00","datePublished":"2021-02-03T21:01:17+00:00","description":"","headline":"13. ORM","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/03/13-ORM/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/03/13-ORM/"}</script>
-    <meta name="description" content="ORMSObject Relational Mappings Sequelizemodel&#x2F;user.jsnot need to define model.js by ourselves  table not exists: create table&#x2F; exists: send the related table  models&#x2F;task.jsconnecting db with new Sequ">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"NoSQLNon-relational databases\n\ndon’t enforce a predeifend structure on data\nmain families are: document, key-value, and graph\noffer a lot of flexibility, but less guarantees\n\nDocument Databases\ndocument looks like JSON\ndon’t need constraints\nid: automatically generated\neach document can be represented as a row, BUT document is document inside the collection!\nstructured to store big data\n\n\nmongoDB\n\n\nfaster than SQL\n\nKey-Value Databaseskey-value pair\n\nfaster than any other dbs\nset as a pair and get right away\nused for caching\n\n\nRedisYou can run atomic operations on these types, like appending to a string;incrementing the value in a hash; pushing an element to a list; computing set intersection, union and difference; or getting the member with highest ranking in a sorted set.\n\nTo achieve top performance, Redis works with an in-memory dataset. Depending on your use case, you can persist your data either by periodically dumping the dataset to disk or by appending each command to a disk-based log. You can also disable persistence if you just need a feature-rich, networked, in-memory cache.Redis also supports asynchronous replication, with very fast non-blocking first synchronization, auto-reconnection with partial resynchronization on net split.\nGraph Databases\narrow: who follows whom\n\n\nsimilar to ASCII Art\ngraph structure: map, social network\n\nRelational vs. Non-relationalDimension    Relational    Non-relationalSchema    Predefined    FlexibleScaling    Vertical    HorizontalACID    Yes    No guarantees\nIn database systems, ACID (Atomicity, Consistency, Isolation, Durability) refers to a standard set of properties that guarantee database transactions are processed reliably. ACID is especially concerned with how a database recovers from any failure that might occur while processing a transaction.\n\nNon-relational =&gt; covers the relational databases’ constraintsSQL: MySQL is a relational database management system (RDBMS) from the Oracle Corporation. Like other relational systems, MySQL stores data in tables and uses structured query language (SQL) for database access. When MySQL developers need to access data in an application, they merge data from multiple tables together in a process called a join. In MySQL, you predefine your database schema and set up rules to govern the relationships between fields in your tables.\n\nNoSQL: MongoDB is a NoSQL database that stores data as JSON-like documents. Documents store related information together and use the MongoDB query language (MQL) for access. Fields can vary from document to document - there is no need to declare the structure of documents to the system, as documents are self-describing. Optionally, schema validation can be used to enforce data governance controls over each collection.\n","dateCreated":"2021-02-04T20:05:54+00:00","dateModified":"2021-02-04T20:06:08+00:00","datePublished":"2021-02-04T20:05:54+00:00","description":"","headline":"14. NoSQL","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/04/14-NoSQL/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/04/14-NoSQL/"}</script>
+    <meta name="description" content="NoSQLNon-relational databases  don’t enforce a predeifend structure on data main families are: document, key-value, and graph offer a lot of flexibility, but less guarantees  Document Databases docume">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="13. ORM">
-<meta property="og:url" content="http://leahincom.github.io/2021/02/03/13-ORM/index.html">
+<meta property="og:title" content="14. NoSQL">
+<meta property="og:url" content="http://leahincom.github.io/2021/02/04/14-NoSQL/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="ORMSObject Relational Mappings Sequelizemodel&#x2F;user.jsnot need to define model.js by ourselves  table not exists: create table&#x2F; exists: send the related table  models&#x2F;task.jsconnecting db with new Sequ">
+<meta property="og:description" content="NoSQLNon-relational databases  don’t enforce a predeifend structure on data main families are: document, key-value, and graph offer a lot of flexibility, but less guarantees  Document Databases docume">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-03T21:01:17.000Z">
-<meta property="article:modified_time" content="2021-02-03T21:01:30.206Z">
+<meta property="article:published_time" content="2021-02-04T20:05:54.000Z">
+<meta property="article:modified_time" content="2021-02-04T20:06:08.637Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="javascript">
@@ -300,14 +300,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            13. ORM
+            14. NoSQL
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-02-03T21:01:17+00:00">
+    <time datetime="2021-02-04T20:05:54+00:00">
 	
-		    Feb 03, 2021
+		    Feb 04, 2021
     	
     </time>
     
@@ -319,23 +319,48 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="ORMS"><a href="#ORMS" class="headerlink" title="ORMS"></a>ORMS</h2><p>Object Relational Mappings</p>
-<h3 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h3><h4 id="model-user-js"><a href="#model-user-js" class="headerlink" title="model/user.js"></a>model/user.js</h4><p>not need to define model.js by ourselves</p>
+            <h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><p>Non-relational databases</p>
 <ul>
-<li>table not exists: create table/ exists: send the related table</li>
+<li>don’t enforce a predeifend structure on data</li>
+<li>main families are: document, key-value, and graph</li>
+<li>offer a lot of flexibility, but less guarantees</li>
 </ul>
-<h4 id="models-task-js"><a href="#models-task-js" class="headerlink" title="models/task.js"></a>models/task.js</h4><p>connecting db with new Sequelize<br>.readditSync(__dirname) : return array of files in __dirname<br>// [index.js, task.js, user.js, .hide]<br>.filter(file =&gt; {<br>return (file.indexOf(‘.’) !== 0) &amp;&amp; (file !== ‘index.js’) &amp;&amp; (file.slice(-3) === ‘.js’);<br>// [task.js, user.js]<br>.forEach(file =&gt; {<br>const model = require(path.join(__dirname, file))<br>// create absolute path to the file<br>(sequelize, Sequelize.DataTypes);<br>// requiring models/task.js function<br>db[model.name] = model<br>// model: task / user<br>// each file will be the model object<br>db.sequelize = sequelize;<br>db.Sequelize = Sequelize;<br>// take the code and put it individually<br>// leave this code without changing anything in this file<br>module.exports = db<br>exports db with passing db</p>
-<p>👇</p>
-<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><ul>
-<li>set-up everything in the db perfectly and then connect to the client</li>
+<h3 id="Document-Databases"><a href="#Document-Databases" class="headerlink" title="Document Databases"></a>Document Databases</h3><ul>
+<li>document looks like JSON</li>
+<li>don’t need constraints</li>
+<li>id: automatically generated</li>
+<li>each document can be represented as a row, BUT document is document inside the collection!</li>
+<li>structured to store big data</li>
 </ul>
-<h4 id="router-js"><a href="#router-js" class="headerlink" title="router.js"></a>router.js</h4><p>not changed</p>
-<h4 id="controllers-user-js"><a href="#controllers-user-js" class="headerlink" title="controllers/user.js"></a>controllers/user.js</h4><h4 id="models-user-js"><a href="#models-user-js" class="headerlink" title="models/user.js"></a>models/user.js</h4><h4 id="models-task-js-1"><a href="#models-task-js-1" class="headerlink" title="models/task.js"></a>models/task.js</h4><p>— complete declare, now run —</p>
-<h4 id="models-index-js"><a href="#models-index-js" class="headerlink" title="models/index.js"></a>models/index.js</h4><p>mkcd [dir]<br>npm init -y<br>touch [index.js] [router.js]<br>npm i sequelize koa koa-router</p>
-<p>create table</p>
-<p>get the model : model/index.js, createStudent -&gt; not view, create template with the data</p>
-<p>get student by id, bodyparser -&gt; router.post</p>
-<p><strong>* npm weekly downloads : &gt;= 7M *</strong></p>
+<ul>
+<li>mongoDB</li>
+</ul>
+<ul>
+<li>faster than SQL</li>
+</ul>
+<h3 id="Key-Value-Databases"><a href="#Key-Value-Databases" class="headerlink" title="Key-Value Databases"></a>Key-Value Databases</h3><p>key-value pair</p>
+<ul>
+<li>faster than any other dbs</li>
+<li>set as a pair and get right away</li>
+<li>used for caching</li>
+</ul>
+<ul>
+<li>Redis<br>You can run atomic operations on these types, like appending to a string;incrementing the value in a hash; pushing an element to a list; computing set intersection, union and difference; or getting the member with highest ranking in a sorted set.</li>
+</ul>
+<p>To achieve top performance, Redis works with an in-memory dataset. Depending on your use case, you can persist your data either by periodically dumping the dataset to disk or by appending each command to a disk-based log. You can also disable persistence if you just need a feature-rich, networked, in-memory cache.<br>Redis also supports asynchronous replication, with very fast non-blocking first synchronization, auto-reconnection with partial resynchronization on net split.</p>
+<h3 id="Graph-Databases"><a href="#Graph-Databases" class="headerlink" title="Graph Databases"></a>Graph Databases</h3><ul>
+<li>arrow: who follows whom</li>
+</ul>
+<ul>
+<li>similar to ASCII Art</li>
+<li>graph structure: map, social network</li>
+</ul>
+<h3 id="Relational-vs-Non-relational"><a href="#Relational-vs-Non-relational" class="headerlink" title="Relational vs. Non-relational"></a>Relational vs. Non-relational</h3><p>Dimension    Relational    Non-relational<br>Schema    Predefined    Flexible<br>Scaling    Vertical    Horizontal<br>ACID    Yes    No guarantees</p>
+<p>In database systems, ACID (Atomicity, Consistency, Isolation, Durability) refers to a standard set of properties that guarantee database transactions are processed reliably. ACID is especially concerned with how a database recovers from any failure that might occur while processing a transaction.</p>
+<ul>
+<li>Non-relational =&gt; covers the relational databases’ constraints<br>SQL: MySQL is a relational database management system (RDBMS) from the Oracle Corporation. Like other relational systems, MySQL stores data in tables and uses structured query language (SQL) for database access. When MySQL developers need to access data in an application, they merge data from multiple tables together in a process called a join. In MySQL, you predefine your database schema and set up rules to govern the relationships between fields in your tables.</li>
+</ul>
+<p>NoSQL: MongoDB is a NoSQL database that stores data as JSON-like documents. Documents store related information together and use the MongoDB query language (MQL) for access. Fields can vary from document to document - there is no need to declare the structure of documents to the system, as documents are self-describing. Optionally, schema validation can be used to enforce data governance controls over each collection.</p>
 
             
 
@@ -350,14 +375,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/04/14-NoSQL/"
-                    data-tooltip="14. NoSQL"
-                    aria-label="PREVIOUS: 14. NoSQL"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -367,9 +389,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/02/13-Database/"
-                    data-tooltip="13. Database"
-                    aria-label="NEXT: 13. Database"
+                    href="/2021/02/03/13-ORM/"
+                    data-tooltip="13. ORM"
+                    aria-label="NEXT: 13. ORM"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -394,7 +416,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/03/13-ORM/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/04/14-NoSQL/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -407,7 +429,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/03/13-ORM/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/04/14-NoSQL/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -420,7 +442,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/03/13-ORM/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/04/14-NoSQL/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -465,14 +487,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/04/14-NoSQL/"
-                    data-tooltip="14. NoSQL"
-                    aria-label="PREVIOUS: 14. NoSQL"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -482,9 +501,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/02/13-Database/"
-                    data-tooltip="13. Database"
-                    aria-label="NEXT: 13. Database"
+                    href="/2021/02/03/13-ORM/"
+                    data-tooltip="13. ORM"
+                    aria-label="NEXT: 13. ORM"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -509,7 +528,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/03/13-ORM/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/04/14-NoSQL/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -522,7 +541,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/03/13-ORM/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/04/14-NoSQL/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -535,7 +554,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/03/13-ORM/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/04/14-NoSQL/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -569,7 +588,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/03/13-ORM/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/04/14-NoSQL/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -582,7 +601,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/03/13-ORM/"
+                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/04/14-NoSQL/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -595,7 +614,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/03/13-ORM/"
+                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/04/14-NoSQL/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
