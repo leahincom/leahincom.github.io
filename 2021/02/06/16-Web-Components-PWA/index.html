@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>15. CSS - leah</title>
+    <title>15. Web Components, PWA - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Advanced HTML - CSSEverything is a BOXBox-sizingdeveloper.mozilla.org/ko/docs/Web/CSS/box-sizing\n\nborder box : the way we calculate the box size is just a/c the content\n\n{ // * : everythingbox-sizing: border-box;}\n\n\n\nPositiondeveloper.mozilla.org/ko/docs/Web/CSS/position\nCSS position 속성은 문서 상에 요소를 배치하는 방법을 지정합니다. top, right, bottom, left 속성이 요소를 배치할 최종 위치를 결정합니다.\n\nposition : static / relative / absolute / fixed\n\n\nstatic: default요소를 일반적인 문서 흐름에 따라 배치합니다. top, right, bottom, left, z-index 속성이 아무런 영향도 주지 않습니다. 기본값입니다.\n\nrelative: have elements요소를 일반적인 문서 흐름에 따라 배치하고, 자기 자신을 기준으로 top, right, bottom, left의 값에 따라 오프셋을 적용합니다. 오프셋은 다른 요소에는 영향을 주지 않습니다. 따라서 페이지 레이아웃에서 요소가 차지하는 공간은 static일 때와 같습니다.\n\nsticky:요소를 일반적인 문서 흐름에 따라 배치하고, 테이블 관련 요소를 포함해 가장 가까운, 스크롤 되는 조상과, 표 관련 요소를 포함한 컨테이닝 블록(가장 가까운 블록 레벨 조상) 을 기준으로 top, right, bottom, left의 값에 따라 오프셋을 적용합니다. 오프셋은 다른 요소에는 영향을 주지 않습니다.이 값은 항상 새로운 쌓임 맥락을 생성합니다. 끈끈한 요소는 “스크롤 동작”(overflow가 hidden, scroll, auto 혹은 overlay)이 존재하는 가장 가까운 조상에 달라붙으며, 사실 그 조상은 스크롤 불가하며 실제로 스크롤 가능한 조상이 따로 존재할 경우 “끈끈한” 동작을 보이지 않는 점에 주의하세요.\n\n\nabsolute: relative to its first position parent(e.g. body), not static, everything opposite to staticnot affected to the scrolling요소를 일반적인 문서 흐름에서 제거하고, 페이지 레이아웃에 공간도 배정하지 않습니다. 대신 가장 가까운 위치 지정 조상 요소에 대해 상대적으로 배치합니다. 단, 조상 중 위치 지정 요소가 없다면 초기 컨테이닝 블록을 기준으로 삼습니다. 최종 위치는 top, right, bottom, left 값이 지정합니다.\n\nfixed: 스크롤을 하더라도 fixed된 top-left-right-bottom 위치에 고정요소를 일반적인 문서 흐름에서 제거하고, 페이지 레이아웃에 공간도 배정하지 않습니다. 대신 뷰포트의 초기 컨테이닝 블록을 기준으로 삼아 배치합니다. 단, 요소의 조상 중 하나가 transform, perspective, filter 속성 중 어느 하나라도 none이 아니라면 (CSS Transforms 명세 참조) 뷰포트 대신 그 조상을 컨테이닝 블록으로 삼습니다. (perspective와 filter의 경우 브라우저별로 결과가 다름에 유의) 최종 위치는 top, right, bottom, left 값이 지정합니다.\n\n\n\nclass =&gt; CSS, id =&gt; JavaScript\n\nDisplay\ndisplay: block / inline / inline-block / dom / flex\n\n\nblock : vertical alignment, take as much as horizontal place they can\ninline : take the CONTENT as horizontal alignment, ignore any width value\ninline-block :\n\n\nCompared to ‘display: inline’, the major difference is that ‘display: inline-block’ allows to set a width and height on the element.\nCompared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements.\n\n\ndom : can check the dom (test) but not rendered inside the dom\nflex (Flexbox) : This defines a flex container; inline or block depending on the given value. It enables a flex context for all its direct children.css-tricks.com/snippets/css/a-guide-to-flexbox/&gt; start / center / space-between / space-around / space-evenly\n\n\ndeveloper.mozilla.org/en-US/docs/Web/CSS/justify-content\n\norder : arbitrarily set the orders.box:first-child {order: 3}.box:last-child {order: 1}\n\nUnits\npercentages / absolute \n\n\npercentages\nvw : Viewpoint Width\nvh : Viewpoint Height\nem : Relative to the font-size of the element (2em means 2 times the size of the current font)\nrem : Relative to font-size of the root element\n\n\nabsolute\npx : pixels\npt : 72pts = one inch\n\n\n\nZ-indexcontrol overlapping -&gt; no need for static (which considers content layouts)\nDIV num 따라 구조화 하고 -&gt; DIV에 포함된 DIV의 z-index는 소수점으로 판단된다!=&gt; DIV#1 : 5#2: 2#3: 4\n\n#4: 4.6\n#5: 4.1\n#6: 4.3\n\nVendor Prefixes\nwebkitWebKit is a web browser engine used by browsers such as Safari and Chrome. You can make use of WebKit features such as animation, transform, transition, and more through the use of the -webkit prefix in your CSS\n\nTransformationsAnimations@keyframes [name] {}\nTransition:hover : not switch, interpolating\nResponsive WebMedia queriesCSS PreprocessorsSASSCSS with Super-power\nLESSCSSnextCSS FrameworksBootstrapSkeletonMaterializeBulmaAntd","dateCreated":"2021-02-05T12:37:14+00:00","dateModified":"2021-02-05T12:42:45+00:00","datePublished":"2021-02-05T12:37:14+00:00","description":"","headline":"15. CSS","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/05/15-CSS/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/05/15-CSS/"}</script>
-    <meta name="description" content="Advanced HTML - CSSEverything is a BOXBox-sizingdeveloper.mozilla.org&#x2F;ko&#x2F;docs&#x2F;Web&#x2F;CSS&#x2F;box-sizing  border box : the way we calculate the box size is just a&#x2F;c the content  { &#x2F;&#x2F; * : everythingbox-sizing:">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Web ComponentsFeatures\nScoped\nReusable\nEncapsulated\n\nMade by 4 main technologies\nHTML Template\nCustom Elements\nShadow DOM\nHTML Imports\n\nBasic Web Components\nCard Title\nComponent Title\n\n12345&lt;section class&#x3D;&quot;card&quot;&gt;&lt;div&gt;&lt;h2&gt;&lt;p&gt;&lt;&#x2F;...&gt;\n👇\n\nreduce duplicated contents using…&lt;product-carddata-header=data-img=data-text=\n\n\nwith JavaScript!\n\n\ncustomElements : global variable\nshadow, secret // outside world can’t get access to it\n\n\nshadow DOMa tree-like structure of connected nodes that represents the different elements and strings of text appearing in a markup document (usually an HTML document in the case of web documents).※ font-size =&gt; DON’T use px !!! USE rem\n\nProgressive Web App (PWA)\nReliable: download and work off-line\n\n\nService worker (downloads content-heavy web, use off-line)\nPre-caching\n\n\nFast\nEngaging\n\n\nNo app store needed\nImmersive full screen\nPush Notifications\n\n\nChrome DevTools : Inspect -&gt; LightHouse 이용!!\n\n","dateCreated":"2021-02-06T11:27:27+00:00","dateModified":"2021-02-06T11:30:01+00:00","datePublished":"2021-02-06T11:27:27+00:00","description":"","headline":"15. Web Components, PWA","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"}</script>
+    <meta name="description" content="Web ComponentsFeatures Scoped Reusable Encapsulated  Made by 4 main technologies HTML Template Custom Elements Shadow DOM HTML Imports  Basic Web Components Card Title Component Title  12345&lt;sectio">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="15. CSS">
-<meta property="og:url" content="http://leahincom.github.io/2021/02/05/15-CSS/index.html">
+<meta property="og:title" content="15. Web Components, PWA">
+<meta property="og:url" content="http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Advanced HTML - CSSEverything is a BOXBox-sizingdeveloper.mozilla.org&#x2F;ko&#x2F;docs&#x2F;Web&#x2F;CSS&#x2F;box-sizing  border box : the way we calculate the box size is just a&#x2F;c the content  { &#x2F;&#x2F; * : everythingbox-sizing:">
+<meta property="og:description" content="Web ComponentsFeatures Scoped Reusable Encapsulated  Made by 4 main technologies HTML Template Custom Elements Shadow DOM HTML Imports  Basic Web Components Card Title Component Title  12345&lt;sectio">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-05T12:37:14.000Z">
-<meta property="article:modified_time" content="2021-02-05T12:42:45.826Z">
+<meta property="article:published_time" content="2021-02-06T11:27:27.000Z">
+<meta property="article:modified_time" content="2021-02-06T11:30:01.306Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="javascript">
@@ -300,14 +300,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            15. CSS
+            15. Web Components, PWA
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-02-05T12:37:14+00:00">
+    <time datetime="2021-02-06T11:27:27+00:00">
 	
-		    Feb 05, 2021
+		    Feb 06, 2021
     	
     </time>
     
@@ -319,87 +319,56 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="Advanced-HTML-CSS"><a href="#Advanced-HTML-CSS" class="headerlink" title="Advanced HTML - CSS"></a>Advanced HTML - CSS</h2><h3 id="Everything-is-a-BOX"><a href="#Everything-is-a-BOX" class="headerlink" title="Everything is a BOX"></a>Everything is a BOX</h3><h4 id="Box-sizing"><a href="#Box-sizing" class="headerlink" title="Box-sizing"></a>Box-sizing</h4><p>developer.mozilla.org/ko/docs/Web/CSS/box-sizing</p>
-<ul>
-<li>border box : the way we calculate the box size is just a/c the content</li>
-<li><ul>
-<li>{ // * : everything<br>box-sizing: border-box;<br>}</li>
+            <h3 id="Web-Components"><a href="#Web-Components" class="headerlink" title="Web Components"></a>Web Components</h3><h4 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h4><ol>
+<li>Scoped</li>
+<li>Reusable</li>
+<li>Encapsulated</li>
+</ol>
+<h4 id="Made-by-4-main-technologies"><a href="#Made-by-4-main-technologies" class="headerlink" title="Made by 4 main technologies"></a>Made by 4 main technologies</h4><ol>
+<li>HTML Template</li>
+<li>Custom Elements</li>
+<li>Shadow DOM</li>
+<li>HTML Imports</li>
+</ol>
+<h4 id="Basic-Web-Components"><a href="#Basic-Web-Components" class="headerlink" title="Basic Web Components"></a>Basic Web Components</h4><ul>
+<li>Card Title</li>
+<li>Component Title</li>
 </ul>
-</li>
-</ul>
-<h4 id="Position"><a href="#Position" class="headerlink" title="Position"></a>Position</h4><p>developer.mozilla.org/ko/docs/Web/CSS/position</p>
-<p>CSS position 속성은 문서 상에 요소를 배치하는 방법을 지정합니다. top, right, bottom, left 속성이 요소를 배치할 최종 위치를 결정합니다.</p>
-<ul>
-<li>position : static / relative / absolute / fixed</li>
-</ul>
-<ul>
-<li><p>static: <em>default</em><br>요소를 일반적인 문서 흐름에 따라 배치합니다. top, right, bottom, left, z-index 속성이 아무런 영향도 주지 않습니다. 기본값입니다.</p>
-</li>
-<li><p>relative: have elements<br>요소를 일반적인 문서 흐름에 따라 배치하고, 자기 자신을 기준으로 top, right, bottom, left의 값에 따라 오프셋을 적용합니다. 오프셋은 다른 요소에는 영향을 주지 않습니다. 따라서 페이지 레이아웃에서 요소가 차지하는 공간은 static일 때와 같습니다.</p>
-<ul>
-<li>sticky:<br>요소를 일반적인 문서 흐름에 따라 배치하고, 테이블 관련 요소를 포함해 가장 가까운, 스크롤 되는 조상과, 표 관련 요소를 포함한 컨테이닝 블록(가장 가까운 블록 레벨 조상) 을 기준으로 top, right, bottom, left의 값에 따라 오프셋을 적용합니다. 오프셋은 다른 요소에는 영향을 주지 않습니다.<br>이 값은 항상 새로운 쌓임 맥락을 생성합니다. 끈끈한 요소는 “스크롤 동작”(overflow가 hidden, scroll, auto 혹은 overlay)이 존재하는 가장 가까운 조상에 달라붙으며, 사실 그 조상은 스크롤 불가하며 실제로 스크롤 가능한 조상이 따로 존재할 경우 “끈끈한” 동작을 보이지 않는 점에 주의하세요.</li>
-</ul>
-</li>
-<li><p>absolute: relative to its first position parent(e.g. body), not static, everything opposite to static<br>not affected to the scrolling<br>요소를 일반적인 문서 흐름에서 제거하고, 페이지 레이아웃에 공간도 배정하지 않습니다. 대신 가장 가까운 위치 지정 조상 요소에 대해 상대적으로 배치합니다. 단, 조상 중 위치 지정 요소가 없다면 초기 컨테이닝 블록을 기준으로 삼습니다. 최종 위치는 top, right, bottom, left 값이 지정합니다.</p>
-</li>
-<li><p>fixed: 스크롤을 하더라도 fixed된 top-left-right-bottom 위치에 고정<br>요소를 일반적인 문서 흐름에서 제거하고, 페이지 레이아웃에 공간도 배정하지 않습니다. 대신 뷰포트의 초기 컨테이닝 블록을 기준으로 삼아 배치합니다. 단, 요소의 조상 중 하나가 transform, perspective, filter 속성 중 어느 하나라도 none이 아니라면 (CSS Transforms 명세 참조) 뷰포트 대신 그 조상을 컨테이닝 블록으로 삼습니다. (perspective와 filter의 경우 브라우저별로 결과가 다름에 유의) 최종 위치는 top, right, bottom, left 값이 지정합니다.</p>
-</li>
-</ul>
-<ul>
-<li>class =&gt; CSS, id =&gt; JavaScript</li>
-</ul>
-<h4 id="Display"><a href="#Display" class="headerlink" title="Display"></a>Display</h4><ul>
-<li>display: block / inline / inline-block / dom / flex</li>
-</ul>
-<ul>
-<li>block : vertical alignment, take as much as horizontal place they can</li>
-<li>inline : take the CONTENT as horizontal alignment, ignore any width value</li>
-<li>inline-block :</li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class&#x3D;&quot;card&quot;&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h2&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;&#x2F;...&gt;</span><br></pre></td></tr></table></figure>
+<p>👇</p>
 <ol>
-<li>Compared to ‘display: inline’, the major difference is that ‘display: inline-block’ allows to set a width and height on the element.</li>
-<li>Compared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements.</li>
+<li>reduce duplicated contents using…<br>&lt;product-card<br>data-header=<br>data-img=<br>data-text=<blockquote>
+</product-card></blockquote>
+</li>
+<li>with JavaScript!</li>
 </ol>
 <ul>
-<li>dom : can check the dom (test) but not rendered inside the dom</li>
-<li>flex (Flexbox) : This defines a flex container; inline or block depending on the given value. It enables a flex context for all its direct children.<br>css-tricks.com/snippets/css/a-guide-to-flexbox/<pre><code>&gt; start / center / space-between / space-around / space-evenly</code></pre>
-</li>
-</ul>
-<p>developer.mozilla.org/en-US/docs/Web/CSS/justify-content</p>
-<ul>
-<li>order : arbitrarily set the orders<br>.box:first-child {<br>order: 3<br>}<br>.box:last-child {<br>order: 1<br>}</li>
-</ul>
-<h4 id="Units"><a href="#Units" class="headerlink" title="Units"></a>Units</h4><ul>
-<li>percentages / absolute </li>
+<li>customElements : global variable</li>
+<li>shadow, secret // outside world can’t get access to it</li>
 </ul>
 <ul>
-<li>percentages<ul>
-<li>vw : Viewpoint Width</li>
-<li>vh : Viewpoint Height</li>
-<li>em : Relative to the font-size of the element (2em means 2 times the size of the current font)</li>
-<li>rem : Relative to font-size of the root element</li>
+<li>shadow DOM<br>a tree-like structure of connected nodes that represents the different elements and strings of text appearing in a markup document (usually an HTML document in the case of web documents).<br>※ font-size =&gt; DON’T use px !!! USE rem</li>
 </ul>
-</li>
-<li>absolute<ul>
-<li>px : pixels</li>
-<li>pt : 72pts = one inch</li>
-</ul>
-</li>
-</ul>
-<h4 id="Z-index"><a href="#Z-index" class="headerlink" title="Z-index"></a>Z-index</h4><p>control overlapping -&gt; no need for static (which considers content layouts)</p>
-<p>DIV num 따라 구조화 하고 -&gt; DIV에 포함된 DIV의 z-index는 소수점으로 판단된다!<br>=&gt; DIV<br>#1 : 5<br>#2: 2<br>#3: 4</p>
+<h3 id="Progressive-Web-App-PWA"><a href="#Progressive-Web-App-PWA" class="headerlink" title="Progressive Web App (PWA)"></a>Progressive Web App (PWA)</h3><ol>
+<li>Reliable: download and work off-line</li>
+</ol>
 <ul>
-<li>#4: 4.6</li>
-<li>#5: 4.1</li>
-<li>#6: 4.3</li>
+<li>Service worker (downloads content-heavy web, use off-line)</li>
+<li>Pre-caching</li>
 </ul>
-<h4 id="Vendor-Prefixes"><a href="#Vendor-Prefixes" class="headerlink" title="Vendor Prefixes"></a>Vendor Prefixes</h4><ul>
-<li>webkit<br>WebKit is a web browser engine used by browsers such as Safari and Chrome. You can make use of WebKit features such as animation, transform, transition, and more through the use of the -webkit prefix in your CSS</li>
+<ol start="2">
+<li>Fast</li>
+<li>Engaging</li>
+</ol>
+<ul>
+<li>No app store needed</li>
+<li>Immersive full screen</li>
+<li>Push Notifications</li>
 </ul>
-<h4 id="Transformations"><a href="#Transformations" class="headerlink" title="Transformations"></a>Transformations</h4><h4 id="Animations"><a href="#Animations" class="headerlink" title="Animations"></a>Animations</h4><p>@keyframes [name] {<br>}</p>
-<h4 id="Transition"><a href="#Transition" class="headerlink" title="Transition"></a>Transition</h4><p>:hover : not switch, interpolating</p>
-<h3 id="Responsive-Web"><a href="#Responsive-Web" class="headerlink" title="Responsive Web"></a>Responsive Web</h3><h4 id="Media-queries"><a href="#Media-queries" class="headerlink" title="Media queries"></a>Media queries</h4><h3 id="CSS-Preprocessors"><a href="#CSS-Preprocessors" class="headerlink" title="CSS Preprocessors"></a>CSS Preprocessors</h3><h4 id="SASS"><a href="#SASS" class="headerlink" title="SASS"></a>SASS</h4><p>CSS with Super-power</p>
-<h4 id="LESS"><a href="#LESS" class="headerlink" title="LESS"></a>LESS</h4><h4 id="CSSnext"><a href="#CSSnext" class="headerlink" title="CSSnext"></a>CSSnext</h4><h3 id="CSS-Frameworks"><a href="#CSS-Frameworks" class="headerlink" title="CSS Frameworks"></a>CSS Frameworks</h3><h4 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h4><h4 id="Skeleton"><a href="#Skeleton" class="headerlink" title="Skeleton"></a>Skeleton</h4><h4 id="Materialize"><a href="#Materialize" class="headerlink" title="Materialize"></a>Materialize</h4><h4 id="Bulma"><a href="#Bulma" class="headerlink" title="Bulma"></a>Bulma</h4><h4 id="Antd"><a href="#Antd" class="headerlink" title="Antd"></a>Antd</h4>
+<ul>
+<li>Chrome DevTools : Inspect -&gt; LightHouse 이용!!</li>
+</ul>
+
             
 
 
@@ -413,14 +382,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/06/16-Web-Components-PWA/"
-                    data-tooltip="15. Web Components, PWA"
-                    aria-label="PREVIOUS: 15. Web Components, PWA"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -430,9 +396,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/04/14-NoSQL/"
-                    data-tooltip="14. NoSQL"
-                    aria-label="NEXT: 14. NoSQL"
+                    href="/2021/02/05/15-CSS/"
+                    data-tooltip="15. CSS"
+                    aria-label="NEXT: 15. CSS"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -457,7 +423,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/05/15-CSS/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -470,7 +436,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/05/15-CSS/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -483,7 +449,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/05/15-CSS/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -528,14 +494,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/06/16-Web-Components-PWA/"
-                    data-tooltip="15. Web Components, PWA"
-                    aria-label="PREVIOUS: 15. Web Components, PWA"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -545,9 +508,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/04/14-NoSQL/"
-                    data-tooltip="14. NoSQL"
-                    aria-label="NEXT: 14. NoSQL"
+                    href="/2021/02/05/15-CSS/"
+                    data-tooltip="15. CSS"
+                    aria-label="NEXT: 15. CSS"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -572,7 +535,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/05/15-CSS/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -585,7 +548,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/05/15-CSS/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -598,7 +561,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/05/15-CSS/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -632,7 +595,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/05/15-CSS/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -645,7 +608,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/05/15-CSS/"
+                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -658,7 +621,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/05/15-CSS/"
+                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
