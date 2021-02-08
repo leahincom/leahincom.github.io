@@ -300,6 +300,177 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/02/08/17-GraphQL/"
+                            aria-label=": 17. GraphQL"
+                        >
+                            17. GraphQL
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-08T21:44:47+00:00">
+	
+		    Feb 08, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h2><ul>
+<li>more efficient</li>
+<li>alternative to REST API</li>
+</ul>
+<ul>
+<li>Not a Framework!</li>
+<li>similar to router</li>
+</ul>
+<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><ul>
+<li>pattern, standard for APIs</li>
+<li>interface that tells the external how to get the datas</li>
+<li>have endpoints (e.g. ‘/messages’)</li>
+</ul>
+<dl><dt>/teams/CH</dt><dd>send all the info</dd></dl><p>–&gt; moduler<br>/teams/CH/info<br>/teams/CH/players<br>/teams/CH/matches</p>
+<ul>
+<li>Query Language (Standard)</li>
+</ul>
+<p>order also matches!</p>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><ol>
+<li>Schema<ul>
+<li>Types</li>
+</ul>
+</li>
+</ol>
+<p>id =&gt; unique<br>[]! =&gt; need [] type, you need to pass [] thing<br>team: Team! =&gt; team is related to type Team (Team: object)</p>
+<ol start="2">
+<li>Resolvers</li>
+</ol>
+<ul>
+<li>Scalar Types<br>(Built-In)</li>
+</ul>
+<ul>
+<li>Int</li>
+<li>Float</li>
+<li>String</li>
+<li>Boolean</li>
+<li>ID<br>(Custom Scalar)</li>
+<li>Date, Url, EmailAddress …<br>id, name, age: primitive type<br>team: object -&gt; sub-doc. type =&gt; repeat the same process to find the type</li>
+</ul>
+<ol start="3">
+<li>Queries &amp; Mutations<br>one single endpoint</li>
+</ol>
+<p>-&gt; perform queries</p>
+<ul>
+<li>Sub-Selection<br>pass the object to the type -&gt; give the right interface of information of that object</li>
+</ul>
+<ul>
+<li>have to ask the property of the object</li>
+</ul>
+<ul>
+<li><p>Arguments</p>
+</li>
+<li><p>Variables</p>
+</li>
+</ul>
+<p>put “DEF” into $position var</p>
+<ul>
+<li><ul>
+<li><ul>
+<li>fetching data - - -<br>👇</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>change (mutate) data - - -</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Mutations</p>
+</li>
+</ul>
+<ul>
+<li>another type of action like query that performs changes on the resources</li>
+<li>diff is like <code>GET - POST</code>: doesn’t change anything in the server - change something in the server<br> -&gt; do st that doesn’t suppose to do, run semantic, perform changes by manipulating inside my DB</li>
+</ul>
+<ol>
+<li>create new data <code>POST</code></li>
+<li>update existing data <code>PUT</code></li>
+<li>delete existing data <code>DELETE</code></li>
+</ol>
+<p>name, position: response<br>1st: input type checking -&gt; 2nd: actually executing the mutation</p>
+<ul>
+<li>ID: created internally by the program</li>
+</ul>
+<ul>
+<li>send the request to the root (4000-graphQL as the endpoint)</li>
+<li>reliable, flexible</li>
+</ul>
+<ul>
+<li>Execution<br>search for syntax error</li>
+</ul>
+<p>undefined height -&gt; null, name ~ pass height ~ go inside team obj</p>
+<ul>
+<li>Resolvers<br>Schema: define, Resolver: interact =&gt; interplay to call server flexibly</li>
+</ul>
+<p>get id:42 from upper example</p>
+<ul>
+<li>obj : the previous resolved obj, parent element that has been previously resolved</li>
+<li>args : the arguments object for the field in the query, include id .. all the args that we want to pass</li>
+<li>context : shared object provided to every resolver, communicate and share information, later function can access to it (i.e. ctx in Koa)</li>
+<li>info : extra information about the current query to mutate, etc.</li>
+</ul>
+<h4 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h4><p>typeDefs: routers<br>resolvers: controllers</p>
+<ul>
+<li><p>index.js</p>
+</li>
+<li><p>typeDefs.js</p>
+</li>
+</ul>
+<ul>
+<li>resolvers.js</li>
+</ul>
+<p>not using obj =&gt; replace it with <code>_</code><br>👇</p>
+<ul>
+<li>resolvers.js</li>
+</ul>
+<p>※ express / koa : REST API = apollo-server : gql</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/08/17-GraphQL/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/02/06/16-Web-Components-PWA/"
                             aria-label=": 16. Web Components, PWA"
                         >
@@ -1162,139 +1333,6 @@
                         <p>
                             <a
                                 href="/2021/01/28/9-Networking/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/01/27/8-Bitwise-Operation/"
-                            aria-label=": 8. Bitwise Operation"
-                        >
-                            8. Bitwise Operation
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-01-27T23:37:53+00:00">
-	
-		    Jan 27, 2021
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Bitwise-Operation"><a href="#Bitwise-Operation" class="headerlink" title="Bitwise Operation"></a>Bitwise Operation</h2><p>num[index] * 2^(index-1)</p>
-<h3 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h3><p><code>both</code><br><strong>&amp; : return 1 if both has 1 (same)</strong></p>
-<ol>
-<li>change num into bitwise</li>
-<li>&amp;<blockquote>
-<p>5 &amp; 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
-<h2 id="amp-1001"><a href="#amp-1001" class="headerlink" title="&amp;1001"></a>&amp;1001</h2><p>0001(2) –&gt; 1</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h3><p><code>at least</code><br><strong>| : return 1 if at least one has 1</strong></p>
-<ol>
-<li>change num into bitwise</li>
-<li>|<blockquote>
-<p>5 | 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
-<table>
-<thead>
-<tr>
-<th>1001</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1101(2) –&gt; 13</td>
-</tr>
-</tbody></table>
-</blockquote>
-</li>
-</ol>
-<h3 id="XOR"><a href="#XOR" class="headerlink" title="XOR"></a>XOR</h3><p><code>just one</code><br><strong>^ : return 1 if the value is different, return 0 if same</strong></p>
-<ol>
-<li>change num into bitwise</li>
-<li>^<blockquote>
-<p>5 ^ 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
-<h2 id="1001"><a href="#1001" class="headerlink" title="^1001"></a>^1001</h2><p>1100(2) –&gt; 12</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="NOT"><a href="#NOT" class="headerlink" title="NOT"></a>NOT</h3><p><strong>~ : return the oppostie value</strong></p>
-<blockquote>
-<p>actually, there are 0 as many as the size of the integer range(&lt;=256, thus 8개) in front of the bits</p>
-</blockquote>
-<ul>
-<li>-(x) -1 (// in JS)</li>
-<li>negative<ul>
-<li>starts from -1</li>
-<li>meaning of 0, 1 is swtiched: 0 -&gt; decrement<blockquote>
-<p>~5<br>5 –&gt; 0101(2)</p>
-<h2 id="0101-2"><a href="#0101-2" class="headerlink" title="~0101(2)"></a>~0101(2)</h2><p>1010(2) –&gt; -6 (in JS, normally -5) // 1011(2) –&gt; -5 in JS</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Left-Shift"><a href="#Left-Shift" class="headerlink" title="Left Shift"></a>Left Shift</h3><p><strong>&lt;&lt; n : shift bits to the left to the n extent and fill the right bit with 0</strong></p>
-<blockquote>
-<p>5 &lt;&lt; 1<br>0101(2)<br>—– &lt;&lt; 1<br>1010(2)</p>
-</blockquote>
-<h3 id="Sign-propagating-Right-Shift"><a href="#Sign-propagating-Right-Shift" class="headerlink" title="Sign-propagating Right Shift"></a>Sign-propagating Right Shift</h3><p><strong>&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with the same one as the original last right value which is sign property</strong></p>
-<blockquote>
-<p>8 &gt;&gt;&gt; 1<br>0…1000(2)<br>———– &gt;&gt; 1<br>00…0100(2)  // 4<br>-8 &gt;&gt;&gt; 1<br>1…1000(2)<br>———– &gt;&gt; 1<br>11…1100(2) // -4</p>
-</blockquote>
-<h3 id="Zero-fill-Right-Shift"><a href="#Zero-fill-Right-Shift" class="headerlink" title="Zero-fill Right Shift"></a>Zero-fill Right Shift</h3><p><strong>&gt;&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with 0</strong></p>
-<blockquote>
-<p>[1]1…0111 // -8<br>——— &gt;&gt;&gt; 1<br>[0]1…1011 // 2147483644</p>
-</blockquote>
-<p>blog.logrocket.com/interesting-use-cases-for-javascript-bitwise-operators/<br>Interesting use cases for JavaScript bitwise operators - LogRocket Blog<br>Although we don’t often see bitwise operators used in JavaScript, they have some cool use cases. Learn their theory and implementation.<br>blog.logrocket.com</p>
-<hr>
-<dl><dt><em>compare <code>multiple values</code> together</em></dt><dd>first comparison -&gt; compare with the next one -&gt; (((repeat)))</dd></dl><h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>qiao.github.io/PathFinding.js/visual/<br>PathFinding.js<br>qiao.github.io</p>
-<h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><ul>
-<li>only need the weight</li>
-<li>evaluate all the nodes -&gt; slower</li>
-</ul>
-<ol>
-<li>set the weight of starting point to 0, and others to INF (as not started yet)</li>
-</ol>
-<h3 id="A"><a href="#A" class="headerlink" title="A*"></a>A*</h3><ul>
-<li>only evaluate shorter distance -&gt;faster</li>
-<li>need weight and distance both</li>
-</ul>
-<ol>
-<li>set additional array with distance</li>
-</ol>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/01/27/8-Bitwise-Operation/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

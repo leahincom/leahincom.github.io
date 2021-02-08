@@ -301,6 +301,177 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/02/08/17-GraphQL/"
+                            aria-label=": 17. GraphQL"
+                        >
+                            17. GraphQL
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-08T21:44:47+00:00">
+	
+		    Feb 08, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h2><ul>
+<li>more efficient</li>
+<li>alternative to REST API</li>
+</ul>
+<ul>
+<li>Not a Framework!</li>
+<li>similar to router</li>
+</ul>
+<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><ul>
+<li>pattern, standard for APIs</li>
+<li>interface that tells the external how to get the datas</li>
+<li>have endpoints (e.g. ‘/messages’)</li>
+</ul>
+<dl><dt>/teams/CH</dt><dd>send all the info</dd></dl><p>–&gt; moduler<br>/teams/CH/info<br>/teams/CH/players<br>/teams/CH/matches</p>
+<ul>
+<li>Query Language (Standard)</li>
+</ul>
+<p>order also matches!</p>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><ol>
+<li>Schema<ul>
+<li>Types</li>
+</ul>
+</li>
+</ol>
+<p>id =&gt; unique<br>[]! =&gt; need [] type, you need to pass [] thing<br>team: Team! =&gt; team is related to type Team (Team: object)</p>
+<ol start="2">
+<li>Resolvers</li>
+</ol>
+<ul>
+<li>Scalar Types<br>(Built-In)</li>
+</ul>
+<ul>
+<li>Int</li>
+<li>Float</li>
+<li>String</li>
+<li>Boolean</li>
+<li>ID<br>(Custom Scalar)</li>
+<li>Date, Url, EmailAddress …<br>id, name, age: primitive type<br>team: object -&gt; sub-doc. type =&gt; repeat the same process to find the type</li>
+</ul>
+<ol start="3">
+<li>Queries &amp; Mutations<br>one single endpoint</li>
+</ol>
+<p>-&gt; perform queries</p>
+<ul>
+<li>Sub-Selection<br>pass the object to the type -&gt; give the right interface of information of that object</li>
+</ul>
+<ul>
+<li>have to ask the property of the object</li>
+</ul>
+<ul>
+<li><p>Arguments</p>
+</li>
+<li><p>Variables</p>
+</li>
+</ul>
+<p>put “DEF” into $position var</p>
+<ul>
+<li><ul>
+<li><ul>
+<li>fetching data - - -<br>👇</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>change (mutate) data - - -</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Mutations</p>
+</li>
+</ul>
+<ul>
+<li>another type of action like query that performs changes on the resources</li>
+<li>diff is like <code>GET - POST</code>: doesn’t change anything in the server - change something in the server<br> -&gt; do st that doesn’t suppose to do, run semantic, perform changes by manipulating inside my DB</li>
+</ul>
+<ol>
+<li>create new data <code>POST</code></li>
+<li>update existing data <code>PUT</code></li>
+<li>delete existing data <code>DELETE</code></li>
+</ol>
+<p>name, position: response<br>1st: input type checking -&gt; 2nd: actually executing the mutation</p>
+<ul>
+<li>ID: created internally by the program</li>
+</ul>
+<ul>
+<li>send the request to the root (4000-graphQL as the endpoint)</li>
+<li>reliable, flexible</li>
+</ul>
+<ul>
+<li>Execution<br>search for syntax error</li>
+</ul>
+<p>undefined height -&gt; null, name ~ pass height ~ go inside team obj</p>
+<ul>
+<li>Resolvers<br>Schema: define, Resolver: interact =&gt; interplay to call server flexibly</li>
+</ul>
+<p>get id:42 from upper example</p>
+<ul>
+<li>obj : the previous resolved obj, parent element that has been previously resolved</li>
+<li>args : the arguments object for the field in the query, include id .. all the args that we want to pass</li>
+<li>context : shared object provided to every resolver, communicate and share information, later function can access to it (i.e. ctx in Koa)</li>
+<li>info : extra information about the current query to mutate, etc.</li>
+</ul>
+<h4 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h4><p>typeDefs: routers<br>resolvers: controllers</p>
+<ul>
+<li><p>index.js</p>
+</li>
+<li><p>typeDefs.js</p>
+</li>
+</ul>
+<ul>
+<li>resolvers.js</li>
+</ul>
+<p>not using obj =&gt; replace it with <code>_</code><br>👇</p>
+<ul>
+<li>resolvers.js</li>
+</ul>
+<p>※ express / koa : REST API = apollo-server : gql</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/08/17-GraphQL/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/02/06/16-Web-Components-PWA/"
                             aria-label=": 16. Web Components, PWA"
                         >
