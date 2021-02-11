@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>18. Angular - leah</title>
+    <title>19. Decorators - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"AngularTypeScriptwww.typescriptlang.org/docs/handbook/intro.html\nHandbook - The TypeScript HandbookYour first step to learn TypeScriptwww.typescriptlang.org\nlet [varName] : [varType] = [value];\n\nenum : dictionary\nfunction =&gt; need to specify the types of parameters\n\n\ngetting rid of any error of classes…\ntesting if we generate any error\ntyping faster\n\nimraccoon-developer.tistory.com/11\nTypeScript, 왜 써야되나?? (feat. 장단점)JavaScript가 es6로 바뀌면서 큰 인기를 끌기 시작했습니다. 또한, Node.js로 할 수 있는 것들이 점점 많아졌으며, 지금도 많아지고 있습니다. 처음에는 웹에서 사용하기 위한 스크립트 언어로 활용되imraccoon-developer.tistory.com\nAngular Architecture\nModules\nComponents\nServices…\n\nModules\nconnected through Metadata\nComponent === View\nService: share functionality through entire app\ndependency injector\n\n@NgModule: function\n\nbootstrap: starting point, start compiling\ndecorators: annotate data to give extra info to(of) the target\n\n–&gt; decorating: NgModule targeting AppModule\nComponents\nA class meant to be as reusable (when applies) as possible\n\nDefines application data and logic\n\nBound to a template, an HTML file\n\n\ngive users all the functionality of the app\n\n\ncreate DOM and add components thus drawing a tree: [tree] template -&gt; components (+ template) -&gt; … \n\ncommunicate with each other and give access of information to users\n\ncomponent = instance of a class, independent element but communicate with others as a class\n\nrender the DOM as a new node\n\nshadow DOM to encapsulate the component, not affected by exeternal interventionsShadow DOMdifferent DOM, OWN capsulated environment\n\npolymer-library.polymer-project.org/2.0/docs/devguide/shadow-domShadow DOM is a new DOM feature that helps you build components. You can think of shadow DOM as a scoped subtreeinside your element.\n\nRoot Component\n\n\ncontain everything\n\n\nRoot Template\n\n\nNavigation Component: works itself, alone\nContainer Component: including other components\n\n\nFiltering Component\n\n\nreceive the input data\nrender into different components (list, map)\n\ne.g. Scenarioif like one of the list component item -&gt; passed up to the container -&gt; reflect that to the map componentfiltering info in the filter component -&gt; passed up to the container -&gt; reflect that to the map component\nData Bindingwhen user gives the input, then DOM will communicate using property in [(ng-model)] = “property”\n\nhandler: function declared component \n\nobject =&gt; {}\n\n2 way binding: class component &lt;-&gt; template \n\n\nselector: ‘movie-details’ –&gt; director obj go in trhough selector\n\nServices\nprivate: TS property, can’t access it from other classes\n\n","dateCreated":"2021-02-10T12:28:55+00:00","dateModified":"2021-02-10T12:29:38+00:00","datePublished":"2021-02-10T12:28:55+00:00","description":"","headline":"18. Angular","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/10/18-Angular/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/10/18-Angular/"}</script>
-    <meta name="description" content="AngularTypeScriptwww.typescriptlang.org&#x2F;docs&#x2F;handbook&#x2F;intro.html Handbook - The TypeScript HandbookYour first step to learn TypeScriptwww.typescriptlang.org let [varName] : [varType] &#x3D; [value];  enum">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"ModuleContainertake the logic\nData Binding\n[(ngModel)] = “property” : binding input property with handling model\n\nTypescript and Angular DecoratorsTypescript Decoratorswww.typescriptlang.org/docs/handbook/decorators.htmlDocumentation - DecoratorsTypeScript Decorators overviewwww.typescriptlang.org\n\nmeta programming changing target without modifying metadata (classes)\nannotate or modify the target\n\n\nlabelling the target\n@function: function decorator, decorator creater(factory)\n\nreturn function (target) =&gt; put class into the target\nreturn what you decorate (classDecorator -&gt; return class info …)\n\n…toppings: string[] –&gt; toppings = [‘tomato’, ‘mozzarella’, ‘basil’]\nmemoize() : // _.memoize(func)\nMemoizes a given function by caching the computed result.Useful for speeding up slow-running computations.You may assume that the memoized function takes only one argument and that it is a primitive.Memoize should return a function that when called, will check if it has already computed the result for the given argument and return that value instead of recomputing it.\nObject PropertiesHow to define a property?ob.foo = ‘bar’; // direct// Object.defineProperty(obj, ‘foo’, {value: ‘bar’}); //(ppt, ppt_name, object// describe the behaviour of the ppt //ppt_value)\n\nAttribute name\n\n\nValue (Any type) // actual value// default values of 3 boolean functions of defineProperty(): false // if we define obj with assigning it, then default == true !!!\nWritable (Boolean) // whether the property value can be changed or not\nEnumerable (Boolean) // makes it appear to be in loops (listed in ‘for-in’ enumeration)// 💥 Is Array enumerable?\nConfigurable (Boolean) // +Writable +Enumerable // whether we can delete the property or change any attribute apart from attr // configurable lets us change the writable property, writable lets us change the value property\n\nAngular DecoratorsComponenttarget: class MyComponent\nInjectableInput@Input: input decorator =&gt; able to pass the value from parent template using the tag to the child component class\nOutput@Output: output decorator =&gt; sen the info to the parent element💥 Child’s viewinput is meant to receive information from the parent elementoutput is meant to send info to the parent\n","dateCreated":"2021-02-11T11:50:45+00:00","dateModified":"2021-02-11T11:56:35+00:00","datePublished":"2021-02-11T11:50:45+00:00","description":"","headline":"19. Decorators","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/11/19-Decorators/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/11/19-Decorators/"}</script>
+    <meta name="description" content="ModuleContainertake the logic Data Binding [(ngModel)] &#x3D; “property” : binding input property with handling model  Typescript and Angular DecoratorsTypescript Decoratorswww.typescriptlang.org&#x2F;docs&#x2F;hand">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="18. Angular">
-<meta property="og:url" content="http://leahincom.github.io/2021/02/10/18-Angular/index.html">
+<meta property="og:title" content="19. Decorators">
+<meta property="og:url" content="http://leahincom.github.io/2021/02/11/19-Decorators/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="AngularTypeScriptwww.typescriptlang.org&#x2F;docs&#x2F;handbook&#x2F;intro.html Handbook - The TypeScript HandbookYour first step to learn TypeScriptwww.typescriptlang.org let [varName] : [varType] &#x3D; [value];  enum">
+<meta property="og:description" content="ModuleContainertake the logic Data Binding [(ngModel)] &#x3D; “property” : binding input property with handling model  Typescript and Angular DecoratorsTypescript Decoratorswww.typescriptlang.org&#x2F;docs&#x2F;hand">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-10T12:28:55.000Z">
-<meta property="article:modified_time" content="2021-02-10T12:29:38.719Z">
+<meta property="article:published_time" content="2021-02-11T11:50:45.000Z">
+<meta property="article:modified_time" content="2021-02-11T11:56:35.948Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="javascript">
@@ -300,14 +300,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            18. Angular
+            19. Decorators
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-02-10T12:28:55+00:00">
+    <time datetime="2021-02-11T11:50:45+00:00">
 	
-		    Feb 10, 2021
+		    Feb 11, 2021
     	
     </time>
     
@@ -319,94 +319,38 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h2><h3 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h3><p><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/docs/handbook/intro.html">www.typescriptlang.org/docs/handbook/intro.html</a></p>
-<p>Handbook - The TypeScript Handbook<br>Your first step to learn TypeScript<br><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">www.typescriptlang.org</a></p>
-<p>let [varName] : [varType] = [value];</p>
+            <h3 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h3><h3 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h3><p>take the logic</p>
+<h3 id="Data-Binding"><a href="#Data-Binding" class="headerlink" title="Data Binding"></a>Data Binding</h3><ul>
+<li>[(ngModel)] = “property” : binding input property with handling model</li>
+</ul>
+<h2 id="Typescript-and-Angular-Decorators"><a href="#Typescript-and-Angular-Decorators" class="headerlink" title="Typescript and Angular Decorators"></a>Typescript and Angular Decorators</h2><h3 id="Typescript-Decorators"><a href="#Typescript-Decorators" class="headerlink" title="Typescript Decorators"></a>Typescript Decorators</h3><p><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/docs/handbook/decorators.html">www.typescriptlang.org/docs/handbook/decorators.html</a><br>Documentation - Decorators<br>TypeScript Decorators overview<br><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">www.typescriptlang.org</a></p>
 <ul>
-<li>enum : dictionary</li>
-<li>function =&gt; need to specify the types of parameters</li>
+<li>meta programming changing target without modifying metadata (classes)</li>
+<li>annotate or modify the target</li>
+<li></li>
 </ul>
+<p>labelling the target</p>
+<p>@function: function decorator, decorator creater(factory)</p>
 <ul>
-<li>getting rid of any error of classes…</li>
-<li>testing if we generate any error</li>
-<li>typing faster</li>
+<li>return function (target) =&gt; put class into the target</li>
+<li>return what you decorate (classDecorator -&gt; return class info …)</li>
 </ul>
-<p>imraccoon-developer.tistory.com/11</p>
-<p>TypeScript, 왜 써야되나?? (feat. 장단점)<br>JavaScript가 es6로 바뀌면서 큰 인기를 끌기 시작했습니다. 또한, Node.js로 할 수 있는 것들이 점점 많아졌으며, 지금도 많아지고 있습니다. 처음에는 웹에서 사용하기 위한 스크립트 언어로 활용되<br>imraccoon-developer.tistory.com</p>
-<h3 id="Angular-Architecture"><a href="#Angular-Architecture" class="headerlink" title="Angular Architecture"></a>Angular Architecture</h3><ul>
-<li>Modules</li>
-<li>Components</li>
-<li>Services<br>…</li>
-</ul>
-<h4 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h4><ul>
-<li>connected through Metadata</li>
-<li>Component === View</li>
-<li>Service: share functionality through entire app</li>
-<li>dependency injector</li>
-</ul>
-<p>@NgModule: function</p>
-<ul>
-<li>bootstrap: starting point, start compiling</li>
-<li>decorators: annotate data to give extra info to(of) the target</li>
-</ul>
-<p>–&gt; decorating: NgModule targeting AppModule</p>
-<h4 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h4><ul>
-<li><p>A class meant to be as reusable (when applies) as possible</p>
-</li>
-<li><p>Defines application data and logic</p>
-</li>
-<li><p>Bound to a template, an HTML file</p>
-</li>
-<li><blockquote>
-<p>give users all the functionality of the app</p>
+<p>…toppings: string[] –&gt; toppings = [‘tomato’, ‘mozzarella’, ‘basil’]</p>
+<p>memoize() : // _.memoize(func)</p>
+<p>Memoizes a given function by caching the computed result.<br>Useful for speeding up slow-running computations.<br>You may assume that the memoized function takes only one argument and that it is a primitive.<br>Memoize should return a function that when called, will check if it has already computed the result for the given argument and return that value instead of recomputing it.</p>
+<h2 id="Object-Properties"><a href="#Object-Properties" class="headerlink" title="Object Properties"></a>Object Properties</h2><h3 id="How-to-define-a-property"><a href="#How-to-define-a-property" class="headerlink" title="How to define a property?"></a>How to define a property?</h3><p>ob.foo = ‘bar’; // direct<br>// Object.defineProperty(obj, ‘foo’, {value: ‘bar’}); //(ppt, ppt_name, object// describe the behaviour of the ppt //ppt_value)</p>
+<blockquote>
+<p>Attribute name</p>
 </blockquote>
-</li>
-<li><p>create DOM and add components thus drawing a tree: [tree] template -&gt; components (+ template) -&gt; … </p>
-</li>
-<li><p>communicate with each other and give access of information to users</p>
-</li>
-<li><p>component = instance of a class, independent element but communicate with others as a class</p>
-</li>
-<li><p>render the DOM as a new node</p>
-</li>
-<li><dl><dt>shadow DOM to encapsulate the component, not affected by exeternal interventions<br>Shadow DOM</dt><dd>different DOM, OWN capsulated environment</dd></dl></li>
-</ul>
-<p>polymer-library.polymer-project.org/2.0/docs/devguide/shadow-dom<br>Shadow DOM is a new DOM feature that helps you build components. You can think of shadow DOM as a scoped subtreeinside your element.</p>
 <ul>
-<li>Root Component</li>
+<li>Value (Any type) // actual value<br>// default values of 3 boolean functions of defineProperty(): false // if we define obj with assigning it, then default == true !!!</li>
+<li>Writable (Boolean) // whether the property value can be changed or not</li>
+<li>Enumerable (Boolean) // makes it appear to be in loops (listed in ‘for-in’ enumeration)<br>// 💥 Is Array enumerable?</li>
+<li>Configurable (Boolean) // +Writable +Enumerable // whether we can delete the property or change any attribute apart from attr // configurable lets us change the writable property, writable lets us change the value property</li>
 </ul>
-<ul>
-<li>contain everything</li>
-</ul>
-<ul>
-<li>Root Template</li>
-</ul>
-<ul>
-<li>Navigation Component: works itself, alone</li>
-<li>Container Component: including other components</li>
-</ul>
-<ul>
-<li>Filtering Component</li>
-</ul>
-<ul>
-<li>receive the input data</li>
-<li>render into different components (list, map)</li>
-</ul>
-<p>e.g. Scenario<br>if like one of the list component item -&gt; passed up to the container -&gt; reflect that to the map component<br>filtering info in the filter component -&gt; passed up to the container -&gt; reflect that to the map component</p>
-<h4 id="Data-Binding"><a href="#Data-Binding" class="headerlink" title="Data Binding"></a>Data Binding</h4><p>when user gives the input, then DOM will communicate using property in [(ng-model)] = “property”</p>
-<ul>
-<li>handler: function declared component </li>
-</ul>
-<p>object =&gt; {}</p>
-<ul>
-<li>2 way binding: class component &lt;-&gt; template </li>
-</ul>
-<ul>
-<li>selector: ‘movie-details’ –&gt; director obj go in trhough selector</li>
-</ul>
-<h4 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h4><ul>
-<li>private: TS property, can’t access it from other classes</li>
-</ul>
+<h3 id="Angular-Decorators"><a href="#Angular-Decorators" class="headerlink" title="Angular Decorators"></a>Angular Decorators</h3><h4 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h4><p>target: class MyComponent</p>
+<h4 id="Injectable"><a href="#Injectable" class="headerlink" title="Injectable"></a>Injectable</h4><h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>@Input: input decorator =&gt; able to pass the value from parent template using the tag to the child component class</p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>@Output: output decorator =&gt; sen the info to the parent element<br>💥 Child’s view<br>input is meant to receive information from the parent element<br>output is meant to send info to the parent</p>
 
             
 
@@ -421,14 +365,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/11/19-Decorators/"
-                    data-tooltip="19. Decorators"
-                    aria-label="PREVIOUS: 19. Decorators"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -438,9 +379,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/09/Data-Sitting-from-MongoDB-to-GraphQL/"
-                    data-tooltip="Data Sitting from MongoDB to GraphQL"
-                    aria-label="NEXT: Data Sitting from MongoDB to GraphQL"
+                    href="/2021/02/10/18-Angular/"
+                    data-tooltip="18. Angular"
+                    aria-label="NEXT: 18. Angular"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -465,7 +406,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/10/18-Angular/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/11/19-Decorators/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -478,7 +419,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/10/18-Angular/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/11/19-Decorators/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -491,7 +432,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/10/18-Angular/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/11/19-Decorators/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -536,14 +477,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/11/19-Decorators/"
-                    data-tooltip="19. Decorators"
-                    aria-label="PREVIOUS: 19. Decorators"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -553,9 +491,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/09/Data-Sitting-from-MongoDB-to-GraphQL/"
-                    data-tooltip="Data Sitting from MongoDB to GraphQL"
-                    aria-label="NEXT: Data Sitting from MongoDB to GraphQL"
+                    href="/2021/02/10/18-Angular/"
+                    data-tooltip="18. Angular"
+                    aria-label="NEXT: 18. Angular"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -580,7 +518,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/10/18-Angular/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/11/19-Decorators/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -593,7 +531,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/10/18-Angular/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/11/19-Decorators/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -606,7 +544,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/10/18-Angular/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/11/19-Decorators/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -640,7 +578,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/10/18-Angular/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/11/19-Decorators/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -653,7 +591,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/10/18-Angular/"
+                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/11/19-Decorators/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -666,7 +604,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/10/18-Angular/"
+                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/11/19-Decorators/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
