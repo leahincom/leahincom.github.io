@@ -301,6 +301,144 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/02/12/20-Observable/"
+                            aria-label=": 20. Observable"
+                        >
+                            20. Observable
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-12T19:14:47+00:00">
+	
+		    Feb 12, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h3><p>angular.io/guide/observables<br>Angular<br>angular.io</p>
+<h4 id="RxJS"><a href="#RxJS" class="headerlink" title="RxJS"></a>RxJS</h4><ul>
+<li>PULLING system<br>producer<br>consumer</li>
+<li>PUSHING system<br>producer: pushes the data to a consumer</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://www.youtube.com/watch?v=ei7FsoXKPl0">www.youtube.com/watch?v=ei7FsoXKPl0</a></p>
+<p>Singluar    Plural<br>Synchronous    Value    Iterable<br>Asynchronous    Promise    Observable</p>
+<ul>
+<li>linear vector time</li>
+<li>seperated randomly (spreaded)<br>e.g. User Interaction: key stroke like click button, create event</li>
+<li>receives promises for multiple times</li>
+<li>compatibility: consistancy, handled by observables</li>
+</ul>
+<p>※ Everything is a Stream</p>
+<h4 id="Subscribe"><a href="#Subscribe" class="headerlink" title="Subscribe"></a>Subscribe</h4><ul>
+<li>observable$ =&gt; always with ‘$’</li>
+</ul>
+<h4 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h4><p>observable$.pipe(<br>operator(),<br>…<br>).subscribe(data =&gt; …)</p>
+<ul>
+<li>pipe(): throwing every single element a time</li>
+</ul>
+<ul>
+<li>operators are listed in order</li>
+</ul>
+<ul>
+<li>filter(): Array.filter과 비슷<br>filter() 메서드는 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.</li>
+</ul>
+<ul>
+<li>receiving bunch of events spreaded in time</li>
+<li>not returning an array</li>
+<li>true: pass / false: filtered out</li>
+</ul>
+<ul>
+<li>map()</li>
+</ul>
+<ul>
+<li>take the element and returns the conditioned element</li>
+</ul>
+<ul>
+<li>scan()</li>
+</ul>
+<p>As you can see from above code, similar to reduce function the scan function passes output of first function, as the input to the next function execution but the only difference being that, the result of each function execution is stored in an array and that array is returned as a result.</p>
+<p>You can notice that, the last element of the resulting array is 15which was the output of reduce function.</p>
+<ul>
+<li>subscribe(): final function that receives the information</li>
+</ul>
+<ul>
+<li>make sure it returns anything, not error</li>
+</ul>
+<ul>
+<li>next(): call the next function in the stream</li>
+</ul>
+<ul>
+<li>expressJS<br>Middleware functions are functions that have access to the request object(req), the response object (res), and the next function in the application’s request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.</li>
+</ul>
+<p>Middleware functions can perform the following tasks:<br>Execute any code.<br>Make changes to the request and the response objects.<br>End the request-response cycle.<br>Call the next middleware in the stack.<br>If the current middleware function does not end the request-response cycle, it must call next() to pass control to the next middleware function. Otherwise, the request will be left hanging.</p>
+<p>Starting with Express 5, middleware functions that return a Promise will call next(value) when they reject or throw an error. next will be called with either the rejected value or the thrown Error.</p>
+<ul>
+<li>Angular (angular.io/guide/observables)<br>Note that a next() function could receive, for instance, message strings, or event objects, numeric values, or structures, depending on context. As a general term, we refer to data published by an observable as a stream. Any type of value can be represented with an observable, and the values are published as a stream.</li>
+</ul>
+<ul>
+<li>complete(): close the stream</li>
+</ul>
+<ol>
+<li><dl><dt>Cold Observable<br>: only one subscription at one<br>: receive last value in the stream<br>: stream one direction, prepare data and spread them all at one together</dt><dd>same info to all the users</dd></dl></li>
+<li><dl><dt>Hot Observable<br>: can connect to the same stream the other one<br>: multiple streamers</dt><dd>can use former value after next function</dd></dl></li>
+</ol>
+<ul>
+<li>debounceTime(k): wait for k(ms) after stopped typing and put arg in the stream</li>
+</ul>
+<p>👀 Why do we need both ngOnInit() and constructor()?<br>The Constructor is a default method of the class that is executed when the class is instantiated and ensures proper initialisation of fields in the class and its subclasses. Angular, or better Dependency Injector (DI), analyses the constructor parameters and when it creates a new instance by calling new MyClass() it tries to find providers that match the types of the constructor parameters, resolves them and passes them to the constructor like <code>new MyClass(someArg);</code></p>
+<p>ngOnInit is a life cycle hook called by Angular to indicate that Angular is done creating the component.</p>
+<ul>
+<li>constructor: rendoring first</li>
+</ul>
+<ul>
+<li>initialise mainly properties</li>
+<li>have nothing which could stop executing</li>
+</ul>
+<ul>
+<li>ngOnInit: happen after first rendor, fulfill others</li>
+</ul>
+<ul>
+<li>triggering the function, asking for datas, populate them in the final</li>
+</ul>
+<p>BEM (Block Element Modifier)</p>
+<p>getbem.com/naming</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/12/20-Observable/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/02/11/19-Decorators/"
                             aria-label=": 19. Decorators"
                         >
@@ -1243,116 +1381,22 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/02/01/12-Async-Koa/"
-                            aria-label=": 12. Async, Koa"
-                        >
-                            12. Async, Koa
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-02-01T18:56:16+00:00">
-	
-		    Feb 01, 2021
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h3 id="Async-Patterns"><a href="#Async-Patterns" class="headerlink" title="Async Patterns"></a>Async Patterns</h3><ol>
-<li>Callbacks</li>
-</ol>
-<p>too complicated -&gt; simplified in ES6</p>
-<ol start="2">
-<li>Promises<br>reduce too many handlings, make into clean code (sugar coding)</li>
-</ol>
-<p>Promise -&gt; invoke reject/ resolve as callbacks</p>
-<p>then -&gt; happen arg first and then ‘then’ method</p>
-<ul>
-<li>resolve : when we find the answer</li>
-<li>reject : st went wrong</li>
-</ul>
-<ol start="3">
-<li>Async / Await</li>
-</ol>
-<ul>
-<li>async === setTimeOut</li>
-<li>await : pending promise/ valid answer from crypto.compare</li>
-</ul>
-<p>☝️</p>
-<dl><dt>callback functions are stacked<br>: first cb -&gt; first wait + call the second stacked callback function</dt><dd>second cb -&gt; second wait + third callback</dd></dl><p>✌️</p>
-<dl><dt>nested callback functions</dt><dd>wait for set time and execute the next one</dd></dl><p>=&gt; create new Promise and put setTimeOut in it, use resolve function</p>
-<p>async<br>=&gt; create asyn function, use await</p>
-<p>print 1 time</p>
-<ul>
-<li>async itself is just a normal function, but return the value as Promise</li>
-</ul>
-<h2 id="Koa"><a href="#Koa" class="headerlink" title="Koa"></a>Koa</h2><p>Search everything by ‘koa ~’</p>
-<ul>
-<li>promise based -&gt; always use ‘async’ !</li>
-<li>app.use() : go to the next() middleware</li>
-<li>express : req/res each send/receive info to/from the client<br>koa : ctx controls everything, koa sends/receives the info all by itself, control everything related to the client</li>
-</ul>
-<p>await next() -&gt; call bodyParser -&gt; call router -&gt; call allowedMethods…<br>*** install packages needed !!</p>
-<ul>
-<li>controller -&gt; usually the end of the chain (next -&gt; next -&gt; … -&gt; ctrl)</li>
-<li>controller doesn’t send anything to the client (no res.send()) =&gt; app (koa obj) sends the info to the client after receiving everything from the chain of next &amp; controller</li>
-</ul>
-<p>response aliases : Not method!, just variables!</p>
-<ul>
-<li>ctx.request.body -&gt; approach the request of body</li>
-</ul>
-<h3 id="Pre-requisite"><a href="#Pre-requisite" class="headerlink" title="Pre-requisite"></a>Pre-requisite</h3><p>code . // vscode<br>npm init –y // npm initialise<br>touch index.js router.js controller.js // make files<br>npm i koa<br>@ npm i “koa pkg” // search!</p>
-<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><p>middleware ( 1 -&gt; 2 -&gt; 3 ) -&gt; router: doorman –&gt; controller: manager)</p>
-<ul>
-<li>app.use(router) : always the last, right before to the controller</li>
-</ul>
-<p>set the middleware next(), which is the ‘router.routes()’ in this case</p>
-<h4 id="router-js"><a href="#router-js" class="headerlink" title="router.js"></a>router.js</h4><p>const Router = require(‘koa-router’)</p>
-<h4 id="controller-js"><a href="#controller-js" class="headerlink" title="controller.js"></a>controller.js</h4><p>get the id as params.id</p>
-<ul>
-<li>all the vars sent via the address are saved in the ctx.request.params!<br>e.g. /:name/:id –&gt; ctx.request.params.name, ctx.request.params.id</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/02/01/12-Async-Koa/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
         
-        <li class="pagination-number">page 1 of 1</li>
+          <li class="pagination-next">
+            <a
+                class="btn btn--default btn--small"
+                href="/archives/2021/02/page/2/"
+                aria-label="OLDER POSTS"
+            >
+              <span>OLDER POSTS</span>
+              <i class="fa fa-angle-right text-base icon-ml"></i>
+            </a>
+          </li>
+        
+        <li class="pagination-number">page 1 of 2</li>
     </ul>
 </div>
 
