@@ -300,6 +300,64 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/02/16/22-React-Component/"
+                            aria-label=": 22. React Component"
+                        >
+                            22. React Component
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-16T19:15:07+00:00">
+	
+		    Feb 16, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="React-Component-Lifecycle"><a href="#React-Component-Lifecycle" class="headerlink" title="React Component Lifecycle"></a>React Component Lifecycle</h3><ul>
+<li>Mounting</li>
+<li>Updating</li>
+<li>Unmounting: remove the component =&gt; without any re-rendering or updating</li>
+</ul>
+<p>render -&gt; mount -&gt; (setState()) -&gt; render -&gt; update</p>
+<h3 id="The-form-tag"><a href="#The-form-tag" class="headerlink" title="The form tag"></a>The <code>form</code> tag</h3><h3 id="Controlled-Components"><a href="#Controlled-Components" class="headerlink" title="Controlled Components"></a>Controlled Components</h3><p>export the parent element -&gt; pass to the child data -&gt; repeat … to the grandchild<br>LIKE A TREE</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/16/22-React-Component/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/02/15/21-React/"
                             aria-label=": 21. React"
                         >
@@ -1261,74 +1319,6 @@
                         <p>
                             <a
                                 href="/2021/02/04/14-NoSQL/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/02/03/13-ORM/"
-                            aria-label=": 13. ORM"
-                        >
-                            13. ORM
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-02-03T21:01:17+00:00">
-	
-		    Feb 03, 2021
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="ORMS"><a href="#ORMS" class="headerlink" title="ORMS"></a>ORMS</h2><p>Object Relational Mappings</p>
-<h3 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h3><h4 id="model-user-js"><a href="#model-user-js" class="headerlink" title="model/user.js"></a>model/user.js</h4><p>not need to define model.js by ourselves</p>
-<ul>
-<li>table not exists: create table/ exists: send the related table</li>
-</ul>
-<h4 id="models-task-js"><a href="#models-task-js" class="headerlink" title="models/task.js"></a>models/task.js</h4><p>connecting db with new Sequelize<br>.readditSync(__dirname) : return array of files in __dirname<br>// [index.js, task.js, user.js, .hide]<br>.filter(file =&gt; {<br>return (file.indexOf(‘.’) !== 0) &amp;&amp; (file !== ‘index.js’) &amp;&amp; (file.slice(-3) === ‘.js’);<br>// [task.js, user.js]<br>.forEach(file =&gt; {<br>const model = require(path.join(__dirname, file))<br>// create absolute path to the file<br>(sequelize, Sequelize.DataTypes);<br>// requiring models/task.js function<br>db[model.name] = model<br>// model: task / user<br>// each file will be the model object<br>db.sequelize = sequelize;<br>db.Sequelize = Sequelize;<br>// take the code and put it individually<br>// leave this code without changing anything in this file<br>module.exports = db<br>exports db with passing db</p>
-<p>👇</p>
-<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><ul>
-<li>set-up everything in the db perfectly and then connect to the client</li>
-</ul>
-<h4 id="router-js"><a href="#router-js" class="headerlink" title="router.js"></a>router.js</h4><p>not changed</p>
-<h4 id="controllers-user-js"><a href="#controllers-user-js" class="headerlink" title="controllers/user.js"></a>controllers/user.js</h4><h4 id="models-user-js"><a href="#models-user-js" class="headerlink" title="models/user.js"></a>models/user.js</h4><h4 id="models-task-js-1"><a href="#models-task-js-1" class="headerlink" title="models/task.js"></a>models/task.js</h4><p>— complete declare, now run —</p>
-<h4 id="models-index-js"><a href="#models-index-js" class="headerlink" title="models/index.js"></a>models/index.js</h4><p>mkcd [dir]<br>npm init -y<br>touch [index.js] [router.js]<br>npm i sequelize koa koa-router</p>
-<p>create table</p>
-<p>get the model : model/index.js, createStudent -&gt; not view, create template with the data</p>
-<p>get student by id, bodyparser -&gt; router.post</p>
-<p><strong>* npm weekly downloads : &gt;= 7M *</strong></p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/02/03/13-ORM/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
