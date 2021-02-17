@@ -300,6 +300,165 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/01/22/5-Data-Structure/"
+                            aria-label=": 5. Data Structure"
+                        >
+                            5. Data Structure
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-22T22:03:51+00:00">
+	
+		    Jan 22, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Data-Structure"><a href="#Data-Structure" class="headerlink" title="Data Structure"></a>Data Structure</h2><ul>
+<li>The way to organize the data</li>
+</ul>
+<h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><p><code>push</code> : put at the top<br><code>pop</code> : remove from the top</p>
+<ul>
+<li><strong>LIFO (Last In First Out)</strong></li>
+<li>Call Stack (e.g. factorial function)<ul>
+<li>always interact with the top element</li>
+</ul>
+</li>
+</ul>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><p><code>enqueue</code> : put at the back<br><code>dequeue</code> : remove from the first</p>
+<ul>
+<li><strong>FIFO (First In First Out)</strong></li>
+</ul>
+<h3 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked-List"></a>Linked-List</h3><p><code>head</code><br><code>tail</code><br><code>next</code></p>
+<ul>
+<li>Node and Pointer<ul>
+<li>just store two nodes as a pointer (head/ tail)</li>
+</ul>
+</li>
+<li>No need to initialise</li>
+<li>No need to relocate (linking)</li>
+<li>No need of indices (head / tail linking)<ul>
+<li>change the point of next when add the element<blockquote>
+<p>Block Chain<br>Delegation Chain</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="What-If-we-want-to-go-back"><a href="#What-If-we-want-to-go-back" class="headerlink" title="What If we want to go back?"></a>What If we want to go back?</h4><h3 id="Double-Linked-List"><a href="#Double-Linked-List" class="headerlink" title="Double-Linked-List"></a>Double-Linked-List</h3><ul>
+<li>first : <code>H -&gt; null, T -&gt; null</code></li>
+<li>add the node : <code>H, T -&gt; node</code></li>
+<li>add one more : <code>H -&gt; new node, T -&gt; old node, new -&gt; old node</code></li>
+</ul>
+<blockquote>
+<p>LL: {head: Node7, tail: Node29}<br>Node7: {val: 7, next: Node34}<br>Node34: {val: 34, next: Node29}<br>Node29: {val: 29, next: null}</p>
+</blockquote>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><h3 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h3><ul>
+<li><strong>Can’t Have a LOOP</strong></li>
+<li>subTree<ul>
+<li>Root</li>
+<li>Children / Parent</li>
+<li>Siblings</li>
+<li>Cousins</li>
+<li>Descendent</li>
+</ul>
+</li>
+<li>Leaf Node: bottom node without any children (null)</li>
+</ul>
+<hr>
+<blockquote>
+<p>Implementations</p>
+</blockquote>
+<h4 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h4><h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><hr>
+<h3 id="Hash-Table-Hash-Map"><a href="#Hash-Table-Hash-Map" class="headerlink" title="Hash Table/ Hash Map"></a>Hash Table/ Hash Map</h3><ul>
+<li>Object in JS: Hash Table/ Map</li>
+<li>same input -&gt; same output</li>
+<li>elements are evenly distributed along the range using <strong>hash function</strong><ul>
+<li>hash function: MAX === size of the array</li>
+<li>multiple values in the same key: contains() -&gt; return true;<br><code>Array</code> : used to keep objecs as elements<br>=&gt; arr = [obj1, obj2, …]<br><code>Linked-List</code> : used to link the elements that object has<br>=&gt; obj1 = {[<code>key</code>, <code>value</code>] -&gt; [<code>key</code>, <code>value</code>], …}<br>e.g. Person = [name: ‘Lisa’] -&gt; [age: 28] -&gt; …</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>해시 테이블은 (Key, Value)로 데이터를 저장하는 자료구조 중 하나로 빠르게 데이터를 검색할 수 있는 자료구조이다. 해시 테이블이 빠른 검색속도를 제공하는 이유는 내부적으로 배열(버킷)을 사용하여 데이터를 저장하기 때문이다. 해시 테이블은 각각의 Key값에 해시함수를 적용해 배열의 고유한 index를 생성하고, 이 index를 활용해 값을 저장하거나 검색하게 된다. 여기서 실제 값이 저장되는 장소를 버킷 또는 슬롯이라고 한다.<br>예를 들어 우리가 (Key, Value)가 (“John Smith”, “521-1234”)인 데이터를 크기가 16인 해시 테이블에 저장한다고 하자. 그러면 먼저 index = hash_function(“John Smith”) % 16 연산을 통해 index 값을 계산한다. 그리고 array[index] = “521-1234” 로 전화번호를 저장하게 된다.</p>
+</blockquote>
+<p><strong>REF</strong><br>mangkyu.tistory.com/102</p>
+<hr>
+<h4 id="Tree-Family"><a href="#Tree-Family" class="headerlink" title="Tree Family"></a>Tree Family</h4><h3 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h3><ul>
+<li>type of Tree</li>
+<li>parent has higher priority than children (root: most important)</li>
+<li>highest property is retrieved first</li>
+</ul>
+<h3 id="Binary-Heap"><a href="#Binary-Heap" class="headerlink" title="Binary Heap"></a>Binary Heap</h3><p><code>Add</code> : the leaf node, check the priority through the entire tree by going up<br><code>Delete</code> : the root node, put the last leaf node in the root and check the priority by going down the entire tree layer by layer</p>
+<ul>
+<li>Max Heap</li>
+<li>Min Heap</li>
+<li>fully filled layer by layer, with at most 2 leaf nodes</li>
+</ul>
+<p><strong>REF</strong><br><a target="_blank" rel="noopener" href="http://www.cs.usfca.edu/~galles/visualization/Heap.html">www.cs.usfca.edu/~galles/visualization/Heap.html</a></p>
+<h3 id="Binary-Search-Tree-BST"><a href="#Binary-Search-Tree-BST" class="headerlink" title="Binary Search Tree (BST)"></a>Binary Search Tree (BST)</h3><ul>
+<li>divide the tree into two parts<ul>
+<li>Left: smaller than the root node</li>
+<li>Right: bigger than the root node</li>
+</ul>
+</li>
+<li><strong>UNBALANCED TREE</strong>: if adds onlly bigger/ smaller elements, the height of the tree will be longer, thus unbalanced</li>
+</ul>
+<p><strong>REF</strong><br><a target="_blank" rel="noopener" href="http://www.cs.usfca.edu/~galles/visualization/BST.html">www.cs.usfca.edu/~galles/visualization/BST.html</a></p>
+<h3 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B-Tree"></a>B-Tree</h3><ul>
+<li>evolution of the binary search tree</li>
+<li>can have more than 2 children</li>
+<li>can have more than 1 key in 1 node<blockquote>
+<p>one key -&gt; 2 children<br>two keys -&gt; 3 children<br>three keys -&gt; divide into 2 keys with promotting the mid-value to the parent node</p>
+</blockquote>
+</li>
+<li>maintain a balance (complement the cons of a BST)</li>
+<li>can have duplicated keys</li>
+</ul>
+<p><strong>REF</strong><br><a target="_blank" rel="noopener" href="http://www.cs.usfca.edu/~galles/visualization/BTree.html">www.cs.usfca.edu/~galles/visualization/BTree.html</a></p>
+<h3 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h3><p><code>path</code><br><code>adjacency</code></p>
+<ul>
+<li>connection between edges with weights (e.g. facebook familiarity)</li>
+<li>pair of sets (Vertices: V, Edges: E)</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/22/5-Data-Structure/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/01/13/2-Unit-Testing/"
                             aria-label=": 2. Unit Testing"
                         >
