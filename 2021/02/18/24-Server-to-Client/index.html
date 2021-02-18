@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>23. ReactContext - leah</title>
+    <title>24. Server to Client - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"React Context: pass through App -&gt; Sidebar + ( Dashboard -&gt; AddComment)\n\nProvider: Owner\nConsumer(s)\nshare the parent\na subtree of the provider\n\n\n\n\nargument = null =&gt; inaccessible to the provider\n\nvalue = {42} =&gt; give the value to the CurrentUserContext.Provider, give access\n\n{ value =&gt;  } =&gt; give CurrentUserContext.Provider a Function\n\n\n–&gt; Modify\nHooks\nClasses\nReuse stateful logic is hard\nLogic spread into lifecycle methods\n\nOnly call hooks at/from…\n\nthe top level\nfunction components or custom hooks\n\nFunction Components\nfunction name with ‘use’\n\n\nuseState()\n\nsetCounter(counter+1) =&gt; (update): counter = counter+1 \n\nuseEffect()\n\n\nuseEffect without [] (initializing) =&gt; call setInterval exponentially (setInterval itself calls the function exponentially, it’s like ex*ex)\n\n\nuseContext()\n\n","dateCreated":"2021-02-17T17:19:20+00:00","dateModified":"2021-02-17T17:19:46+00:00","datePublished":"2021-02-17T17:19:20+00:00","description":"","headline":"23. ReactContext","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/17/23-React-Context/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/17/23-React-Context/"}</script>
-    <meta name="description" content="React Context: pass through App -&gt; Sidebar + ( Dashboard -&gt; AddComment)  Provider: Owner Consumer(s) share the parent a subtree of the provider     argument &#x3D; null &#x3D;&gt; inaccessible to the prov">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Server -&gt; Client\n\ntest server with Postman\nfix react server err with adding err_msg keyword (SKIP_PREFLIGHT_CHECK) in .env file in client\n\n*Date.now : function referenceDate.now() : create Date object\n*require(folder) =&gt; exports ‘index.js’ file in the folder\n*req.params(id) -&gt; findById(id) worksBecause id is the primary key of the Schma, which works as Index\n*findByIdAndUpdate()mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate\nMongoose v5.11.17: API docs\nmongoosejs.com\n*always put cors at the top, otherwise router will work without applying cors\n*import .vs. requiremasteringjs.io/tutorials/node/import-vs-require\nImport vs Require in Node.jsNow that Node.js has native support for ESM imports, should you use require() or import? Here’s what you need to know.masteringjs.io*personalise Date type fomatmomentjs.com/\nMoment.js | HomeFormat Dates moment().format(‘MMMM Do YYYY, h:mm:ss a’); moment().format(‘dddd’); moment().format(“MMM Do YY”); moment().format(‘YYYY [escaped] YYYY’); moment().format(); Relative Time moment(“20111031”, “YYYYMMDD”).fromNow(); moment(“20120620”, “YYYYMMDD”momentjs.com[ Index ]\n[ Router ]\n[ Controller ]\n[ Model ]\n[ App ]\n[ ApiService ]\n[ TopicForm ]\n[ TopicList ]\n[ TopicItem ]\n","dateCreated":"2021-02-18T13:12:44+00:00","dateModified":"2021-02-18T13:13:02+00:00","datePublished":"2021-02-18T13:12:44+00:00","description":"","headline":"24. Server to Client","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/18/24-Server-to-Client/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/18/24-Server-to-Client/"}</script>
+    <meta name="description" content="Server -&gt; Client  test server with Postman fix react server err with adding err_msg keyword (SKIP_PREFLIGHT_CHECK) in .env file in client  *Date.now : function referenceDate.now() : create Date obj">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="23. ReactContext">
-<meta property="og:url" content="http://leahincom.github.io/2021/02/17/23-React-Context/index.html">
+<meta property="og:title" content="24. Server to Client">
+<meta property="og:url" content="http://leahincom.github.io/2021/02/18/24-Server-to-Client/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="React Context: pass through App -&gt; Sidebar + ( Dashboard -&gt; AddComment)  Provider: Owner Consumer(s) share the parent a subtree of the provider     argument &#x3D; null &#x3D;&gt; inaccessible to the prov">
+<meta property="og:description" content="Server -&gt; Client  test server with Postman fix react server err with adding err_msg keyword (SKIP_PREFLIGHT_CHECK) in .env file in client  *Date.now : function referenceDate.now() : create Date obj">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-17T17:19:20.000Z">
-<meta property="article:modified_time" content="2021-02-17T17:19:46.735Z">
+<meta property="article:published_time" content="2021-02-18T13:12:44.000Z">
+<meta property="article:modified_time" content="2021-02-18T13:13:02.107Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="javascript">
@@ -300,14 +300,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            23. ReactContext
+            24. Server to Client
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-02-17T17:19:20+00:00">
+    <time datetime="2021-02-18T13:12:44+00:00">
 	
-		    Feb 17, 2021
+		    Feb 18, 2021
     	
     </time>
     
@@ -319,50 +319,29 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h3 id="React-Context"><a href="#React-Context" class="headerlink" title="React Context"></a>React Context</h3><p>: pass through App -&gt; Sidebar + ( Dashboard -&gt; AddComment)</p>
-<ol>
-<li>Provider: Owner</li>
-<li>Consumer(s)<ul>
-<li>share the parent</li>
-<li>a subtree of the provider</li>
-</ul>
-</li>
-</ol>
+            <p>Server -&gt; Client</p>
 <ul>
-<li><p>argument = null =&gt; inaccessible to the provider</p>
-</li>
-<li><p>value = {42} =&gt; give the value to the CurrentUserContext.Provider, give access</p>
-</li>
-<li><p>{ value =&gt; <User age = {value} /> } =&gt; give CurrentUserContext.Provider a Function</p>
-</li>
+<li>test server with Postman</li>
+<li>fix react server err with adding err_msg keyword (SKIP_PREFLIGHT_CHECK) in .env file in client</li>
 </ul>
-<p>–&gt; Modify</p>
-<h3 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h3><ol>
-<li>Classes</li>
-<li>Reuse stateful logic is hard</li>
-<li>Logic spread into lifecycle methods</li>
-</ol>
-<p>Only call hooks at/from…</p>
-<ul>
-<li>the top level</li>
-<li>function components or custom hooks</li>
-</ul>
-<h4 id="Function-Components"><a href="#Function-Components" class="headerlink" title="Function Components"></a>Function Components</h4><ul>
-<li>function name with ‘use’</li>
-</ul>
-<ul>
-<li>useState()</li>
-</ul>
-<p>setCounter(counter+1) =&gt; (update): counter = counter+1 </p>
-<ul>
-<li>useEffect()</li>
-</ul>
-<ul>
-<li>useEffect without [] (initializing) =&gt; call setInterval exponentially (setInterval itself calls the function exponentially, it’s like ex*ex)</li>
-</ul>
-<ul>
-<li>useContext()</li>
-</ul>
+<p>*<br>Date.now : function reference<br>Date.now() : create Date object</p>
+<p>*<br>require(folder) =&gt; exports ‘index.js’ file in the folder</p>
+<p>*<br>req.params(id) -&gt; findById(id) works<br>Because id is the primary key of the Schma, which works as Index</p>
+<p>*<br>findByIdAndUpdate()<br>mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate</p>
+<p>Mongoose v5.11.17: API docs</p>
+<p>mongoosejs.com</p>
+<p>*<br>always put cors at the top, otherwise router will work without applying cors</p>
+<p>*<br>import .vs. require<br>masteringjs.io/tutorials/node/import-vs-require</p>
+<p>Import vs Require in Node.js<br>Now that Node.js has native support for ESM imports, should you use <code>require()</code> or <code>import</code>? Here’s what you need to know.<br>masteringjs.io<br>*<br>personalise Date type fomat<br>momentjs.com/</p>
+<p>Moment.js | Home<br>Format Dates moment().format(‘MMMM Do YYYY, h:mm:ss a’); moment().format(‘dddd’); moment().format(“MMM Do YY”); moment().format(‘YYYY [escaped] YYYY’); moment().format(); Relative Time moment(“20111031”, “YYYYMMDD”).fromNow(); moment(“20120620”, “YYYYMMDD”<br>momentjs.com<br>[ Index ]</p>
+<p>[ Router ]</p>
+<p>[ Controller ]</p>
+<p>[ Model ]</p>
+<p>[ App ]</p>
+<p>[ ApiService ]</p>
+<p>[ TopicForm ]</p>
+<p>[ TopicList ]</p>
+<p>[ TopicItem ]</p>
 
             
 
@@ -377,14 +356,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/18/24-Server-to-Client/"
-                    data-tooltip="24. Server to Client"
-                    aria-label="PREVIOUS: 24. Server to Client"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -394,9 +370,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/16/22-React-Component/"
-                    data-tooltip="22. React Component"
-                    aria-label="NEXT: 22. React Component"
+                    href="/2021/02/17/23-React-Context/"
+                    data-tooltip="23. ReactContext"
+                    aria-label="NEXT: 23. ReactContext"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -421,7 +397,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/17/23-React-Context/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/18/24-Server-to-Client/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -434,7 +410,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/17/23-React-Context/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/18/24-Server-to-Client/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -447,7 +423,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/17/23-React-Context/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/18/24-Server-to-Client/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -492,14 +468,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/18/24-Server-to-Client/"
-                    data-tooltip="24. Server to Client"
-                    aria-label="PREVIOUS: 24. Server to Client"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -509,9 +482,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/16/22-React-Component/"
-                    data-tooltip="22. React Component"
-                    aria-label="NEXT: 22. React Component"
+                    href="/2021/02/17/23-React-Context/"
+                    data-tooltip="23. ReactContext"
+                    aria-label="NEXT: 23. ReactContext"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -536,7 +509,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/17/23-React-Context/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/18/24-Server-to-Client/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -549,7 +522,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/17/23-React-Context/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/18/24-Server-to-Client/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -562,7 +535,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/17/23-React-Context/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/18/24-Server-to-Client/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -596,7 +569,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/17/23-React-Context/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/18/24-Server-to-Client/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -609,7 +582,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/17/23-React-Context/"
+                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/18/24-Server-to-Client/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -622,7 +595,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/17/23-React-Context/"
+                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/18/24-Server-to-Client/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
