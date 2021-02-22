@@ -300,6 +300,106 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/02/06/16-Web-Components-PWA/"
+                            aria-label=": 16. Web Components, PWA"
+                        >
+                            16. Web Components, PWA
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-06T11:27:27+00:00">
+	
+		    Feb 06, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="Web-Components"><a href="#Web-Components" class="headerlink" title="Web Components"></a>Web Components</h3><h4 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h4><ol>
+<li>Scoped</li>
+<li>Reusable</li>
+<li>Encapsulated</li>
+</ol>
+<h4 id="Made-by-4-main-technologies"><a href="#Made-by-4-main-technologies" class="headerlink" title="Made by 4 main technologies"></a>Made by 4 main technologies</h4><ol>
+<li>HTML Template</li>
+<li>Custom Elements</li>
+<li>Shadow DOM</li>
+<li>HTML Imports</li>
+</ol>
+<h4 id="Basic-Web-Components"><a href="#Basic-Web-Components" class="headerlink" title="Basic Web Components"></a>Basic Web Components</h4><ul>
+<li>Card Title</li>
+<li>Component Title</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class&#x3D;&quot;card&quot;&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h2&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;&#x2F;...&gt;</span><br></pre></td></tr></table></figure>
+<p>👇</p>
+<ol>
+<li>reduce duplicated contents using…<br>&lt;product-card<br>data-header=<br>data-img=<br>data-text=<blockquote>
+</product-card></blockquote>
+</li>
+<li>with JavaScript!</li>
+</ol>
+<ul>
+<li>customElements : global variable</li>
+<li>shadow, secret // outside world can’t get access to it</li>
+</ul>
+<ul>
+<li>shadow DOM<br>a tree-like structure of connected nodes that represents the different elements and strings of text appearing in a markup document (usually an HTML document in the case of web documents).<br>※ font-size =&gt; DON’T use px !!! USE rem</li>
+</ul>
+<h3 id="Progressive-Web-App-PWA"><a href="#Progressive-Web-App-PWA" class="headerlink" title="Progressive Web App (PWA)"></a>Progressive Web App (PWA)</h3><ol>
+<li>Reliable: download and work off-line</li>
+</ol>
+<ul>
+<li>Service worker (downloads content-heavy web, use off-line)</li>
+<li>Pre-caching</li>
+</ul>
+<ol start="2">
+<li>Fast</li>
+<li>Engaging</li>
+</ol>
+<ul>
+<li>No app store needed</li>
+<li>Immersive full screen</li>
+<li>Push Notifications</li>
+</ul>
+<ul>
+<li>Chrome DevTools : Inspect -&gt; LightHouse 이용!!</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/06/16-Web-Components-PWA/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/02/05/15-CSS/"
                             aria-label=": 15. CSS"
                         >
@@ -1195,97 +1295,6 @@
                         <p>
                             <a
                                 href="/2021/01/27/8-Bitwise-Operation/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/01/26/7-BFS-DFS/"
-                            aria-label=": 7. BFS &amp; DFS"
-                        >
-                            7. BFS &amp; DFS
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-01-26T22:40:08+00:00">
-	
-		    Jan 26, 2021
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p><strong>Breadth First Search</strong></p>
-<ul>
-<li>Queue<br> : go same level node first and go deeper</li>
-</ul>
-<blockquote>
-<ul>
-<li>push root node</li>
-<li>pop root node<ul>
-<li>push children nodes <em>From Left to Right</em></li>
-</ul>
-</li>
-<li>pop child node one by one and…<ul>
-<li>push children nodes from child (((repeat)))</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">queue.enqueue(this);</span><br><span class="line">while (queue.length &gt; 0) &#123;</span><br><span class="line">    current &#x3D; queue.dequeue();</span><br><span class="line">    children &#x3D; current.children;</span><br><span class="line">    for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    	queue.enqueue(children[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p><strong>Depth First Search</strong></p>
-<ul>
-<li>Stack<br> : go down to the leaf node first and move on to the other children</li>
-</ul>
-<blockquote>
-<ul>
-<li>push root node</li>
-<li>pop root node<ul>
-<li>push children nodes <em>From Left To Right</em></li>
-</ul>
-</li>
-<li>pop child node and…<ul>
-<li>push children nodes of child (((repeat)))</li>
-</ul>
-</li>
-<li>pop the leaf node<ul>
-<li>pop other leaf nodes on the same level / push children nodes of the node on the same level</li>
-</ul>
-</li>
-<li>pop parent node and move on (((repeat)))</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">stack.push(this);</span><br><span class="line">while (stack.length &gt; 0) &#123;</span><br><span class="line">  current &#x3D; stack.pop();</span><br><span class="line">  children &#x3D; current.children;</span><br><span class="line">  for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    stack.push(children[i]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/01/26/7-BFS-DFS/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
