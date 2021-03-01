@@ -301,7 +301,140 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/2021/01/26/7-BFS-DFS/"
+                            href="/2021/01/28/8-Bitwise-Operation/"
+                            aria-label=": 8. Bitwise Operation"
+                        >
+                            8. Bitwise Operation
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-28T08:37:53+09:00">
+	
+		    Jan 28, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Bitwise-Operation"><a href="#Bitwise-Operation" class="headerlink" title="Bitwise Operation"></a>Bitwise Operation</h2><p>num[index] * 2^(index-1)</p>
+<h3 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h3><p><code>both</code><br><strong>&amp; : return 1 if both has 1 (same)</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>&amp;<blockquote>
+<p>5 &amp; 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<h2 id="amp-1001"><a href="#amp-1001" class="headerlink" title="&amp;1001"></a>&amp;1001</h2><p>0001(2) –&gt; 1</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h3><p><code>at least</code><br><strong>| : return 1 if at least one has 1</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>|<blockquote>
+<p>5 | 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<table>
+<thead>
+<tr>
+<th>1001</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1101(2) –&gt; 13</td>
+</tr>
+</tbody></table>
+</blockquote>
+</li>
+</ol>
+<h3 id="XOR"><a href="#XOR" class="headerlink" title="XOR"></a>XOR</h3><p><code>just one</code><br><strong>^ : return 1 if the value is different, return 0 if same</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>^<blockquote>
+<p>5 ^ 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<h2 id="1001"><a href="#1001" class="headerlink" title="^1001"></a>^1001</h2><p>1100(2) –&gt; 12</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="NOT"><a href="#NOT" class="headerlink" title="NOT"></a>NOT</h3><p><strong>~ : return the oppostie value</strong></p>
+<blockquote>
+<p>actually, there are 0 as many as the size of the integer range(&lt;=256, thus 8개) in front of the bits</p>
+</blockquote>
+<ul>
+<li>-(x) -1 (// in JS)</li>
+<li>negative<ul>
+<li>starts from -1</li>
+<li>meaning of 0, 1 is swtiched: 0 -&gt; decrement<blockquote>
+<p>~5<br>5 –&gt; 0101(2)</p>
+<h2 id="0101-2"><a href="#0101-2" class="headerlink" title="~0101(2)"></a>~0101(2)</h2><p>1010(2) –&gt; -6 (in JS, normally -5) // 1011(2) –&gt; -5 in JS</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Left-Shift"><a href="#Left-Shift" class="headerlink" title="Left Shift"></a>Left Shift</h3><p><strong>&lt;&lt; n : shift bits to the left to the n extent and fill the right bit with 0</strong></p>
+<blockquote>
+<p>5 &lt;&lt; 1<br>0101(2)<br>—– &lt;&lt; 1<br>1010(2)</p>
+</blockquote>
+<h3 id="Sign-propagating-Right-Shift"><a href="#Sign-propagating-Right-Shift" class="headerlink" title="Sign-propagating Right Shift"></a>Sign-propagating Right Shift</h3><p><strong>&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with the same one as the original last right value which is sign property</strong></p>
+<blockquote>
+<p>8 &gt;&gt;&gt; 1<br>0…1000(2)<br>———– &gt;&gt; 1<br>00…0100(2)  // 4<br>-8 &gt;&gt;&gt; 1<br>1…1000(2)<br>———– &gt;&gt; 1<br>11…1100(2) // -4</p>
+</blockquote>
+<h3 id="Zero-fill-Right-Shift"><a href="#Zero-fill-Right-Shift" class="headerlink" title="Zero-fill Right Shift"></a>Zero-fill Right Shift</h3><p><strong>&gt;&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with 0</strong></p>
+<blockquote>
+<p>[1]1…0111 // -8<br>——— &gt;&gt;&gt; 1<br>[0]1…1011 // 2147483644</p>
+</blockquote>
+<p>blog.logrocket.com/interesting-use-cases-for-javascript-bitwise-operators/<br>Interesting use cases for JavaScript bitwise operators - LogRocket Blog<br>Although we don’t often see bitwise operators used in JavaScript, they have some cool use cases. Learn their theory and implementation.<br>blog.logrocket.com</p>
+<hr>
+<dl><dt><em>compare <code>multiple values</code> together</em></dt><dd>first comparison -&gt; compare with the next one -&gt; (((repeat)))</dd></dl><h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>qiao.github.io/PathFinding.js/visual/<br>PathFinding.js<br>qiao.github.io</p>
+<h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><ul>
+<li>only need the weight</li>
+<li>evaluate all the nodes -&gt; slower</li>
+</ul>
+<ol>
+<li>set the weight of starting point to 0, and others to INF (as not started yet)</li>
+</ol>
+<h3 id="A"><a href="#A" class="headerlink" title="A*"></a>A*</h3><ul>
+<li>only evaluate shorter distance -&gt;faster</li>
+<li>need weight and distance both</li>
+</ul>
+<ol>
+<li>set additional array with distance</li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/28/8-Bitwise-Operation/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/01/27/7-BFS-DFS/"
                             aria-label=": 7. BFS &amp; DFS"
                         >
                             7. BFS &amp; DFS
@@ -309,9 +442,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2021-01-26T22:40:08+00:00">
+    <time datetime="2021-01-27T07:40:08+09:00">
 	
-		    Jan 26, 2021
+		    Jan 27, 2021
     	
     </time>
     
@@ -369,7 +502,7 @@
                     
                         <p>
                             <a
-                                href="/2021/01/26/7-BFS-DFS/#post-footer"
+                                href="/2021/01/27/7-BFS-DFS/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -392,7 +525,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/2021/01/23/6-Complexity-Analysis/"
+                            href="/2021/01/24/6-Complexity-Analysis/"
                             aria-label=": 6. Complexity Analysis"
                         >
                             6. Complexity Analysis
@@ -400,9 +533,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2021-01-23T23:43:59+00:00">
+    <time datetime="2021-01-24T08:43:59+09:00">
 	
-		    Jan 23, 2021
+		    Jan 24, 2021
     	
     </time>
     
@@ -470,7 +603,7 @@ e.g. mergeSort</li>
                     
                         <p>
                             <a
-                                href="/2021/01/23/6-Complexity-Analysis/#post-footer"
+                                href="/2021/01/24/6-Complexity-Analysis/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -493,7 +626,7 @@ e.g. mergeSort</li>
                     
                         <a
                             class="link-unstyled"
-                            href="/2021/01/22/5-Data-Structure/"
+                            href="/2021/01/23/5-Data-Structure/"
                             aria-label=": 5. Data Structure"
                         >
                             5. Data Structure
@@ -501,9 +634,9 @@ e.g. mergeSort</li>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2021-01-22T22:03:51+00:00">
+    <time datetime="2021-01-23T07:03:51+09:00">
 	
-		    Jan 22, 2021
+		    Jan 23, 2021
     	
     </time>
     
@@ -629,7 +762,7 @@ e.g. mergeSort</li>
                     
                         <p>
                             <a
-                                href="/2021/01/22/5-Data-Structure/#post-footer"
+                                href="/2021/01/23/5-Data-Structure/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -652,7 +785,7 @@ e.g. mergeSort</li>
                     
                         <a
                             class="link-unstyled"
-                            href="/2021/01/13/2-Unit-Testing/"
+                            href="/2021/01/14/2-Unit-Testing/"
                             aria-label=": 2. Unit Testing"
                         >
                             2. Unit Testing
@@ -660,9 +793,9 @@ e.g. mergeSort</li>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2021-01-13T22:46:23+00:00">
+    <time datetime="2021-01-14T07:46:23+09:00">
 	
-		    Jan 13, 2021
+		    Jan 14, 2021
     	
     </time>
     
@@ -741,7 +874,7 @@ e.g. mergeSort</li>
                     
                         <p>
                             <a
-                                href="/2021/01/13/2-Unit-Testing/#post-footer"
+                                href="/2021/01/14/2-Unit-Testing/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -764,7 +897,7 @@ e.g. mergeSort</li>
                     
                         <a
                             class="link-unstyled"
-                            href="/2021/01/12/function-with-multiple-invocations/"
+                            href="/2021/01/13/function-with-multiple-invocations/"
                             aria-label=": JS) function with multiple invocations"
                         >
                             JS) function with multiple invocations
@@ -772,9 +905,9 @@ e.g. mergeSort</li>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2021-01-12T18:39:15+00:00">
+    <time datetime="2021-01-13T03:39:15+09:00">
 	
-		    Jan 12, 2021
+		    Jan 13, 2021
     	
     </time>
     
@@ -802,7 +935,7 @@ e.g. mergeSort</li>
                     
                         <p>
                             <a
-                                href="/2021/01/12/function-with-multiple-invocations/#post-footer"
+                                href="/2021/01/13/function-with-multiple-invocations/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -825,7 +958,7 @@ e.g. mergeSort</li>
                     
                         <a
                             class="link-unstyled"
-                            href="/2021/01/11/1-Git/"
+                            href="/2021/01/12/1-Git/"
                             aria-label=": 1. Git"
                         >
                             1. Git
@@ -833,9 +966,9 @@ e.g. mergeSort</li>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2021-01-11T23:16:22+00:00">
+    <time datetime="2021-01-12T08:16:22+09:00">
 	
-		    Jan 11, 2021
+		    Jan 12, 2021
     	
     </time>
     
@@ -865,7 +998,7 @@ e.g. mergeSort</li>
                     
                         <p>
                             <a
-                                href="/2021/01/11/1-Git/#post-footer"
+                                href="/2021/01/12/1-Git/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

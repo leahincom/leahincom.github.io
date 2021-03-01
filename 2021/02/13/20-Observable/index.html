@@ -1,0 +1,735 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="leah">
+    <title>20. Observable - leah</title>
+    <meta name="author" content="JungHyun">
+    
+        <meta name="keywords" content="hexo,javascript,">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Observableangular.io/guide/observablesAngularangular.io\nRxJS\nPULLING systemproducerconsumer\nPUSHING systemproducer: pushes the data to a consumer\n\nwww.youtube.com/watch?v=ei7FsoXKPl0\nSingluar    PluralSynchronous    Value    IterableAsynchronous    Promise    Observable\n\nlinear vector time\nseperated randomly (spreaded)e.g. User Interaction: key stroke like click button, create event\nreceives promises for multiple times\ncompatibility: consistancy, handled by observables\n\n※ Everything is a Stream\nSubscribe\nobservable$ =&gt; always with ‘$’\n\nOperatorsobservable$.pipe(operator(),…).subscribe(data =&gt; …)\n\npipe(): throwing every single element a time\n\n\noperators are listed in order\n\n\nfilter(): Array.filter과 비슷filter() 메서드는 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.\n\n\nreceiving bunch of events spreaded in time\nnot returning an array\ntrue: pass / false: filtered out\n\n\nmap()\n\n\ntake the element and returns the conditioned element\n\n\nscan()\n\nAs you can see from above code, similar to reduce function the scan function passes output of first function, as the input to the next function execution but the only difference being that, the result of each function execution is stored in an array and that array is returned as a result.\nYou can notice that, the last element of the resulting array is 15which was the output of reduce function.\n\nsubscribe(): final function that receives the information\n\n\nmake sure it returns anything, not error\n\n\nnext(): call the next function in the stream\n\n\nexpressJSMiddleware functions are functions that have access to the request object(req), the response object (res), and the next function in the application’s request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.\n\nMiddleware functions can perform the following tasks:Execute any code.Make changes to the request and the response objects.End the request-response cycle.Call the next middleware in the stack.If the current middleware function does not end the request-response cycle, it must call next() to pass control to the next middleware function. Otherwise, the request will be left hanging.\nStarting with Express 5, middleware functions that return a Promise will call next(value) when they reject or throw an error. next will be called with either the rejected value or the thrown Error.\n\nAngular (angular.io/guide/observables)Note that a next() function could receive, for instance, message strings, or event objects, numeric values, or structures, depending on context. As a general term, we refer to data published by an observable as a stream. Any type of value can be represented with an observable, and the values are published as a stream.\n\n\ncomplete(): close the stream\n\n\nCold Observable: only one subscription at one: receive last value in the stream: stream one direction, prepare data and spread them all at one togethersame info to all the users\nHot Observable: can connect to the same stream the other one: multiple streamerscan use former value after next function\n\n\ndebounceTime(k): wait for k(ms) after stopped typing and put arg in the stream\n\n👀 Why do we need both ngOnInit() and constructor()?The Constructor is a default method of the class that is executed when the class is instantiated and ensures proper initialisation of fields in the class and its subclasses. Angular, or better Dependency Injector (DI), analyses the constructor parameters and when it creates a new instance by calling new MyClass() it tries to find providers that match the types of the constructor parameters, resolves them and passes them to the constructor like new MyClass(someArg);\nngOnInit is a life cycle hook called by Angular to indicate that Angular is done creating the component.\n\nconstructor: rendoring first\n\n\ninitialise mainly properties\nhave nothing which could stop executing\n\n\nngOnInit: happen after first rendor, fulfill others\n\n\ntriggering the function, asking for datas, populate them in the final\n\nBEM (Block Element Modifier)\ngetbem.com/naming\n","dateCreated":"2021-02-13T04:14:47+09:00","dateModified":"2021-02-13T04:15:02+09:00","datePublished":"2021-02-13T04:14:47+09:00","description":"","headline":"20. Observable","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/13/20-Observable/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/13/20-Observable/"}</script>
+    <meta name="description" content="Observableangular.io&#x2F;guide&#x2F;observablesAngularangular.io RxJS PULLING systemproducerconsumer PUSHING systemproducer: pushes the data to a consumer  www.youtube.com&#x2F;watch?v&#x3D;ei7FsoXKPl0 Singluar    Plura">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="20. Observable">
+<meta property="og:url" content="http://leahincom.github.io/2021/02/13/20-Observable/index.html">
+<meta property="og:site_name" content="leah">
+<meta property="og:description" content="Observableangular.io&#x2F;guide&#x2F;observablesAngularangular.io RxJS PULLING systemproducerconsumer PUSHING systemproducer: pushes the data to a consumer  www.youtube.com&#x2F;watch?v&#x3D;ei7FsoXKPl0 Singluar    Plura">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-12T19:14:47.000Z">
+<meta property="article:modified_time" content="2021-02-12T19:15:02.966Z">
+<meta property="article:author" content="JungHyun">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.JPG"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-zstiyrqjn5afyerefllmrb4gxsapavysezkil26axxvoneefwvumdvyvq27k.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            leah
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name">JungHyun</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            20. Observable
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2021-02-13T04:14:47+09:00">
+	
+		    Feb 13, 2021
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h3 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h3><p>angular.io/guide/observables<br>Angular<br>angular.io</p>
+<h4 id="RxJS"><a href="#RxJS" class="headerlink" title="RxJS"></a>RxJS</h4><ul>
+<li>PULLING system<br>producer<br>consumer</li>
+<li>PUSHING system<br>producer: pushes the data to a consumer</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://www.youtube.com/watch?v=ei7FsoXKPl0">www.youtube.com/watch?v=ei7FsoXKPl0</a></p>
+<p>Singluar    Plural<br>Synchronous    Value    Iterable<br>Asynchronous    Promise    Observable</p>
+<ul>
+<li>linear vector time</li>
+<li>seperated randomly (spreaded)<br>e.g. User Interaction: key stroke like click button, create event</li>
+<li>receives promises for multiple times</li>
+<li>compatibility: consistancy, handled by observables</li>
+</ul>
+<p>※ Everything is a Stream</p>
+<h4 id="Subscribe"><a href="#Subscribe" class="headerlink" title="Subscribe"></a>Subscribe</h4><ul>
+<li>observable$ =&gt; always with ‘$’</li>
+</ul>
+<h4 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h4><p>observable$.pipe(<br>operator(),<br>…<br>).subscribe(data =&gt; …)</p>
+<ul>
+<li>pipe(): throwing every single element a time</li>
+</ul>
+<ul>
+<li>operators are listed in order</li>
+</ul>
+<ul>
+<li>filter(): Array.filter과 비슷<br>filter() 메서드는 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.</li>
+</ul>
+<ul>
+<li>receiving bunch of events spreaded in time</li>
+<li>not returning an array</li>
+<li>true: pass / false: filtered out</li>
+</ul>
+<ul>
+<li>map()</li>
+</ul>
+<ul>
+<li>take the element and returns the conditioned element</li>
+</ul>
+<ul>
+<li>scan()</li>
+</ul>
+<p>As you can see from above code, similar to reduce function the scan function passes output of first function, as the input to the next function execution but the only difference being that, the result of each function execution is stored in an array and that array is returned as a result.</p>
+<p>You can notice that, the last element of the resulting array is 15which was the output of reduce function.</p>
+<ul>
+<li>subscribe(): final function that receives the information</li>
+</ul>
+<ul>
+<li>make sure it returns anything, not error</li>
+</ul>
+<ul>
+<li>next(): call the next function in the stream</li>
+</ul>
+<ul>
+<li>expressJS<br>Middleware functions are functions that have access to the request object(req), the response object (res), and the next function in the application’s request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.</li>
+</ul>
+<p>Middleware functions can perform the following tasks:<br>Execute any code.<br>Make changes to the request and the response objects.<br>End the request-response cycle.<br>Call the next middleware in the stack.<br>If the current middleware function does not end the request-response cycle, it must call next() to pass control to the next middleware function. Otherwise, the request will be left hanging.</p>
+<p>Starting with Express 5, middleware functions that return a Promise will call next(value) when they reject or throw an error. next will be called with either the rejected value or the thrown Error.</p>
+<ul>
+<li>Angular (angular.io/guide/observables)<br>Note that a next() function could receive, for instance, message strings, or event objects, numeric values, or structures, depending on context. As a general term, we refer to data published by an observable as a stream. Any type of value can be represented with an observable, and the values are published as a stream.</li>
+</ul>
+<ul>
+<li>complete(): close the stream</li>
+</ul>
+<ol>
+<li><dl><dt>Cold Observable<br>: only one subscription at one<br>: receive last value in the stream<br>: stream one direction, prepare data and spread them all at one together</dt><dd>same info to all the users</dd></dl></li>
+<li><dl><dt>Hot Observable<br>: can connect to the same stream the other one<br>: multiple streamers</dt><dd>can use former value after next function</dd></dl></li>
+</ol>
+<ul>
+<li>debounceTime(k): wait for k(ms) after stopped typing and put arg in the stream</li>
+</ul>
+<p>👀 Why do we need both ngOnInit() and constructor()?<br>The Constructor is a default method of the class that is executed when the class is instantiated and ensures proper initialisation of fields in the class and its subclasses. Angular, or better Dependency Injector (DI), analyses the constructor parameters and when it creates a new instance by calling new MyClass() it tries to find providers that match the types of the constructor parameters, resolves them and passes them to the constructor like <code>new MyClass(someArg);</code></p>
+<p>ngOnInit is a life cycle hook called by Angular to indicate that Angular is done creating the component.</p>
+<ul>
+<li>constructor: rendoring first</li>
+</ul>
+<ul>
+<li>initialise mainly properties</li>
+<li>have nothing which could stop executing</li>
+</ul>
+<ul>
+<li>ngOnInit: happen after first rendor, fulfill others</li>
+</ul>
+<ul>
+<li>triggering the function, asking for datas, populate them in the final</li>
+</ul>
+<p>BEM (Block Element Modifier)</p>
+<p>getbem.com/naming</p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/02/16/21-React/"
+                    data-tooltip="21. React"
+                    aria-label="PREVIOUS: 21. React"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/02/11/19-Decorators/"
+                    data-tooltip="19. Decorators"
+                    aria-label="NEXT: 19. Decorators"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/13/20-Observable/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/13/20-Observable/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/13/20-Observable/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 JungHyun. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/02/16/21-React/"
+                    data-tooltip="21. React"
+                    aria-label="PREVIOUS: 21. React"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/02/11/19-Decorators/"
+                    data-tooltip="19. Decorators"
+                    aria-label="NEXT: 19. Decorators"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/13/20-Observable/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/13/20-Observable/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/13/20-Observable/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/02/13/20-Observable/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/02/13/20-Observable/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/02/13/20-Observable/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name">JungHyun</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br/>
+                Currently_Europe/London, Home_Asia/Seoul
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-lpzyr3xjnv3dqyt5yikenoi8ogslmvjyaaaptsxgintd2hcan11q0kaxkk4e.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Database\npiece of software, store and retrieve\nsimilar to data.json()\n\nRelational Databases\nPrimary Key\n\n\nunique\nordered\ncan’t be null\n\n\nForeign Key\n\n\nreference the primary key of other table\n\nSQL\ncan use various types of tablese.g. B-tree …\n\nSQL - Relations\nOne to many\nMany to manyCombine…\n\n\nMany to one\none to Many\n\n\nOne to One\n\nSQL - QueriesSELECT _ FROM _ WHERE _ : SELECT COL FROM TABLE WHERE CONDITION\n\nSELECT * FROM “Users”\n\n\n*: everything\n\n\nSELECT “Email” FROM “Users” WHERE Id=7\n\n\nTime Complexityapproach table by index, not directly by primary key =&gt; O(n)\n-&gt; (because a primary key is ordered,) binary_search =&gt; O(logN)\n\nSQL - Indexes\nSELECT “Email” FROM “Users” WHERE Email = “&#x62;&#105;&#108;&#108;&#46;&#103;&#97;&#x74;&#101;&#x73;&#x40;&#x6d;&#x69;&#99;&#114;&#111;&#115;&#111;&#x66;&#x74;&#x2e;&#99;&#111;&#x6d;“ \n\n\nTime Complexityapproach table by checking each element =&gt; O(n)\n-&gt; set email as a primary key by adding a table and search in the original table using id as a reference key =&gt; O(2*logN)\n\nSQL - JoinsSharding and ReplicatingNot good in developer stand, but for safety (backup)\n\nSharding : divide into half and put each one into different machines\nReplicating : write the same data into different machinesIn case of sharding the data might be nicely distributed and hence the queries.\nTo “improve query” response on reading data, replication will help. You could write away to your primary and read from secondaries to distribute the queries. Also the primary then is relieved of the expensive reads, and can be busy with only writing.\n\nIn case of replicating existing shards, there will be more hosts to respond to a query request.\n\nThere is a some improvement with sharding if you choose a good shard key. Writing queries away ‘might’ be distributed if you do that correctly. The main reason for sharding is to “horizontally expand your database”. Working with big data, and not wanting to create/insert bigger and bigger disks … you can just create new servers next to it, as much as you want.\n\n","dateCreated":"2021-02-02T10:53:41+00:00","dateModified":"2021-02-02T10:53:58+00:00","datePublished":"2021-02-02T10:53:41+00:00","description":"","headline":"13. Database","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/02/13-Database/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/02/13-Database/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Database\npiece of software, store and retrieve\nsimilar to data.json()\n\nRelational Databases\nPrimary Key\n\n\nunique\nordered\ncan’t be null\n\n\nForeign Key\n\n\nreference the primary key of other table\n\nSQL\ncan use various types of tablese.g. B-tree …\n\nSQL - Relations\nOne to many\nMany to manyCombine…\n\n\nMany to one\none to Many\n\n\nOne to One\n\nSQL - QueriesSELECT _ FROM _ WHERE _ : SELECT COL FROM TABLE WHERE CONDITION\n\nSELECT * FROM “Users”\n\n\n*: everything\n\n\nSELECT “Email” FROM “Users” WHERE Id=7\n\n\nTime Complexityapproach table by index, not directly by primary key =&gt; O(n)\n-&gt; (because a primary key is ordered,) binary_search =&gt; O(logN)\n\nSQL - Indexes\nSELECT “Email” FROM “Users” WHERE Email = “&#x62;&#105;&#108;&#108;&#46;&#103;&#97;&#x74;&#101;&#x73;&#x40;&#x6d;&#x69;&#99;&#114;&#111;&#115;&#111;&#x66;&#x74;&#x2e;&#99;&#111;&#x6d;“ \n\n\nTime Complexityapproach table by checking each element =&gt; O(n)\n-&gt; set email as a primary key by adding a table and search in the original table using id as a reference key =&gt; O(2*logN)\n\nSQL - JoinsSharding and ReplicatingNot good in developer stand, but for safety (backup)\n\nSharding : divide into half and put each one into different machines\nReplicating : write the same data into different machinesIn case of sharding the data might be nicely distributed and hence the queries.\nTo “improve query” response on reading data, replication will help. You could write away to your primary and read from secondaries to distribute the queries. Also the primary then is relieved of the expensive reads, and can be busy with only writing.\n\nIn case of replicating existing shards, there will be more hosts to respond to a query request.\n\nThere is a some improvement with sharding if you choose a good shard key. Writing queries away ‘might’ be distributed if you do that correctly. The main reason for sharding is to “horizontally expand your database”. Working with big data, and not wanting to create/insert bigger and bigger disks … you can just create new servers next to it, as much as you want.\n\n","dateCreated":"2021-02-02T19:53:41+09:00","dateModified":"2021-02-02T19:53:58+09:00","datePublished":"2021-02-02T19:53:41+09:00","description":"","headline":"13. Database","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/02/13-Database/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/02/13-Database/"}</script>
     <meta name="description" content="Database piece of software, store and retrieve similar to data.json()  Relational Databases Primary Key   unique ordered can’t be null   Foreign Key   reference the primary key of other table  SQL can">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="13. Database">
@@ -305,7 +305,7 @@
     
     
         <div class="post-meta">
-    <time datetime="2021-02-02T10:53:41+00:00">
+    <time datetime="2021-02-02T19:53:41+09:00">
 	
 		    Feb 02, 2021
     	
@@ -399,7 +399,7 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/03/13-ORM/"
+                    href="/2021/02/04/13-ORM/"
                     data-tooltip="13. ORM"
                     aria-label="PREVIOUS: 13. ORM"
                 >
@@ -413,7 +413,7 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/01/12-Async-Koa/"
+                    href="/2021/02/02/12-Async-Koa/"
                     data-tooltip="12. Async, Koa"
                     aria-label="NEXT: 12. Async, Koa"
                 >
@@ -514,7 +514,7 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/03/13-ORM/"
+                    href="/2021/02/04/13-ORM/"
                     data-tooltip="13. ORM"
                     aria-label="PREVIOUS: 13. ORM"
                 >
@@ -528,7 +528,7 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/01/12-Async-Koa/"
+                    href="/2021/02/02/12-Async-Koa/"
                     data-tooltip="12. Async, Koa"
                     aria-label="NEXT: 12. Async, Koa"
                 >
