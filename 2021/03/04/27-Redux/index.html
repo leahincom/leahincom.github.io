@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>26. authentication - leah</title>
+    <title>27. Redux - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Authentication\nAuthentication: who you are\nAuthorization: what you are authorized to do\n\nThe Authorization HeaderHTTP/1.1\n\nbrowser ‘Inspect’ -&gt; Network\n\nTypesBasichttp://www.base64decode.org\nBase64 Decode and Encode - Online\nwww.base64decode.orgAutehntication based on username and passwordconcatenation with :\n\nDon’t store passwords in raw text, always hash it!\nDon’t use MD5 (Brute Force) since is becoming more insecure with the current computing power\nUSE BCrypt(the standard nowadays): hash same input into different everytimenpm bcrypt\n\nToken\ngithub personal access tokensrandom token is shared between the server and the client, usually on another requestlasts for short time (normally 30sec)Authorization = Bearer\n\nclinet: React, Angular …\nJWT (Jason Web Tokens)https://jwt.io[algorithm &amp; token type]header-[data: that needs to be secured]payload(userId, iat)-[verifying key]verify signature: no one can change the contentsignature =&gt; only if I have a secret, generates the signature / if input is different, signature will be different too\n\ncan’t change the payload if the signature hasn’t been changed\n\n\nmost bearer strategy: the token has all the info needed\nthe only thing stored in the server is the stored passphrase\nthe token is composed by the encryption information, the payload encoded in base64 and the signature\nless control on the token, the only way not to accept it is by using a blacklist\n\nSesson\npayload of data that relates to a user\npersisted in the server and is tagged with the ID\nwrites ID in the cookie (piece of information)-&gt; how we are saved and tracked// and sends it to the browser\n\n\neverytime the browser performs a request to the server, it sends back the cookie with the ID in it\n\nsession store: mongodb, file, etc…npm express-sessionnpm helmet\n\niframe: build website inside the website (element)\n\nOauth\nFireFox\n\n\nuser, app and authentication provider\nlets us authenticate a user through an authentication provider, who manages the account of the user\nAuthenticates a user within the activity of an app\nThe credentials are not leaked to the app\nBUT gives the provider the information (e.g. google)passport.jsoauth0firebase authentication\n\n","dateCreated":"2021-03-03T07:31:30+09:00","dateModified":"2021-03-02T22:31:51+09:00","datePublished":"2021-03-03T07:31:30+09:00","description":"","headline":"26. authentication","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/03/03/26-authentication/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/03/03/26-authentication/"}</script>
-    <meta name="description" content="Authentication Authentication: who you are Authorization: what you are authorized to do  The Authorization HeaderHTTP&#x2F;1.1  browser ‘Inspect’ -&gt; Network  TypesBasichttp:&#x2F;&#x2F;www.base64decode.org Base64">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"ReduxState Manager\nWithouteach component has its own storage =&gt; spaghetti code\nWithhas one store without having each storage\n\n\npredictable state container for JavaScript applications\nunpredictable; random bugs, hard to fix\n\n\napplication-wide state\nreduce function\n\nreact component = view\nReducer\ncan have multiple reducers\nreceives a state and do an action\n\n\nreduce function\nspecify how the application’s state changes in response\npure function\nnever do something like : mutate arguments, callign an API, call non-pure function\n\nidentity reducer\n\ngetState()\ndispatch(action)\nsubscribe(listener)\n\n👇but normally uses hooks👇 \nHooks※ for Reactreact-query.tanstack.com/reference/useQueryuseQuerySubscribe to our newsletter The latest TanStack news, articles, and resources, sent to your inbox.react-query.tanstack.comuseReducerko.reactjs.org/docs/hooks-reference.htmlHooks API Reference – ReactA JavaScript library for building user interfacesko.reactjs.org\nMaking To-Do List🚀 redux devTools\nDo one thing -&gt; make sure it is working -&gt; move on to next one﻿\noverview Treebig loop\n\ndispatch: sends the action to the reducer =&gt; actions in loop\n\nindex.js👇simplified\n\n&lt; TodoItem todo = {todo} onChange={onChangeTodo} &gt;\n\n※ Single component as a single responsibility\n\nPresentational Componentblog.naver.com/backsajang420/221368885149[React] Presentational and Container Components[React] 프레젠테이션 컴포넌트와 컨테이너 컴포넌트 (Presentational and Container Components)# 시…blog.naver.com\n\n\n프레젠테이션 컴포넌트 (Presentational Component)프레젠테이션 컴포넌트(Presentational Component) 는 아래와 같은 성질을 갖는다.● 어떻게 보여지는 지를 책임진다.컨테이너 컴포넌트 (Container Component)컨테이너 컴포넌트(Container Component) 는 아래와 같은 성질을 갖는다.● 어떻게 동작해야 할지를 책임진다.\n\nReact with Redux","dateCreated":"2021-03-04T04:49:00+09:00","dateModified":"2021-03-03T19:49:13+09:00","datePublished":"2021-03-04T04:49:00+09:00","description":"","headline":"27. Redux","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/03/04/27-Redux/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/03/04/27-Redux/"}</script>
+    <meta name="description" content="ReduxState Manager Withouteach component has its own storage &#x3D;&gt; spaghetti code Withhas one store without having each storage   predictable state container for JavaScript applications unpredictable;">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="26. authentication">
-<meta property="og:url" content="http://leahincom.github.io/2021/03/03/26-authentication/index.html">
+<meta property="og:title" content="27. Redux">
+<meta property="og:url" content="http://leahincom.github.io/2021/03/04/27-Redux/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Authentication Authentication: who you are Authorization: what you are authorized to do  The Authorization HeaderHTTP&#x2F;1.1  browser ‘Inspect’ -&gt; Network  TypesBasichttp:&#x2F;&#x2F;www.base64decode.org Base64">
+<meta property="og:description" content="ReduxState Manager Withouteach component has its own storage &#x3D;&gt; spaghetti code Withhas one store without having each storage   predictable state container for JavaScript applications unpredictable;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-02T22:31:30.000Z">
-<meta property="article:modified_time" content="2021-03-02T13:31:51.650Z">
+<meta property="article:published_time" content="2021-03-03T19:49:00.000Z">
+<meta property="article:modified_time" content="2021-03-03T10:49:13.549Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="javascript">
@@ -300,14 +300,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            26. authentication
+            27. Redux
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-03-03T07:31:30+09:00">
+    <time datetime="2021-03-04T04:49:00+09:00">
 	
-		    Mar 03, 2021
+		    Mar 04, 2021
     	
     </time>
     
@@ -319,59 +319,55 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h2><ul>
-<li>Authentication: who you are</li>
-<li>Authorization: what you are authorized to do</li>
-</ul>
-<h3 id="The-Authorization-Header"><a href="#The-Authorization-Header" class="headerlink" title="The Authorization Header"></a>The Authorization Header</h3><p>HTTP/1.1</p>
-<ul>
-<li>browser ‘Inspect’ -&gt; Network</li>
-</ul>
-<h3 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h3><h4 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h4><p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">http://www.base64decode.org</a></p>
-<p>Base64 Decode and Encode - Online</p>
-<p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">www.base64decode.org</a><br>Autehntication based on username and password<br>concatenation with <code>:</code></p>
-<ul>
-<li>Don’t store passwords in raw text, always hash it!</li>
-<li>Don’t use MD5 (Brute Force) since is becoming more insecure with the current computing power</li>
-<li>USE BCrypt(the standard nowadays): hash same input into different everytime<br>npm bcrypt</li>
-</ul>
-<h4 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h4><ul>
-<li>github personal access tokens<br>random token is shared between the server and the client, usually on another request<br>lasts for short time (normally 30sec)<br>Authorization = Bearer</li>
-</ul>
-<p>clinet: React, Angular …</p>
-<h4 id="JWT-Jason-Web-Tokens"><a href="#JWT-Jason-Web-Tokens" class="headerlink" title="JWT (Jason Web Tokens)"></a>JWT (Jason Web Tokens)</h4><p><a target="_blank" rel="noopener" href="https://jwt.io/">https://jwt.io</a><br>[algorithm &amp; token type]header-[data: that needs to be secured]payload(userId, iat)-[verifying key]verify signature: no one can change the content<br>signature =&gt; only if I have a secret, generates the signature / if input is different, signature will be different too</p>
-<ul>
-<li>can’t change the payload if the signature hasn’t been changed</li>
+            <h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="State-Manager"><a href="#State-Manager" class="headerlink" title="State Manager"></a>State Manager</h3><ul>
+<li>Without<br>each component has its own storage =&gt; spaghetti code</li>
+<li>With<br>has one store without having each storage</li>
 </ul>
 <ul>
-<li>most bearer strategy: the token has all the info needed</li>
-<li>the only thing stored in the server is the stored passphrase</li>
-<li>the token is composed by the encryption information, the payload encoded in base64 and the signature</li>
-<li>less control on the token, the only way not to accept it is by using a blacklist</li>
+<li>predictable state container for JavaScript applications<ul>
+<li>unpredictable; random bugs, hard to fix</li>
 </ul>
-<h3 id="Sesson"><a href="#Sesson" class="headerlink" title="Sesson"></a>Sesson</h3><ul>
-<li>payload of data that relates to a user</li>
-<li>persisted in the server and is tagged with the ID</li>
-<li>writes ID in the cookie (piece of information)-&gt; how we are saved and tracked// and sends it to the browser</li>
+</li>
+<li>application-wide state</li>
+<li>reduce function</li>
 </ul>
-<ul>
-<li>everytime the browser performs a request to the server, it sends back the cookie with the ID in it</li>
-</ul>
-<p>session store: mongodb, file, etc…<br>npm express-session<br>npm helmet</p>
-<ul>
-<li>iframe: build website inside the website (element)</li>
-</ul>
-<h4 id="Oauth"><a href="#Oauth" class="headerlink" title="Oauth"></a>Oauth</h4><ul>
-<li>FireFox</li>
+<p>react component = view</p>
+<h4 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h4><ul>
+<li>can have multiple reducers</li>
+<li>receives a state and do an action</li>
 </ul>
 <ul>
-<li>user, app and authentication provider</li>
-<li>lets us authenticate a user through an authentication provider, who manages the account of the user</li>
-<li>Authenticates a user within the activity of an app</li>
-<li>The credentials are not leaked to the app</li>
-<li>BUT gives the provider the information (e.g. google)<br>passport.js<br>oauth0<br>firebase authentication</li>
+<li>reduce function</li>
+<li>specify how the application’s state changes in response</li>
+<li>pure function</li>
+<li>never do something like : mutate arguments, callign an API, call non-pure function</li>
 </ul>
-
+<p>identity reducer</p>
+<ul>
+<li>getState()</li>
+<li>dispatch(action)</li>
+<li>subscribe(listener)</li>
+</ul>
+<p>👇but normally uses hooks👇 </p>
+<h4 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h4><p>※ for React<br>react-query.tanstack.com/reference/useQuery<br>useQuery<br>Subscribe to our newsletter The latest TanStack news, articles, and resources, sent to your inbox.<br>react-query.tanstack.com<br>useReducer<br>ko.reactjs.org/docs/hooks-reference.html<br>Hooks API Reference – React<br>A JavaScript library for building user interfaces<br>ko.reactjs.org</p>
+<h3 id="Making-To-Do-List"><a href="#Making-To-Do-List" class="headerlink" title="Making To-Do List"></a>Making To-Do List</h3><p>🚀 redux devTools</p>
+<p>Do one thing -&gt; make sure it is working -&gt; move on to next one﻿</p>
+<h4 id="overview-Tree"><a href="#overview-Tree" class="headerlink" title="overview Tree"></a>overview Tree</h4><p>big loop</p>
+<ul>
+<li>dispatch: sends the action to the reducer =&gt; actions in loop</li>
+</ul>
+<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><p>👇simplified</p>
+<ul>
+<li>&lt; TodoItem todo = {todo} onChange={onChangeTodo} &gt;</li>
+</ul>
+<p>※ Single component as a single responsibility</p>
+<ul>
+<li>Presentational Component<br>blog.naver.com/backsajang420/221368885149<br>[React] Presentational and Container Components<br>[React] 프레젠테이션 컴포넌트와 컨테이너 컴포넌트 (Presentational and Container Components)# 시…<br>blog.naver.com</li>
+</ul>
+<blockquote>
+<p>프레젠테이션 컴포넌트 (Presentational Component)<br>프레젠테이션 컴포넌트(Presentational Component) 는 아래와 같은 성질을 갖는다.<br>● 어떻게 보여지는 지를 책임진다.<br>컨테이너 컴포넌트 (Container Component)<br>컨테이너 컴포넌트(Container Component) 는 아래와 같은 성질을 갖는다.<br>● 어떻게 동작해야 할지를 책임진다.</p>
+</blockquote>
+<h4 id="React-with-Redux"><a href="#React-with-Redux" class="headerlink" title="React with Redux"></a>React with Redux</h4>
             
 
 
@@ -385,14 +381,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/03/04/27-Redux/"
-                    data-tooltip="27. Redux"
-                    aria-label="PREVIOUS: 27. Redux"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -402,9 +395,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/03/02/25-Security/"
-                    data-tooltip="25. Security"
-                    aria-label="NEXT: 25. Security"
+                    href="/2021/03/03/26-authentication/"
+                    data-tooltip="26. authentication"
+                    aria-label="NEXT: 26. authentication"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -429,7 +422,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/03/03/26-authentication/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/03/04/27-Redux/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -442,7 +435,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/03/03/26-authentication/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/03/04/27-Redux/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -455,7 +448,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/03/03/26-authentication/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/03/04/27-Redux/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -500,14 +493,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/03/04/27-Redux/"
-                    data-tooltip="27. Redux"
-                    aria-label="PREVIOUS: 27. Redux"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -517,9 +507,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/03/02/25-Security/"
-                    data-tooltip="25. Security"
-                    aria-label="NEXT: 25. Security"
+                    href="/2021/03/03/26-authentication/"
+                    data-tooltip="26. authentication"
+                    aria-label="NEXT: 26. authentication"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -544,7 +534,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/03/03/26-authentication/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/03/04/27-Redux/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -557,7 +547,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/03/03/26-authentication/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/03/04/27-Redux/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -570,7 +560,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/03/03/26-authentication/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/03/04/27-Redux/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -604,7 +594,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/03/03/26-authentication/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/03/04/27-Redux/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -617,7 +607,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/03/03/26-authentication/"
+                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/03/04/27-Redux/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -630,7 +620,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/03/03/26-authentication/"
+                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/03/04/27-Redux/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
