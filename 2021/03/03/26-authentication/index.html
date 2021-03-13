@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"Authentication\nAuthentication: who you are\nAuthorization: what you are authorized to do\n\nThe Authorization HeaderHTTP/1.1\n\nbrowser ‘Inspect’ -&gt; Network\n\nTypesBasichttp://www.base64decode.org\nBase64 Decode and Encode - Online\nwww.base64decode.orgAutehntication based on username and passwordconcatenation with :\n\nDon’t store passwords in raw text, always hash it!\nDon’t use MD5 (Brute Force) since is becoming more insecure with the current computing power\nUSE BCrypt(the standard nowadays): hash same input into different everytimenpm bcrypt\n\nToken\ngithub personal access tokensrandom token is shared between the server and the client, usually on another requestlasts for short time (normally 30sec)Authorization = Bearer\n\nclinet: React, Angular …\nJWT (Jason Web Tokens)https://jwt.io[algorithm &amp; token type]header-[data: that needs to be secured]payload(userId, iat)-[verifying key]verify signature: no one can change the contentsignature =&gt; only if I have a secret, generates the signature / if input is different, signature will be different too\n\ncan’t change the payload if the signature hasn’t been changed\n\n\nmost bearer strategy: the token has all the info needed\nthe only thing stored in the server is the stored passphrase\nthe token is composed by the encryption information, the payload encoded in base64 and the signature\nless control on the token, the only way not to accept it is by using a blacklist\n\nSesson\npayload of data that relates to a user\npersisted in the server and is tagged with the ID\nwrites ID in the cookie (piece of information)-&gt; how we are saved and tracked// and sends it to the browser\n\n\neverytime the browser performs a request to the server, it sends back the cookie with the ID in it\n\nsession store: mongodb, file, etc…npm express-sessionnpm helmet\n\niframe: build website inside the website (element)\n\nOauth\nFireFox\n\n\nuser, app and authentication provider\nlets us authenticate a user through an authentication provider, who manages the account of the user\nAuthenticates a user within the activity of an app\nThe credentials are not leaked to the app\nBUT gives the provider the information (e.g. google)passport.jsoauth0firebase authentication\n\n","dateCreated":"2021-03-03T07:31:30+09:00","dateModified":"2021-03-02T22:31:51+09:00","datePublished":"2021-03-03T07:31:30+09:00","description":"","headline":"26. authentication","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/03/03/26-authentication/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://leahincom.github.io/2021/03/03/26-authentication/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"Authentication\nAuthentication: who you are\nAuthorization: what you are authorized to do\n\nThe Authorization HeaderHTTP/1.1\n\nbrowser ‘Inspect’ -&gt; Network\n\nTypesBasichttp://www.base64decode.org\nBase64 Decode and Encode - Online\nwww.base64decode.orgAutehntication based on username and passwordconcatenation with :\n\nDon’t store passwords in raw text, always hash it!\nDon’t use MD5 (Brute Force) since is becoming more insecure with the current computing power\nUSE BCrypt(the standard nowadays): hash same input into different everytimenpm bcrypt\n\nToken\ngithub personal access tokensrandom token is shared between the server and the client, usually on another requestlasts for short time (normally 30sec)Authorization = Bearer\n\nclinet: React, Angular …\nJWT (Jason Web Tokens)https://jwt.io[algorithm &amp; token type]header-[data: that needs to be secured]payload(userId, iat)-[verifying key]verify signature: no one can change the contentsignature =&gt; only if I have a secret, generates the signature / if input is different, signature will be different too\n\ncan’t change the payload if the signature hasn’t been changed\n\n\nmost bearer strategy: the token has all the info needed\nthe only thing stored in the server is the stored passphrase\nthe token is composed by the encryption information, the payload encoded in base64 and the signature\nless control on the token, the only way not to accept it is by using a blacklist\n\nSesson\npayload of data that relates to a user\npersisted in the server and is tagged with the ID\nwrites ID in the cookie (piece of information)-&gt; how we are saved and tracked// and sends it to the browser\n\n\neverytime the browser performs a request to the server, it sends back the cookie with the ID in it\n\nsession store: mongodb, file, etc…npm express-sessionnpm helmet\n\niframe: build website inside the website (element)\n\nOauth\nFireFox\n\n\nuser, app and authentication provider\nlets us authenticate a user through an authentication provider, who manages the account of the user\nAuthenticates a user within the activity of an app\nThe credentials are not leaked to the app\nBUT gives the provider the information (e.g. google)passport.jsoauth0firebase authentication\n\n","dateCreated":"2021-03-03T07:31:30+09:00","dateModified":"2021-03-02T22:31:51+09:00","datePublished":"2021-03-03T07:31:30+09:00","description":"","headline":"26. authentication","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/03/03/26-authentication/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/03/03/26-authentication/"}</script>
     <meta name="description" content="Authentication Authentication: who you are Authorization: what you are authorized to do  The Authorization HeaderHTTP&#x2F;1.1  browser ‘Inspect’ -&gt; Network  TypesBasichttp:&#x2F;&#x2F;www.base64decode.org Base64">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="26. authentication">
@@ -32,7 +32,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpg"/>
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -91,7 +91,7 @@
             >
         
         
-            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
         </a>
     
@@ -112,7 +112,7 @@
                     href="/#about"
                     aria-label="Read more about the author"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
                 </a>
                 <h4 class="sidebar-profile-name">JungHyun</h4>
                 
@@ -665,7 +665,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
             <h4 id="about-card-name">JungHyun</h4>
         

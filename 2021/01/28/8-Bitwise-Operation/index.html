@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"Bitwise Operationnum[index] * 2^(index-1)\nANDboth&amp; : return 1 if both has 1 (same)\n\nchange num into bitwise\n&amp;\n5 &amp; 95 –&gt; 0101(2)9 –&gt; 1001(2) 0101\n&amp;10010001(2) –&gt; 1\n\n\n\nORat least| : return 1 if at least one has 1\n\nchange num into bitwise\n|\n5 | 95 –&gt; 0101(2)9 –&gt; 1001(2) 0101\n\n\n\n1001\n\n\n\n1101(2) –&gt; 13\n\n\n\n\n\nXORjust one^ : return 1 if the value is different, return 0 if same\n\nchange num into bitwise\n^\n5 ^ 95 –&gt; 0101(2)9 –&gt; 1001(2) 0101\n^10011100(2) –&gt; 12\n\n\n\nNOT~ : return the oppostie value\n\nactually, there are 0 as many as the size of the integer range(&lt;=256, thus 8개) in front of the bits\n\n\n-(x) -1 (// in JS)\nnegative\nstarts from -1\nmeaning of 0, 1 is swtiched: 0 -&gt; decrement\n~55 –&gt; 0101(2)\n~0101(2)1010(2) –&gt; -6 (in JS, normally -5) // 1011(2) –&gt; -5 in JS\n\n\n\n\n\nLeft Shift&lt;&lt; n : shift bits to the left to the n extent and fill the right bit with 0\n\n5 &lt;&lt; 10101(2)—– &lt;&lt; 11010(2)\n\nSign-propagating Right Shift&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with the same one as the original last right value which is sign property\n\n8 &gt;&gt;&gt; 10…1000(2)———– &gt;&gt; 100…0100(2)  // 4-8 &gt;&gt;&gt; 11…1000(2)———– &gt;&gt; 111…1100(2) // -4\n\nZero-fill Right Shift&gt;&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with 0\n\n[1]1…0111 // -8——— &gt;&gt;&gt; 1[0]1…1011 // 2147483644\n\nblog.logrocket.com/interesting-use-cases-for-javascript-bitwise-operators/Interesting use cases for JavaScript bitwise operators - LogRocket BlogAlthough we don’t often see bitwise operators used in JavaScript, they have some cool use cases. Learn their theory and implementation.blog.logrocket.com\n\ncompare multiple values togetherfirst comparison -&gt; compare with the next one -&gt; (((repeat)))Algorithmqiao.github.io/PathFinding.js/visual/PathFinding.jsqiao.github.io\nDijkstra\nonly need the weight\nevaluate all the nodes -&gt; slower\n\n\nset the weight of starting point to 0, and others to INF (as not started yet)\n\nA*\nonly evaluate shorter distance -&gt;faster\nneed weight and distance both\n\n\nset additional array with distance\n\n","dateCreated":"2021-01-28T08:37:53+09:00","dateModified":"2021-01-28T08:38:17+09:00","datePublished":"2021-01-28T08:37:53+09:00","description":"","headline":"8. Bitwise Operation","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/28/8-Bitwise-Operation/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://leahincom.github.io/2021/01/28/8-Bitwise-Operation/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"Bitwise Operationnum[index] * 2^(index-1)\nANDboth&amp; : return 1 if both has 1 (same)\n\nchange num into bitwise\n&amp;\n5 &amp; 95 –&gt; 0101(2)9 –&gt; 1001(2) 0101\n&amp;10010001(2) –&gt; 1\n\n\n\nORat least| : return 1 if at least one has 1\n\nchange num into bitwise\n|\n5 | 95 –&gt; 0101(2)9 –&gt; 1001(2) 0101\n\n\n\n1001\n\n\n\n1101(2) –&gt; 13\n\n\n\n\n\nXORjust one^ : return 1 if the value is different, return 0 if same\n\nchange num into bitwise\n^\n5 ^ 95 –&gt; 0101(2)9 –&gt; 1001(2) 0101\n^10011100(2) –&gt; 12\n\n\n\nNOT~ : return the oppostie value\n\nactually, there are 0 as many as the size of the integer range(&lt;=256, thus 8개) in front of the bits\n\n\n-(x) -1 (// in JS)\nnegative\nstarts from -1\nmeaning of 0, 1 is swtiched: 0 -&gt; decrement\n~55 –&gt; 0101(2)\n~0101(2)1010(2) –&gt; -6 (in JS, normally -5) // 1011(2) –&gt; -5 in JS\n\n\n\n\n\nLeft Shift&lt;&lt; n : shift bits to the left to the n extent and fill the right bit with 0\n\n5 &lt;&lt; 10101(2)—– &lt;&lt; 11010(2)\n\nSign-propagating Right Shift&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with the same one as the original last right value which is sign property\n\n8 &gt;&gt;&gt; 10…1000(2)———– &gt;&gt; 100…0100(2)  // 4-8 &gt;&gt;&gt; 11…1000(2)———– &gt;&gt; 111…1100(2) // -4\n\nZero-fill Right Shift&gt;&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with 0\n\n[1]1…0111 // -8——— &gt;&gt;&gt; 1[0]1…1011 // 2147483644\n\nblog.logrocket.com/interesting-use-cases-for-javascript-bitwise-operators/Interesting use cases for JavaScript bitwise operators - LogRocket BlogAlthough we don’t often see bitwise operators used in JavaScript, they have some cool use cases. Learn their theory and implementation.blog.logrocket.com\n\ncompare multiple values togetherfirst comparison -&gt; compare with the next one -&gt; (((repeat)))Algorithmqiao.github.io/PathFinding.js/visual/PathFinding.jsqiao.github.io\nDijkstra\nonly need the weight\nevaluate all the nodes -&gt; slower\n\n\nset the weight of starting point to 0, and others to INF (as not started yet)\n\nA*\nonly evaluate shorter distance -&gt;faster\nneed weight and distance both\n\n\nset additional array with distance\n\n","dateCreated":"2021-01-28T08:37:53+09:00","dateModified":"2021-01-28T08:38:17+09:00","datePublished":"2021-01-28T08:37:53+09:00","description":"","headline":"8. Bitwise Operation","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/28/8-Bitwise-Operation/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/01/28/8-Bitwise-Operation/"}</script>
     <meta name="description" content="Bitwise Operationnum[index] * 2^(index-1) ANDboth&amp; : return 1 if both has 1 (same)  change num into bitwise &amp; 5 &amp; 95 –&gt; 0101(2)9 –&gt; 1001(2) 0101 &amp;10010001(2) –&gt; 1    ORat leas">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="8. Bitwise Operation">
@@ -32,7 +32,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpg"/>
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -91,7 +91,7 @@
             >
         
         
-            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
         </a>
     
@@ -112,7 +112,7 @@
                     href="/#about"
                     aria-label="Read more about the author"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
                 </a>
                 <h4 class="sidebar-profile-name">JungHyun</h4>
                 
@@ -695,7 +695,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
             <h4 id="about-card-name">JungHyun</h4>
         

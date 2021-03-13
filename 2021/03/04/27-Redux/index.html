@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"ReduxState Manager\nWithouteach component has its own storage =&gt; spaghetti code\nWithhas one store without having each storage\n\n\npredictable state container for JavaScript applications\nunpredictable; random bugs, hard to fix\n\n\napplication-wide state\nreduce function\n\nreact component = view\nReducer\ncan have multiple reducers\nreceives a state and do an action\n\n\nreduce function\nspecify how the application’s state changes in response\npure function\nnever do something like : mutate arguments, callign an API, call non-pure function\n\nidentity reducer\n\ngetState()\ndispatch(action)\nsubscribe(listener)\n\n👇but normally uses hooks👇 \nHooks※ for Reactreact-query.tanstack.com/reference/useQueryuseQuerySubscribe to our newsletter The latest TanStack news, articles, and resources, sent to your inbox.react-query.tanstack.comuseReducerko.reactjs.org/docs/hooks-reference.htmlHooks API Reference – ReactA JavaScript library for building user interfacesko.reactjs.org\nMaking To-Do List🚀 redux devTools\nDo one thing -&gt; make sure it is working -&gt; move on to next one﻿\noverview Treebig loop\n\ndispatch: sends the action to the reducer =&gt; actions in loop\n\nindex.js👇simplified\n\n&lt; TodoItem todo = {todo} onChange={onChangeTodo} &gt;\n\n※ Single component as a single responsibility\n\nPresentational Componentblog.naver.com/backsajang420/221368885149[React] Presentational and Container Components[React] 프레젠테이션 컴포넌트와 컨테이너 컴포넌트 (Presentational and Container Components)# 시…blog.naver.com\n\n\n프레젠테이션 컴포넌트 (Presentational Component)프레젠테이션 컴포넌트(Presentational Component) 는 아래와 같은 성질을 갖는다.● 어떻게 보여지는 지를 책임진다.컨테이너 컴포넌트 (Container Component)컨테이너 컴포넌트(Container Component) 는 아래와 같은 성질을 갖는다.● 어떻게 동작해야 할지를 책임진다.\n\nReact with Redux","dateCreated":"2021-03-04T04:49:00+09:00","dateModified":"2021-03-03T19:49:13+09:00","datePublished":"2021-03-04T04:49:00+09:00","description":"","headline":"27. Redux","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/03/04/27-Redux/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://leahincom.github.io/2021/03/04/27-Redux/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"ReduxState Manager\nWithouteach component has its own storage =&gt; spaghetti code\nWithhas one store without having each storage\n\n\npredictable state container for JavaScript applications\nunpredictable; random bugs, hard to fix\n\n\napplication-wide state\nreduce function\n\nreact component = view\nReducer\ncan have multiple reducers\nreceives a state and do an action\n\n\nreduce function\nspecify how the application’s state changes in response\npure function\nnever do something like : mutate arguments, callign an API, call non-pure function\n\nidentity reducer\n\ngetState()\ndispatch(action)\nsubscribe(listener)\n\n👇but normally uses hooks👇 \nHooks※ for Reactreact-query.tanstack.com/reference/useQueryuseQuerySubscribe to our newsletter The latest TanStack news, articles, and resources, sent to your inbox.react-query.tanstack.comuseReducerko.reactjs.org/docs/hooks-reference.htmlHooks API Reference – ReactA JavaScript library for building user interfacesko.reactjs.org\nMaking To-Do List🚀 redux devTools\nDo one thing -&gt; make sure it is working -&gt; move on to next one﻿\noverview Treebig loop\n\ndispatch: sends the action to the reducer =&gt; actions in loop\n\nindex.js👇simplified\n\n&lt; TodoItem todo = {todo} onChange={onChangeTodo} &gt;\n\n※ Single component as a single responsibility\n\nPresentational Componentblog.naver.com/backsajang420/221368885149[React] Presentational and Container Components[React] 프레젠테이션 컴포넌트와 컨테이너 컴포넌트 (Presentational and Container Components)# 시…blog.naver.com\n\n\n프레젠테이션 컴포넌트 (Presentational Component)프레젠테이션 컴포넌트(Presentational Component) 는 아래와 같은 성질을 갖는다.● 어떻게 보여지는 지를 책임진다.컨테이너 컴포넌트 (Container Component)컨테이너 컴포넌트(Container Component) 는 아래와 같은 성질을 갖는다.● 어떻게 동작해야 할지를 책임진다.\n\nReact with Redux","dateCreated":"2021-03-04T04:49:00+09:00","dateModified":"2021-03-03T19:49:13+09:00","datePublished":"2021-03-04T04:49:00+09:00","description":"","headline":"27. Redux","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/03/04/27-Redux/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/03/04/27-Redux/"}</script>
     <meta name="description" content="ReduxState Manager Withouteach component has its own storage &#x3D;&gt; spaghetti code Withhas one store without having each storage   predictable state container for JavaScript applications unpredictable;">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="27. Redux">
@@ -32,7 +32,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpg"/>
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -91,7 +91,7 @@
             >
         
         
-            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
         </a>
     
@@ -112,7 +112,7 @@
                     href="/#about"
                     aria-label="Read more about the author"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
                 </a>
                 <h4 class="sidebar-profile-name">JungHyun</h4>
                 
@@ -655,7 +655,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
             <h4 id="about-card-name">JungHyun</h4>
         

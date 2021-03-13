@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"React Context: pass through App -&gt; Sidebar + ( Dashboard -&gt; AddComment)\n\nProvider: Owner\nConsumer(s)\nshare the parent\na subtree of the provider\n\n\n\n\nargument = null =&gt; inaccessible to the provider\n\nvalue = {42} =&gt; give the value to the CurrentUserContext.Provider, give access\n\n{ value =&gt;  } =&gt; give CurrentUserContext.Provider a Function\n\n\n–&gt; Modify\nHooks\nClasses\nReuse stateful logic is hard\nLogic spread into lifecycle methods\n\nOnly call hooks at/from…\n\nthe top level\nfunction components or custom hooks\n\nFunction Components\nfunction name with ‘use’\n\n\nuseState()\n\nsetCounter(counter+1) =&gt; (update): counter = counter+1 \n\nuseEffect()\n\n\nuseEffect without [] (initializing) =&gt; call setInterval exponentially (setInterval itself calls the function exponentially, it’s like ex*ex)\n\n\nuseContext()\n\n","dateCreated":"2021-02-18T02:19:20+09:00","dateModified":"2021-02-18T02:19:46+09:00","datePublished":"2021-02-18T02:19:20+09:00","description":"","headline":"23. ReactContext","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/18/23-React-Context/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://leahincom.github.io/2021/02/18/23-React-Context/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"React Context: pass through App -&gt; Sidebar + ( Dashboard -&gt; AddComment)\n\nProvider: Owner\nConsumer(s)\nshare the parent\na subtree of the provider\n\n\n\n\nargument = null =&gt; inaccessible to the provider\n\nvalue = {42} =&gt; give the value to the CurrentUserContext.Provider, give access\n\n{ value =&gt;  } =&gt; give CurrentUserContext.Provider a Function\n\n\n–&gt; Modify\nHooks\nClasses\nReuse stateful logic is hard\nLogic spread into lifecycle methods\n\nOnly call hooks at/from…\n\nthe top level\nfunction components or custom hooks\n\nFunction Components\nfunction name with ‘use’\n\n\nuseState()\n\nsetCounter(counter+1) =&gt; (update): counter = counter+1 \n\nuseEffect()\n\n\nuseEffect without [] (initializing) =&gt; call setInterval exponentially (setInterval itself calls the function exponentially, it’s like ex*ex)\n\n\nuseContext()\n\n","dateCreated":"2021-02-18T02:19:20+09:00","dateModified":"2021-02-18T02:19:46+09:00","datePublished":"2021-02-18T02:19:20+09:00","description":"","headline":"23. ReactContext","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/18/23-React-Context/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/02/18/23-React-Context/"}</script>
     <meta name="description" content="React Context: pass through App -&gt; Sidebar + ( Dashboard -&gt; AddComment)  Provider: Owner Consumer(s) share the parent a subtree of the provider     argument &#x3D; null &#x3D;&gt; inaccessible to the prov">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="23. ReactContext">
@@ -32,7 +32,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpg"/>
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -91,7 +91,7 @@
             >
         
         
-            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
         </a>
     
@@ -112,7 +112,7 @@
                     href="/#about"
                     aria-label="Read more about the author"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
                 </a>
                 <h4 class="sidebar-profile-name">JungHyun</h4>
                 
@@ -657,7 +657,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
             <h4 id="about-card-name">JungHyun</h4>
         

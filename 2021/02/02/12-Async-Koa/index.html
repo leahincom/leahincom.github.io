@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"Async Patterns\nCallbacks\n\ntoo complicated -&gt; simplified in ES6\n\nPromisesreduce too many handlings, make into clean code (sugar coding)\n\nPromise -&gt; invoke reject/ resolve as callbacks\nthen -&gt; happen arg first and then ‘then’ method\n\nresolve : when we find the answer\nreject : st went wrong\n\n\nAsync / Await\n\n\nasync === setTimeOut\nawait : pending promise/ valid answer from crypto.compare\n\n☝️\ncallback functions are stacked: first cb -&gt; first wait + call the second stacked callback functionsecond cb -&gt; second wait + third callback✌️\nnested callback functionswait for set time and execute the next one=&gt; create new Promise and put setTimeOut in it, use resolve function\nasync=&gt; create asyn function, use await\nprint 1 time\n\nasync itself is just a normal function, but return the value as Promise\n\nKoaSearch everything by ‘koa ~’\n\npromise based -&gt; always use ‘async’ !\napp.use() : go to the next() middleware\nexpress : req/res each send/receive info to/from the clientkoa : ctx controls everything, koa sends/receives the info all by itself, control everything related to the client\n\nawait next() -&gt; call bodyParser -&gt; call router -&gt; call allowedMethods…*** install packages needed !!\n\ncontroller -&gt; usually the end of the chain (next -&gt; next -&gt; … -&gt; ctrl)\ncontroller doesn’t send anything to the client (no res.send()) =&gt; app (koa obj) sends the info to the client after receiving everything from the chain of next &amp; controller\n\nresponse aliases : Not method!, just variables!\n\nctx.request.body -&gt; approach the request of body\n\nPre-requisitecode . // vscodenpm init –y // npm initialisetouch index.js router.js controller.js // make filesnpm i koa@ npm i “koa pkg” // search!\nindex.jsmiddleware ( 1 -&gt; 2 -&gt; 3 ) -&gt; router: doorman –&gt; controller: manager)\n\napp.use(router) : always the last, right before to the controller\n\nset the middleware next(), which is the ‘router.routes()’ in this case\nrouter.jsconst Router = require(‘koa-router’)\ncontroller.jsget the id as params.id\n\nall the vars sent via the address are saved in the ctx.request.params!e.g. /:name/:id –&gt; ctx.request.params.name, ctx.request.params.id\n\n","dateCreated":"2021-02-02T03:56:16+09:00","dateModified":"2021-02-02T03:56:37+09:00","datePublished":"2021-02-02T03:56:16+09:00","description":"","headline":"12. Async, Koa","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/02/12-Async-Koa/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://leahincom.github.io/2021/02/02/12-Async-Koa/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"Async Patterns\nCallbacks\n\ntoo complicated -&gt; simplified in ES6\n\nPromisesreduce too many handlings, make into clean code (sugar coding)\n\nPromise -&gt; invoke reject/ resolve as callbacks\nthen -&gt; happen arg first and then ‘then’ method\n\nresolve : when we find the answer\nreject : st went wrong\n\n\nAsync / Await\n\n\nasync === setTimeOut\nawait : pending promise/ valid answer from crypto.compare\n\n☝️\ncallback functions are stacked: first cb -&gt; first wait + call the second stacked callback functionsecond cb -&gt; second wait + third callback✌️\nnested callback functionswait for set time and execute the next one=&gt; create new Promise and put setTimeOut in it, use resolve function\nasync=&gt; create asyn function, use await\nprint 1 time\n\nasync itself is just a normal function, but return the value as Promise\n\nKoaSearch everything by ‘koa ~’\n\npromise based -&gt; always use ‘async’ !\napp.use() : go to the next() middleware\nexpress : req/res each send/receive info to/from the clientkoa : ctx controls everything, koa sends/receives the info all by itself, control everything related to the client\n\nawait next() -&gt; call bodyParser -&gt; call router -&gt; call allowedMethods…*** install packages needed !!\n\ncontroller -&gt; usually the end of the chain (next -&gt; next -&gt; … -&gt; ctrl)\ncontroller doesn’t send anything to the client (no res.send()) =&gt; app (koa obj) sends the info to the client after receiving everything from the chain of next &amp; controller\n\nresponse aliases : Not method!, just variables!\n\nctx.request.body -&gt; approach the request of body\n\nPre-requisitecode . // vscodenpm init –y // npm initialisetouch index.js router.js controller.js // make filesnpm i koa@ npm i “koa pkg” // search!\nindex.jsmiddleware ( 1 -&gt; 2 -&gt; 3 ) -&gt; router: doorman –&gt; controller: manager)\n\napp.use(router) : always the last, right before to the controller\n\nset the middleware next(), which is the ‘router.routes()’ in this case\nrouter.jsconst Router = require(‘koa-router’)\ncontroller.jsget the id as params.id\n\nall the vars sent via the address are saved in the ctx.request.params!e.g. /:name/:id –&gt; ctx.request.params.name, ctx.request.params.id\n\n","dateCreated":"2021-02-02T03:56:16+09:00","dateModified":"2021-02-02T03:56:37+09:00","datePublished":"2021-02-02T03:56:16+09:00","description":"","headline":"12. Async, Koa","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/02/12-Async-Koa/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/02/02/12-Async-Koa/"}</script>
     <meta name="description" content="Async Patterns Callbacks  too complicated -&gt; simplified in ES6  Promisesreduce too many handlings, make into clean code (sugar coding)  Promise -&gt; invoke reject&#x2F; resolve as callbacks then -&gt;">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="12. Async, Koa">
@@ -32,7 +32,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpg"/>
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -91,7 +91,7 @@
             >
         
         
-            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
         </a>
     
@@ -112,7 +112,7 @@
                     href="/#about"
                     aria-label="Read more about the author"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
                 </a>
                 <h4 class="sidebar-profile-name">JungHyun</h4>
                 
@@ -667,7 +667,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
             <h4 id="about-card-name">JungHyun</h4>
         
