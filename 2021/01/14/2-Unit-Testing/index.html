@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Testingnot in the production, just for element checking before a deployment\n\nAutomated Tests반복되는 test 작업을 줄임\n\n\nUnitreceives a single case input, return certain type of outputwouldn’t pass unless the entire process works oute.g. validation email &amp; password -&gt; similar word -&gt; set the function as a unit with diff. input\n\nIntegrationmultiple single inputs -&gt; integrates into a single outpute.g. email / pw -&gt; basic email : password\n\nE2Eend-to-enduser-perspective, operation on the browser, entire process without manually fixing ithard to point where the error comes out\n\n\n\nTDD\nTest Driven Developmentfail-fix-refactor\n\n\none test at a time\n\nBDD\nBahaviour Driven DevelopmentE2E\n\n\ntesting single unit, element to test entirely\nimplemented in non-technical env. -&gt; no coding\n\ndiff: technical or not\n\nTesting Frameworks: the function to run the tests (in JS - Mocha, Jasmine(React), Jest)# : e.g. #func() : recall all the elements including func()\n\ndescribe()\nit()\nHooks; rather than list singly, wrap it for organizing\nstart a server, create DB\n\n\n\n12345678910111213141516171819describe(&#39;hooks&#39;, function() &#123;  before(function() &#123;    &#x2F;&#x2F; runs once before the first test in this block  &#125;);  after(function() &#123;    &#x2F;&#x2F; runs once after the last test in this block  &#125;);  beforeEach(function() &#123;    &#x2F;&#x2F; runs before each test in this block  &#125;);  afterEach(function() &#123;    &#x2F;&#x2F; runs after each test in this block  &#125;);  &#x2F;&#x2F; test cases&#125;);\n\ninside each hooks: it()\n\n\nAssertion\nassert -&gt; technical, not readable\n\nbuilt-in in Node.js\n\n\ntypeOf(var, typeof, [msg])\nequal(var, val, [msg])\nlengthOf(var, length, [msg])\n\n\nexpect e.g. expect(foo).to.not.equal(&#39;bar&#39;)\n\nshoulde.g. foo.should.not.equal(&#39;bar&#39;)\n\n\n123456789101112131415161718192021222324252627282930313233function add (a, b) &#123;\tif (typeof a &#x3D;&#x3D;&#x3D; &#39;number&#39; &amp;&amp; b &#x3D;&#x3D;&#x3D; undefined) return a;    if (typeof a !&#x3D;&#x3D; &#39;number&#39; || typeof b !&#x3D;&#x3D; &#39;number&#39;) return undefined;\t&#x2F;&#x2F; return 8;    return a + b;&#125;&#x2F;&#x2F; write the test firstvar should &#x3D; require(&#39;chai&#39;).should();describe(&#39;Add&#39;, function () &#123;\tit(&#39;should sum two numbers&#39;, function () &#123;    \tadd(3, 5).should.equal(8);        &#x2F;&#x2F; add another ex to fail add(a,b) &#123;return 8;&#125; function        add(2, 7).should.equal(9);    &#125;);        it(&#39;should return undefined when is not passed numbers&#39;, function () &#123;    \tshould.equal(add(&#39;hello&#39;, &#39;world&#39;), undefined);        &#x2F;&#x2F; add(&#39;&#39;).should.equal이 아닌 이유:        &#x2F;&#x2F; undefined을 반환하면 undefined.should.equal()이 되고,        &#x2F;&#x2F; 이는 error(cannot read the property)를 반환 (undefined의 function 정의 불가)        &#x2F;&#x2F; 따라서 should.equal(add(&#39;&#39;))의 결과와 undefined를 matching                should.equal(add(1, &#39;world&#39;), undefined);        should.equal(add(&#39;hello&#39;, 1), undefined);    &#125;);        it(&#39;should return the number if only one is passed&#39;, function () &#123;    \tshould.equal(add(8), 8);        &#x2F;&#x2F; add(8).should.equal(8);    &#125;);&#125;);\n\nREFkent c.dodds webmochajs.com\n","dateCreated":"2021-01-14T07:46:23+09:00","dateModified":"2021-01-14T08:18:12+09:00","datePublished":"2021-01-14T07:46:23+09:00","description":"","headline":"2. Unit Testing","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/14/2-Unit-Testing/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/01/14/2-Unit-Testing/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"Testingnot in the production, just for element checking before a deployment\n\nAutomated Tests반복되는 test 작업을 줄임\n\n\nUnitreceives a single case input, return certain type of outputwouldn’t pass unless the entire process works oute.g. validation email &amp; password -&gt; similar word -&gt; set the function as a unit with diff. input\n\nIntegrationmultiple single inputs -&gt; integrates into a single outpute.g. email / pw -&gt; basic email : password\n\nE2Eend-to-enduser-perspective, operation on the browser, entire process without manually fixing ithard to point where the error comes out\n\n\n\nTDD\nTest Driven Developmentfail-fix-refactor\n\n\none test at a time\n\nBDD\nBahaviour Driven DevelopmentE2E\n\n\ntesting single unit, element to test entirely\nimplemented in non-technical env. -&gt; no coding\n\ndiff: technical or not\n\nTesting Frameworks: the function to run the tests (in JS - Mocha, Jasmine(React), Jest)# : e.g. #func() : recall all the elements including func()\n\ndescribe()\nit()\nHooks; rather than list singly, wrap it for organizing\nstart a server, create DB\n\n\n\n12345678910111213141516171819describe(&#39;hooks&#39;, function() &#123;  before(function() &#123;    &#x2F;&#x2F; runs once before the first test in this block  &#125;);  after(function() &#123;    &#x2F;&#x2F; runs once after the last test in this block  &#125;);  beforeEach(function() &#123;    &#x2F;&#x2F; runs before each test in this block  &#125;);  afterEach(function() &#123;    &#x2F;&#x2F; runs after each test in this block  &#125;);  &#x2F;&#x2F; test cases&#125;);\n\ninside each hooks: it()\n\n\nAssertion\nassert -&gt; technical, not readable\n\nbuilt-in in Node.js\n\n\ntypeOf(var, typeof, [msg])\nequal(var, val, [msg])\nlengthOf(var, length, [msg])\n\n\nexpect e.g. expect(foo).to.not.equal(&#39;bar&#39;)\n\nshoulde.g. foo.should.not.equal(&#39;bar&#39;)\n\n\n123456789101112131415161718192021222324252627282930313233function add (a, b) &#123;\tif (typeof a &#x3D;&#x3D;&#x3D; &#39;number&#39; &amp;&amp; b &#x3D;&#x3D;&#x3D; undefined) return a;    if (typeof a !&#x3D;&#x3D; &#39;number&#39; || typeof b !&#x3D;&#x3D; &#39;number&#39;) return undefined;\t&#x2F;&#x2F; return 8;    return a + b;&#125;&#x2F;&#x2F; write the test firstvar should &#x3D; require(&#39;chai&#39;).should();describe(&#39;Add&#39;, function () &#123;\tit(&#39;should sum two numbers&#39;, function () &#123;    \tadd(3, 5).should.equal(8);        &#x2F;&#x2F; add another ex to fail add(a,b) &#123;return 8;&#125; function        add(2, 7).should.equal(9);    &#125;);        it(&#39;should return undefined when is not passed numbers&#39;, function () &#123;    \tshould.equal(add(&#39;hello&#39;, &#39;world&#39;), undefined);        &#x2F;&#x2F; add(&#39;&#39;).should.equal이 아닌 이유:        &#x2F;&#x2F; undefined을 반환하면 undefined.should.equal()이 되고,        &#x2F;&#x2F; 이는 error(cannot read the property)를 반환 (undefined의 function 정의 불가)        &#x2F;&#x2F; 따라서 should.equal(add(&#39;&#39;))의 결과와 undefined를 matching                should.equal(add(1, &#39;world&#39;), undefined);        should.equal(add(&#39;hello&#39;, 1), undefined);    &#125;);        it(&#39;should return the number if only one is passed&#39;, function () &#123;    \tshould.equal(add(8), 8);        &#x2F;&#x2F; add(8).should.equal(8);    &#125;);&#125;);\n\nREFkent c.dodds webmochajs.com\n","dateCreated":"2021-01-14T07:46:23+09:00","dateModified":"2021-01-14T08:18:12+09:00","datePublished":"2021-01-14T07:46:23+09:00","description":"","headline":"2. Unit Testing","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/14/2-Unit-Testing/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/01/14/2-Unit-Testing/"}</script>
     <meta name="description" content="Testingnot in the production, just for element checking before a deployment  Automated Tests반복되는 test 작업을 줄임   Unitreceives a single case input, return certain type of outputwouldn’t pass unless the e">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="2. Unit Testing">
@@ -32,14 +32,23 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.JPG"/>
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/assets/css/style-zstiyrqjn5afyerefllmrb4gxsapavysezkil26axxvoneefwvumdvyvq27k.min.css">
+<link rel="stylesheet" href="/assets/css/all.css">
+
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
+
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
 
     <!--STYLES END-->
     
@@ -82,7 +91,7 @@
             >
         
         
-            <img class="header-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
         </a>
     
@@ -103,7 +112,7 @@
                     href="/#about"
                     aria-label="Read more about the author"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
                 </a>
                 <h4 class="sidebar-profile-name">JungHyun</h4>
                 
@@ -665,7 +674,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
             <h4 id="about-card-name">JungHyun</h4>
         
@@ -684,7 +693,7 @@
             <div id="about-card-location">
                 <i class="fa fa-map-marker-alt"></i>
                 <br/>
-                Currently_Europe/London, Home_Asia/Seoul
+                Seoul/South Korea, London/UK
             </div>
         
     </div>
@@ -692,10 +701,19 @@
 
         
         
-<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
         <!--SCRIPTS-->
 
-<script src="/assets/js/script-lpzyr3xjnv3dqyt5yikenoi8ogslmvjyaaaptsxgintd2hcan11q0kaxkk4e.min.js"></script>
+<script src="/assets/js/jquery.js"></script>
+
+
+<script src="/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/assets/js/thumbs.js"></script>
+
+
+<script src="/assets/js/tranquilpeak.js"></script>
 
 <!--SCRIPTS END-->
 

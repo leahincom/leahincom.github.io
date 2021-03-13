@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"Git workflow-fork-clone-commit (status, diff, add)-push(-sync with upstream)-pull requests\n\ncd //project root folder//git clone //project url//cd //project folder//npm install: get the all dependencies, environment needed for the repository-&gt; needed for npm test: debugginggit checkout – ./: A checkout is an operation that moves the HEAD ref pointer to a specified commit.git status: check changesls -a: local machine 외에 변경 사항이 확인되는지// lists all files including hidden files starting with ‘. ‘💥 git add . =&gt; git status 시 여전히 modified file이 존재할 수 있음: 다른 폴더에 변경된 파일이 있을 때-&gt; git status로 항상 check하기!!git commit -m “first commit”gs: == git status, branch HEAD 확인할 것!git log: commit log 확인git remote -v: branch 확인git push: push everything to the repo, up-to-date💥 synchronizationgit remote -vgit remote add upstream //original repo url – forked one//git pull upstream master: upstream -&gt; master branch로 if any change exists, pull\n\nQ. override =&gt; version conflict =&gt;pull request로 merge 전 conflict 방지Q. pull request, sync with upstream의 목적 =&gt;\n\nsync with upstream: orinigal repo의 changes 확인\npull request: 💥 MERGE와 구분! feedback, review의 목적=&gt; when git history gets merged, adds commit on the top and merge=&gt; pull request before merge minimizes unuseful conflicts -&gt; check others’ codes★ Merge: add changes of ver2. to ver1.\n\n\ngit commit //file1// //file2// : individually commit 가능\nREFvelog.io/@zansol/Pull-Request-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0\n","dateCreated":"2021-01-12T08:16:22+09:00","dateModified":"2021-01-12T08:29:35+09:00","datePublished":"2021-01-12T08:16:22+09:00","description":"","headline":"1. Git","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/12/1-Git/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/01/12/1-Git/","keywords":"git"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"Git workflow-fork-clone-commit (status, diff, add)-push(-sync with upstream)-pull requests\n\ncd //project root folder//git clone //project url//cd //project folder//npm install: get the all dependencies, environment needed for the repository-&gt; needed for npm test: debugginggit checkout – ./: A checkout is an operation that moves the HEAD ref pointer to a specified commit.git status: check changesls -a: local machine 외에 변경 사항이 확인되는지// lists all files including hidden files starting with ‘. ‘💥 git add . =&gt; git status 시 여전히 modified file이 존재할 수 있음: 다른 폴더에 변경된 파일이 있을 때-&gt; git status로 항상 check하기!!git commit -m “first commit”gs: == git status, branch HEAD 확인할 것!git log: commit log 확인git remote -v: branch 확인git push: push everything to the repo, up-to-date💥 synchronizationgit remote -vgit remote add upstream //original repo url – forked one//git pull upstream master: upstream -&gt; master branch로 if any change exists, pull\n\nQ. override =&gt; version conflict =&gt;pull request로 merge 전 conflict 방지Q. pull request, sync with upstream의 목적 =&gt;\n\nsync with upstream: orinigal repo의 changes 확인\npull request: 💥 MERGE와 구분! feedback, review의 목적=&gt; when git history gets merged, adds commit on the top and merge=&gt; pull request before merge minimizes unuseful conflicts -&gt; check others’ codes★ Merge: add changes of ver2. to ver1.\n\n\ngit commit //file1// //file2// : individually commit 가능\nREFvelog.io/@zansol/Pull-Request-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0\n","dateCreated":"2021-01-12T08:16:22+09:00","dateModified":"2021-01-12T08:29:35+09:00","datePublished":"2021-01-12T08:16:22+09:00","description":"","headline":"1. Git","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/12/1-Git/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/01/12/1-Git/","keywords":"git"}</script>
     <meta name="description" content="Git workflow-fork-clone-commit (status, diff, add)-push(-sync with upstream)-pull requests  cd &#x2F;&#x2F;project root folder&#x2F;&#x2F;git clone &#x2F;&#x2F;project url&#x2F;&#x2F;cd &#x2F;&#x2F;project folder&#x2F;&#x2F;npm install: get the all dependencie">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="1. Git">
@@ -31,14 +31,23 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.JPG"/>
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/assets/css/style-zstiyrqjn5afyerefllmrb4gxsapavysezkil26axxvoneefwvumdvyvq27k.min.css">
+<link rel="stylesheet" href="/assets/css/all.css">
+
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
+
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
 
     <!--STYLES END-->
     
@@ -81,7 +90,7 @@
             >
         
         
-            <img class="header-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
         </a>
     
@@ -102,7 +111,7 @@
                     href="/#about"
                     aria-label="Read more about the author"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
                 </a>
                 <h4 class="sidebar-profile-name">JungHyun</h4>
                 
@@ -616,7 +625,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
             <h4 id="about-card-name">JungHyun</h4>
         
@@ -635,7 +644,7 @@
             <div id="about-card-location">
                 <i class="fa fa-map-marker-alt"></i>
                 <br/>
-                Currently_Europe/London, Home_Asia/Seoul
+                Seoul/South Korea, London/UK
             </div>
         
     </div>
@@ -643,10 +652,19 @@
 
         
         
-<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
         <!--SCRIPTS-->
 
-<script src="/assets/js/script-lpzyr3xjnv3dqyt5yikenoi8ogslmvjyaaaptsxgintd2hcan11q0kaxkk4e.min.js"></script>
+<script src="/assets/js/jquery.js"></script>
+
+
+<script src="/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/assets/js/thumbs.js"></script>
+
+
+<script src="/assets/js/tranquilpeak.js"></script>
 
 <!--SCRIPTS END-->
 

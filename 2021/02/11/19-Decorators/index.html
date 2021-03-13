@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG"},"articleBody":"ModuleContainertake the logic\nData Binding\n[(ngModel)] = “property” : binding input property with handling model\n\nTypescript and Angular DecoratorsTypescript Decoratorswww.typescriptlang.org/docs/handbook/decorators.htmlDocumentation - DecoratorsTypeScript Decorators overviewwww.typescriptlang.org\n\nmeta programming changing target without modifying metadata (classes)\nannotate or modify the target\n\n\nlabelling the target\n@function: function decorator, decorator creater(factory)\n\nreturn function (target) =&gt; put class into the target\nreturn what you decorate (classDecorator -&gt; return class info …)\n\n…toppings: string[] –&gt; toppings = [‘tomato’, ‘mozzarella’, ‘basil’]\nmemoize() : // _.memoize(func)\nMemoizes a given function by caching the computed result.Useful for speeding up slow-running computations.You may assume that the memoized function takes only one argument and that it is a primitive.Memoize should return a function that when called, will check if it has already computed the result for the given argument and return that value instead of recomputing it.\nObject PropertiesHow to define a property?ob.foo = ‘bar’; // direct// Object.defineProperty(obj, ‘foo’, {value: ‘bar’}); //(ppt, ppt_name, object// describe the behaviour of the ppt //ppt_value)\n\nAttribute name\n\n\nValue (Any type) // actual value// default values of 3 boolean functions of defineProperty(): false // if we define obj with assigning it, then default == true !!!\nWritable (Boolean) // whether the property value can be changed or not\nEnumerable (Boolean) // makes it appear to be in loops (listed in ‘for-in’ enumeration)// 💥 Is Array enumerable?\nConfigurable (Boolean) // +Writable +Enumerable // whether we can delete the property or change any attribute apart from attr // configurable lets us change the writable property, writable lets us change the value property\n\nAngular DecoratorsComponenttarget: class MyComponent\nInjectableInput@Input: input decorator =&gt; able to pass the value from parent template using the tag to the child component class\nOutput@Output: output decorator =&gt; sen the info to the parent element💥 Child’s viewinput is meant to receive information from the parent elementoutput is meant to send info to the parent\n","dateCreated":"2021-02-11T20:50:45+09:00","dateModified":"2021-02-11T20:56:35+09:00","datePublished":"2021-02-11T20:50:45+09:00","description":"","headline":"19. Decorators","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/11/19-Decorators/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.JPG","logo":{"@type":"ImageObject","url":"profile.JPG"}},"url":"http://leahincom.github.io/2021/02/11/19-Decorators/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"ModuleContainertake the logic\nData Binding\n[(ngModel)] = “property” : binding input property with handling model\n\nTypescript and Angular DecoratorsTypescript Decoratorswww.typescriptlang.org/docs/handbook/decorators.htmlDocumentation - DecoratorsTypeScript Decorators overviewwww.typescriptlang.org\n\nmeta programming changing target without modifying metadata (classes)\nannotate or modify the target\n\n\nlabelling the target\n@function: function decorator, decorator creater(factory)\n\nreturn function (target) =&gt; put class into the target\nreturn what you decorate (classDecorator -&gt; return class info …)\n\n…toppings: string[] –&gt; toppings = [‘tomato’, ‘mozzarella’, ‘basil’]\nmemoize() : // _.memoize(func)\nMemoizes a given function by caching the computed result.Useful for speeding up slow-running computations.You may assume that the memoized function takes only one argument and that it is a primitive.Memoize should return a function that when called, will check if it has already computed the result for the given argument and return that value instead of recomputing it.\nObject PropertiesHow to define a property?ob.foo = ‘bar’; // direct// Object.defineProperty(obj, ‘foo’, {value: ‘bar’}); //(ppt, ppt_name, object// describe the behaviour of the ppt //ppt_value)\n\nAttribute name\n\n\nValue (Any type) // actual value// default values of 3 boolean functions of defineProperty(): false // if we define obj with assigning it, then default == true !!!\nWritable (Boolean) // whether the property value can be changed or not\nEnumerable (Boolean) // makes it appear to be in loops (listed in ‘for-in’ enumeration)// 💥 Is Array enumerable?\nConfigurable (Boolean) // +Writable +Enumerable // whether we can delete the property or change any attribute apart from attr // configurable lets us change the writable property, writable lets us change the value property\n\nAngular DecoratorsComponenttarget: class MyComponent\nInjectableInput@Input: input decorator =&gt; able to pass the value from parent template using the tag to the child component class\nOutput@Output: output decorator =&gt; sen the info to the parent element💥 Child’s viewinput is meant to receive information from the parent elementoutput is meant to send info to the parent\n","dateCreated":"2021-02-11T20:50:45+09:00","dateModified":"2021-02-11T20:56:35+09:00","datePublished":"2021-02-11T20:50:45+09:00","description":"","headline":"19. Decorators","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/11/19-Decorators/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/02/11/19-Decorators/"}</script>
     <meta name="description" content="ModuleContainertake the logic Data Binding [(ngModel)] &#x3D; “property” : binding input property with handling model  Typescript and Angular DecoratorsTypescript Decoratorswww.typescriptlang.org&#x2F;docs&#x2F;hand">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="19. Decorators">
@@ -32,14 +32,23 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.JPG"/>
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/assets/css/style-zstiyrqjn5afyerefllmrb4gxsapavysezkil26axxvoneefwvumdvyvq27k.min.css">
+<link rel="stylesheet" href="/assets/css/all.css">
+
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
+
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
 
     <!--STYLES END-->
     
@@ -82,7 +91,7 @@
             >
         
         
-            <img class="header-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
         </a>
     
@@ -103,7 +112,7 @@
                     href="/#about"
                     aria-label="Read more about the author"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
                 </a>
                 <h4 class="sidebar-profile-name">JungHyun</h4>
                 
@@ -636,7 +645,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/profile.JPG" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
         
             <h4 id="about-card-name">JungHyun</h4>
         
@@ -655,7 +664,7 @@
             <div id="about-card-location">
                 <i class="fa fa-map-marker-alt"></i>
                 <br/>
-                Currently_Europe/London, Home_Asia/Seoul
+                Seoul/South Korea, London/UK
             </div>
         
     </div>
@@ -663,10 +672,19 @@
 
         
         
-<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
         <!--SCRIPTS-->
 
-<script src="/assets/js/script-lpzyr3xjnv3dqyt5yikenoi8ogslmvjyaaaptsxgintd2hcan11q0kaxkk4e.min.js"></script>
+<script src="/assets/js/jquery.js"></script>
+
+
+<script src="/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/assets/js/thumbs.js"></script>
+
+
+<script src="/assets/js/tranquilpeak.js"></script>
 
 <!--SCRIPTS END-->
 
