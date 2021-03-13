@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"AngularTypeScriptwww.typescriptlang.org/docs/handbook/intro.html\nHandbook - The TypeScript HandbookYour first step to learn TypeScriptwww.typescriptlang.org\nlet [varName] : [varType] = [value];\n\nenum : dictionary\nfunction =&gt; need to specify the types of parameters\n\n\ngetting rid of any error of classes…\ntesting if we generate any error\ntyping faster\n\nimraccoon-developer.tistory.com/11\nTypeScript, 왜 써야되나?? (feat. 장단점)JavaScript가 es6로 바뀌면서 큰 인기를 끌기 시작했습니다. 또한, Node.js로 할 수 있는 것들이 점점 많아졌으며, 지금도 많아지고 있습니다. 처음에는 웹에서 사용하기 위한 스크립트 언어로 활용되imraccoon-developer.tistory.com\nAngular Architecture\nModules\nComponents\nServices…\n\nModules\nconnected through Metadata\nComponent === View\nService: share functionality through entire app\ndependency injector\n\n@NgModule: function\n\nbootstrap: starting point, start compiling\ndecorators: annotate data to give extra info to(of) the target\n\n–&gt; decorating: NgModule targeting AppModule\nComponents\nA class meant to be as reusable (when applies) as possible\n\nDefines application data and logic\n\nBound to a template, an HTML file\n\n\ngive users all the functionality of the app\n\n\ncreate DOM and add components thus drawing a tree: [tree] template -&gt; components (+ template) -&gt; … \n\ncommunicate with each other and give access of information to users\n\ncomponent = instance of a class, independent element but communicate with others as a class\n\nrender the DOM as a new node\n\nshadow DOM to encapsulate the component, not affected by exeternal interventionsShadow DOMdifferent DOM, OWN capsulated environment\n\npolymer-library.polymer-project.org/2.0/docs/devguide/shadow-domShadow DOM is a new DOM feature that helps you build components. You can think of shadow DOM as a scoped subtreeinside your element.\n\nRoot Component\n\n\ncontain everything\n\n\nRoot Template\n\n\nNavigation Component: works itself, alone\nContainer Component: including other components\n\n\nFiltering Component\n\n\nreceive the input data\nrender into different components (list, map)\n\ne.g. Scenarioif like one of the list component item -&gt; passed up to the container -&gt; reflect that to the map componentfiltering info in the filter component -&gt; passed up to the container -&gt; reflect that to the map component\nData Bindingwhen user gives the input, then DOM will communicate using property in [(ng-model)] = “property”\n\nhandler: function declared component \n\nobject =&gt; {}\n\n2 way binding: class component &lt;-&gt; template \n\n\nselector: ‘movie-details’ –&gt; director obj go in trhough selector\n\nServices\nprivate: TS property, can’t access it from other classes\n\n","dateCreated":"2021-02-10T21:28:55+09:00","dateModified":"2021-02-10T21:29:38+09:00","datePublished":"2021-02-10T21:28:55+09:00","description":"","headline":"18. Angular","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/10/18-Angular/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/02/10/18-Angular/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"AngularTypeScriptwww.typescriptlang.org/docs/handbook/intro.html\nHandbook - The TypeScript HandbookYour first step to learn TypeScriptwww.typescriptlang.org\nlet [varName] : [varType] = [value];\n\nenum : dictionary\nfunction =&gt; need to specify the types of parameters\n\n\ngetting rid of any error of classes…\ntesting if we generate any error\ntyping faster\n\nimraccoon-developer.tistory.com/11\nTypeScript, 왜 써야되나?? (feat. 장단점)JavaScript가 es6로 바뀌면서 큰 인기를 끌기 시작했습니다. 또한, Node.js로 할 수 있는 것들이 점점 많아졌으며, 지금도 많아지고 있습니다. 처음에는 웹에서 사용하기 위한 스크립트 언어로 활용되imraccoon-developer.tistory.com\nAngular Architecture\nModules\nComponents\nServices…\n\nModules\nconnected through Metadata\nComponent === View\nService: share functionality through entire app\ndependency injector\n\n@NgModule: function\n\nbootstrap: starting point, start compiling\ndecorators: annotate data to give extra info to(of) the target\n\n–&gt; decorating: NgModule targeting AppModule\nComponents\nA class meant to be as reusable (when applies) as possible\n\nDefines application data and logic\n\nBound to a template, an HTML file\n\n\ngive users all the functionality of the app\n\n\ncreate DOM and add components thus drawing a tree: [tree] template -&gt; components (+ template) -&gt; … \n\ncommunicate with each other and give access of information to users\n\ncomponent = instance of a class, independent element but communicate with others as a class\n\nrender the DOM as a new node\n\nshadow DOM to encapsulate the component, not affected by exeternal interventionsShadow DOMdifferent DOM, OWN capsulated environment\n\npolymer-library.polymer-project.org/2.0/docs/devguide/shadow-domShadow DOM is a new DOM feature that helps you build components. You can think of shadow DOM as a scoped subtreeinside your element.\n\nRoot Component\n\n\ncontain everything\n\n\nRoot Template\n\n\nNavigation Component: works itself, alone\nContainer Component: including other components\n\n\nFiltering Component\n\n\nreceive the input data\nrender into different components (list, map)\n\ne.g. Scenarioif like one of the list component item -&gt; passed up to the container -&gt; reflect that to the map componentfiltering info in the filter component -&gt; passed up to the container -&gt; reflect that to the map component\nData Bindingwhen user gives the input, then DOM will communicate using property in [(ng-model)] = “property”\n\nhandler: function declared component \n\nobject =&gt; {}\n\n2 way binding: class component &lt;-&gt; template \n\n\nselector: ‘movie-details’ –&gt; director obj go in trhough selector\n\nServices\nprivate: TS property, can’t access it from other classes\n\n","dateCreated":"2021-02-10T21:28:55+09:00","dateModified":"2021-02-10T21:29:38+09:00","datePublished":"2021-02-10T21:28:55+09:00","description":"","headline":"18. Angular","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/10/18-Angular/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://leahincom.github.io/2021/02/10/18-Angular/"}</script>
     <meta name="description" content="AngularTypeScriptwww.typescriptlang.org&#x2F;docs&#x2F;handbook&#x2F;intro.html Handbook - The TypeScript HandbookYour first step to learn TypeScriptwww.typescriptlang.org let [varName] : [varType] &#x3D; [value];  enum">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="18. Angular">
@@ -32,7 +32,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpg"/>
     
     
     
@@ -91,7 +91,7 @@
             >
         
         
-            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
         
         </a>
     
@@ -112,7 +112,7 @@
                     href="/#about"
                     aria-label="Read more about the author"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
                 </a>
                 <h4 class="sidebar-profile-name">JungHyun</h4>
                 
@@ -701,7 +701,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
         
             <h4 id="about-card-name">JungHyun</h4>
         

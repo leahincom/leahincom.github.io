@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"Algorithms\nlike a recipe\nconcrete steps to solve the problem\nlanguage independent (logic itself)\n\nComplexity Analysis\nObjective Criteria\n\n\ntime, space\nbest, average, worst (always think in worst case!)\nBig O\n\nBe aware of the ComplexityRecognise patternsThink if you can bring it downBig ODROP the constant in front of the N\n\nConstant - O(k) (k: constant number): stays the same independently of the size of the problem\nLinear - O(n) (n: number of items): grows proportional to the size of the probleme.g. for loop, linked list- find the item\nLogarithmic - O(logn)\n\n\nrandom array =&gt; cut half =&gt; repeat until find the element (Binary Search)\nsorted =&gt; increase by one1234567let count &#x3D; 0;let limit &#x3D; 100;for (let i&#x3D;0; i&lt;limit; i++) &#123;  limit &#x2F;&#x3D; 2;  count++;&#125;\n\n\nQuadratic - O(n^2): nested for loop\nN log n - O (nlogn)123456789let count &#x3D; 0;let limit &#x3D; 100;for (let i&#x3D;0; i&lt;limit; i++) &#123;  limit &#x2F;&#x3D; 2;  for (let j&#x3D;0; j&lt;limit; j++) &#123;    count++;  &#125;&#125;\ne.g. mergeSort\n\nBAD Time Complexity\nExponential - O(2^n)\nFactorial - O(n!)e.g. Queen Problem\n\n\nHash Table: O(1) average and amortized case complexity, however it suffers from O(n) worst case time complexity.\n\nWorst Case\n\n\nIf too many elements were hashed into the same key: looking inside this key may take O(n) time.\nOnce a hash table has passed its load balance - it has to rehash [create a new bigger table, and re-insert each element to the table]. \n\n\naverage and amortized case\n\n\nIt is very rare that many items will be hashed to the same key [if you chose a good hash function and you don’t have too big load balance.\nThe rehash operation, which is O(n), can at most happen after n/2 ops, which are all assumed O(1): Thus when you sum the average time per op, you get : (n*O(1) + O(n)) / n) = O(1)\n\n\nREFwww.bigocheatsheet.com/\n","dateCreated":"2021-01-24T08:43:59+09:00","dateModified":"2021-01-26T19:09:38+09:00","datePublished":"2021-01-24T08:43:59+09:00","description":"","headline":"6. Complexity Analysis","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/24/6-Complexity-Analysis/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/01/24/6-Complexity-Analysis/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"Algorithms\nlike a recipe\nconcrete steps to solve the problem\nlanguage independent (logic itself)\n\nComplexity Analysis\nObjective Criteria\n\n\ntime, space\nbest, average, worst (always think in worst case!)\nBig O\n\nBe aware of the ComplexityRecognise patternsThink if you can bring it downBig ODROP the constant in front of the N\n\nConstant - O(k) (k: constant number): stays the same independently of the size of the problem\nLinear - O(n) (n: number of items): grows proportional to the size of the probleme.g. for loop, linked list- find the item\nLogarithmic - O(logn)\n\n\nrandom array =&gt; cut half =&gt; repeat until find the element (Binary Search)\nsorted =&gt; increase by one1234567let count &#x3D; 0;let limit &#x3D; 100;for (let i&#x3D;0; i&lt;limit; i++) &#123;  limit &#x2F;&#x3D; 2;  count++;&#125;\n\n\nQuadratic - O(n^2): nested for loop\nN log n - O (nlogn)123456789let count &#x3D; 0;let limit &#x3D; 100;for (let i&#x3D;0; i&lt;limit; i++) &#123;  limit &#x2F;&#x3D; 2;  for (let j&#x3D;0; j&lt;limit; j++) &#123;    count++;  &#125;&#125;\ne.g. mergeSort\n\nBAD Time Complexity\nExponential - O(2^n)\nFactorial - O(n!)e.g. Queen Problem\n\n\nHash Table: O(1) average and amortized case complexity, however it suffers from O(n) worst case time complexity.\n\nWorst Case\n\n\nIf too many elements were hashed into the same key: looking inside this key may take O(n) time.\nOnce a hash table has passed its load balance - it has to rehash [create a new bigger table, and re-insert each element to the table]. \n\n\naverage and amortized case\n\n\nIt is very rare that many items will be hashed to the same key [if you chose a good hash function and you don’t have too big load balance.\nThe rehash operation, which is O(n), can at most happen after n/2 ops, which are all assumed O(1): Thus when you sum the average time per op, you get : (n*O(1) + O(n)) / n) = O(1)\n\n\nREFwww.bigocheatsheet.com/\n","dateCreated":"2021-01-24T08:43:59+09:00","dateModified":"2021-01-26T19:09:38+09:00","datePublished":"2021-01-24T08:43:59+09:00","description":"","headline":"6. Complexity Analysis","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/24/6-Complexity-Analysis/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://leahincom.github.io/2021/01/24/6-Complexity-Analysis/"}</script>
     <meta name="description" content="Algorithms like a recipe concrete steps to solve the problem language independent (logic itself)  Complexity Analysis Objective Criteria   time, space best, average, worst (always think in worst case!">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="6. Complexity Analysis">
@@ -32,7 +32,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpg"/>
     
     
     
@@ -91,7 +91,7 @@
             >
         
         
-            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
         
         </a>
     
@@ -112,7 +112,7 @@
                     href="/#about"
                     aria-label="Read more about the author"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
                 </a>
                 <h4 class="sidebar-profile-name">JungHyun</h4>
                 
@@ -663,7 +663,7 @@ e.g. mergeSort</li>
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
         
             <h4 id="about-card-name">JungHyun</h4>
         

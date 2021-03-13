@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"GraphQL\nmore efficient\nalternative to REST API\n\n\nNot a Framework!\nsimilar to router\n\nREST\npattern, standard for APIs\ninterface that tells the external how to get the datas\nhave endpoints (e.g. ‘/messages’)\n\n/teams/CHsend all the info–&gt; moduler/teams/CH/info/teams/CH/players/teams/CH/matches\n\nQuery Language (Standard)\n\norder also matches!\nImplementation\nSchema\nTypes\n\n\n\nid =&gt; unique[]! =&gt; need [] type, you need to pass [] thingteam: Team! =&gt; team is related to type Team (Team: object)\n\nResolvers\n\n\nScalar Types(Built-In)\n\n\nInt\nFloat\nString\nBoolean\nID(Custom Scalar)\nDate, Url, EmailAddress …id, name, age: primitive typeteam: object -&gt; sub-doc. type =&gt; repeat the same process to find the type\n\n\nQueries &amp; Mutationsone single endpoint\n\n-&gt; perform queries\n\nSub-Selectionpass the object to the type -&gt; give the right interface of information of that object\n\n\nhave to ask the property of the object\n\n\nArguments\n\nVariables\n\n\nput “DEF” into $position var\n\n\n\nfetching data - - -👇\n\n\n\n\n\n\nchange (mutate) data - - -\n\n\n\n\nMutations\n\n\n\nanother type of action like query that performs changes on the resources\ndiff is like GET - POST: doesn’t change anything in the server - change something in the server -&gt; do st that doesn’t suppose to do, run semantic, perform changes by manipulating inside my DB\n\n\ncreate new data POST\nupdate existing data PUT\ndelete existing data DELETE\n\nname, position: response1st: input type checking -&gt; 2nd: actually executing the mutation\n\nID: created internally by the program\n\n\nsend the request to the root (4000-graphQL as the endpoint)\nreliable, flexible\n\n\nExecutionsearch for syntax error\n\nundefined height -&gt; null, name ~ pass height ~ go inside team obj\n\nResolversSchema: define, Resolver: interact =&gt; interplay to call server flexibly\n\nget id:42 from upper example\n\nobj : the previous resolved obj, parent element that has been previously resolved\nargs : the arguments object for the field in the query, include id .. all the args that we want to pass\ncontext : shared object provided to every resolver, communicate and share information, later function can access to it (i.e. ctx in Koa)\ninfo : extra information about the current query to mutate, etc.\n\nImplementationtypeDefs: routersresolvers: controllers\n\nindex.js\n\ntypeDefs.js\n\n\n\nresolvers.js\n\nnot using obj =&gt; replace it with _👇\n\nresolvers.js\n\n※ express / koa : REST API = apollo-server : gql\n","dateCreated":"2021-02-09T06:44:47+09:00","dateModified":"2021-02-09T06:45:00+09:00","datePublished":"2021-02-09T06:44:47+09:00","description":"","headline":"17. GraphQL","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/09/17-GraphQL/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/02/09/17-GraphQL/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"GraphQL\nmore efficient\nalternative to REST API\n\n\nNot a Framework!\nsimilar to router\n\nREST\npattern, standard for APIs\ninterface that tells the external how to get the datas\nhave endpoints (e.g. ‘/messages’)\n\n/teams/CHsend all the info–&gt; moduler/teams/CH/info/teams/CH/players/teams/CH/matches\n\nQuery Language (Standard)\n\norder also matches!\nImplementation\nSchema\nTypes\n\n\n\nid =&gt; unique[]! =&gt; need [] type, you need to pass [] thingteam: Team! =&gt; team is related to type Team (Team: object)\n\nResolvers\n\n\nScalar Types(Built-In)\n\n\nInt\nFloat\nString\nBoolean\nID(Custom Scalar)\nDate, Url, EmailAddress …id, name, age: primitive typeteam: object -&gt; sub-doc. type =&gt; repeat the same process to find the type\n\n\nQueries &amp; Mutationsone single endpoint\n\n-&gt; perform queries\n\nSub-Selectionpass the object to the type -&gt; give the right interface of information of that object\n\n\nhave to ask the property of the object\n\n\nArguments\n\nVariables\n\n\nput “DEF” into $position var\n\n\n\nfetching data - - -👇\n\n\n\n\n\n\nchange (mutate) data - - -\n\n\n\n\nMutations\n\n\n\nanother type of action like query that performs changes on the resources\ndiff is like GET - POST: doesn’t change anything in the server - change something in the server -&gt; do st that doesn’t suppose to do, run semantic, perform changes by manipulating inside my DB\n\n\ncreate new data POST\nupdate existing data PUT\ndelete existing data DELETE\n\nname, position: response1st: input type checking -&gt; 2nd: actually executing the mutation\n\nID: created internally by the program\n\n\nsend the request to the root (4000-graphQL as the endpoint)\nreliable, flexible\n\n\nExecutionsearch for syntax error\n\nundefined height -&gt; null, name ~ pass height ~ go inside team obj\n\nResolversSchema: define, Resolver: interact =&gt; interplay to call server flexibly\n\nget id:42 from upper example\n\nobj : the previous resolved obj, parent element that has been previously resolved\nargs : the arguments object for the field in the query, include id .. all the args that we want to pass\ncontext : shared object provided to every resolver, communicate and share information, later function can access to it (i.e. ctx in Koa)\ninfo : extra information about the current query to mutate, etc.\n\nImplementationtypeDefs: routersresolvers: controllers\n\nindex.js\n\ntypeDefs.js\n\n\n\nresolvers.js\n\nnot using obj =&gt; replace it with _👇\n\nresolvers.js\n\n※ express / koa : REST API = apollo-server : gql\n","dateCreated":"2021-02-09T06:44:47+09:00","dateModified":"2021-02-09T06:45:00+09:00","datePublished":"2021-02-09T06:44:47+09:00","description":"","headline":"17. GraphQL","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/09/17-GraphQL/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://leahincom.github.io/2021/02/09/17-GraphQL/"}</script>
     <meta name="description" content="GraphQL more efficient alternative to REST API   Not a Framework! similar to router  REST pattern, standard for APIs interface that tells the external how to get the datas have endpoints (e.g. ‘&#x2F;messa">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="17. GraphQL">
@@ -32,7 +32,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpg"/>
     
     
     
@@ -91,7 +91,7 @@
             >
         
         
-            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
         
         </a>
     
@@ -112,7 +112,7 @@
                     href="/#about"
                     aria-label="Read more about the author"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
                 </a>
                 <h4 class="sidebar-profile-name">JungHyun</h4>
                 
@@ -733,7 +733,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
         
             <h4 id="about-card-name">JungHyun</h4>
         
