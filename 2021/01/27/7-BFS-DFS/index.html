@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg"},"articleBody":"BFSBreadth First Search\n\nQueue : go same level node first and go deeper\n\n\n\npush root node\npop root node\npush children nodes From Left to Right\n\n\npop child node one by one and…\npush children nodes from child (((repeat)))\n\n\n\n\n12345678queue.enqueue(this);while (queue.length &gt; 0) &#123;    current &#x3D; queue.dequeue();    children &#x3D; current.children;    for (let i&#x3D;0; i&lt;children.length; i++) &#123;    \tqueue.enqueue(children[i]);    &#125;&#125;\nDFSDepth First Search\n\nStack : go down to the leaf node first and move on to the other children\n\n\n\npush root node\npop root node\npush children nodes From Left To Right\n\n\npop child node and…\npush children nodes of child (((repeat)))\n\n\npop the leaf node\npop other leaf nodes on the same level / push children nodes of the node on the same level\n\n\npop parent node and move on (((repeat)))\n\n\n12345678stack.push(this);while (stack.length &gt; 0) &#123;  current &#x3D; stack.pop();  children &#x3D; current.children;  for (let i&#x3D;0; i&lt;children.length; i++) &#123;    stack.push(children[i]);  &#125;&#125;","dateCreated":"2021-01-27T07:40:08+09:00","dateModified":"2021-01-27T07:48:19+09:00","datePublished":"2021-01-27T07:40:08+09:00","description":"","headline":"7. BFS & DFS","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/27/7-BFS-DFS/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/","https://facebook.com/","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/01/27/7-BFS-DFS/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"BFSBreadth First Search\n\nQueue : go same level node first and go deeper\n\n\n\npush root node\npop root node\npush children nodes From Left to Right\n\n\npop child node one by one and…\npush children nodes from child (((repeat)))\n\n\n\n\n12345678queue.enqueue(this);while (queue.length &gt; 0) &#123;    current &#x3D; queue.dequeue();    children &#x3D; current.children;    for (let i&#x3D;0; i&lt;children.length; i++) &#123;    \tqueue.enqueue(children[i]);    &#125;&#125;\nDFSDepth First Search\n\nStack : go down to the leaf node first and move on to the other children\n\n\n\npush root node\npop root node\npush children nodes From Left To Right\n\n\npop child node and…\npush children nodes of child (((repeat)))\n\n\npop the leaf node\npop other leaf nodes on the same level / push children nodes of the node on the same level\n\n\npop parent node and move on (((repeat)))\n\n\n12345678stack.push(this);while (stack.length &gt; 0) &#123;  current &#x3D; stack.pop();  children &#x3D; current.children;  for (let i&#x3D;0; i&lt;children.length; i++) &#123;    stack.push(children[i]);  &#125;&#125;","dateCreated":"2021-01-27T07:40:08+09:00","dateModified":"2021-01-27T07:48:19+09:00","datePublished":"2021-01-27T07:40:08+09:00","description":"","headline":"7. BFS & DFS","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/01/27/7-BFS-DFS/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/01/27/7-BFS-DFS/"}</script>
     <meta name="description" content="BFSBreadth First Search  Queue : go same level node first and go deeper    push root node pop root node push children nodes From Left to Right   pop child node one by one and… push children nodes from">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="7. BFS &amp; DFS">
@@ -216,7 +216,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/leahincom"
                             
                                 target="_blank"
                             
@@ -232,7 +232,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://facebook.com/"
+                            href="https://facebook.com/junghyun.lah/"
                             
                                 target="_blank"
                             
@@ -248,7 +248,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://www.linkedin.com/profile/"
+                            href="https://www.linkedin.com/profile"
                             
                                 target="_blank"
                             
@@ -264,7 +264,9 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/mailto"
+                            href="mailto:leahincom@gmail.com"
+                            
+                                target="_blank"
                             
                             rel="noopener"
                             title="Mail"
