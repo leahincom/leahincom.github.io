@@ -311,6 +311,278 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/02/17/22-React-Component/"
+                            aria-label=": 22. React Component"
+                        >
+                            22. React Component
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-17T04:15:07+09:00">
+	
+		    Feb 17, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="React-Component-Lifecycle"><a href="#React-Component-Lifecycle" class="headerlink" title="React Component Lifecycle"></a>React Component Lifecycle</h3><ul>
+<li>Mounting</li>
+<li>Updating</li>
+<li>Unmounting: remove the component =&gt; without any re-rendering or updating</li>
+</ul>
+<p>render -&gt; mount -&gt; (setState()) -&gt; render -&gt; update</p>
+<h3 id="The-form-tag"><a href="#The-form-tag" class="headerlink" title="The form tag"></a>The <code>form</code> tag</h3><h3 id="Controlled-Components"><a href="#Controlled-Components" class="headerlink" title="Controlled Components"></a>Controlled Components</h3><p>export the parent element -&gt; pass to the child data -&gt; repeat … to the grandchild<br>LIKE A TREE</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/17/22-React-Component/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/02/16/21-React/"
+                            aria-label=": 21. React"
+                        >
+                            21. React
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-16T00:01:26+09:00">
+	
+		    Feb 16, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><ul>
+<li>not framework (collection of libraries) =&gt; same as express(Angular)/ koa (React)<ul>
+<li>libary for creating interactive UIs</li>
+<li>rendering engine -&gt; need 3rd party lib</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>component-based</li>
+<li>unopinionated</li>
+<li>JSX template</li>
+<li>every component receives props(transfer from parent to the child) and/or handle its own state(own obj handled by the component itself)</li>
+</ul>
+<h3 id="React-Component-Class"><a href="#React-Component-Class" class="headerlink" title="React Component (Class)"></a>React Component (Class)</h3><ul>
+<li>render()</li>
+</ul>
+<p>return JSX template –&gt; html element</p>
+<p>inherit in the parent component</p>
+<h3 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h3><h3 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h3><dl><dt>name=”Sara” -&gt; this.props.name (this ctx: MyComponent)</dt><dd>this.props =&gt; 해당 class를 부르는 child component attribute 전달 및 실행</dd></dl><p>App- Parent- Child</p>
+<h3 id="State"><a href="#State" class="headerlink" title="State"></a>State</h3><h3 id="React-Application"><a href="#React-Application" class="headerlink" title="React Application"></a>React Application</h3><ul>
+<li>ReactDOM.render()</li>
+</ul>
+<p>-&gt; replace the normal DOM with virtual DOM (ReactDOM)</p>
+<h3 id="Conditional-Rendering"><a href="#Conditional-Rendering" class="headerlink" title="Conditional Rendering"></a>Conditional Rendering</h3><h4 id="Loop-Rendering"><a href="#Loop-Rendering" class="headerlink" title="Loop Rendering"></a>Loop Rendering</h4><p>{} : act as JavaScript</p>
+<h3 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h3><p>flows data from parent to children<br>handleChange (e) {} === handleChange = (e) =&gt; {}<br>*** arrow function =&gt; solves a lot of problems because it gets rid of the ctx of passing argument but passes the function scope which called it to <code>this</code> context</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/16/21-React/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/02/13/20-Observable/"
+                            aria-label=": 20. Observable"
+                        >
+                            20. Observable
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-13T04:14:47+09:00">
+	
+		    Feb 13, 2021
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h3><p>angular.io/guide/observables<br>Angular<br>angular.io</p>
+<h4 id="RxJS"><a href="#RxJS" class="headerlink" title="RxJS"></a>RxJS</h4><ul>
+<li>PULLING system<br>producer<br>consumer</li>
+<li>PUSHING system<br>producer: pushes the data to a consumer</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://www.youtube.com/watch?v=ei7FsoXKPl0">www.youtube.com/watch?v=ei7FsoXKPl0</a></p>
+<p>Singluar    Plural<br>Synchronous    Value    Iterable<br>Asynchronous    Promise    Observable</p>
+<ul>
+<li>linear vector time</li>
+<li>seperated randomly (spreaded)<br>e.g. User Interaction: key stroke like click button, create event</li>
+<li>receives promises for multiple times</li>
+<li>compatibility: consistancy, handled by observables</li>
+</ul>
+<p>※ Everything is a Stream</p>
+<h4 id="Subscribe"><a href="#Subscribe" class="headerlink" title="Subscribe"></a>Subscribe</h4><ul>
+<li>observable$ =&gt; always with ‘$’</li>
+</ul>
+<h4 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h4><p>observable$.pipe(<br>operator(),<br>…<br>).subscribe(data =&gt; …)</p>
+<ul>
+<li>pipe(): throwing every single element a time</li>
+</ul>
+<ul>
+<li>operators are listed in order</li>
+</ul>
+<ul>
+<li>filter(): Array.filter과 비슷<br>filter() 메서드는 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.</li>
+</ul>
+<ul>
+<li>receiving bunch of events spreaded in time</li>
+<li>not returning an array</li>
+<li>true: pass / false: filtered out</li>
+</ul>
+<ul>
+<li>map()</li>
+</ul>
+<ul>
+<li>take the element and returns the conditioned element</li>
+</ul>
+<ul>
+<li>scan()</li>
+</ul>
+<p>As you can see from above code, similar to reduce function the scan function passes output of first function, as the input to the next function execution but the only difference being that, the result of each function execution is stored in an array and that array is returned as a result.</p>
+<p>You can notice that, the last element of the resulting array is 15which was the output of reduce function.</p>
+<ul>
+<li>subscribe(): final function that receives the information</li>
+</ul>
+<ul>
+<li>make sure it returns anything, not error</li>
+</ul>
+<ul>
+<li>next(): call the next function in the stream</li>
+</ul>
+<ul>
+<li>expressJS<br>Middleware functions are functions that have access to the request object(req), the response object (res), and the next function in the application’s request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.</li>
+</ul>
+<p>Middleware functions can perform the following tasks:<br>Execute any code.<br>Make changes to the request and the response objects.<br>End the request-response cycle.<br>Call the next middleware in the stack.<br>If the current middleware function does not end the request-response cycle, it must call next() to pass control to the next middleware function. Otherwise, the request will be left hanging.</p>
+<p>Starting with Express 5, middleware functions that return a Promise will call next(value) when they reject or throw an error. next will be called with either the rejected value or the thrown Error.</p>
+<ul>
+<li>Angular (angular.io/guide/observables)<br>Note that a next() function could receive, for instance, message strings, or event objects, numeric values, or structures, depending on context. As a general term, we refer to data published by an observable as a stream. Any type of value can be represented with an observable, and the values are published as a stream.</li>
+</ul>
+<ul>
+<li>complete(): close the stream</li>
+</ul>
+<ol>
+<li><dl><dt>Cold Observable<br>: only one subscription at one<br>: receive last value in the stream<br>: stream one direction, prepare data and spread them all at one together</dt><dd>same info to all the users</dd></dl></li>
+<li><dl><dt>Hot Observable<br>: can connect to the same stream the other one<br>: multiple streamers</dt><dd>can use former value after next function</dd></dl></li>
+</ol>
+<ul>
+<li>debounceTime(k): wait for k(ms) after stopped typing and put arg in the stream</li>
+</ul>
+<p>👀 Why do we need both ngOnInit() and constructor()?<br>The Constructor is a default method of the class that is executed when the class is instantiated and ensures proper initialisation of fields in the class and its subclasses. Angular, or better Dependency Injector (DI), analyses the constructor parameters and when it creates a new instance by calling new MyClass() it tries to find providers that match the types of the constructor parameters, resolves them and passes them to the constructor like <code>new MyClass(someArg);</code></p>
+<p>ngOnInit is a life cycle hook called by Angular to indicate that Angular is done creating the component.</p>
+<ul>
+<li>constructor: rendoring first</li>
+</ul>
+<ul>
+<li>initialise mainly properties</li>
+<li>have nothing which could stop executing</li>
+</ul>
+<ul>
+<li>ngOnInit: happen after first rendor, fulfill others</li>
+</ul>
+<ul>
+<li>triggering the function, asking for datas, populate them in the final</li>
+</ul>
+<p>BEM (Block Element Modifier)</p>
+<p>getbem.com/naming</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/13/20-Observable/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/02/11/19-Decorators/"
                             aria-label=": 19. Decorators"
                         >
@@ -1071,293 +1343,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/02/04/13-ORM/"
-                            aria-label=": 13. ORM"
-                        >
-                            13. ORM
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-02-04T06:01:17+09:00">
-	
-		    Feb 04, 2021
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="ORMS"><a href="#ORMS" class="headerlink" title="ORMS"></a>ORMS</h2><p>Object Relational Mappings</p>
-<h3 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h3><h4 id="model-user-js"><a href="#model-user-js" class="headerlink" title="model/user.js"></a>model/user.js</h4><p>not need to define model.js by ourselves</p>
-<ul>
-<li>table not exists: create table/ exists: send the related table</li>
-</ul>
-<h4 id="models-task-js"><a href="#models-task-js" class="headerlink" title="models/task.js"></a>models/task.js</h4><p>connecting db with new Sequelize<br>.readditSync(__dirname) : return array of files in __dirname<br>// [index.js, task.js, user.js, .hide]<br>.filter(file =&gt; {<br>return (file.indexOf(‘.’) !== 0) &amp;&amp; (file !== ‘index.js’) &amp;&amp; (file.slice(-3) === ‘.js’);<br>// [task.js, user.js]<br>.forEach(file =&gt; {<br>const model = require(path.join(__dirname, file))<br>// create absolute path to the file<br>(sequelize, Sequelize.DataTypes);<br>// requiring models/task.js function<br>db[model.name] = model<br>// model: task / user<br>// each file will be the model object<br>db.sequelize = sequelize;<br>db.Sequelize = Sequelize;<br>// take the code and put it individually<br>// leave this code without changing anything in this file<br>module.exports = db<br>exports db with passing db</p>
-<p>👇</p>
-<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><ul>
-<li>set-up everything in the db perfectly and then connect to the client</li>
-</ul>
-<h4 id="router-js"><a href="#router-js" class="headerlink" title="router.js"></a>router.js</h4><p>not changed</p>
-<h4 id="controllers-user-js"><a href="#controllers-user-js" class="headerlink" title="controllers/user.js"></a>controllers/user.js</h4><h4 id="models-user-js"><a href="#models-user-js" class="headerlink" title="models/user.js"></a>models/user.js</h4><h4 id="models-task-js-1"><a href="#models-task-js-1" class="headerlink" title="models/task.js"></a>models/task.js</h4><p>— complete declare, now run —</p>
-<h4 id="models-index-js"><a href="#models-index-js" class="headerlink" title="models/index.js"></a>models/index.js</h4><p>mkcd [dir]<br>npm init -y<br>touch [index.js] [router.js]<br>npm i sequelize koa koa-router</p>
-<p>create table</p>
-<p>get the model : model/index.js, createStudent -&gt; not view, create template with the data</p>
-<p>get student by id, bodyparser -&gt; router.post</p>
-<p><strong>* npm weekly downloads : &gt;= 7M *</strong></p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/02/04/13-ORM/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/02/02/13-Database/"
-                            aria-label=": 13. Database"
-                        >
-                            13. Database
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-02-02T19:53:41+09:00">
-	
-		    Feb 02, 2021
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h2><ul>
-<li>piece of software, store and retrieve</li>
-<li>similar to data.json()</li>
-</ul>
-<h3 id="Relational-Databases"><a href="#Relational-Databases" class="headerlink" title="Relational Databases"></a>Relational Databases</h3><ul>
-<li>Primary Key</li>
-</ul>
-<ul>
-<li>unique</li>
-<li>ordered</li>
-<li>can’t be null</li>
-</ul>
-<ul>
-<li>Foreign Key</li>
-</ul>
-<ul>
-<li>reference the primary key of other table</li>
-</ul>
-<h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><ul>
-<li>can use various types of tables<br>e.g. B-tree …</li>
-</ul>
-<h4 id="SQL-Relations"><a href="#SQL-Relations" class="headerlink" title="SQL - Relations"></a>SQL - Relations</h4><ul>
-<li>One to many</li>
-<li>Many to many<br>Combine…</li>
-</ul>
-<ul>
-<li>Many to one</li>
-<li>one to Many</li>
-</ul>
-<ul>
-<li>One to One</li>
-</ul>
-<h4 id="SQL-Queries"><a href="#SQL-Queries" class="headerlink" title="SQL - Queries"></a>SQL - Queries</h4><p>SELECT _ FROM _ WHERE _ : SELECT COL FROM TABLE WHERE CONDITION</p>
-<ol>
-<li>SELECT * FROM “Users”</li>
-</ol>
-<ul>
-<li>*: everything</li>
-</ul>
-<ol start="2">
-<li>SELECT “Email” FROM “Users” WHERE Id=7</li>
-</ol>
-<ul>
-<li>Time Complexity<br>approach table by index, not directly by primary key =&gt; O(n)</li>
-<li>-&gt; (because a primary key is ordered,) binary_search =&gt; O(logN)</li>
-</ul>
-<h4 id="SQL-Indexes"><a href="#SQL-Indexes" class="headerlink" title="SQL - Indexes"></a>SQL - Indexes</h4><ol start="3">
-<li>SELECT “Email” FROM “Users” WHERE Email = “<a href="mailto:&#x62;&#105;&#108;&#108;&#46;&#103;&#97;&#x74;&#101;&#x73;&#x40;&#x6d;&#x69;&#99;&#114;&#111;&#115;&#111;&#x66;&#x74;&#x2e;&#99;&#111;&#x6d;">&#x62;&#105;&#108;&#108;&#46;&#103;&#97;&#x74;&#101;&#x73;&#x40;&#x6d;&#x69;&#99;&#114;&#111;&#115;&#111;&#x66;&#x74;&#x2e;&#99;&#111;&#x6d;</a>“ </li>
-</ol>
-<ul>
-<li>Time Complexity<br>approach table by checking each element =&gt; O(n)</li>
-<li>-&gt; set email as a primary key by adding a table and search in the original table using id as a reference key =&gt; O(2*logN)</li>
-</ul>
-<h4 id="SQL-Joins"><a href="#SQL-Joins" class="headerlink" title="SQL - Joins"></a>SQL - Joins</h4><h4 id="Sharding-and-Replicating"><a href="#Sharding-and-Replicating" class="headerlink" title="Sharding and Replicating"></a>Sharding and Replicating</h4><p>Not good in developer stand, but for safety (backup)</p>
-<ul>
-<li>Sharding : divide into half and put each one into different machines</li>
-<li>Replicating : write the same data into different machines<br>In case of sharding the data might be nicely distributed and hence the queries.</li>
-<li>To “improve query” response on reading data, replication will help. You could write away to your primary and read from secondaries to distribute the queries. Also the primary then is relieved of the expensive reads, and can be busy with only writing.</li>
-</ul>
-<p>In case of replicating existing shards, there will be more hosts to respond to a query request.</p>
-<ul>
-<li>There is a some improvement with sharding if you choose a good shard key. Writing queries away ‘might’ be distributed if you do that correctly. The main reason for sharding is to “horizontally expand your database”. Working with big data, and not wanting to create/insert bigger and bigger disks … you can just create new servers next to it, as much as you want.</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/02/02/13-Database/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/02/02/12-Async-Koa/"
-                            aria-label=": 12. Async, Koa"
-                        >
-                            12. Async, Koa
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-02-02T03:56:16+09:00">
-	
-		    Feb 02, 2021
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h3 id="Async-Patterns"><a href="#Async-Patterns" class="headerlink" title="Async Patterns"></a>Async Patterns</h3><ol>
-<li>Callbacks</li>
-</ol>
-<p>too complicated -&gt; simplified in ES6</p>
-<ol start="2">
-<li>Promises<br>reduce too many handlings, make into clean code (sugar coding)</li>
-</ol>
-<p>Promise -&gt; invoke reject/ resolve as callbacks</p>
-<p>then -&gt; happen arg first and then ‘then’ method</p>
-<ul>
-<li>resolve : when we find the answer</li>
-<li>reject : st went wrong</li>
-</ul>
-<ol start="3">
-<li>Async / Await</li>
-</ol>
-<ul>
-<li>async === setTimeOut</li>
-<li>await : pending promise/ valid answer from crypto.compare</li>
-</ul>
-<p>☝️</p>
-<dl><dt>callback functions are stacked<br>: first cb -&gt; first wait + call the second stacked callback function</dt><dd>second cb -&gt; second wait + third callback</dd></dl><p>✌️</p>
-<dl><dt>nested callback functions</dt><dd>wait for set time and execute the next one</dd></dl><p>=&gt; create new Promise and put setTimeOut in it, use resolve function</p>
-<p>async<br>=&gt; create asyn function, use await</p>
-<p>print 1 time</p>
-<ul>
-<li>async itself is just a normal function, but return the value as Promise</li>
-</ul>
-<h2 id="Koa"><a href="#Koa" class="headerlink" title="Koa"></a>Koa</h2><p>Search everything by ‘koa ~’</p>
-<ul>
-<li>promise based -&gt; always use ‘async’ !</li>
-<li>app.use() : go to the next() middleware</li>
-<li>express : req/res each send/receive info to/from the client<br>koa : ctx controls everything, koa sends/receives the info all by itself, control everything related to the client</li>
-</ul>
-<p>await next() -&gt; call bodyParser -&gt; call router -&gt; call allowedMethods…<br>*** install packages needed !!</p>
-<ul>
-<li>controller -&gt; usually the end of the chain (next -&gt; next -&gt; … -&gt; ctrl)</li>
-<li>controller doesn’t send anything to the client (no res.send()) =&gt; app (koa obj) sends the info to the client after receiving everything from the chain of next &amp; controller</li>
-</ul>
-<p>response aliases : Not method!, just variables!</p>
-<ul>
-<li>ctx.request.body -&gt; approach the request of body</li>
-</ul>
-<h3 id="Pre-requisite"><a href="#Pre-requisite" class="headerlink" title="Pre-requisite"></a>Pre-requisite</h3><p>code . // vscode<br>npm init –y // npm initialise<br>touch index.js router.js controller.js // make files<br>npm i koa<br>@ npm i “koa pkg” // search!</p>
-<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><p>middleware ( 1 -&gt; 2 -&gt; 3 ) -&gt; router: doorman –&gt; controller: manager)</p>
-<ul>
-<li>app.use(router) : always the last, right before to the controller</li>
-</ul>
-<p>set the middleware next(), which is the ‘router.routes()’ in this case</p>
-<h4 id="router-js"><a href="#router-js" class="headerlink" title="router.js"></a>router.js</h4><p>const Router = require(‘koa-router’)</p>
-<h4 id="controller-js"><a href="#controller-js" class="headerlink" title="controller.js"></a>controller.js</h4><p>get the id as params.id</p>
-<ul>
-<li>all the vars sent via the address are saved in the ctx.request.params!<br>e.g. /:name/:id –&gt; ctx.request.params.name, ctx.request.params.id</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/02/02/12-Async-Koa/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1384,7 +1369,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 2 of 3</li>
+        <li class="pagination-number">page 2 of 4</li>
     </ul>
 </div>
 
