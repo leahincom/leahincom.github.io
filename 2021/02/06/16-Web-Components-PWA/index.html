@@ -13,7 +13,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Web ComponentsFeatures\nScoped\nReusable\nEncapsulated\n\nMade by 4 main technologies\nHTML Template\nCustom Elements\nShadow DOM\nHTML Imports\n\nBasic Web Components\nCard Title\nComponent Title\n\n12345&lt;section class&#x3D;&quot;card&quot;&gt;&lt;div&gt;&lt;h2&gt;&lt;p&gt;&lt;&#x2F;...&gt;\n👇\n\nreduce duplicated contents using…&lt;product-carddata-header=data-img=data-text=\n\n\nwith JavaScript!\n\n\ncustomElements : global variable\nshadow, secret // outside world can’t get access to it\n\n\nshadow DOMa tree-like structure of connected nodes that represents the different elements and strings of text appearing in a markup document (usually an HTML document in the case of web documents).※ font-size =&gt; DON’T use px !!! USE rem\n\nProgressive Web App (PWA)\nReliable: download and work off-line\n\n\nService worker (downloads content-heavy web, use off-line)\nPre-caching\n\n\nFast\nEngaging\n\n\nNo app store needed\nImmersive full screen\nPush Notifications\n\n\nChrome DevTools : Inspect -&gt; LightHouse 이용!!\n\n","dateCreated":"2021-02-06T20:27:27+09:00","dateModified":"2021-02-06T21:33:09+09:00","datePublished":"2021-02-06T20:27:27+09:00","description":"","headline":"16. Web Components, PWA","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Web ComponentsFeatures\nScoped\nReusable\nEncapsulated\n\nMade by 4 main technologies\nHTML Template\nCustom Elements\nShadow DOM\nHTML Imports\n\nBasic Web Components\nCard Title\nComponent Title\n\n12345&lt;section class&#x3D;&quot;card&quot;&gt;&lt;div&gt;&lt;h2&gt;&lt;p&gt;&lt;&#x2F;...&gt;\n👇\n\nreduce duplicated contents using…&lt;product-carddata-header=data-img=data-text=\n\n\n\nwith JavaScript!\n\n\n\ncustomElements : global variable\nshadow, secret // outside world can’t get access to it\n\n\nshadow DOMa tree-like structure of connected nodes that represents the different elements and strings of text appearing in a markup document (usually an HTML document in the case of web documents).※ font-size =&gt; DON’T use px !!! USE rem\n\nProgressive Web App (PWA)\nReliable: download and work off-line\n\n\nService worker (downloads content-heavy web, use off-line)\nPre-caching\n\n\nFast\nEngaging\n\n\nNo app store needed\nImmersive full screen\nPush Notifications\n\n\nChrome DevTools : Inspect -&gt; LightHouse 이용!!\n\n","dateCreated":"2021-02-06T20:27:27+09:00","dateModified":"2021-04-05T10:46:44+09:00","datePublished":"2021-02-06T20:27:27+09:00","description":"","headline":"16. Web Components, PWA","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/02/06/16-Web-Components-PWA/"}</script>
     <meta name="description" content="Web ComponentsFeatures Scoped Reusable Encapsulated  Made by 4 main technologies HTML Template Custom Elements Shadow DOM HTML Imports  Basic Web Components Card Title Component Title  12345&lt;sectio">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="16. Web Components, PWA">
@@ -22,7 +22,7 @@
 <meta property="og:description" content="Web ComponentsFeatures Scoped Reusable Encapsulated  Made by 4 main technologies HTML Template Custom Elements Shadow DOM HTML Imports  Basic Web Components Card Title Component Title  12345&lt;sectio">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-06T11:27:27.000Z">
-<meta property="article:modified_time" content="2021-02-06T12:33:09.632Z">
+<meta property="article:modified_time" content="2021-04-05T01:46:44.655Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="javascript">
@@ -322,6 +322,12 @@
     	
     </time>
     
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
 </div>
 
     
@@ -348,10 +354,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class&#x3D;&quot;card&quot;&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h2&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;&#x2F;...&gt;</span><br></pre></td></tr></table></figure>
 <p>👇</p>
 <ol>
-<li>reduce duplicated contents using…<br>&lt;product-card<br>data-header=<br>data-img=<br>data-text=<blockquote>
+<li><p>reduce duplicated contents using…<br>&lt;product-card<br>data-header=<br>data-img=<br>data-text=</p>
+<blockquote>
 </product-card></blockquote>
 </li>
-<li>with JavaScript!</li>
+<li><p>with JavaScript!</p>
+</li>
 </ol>
 <ul>
 <li>customElements : global variable</li>

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>Archives: 2021/2 - leah</title>
+    <title>Category: Overview - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
@@ -17,7 +17,7 @@
     <meta name="description" content="Continuously Developing Developer">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="leah">
-<meta property="og:url" content="http://leahincom.github.io/archives/2021/02/page/2/index.html">
+<meta property="og:url" content="http://leahincom.github.io/categories/Web/Overview/page/2/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="Continuously Developing Developer">
 <meta property="og:locale" content="en_US">
@@ -302,6 +302,241 @@
                         ">
                 
     <section class="postShorten-group main-content-wrap">
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/"
+                            aria-label=": Data Sitting from MongoDB to GraphQL"
+                        >
+                            Data Sitting from MongoDB to GraphQL
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-10T01:47:19+09:00">
+	
+		    Feb 10, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h4 id="TRY-THIS-🌈✨"><a href="#TRY-THIS-🌈✨" class="headerlink" title="TRY THIS 🌈✨"></a>TRY THIS 🌈✨</h4><p>buddy.works/tutorials/how-to-connect-mongodb-to-graphql-server</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/02/09/17-GraphQL/"
+                            aria-label=": 17. GraphQL"
+                        >
+                            17. GraphQL
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-09T06:44:47+09:00">
+	
+		    Feb 09, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h2><ul>
+<li>more efficient</li>
+<li>alternative to REST API</li>
+</ul>
+<ul>
+<li>Not a Framework!</li>
+<li>similar to router</li>
+</ul>
+<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><ul>
+<li>pattern, standard for APIs</li>
+<li>interface that tells the external how to get the datas</li>
+<li>have endpoints (e.g. ‘/messages’)</li>
+</ul>
+<dl><dt>/teams/CH</dt><dd>send all the info</dd></dl><p>–&gt; moduler<br>/teams/CH/info<br>/teams/CH/players<br>/teams/CH/matches</p>
+<ul>
+<li>Query Language (Standard)</li>
+</ul>
+<p>order also matches!</p>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><ol>
+<li>Schema<ul>
+<li>Types</li>
+</ul>
+</li>
+</ol>
+<p>id =&gt; unique<br>[]! =&gt; need [] type, you need to pass [] thing<br>team: Team! =&gt; team is related to type Team (Team: object)</p>
+<ol start="2">
+<li>Resolvers</li>
+</ol>
+<ul>
+<li>Scalar Types<br>(Built-In)</li>
+</ul>
+<ul>
+<li>Int</li>
+<li>Float</li>
+<li>String</li>
+<li>Boolean</li>
+<li>ID<br>(Custom Scalar)</li>
+<li>Date, Url, EmailAddress …<br>id, name, age: primitive type<br>team: object -&gt; sub-doc. type =&gt; repeat the same process to find the type</li>
+</ul>
+<ol start="3">
+<li>Queries &amp; Mutations<br>one single endpoint</li>
+</ol>
+<p>-&gt; perform queries</p>
+<ul>
+<li>Sub-Selection<br>pass the object to the type -&gt; give the right interface of information of that object</li>
+</ul>
+<ul>
+<li>have to ask the property of the object</li>
+</ul>
+<ul>
+<li><p>Arguments</p>
+</li>
+<li><p>Variables</p>
+</li>
+</ul>
+<p>put “DEF” into $position var</p>
+<ul>
+<li><ul>
+<li><ul>
+<li>fetching data - - -<br>👇</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>change (mutate) data - - -</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Mutations</p>
+</li>
+</ul>
+<ul>
+<li>another type of action like query that performs changes on the resources</li>
+<li>diff is like <code>GET - POST</code>: doesn’t change anything in the server - change something in the server<br> -&gt; do st that doesn’t suppose to do, run semantic, perform changes by manipulating inside my DB</li>
+</ul>
+<ol>
+<li>create new data <code>POST</code></li>
+<li>update existing data <code>PUT</code></li>
+<li>delete existing data <code>DELETE</code></li>
+</ol>
+<p>name, position: response<br>1st: input type checking -&gt; 2nd: actually executing the mutation</p>
+<ul>
+<li>ID: created internally by the program</li>
+</ul>
+<ul>
+<li>send the request to the root (4000-graphQL as the endpoint)</li>
+<li>reliable, flexible</li>
+</ul>
+<ul>
+<li>Execution<br>search for syntax error</li>
+</ul>
+<p>undefined height -&gt; null, name ~ pass height ~ go inside team obj</p>
+<ul>
+<li>Resolvers<br>Schema: define, Resolver: interact =&gt; interplay to call server flexibly</li>
+</ul>
+<p>get id:42 from upper example</p>
+<ul>
+<li>obj : the previous resolved obj, parent element that has been previously resolved</li>
+<li>args : the arguments object for the field in the query, include id .. all the args that we want to pass</li>
+<li>context : shared object provided to every resolver, communicate and share information, later function can access to it (i.e. ctx in Koa)</li>
+<li>info : extra information about the current query to mutate, etc.</li>
+</ul>
+<h4 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h4><p>typeDefs: routers<br>resolvers: controllers</p>
+<ul>
+<li><p>index.js</p>
+</li>
+<li><p>typeDefs.js</p>
+</li>
+</ul>
+<ul>
+<li>resolvers.js</li>
+</ul>
+<p>not using obj =&gt; replace it with <code>_</code><br>👇</p>
+<ul>
+<li>resolvers.js</li>
+</ul>
+<p>※ express / koa : REST API = apollo-server : gql</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/09/17-GraphQL/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
     
     
     <article class="postShorten postShorten--thumbnailimg-bottom">
@@ -952,13 +1187,184 @@
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/01/31/11-MVC/"
+                            aria-label=": 11. MVC"
+                        >
+                            11. MVC
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-31T05:03:34+09:00">
+	
+		    Jan 31, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <ul>
+<li><p>Linux ‘/‘ path</p>
+</li>
+<li><p>GET / POST<br>adrian0220.tistory.com/209</p>
+</li>
+</ul>
+<h3 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h3><p>try {// something that might go wrong} catch (e) {// handle error}</p>
+<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>model: starting making logics from here<br>controller: conductor of orchestra, router<br>receive the request<br>the only part to communicate with the outside part<br>coming to the controller<br>sending from the controller<br>knowing who to call and packages the content, send it to the outside<br>view: html structure filled in template with no data<br>send the filled template back to the controller<br>.gitignore : files to be ignored when creating a repo</p>
+<p>npm handle-bars<br>programmingsummaries.tistory.com/381</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/31/11-MVC/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/01/30/10-Back-end-Frameworks/"
+                            aria-label=": 10. Back-end Frameworks"
+                        >
+                            10. Back-end Frameworks
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-30T06:49:40+09:00">
+	
+		    Jan 30, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Back-end-Frameworks"><a href="#Back-end-Frameworks" class="headerlink" title="Back-end Frameworks"></a>Back-end Frameworks</h2><h3 id="Back-end"><a href="#Back-end" class="headerlink" title="Back-end"></a>Back-end</h3><p>executed on server</p>
+<h3 id="Front-end"><a href="#Front-end" class="headerlink" title="Front-end"></a>Front-end</h3><p>executed on clinet (browser, mobile, tablet…)</p>
+<h3 id="Web-server"><a href="#Web-server" class="headerlink" title="Web server"></a>Web server</h3><p>software on the physical machine (hardware)</p>
+<h3 id="Node-JS"><a href="#Node-JS" class="headerlink" title="Node JS"></a>Node JS</h3><ul>
+<li>server side javascript<ul>
+<li>interact with file (operating) systems</li>
+<li>FIFO</li>
+<li>time difference: 1sec ~ 28hours</li>
+</ul>
+</li>
+<li>non-blocking === asynchronous Input/Output<ul>
+<li>allows other operation on the other side</li>
+<li>delegate to someone something and do other stuff =&gt; higher efficiency</li>
+<li>multi-threads (<em>JS: single-thread</em>) : e.g. one looking for the answer / one doing help request</li>
+</ul>
+</li>
+<li>allows to use the same language on client and server</li>
+</ul>
+<h4 id="Npm"><a href="#Npm" class="headerlink" title="Npm"></a>Npm</h4><ul>
+<li>npm init<ul>
+<li>initialise the packages</li>
+</ul>
+</li>
+<li>package . json<ul>
+<li>list all dependencies</li>
+</ul>
+</li>
+<li>npm install / uninstall (–save-dev)</li>
+<li>npm publish<ul>
+<li>create lib -&gt; give authority as an open source</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>weekly download counts</li>
+<li>last publish (updated) version</li>
+</ul>
+<h4 id="Async"><a href="#Async" class="headerlink" title="Async"></a>Async</h4><p>Sync: fs 설정 시 다른 scope에서도 접근 가능하지만<br>Async: fs 안에서만 data 접근 가능, 밖 scope에서 접근 불가</p>
+<h4 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h4><p>msg sending to client: “Hello World”</p>
+<h4 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h4><ul>
+<li>Node.js: common js Module</li>
+</ul>
+<ul>
+<li>Module: object</li>
+<li>require: read exports and take object’s properties in it, assign to the variable which is reading the require, follow the execution in the file</li>
+<li>module.exports : what the file does/ passes</li>
+</ul>
+<p>touch: create file<br>nodemon: watches the file, automatically restart (reload, update) the file</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/30/10-Back-end-Frameworks/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
           <li class="pagination-prev">
             <a
                 class="btn btn--default btn--small"
-                href="/archives/2021/02/"
+                href="/categories/Web/Overview/"
                 aria-label="NEWER POSTS"
             >
               <i class="fa fa-angle-left text-base icon-mr"></i>
@@ -967,7 +1373,18 @@
           </li>
         
         
-        <li class="pagination-number">page 2 of 2</li>
+          <li class="pagination-next">
+            <a
+                class="btn btn--default btn--small"
+                href="/categories/Web/Overview/page/3/"
+                aria-label="OLDER POSTS"
+            >
+              <span>OLDER POSTS</span>
+              <i class="fa fa-angle-right text-base icon-ml"></i>
+            </a>
+          </li>
+        
+        <li class="pagination-number">page 2 of 3</li>
     </ul>
 </div>
 

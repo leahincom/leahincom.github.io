@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>Tag: git - leah</title>
+    <title>Category: Algorithm - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
@@ -17,7 +17,7 @@
     <meta name="description" content="Continuously Developing Developer">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="leah">
-<meta property="og:url" content="http://leahincom.github.io/tags/git/index.html">
+<meta property="og:url" content="http://leahincom.github.io/categories/Algorithm/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="Continuously Developing Developer">
 <meta property="og:locale" content="en_US">
@@ -312,23 +312,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/2021/01/12/1-Git/"
-                            aria-label=": 1. Git"
+                            href="/2021/01/13/function-with-multiple-invocations/"
+                            aria-label=": JS) function with multiple invocations"
                         >
-                            1. Git
+                            JS) function with multiple invocations
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2021-01-12T08:16:22+09:00">
+    <time datetime="2021-01-13T03:39:15+09:00">
 	
-		    Jan 12, 2021
+		    Jan 13, 2021
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+    <a class="category-link" href="/categories/Algorithm/">Algorithm</a>
 
 
     
@@ -337,18 +337,16 @@
             </div>
             
                 <div class="postShorten-content">
-                    <h2 id="Git-workflow"><a href="#Git-workflow" class="headerlink" title="Git workflow"></a>Git workflow</h2><p>-fork<br>-clone<br>-commit (status, diff, add)<br>-push<br>(-sync with upstream)<br>-pull requests</p>
-<hr>
-<p>cd //project root folder//<br>git clone //project url//<br>cd //project folder//<br>npm install: get the all dependencies, environment needed for the repository<br>-&gt; <em>needed for</em> npm test: debugging<br>git checkout – ./: A checkout is an operation that moves the HEAD ref pointer to a specified commit.<br>git status: check changes<br>ls -a: local machine 외에 변경 사항이 확인되는지<br>// lists all files including hidden files starting with ‘. ‘<br>💥 git add . =&gt; git status 시 여전히 modified file이 존재할 수 있음: 다른 폴더에 변경된 파일이 있을 때<br>-&gt; git status로 항상 check하기!!<br>git commit -m “first commit”<br>gs: == git status, branch HEAD 확인할 것!<br>git log: commit log 확인<br>git remote -v: branch 확인<br>git push: push everything to the repo, up-to-date<br>💥 synchronization<br>git remote -v<br>git remote add upstream //original repo url – forked one//<br>git pull upstream master: upstream -&gt; master branch로 if any change exists, pull</p>
-<blockquote>
-<p>Q. override =&gt; version conflict =&gt;<br>pull request로 merge 전 conflict 방지<br>Q. pull request, sync with upstream의 목적 =&gt;</p>
-<ol>
-<li>sync with upstream: orinigal repo의 changes 확인</li>
-<li>pull request: 💥 MERGE와 구분! feedback, review의 목적<br>=&gt; when git history gets merged, adds commit on the top and merge<br>=&gt; pull request before merge minimizes unuseful conflicts -&gt; check others’ codes<br>★ Merge: add changes of ver2. to ver1.</li>
-</ol>
+                    <blockquote>
+<p>a function that adds from two invocations.<br>e.g. twoAdds(3)(4) -&gt; 7</p>
 </blockquote>
-<p>git commit //file1// //file2// : individually commit 가능</p>
-<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p>velog.io/@zansol/Pull-Request-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function twoAdds (num) &#123;</span><br><span class="line">	return function (num2) &#123;</span><br><span class="line">		return num+num2;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; twoAdds(num1)(num2)</span><br><span class="line">&#x2F;&#x2F; twoAdds(num1) &#x2F;&#x2F; return value as a function -&gt; value(num2)</span><br></pre></td></tr></table></figure>
+<p><code>currying</code> is the technique of converting a function that takes multiple arguments into a sequence of functions that each take a single argument.</p>
+<h3 id="Closure-vs-Currying"><a href="#Closure-vs-Currying" class="headerlink" title="Closure vs Currying"></a>Closure vs Currying</h3><ul>
+<li>Closure: allows a function to access variables in a parent scope without passing them in.</li>
+<li>Currying: the pattern of functions that immediately evaluate and return other functions.</li>
+</ul>
+<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p><a target="_blank" rel="noopener" href="http://www.youtube.com/watch?v=hRJrp17WnOE&amp;feature=youtu.be">www.youtube.com/watch?v=hRJrp17WnOE&amp;feature=youtu.be</a></p>
 
                     
                         
@@ -358,7 +356,7 @@
                     
                         <p>
                             <a
-                                href="/2021/01/12/1-Git/#post-footer"
+                                href="/2021/01/13/function-with-multiple-invocations/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -381,6 +379,7 @@
 </div>
 
 </section>
+
 
 
                 <footer id="footer" class="main-content-wrap">

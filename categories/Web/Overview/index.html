@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>Archives: 2021/2 - leah</title>
+    <title>Category: Overview - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
@@ -17,7 +17,7 @@
     <meta name="description" content="Continuously Developing Developer">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="leah">
-<meta property="og:url" content="http://leahincom.github.io/archives/2021/02/index.html">
+<meta property="og:url" content="http://leahincom.github.io/categories/Web/Overview/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="Continuously Developing Developer">
 <meta property="og:locale" content="en_US">
@@ -312,26 +312,188 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/2021/02/22/DCGAN/"
-                            aria-label=": DCGAN"
+                            href="/2021/03/04/27-Redux/"
+                            aria-label=": 27. Redux"
                         >
-                            DCGAN
+                            27. Redux
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2021-02-22T07:14:52+09:00">
+    <time datetime="2021-03-04T04:49:00+09:00">
 	
-		    Feb 22, 2021
+		    Mar 04, 2021
     	
     </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
     
 </div>
 
             </div>
             
                 <div class="postShorten-content">
-                    <h3 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h3><p><a target="_blank" rel="noopener" href="https://www.goeduhub.com/10614/generate-convolutional-generative-adversarial-networks">https://www.goeduhub.com/10614/generate-convolutional-generative-adversarial-networks</a></p>
+                    <h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="State-Manager"><a href="#State-Manager" class="headerlink" title="State Manager"></a>State Manager</h3><ul>
+<li>Without<br>each component has its own storage =&gt; spaghetti code</li>
+<li>With<br>has one store without having each storage</li>
+</ul>
+<ul>
+<li>predictable state container for JavaScript applications<ul>
+<li>unpredictable; random bugs, hard to fix</li>
+</ul>
+</li>
+<li>application-wide state</li>
+<li>reduce function</li>
+</ul>
+<p>react component = view</p>
+<h4 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h4><ul>
+<li>can have multiple reducers</li>
+<li>receives a state and do an action</li>
+</ul>
+<ul>
+<li>reduce function</li>
+<li>specify how the application’s state changes in response</li>
+<li>pure function</li>
+<li>never do something like : mutate arguments, callign an API, call non-pure function</li>
+</ul>
+<p>identity reducer</p>
+<ul>
+<li>getState()</li>
+<li>dispatch(action)</li>
+<li>subscribe(listener)</li>
+</ul>
+<p>👇but normally uses hooks👇 </p>
+<h4 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h4><p>※ for React<br>react-query.tanstack.com/reference/useQuery<br>useQuery<br>Subscribe to our newsletter The latest TanStack news, articles, and resources, sent to your inbox.<br>react-query.tanstack.com<br>useReducer<br>ko.reactjs.org/docs/hooks-reference.html<br>Hooks API Reference – React<br>A JavaScript library for building user interfaces<br>ko.reactjs.org</p>
+<h3 id="Making-To-Do-List"><a href="#Making-To-Do-List" class="headerlink" title="Making To-Do List"></a>Making To-Do List</h3><p>🚀 redux devTools</p>
+<p>Do one thing -&gt; make sure it is working -&gt; move on to next one﻿</p>
+<h4 id="overview-Tree"><a href="#overview-Tree" class="headerlink" title="overview Tree"></a>overview Tree</h4><p>big loop</p>
+<ul>
+<li>dispatch: sends the action to the reducer =&gt; actions in loop</li>
+</ul>
+<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><p>👇simplified</p>
+<ul>
+<li>&lt; TodoItem todo = {todo} onChange={onChangeTodo} &gt;</li>
+</ul>
+<p>※ Single component as a single responsibility</p>
+<ul>
+<li>Presentational Component<br>blog.naver.com/backsajang420/221368885149<br>[React] Presentational and Container Components<br>[React] 프레젠테이션 컴포넌트와 컨테이너 컴포넌트 (Presentational and Container Components)# 시…<br>blog.naver.com</li>
+</ul>
+<blockquote>
+<p>프레젠테이션 컴포넌트 (Presentational Component)<br>프레젠테이션 컴포넌트(Presentational Component) 는 아래와 같은 성질을 갖는다.<br>● 어떻게 보여지는 지를 책임진다.<br>컨테이너 컴포넌트 (Container Component)<br>컨테이너 컴포넌트(Container Component) 는 아래와 같은 성질을 갖는다.<br>● 어떻게 동작해야 할지를 책임진다.</p>
+</blockquote>
+<h4 id="React-with-Redux"><a href="#React-with-Redux" class="headerlink" title="React with Redux"></a>React with Redux</h4>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/03/04/27-Redux/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/03/03/26-authentication/"
+                            aria-label=": 26. authentication"
+                        >
+                            26. authentication
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-03-03T07:31:30+09:00">
+	
+		    Mar 03, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h2><ul>
+<li>Authentication: who you are</li>
+<li>Authorization: what you are authorized to do</li>
+</ul>
+<h3 id="The-Authorization-Header"><a href="#The-Authorization-Header" class="headerlink" title="The Authorization Header"></a>The Authorization Header</h3><p>HTTP/1.1</p>
+<ul>
+<li>browser ‘Inspect’ -&gt; Network</li>
+</ul>
+<h3 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h3><h4 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h4><p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">http://www.base64decode.org</a></p>
+<p>Base64 Decode and Encode - Online</p>
+<p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">www.base64decode.org</a><br>Autehntication based on username and password<br>concatenation with <code>:</code></p>
+<ul>
+<li>Don’t store passwords in raw text, always hash it!</li>
+<li>Don’t use MD5 (Brute Force) since is becoming more insecure with the current computing power</li>
+<li>USE BCrypt(the standard nowadays): hash same input into different everytime<br>npm bcrypt</li>
+</ul>
+<h4 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h4><ul>
+<li>github personal access tokens<br>random token is shared between the server and the client, usually on another request<br>lasts for short time (normally 30sec)<br>Authorization = Bearer</li>
+</ul>
+<p>clinet: React, Angular …</p>
+<h4 id="JWT-Jason-Web-Tokens"><a href="#JWT-Jason-Web-Tokens" class="headerlink" title="JWT (Jason Web Tokens)"></a>JWT (Jason Web Tokens)</h4><p><a target="_blank" rel="noopener" href="https://jwt.io/">https://jwt.io</a><br>[algorithm &amp; token type]header-[data: that needs to be secured]payload(userId, iat)-[verifying key]verify signature: no one can change the content<br>signature =&gt; only if I have a secret, generates the signature / if input is different, signature will be different too</p>
+<ul>
+<li>can’t change the payload if the signature hasn’t been changed</li>
+</ul>
+<ul>
+<li>most bearer strategy: the token has all the info needed</li>
+<li>the only thing stored in the server is the stored passphrase</li>
+<li>the token is composed by the encryption information, the payload encoded in base64 and the signature</li>
+<li>less control on the token, the only way not to accept it is by using a blacklist</li>
+</ul>
+<h3 id="Sesson"><a href="#Sesson" class="headerlink" title="Sesson"></a>Sesson</h3><ul>
+<li>payload of data that relates to a user</li>
+<li>persisted in the server and is tagged with the ID</li>
+<li>writes ID in the cookie (piece of information)-&gt; how we are saved and tracked// and sends it to the browser</li>
+</ul>
+<ul>
+<li>everytime the browser performs a request to the server, it sends back the cookie with the ID in it</li>
+</ul>
+<p>session store: mongodb, file, etc…<br>npm express-session<br>npm helmet</p>
+<ul>
+<li>iframe: build website inside the website (element)</li>
+</ul>
+<h4 id="Oauth"><a href="#Oauth" class="headerlink" title="Oauth"></a>Oauth</h4><ul>
+<li>FireFox</li>
+</ul>
+<ul>
+<li>user, app and authentication provider</li>
+<li>lets us authenticate a user through an authentication provider, who manages the account of the user</li>
+<li>Authenticates a user within the activity of an app</li>
+<li>The credentials are not leaked to the app</li>
+<li>BUT gives the provider the information (e.g. google)<br>passport.js<br>oauth0<br>firebase authentication</li>
+</ul>
 
                     
                         
@@ -341,7 +503,123 @@
                     
                         <p>
                             <a
-                                href="/2021/02/22/DCGAN/#post-footer"
+                                href="/2021/03/03/26-authentication/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/03/02/25-Security/"
+                            aria-label=": 25. Security"
+                        >
+                            25. Security
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-03-02T07:39:07+09:00">
+	
+		    Mar 02, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Web-Security"><a href="#Web-Security" class="headerlink" title="Web Security"></a>Web Security</h2><ul>
+<li>Assume the worst case *</li>
+</ul>
+<ul>
+<li>Exposed to threats<ul>
+<li>Data theft/ destruction</li>
+<li>System attacks</li>
+</ul>
+</li>
+<li>vulnerabilities</li>
+<li>defencsive using automated alerts</li>
+</ul>
+<h3 id="Attack-Types"><a href="#Attack-Types" class="headerlink" title="Attack Types"></a>Attack Types</h3><ul>
+<li>Malicious code execution</li>
+<li>Cryptography attacks: hide secrets</li>
+<li>Data interception</li>
+<li>Denial of Service</li>
+</ul>
+<p>owasp.org/www-project-top-ten/<br>OWASP Top Ten Web Application Security Risks | OWASP<br>The OWASP Top 10 is the reference standard for the most critical web application security risks. Adopting the OWASP Top 10 is perhaps the most effective first step towards changing your software development culture focused on producing secure code.<br>owasp.org</p>
+<h4 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h4><ul>
+<li>Cross-Site Scripting: request from one domain to another domain<br> -&gt; html entities</li>
+<li>A type of injection</li>
+<li>Malicious scripts are injected into web sites</li>
+<li>scripts could be entered on any inputs</li>
+</ul>
+<h4 id="XSS-Solutions"><a href="#XSS-Solutions" class="headerlink" title="XSS Solutions"></a>XSS Solutions</h4><p>Escape/ Sanitiza all user inputs<br>Escape all the input before actually putting it on sensible places<br>XSS Protection Cheatsheet</p>
+<h4 id="SQL-Injection"><a href="#SQL-Injection" class="headerlink" title="SQL Injection"></a>SQL Injection</h4><ul>
+<li>just USE <code>Sequelize</code></li>
+</ul>
+<ul>
+<li>parameterized statements</li>
+<li>escaping user inputs</li>
+<li>privileges control</li>
+<li>SQL Injection Prevention Cheatsheet</li>
+</ul>
+<h4 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h4><ul>
+<li>Cross-Site Request Forgery</li>
+<li>forces a user to input st unauthorized</li>
+</ul>
+<h4 id="CSRF-Solutions"><a href="#CSRF-Solutions" class="headerlink" title="CSRF Solutions"></a>CSRF Solutions</h4><ul>
+<li>Identifying source origin</li>
+<li>access-control-allow-origin</li>
+<li>Synchronizer Tokens</li>
+</ul>
+<h4 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h4><ul>
+<li>http is not safe, HTTPS is same with http over TLS</li>
+<li>only expose the host to a DNS server and the target IP<br> &lt; Secured things &gt;<ul>
+<li>path</li>
+<li>query</li>
+<li>payload</li>
+<li>every method</li>
+</ul>
+</li>
+</ul>
+<h5 id="The-Handshake"><a href="#The-Handshake" class="headerlink" title="The Handshake"></a>The Handshake</h5><ul>
+<li>negociation the certificate</li>
+</ul>
+<p>Heroku / Let’s Encrypt<br>gives HTTP certificate for free</p>
+<p>Hack Bounties<br>to test the security</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/03/02/25-Security/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -1060,241 +1338,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/"
-                            aria-label=": Data Sitting from MongoDB to GraphQL"
-                        >
-                            Data Sitting from MongoDB to GraphQL
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-02-10T01:47:19+09:00">
-	
-		    Feb 10, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h4 id="TRY-THIS-🌈✨"><a href="#TRY-THIS-🌈✨" class="headerlink" title="TRY THIS 🌈✨"></a>TRY THIS 🌈✨</h4><p>buddy.works/tutorials/how-to-connect-mongodb-to-graphql-server</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/02/09/17-GraphQL/"
-                            aria-label=": 17. GraphQL"
-                        >
-                            17. GraphQL
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-02-09T06:44:47+09:00">
-	
-		    Feb 09, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h2><ul>
-<li>more efficient</li>
-<li>alternative to REST API</li>
-</ul>
-<ul>
-<li>Not a Framework!</li>
-<li>similar to router</li>
-</ul>
-<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><ul>
-<li>pattern, standard for APIs</li>
-<li>interface that tells the external how to get the datas</li>
-<li>have endpoints (e.g. ‘/messages’)</li>
-</ul>
-<dl><dt>/teams/CH</dt><dd>send all the info</dd></dl><p>–&gt; moduler<br>/teams/CH/info<br>/teams/CH/players<br>/teams/CH/matches</p>
-<ul>
-<li>Query Language (Standard)</li>
-</ul>
-<p>order also matches!</p>
-<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><ol>
-<li>Schema<ul>
-<li>Types</li>
-</ul>
-</li>
-</ol>
-<p>id =&gt; unique<br>[]! =&gt; need [] type, you need to pass [] thing<br>team: Team! =&gt; team is related to type Team (Team: object)</p>
-<ol start="2">
-<li>Resolvers</li>
-</ol>
-<ul>
-<li>Scalar Types<br>(Built-In)</li>
-</ul>
-<ul>
-<li>Int</li>
-<li>Float</li>
-<li>String</li>
-<li>Boolean</li>
-<li>ID<br>(Custom Scalar)</li>
-<li>Date, Url, EmailAddress …<br>id, name, age: primitive type<br>team: object -&gt; sub-doc. type =&gt; repeat the same process to find the type</li>
-</ul>
-<ol start="3">
-<li>Queries &amp; Mutations<br>one single endpoint</li>
-</ol>
-<p>-&gt; perform queries</p>
-<ul>
-<li>Sub-Selection<br>pass the object to the type -&gt; give the right interface of information of that object</li>
-</ul>
-<ul>
-<li>have to ask the property of the object</li>
-</ul>
-<ul>
-<li><p>Arguments</p>
-</li>
-<li><p>Variables</p>
-</li>
-</ul>
-<p>put “DEF” into $position var</p>
-<ul>
-<li><ul>
-<li><ul>
-<li>fetching data - - -<br>👇</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>change (mutate) data - - -</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Mutations</p>
-</li>
-</ul>
-<ul>
-<li>another type of action like query that performs changes on the resources</li>
-<li>diff is like <code>GET - POST</code>: doesn’t change anything in the server - change something in the server<br> -&gt; do st that doesn’t suppose to do, run semantic, perform changes by manipulating inside my DB</li>
-</ul>
-<ol>
-<li>create new data <code>POST</code></li>
-<li>update existing data <code>PUT</code></li>
-<li>delete existing data <code>DELETE</code></li>
-</ol>
-<p>name, position: response<br>1st: input type checking -&gt; 2nd: actually executing the mutation</p>
-<ul>
-<li>ID: created internally by the program</li>
-</ul>
-<ul>
-<li>send the request to the root (4000-graphQL as the endpoint)</li>
-<li>reliable, flexible</li>
-</ul>
-<ul>
-<li>Execution<br>search for syntax error</li>
-</ul>
-<p>undefined height -&gt; null, name ~ pass height ~ go inside team obj</p>
-<ul>
-<li>Resolvers<br>Schema: define, Resolver: interact =&gt; interplay to call server flexibly</li>
-</ul>
-<p>get id:42 from upper example</p>
-<ul>
-<li>obj : the previous resolved obj, parent element that has been previously resolved</li>
-<li>args : the arguments object for the field in the query, include id .. all the args that we want to pass</li>
-<li>context : shared object provided to every resolver, communicate and share information, later function can access to it (i.e. ctx in Koa)</li>
-<li>info : extra information about the current query to mutate, etc.</li>
-</ul>
-<h4 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h4><p>typeDefs: routers<br>resolvers: controllers</p>
-<ul>
-<li><p>index.js</p>
-</li>
-<li><p>typeDefs.js</p>
-</li>
-</ul>
-<ul>
-<li>resolvers.js</li>
-</ul>
-<p>not using obj =&gt; replace it with <code>_</code><br>👇</p>
-<ul>
-<li>resolvers.js</li>
-</ul>
-<p>※ express / koa : REST API = apollo-server : gql</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/02/09/17-GraphQL/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1302,7 +1345,7 @@
           <li class="pagination-next">
             <a
                 class="btn btn--default btn--small"
-                href="/archives/2021/02/page/2/"
+                href="/categories/Web/Overview/page/2/"
                 aria-label="OLDER POSTS"
             >
               <span>OLDER POSTS</span>
@@ -1310,7 +1353,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 1 of 2</li>
+        <li class="pagination-number">page 1 of 3</li>
     </ul>
 </div>
 
