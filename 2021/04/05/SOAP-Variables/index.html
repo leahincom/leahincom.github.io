@@ -6,29 +6,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>CLEANCODING-Objects-and-DSs - leah</title>
+    <title>Variables - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Objects and Data Structures\nGetter and Setter\n\nJS는 인터페이스 / 타입 / 접근제어자 (Access Modifier) 을 가지고 있지 않음\n\nObject property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨\n\nset action 시 validation을 추가하는 것이 좋음\n\ninternal representation을 encapsulating\n\nget, set시 logging이나 error handling을 추가하는 것이 용이함\n\nget 시 lazy load 속성을 추가할 수 있음\n\n\n\nLazy loading \n\nIt’s a way to shorten the length of the critical rendering path, which translates into reduced page load times\ngetting the properties from a server\n\n\nidentify resources as non-blocking (non-critical)\nload these only when needed\n\n\n\n\n123456789101112131415161718192021222324252627282930313233343536373839// badfunction makeBankAccount() &#123;  // ...  return &#123;    // ...    balance: 0  &#125;;&#125;const account = makeBankAccount();account.balance = 100;// goodfunction makeBankAccount() &#123;  // private으로 선언된 변수  let balance = 0;  // 아래 return을 통해 public으로 선언된 &quot;getter&quot;  function getBalance() &#123;    return balance;  &#125;  // 아래 return을 통해 public으로 선언된 &quot;setter&quot;  function setBalance(amount) &#123;    // ... balance를 업데이트하기 전 검증로직    balance = amount;  &#125;  return &#123;    // ...    getBalance,    setBalance  &#125;;&#125;const account = makeBankAccount();account.setBalance(100);\n\nobjects의 properties는 private로 만들기\n\nclosures\n\n1234567891011121314151617181920212223242526272829303132// badconst Employee = function(name) &#123;  this.name = name;&#125;;Employee.prototype.getName = function getName() &#123;  return this.name;&#125;;const employee = new Employee(&#x27;John Doe&#x27;);console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: John Doedelete employee.name;console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: undefined// goodfunction makeEmployee(name) &#123;  return &#123;    getName() &#123;      return name;    &#125;,  &#125;;&#125;const employee = makeEmployee(&#x27;John Doe&#x27;);console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: John Doedelete employee.name;console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: John Doe\n\n\n","dateCreated":"2021-04-05T18:20:55+09:00","dateModified":"2021-04-05T10:33:16+09:00","datePublished":"2021-04-05T18:20:55+09:00","description":"","headline":"CLEANCODING-Objects-and-DSs","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/","keywords":"SOPT, clean code, javascript, object, data structure"}</script>
-    <meta name="description" content="Objects and Data Structures Getter and Setter  JS는 인터페이스 &#x2F; 타입 &#x2F; 접근제어자 (Access Modifier) 을 가지고 있지 않음  Object property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨  set a">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Variables\n변수 이름\n\n의미 있는\n\n발음하기 쉬운\n\n\n12345// badconst yyyymmdstr = moment().format(&#x27;YYYY/MM/DD&#x27;);// goodconst currentDate = moment().format(&#x27;YYYY/MM/DD&#x27;);\n\n동일한 유형에 동일한 어휘\n\n1234567// badgetUserInfo();getClientData();getCustomerRecord();// goodgetUser();\n\n검색 가능한 이름 지정하기\n\n123456// badsetTimeout(blastOff, 86400000);// goodconst MILLISECONDS_IN_A_DAY = 86400000;setTimeout(blastOff, MILLISECONDS_IN_A_DAY);\n\n의도를 나타내는\n\n123456789const address = &#x27;One Infinite Loop, Cupertino 95014&#x27;;const cityZipCodeRegex = /^[^,\\\\]+[,\\\\\\s]+(.+?)\\s*(\\d&#123;5&#125;)?$/;// badsaveCityZipCode(address.match(cityZipCodeRegex)[1], address.match(cityZipCodeRegex)[2]);// goodconst [, city, zipCode] = address.match(cityZipCodeRegex) || [];saveCityZipCode(city, zipCode);\n\n암시적인 것 X, 명시적인 것\n\n12345678910111213141516171819202122const locations = [&#x27;서울&#x27;, &#x27;인천&#x27;, &#x27;수원&#x27;];// badlocations.forEach(l =&gt; &#123;  doStuff();  doSomeOtherStuff();  // ...  // ...  // ...  // 잠깐, `l`은 또 뭘까요?  dispatch(l);&#125;);// goodlocations.forEach(location =&gt; &#123;  doStuff();  doSomeOtherStuff();  // ...  // ...  // ...  dispatch(location);&#125;);\n\n필요없는 것 지우기\n\n123456789101112131415161718192021// badconst Car = &#123;  carMake: &#x27;BMW&#x27;,  carModel: &#x27;M3&#x27;,  carColor: &#x27;파란색&#x27;&#125;;function paintCar(car) &#123;  car.carColor = &#x27;빨간색&#x27;;&#125;// goodconst Car = &#123;  make: &#x27;BMW&#x27;,  model: &#x27;M3&#x27;,  color: &#x27;파란색&#x27;&#125;;function paintCar(car) &#123;  car.color = &#x27;빨간색&#x27;;&#125;\n\nshort circuiting보다 default 매개변수 활용하기\ndefault 매개변수 : 매개변수가 undefined 일 때 적용됨\n그 외 (‘’, “”, false, null, 0, NaN 등의 falsy 값 포함) 은 적용되지 않음\n\n\n\n12345678910// badfunction createMicrobrewery(name) &#123;  const breweryName = name || &#x27;Hipster Brew Co.&#x27;;  // ...&#125;// goodfunction createMicrobrewery(name = &#x27;Hipster Brew Co.&#x27;) &#123;  // ...&#125;\n\n\n\n\n","dateCreated":"2021-04-05T07:01:36+09:00","dateModified":"2021-04-10T12:57:11+09:00","datePublished":"2021-04-05T07:01:36+09:00","description":"","headline":"Variables","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/04/05/SOAP-Variables/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/04/05/SOAP-Variables/","keywords":"SOPT, clean code, javascript, variable"}</script>
+    <meta name="description" content="Variables 변수 이름  의미 있는  발음하기 쉬운   12345&#x2F;&#x2F; badconst yyyymmdstr &#x3D; moment().format(&amp;#x27;YYYY&#x2F;MM&#x2F;DD&amp;#x27;);&#x2F;&#x2F; goodconst currentDate &#x3D; moment().format(&amp;#x27;YYYY&#x2F;MM&#x2F;DD&amp;#x27;);  동일한 유형에 동일한 어휘  1234567&#x2F;&#x2F; b">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="CLEANCODING-Objects-and-DSs">
-<meta property="og:url" content="http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/index.html">
+<meta property="og:title" content="Variables">
+<meta property="og:url" content="http://leahincom.github.io/2021/04/05/SOAP-Variables/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Objects and Data Structures Getter and Setter  JS는 인터페이스 &#x2F; 타입 &#x2F; 접근제어자 (Access Modifier) 을 가지고 있지 않음  Object property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨  set a">
+<meta property="og:description" content="Variables 변수 이름  의미 있는  발음하기 쉬운   12345&#x2F;&#x2F; badconst yyyymmdstr &#x3D; moment().format(&amp;#x27;YYYY&#x2F;MM&#x2F;DD&amp;#x27;);&#x2F;&#x2F; goodconst currentDate &#x3D; moment().format(&amp;#x27;YYYY&#x2F;MM&#x2F;DD&amp;#x27;);  동일한 유형에 동일한 어휘  1234567&#x2F;&#x2F; b">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-04-05T09:20:55.000Z">
-<meta property="article:modified_time" content="2021-04-05T01:33:16.316Z">
+<meta property="article:published_time" content="2021-04-04T22:01:36.000Z">
+<meta property="article:modified_time" content="2021-04-10T03:57:11.076Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="SOPT">
 <meta property="article:tag" content="clean code">
 <meta property="article:tag" content="javascript">
-<meta property="article:tag" content="object">
-<meta property="article:tag" content="data structure">
+<meta property="article:tag" content="variable">
 <meta name="twitter:card" content="summary">
     
     
@@ -314,12 +313,12 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            CLEANCODING-Objects-and-DSs
+            Variables
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-04-05T18:20:55+09:00">
+    <time datetime="2021-04-05T07:01:36+09:00">
 	
 		    Apr 05, 2021
     	
@@ -327,7 +326,7 @@
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/CleanCoding/">CleanCoding</a>
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
 
 
     
@@ -339,44 +338,47 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="Objects-and-Data-Structures"><a href="#Objects-and-Data-Structures" class="headerlink" title="Objects and Data Structures"></a>Objects and Data Structures</h2><ol>
-<li><p><code>Getter</code> and <code>Setter</code></p>
-<ul>
-<li><p>JS는 인터페이스 / 타입 / 접근제어자 (Access Modifier) 을 가지고 있지 않음</p>
-</li>
-<li><p>Object property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨</p>
-</li>
-<li><p><code>set</code> action 시 validation을 추가하는 것이 좋음</p>
-</li>
-<li><p>internal representation을 encapsulating</p>
-</li>
-<li><p><code>get</code>, <code>set</code>시 logging이나 error handling을 추가하는 것이 용이함</p>
-</li>
-<li><p><code>get</code> 시 lazy load 속성을 추가할 수 있음</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>Lazy loading</strong> </p>
-<ul>
-<li>It’s a way to shorten the length of the critical rendering path, which translates into reduced page <strong>load</strong> times</li>
-<li>getting the properties from a server</li>
-</ul>
+            <h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
+<li><p>변수 이름</p>
 <ol>
-<li>identify resources as non-blocking (non-critical)</li>
-<li><strong>load</strong> these only when needed</li>
-</ol>
-</blockquote>
+<li><p>의미 있는</p>
+</li>
+<li><p>발음하기 쉬운</p>
 </li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeBankAccount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    balance: <span class="number">0</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> account = makeBankAccount();</span><br><span class="line">account.balance = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeBankAccount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// private으로 선언된 변수</span></span><br><span class="line">  <span class="keyword">let</span> balance = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 아래 return을 통해 public으로 선언된 &quot;getter&quot;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getBalance</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> balance;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 아래 return을 통해 public으로 선언된 &quot;setter&quot;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setBalance</span>(<span class="params">amount</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ... balance를 업데이트하기 전 검증로직</span></span><br><span class="line">    balance = amount;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    getBalance,</span><br><span class="line">    setBalance</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> account = makeBankAccount();</span><br><span class="line">account.setBalance(<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><p>objects의 properties는 private로 만들기</p>
-<ul>
-<li><code>closures</code></li>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> yyyymmdstr = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> currentDate = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>동일한 유형에 동일한 어휘</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">getUserInfo();</span><br><span class="line">getClientData();</span><br><span class="line">getCustomerRecord();</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">getUser();</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>검색 가능한 이름 지정하기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, <span class="number">86400000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> MILLISECONDS_IN_A_DAY = <span class="number">86400000</span>;</span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, MILLISECONDS_IN_A_DAY);</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>의도를 나타내는</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> address = <span class="string">&#x27;One Infinite Loop, Cupertino 95014&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> cityZipCodeRegex = <span class="regexp">/^[^,\\]+[,\\\s]+(.+?)\s*(\d&#123;5&#125;)?$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">saveCityZipCode(address.match(cityZipCodeRegex)[<span class="number">1</span>], address.match(cityZipCodeRegex)[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> [, city, zipCode] = address.match(cityZipCodeRegex) || [];</span><br><span class="line">saveCityZipCode(city, zipCode);</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>암시적인 것 X, <strong>명시적인 것</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> locations = [<span class="string">&#x27;서울&#x27;</span>, <span class="string">&#x27;인천&#x27;</span>, <span class="string">&#x27;수원&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">l</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 잠깐, `l`은 또 뭘까요?</span></span><br><span class="line">  dispatch(l);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">location</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  dispatch(location);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>필요없는 것 지우기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  carMake: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  carModel: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  carColor: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.carColor = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  make: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  model: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  color: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.color = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>short circuiting보다 <strong>default 매개변수 활용하기</strong><ul>
+<li>default 매개변수 : 매개변수가 <code>undefined</code> 일 때 적용됨</li>
+<li>그 외 (‘’, “”, false, null, 0, NaN 등의 <code>falsy</code> 값 포함) 은 적용되지 않음</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Employee = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Employee.prototype.getName = <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> employee = <span class="keyword">new</span> Employee(<span class="string">&#x27;John Doe&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br><span class="line"><span class="keyword">delete</span> employee.name;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: undefined</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeEmployee</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="function"><span class="title">getName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> name;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> employee = makeEmployee(<span class="string">&#x27;John Doe&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br><span class="line"><span class="keyword">delete</span> employee.name;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> breweryName = name || <span class="string">&#x27;Hipster Brew Co.&#x27;</span>;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name = <span class="string">&#x27;Hipster Brew Co.&#x27;</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
 
             
 
@@ -388,7 +390,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/SOPT/" rel="tag">SOPT</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/clean-code/" rel="tag">clean code</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/data-structure/" rel="tag">data structure</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/javascript/" rel="tag">javascript</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/object/" rel="tag">object</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/SOPT/" rel="tag">SOPT</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/clean-code/" rel="tag">clean code</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/javascript/" rel="tag">javascript</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/variable/" rel="tag">variable</a>
 
             </div>
         
@@ -401,9 +403,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
-                    data-tooltip="Responsive Web"
-                    aria-label="PREVIOUS: Responsive Web"
+                    href="/2021/04/05/SOAP-Functions/"
+                    data-tooltip="Functions"
+                    aria-label="PREVIOUS: Functions"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -415,9 +417,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/05/CLEANCODING-Functions/"
-                    data-tooltip="CLEANCODING-Functions"
-                    aria-label="NEXT: CLEANCODING-Functions"
+                    href="/2021/04/04/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-03-04-21/"
+                    data-tooltip="1차 세미나_03/04/21"
+                    aria-label="NEXT: 1차 세미나_03/04/21"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -442,7 +444,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -455,7 +457,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -468,7 +470,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -516,9 +518,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
-                    data-tooltip="Responsive Web"
-                    aria-label="PREVIOUS: Responsive Web"
+                    href="/2021/04/05/SOAP-Functions/"
+                    data-tooltip="Functions"
+                    aria-label="PREVIOUS: Functions"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -530,9 +532,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/05/CLEANCODING-Functions/"
-                    data-tooltip="CLEANCODING-Functions"
-                    aria-label="NEXT: CLEANCODING-Functions"
+                    href="/2021/04/04/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-03-04-21/"
+                    data-tooltip="1차 세미나_03/04/21"
+                    aria-label="NEXT: 1차 세미나_03/04/21"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -557,7 +559,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -570,7 +572,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -583,7 +585,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -617,7 +619,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -630,7 +632,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/"
+                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -643,7 +645,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/CLEANCODING-Objects-and-DSs/"
+                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>

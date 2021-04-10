@@ -312,6 +312,96 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/04/10/const-function/"
+                            aria-label=": const function"
+                        >
+                            const function
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-04-10T20:58:41+09:00">
+	
+		    Apr 10, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/JavaScript/">JavaScript</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="Function-Statement"><a href="#Function-Statement" class="headerlink" title="Function Statement"></a>Function Statement</h3><ul>
+<li><em>hoisted</em> to the top of the <em>full lexical scope</em><ul>
+<li>can break conflicting scripts</li>
+<li>it’s difficult to debug</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>named function is shown in the stack trace<ul>
+<li>easier to debug when error occurs in the function</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function declarations are given two passes,</span></span><br><span class="line"><span class="comment">where the first lifts them to the top (hoisting),</span></span><br><span class="line"><span class="comment">allowing &quot;out of order&quot; usage</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">doTheThing();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTheThing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome number <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAwesome</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Const-Declaration"><a href="#Const-Declaration" class="headerlink" title="Const Declaration"></a>Const Declaration</h3><ul>
+<li><em>edge-case hoisting</em></li>
+</ul>
+<ul>
+<li>declare a variable<ul>
+<li>gives it a block scope</li>
+<li>stops the full hoisting</li>
+</ul>
+</li>
+<li>cannot be re-declared<ul>
+<li>throws exception if re-declared</li>
+<li>easier to debug</li>
+</ul>
+</li>
+<li>won’t be caught until called</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">This shows that, because of block-scoping,</span></span><br><span class="line"><span class="comment">const function references must be invoked in-order</span></span><br><span class="line"><span class="comment">or else things will fail silently.</span></span><br><span class="line"><span class="comment">consts are added serially (in the order in which they appear)</span></span><br><span class="line"><span class="comment">and much of the body isn&#x27;t declared when we first try to invoke or functions</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// use `getAwesome()`</span></span><br><span class="line"><span class="keyword">const</span> tryDoTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is me trying to be awesome <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;getAwesome is not defined&quot;, because it is referenced too early,</span></span><br><span class="line"><span class="comment">// before declaring `getAwesome()` function</span></span><br><span class="line">tryDoTheThing()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getAwesome = <span class="function">() =&gt;</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome! <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doTheThing()</span><br></pre></td></tr></table></figure>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/04/10/const-function/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/03/04/27-Redux/"
                             aria-label=": 27. Redux"
                         >
@@ -1180,151 +1270,6 @@
                         <p>
                             <a
                                 href="/2021/02/11/19-Decorators/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/02/10/18-Angular/"
-                            aria-label=": 18. Angular"
-                        >
-                            18. Angular
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-02-10T21:28:55+09:00">
-	
-		    Feb 10, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h2><h3 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h3><p><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/docs/handbook/intro.html">www.typescriptlang.org/docs/handbook/intro.html</a></p>
-<p>Handbook - The TypeScript Handbook<br>Your first step to learn TypeScript<br><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">www.typescriptlang.org</a></p>
-<p>let [varName] : [varType] = [value];</p>
-<ul>
-<li>enum : dictionary</li>
-<li>function =&gt; need to specify the types of parameters</li>
-</ul>
-<ul>
-<li>getting rid of any error of classes…</li>
-<li>testing if we generate any error</li>
-<li>typing faster</li>
-</ul>
-<p>imraccoon-developer.tistory.com/11</p>
-<p>TypeScript, 왜 써야되나?? (feat. 장단점)<br>JavaScript가 es6로 바뀌면서 큰 인기를 끌기 시작했습니다. 또한, Node.js로 할 수 있는 것들이 점점 많아졌으며, 지금도 많아지고 있습니다. 처음에는 웹에서 사용하기 위한 스크립트 언어로 활용되<br>imraccoon-developer.tistory.com</p>
-<h3 id="Angular-Architecture"><a href="#Angular-Architecture" class="headerlink" title="Angular Architecture"></a>Angular Architecture</h3><ul>
-<li>Modules</li>
-<li>Components</li>
-<li>Services<br>…</li>
-</ul>
-<h4 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h4><ul>
-<li>connected through Metadata</li>
-<li>Component === View</li>
-<li>Service: share functionality through entire app</li>
-<li>dependency injector</li>
-</ul>
-<p>@NgModule: function</p>
-<ul>
-<li>bootstrap: starting point, start compiling</li>
-<li>decorators: annotate data to give extra info to(of) the target</li>
-</ul>
-<p>–&gt; decorating: NgModule targeting AppModule</p>
-<h4 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h4><ul>
-<li><p>A class meant to be as reusable (when applies) as possible</p>
-</li>
-<li><p>Defines application data and logic</p>
-</li>
-<li><p>Bound to a template, an HTML file</p>
-</li>
-<li><blockquote>
-<p>give users all the functionality of the app</p>
-</blockquote>
-</li>
-<li><p>create DOM and add components thus drawing a tree: [tree] template -&gt; components (+ template) -&gt; … </p>
-</li>
-<li><p>communicate with each other and give access of information to users</p>
-</li>
-<li><p>component = instance of a class, independent element but communicate with others as a class</p>
-</li>
-<li><p>render the DOM as a new node</p>
-</li>
-<li><dl><dt>shadow DOM to encapsulate the component, not affected by exeternal interventions<br>Shadow DOM</dt><dd>different DOM, OWN capsulated environment</dd></dl></li>
-</ul>
-<p>polymer-library.polymer-project.org/2.0/docs/devguide/shadow-dom<br>Shadow DOM is a new DOM feature that helps you build components. You can think of shadow DOM as a scoped subtreeinside your element.</p>
-<ul>
-<li>Root Component</li>
-</ul>
-<ul>
-<li>contain everything</li>
-</ul>
-<ul>
-<li>Root Template</li>
-</ul>
-<ul>
-<li>Navigation Component: works itself, alone</li>
-<li>Container Component: including other components</li>
-</ul>
-<ul>
-<li>Filtering Component</li>
-</ul>
-<ul>
-<li>receive the input data</li>
-<li>render into different components (list, map)</li>
-</ul>
-<p>e.g. Scenario<br>if like one of the list component item -&gt; passed up to the container -&gt; reflect that to the map component<br>filtering info in the filter component -&gt; passed up to the container -&gt; reflect that to the map component</p>
-<h4 id="Data-Binding"><a href="#Data-Binding" class="headerlink" title="Data Binding"></a>Data Binding</h4><p>when user gives the input, then DOM will communicate using property in [(ng-model)] = “property”</p>
-<ul>
-<li>handler: function declared component </li>
-</ul>
-<p>object =&gt; {}</p>
-<ul>
-<li>2 way binding: class component &lt;-&gt; template </li>
-</ul>
-<ul>
-<li>selector: ‘movie-details’ –&gt; director obj go in trhough selector</li>
-</ul>
-<h4 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h4><ul>
-<li>private: TS property, can’t access it from other classes</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/02/10/18-Angular/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
