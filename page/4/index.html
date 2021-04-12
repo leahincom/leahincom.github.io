@@ -311,6 +311,113 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/01/24/6-Complexity-Analysis/"
+                            aria-label=": 6. Complexity Analysis"
+                        >
+                            6. Complexity Analysis
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-24T08:43:59+09:00">
+	
+		    Jan 24, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h2><ul>
+<li>like a recipe</li>
+<li>concrete steps to solve the problem</li>
+<li>language independent (logic itself)</li>
+</ul>
+<h3 id="Complexity-Analysis"><a href="#Complexity-Analysis" class="headerlink" title="Complexity Analysis"></a>Complexity Analysis</h3><ul>
+<li>Objective Criteria</li>
+</ul>
+<ul>
+<li><code>time</code>, <code>space</code></li>
+<li>best, average, worst (always think in worst case!)</li>
+<li>Big O</li>
+</ul>
+<h5 id="Be-aware-of-the-Complexity"><a href="#Be-aware-of-the-Complexity" class="headerlink" title="Be aware of the Complexity"></a>Be aware of the Complexity</h5><h5 id="Recognise-patterns"><a href="#Recognise-patterns" class="headerlink" title="Recognise patterns"></a>Recognise patterns</h5><h5 id="Think-if-you-can-bring-it-down"><a href="#Think-if-you-can-bring-it-down" class="headerlink" title="Think if you can bring it down"></a>Think if you can bring it down</h5><h3 id="Big-O"><a href="#Big-O" class="headerlink" title="Big O"></a>Big O</h3><p><em>DROP the constant in front of the N</em></p>
+<ol>
+<li>Constant - O(k) <em>(k: constant number)</em><br>: stays the same independently of the size of the problem</li>
+<li>Linear - O(n) <em>(n: number of items)</em><br>: grows proportional to the size of the problem<br>e.g. for loop, linked list- find the item</li>
+<li>Logarithmic - O(logn)</li>
+</ol>
+<ul>
+<li>random array =&gt; cut half =&gt; repeat until find the element (Binary Search)</li>
+<li>sorted =&gt; increase by one<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let count &#x3D; 0;</span><br><span class="line">let limit &#x3D; 100;</span><br><span class="line"></span><br><span class="line">for (let i&#x3D;0; i&lt;limit; i++) &#123;</span><br><span class="line">  limit &#x2F;&#x3D; 2;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li>Quadratic - O(n^2)<br>: nested for loop</li>
+<li>N log n - O (nlogn)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let count &#x3D; 0;</span><br><span class="line">let limit &#x3D; 100;</span><br><span class="line"></span><br><span class="line">for (let i&#x3D;0; i&lt;limit; i++) &#123;</span><br><span class="line">  limit &#x2F;&#x3D; 2;</span><br><span class="line">  for (let j&#x3D;0; j&lt;limit; j++) &#123;</span><br><span class="line">    count++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+e.g. mergeSort</li>
+</ol>
+<h4 id="BAD-Time-Complexity"><a href="#BAD-Time-Complexity" class="headerlink" title="BAD Time Complexity"></a>BAD Time Complexity</h4><ol start="6">
+<li>Exponential - O(2^n)</li>
+<li>Factorial - O(n!)<br>e.g. Queen Problem</li>
+</ol>
+<blockquote>
+<p>Hash Table: O(1) average and amortized case complexity, however it suffers from O(n) worst case time complexity.</p>
+<ul>
+<li>Worst Case</li>
+</ul>
+<ol>
+<li>If too many elements were hashed into the same key: looking inside this key may take O(n) time.</li>
+<li>Once a hash table has passed its load balance - it has to rehash [create a new bigger table, and re-insert each element to the table]. </li>
+</ol>
+<ul>
+<li>average and amortized case</li>
+</ul>
+<ol>
+<li>It is very rare that many items will be hashed to the same key [if you chose a good hash function and you don’t have too big load balance.</li>
+<li>The rehash operation, which is O(n), can at most happen after n/2 ops, which are all assumed O(1): Thus when you sum the average time per op, you get : (n*O(1) + O(n)) / n) = O(1)</li>
+</ol>
+</blockquote>
+<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p><a target="_blank" rel="noopener" href="http://www.bigocheatsheet.com/">www.bigocheatsheet.com/</a></p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/24/6-Complexity-Analysis/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/01/23/5-Data-Structure/"
                             aria-label=": 5. Data Structure"
                         >
