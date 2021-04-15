@@ -788,15 +788,86 @@
 </li>
 <li><p><code>new Promise()</code> 를 통해 선언, 인자는 <code>(resolve, reject)</code></p>
 <ul>
-<li><pre><code class="javascript">const promise = new Promise((res, rej) =&gt; &#123;&#125;);
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- return 값은 resolve나 reject 내부의 메시지</span><br><span class="line"></span><br><span class="line">- resolve, reject 둘 중 하나만 실행</span><br><span class="line"></span><br><span class="line">  - 둘 다 있다면 나중에 작성된 코드 무시</span><br><span class="line"></span><br><span class="line">- &#96;fetch&#96; 를 사용하여 실제 API를 호출하면 Promise 객체가 반환됨</span><br><span class="line"></span><br><span class="line">- &#96;response.json()&#96; 을 통해 response의 body를 JSON 객체로 변환함</span><br><span class="line"></span><br><span class="line">  - 이 메소드의 **실행 결과도 Promise**임</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### Promise의 3가지 상태</span><br><span class="line"></span><br><span class="line">&lt;img width&#x3D;&quot;276&quot; alt&#x3D;&quot;Screenshot 2021-04-15 at 20 43 45&quot; src&#x3D;&quot;https:&#x2F;&#x2F;user-images.githubusercontent.com&#x2F;49134038&#x2F;114866259-4f3cc900-9e2e-11eb-885b-be61da0cc5f6.png&quot;&gt;</span><br><span class="line"></span><br><span class="line">1. pending : 아직 비동기 처리가 완료되지 않음</span><br><span class="line">2. fulfilled : 비동기 처리가 완료되어 결과값이 반환됨</span><br><span class="line">   * &#96;then&#96; 실행</span><br><span class="line">   * then을 연속으로 사용할 수 있음</span><br><span class="line">   * catch 이후에도 then 설정 가능</span><br><span class="line">   * &#96;throw Error()&#96; 를 통해 에러가 발생하면 catch 실행</span><br><span class="line">3. rejected : 비동기 처리 중 오류가 발생함</span><br><span class="line">   * &#96;catch&#96; 실행</span><br><span class="line"></span><br><span class="line">&gt; &#96;finally&#96; 는 결과 상관 없이 실행됨</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### Async &#x2F; Await</span><br><span class="line"></span><br><span class="line">&lt;img width&#x3D;&quot;583&quot; alt&#x3D;&quot;Screenshot 2021-04-10 at 16 31 05&quot; src&#x3D;&quot;https:&#x2F;&#x2F;user-images.githubusercontent.com&#x2F;49134038&#x2F;114866280-549a1380-9e2e-11eb-9375-d00612bc3e01.png&quot;&gt;</span><br><span class="line"></span><br><span class="line">- await은 async 함수 안에서만 사용 가능</span><br><span class="line">- await은 결과가 resolve, reject이든 상관 없이 Promise가 끝날 때까지 기다림</span><br><span class="line">- &#96;then&#96;, &#96;catch&#96; 를 사용하지 않고 무조건 Promise 결과를 얻음</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### Notification</span><br><span class="line"></span><br><span class="line">1. Alert : 사용자가 확인을 누를 때까지 메시지를 보여줌</span><br><span class="line"></span><br><span class="line">2. Prompt : 사용자에게 값을 입력받음</span><br><span class="line"></span><br><span class="line">   * 첫번째 인자는 notifying message</span><br><span class="line"></span><br><span class="line">   * 두번째 인자는 default 값, 사용자가 취소를 누르면 &#96;null&#96; 리턴</span><br><span class="line"></span><br><span class="line">3. Confirm : 사용자에게 질문을 보여주고 true &#x2F; false 리턴</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### async &#x2F; defer</span><br><span class="line"></span><br><span class="line">&lt;img width&#x3D;&quot;532&quot; alt&#x3D;&quot;Screenshot 2021-04-10 at 16 36 52&quot; src&#x3D;&quot;https:&#x2F;&#x2F;user-images.githubusercontent.com&#x2F;49134038&#x2F;114866279-549a1380-9e2e-11eb-8571-fbfef343dc76.png&quot;&gt;</span><br><span class="line"></span><br><span class="line">- async : script가 html의 영향을 받지 않을 때</span><br><span class="line">  - e.g. DOM 조작 요소가 없을 때</span><br><span class="line">  - HTML pausing해도 영향 없음</span><br><span class="line">- **defer** : script가 html의 영향을 받을 때</span><br><span class="line">  - e.g. DOM 조작 요소가 있을 때</span><br><span class="line">  - 일단 모두 로딩하고 reloading</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## API</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### Canvas</span><br><span class="line"></span><br><span class="line">* 애니메이션, 게임 그래픽, 사진 조작, 영상 처리 등 그래픽을 그리기 위한 방법</span><br><span class="line">* **&#96;API&#96;이기 때문에 &#96;자바스크립트&#96;로 조작한다**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;html</span><br><span class="line">&lt;!- 넓이와 높이 지정해야 함 (css로 조정해도 됨) -&gt;</span><br><span class="line">&lt;canvas id&#x3D;&quot;canvas&quot; width&#x3D;&quot;500&quot; height&#x3D;&quot;500&quot;&gt;&lt;&#x2F;canvas&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;canvas.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<li><code>const promise = new Promise((res, rej) =&gt; &#123;&#125;);</code></li>
+</ul>
+</li>
+<li><p>return 값은 resolve나 reject 내부의 메시지</p>
+</li>
+<li><p>resolve, reject 둘 중 하나만 실행</p>
+<ul>
+<li>둘 다 있다면 나중에 작성된 코드 무시</li>
+</ul>
+</li>
+<li><p><code>fetch</code> 를 사용하여 실제 API를 호출하면 Promise 객체가 반환됨</p>
+</li>
+<li><p><code>response.json()</code> 을 통해 response의 body를 JSON 객체로 변환함</p>
+<ul>
+<li>이 메소드의 <strong>실행 결과도 Promise</strong>임</li>
+</ul>
+</li>
+</ul>
+<h5 id="Promise의-3가지-상태"><a href="#Promise의-3가지-상태" class="headerlink" title="Promise의 3가지 상태"></a>Promise의 3가지 상태</h5><img width="276" alt="Screenshot 2021-04-15 at 20 43 45" src="https://user-images.githubusercontent.com/49134038/114866259-4f3cc900-9e2e-11eb-885b-be61da0cc5f6.png">
+
+<ol>
+<li>pending : 아직 비동기 처리가 완료되지 않음</li>
+<li>fulfilled : 비동기 처리가 완료되어 결과값이 반환됨<ul>
+<li><code>then</code> 실행</li>
+<li>then을 연속으로 사용할 수 있음</li>
+<li>catch 이후에도 then 설정 가능</li>
+<li><code>throw Error()</code> 를 통해 에러가 발생하면 catch 실행</li>
+</ul>
+</li>
+<li>rejected : 비동기 처리 중 오류가 발생함<ul>
+<li><code>catch</code> 실행</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><code>finally</code> 는 결과 상관 없이 실행됨</p>
+</blockquote>
+<h4 id="Async-Await"><a href="#Async-Await" class="headerlink" title="Async / Await"></a>Async / Await</h4><img width="583" alt="Screenshot 2021-04-10 at 16 31 05" src="https://user-images.githubusercontent.com/49134038/114866280-549a1380-9e2e-11eb-9375-d00612bc3e01.png">
+
+<ul>
+<li>await은 async 함수 안에서만 사용 가능</li>
+<li>await은 결과가 resolve, reject이든 상관 없이 Promise가 끝날 때까지 기다림</li>
+<li><code>then</code>, <code>catch</code> 를 사용하지 않고 무조건 Promise 결과를 얻음</li>
+</ul>
+<h4 id="Notification"><a href="#Notification" class="headerlink" title="Notification"></a>Notification</h4><ol>
+<li><p>Alert : 사용자가 확인을 누를 때까지 메시지를 보여줌</p>
+</li>
+<li><p>Prompt : 사용자에게 값을 입력받음</p>
+<ul>
+<li><p>첫번째 인자는 notifying message</p>
+</li>
+<li><p>두번째 인자는 default 값, 사용자가 취소를 누르면 <code>null</code> 리턴</p>
+</li>
+</ul>
+</li>
+<li><p>Confirm : 사용자에게 질문을 보여주고 true / false 리턴</p>
+</li>
+</ol>
+<h4 id="async-defer"><a href="#async-defer" class="headerlink" title="async / defer"></a>async / defer</h4><img width="532" alt="Screenshot 2021-04-10 at 16 36 52" src="https://user-images.githubusercontent.com/49134038/114866279-549a1380-9e2e-11eb-8571-fbfef343dc76.png">
+
+<ul>
+<li>async : script가 html의 영향을 받지 않을 때<ul>
+<li>e.g. DOM 조작 요소가 없을 때</li>
+<li>HTML pausing해도 영향 없음</li>
+</ul>
+</li>
+<li><strong>defer</strong> : script가 html의 영향을 받을 때<ul>
+<li>e.g. DOM 조작 요소가 있을 때</li>
+<li>일단 모두 로딩하고 reloading</li>
+</ul>
+</li>
+</ul>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h3><ul>
+<li>애니메이션, 게임 그래픽, 사진 조작, 영상 처리 등 그래픽을 그리기 위한 방법</li>
+<li><strong><code>API</code>이기 때문에 <code>자바스크립트</code>로 조작한다</strong></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!- 넓이와 높이 지정해야 함 (css로 조정해도 됨) -&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;canvas&quot;</span> <span class="attr">width</span>=<span class="string">&quot;500&quot;</span> <span class="attr">height</span>=<span class="string">&quot;500&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;canvas.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// canvas element 가져오기</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">&quot;canvas&quot;</span>);</span><br><span class="line"><span class="comment">// canvas의 context를 &quot;2d&quot;로 지정하기</span></span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">&quot;2d&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
+
 <img width="343" alt="Screenshot 2021-04-10 at 16 43 28" src="https://user-images.githubusercontent.com/49134038/114866278-54017d00-9e2e-11eb-8a51-e8ea25f388fd.png">
 
 <img width="321" alt="Screenshot 2021-04-10 at 16 49 25" src="https://user-images.githubusercontent.com/49134038/114866275-54017d00-9e2e-11eb-8cd0-73ff7dca9c19.png">
