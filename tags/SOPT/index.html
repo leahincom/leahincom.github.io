@@ -345,27 +345,116 @@
 </ul>
 <blockquote>
 <ul>
-<li><p>class</p>
-</li>
-<li><p>const &amp; let</p>
-</li>
-<li><p>block scope</p>
-</li>
-<li><p>arrow function</p>
-</li>
-<li><p>promise</p>
-</li>
-<li><p>spread operator</p>
-</li>
-<li><p>template literal</p>
-<ul>
-<li><pre><code>`$&#123;expression&#125;`
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line">* destructuring</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;img width&#x3D;&quot;443&quot; alt&#x3D;&quot;Screenshot 2021-04-10 at 15 08 48&quot; src&#x3D;&quot;https:&#x2F;&#x2F;user-images.githubusercontent.com&#x2F;49134038&#x2F;114866308-595ec780-9e2e-11eb-8a12-714e054b6017.png&quot;&gt;</span><br><span class="line"></span><br><span class="line">- let</span><br><span class="line"> - 변하는 값을 할당할 때</span><br><span class="line"> - 변수명은 lowerCamelCase</span><br><span class="line"></span><br><span class="line">- const</span><br><span class="line"> - 변하지 않는 값을 할당할 때</span><br><span class="line"> - 변수명은 SNAKE_CASE</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hoisting (변수 할당 전에 접근 시)</span><br><span class="line"></span><br><span class="line">* var : undefined</span><br><span class="line">* let : &#96;reference error&#96;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### Scope</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1. Function Scope</span><br><span class="line"></span><br><span class="line">- function 블록 내에서 유효</span><br><span class="line">- 함수 내부에 선언되면 **지역변수**</span><br><span class="line">- 외부에 선언되면 **전역변수**</span><br><span class="line"></span><br><span class="line">&#96;지역변수&#96;</span><br><span class="line"></span><br><span class="line">* 함수 내부에 선언</span><br><span class="line">* 함수 내부에서만 접근 가능</span><br><span class="line">* 함수가 시작될 때 생성되고, 함수 context가 종료될 때 삭제됨</span><br><span class="line"></span><br><span class="line">&#96;전역변수&#96;</span><br><span class="line"></span><br><span class="line">* 함수 외부에 선언</span><br><span class="line">* 어디에서나 접근 가능</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2. Block Scope</span><br><span class="line"></span><br><span class="line">* &#96;&#123;&#125;&#96; 가 있는 경우</span><br><span class="line"> * if, switch 문...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;img width&#x3D;&quot;227&quot; alt&#x3D;&quot;Screenshot 2021-04-10 at 15 13 27&quot; src&#x3D;&quot;https:&#x2F;&#x2F;user-images.githubusercontent.com&#x2F;49134038&#x2F;114866307-595ec780-9e2e-11eb-96fc-a456cb2c048c.png&quot;&gt;</span><br><span class="line"></span><br><span class="line">- &#96;var a&#96;</span><br><span class="line"> - 전역 변수</span><br><span class="line"></span><br><span class="line">- &#96;var b&#96;</span><br><span class="line"> </span><br><span class="line"> - 지역 변수</span><br><span class="line">   </span><br><span class="line"> - function scope</span><br><span class="line"> </span><br><span class="line">   - if문 밖에서도 접근 가능 (if문이 function 안에 있기 때문)</span><br><span class="line"> </span><br><span class="line">&#96;var&#96; variables are *function scope*.</span><br><span class="line"></span><br><span class="line">: It means they are only available *inside* the function they’re created in, or if not created inside a function, they are ‘globally scoped.’</span><br><span class="line"></span><br><span class="line">&gt; &#96;globally scoped&#96;</span><br><span class="line">&gt;</span><br><span class="line">&gt; : returns &#96;undefined&#96;</span><br><span class="line"> </span><br><span class="line">- &#96;let c&#96;</span><br><span class="line"> </span><br><span class="line"> - 지역 변수</span><br><span class="line"> - block scope</span><br><span class="line">   - if문 밖에서 접근 불가 (참조 불가능)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### Hoisting</span><br><span class="line"></span><br><span class="line">- scope에 따라 &#96;선언&#96; 과 &#96;할당&#96; 으로 구분됨</span><br><span class="line">- 변수의 선언문과 함수의 선언식을 **유효 범위의 최상단**으로 끌어올리는 것</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;javascript</span><br><span class="line">function hoisting() &#123;</span><br><span class="line">console.log(d);</span><br><span class="line">console.log(e);</span><br><span class="line"></span><br><span class="line">var d &#x3D; &quot;be&quot;;</span><br><span class="line">let e &#x3D; &quot;sopt&quot;;</span><br><span class="line"></span><br><span class="line">function f() &#123;</span><br><span class="line">	console.log(&quot;28th&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hoisting();</span><br><span class="line"></span><br><span class="line">👇</span><br><span class="line"></span><br><span class="line">function hoisting() &#123;</span><br><span class="line"> &#x2F;&#x2F; 변수 선언문 (메모리 할당)</span><br><span class="line">var d;</span><br><span class="line"> let e;</span><br><span class="line"> &#x2F;&#x2F; 함수 선언식</span><br><span class="line"> function f() &#123;</span><br><span class="line">	console.log(&quot;28th&quot;);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> &#x2F;&#x2F; 기존 식 순차적으로 실행</span><br><span class="line"> console.log(d); &#x2F;&#x2F; undefined</span><br><span class="line">console.log(e); &#x2F;&#x2F; ReferenceError</span><br><span class="line"> </span><br><span class="line"> d &#x3D; &quot;be&quot;;</span><br><span class="line">e &#x3D; &quot;sopt&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hositing();</span><br></pre></td></tr></table></figure></code></pre>
-</li>
+<li>class</li>
+<li>const &amp; let</li>
+<li>block scope</li>
+<li>arrow function</li>
+<li>promise</li>
+<li>spread operator</li>
+<li>template literal<ul>
+<li><code>$&#123;expression&#125;</code> with `</li>
 </ul>
 </li>
+<li>destructuring</li>
 </ul>
 </blockquote>
+<img width="443" alt="Screenshot 2021-04-10 at 15 08 48" src="https://user-images.githubusercontent.com/49134038/114866308-595ec780-9e2e-11eb-8a12-714e054b6017.png">
+
+<ul>
+<li><p>let</p>
+<ul>
+<li>변하는 값을 할당할 때</li>
+<li>변수명은 lowerCamelCase</li>
+</ul>
+</li>
+<li><p>const</p>
+<ul>
+<li>변하지 않는 값을 할당할 때</li>
+<li>변수명은 SNAKE_CASE</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>hoisting (변수 할당 전에 접근 시)</p>
+<ul>
+<li>var : undefined</li>
+<li>let : <code>reference error</code></li>
+</ul>
+</blockquote>
+<h4 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h4><ol>
+<li>Function Scope</li>
+</ol>
+<ul>
+<li>function 블록 내에서 유효</li>
+<li>함수 내부에 선언되면 <strong>지역변수</strong></li>
+<li>외부에 선언되면 <strong>전역변수</strong></li>
+</ul>
+<blockquote>
+<p><code>지역변수</code></p>
+<ul>
+<li>함수 내부에 선언</li>
+<li>함수 내부에서만 접근 가능</li>
+<li>함수가 시작될 때 생성되고, 함수 context가 종료될 때 삭제됨</li>
+</ul>
+<p><code>전역변수</code></p>
+<ul>
+<li>함수 외부에 선언</li>
+<li>어디에서나 접근 가능</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li>Block Scope</li>
+</ol>
+<ul>
+<li><code>&#123;&#125;</code> 가 있는 경우<ul>
+<li>if, switch 문…</li>
+</ul>
+</li>
+</ul>
+<img width="227" alt="Screenshot 2021-04-10 at 15 13 27" src="https://user-images.githubusercontent.com/49134038/114866307-595ec780-9e2e-11eb-96fc-a456cb2c048c.png">
+
+<ul>
+<li><p><code>var a</code></p>
+<ul>
+<li>전역 변수</li>
+</ul>
+</li>
+<li><p><code>var b</code></p>
+<ul>
+<li><p>지역 변수</p>
+</li>
+<li><p>function scope</p>
+<ul>
+<li>if문 밖에서도 접근 가능 (if문이 function 안에 있기 때문)</li>
+</ul>
+<blockquote>
+<p><code>var</code> variables are <em>function scope</em>.</p>
+<p>: It means they are only available <em>inside</em> the function they’re created in, or if not created inside a function, they are ‘globally scoped.’</p>
+<blockquote>
+<p><code>globally scoped</code></p>
+<p>: returns <code>undefined</code></p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><code>let c</code></p>
+<ul>
+<li>지역 변수</li>
+<li>block scope<ul>
+<li>if문 밖에서 접근 불가 (참조 불가능)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Hoisting"><a href="#Hoisting" class="headerlink" title="Hoisting"></a>Hoisting</h4><ul>
+<li>scope에 따라 <code>선언</code> 과 <code>할당</code> 으로 구분됨</li>
+<li>변수의 선언문과 함수의 선언식을 <strong>유효 범위의 최상단</strong>으로 끌어올리는 것</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hoisting</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(d);</span><br><span class="line">	<span class="built_in">console</span>.log(e);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">var</span> d = <span class="string">&quot;be&quot;</span>;</span><br><span class="line">	<span class="keyword">let</span> e = <span class="string">&quot;sopt&quot;</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&quot;28th&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hoisting();</span><br><span class="line"></span><br><span class="line">👇</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hoisting</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 변수 선언문 (메모리 할당)</span></span><br><span class="line">	<span class="keyword">var</span> d;</span><br><span class="line">  <span class="keyword">let</span> e;</span><br><span class="line">  <span class="comment">// 함수 선언식</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&quot;28th&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 기존 식 순차적으로 실행</span></span><br><span class="line">  <span class="built_in">console</span>.log(d); <span class="comment">// undefined</span></span><br><span class="line">	<span class="built_in">console</span>.log(e); <span class="comment">// ReferenceError</span></span><br><span class="line">  </span><br><span class="line">  d = <span class="string">&quot;be&quot;</span>;</span><br><span class="line">	e = <span class="string">&quot;sopt&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hositing();</span><br></pre></td></tr></table></figure>
+
+
 <img width="407" alt="Screenshot 2021-04-10 at 15 15 15" src="https://user-images.githubusercontent.com/49134038/114866304-58c63100-9e2e-11eb-9344-88f64fe40543.png">
 
 <img width="521" alt="Screenshot 2021-04-10 at 15 20 20" src="https://user-images.githubusercontent.com/49134038/114866302-582d9a80-9e2e-11eb-9319-2441ba6374c7.png">
