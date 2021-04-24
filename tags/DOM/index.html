@@ -347,6 +347,9 @@
 </blockquote>
 <ul>
 <li><p>웹 페이지는 일종의 문서(document)</p>
+<ul>
+<li>The backbone of an HTML document is <code>tag</code>s</li>
+</ul>
 </li>
 <li><p>웹 페이지의 객체 지향 표현 (독립적인 객체) 이며, 자바스크립트와 같은 스크립팅 언어를 이용해 DOM 을 수정</p>
 </li>
@@ -373,9 +376,21 @@
 <li>기존 HTML 소스 자체로 나타나기도 한다.</li>
 </ul>
 </li>
+<li><p><strong>Everything in HTML, even comments, becomes a part of the DOM.</strong></p>
+</li>
 </ul>
 <h3 id="DOM과-기존-HTML-코드가-달라지는-경우"><a href="#DOM과-기존-HTML-코드가-달라지는-경우" class="headerlink" title="DOM과 기존 HTML 코드가 달라지는 경우"></a>DOM과 기존 HTML 코드가 달라지는 경우</h3><ol>
-<li><p>브라우저가 HTML을 수정하는 경우 : 브라우저 파싱 시 자동 교정 (Autocorrection)</p>
+<li><p>브라우저가 HTML을 수정하는 경우 : 브라우저 파싱 시 <strong>자동 교정 (Autocorrection)</strong></p>
+<blockquote>
+<ol>
+<li>Spaces and newlines before <code>&lt;head&gt;</code> are ignored for historical reasons.</li>
+<li>If we put something after <code>&lt;/body&gt;</code>, then that is automatically moved inside the <code>body</code>, at the end, as the HTML spec requires that all content must be inside <code>&lt;body&gt;</code>. So there can’t be any spaces after <code>&lt;/body&gt;</code>.<ul>
+<li>if there are spaces (just like any character) in the document, then they become text nodes in the DOM</li>
+</ul>
+</li>
+<li>Tables always have <code>&lt;tbody&gt;</code></li>
+</ol>
+</blockquote>
 </li>
 <li><p><strong>JavaScript로 DOM을 조작하는 경우</strong> : 조작 (변경) 사항이 반영되어 DOM 출력</p>
 </li>
@@ -424,8 +439,15 @@
 </li>
 </ul>
 <h3 id="Data-Type"><a href="#Data-Type" class="headerlink" title="Data Type"></a>Data Type</h3><blockquote>
+<p><code>Tag</code>s are <em>element nodes</em> (or just elements) and form the tree structure.</p>
 <ul>
-<li><p>DOM node는 <code>element</code> 로,</p>
+<li><p>DOM <code>node</code>는 <code>element</code> 로,</p>
+<ul>
+<li><code>document</code> – the “entry point” into DOM.</li>
+<li>element nodes – HTML-tags, the tree building blocks.</li>
+<li>text nodes – contain text.</li>
+<li>comments – sometimes we can put information there, it won’t be shown, but JS can read it from the DOM.</li>
+</ul>
 </li>
 <li><p>노드의 array는 <code>nodeList</code> (또는 <code>element</code>),</p>
 </li>
@@ -462,12 +484,17 @@
 <li><code>API</code> 를 이용해 접근 및 조작</li>
 </ul>
 <h4 id="Interface와-Object"><a href="#Interface와-Object" class="headerlink" title="Interface와 Object"></a>Interface와 Object</h4><ul>
-<li>많은 object가 여러 개의 다른 interface와 연관되어 있다.</li>
-<li>HTML <code>element</code> 는 DOM 이 연관되어 있는 한 node 트리에서 하나의 <code>node</code>를 담당한다.<ul>
+<li><p>Every tree <code>node</code> is an <code>object</code>.</p>
+</li>
+<li><p>많은 object가 여러 개의 다른 interface와 연관되어 있다.</p>
+</li>
+<li><p>HTML <code>element</code> 는 DOM 이 연관되어 있는 한 node 트리에서 하나의 <code>node</code>를 담당한다.</p>
+<ul>
 <li><code>Node</code> : 기본적인 <code>Element</code></li>
 </ul>
 </li>
-<li>node 트리는 웹 페이지 또는 XML 페이지를 위한 <code>object</code> model을 구성한다.</li>
+<li><p>node 트리는 웹 페이지 또는 XML 페이지를 위한 <code>object</code> model을 구성한다.</p>
+</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">table object 는 createCaption, insertRow method 들이 포함된 HTMLTableElement 을 구현한 것이다</span><br></pre></td></tr></table></figure>
 <ul>
@@ -502,6 +529,24 @@
 <li><code>window.scrollTo</code></li>
 </ul>
 </blockquote>
+<h3 id="Interaction-with-console"><a href="#Interaction-with-console" class="headerlink" title="Interaction with console"></a>Interaction with console</h3><ol>
+<li><p>select the particular element (e.g. <code>&lt;li&gt;</code>) and press <code>Esc</code> opens the console</p>
+<ul>
+<li>or just run <code>inspect(node)</code></li>
+</ul>
+</li>
+<li><p>the last selected element is available as <code>$0</code>, the previously selected is <code>$1</code> etc.</p>
+</li>
+<li><p>in console tab, run the command on the element</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// changes the background color of the inspected &lt;li&gt; element</span></span><br><span class="line">$<span class="number">0.</span>style.background = <span class="string">&#x27;red&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+</li>
+</ol>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction</a></p>
+<p><a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes">https://javascript.info/dom-nodes</a></p>
 
                     
                         
