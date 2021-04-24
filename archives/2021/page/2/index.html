@@ -312,6 +312,115 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/03/03/26-authentication/"
+                            aria-label=": 26. authentication"
+                        >
+                            26. authentication
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-03-03T07:31:30+09:00">
+	
+		    Mar 03, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h2><ul>
+<li>Authentication: who you are</li>
+<li>Authorization: what you are authorized to do</li>
+</ul>
+<h3 id="The-Authorization-Header"><a href="#The-Authorization-Header" class="headerlink" title="The Authorization Header"></a>The Authorization Header</h3><p>HTTP/1.1</p>
+<ul>
+<li>browser ‘Inspect’ -&gt; Network</li>
+</ul>
+<h3 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h3><h4 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h4><p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">http://www.base64decode.org</a></p>
+<p>Base64 Decode and Encode - Online</p>
+<p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">www.base64decode.org</a><br>Autehntication based on username and password<br>concatenation with <code>:</code></p>
+<ul>
+<li>Don’t store passwords in raw text, always hash it!</li>
+<li>Don’t use MD5 (Brute Force) since is becoming more insecure with the current computing power</li>
+<li>USE BCrypt(the standard nowadays): hash same input into different everytime<br>npm bcrypt</li>
+</ul>
+<h4 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h4><ul>
+<li>github personal access tokens<br>random token is shared between the server and the client, usually on another request<br>lasts for short time (normally 30sec)<br>Authorization = Bearer</li>
+</ul>
+<p>clinet: React, Angular …</p>
+<h4 id="JWT-Jason-Web-Tokens"><a href="#JWT-Jason-Web-Tokens" class="headerlink" title="JWT (Jason Web Tokens)"></a>JWT (Jason Web Tokens)</h4><p><a target="_blank" rel="noopener" href="https://jwt.io/">https://jwt.io</a><br>[algorithm &amp; token type]header-[data: that needs to be secured]payload(userId, iat)-[verifying key]verify signature: no one can change the content<br>signature =&gt; only if I have a secret, generates the signature / if input is different, signature will be different too</p>
+<ul>
+<li>can’t change the payload if the signature hasn’t been changed</li>
+</ul>
+<ul>
+<li>most bearer strategy: the token has all the info needed</li>
+<li>the only thing stored in the server is the stored passphrase</li>
+<li>the token is composed by the encryption information, the payload encoded in base64 and the signature</li>
+<li>less control on the token, the only way not to accept it is by using a blacklist</li>
+</ul>
+<h3 id="Sesson"><a href="#Sesson" class="headerlink" title="Sesson"></a>Sesson</h3><ul>
+<li>payload of data that relates to a user</li>
+<li>persisted in the server and is tagged with the ID</li>
+<li>writes ID in the cookie (piece of information)-&gt; how we are saved and tracked// and sends it to the browser</li>
+</ul>
+<ul>
+<li>everytime the browser performs a request to the server, it sends back the cookie with the ID in it</li>
+</ul>
+<p>session store: mongodb, file, etc…<br>npm express-session<br>npm helmet</p>
+<ul>
+<li>iframe: build website inside the website (element)</li>
+</ul>
+<h4 id="Oauth"><a href="#Oauth" class="headerlink" title="Oauth"></a>Oauth</h4><ul>
+<li>FireFox</li>
+</ul>
+<ul>
+<li>user, app and authentication provider</li>
+<li>lets us authenticate a user through an authentication provider, who manages the account of the user</li>
+<li>Authenticates a user within the activity of an app</li>
+<li>The credentials are not leaked to the app</li>
+<li>BUT gives the provider the information (e.g. google)<br>passport.js<br>oauth0<br>firebase authentication</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/03/03/26-authentication/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/03/02/25-Security/"
                             aria-label=": 25. Security"
                         >
@@ -1163,64 +1272,6 @@
                         <p>
                             <a
                                 href="/2021/02/10/18-Angular/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/"
-                            aria-label=": Data Sitting from MongoDB to GraphQL"
-                        >
-                            Data Sitting from MongoDB to GraphQL
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-02-10T01:47:19+09:00">
-	
-		    Feb 10, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h4 id="TRY-THIS-🌈✨"><a href="#TRY-THIS-🌈✨" class="headerlink" title="TRY THIS 🌈✨"></a>TRY THIS 🌈✨</h4><p>buddy.works/tutorials/how-to-connect-mongodb-to-graphql-server</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

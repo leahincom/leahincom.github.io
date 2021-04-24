@@ -348,9 +348,11 @@
 <ul>
 <li><p>웹 페이지는 일종의 문서(document)</p>
 </li>
+<li><p>웹 페이지의 객체 지향 표현 (독립적인 객체) 이며, 자바스크립트와 같은 스크립팅 언어를 이용해 DOM 을 수정</p>
+</li>
 <li><p>HTML, XML 문서의 <code>프로그래밍 interface</code> 로, 프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공한다.</p>
 <ul>
-<li>문서 구조, 스타일, 내용 등을 변경할 수 있게 돕는다.</li>
+<li>DOM 은 문서를 표현하고, 저장하고, 조작하는 (문서 구조, 스타일, 내용 등을 변경) 방법을 제공한다.</li>
 <li>웹 페이지를 스크립트 또는 프로그래밍 언어들에서 사용될 수 있게 연결시켜주는 역할</li>
 </ul>
 </li>
@@ -371,17 +373,13 @@
 <li>기존 HTML 소스 자체로 나타나기도 한다.</li>
 </ul>
 </li>
-<li><p>DOM 은 문서를 표현하고, 저장하고, 조작하는 방법을 제공한다.</p>
-</li>
-<li><p>웹 페이지의 객체 지향 표현 (독립적인 객체) 이며, 자바스크립트와 같은 스크립팅 언어를 이용해 DOM 을 수정</p>
-</li>
 </ul>
 <h3 id="DOM과-기존-HTML-코드가-달라지는-경우"><a href="#DOM과-기존-HTML-코드가-달라지는-경우" class="headerlink" title="DOM과 기존 HTML 코드가 달라지는 경우"></a>DOM과 기존 HTML 코드가 달라지는 경우</h3><ol>
 <li><p>브라우저가 HTML을 수정하는 경우 : 브라우저 파싱 시 자동 교정 (Autocorrection)</p>
 </li>
 <li><p><strong>JavaScript로 DOM을 조작하는 경우</strong> : 조작 (변경) 사항이 반영되어 DOM 출력</p>
 </li>
-<li><p>Ajax : 컨텐츠를 가져와 (<code>fetch</code>) 페이지에 추가하는 경우</p>
+<li><p>Ajax : 컨텐츠를 가져와 (c.f. <code>fetch</code>) 페이지에 추가하는 경우</p>
 </li>
 <li><p>Templating : server의 내용을 테스트하기 위해 임의의 client-side template을 적용</p>
 <blockquote>
@@ -397,12 +395,12 @@
 <p>DOM : 작업이 이루어지는 <code>장소</code>, 브라우저에 의해 기록되는 모든 것</p>
 </blockquote>
 <ul>
-<li><p>DOM 이 없다면 자바스크립트 언어는 웹 페이지 또는 XML 페이지 및 요소들과 관련된 모델이나 개념들에 대한 정보를 갖지 (불러오지) 못하게 된다.</p>
+<li><p>DOM 이 없다면 자바스크립트 언어는 웹 페이지 또는 XML 페이지의 요소들과 관련된 모델이나 개념들에 대한 정보를 갖지 (불러오지) 못하게 된다.</p>
 </li>
-<li><p>페이지 콘텐츠는 DOM 에 저장되고 자바스크립트를 통해 접근하거나 조작</p>
+<li><p>문서의 모든 element는 DOM의 한 부분</p>
+</li>
+<li><p>페이지 콘텐츠 (element) 는 DOM 에 저장되고 자바스크립트를 통해 접근하거나 조작</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">API (web or XML page) &#x3D; DOM + JS (scripting language)</span><br></pre></td></tr></table></figure></li>
-<li><p>문서의 모든 element는 문서를 위한 document object model 의 한 부분</p>
-</li>
 <li><p>DOM 의 구현은 어떠한 언어에서도 가능</p>
 <blockquote>
 <p>e.g. python 에서도 구현 가능</p>
@@ -415,7 +413,7 @@
 <li><p>스크립트를 작성할 때</p>
 <ul>
 <li>직접적으로 문서 자체를 조작하거나,</li>
-<li>간접적인 조작을 위해 문서의 children 을 얻기 위해 <code>document</code> 또는 <code>window</code> element 를 이용하는 <code>API 를 사용</code>할 수 있다.</li>
+<li>간접적인 조작을 위해 문서의 children 을 얻는, <code>document</code> 또는 <code>window</code> element 를 이용하는 <code>API 를 사용</code>할 수 있다.</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">&quot;window.alert(&#x27;welcome to my home page!&#x27;);&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">       <span class="comment">// run this function when the document is loaded</span></span></span><br><span class="line"><span class="javascript">       <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">         <span class="comment">// create a couple of elements in an otherwise empty HTML page</span></span></span><br><span class="line"><span class="javascript">         <span class="keyword">var</span> heading = <span class="built_in">document</span>.createElement(<span class="string">&quot;h1&quot;</span>);</span></span><br><span class="line"><span class="javascript">         <span class="keyword">var</span> heading_text = <span class="built_in">document</span>.createTextNode(<span class="string">&quot;Big Head!&quot;</span>);</span></span><br><span class="line">         heading.appendChild(heading_text);</span><br><span class="line"><span class="javascript">         <span class="built_in">document</span>.body.appendChild(heading);</span></span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -448,7 +446,7 @@
 </tr>
 <tr>
 <td><code>nodeList</code></td>
-<td><code>nodeList</code> 는 element들의 배열이다. <code>document.getElementsByTagName()</code> 와 같은 method에 의해 리턴된 nodeList의 Item들은 index를 통해 접근 가능하며, 다음과 같이 두 가지 방식이 있다 (동일한 방식임) : <br />- list.item(1) <br />- list[1] <br /><strong><code>item()</code></strong> method는 <code>nodeList</code> object 의 단일 (하나의 item을 반환하는) method 이다. <br />두번째 방식은 list 에서 두번째 item 을 <code>fetch </code>하는 전형적인 array syntax 이다.</td>
+<td><code>nodeList</code> 는 element들의 배열이다. <code>document.getElementsByTagName()</code> 와 같은 method에 의해 리턴된 nodeList의 Item들은 <code>index</code> 를 통해 접근 가능하며, 다음과 같이 두 가지 방식이 있다 (동일한 방식임) : <br />- list.item(1) <br />- list[1] <br /><strong><code>item()</code></strong> 은 <code>nodeList</code> object 의 단일 method 이다. <br />두번째 방식은 list 에서 두번째 item 을 <code>fetch </code>하는 전형적인 array syntax 이다.</td>
 </tr>
 <tr>
 <td><code>attribute</code></td>
@@ -514,6 +512,910 @@
                         <p>
                             <a
                                 href="/2021/04/24/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-DOM/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    <div class="pagination-bar">
+    <ul class="pagination">
+        
+        
+        <li class="pagination-number">page 1 of 1</li>
+    </ul>
+</div>
+
+</section>
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 JungHyun. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name">JungHyun</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br/>
+                Seoul/South Korea, London/UK
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/jquery.js"></script>
+
+
+<script src="/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/assets/js/thumbs.js"></script>
+
+
+<script src="/assets/js/tranquilpeak.js"></script>
+
+<!--SCRIPTS END-->
+
+
+
+
+
+    </body>
+</html>
+
+</li>
+<li><p><code>forEach</code></p>
+<ul>
+<li>index, element 모두 접근</li>
+<li><strong><code>(element, index)</code> 순서 바꾸면 안 됨!</strong></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>String 반복</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// String의 `repeat` 함수</span></span><br><span class="line"><span class="built_in">String</span>.repeat(i)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="함수"><a href="#함수" class="headerlink" title="함수"></a>함수</h4><ul>
+<li><code>일급 객체</code><ul>
+<li>변수나 데이터 구조에 할당 가능</li>
+<li>다른 함수의 파라미터로 전달 가능</li>
+<li>반환 값으로 사용 가능</li>
+<li>런타임 시 생성 가능</li>
+</ul>
+</li>
+<li><code>()</code> 를 이용하여 함수를 호출하지 않으면 실행되지 않음</li>
+</ul>
+<blockquote>
+<p>사용하는 이유</p>
+<ul>
+<li>코드 재사용<ul>
+<li>같은 함수에 다른 인자를 넣으면 다른 결과를 냄</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h5 id="선언"><a href="#선언" class="headerlink" title="선언"></a>선언</h5><img width="356" alt="Screenshot 2021-04-10 at 16 04 05" src="https://user-images.githubusercontent.com/49134038/114866293-5663d700-9e2e-11eb-94f4-8e700418b379.png">
+
+
+
+<ul>
+<li><p><strong>함수 선언문</strong></p>
+</li>
+<li><p>기명함수 표현식</p>
+<ul>
+<li>변수에 할당<ul>
+<li>hoisting에 영향을 받지 않음</li>
+</ul>
+</li>
+<li>함수 이름 따로 선언<ul>
+<li><code>_name</code> 형식</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>잘 사용하지 않음</p>
+</blockquote>
+</li>
+<li><p><strong>익명함수 표현식</strong></p>
+<blockquote>
+<p>가장 많이 사용!</p>
+</blockquote>
+<ul>
+<li>변수에 할당<ul>
+<li>hoisting에 영향을 받지 않음</li>
+</ul>
+</li>
+<li>함수 이름 따로 지정하지 않음</li>
+</ul>
+</li>
+</ul>
+<h5 id="화살표-함수"><a href="#화살표-함수" class="headerlink" title="화살표 함수"></a>화살표 함수</h5><ul>
+<li>익명함수 표현식을 간결하게 표현한 것</li>
+<li>매개변수가 하나면 소괄호 생략 가능</li>
+<li>함수 내부에 return 문만 있다면 return 생략 가능</li>
+</ul>
+<h5 id="매개변수와-인자"><a href="#매개변수와-인자" class="headerlink" title="매개변수와 인자"></a>매개변수와 인자</h5><ul>
+<li>매개변수 <em>(parameter)</em><ul>
+<li>함수 <strong>정의</strong>에 사용되는 변수</li>
+<li>함수가 실행되기 전까지는 값을 가지지 않음</li>
+</ul>
+</li>
+<li>인자 <em>(argument)</em><ul>
+<li>함수를 호출할 때 전달하는 값</li>
+<li>함수에 <strong>적용</strong>되는 실질적인 값</li>
+</ul>
+</li>
+</ul>
+<h5 id="반환-값-return"><a href="#반환-값-return" class="headerlink" title="반환 값 (return)"></a>반환 값 (return)</h5><ul>
+<li>함수 실행을 종료하고 함수 호출 지점으로 값을 반환함</li>
+<li>함수 내부에서 return이 실행될 경우, 이후 코드는 실행되지 않음</li>
+<li>return이 지정되지 않은 경우는 <code>undefined</code> 반환<ul>
+<li><code>return undefined;</code> 와 동일</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h5 id="좋은-함수-만들기"><a href="#좋은-함수-만들기" class="headerlink" title="좋은 함수 만들기"></a>좋은 함수 만들기</h5><ul>
+<li>하나의 함수는 <strong>하나의 기능</strong>만</li>
+<li>함수명은 짧고 명확해야 하며, 동사로 시작</li>
+<li>lowerCamelCase</li>
+<li>arrow function으로 작성하는 것이 권장됨</li>
+</ul>
+</blockquote>
+<h4 id="Operator"><a href="#Operator" class="headerlink" title="Operator"></a>Operator</h4><img width="325" alt="Screenshot 2021-04-10 at 16 10 51" src="https://user-images.githubusercontent.com/49134038/114866290-5663d700-9e2e-11eb-80dc-70f2cefefebc.png">
+
+<blockquote>
+<p>주로 <code>===</code> 이용할 것!</p>
+</blockquote>
+<h4 id="객체"><a href="#객체" class="headerlink" title="객체"></a>객체</h4><img width="233" alt="Screenshot 2021-04-10 at 15 50 41" src="https://user-images.githubusercontent.com/49134038/114866677-d25e1f00-9e2e-11eb-98c0-e40ac96f4a4b.png">
+
+
+
+<ul>
+<li><p>**property === (<code>key</code> , <code>value</code>) ** 쌍 1개</p>
+<ul>
+<li><code>key: value,</code></li>
+</ul>
+</li>
+<li><p>value에는 어떤 것이든 올 수 있음</p>
+</li>
+<li><p>property 간에는 쉼표로 구분됨</p>
+</li>
+<li><p>method : property value로 함수가 오는 것</p>
+<ul>
+<li>사용 시 <code>varName.methodName()</code> 으로 호출</li>
+<li>e.g. <code>sayHi </code> method</li>
+</ul>
+</li>
+</ul>
+<h4 id="JSON-JavaScript-Object-Notation"><a href="#JSON-JavaScript-Object-Notation" class="headerlink" title="JSON (JavaScript Object Notation)"></a>JSON (JavaScript Object Notation)</h4><ul>
+<li><p><code>객체</code> 표현식</p>
+</li>
+<li><p>(key, value) 로 구성된 <code>property</code>들의 정렬되지 않은 집합</p>
+</li>
+<li><p>서버-클라이언트 통신할 때 사용함</p>
+</li>
+<li><p>localStorage 등 웹 저장소에 저장할 때도 사용함</p>
+<ul>
+<li><p><code>localStorage</code> data <strong>is specific to the protocol of the document</strong></p>
+<blockquote>
+<p>In particular, for a site loaded over HTTP (e.g., <code>http://example.com</code>), <code>localStorage</code> returns a different object than <code>localStorage</code> for the corresponding site loaded over HTTPS (e.g., <code>https://example.com</code>).</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<img width="610" alt="Screenshot 2021-04-10 at 16 15 50" src="https://user-images.githubusercontent.com/49134038/114866285-55cb4080-9e2e-11eb-930a-5d6f0ddb7aed.png">
+
+
+
+<h4 id="동기와-비동기"><a href="#동기와-비동기" class="headerlink" title="동기와 비동기"></a>동기와 비동기</h4><blockquote>
+<p>JavaScript</p>
+<ul>
+<li><p>synchronous</p>
+<blockquote>
+<p><code>Synchronous</code> means that if you need to wait for something, then everything stops until the wait is over.</p>
+</blockquote>
+</li>
+<li><p>single thread</p>
+<blockquote>
+<p><code>Single threaded</code> means that only one thing happens at a time.</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li><p><strong>Sync</strong></p>
+<ul>
+<li>차례대로 실행</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getCoffee = <span class="function">(<span class="params">coffee</span>) =&gt;</span> &#123; <span class="comment">// coffee === null</span></span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">		coffee = <span class="string">&quot;Ice Americano&quot;</span>;</span><br><span class="line">	&#125;, <span class="number">3000</span>);</span><br><span class="line">	<span class="built_in">console</span>.log(coffee); <span class="comment">// coffee === null</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> coffee = <span class="literal">null</span>;</span><br><span class="line">getCoffee(coffee); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><strong>Async</strong></p>
+<ul>
+<li>해당 코드가 끝날 때까지 다른 코드를 실행하지 않음</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getCoffee = <span class="function">(<span class="params">coffee</span>) =&gt;</span> &#123; <span class="comment">// coffee === null</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    coffee = <span class="string">&quot;Ice Americano&quot;</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(coffee); <span class="comment">// coffee = &quot;Ice Americano&quot;</span></span><br><span class="line">  &#125;, <span class="number">3000</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> coffee = <span class="literal">null</span>;</span><br><span class="line">getCoffee(coffee); <span class="comment">// Ice Americano</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h4 id="콜백-함수"><a href="#콜백-함수" class="headerlink" title="콜백 함수"></a>콜백 함수</h4><ul>
+<li>자바스크립트는 <code>single thread</code> 이기 때문에 효율성을 위해서 기본적으로 <code>동기적 </code>으로 처리함<ul>
+<li>비동기적으로 처리할 시 waiting time이 무한대로 길어질 수도 있음</li>
+</ul>
+</li>
+<li>비동기로 처리하기 위해서는 <code>콜백 함수</code>를 이용함</li>
+<li>다른 함수의 인자로 전달된 콜백함수는 특정 이벤트가 발생하면 호출됨<ul>
+<li>e.g. <code>setTimeout</code> </li>
+</ul>
+</li>
+<li>❓다른 객체에게 “이벤트가 끝나면 알려달라”고 일을 맡기고, 해당 이벤트가 끝나면 해당 콜백함수를 실행함</li>
+</ul>
+<img width="346" alt="Screenshot 2021-04-10 at 16 20 59" src="https://user-images.githubusercontent.com/49134038/114866282-5532aa00-9e2e-11eb-890c-f521c6dc69b0.png">
+
+<ul>
+<li><p>Asynchronous : setTimeout()에 모두 묶어버림</p>
+</li>
+<li><p>callback function : <code>const second</code></p>
+</li>
+</ul>
+<blockquote>
+<h5 id="콜백-지옥"><a href="#콜백-지옥" class="headerlink" title="콜백 지옥"></a>콜백 지옥</h5><ul>
+<li><em>클린 코드를 위해 피해야 할 것!</em><ul>
+<li>if문 분기와 error handling을 어렵게 만듦</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>익명함수를 분리하여 <code>기명함수</code>로 작성하거나</p>
+</li>
+<li><p><code>promise</code> 와 같은 비동기 처리를 사용할 것</p>
+</li>
+</ol>
+</blockquote>
+<h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><ul>
+<li><p>자바스크립트 비동기 처리에 사용되는 객체</p>
+</li>
+<li><p><code>new Promise()</code> 를 통해 선언, 인자는 <code>(resolve, reject)</code></p>
+<ul>
+<li><code>const promise = new Promise((res, rej) =&gt; &#123;&#125;);</code></li>
+</ul>
+</li>
+<li><p>return 값은 resolve나 reject 내부의 메시지</p>
+</li>
+<li><p>resolve, reject 둘 중 하나만 실행</p>
+<ul>
+<li>둘 다 있다면 나중에 작성된 코드 무시</li>
+</ul>
+</li>
+<li><p><code>fetch</code> 를 사용하여 실제 API를 호출하면 Promise 객체가 반환됨</p>
+</li>
+<li><p><code>response.json()</code> 을 통해 response의 body를 JSON 객체로 변환함</p>
+<ul>
+<li>이 메소드의 <strong>실행 결과도 Promise</strong>임</li>
+</ul>
+</li>
+</ul>
+<h5 id="Promise의-3가지-상태"><a href="#Promise의-3가지-상태" class="headerlink" title="Promise의 3가지 상태"></a>Promise의 3가지 상태</h5><img width="276" alt="Screenshot 2021-04-15 at 20 43 45" src="https://user-images.githubusercontent.com/49134038/114866259-4f3cc900-9e2e-11eb-885b-be61da0cc5f6.png">
+
+<ol>
+<li>pending : 아직 비동기 처리가 완료되지 않음</li>
+<li>fulfilled : 비동기 처리가 완료되어 결과값이 반환됨<ul>
+<li><code>then</code> 실행</li>
+<li>then을 연속으로 사용할 수 있음</li>
+<li>catch 이후에도 then 설정 가능</li>
+<li><code>throw Error()</code> 를 통해 에러가 발생하면 catch 실행</li>
+</ul>
+</li>
+<li>rejected : 비동기 처리 중 오류가 발생함<ul>
+<li><code>catch</code> 실행</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><code>finally</code> 는 결과 상관 없이 실행됨</p>
+</blockquote>
+<h4 id="Async-Await"><a href="#Async-Await" class="headerlink" title="Async / Await"></a>Async / Await</h4><img width="583" alt="Screenshot 2021-04-10 at 16 31 05" src="https://user-images.githubusercontent.com/49134038/114866280-549a1380-9e2e-11eb-9375-d00612bc3e01.png">
+
+<ul>
+<li>await은 async 함수 안에서만 사용 가능</li>
+<li>await은 결과가 resolve, reject이든 상관 없이 Promise가 끝날 때까지 기다림</li>
+<li><code>then</code>, <code>catch</code> 를 사용하지 않고 무조건 Promise 결과를 얻음</li>
+</ul>
+<h4 id="Notification"><a href="#Notification" class="headerlink" title="Notification"></a>Notification</h4><ol>
+<li><p>Alert : 사용자가 확인을 누를 때까지 메시지를 보여줌</p>
+</li>
+<li><p>Prompt : 사용자에게 값을 입력받음</p>
+<ul>
+<li><p>첫번째 인자는 notifying message</p>
+</li>
+<li><p>두번째 인자는 default 값, 사용자가 취소를 누르면 <code>null</code> 리턴</p>
+</li>
+</ul>
+</li>
+<li><p>Confirm : 사용자에게 질문을 보여주고 true / false 리턴</p>
+</li>
+</ol>
+<h4 id="async-defer"><a href="#async-defer" class="headerlink" title="async / defer"></a>async / defer</h4><img width="532" alt="Screenshot 2021-04-10 at 16 36 52" src="https://user-images.githubusercontent.com/49134038/114866279-549a1380-9e2e-11eb-8571-fbfef343dc76.png">
+
+<ul>
+<li>async : script가 html의 영향을 받지 않을 때<ul>
+<li>e.g. DOM 조작 요소가 없을 때</li>
+<li>HTML pausing해도 영향 없음</li>
+</ul>
+</li>
+<li><strong>defer</strong> : script가 html의 영향을 받을 때<ul>
+<li>e.g. DOM 조작 요소가 있을 때</li>
+<li>일단 모두 로딩하고 reloading</li>
+</ul>
+</li>
+</ul>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h3><ul>
+<li>애니메이션, 게임 그래픽, 사진 조작, 영상 처리 등 그래픽을 그리기 위한 방법</li>
+<li><strong><code>API</code>이기 때문에 <code>자바스크립트</code>로 조작한다</strong></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!- 넓이와 높이 지정해야 함 (css로 조정해도 됨) -&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;canvas&quot;</span> <span class="attr">width</span>=<span class="string">&quot;500&quot;</span> <span class="attr">height</span>=<span class="string">&quot;500&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;canvas.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// canvas element 가져오기</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">&quot;canvas&quot;</span>);</span><br><span class="line"><span class="comment">// canvas의 context를 &quot;2d&quot;로 지정하기</span></span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">&quot;2d&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+<img width="343" alt="Screenshot 2021-04-10 at 16 43 28" src="https://user-images.githubusercontent.com/49134038/114866278-54017d00-9e2e-11eb-8a51-e8ea25f388fd.png">
+
+<img width="321" alt="Screenshot 2021-04-10 at 16 49 25" src="https://user-images.githubusercontent.com/49134038/114866275-54017d00-9e2e-11eb-8cd0-73ff7dca9c19.png">
+
+<ul>
+<li>모니터의 좌측 상단 : (0,0)</li>
+</ul>
+<img width="322" alt="Screenshot 2021-04-10 at 16 50 03" src="https://user-images.githubusercontent.com/49134038/114866273-5368e680-9e2e-11eb-9706-200626524a8c.png">
+
+<img width="292" alt="Screenshot 2021-04-10 at 16 56 50" src="https://user-images.githubusercontent.com/49134038/114866261-51068c80-9e2e-11eb-9564-2ac4ee45d86c.png">
+
+
+
+<img width="360" alt="Screenshot 2021-04-10 at 16 52 04" src="https://user-images.githubusercontent.com/49134038/114866271-52d05000-9e2e-11eb-8eab-0ab286a4ac6c.png">
+
+
+
+<img width="206" alt="Screenshot 2021-04-10 at 16 54 07" src="https://user-images.githubusercontent.com/49134038/114866269-52d05000-9e2e-11eb-8b8a-1f93e633d2cc.png">
+
+<img width="321" alt="Screenshot 2021-04-10 at 16 54 43" src="https://user-images.githubusercontent.com/49134038/114866263-5237b980-9e2e-11eb-8a66-ad0a57e4dfdf.png">
+
+
+
+
+
+<h3 id="Drag-and-Drop"><a href="#Drag-and-Drop" class="headerlink" title="Drag-and-Drop"></a>Drag-and-Drop</h3><ul>
+<li>특정 element를 마우스로 끌어서 원하는 위치로 옮기는 HTML API</li>
+<li>element의 위치를 바꾸거나, 파일을 업로드할 때 자주 사용함</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bucket&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;cat.png&quot;</span> <span class="attr">id</span>=<span class="string">&quot;cat&quot;</span> <span class="attr">draggable</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bucket&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bucket&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bucket&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>id</code> 지정 후 <code>draggable=&quot;true&quot;</code></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#cat</span> &#123;</span><br><span class="line">	<span class="attribute">z-index</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>z-index</code> 설정</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buckets = <span class="built_in">document</span>.querySelectorAll(<span class="string">&quot;.bucket&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> cat = <span class="built_in">document</span>.getElementById(<span class="string">&quot;cat&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 상자에 allowDrop(dragover), drop event 추가</span></span><br><span class="line">buckets.forEach(<span class="function">(<span class="params">bucket</span>) =&gt;</span> addEventListener(<span class="string">&quot;dragover&quot;</span>, allowDrop));</span><br><span class="line">buckets.forEach(<span class="function">(<span class="params">bucket</span>) =&gt;</span> addEventListener(<span class="string">&quot;drop&quot;</span>, drop));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 고양이에 drag(dragstart) event 추가</span></span><br><span class="line">cat.addEventListener(<span class="string">&quot;dragstart&quot;</span>, drag);</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">allowDrop</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 기본 동작 막기</span></span><br><span class="line">	event.preventDefault();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drag</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 고양이 이미지의 id를 옮겨야하므로 유형은 &quot;text&quot;, 데이터(cat)는 event.target.id</span></span><br><span class="line">	event.dataTransfer.setData(<span class="string">&quot;text&quot;</span>, event.target.id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drop</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">	event.preventDefault();</span><br><span class="line">	<span class="comment">// 옮기려고 저장한 고양이 이미지의 id 가져오기</span></span><br><span class="line">	<span class="keyword">const</span> imageID = event.dataTransfer.getData(<span class="string">&quot;text&quot;</span>);</span><br><span class="line">	<span class="comment">// 현재 이벤트가 발생한 요소(dropBox)의 하위 요소에 element를 추가하여 자식 노드(cat)로 만들기</span></span><br><span class="line">	event.target.appendChild(<span class="built_in">document</span>.getElementById(<span class="string">&quot;imageID&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/04/10/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-10-04-21/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/04/10/const-function/"
+                            aria-label=": const function"
+                        >
+                            const function
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-04-10T20:58:41+09:00">
+	
+		    Apr 10, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/JavaScript/">JavaScript</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="Function-Statement"><a href="#Function-Statement" class="headerlink" title="Function Statement"></a>Function Statement</h3><ul>
+<li><em>hoisted</em> to the top of the <em>full lexical scope</em><ul>
+<li>can break conflicting scripts</li>
+<li>it’s difficult to debug</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>named function is shown in the stack trace<ul>
+<li>easier to debug when error occurs in the function</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function declarations are given two passes,</span></span><br><span class="line"><span class="comment">where the first lifts them to the top (hoisting),</span></span><br><span class="line"><span class="comment">allowing &quot;out of order&quot; usage</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">doTheThing();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTheThing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome number <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAwesome</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Const-Declaration"><a href="#Const-Declaration" class="headerlink" title="Const Declaration"></a>Const Declaration</h3><ul>
+<li><em>edge-case hoisting</em></li>
+</ul>
+<ul>
+<li>declare a variable<ul>
+<li>gives it a block scope</li>
+<li>stops the full hoisting</li>
+</ul>
+</li>
+<li>cannot be re-declared<ul>
+<li>throws exception if re-declared</li>
+<li>easier to debug</li>
+</ul>
+</li>
+<li>won’t be caught until called</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">This shows that, because of block-scoping,</span></span><br><span class="line"><span class="comment">const function references must be invoked in-order</span></span><br><span class="line"><span class="comment">or else things will fail silently.</span></span><br><span class="line"><span class="comment">consts are added serially (in the order in which they appear)</span></span><br><span class="line"><span class="comment">and much of the body isn&#x27;t declared when we first try to invoke or functions</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// use `getAwesome()`</span></span><br><span class="line"><span class="keyword">const</span> tryDoTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is me trying to be awesome <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;getAwesome is not defined&quot;, because it is referenced too early,</span></span><br><span class="line"><span class="comment">// before declaring `getAwesome()` function</span></span><br><span class="line">tryDoTheThing()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getAwesome = <span class="function">() =&gt;</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome! <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doTheThing()</span><br></pre></td></tr></table></figure>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/04/10/const-function/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/04/05/SOAP-Functions/"
+                            aria-label=": Functions"
+                        >
+                            Functions
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-04-05T18:18:28+09:00">
+	
+		    Apr 05, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><ol>
+<li><p>함수 parameter / argument는 2개 이하</p>
+<blockquote>
+<p>함수 테스팅을 쉽게 만들어 주기 때문</p>
+</blockquote>
+<ul>
+<li><p>3개 이상인 경우: 통합하기</p>
+</li>
+<li><p>higher-level object의 경우 1개로 충분함</p>
+</li>
+<li><p>객체를 생성하고 활용하기</p>
+<ul>
+<li>적은 boilerplate으로도 객체를 만들기 쉬우므로, argument가 많이 필요한 경우 객체를 생성해서 활용하기</li>
+</ul>
+<blockquote>
+<p><code>boilerplate</code> : 변경 없이 계속 재사용할 수 있는 코드, 프로그램</p>
+</blockquote>
+<ul>
+<li><p><strong>Destructuring</strong></p>
+<blockquote>
+<p><strong>구조 분해 할당</strong> 구문은 배열이나 객체의 속성을 해체하여 그 값을 개별 변수에 담을 수 있게 하는 JavaScript 표현식입니다.</p>
+</blockquote>
+<ul>
+<li><code>function signature</code> (argument, return type) 등을 통해 어떤 값이 전달되고 이용되는지 알 수 있음</li>
+<li>simulate <code>named parameters</code></li>
+</ul>
+<blockquote>
+<p><strong>named parameters</strong> : function calls that clearly state the <em>name</em> of each <em>parameter</em> within the function call</p>
+</blockquote>
+<ul>
+<li><code>전달된 argument</code>에 default 값을 복제함, <em>argument로부터 destructure된 object / array는 복제되지 않음</em></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMenu</span>(<span class="params">title, body, buttonText, cancellable</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createMenu(<span class="string">&quot;Foo&quot;</span>, <span class="string">&quot;Bar&quot;</span>, <span class="string">&quot;Baz&quot;</span>, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMenu</span>(<span class="params">&#123; title, body, buttonText, cancellable &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createMenu(&#123;</span><br><span class="line">  title: <span class="string">&quot;Foo&quot;</span>,</span><br><span class="line">  body: <span class="string">&quot;Bar&quot;</span>,</span><br><span class="line">  buttonText: <span class="string">&quot;Baz&quot;</span>,</span><br><span class="line">  cancellable: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>하나의 함수는 하나의 행동만</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">emailClients</span>(<span class="params">clients</span>) </span>&#123;</span><br><span class="line">  clients.forEach(<span class="function"><span class="params">client</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 1-1. check the client : look up the client</span></span><br><span class="line">    <span class="keyword">const</span> clientRecord = database.lookup(client);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 1-2. check the client : check the client status</span></span><br><span class="line">    <span class="keyword">if</span> (clientRecord.isActive()) &#123;</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 2. email the client</span></span><br><span class="line">      email(client);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">emailClients</span>(<span class="params">clients</span>) </span>&#123;</span><br><span class="line">  clients</span><br><span class="line">    .filter(isClientActive)</span><br><span class="line">    .forEach(email);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isClientActive</span>(<span class="params">client</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 1-1.</span></span><br><span class="line">  <span class="keyword">const</span> clientRecord = database.lookup(client);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 1-2.</span></span><br><span class="line">  <span class="keyword">return</span> clientRecord.isActive();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>함수명은 명시적으로 action을 정의하기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">AddToDate</span>(<span class="params">date, month</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 뭘 추가하는 건지 이름만 보고 알아내기 힘듭니다.</span></span><br><span class="line">AddToDate(date, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">AddMonthToDate</span>(<span class="params">date, month</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">AddMonthToDate(date, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>(2)와 비슷한 맥락으로, 재사용 가능하고 테스트가 용이할 수 있도록 하나의 함수는 one level of abstraction을 담당하도록 한다.</li>
+</ol>
+<blockquote>
+<p>❓(2)와 어떤 차이가 있는지?</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function parseBetterJSAlternative(code) &#123;</span><br><span class="line">  const REGEXES &#x3D; [</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 1. tokenize</span><br><span class="line">  const statements &#x3D; code.split(&#39; &#39;);</span><br><span class="line">  const tokens &#x3D; [];</span><br><span class="line">  REGEXES.forEach(REGEX &#x3D;&gt; &#123;</span><br><span class="line">    statements.forEach(statement &#x3D;&gt; &#123;</span><br><span class="line">      &#x2F;&#x2F; ...</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 2. lexer (lexical analysis)</span><br><span class="line">  const ast &#x3D; [];</span><br><span class="line">  tokens.forEach(token &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; lex...</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 3. parse</span><br><span class="line">  ast.forEach(node &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; parse...</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function tokenize(code) &#123;</span><br><span class="line">  const REGEXES &#x3D; [</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  const statements &#x3D; code.split(&#39; &#39;);</span><br><span class="line">  const tokens &#x3D; [];</span><br><span class="line">  REGEXES.forEach(REGEX &#x3D;&gt; &#123;</span><br><span class="line">    statements.forEach(statement &#x3D;&gt; &#123;</span><br><span class="line">      tokens.push( &#x2F;* ... *&#x2F; );</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  return tokens;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function lexer(tokens) &#123;</span><br><span class="line">  const ast &#x3D; [];</span><br><span class="line">  tokens.forEach(token &#x3D;&gt; &#123;</span><br><span class="line">    ast.push( &#x2F;* ... *&#x2F; );</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  return ast;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function parseBetterJSAlternative(code) &#123;</span><br><span class="line">  const tokens &#x3D; tokenize(code);</span><br><span class="line">  const ast &#x3D; lexer(tokens);</span><br><span class="line">  ast.forEach(node &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; parse...</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li><p>중복된 코드는 삭제하기</p>
+<ul>
+<li><p>비슷한 일을 하는 함수들이 사소한 차이로 개별적으로 존재하는 경우</p>
+<p>👉 <code>추상화 </code> 를 통해 하나의 함수/ 모듈/ 클래스를 사용하여 사소한 차이점을 (argument 등으로) 다루기  : 한 곳만 수정해도 다른 코드에 반영할 수 있음</p>
+<blockquote>
+<p>e.g. JAVA의 class</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showDeveloperList</span>(<span class="params">developers</span>) </span>&#123;</span><br><span class="line">  developers.forEach(<span class="function"><span class="params">developers</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> expectedSalary = developer.calculateExpectedSalary();</span><br><span class="line">    <span class="keyword">const</span> experience = developer.getExperience();</span><br><span class="line">    <span class="keyword">const</span> githubLink = developer.getGithubLink(); <span class="comment">// 👈 difference</span></span><br><span class="line">    <span class="keyword">const</span> data = &#123;</span><br><span class="line">      expectedSalary,</span><br><span class="line">      experience,</span><br><span class="line">      githubLink</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    render(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showManagerList</span>(<span class="params">managers</span>) </span>&#123;</span><br><span class="line">  managers.forEach(<span class="function"><span class="params">manager</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> expectedSalary = manager.calculateExpectedSalary();</span><br><span class="line">    <span class="keyword">const</span> experience = manager.getExperience();</span><br><span class="line">    <span class="keyword">const</span> portfolio = manager.getMBAProjects(); <span class="comment">// 👈 difference</span></span><br><span class="line">    <span class="keyword">const</span> data = &#123;</span><br><span class="line">      expectedSalary,</span><br><span class="line">      experience,</span><br><span class="line">      portfolio</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    render(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showEmployeeList</span>(<span class="params">employees</span>) </span>&#123;</span><br><span class="line">  employees.forEach(<span class="function">(<span class="params">employee</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> expectedSalary = employee.calculateExpectedSalary();</span><br><span class="line">    <span class="keyword">const</span> experience = employee.getExperience();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> portfolio = employee.getGithubLink();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (employee.type === <span class="string">&#x27;manager&#x27;</span>) &#123;</span><br><span class="line">      portfolio = employee.getMBAProjects();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> data = &#123;</span><br><span class="line">      expectedSalary,</span><br><span class="line">      experience,</span><br><span class="line">      portfolio</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    render(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>Object.assign</code> 으로 default object 만들기</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> menuConfig = &#123;</span><br><span class="line">  title: <span class="literal">null</span>,</span><br><span class="line">  body: <span class="string">&quot;Bar&quot;</span>,</span><br><span class="line">  buttonText: <span class="literal">null</span>,</span><br><span class="line">  cancellable: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMenu</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  config.title = config.title || <span class="string">&quot;Foo&quot;</span>;</span><br><span class="line">  config.body = config.body || <span class="string">&quot;Bar&quot;</span>;</span><br><span class="line">  config.buttonText = config.buttonText || <span class="string">&quot;Baz&quot;</span>;</span><br><span class="line">  config.cancellable =</span><br><span class="line">    config.cancellable !== <span class="literal">undefined</span> ? config.cancellable : <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createMenu(menuConfig);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> menuConfig = &#123;</span><br><span class="line">  <span class="comment">// minimize null value and set default values to inherit them</span></span><br><span class="line">  title: <span class="string">&quot;Order&quot;</span>,</span><br><span class="line">  <span class="comment">// User did not include &#x27;body&#x27; key</span></span><br><span class="line">  buttonText: <span class="string">&quot;Send&quot;</span>,</span><br><span class="line">  cancellable: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMenu</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> finalConfig = <span class="built_in">Object</span>.assign(</span><br><span class="line">    &#123;</span><br><span class="line">      title: <span class="string">&quot;Foo&quot;</span>,</span><br><span class="line">      body: <span class="string">&quot;Bar&quot;</span>,</span><br><span class="line">      buttonText: <span class="string">&quot;Baz&quot;</span>,</span><br><span class="line">      cancellable: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    config</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">return</span> finalConfig</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// follow the order so...</span></span><br><span class="line">  <span class="comment">// config now equals: &#123;title: &quot;Order&quot;, body: &quot;Bar&quot;, buttonText: &quot;Send&quot;, cancellable: true&#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createMenu(menuConfig);</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>function parameter에 flags 전달하지 않기<ul>
+<li><code>flags</code> 는 그 자체로 하나 이상의 기능을 하는 것을 의미하므로, 단일 기능을 하는 함수로 나누기!</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>플래그(flags)</strong></p>
+<p>정규 표현식을 생성할 때 플래그를 사용하여 기본 검색 설정을 변경할 수 있습니다.</p>
+<p>이렇게 설정된 플래그는 나중에 추가되거나 삭제될 수 없습니다.</p>
+<table>
+<thead>
+<tr>
+<th align="center">플래그(flag)</th>
+<th align="center">설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">i</td>
+<td align="center">검색 패턴을 비교할 때 대소문자를 구분하지 않도록 설정함.</td>
+</tr>
+<tr>
+<td align="center">g</td>
+<td align="center">검색 패턴을 비교할 때 일치하는 모든 부분을 선택하도록 설정함.</td>
+</tr>
+<tr>
+<td align="center">m</td>
+<td align="center">검색 패턴을 비교할 때 여러 줄의 입력 문자열을 그 상태 그대로 여러 줄로 비교하도록 설정함.</td>
+</tr>
+<tr>
+<td align="center">y</td>
+<td align="center">대상 문자열의 현재 위치부터 비교를 시작하도록 설정함.</td>
+</tr>
+</tbody></table>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFile</span>(<span class="params">name, temp</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (temp) &#123;</span><br><span class="line">    fs.create(<span class="string">`./temp/<span class="subst">$&#123;name&#125;</span>`</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    fs.create(name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// temp(flags)를 기능별로 개별적인 함수로 나눔</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFile</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  fs.create(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createTempFile</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  createFile(<span class="string">`./temp/<span class="subst">$&#123;name&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li><p>Side Effect</p>
+<blockquote>
+<p>함수가 <code>take a value in and return another value / values</code> 외의 action을 할 경우 side effect가 발생함</p>
+<p>e.g. writing to a file, modifying some global variable, etc.</p>
+</blockquote>
+<ul>
+<li>side effect를 발생시키는 함수를 정의할 경우, <code>centralize where you are doing this</code> (하나의 함수로 통일할 것!)<ul>
+<li>pitfall (uncatchable error) 을 피하기 위함</li>
+<li>e.g. sharing state between objects without any elucidation / saving, using mutable data types that can be written to anything 👉 <code>TypeScript</code> 이용하기, not centralizing where your side effects occur</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="comment">// Global variable referenced by following function.</span></span><br><span class="line"><span class="comment">// If we had another function that used this name, now it&#x27;d be an array and it could break the logic it originally had.</span></span><br><span class="line"><span class="keyword">let</span> name = <span class="string">&quot;Ryan McDermott&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">splitIntoFirstAndLastName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  name = name.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">splitIntoFirstAndLastName();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// [&#x27;Ryan&#x27;, &#x27;McDermott&#x27;];</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">splitIntoFirstAndLastName</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> name.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">&quot;Ryan McDermott&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> newName = splitIntoFirstAndLastName(name);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// &#x27;Ryan McDermott&#x27;;</span></span><br><span class="line"><span class="built_in">console</span>.log(newName); <span class="comment">// [&#x27;Ryan&#x27;, &#x27;McDermott&#x27;];</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Handling changeable (mutable) values / data by <code>cloning</code><ul>
+<li>input object를 직접적으로 mutate하는 경우는 많지 않으므로, <code>clone - edit - return</code> 하기</li>
+<li>improve performance efficiency using <a target="_blank" rel="noopener" href="https://facebook.github.io/immutable-js/">great libraries</a></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> addItemToCart = <span class="function">(<span class="params">cart, item</span>) =&gt;</span> &#123;</span><br><span class="line">  cart.push(&#123; item, <span class="attr">date</span>: <span class="built_in">Date</span>.now() &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> addItemToCart = <span class="function">(<span class="params">cart, item</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// new array</span></span><br><span class="line">  <span class="keyword">return</span> [...cart, &#123; item, <span class="attr">date</span> : <span class="built_in">Date</span>.now() &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>global function 사용하지 않기</p>
+<ul>
+<li>내장된 library와 충돌할 수 있음<ul>
+<li>똑같은 이름의 함수가 다른 action</li>
+<li>다른 이름의 함수가 같은 action</li>
+</ul>
+</li>
+<li>error handling, exception 처리 없이는 해당 API를 사용할 때 문제 발생</li>
+</ul>
+<p>👉 <code>inheritance</code> 이용하기!</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.diff = <span class="function"><span class="keyword">function</span> <span class="title">diff</span>(<span class="params">comparisonArray</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> hash = <span class="keyword">new</span> <span class="built_in">Set</span>(comparisonArray);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.filter(<span class="function"><span class="params">elem</span> =&gt;</span> !hash.has(elem));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// inheritance</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperArray</span> <span class="keyword">extends</span> <span class="title">Array</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">diff</span>(<span class="params">comparisonArray</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> hash = <span class="keyword">new</span> <span class="built_in">Set</span>(comparisonArray);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.filter(<span class="function"><span class="params">elem</span> =&gt;</span> !hash.has(elem));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="10">
+<li><p>imperative 보다 favor(functional) programming 하기</p>
+<blockquote>
+<p><strong>Imperative programming</strong> : writing your program as a series of instructions (statements) that can actively modify memory (variables, arrays)</p>
+<ul>
+<li>focuses on <strong>how</strong> : express the logic of your program based on how the computer would execute it</li>
+</ul>
+<p><strong>Functional programming</strong> : writing your program in terms of functions and other mathematical structures</p>
+<ul>
+<li>A function is just a rule that maps input elements to output</li>
+<li>concentrates on the <strong>what</strong> : trying to let you specify the logic of your program as close to actual logic as possible</li>
+<li><strong>more expressive</strong> : writing less code</li>
+<li><strong>safer</strong> : more bugs are prevented by the language ahead of time</li>
+<li>side-effects are controlled</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> programmerOutput = [</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">&#x27;Uncle Bobby&#x27;</span>,</span><br><span class="line">    linesOfCode: <span class="number">500</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: <span class="string">&#x27;Suzie Q&#x27;</span>,</span><br><span class="line">    linesOfCode: <span class="number">1500</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: <span class="string">&#x27;Jimmy Gosling&#x27;</span>,</span><br><span class="line">    linesOfCode: <span class="number">150</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: <span class="string">&#x27;Gracie Hopper&#x27;</span>,</span><br><span class="line">    linesOfCode: <span class="number">1000</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">let</span> totalOutput = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; programmerOutput.length; i++) &#123;</span><br><span class="line">  totalOutput += programmerOutput[i].linesOfCode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> totalOutput = programmerOutput</span><br><span class="line">  .map(<span class="function"><span class="params">programmer</span> =&gt;</span> programmer.linesOfCode)</span><br><span class="line">  .reduce(<span class="function">(<span class="params">acc, linesOfCode</span>) =&gt;</span> acc + linesOfCode, INITIAL_VALUE);</span><br></pre></td></tr></table></figure>
+<ol start="11">
+<li>조건문(Conditionals) Encapsulation</li>
+</ol>
+<blockquote>
+<p><strong>Encapsulation</strong></p>
+<p>bundling data and methods that work on that data within one unit</p>
+<ul>
+<li>hide the internal representation, or state, of an object from the outside</li>
+<li>e.g., a class in Java</li>
+</ul>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">if</span> (fsm.state === <span class="string">&#x27;fetching&#x27;</span> &amp;&amp; isEmpty(listNode)) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldShowSpinner</span>(<span class="params">fsm, listNode</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> fsm.state === <span class="string">&#x27;fetching&#x27;</span> &amp;&amp; isEmpty(listNode);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (shouldShowSpinner(fsmInstance, listNodeInstance)) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="12">
+<li>부정조건문 피하기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isDOMNodeNotPresent</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!isDOMNodeNotPresent(node)) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isDOMNodePresent</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (isDOMNodePresent(node)) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="13">
+<li>조건문 피하기</li>
+</ol>
+<ul>
+<li>조건문 자체가 함수가 하나 이상의 일을 하고 있음을 의미함</li>
+</ul>
+<p>👉 각 case에 해당되는 함수 개별적으로 만들기</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Airplane</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="function"><span class="title">getCruisingAltitude</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (<span class="built_in">this</span>.type) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;777&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude() - <span class="built_in">this</span>.getPassengerCount();</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;Air Force One&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude();</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;Cessna&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude() - <span class="built_in">this</span>.getFuelExpenditure();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Airplane</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Boeing777</span> <span class="keyword">extends</span> <span class="title">Airplane</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="function"><span class="title">getCruisingAltitude</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude() - <span class="built_in">this</span>.getPassengerCount();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AirForceOne</span> <span class="keyword">extends</span> <span class="title">Airplane</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="function"><span class="title">getCruisingAltitude</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cessna</span> <span class="keyword">extends</span> <span class="title">Airplane</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="function"><span class="title">getCruisingAltitude</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude() - <span class="built_in">this</span>.getFuelExpenditure();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="14">
+<li>Type-checking 피하기</li>
+</ol>
+<ul>
+<li><p><code>consistent APIs</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">travelToTexas</span>(<span class="params">vehicle</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (vehicle <span class="keyword">instanceof</span> Bicycle) &#123;</span><br><span class="line">    vehicle.pedal(<span class="built_in">this</span>.currentLocation, <span class="keyword">new</span> Location(<span class="string">&#x27;texas&#x27;</span>));</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (vehicle <span class="keyword">instanceof</span> Car) &#123;</span><br><span class="line">    vehicle.drive(<span class="built_in">this</span>.currentLocation, <span class="keyword">new</span> Location(<span class="string">&#x27;texas&#x27;</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// case 별로 move function을 달리 하는 것이 아니라,</span></span><br><span class="line"><span class="comment">// `move`로 동일하게 생성</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">travelToTexas</span>(<span class="params">vehicle</span>) </span>&#123;</span><br><span class="line">  vehicle.move(<span class="built_in">this</span>.currentLocation, <span class="keyword">new</span> Location(<span class="string">&#x27;texas&#x27;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>TypeScript</code></p>
+<ul>
+<li>basic primitive를 이용해서 polymorphism 속성을 활용할 수 없을 때</li>
+<li>provides you with static typing on top of standard JavaScript syntax</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">combine</span>(<span class="params">val1, val2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> val1 === <span class="string">&#x27;number&#x27;</span> &amp;&amp; <span class="keyword">typeof</span> val2 === <span class="string">&#x27;number&#x27;</span> ||</span><br><span class="line">      <span class="keyword">typeof</span> val1 === <span class="string">&#x27;string&#x27;</span> &amp;&amp; <span class="keyword">typeof</span> val2 === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> val1 + val2;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;Must be of type String or Number&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// ※ with Typescript</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">combine</span>(<span class="params">val1, val2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> val1 + val2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="15">
+<li><p>over-optimising 피하기</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/petkaantonov/bluebird/wiki/Optimization-killers">There are good resources</a> 를 통해 optimisation is lacking 부분만 체크하고 고치기</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="comment">// On old browsers, each iteration with &quot;uncached&quot; `list.length` would be costly</span></span><br><span class="line"><span class="comment">// (need to recomputate every time it runs for loop)</span></span><br><span class="line"><span class="comment">// because of `list.length` recomputation. In modern browsers, this is optimized.</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = list.length; i &lt; len; i++) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; list.length; i++) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Dead Code 지우기</p>
+<ul>
+<li>If it’s not being called, get rid of it!<ul>
+<li>keep it in your version history if you still need it</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">oldRequestModule</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">newRequestModule</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> req = newRequestModule;</span><br><span class="line">inventoryTracker(<span class="string">&#x27;apples&#x27;</span>, req, <span class="string">&#x27;www.inventory-awesome.io&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">newRequestModule</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> req = newRequestModule;</span><br><span class="line">inventoryTracker(<span class="string">&#x27;apples&#x27;</span>, req, <span class="string">&#x27;www.inventory-awesome.io&#x27;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/04/05/SOAP-Functions/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/04/05/SOAP-Variables/"
+                            aria-label=": Variables"
+                        >
+                            Variables
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-04-05T07:01:36+09:00">
+	
+		    Apr 05, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
+<li><p>변수 이름</p>
+<ol>
+<li><p>의미 있는</p>
+</li>
+<li><p>발음하기 쉬운</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> yyyymmdstr = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> currentDate = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>동일한 유형에 동일한 어휘</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">getUserInfo();</span><br><span class="line">getClientData();</span><br><span class="line">getCustomerRecord();</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">getUser();</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>검색 가능한 이름 지정하기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, <span class="number">86400000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> MILLISECONDS_IN_A_DAY = <span class="number">86400000</span>;</span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, MILLISECONDS_IN_A_DAY);</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>의도를 나타내는</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> address = <span class="string">&#x27;One Infinite Loop, Cupertino 95014&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> cityZipCodeRegex = <span class="regexp">/^[^,\\]+[,\\\s]+(.+?)\s*(\d&#123;5&#125;)?$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">saveCityZipCode(address.match(cityZipCodeRegex)[<span class="number">1</span>], address.match(cityZipCodeRegex)[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> [, city, zipCode] = address.match(cityZipCodeRegex) || [];</span><br><span class="line">saveCityZipCode(city, zipCode);</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>암시적인 것 X, <strong>명시적인 것</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> locations = [<span class="string">&#x27;서울&#x27;</span>, <span class="string">&#x27;인천&#x27;</span>, <span class="string">&#x27;수원&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">l</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 잠깐, `l`은 또 뭘까요?</span></span><br><span class="line">  dispatch(l);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">location</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  dispatch(location);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>필요없는 것 지우기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  carMake: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  carModel: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  carColor: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.carColor = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  make: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  model: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  color: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.color = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>short circuiting보다 <strong>default 매개변수 활용하기</strong><ul>
+<li>default 매개변수 : 매개변수가 <code>undefined</code> 일 때 적용됨</li>
+<li>그 외 (‘’, “”, false, null, 0, NaN 등의 <code>falsy</code> 값 포함) 은 적용되지 않음</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> breweryName = name || <span class="string">&#x27;Hipster Brew Co.&#x27;</span>;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name = <span class="string">&#x27;Hipster Brew Co.&#x27;</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/04/05/SOAP-Variables/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
