@@ -312,6 +312,230 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/04/24/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-DOM/"
+                            aria-label=": 2차-세미나-DOM"
+                        >
+                            2차-세미나-DOM
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-04-24T18:20:30+09:00">
+	
+		    Apr 24, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/WEB-28th/">WEB_28th</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="DOM-Document-Object-Model"><a href="#DOM-Document-Object-Model" class="headerlink" title="DOM (Document Object Model)"></a>DOM (Document Object Model)</h2><h3 id="1-HTML-코드-Page-Source-코드-DOM"><a href="#1-HTML-코드-Page-Source-코드-DOM" class="headerlink" title="1. HTML 코드 (Page Source 코드) === DOM?"></a>1. HTML 코드 (Page Source 코드) === DOM?</h3><blockquote>
+<p>코드 자체는 아님.</p>
+<p>하지만 해당 코드가 브라우저에 파싱되면 DOM 임.</p>
+</blockquote>
+<h3 id="2-DevTools-코드-DOM"><a href="#2-DevTools-코드-DOM" class="headerlink" title="2. DevTools 코드 === DOM?"></a>2. DevTools 코드 === DOM?</h3><blockquote>
+<p>맞음.</p>
+<p>기존에 작성한 HTML 코드와 동일할 수도 있지만, 대게 브라우저에 파싱됨에 따라 변경사항이 적용되어 브라우저에 보여지는 형태로 변형되어 보여짐.</p>
+</blockquote>
+<ul>
+<li><p>웹 페이지는 일종의 문서(document)</p>
+</li>
+<li><p>HTML, XML 문서의 <code>프로그래밍 interface</code> 로, 프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공한다.</p>
+<ul>
+<li>문서 구조, 스타일, 내용 등을 변경할 수 있게 돕는다.</li>
+<li>웹 페이지를 스크립트 또는 프로그래밍 언어들에서 사용될 수 있게 연결시켜주는 역할</li>
+</ul>
+</li>
+<li><p>문서의 구조화된 표현(structured representation)</p>
+<ul>
+<li><p>node, property, method 를 갖고 있는 object들로 구조화된 문서를 표현</p>
+</li>
+<li><p>document object 는 document 자체</p>
+<blockquote>
+<p>e.g. table object 는 HTML table 에 접근하기 위한 <code>HTMLTableElement</code> DOM interface를 구현하는 것이다.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><em>동일한 문서를 사용하여 다른 형태로 나타날 수 있다.</em></p>
+<ul>
+<li>웹 브라우저를 통해 그 내용이 파싱(해석)되어 웹 브라우저 화면에 나타나거나,</li>
+<li>기존 HTML 소스 자체로 나타나기도 한다.</li>
+</ul>
+</li>
+<li><p>DOM 은 문서를 표현하고, 저장하고, 조작하는 방법을 제공한다.</p>
+</li>
+<li><p>웹 페이지의 객체 지향 표현 (독립적인 객체) 이며, 자바스크립트와 같은 스크립팅 언어를 이용해 DOM 을 수정</p>
+</li>
+</ul>
+<h3 id="DOM과-기존-HTML-코드가-달라지는-경우"><a href="#DOM과-기존-HTML-코드가-달라지는-경우" class="headerlink" title="DOM과 기존 HTML 코드가 달라지는 경우"></a>DOM과 기존 HTML 코드가 달라지는 경우</h3><ol>
+<li><p>브라우저가 HTML을 수정하는 경우 : 브라우저 파싱 시 자동 교정 (Autocorrection)</p>
+</li>
+<li><p><strong>JavaScript로 DOM을 조작하는 경우</strong> : 조작 (변경) 사항이 반영되어 DOM 출력</p>
+</li>
+<li><p>Ajax : 컨텐츠를 가져와 (<code>fetch</code>) 페이지에 추가하는 경우</p>
+</li>
+<li><p>Templating : server의 내용을 테스트하기 위해 임의의 client-side template을 적용</p>
+<blockquote>
+<p>e.g. handlebars.js</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="DOM과-JavaScript"><a href="#DOM과-JavaScript" class="headerlink" title="DOM과 JavaScript"></a>DOM과 JavaScript</h3><blockquote>
+<p>JavaScript : 브라우저가 <code>읽고 작업</code>을 할 수 있는 언어, 브라우저에 기록되는 것들을 조작할 수 있는 문법/ 언어</p>
+<ul>
+<li><code>DOM API</code> 를 이용해서 작업</li>
+</ul>
+<p>DOM : 작업이 이루어지는 <code>장소</code>, 브라우저에 의해 기록되는 모든 것</p>
+</blockquote>
+<ul>
+<li><p>DOM 이 없다면 자바스크립트 언어는 웹 페이지 또는 XML 페이지 및 요소들과 관련된 모델이나 개념들에 대한 정보를 갖지 (불러오지) 못하게 된다.</p>
+</li>
+<li><p>페이지 콘텐츠는 DOM 에 저장되고 자바스크립트를 통해 접근하거나 조작</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">API (web or XML page) &#x3D; DOM + JS (scripting language)</span><br></pre></td></tr></table></figure></li>
+<li><p>문서의 모든 element는 문서를 위한 document object model 의 한 부분</p>
+</li>
+<li><p>DOM 의 구현은 어떠한 언어에서도 가능</p>
+<blockquote>
+<p>e.g. python 에서도 구현 가능</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="DOM에-접근하는-방법"><a href="#DOM에-접근하는-방법" class="headerlink" title="DOM에 접근하는 방법"></a>DOM에 접근하는 방법</h3><ul>
+<li><p>문서가 로드될 때는 모든 DOM을 사용할 수 있게 되는 때이다.</p>
+</li>
+<li><p>스크립트를 작성할 때</p>
+<ul>
+<li>직접적으로 문서 자체를 조작하거나,</li>
+<li>간접적인 조작을 위해 문서의 children 을 얻기 위해 <code>document</code> 또는 <code>window</code> element 를 이용하는 <code>API 를 사용</code>할 수 있다.</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">&quot;window.alert(&#x27;welcome to my home page!&#x27;);&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">       <span class="comment">// run this function when the document is loaded</span></span></span><br><span class="line"><span class="javascript">       <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">         <span class="comment">// create a couple of elements in an otherwise empty HTML page</span></span></span><br><span class="line"><span class="javascript">         <span class="keyword">var</span> heading = <span class="built_in">document</span>.createElement(<span class="string">&quot;h1&quot;</span>);</span></span><br><span class="line"><span class="javascript">         <span class="keyword">var</span> heading_text = <span class="built_in">document</span>.createTextNode(<span class="string">&quot;Big Head!&quot;</span>);</span></span><br><span class="line">         heading.appendChild(heading_text);</span><br><span class="line"><span class="javascript">         <span class="built_in">document</span>.body.appendChild(heading);</span></span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+</li>
+</ul>
+<h3 id="Data-Type"><a href="#Data-Type" class="headerlink" title="Data Type"></a>Data Type</h3><blockquote>
+<ul>
+<li><p>DOM node는 <code>element</code> 로,</p>
+</li>
+<li><p>노드의 array는 <code>nodeList</code> (또는 <code>element</code>),</p>
+</li>
+<li><p>attribute 노드는 <code>attribute </code>로</p>
+</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><code>document</code></th>
+<th>document type 의 object 를 리턴할 때, 이 object 는 root document object 자체이다. <br />예를 들어 element의 <strong><code>ownerDocument</code></strong> property 는 그것이 속해 있는 document 를 return 한다.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>element</code></td>
+<td><code>element</code> 는 DOM API에 의해 리턴된 <code>element</code> 또는 element type 의 DOM <code>node</code> 를 의미한다.  <br />예를 들어 <code>document.createElement()</code> 는 node를 참조하는 object 를 리턴하며, DOM 안에서 생성되는 element를 리턴한다고 말할 수 있다.</td>
+</tr>
+<tr>
+<td><code>nodeList</code></td>
+<td><code>nodeList</code> 는 element들의 배열이다. <code>document.getElementsByTagName()</code> 와 같은 method에 의해 리턴된 nodeList의 Item들은 index를 통해 접근 가능하며, 다음과 같이 두 가지 방식이 있다 (동일한 방식임) : <br />- list.item(1) <br />- list[1] <br /><strong><code>item()</code></strong> method는 <code>nodeList</code> object 의 단일 (하나의 item을 반환하는) method 이다. <br />두번째 방식은 list 에서 두번째 item 을 <code>fetch </code>하는 전형적인 array syntax 이다.</td>
+</tr>
+<tr>
+<td><code>attribute</code></td>
+<td>API에 의해 attribute가 리턴되는 것은 attribute에 대한 특별한 인터페이스를 노출하는 object reference 가 표현됨을 의미한다. attribute는 DOM 에서 element와 같은 <code>node</code>이다.</td>
+</tr>
+<tr>
+<td><code>namedNodeMap</code></td>
+<td><code>namedNodeMap</code> 는 array 와 유사한 list로, item은 <code>name</code> 또는 <code>index</code> 에 의해 접근 가능하다. 리스트는 특별한 정렬이 적용되지 않았기 enumeration (열거, 목록화) 할 때 index 를 주로 사용한다. <code>namedNodeMap</code> 는 이를 위해 <code>item()</code> method 가 있으며, <code>namedNodeMap</code> 에 item 을 추가하거나 삭제할 수 있다.</td>
+</tr>
+</tbody></table>
+<h3 id="DOM-interface"><a href="#DOM-interface" class="headerlink" title="DOM interface"></a>DOM interface</h3><ul>
+<li>object 와 DOM 에서 <code>조작 가능</code> 한 것</li>
+<li><code>API</code> 를 이용해 접근 및 조작</li>
+</ul>
+<h4 id="Interface와-Object"><a href="#Interface와-Object" class="headerlink" title="Interface와 Object"></a>Interface와 Object</h4><ul>
+<li>많은 object가 여러 개의 다른 interface와 연관되어 있다.</li>
+<li>HTML <code>element</code> 는 DOM 이 연관되어 있는 한 node 트리에서 하나의 <code>node</code>를 담당한다.<ul>
+<li><code>Node</code> : 기본적인 <code>Element</code></li>
+</ul>
+</li>
+<li>node 트리는 웹 페이지 또는 XML 페이지를 위한 <code>object</code> model을 구성한다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">table object 는 createCaption, insertRow method 들이 포함된 HTMLTableElement 을 구현한 것이다</span><br></pre></td></tr></table></figure>
+<ul>
+<li>table <code>Element</code> 는 <code>Node</code> interface 를 구현하고 있다.</li>
+<li>table <code>object</code> 는 HTML <code>Element</code> (object model) 이기도 하기 때문에, <code>table</code> 은 <code>Element</code> interface도 구현한다.</li>
+<li>table <code>object</code> 를 참조하게 되면, 기본적으로 이 3 가지 interface를 사용할 수 있다.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> table = <span class="built_in">document</span>.getElementById(<span class="string">&quot;table&quot;</span>); <span class="comment">// table === node/ element</span></span><br><span class="line"><span class="keyword">var</span> tableAttrs = table.attributes; <span class="comment">// Node/Element interface</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tableAttrs.length; i++) &#123;</span><br><span class="line">  <span class="comment">// HTMLTableElement interface: border attribute</span></span><br><span class="line">  <span class="keyword">if</span>(tableAttrs[i].nodeName.toLowerCase() == <span class="string">&quot;border&quot;</span>)</span><br><span class="line">    table.border = <span class="string">&quot;1&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// HTMLTableElement interface: summary attribute</span></span><br><span class="line">table.summary = <span class="string">&quot;note: increased border&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h4 id="핵심-Interface"><a href="#핵심-Interface" class="headerlink" title="핵심 Interface"></a>핵심 Interface</h4><p><em><code>Document</code> 와 <code>window</code> object 는 DOM 프로그래밍에서 가장 자주 사용하는 object</em></p>
+<ul>
+<li><code>window</code> object 는 브라우저와 같다.</li>
+<li><code>document</code> object 는 root document 자체이다.</li>
+</ul>
+<h5 id="DOM-을-사용하는-공통적인-API"><a href="#DOM-을-사용하는-공통적인-API" class="headerlink" title="DOM 을 사용하는 공통적인 API"></a>DOM 을 사용하는 공통적인 API</h5><blockquote>
+<ul>
+<li><code>document.getElementById(id)</code></li>
+<li><code>document.getElementsByTagName(name)</code></li>
+<li><code>document.createElement(name)</code></li>
+<li><code>parentNode.appendChild(node)</code></li>
+<li><code>element.innerHTML</code></li>
+<li><code>element.style.left</code></li>
+<li><code>element.setAttribute()</code></li>
+<li><code>element.getAttribute()</code></li>
+<li><code>element.addEventListener()</code></li>
+<li><code>window.content</code></li>
+<li><code>window.onload</code></li>
+<li><code>window.dump</code></li>
+<li><code>window.scrollTo</code></li>
+</ul>
+</blockquote>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/04/24/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-DOM/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/04/22/position/"
                             aria-label=": position"
                         >
@@ -2322,122 +2546,6 @@
                         <p>
                             <a
                                 href="/2021/03/03/26-authentication/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/03/02/25-Security/"
-                            aria-label=": 25. Security"
-                        >
-                            25. Security
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-03-02T07:39:07+09:00">
-	
-		    Mar 02, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Web-Security"><a href="#Web-Security" class="headerlink" title="Web Security"></a>Web Security</h2><ul>
-<li>Assume the worst case *</li>
-</ul>
-<ul>
-<li>Exposed to threats<ul>
-<li>Data theft/ destruction</li>
-<li>System attacks</li>
-</ul>
-</li>
-<li>vulnerabilities</li>
-<li>defencsive using automated alerts</li>
-</ul>
-<h3 id="Attack-Types"><a href="#Attack-Types" class="headerlink" title="Attack Types"></a>Attack Types</h3><ul>
-<li>Malicious code execution</li>
-<li>Cryptography attacks: hide secrets</li>
-<li>Data interception</li>
-<li>Denial of Service</li>
-</ul>
-<p>owasp.org/www-project-top-ten/<br>OWASP Top Ten Web Application Security Risks | OWASP<br>The OWASP Top 10 is the reference standard for the most critical web application security risks. Adopting the OWASP Top 10 is perhaps the most effective first step towards changing your software development culture focused on producing secure code.<br>owasp.org</p>
-<h4 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h4><ul>
-<li>Cross-Site Scripting: request from one domain to another domain<br> -&gt; html entities</li>
-<li>A type of injection</li>
-<li>Malicious scripts are injected into web sites</li>
-<li>scripts could be entered on any inputs</li>
-</ul>
-<h4 id="XSS-Solutions"><a href="#XSS-Solutions" class="headerlink" title="XSS Solutions"></a>XSS Solutions</h4><p>Escape/ Sanitiza all user inputs<br>Escape all the input before actually putting it on sensible places<br>XSS Protection Cheatsheet</p>
-<h4 id="SQL-Injection"><a href="#SQL-Injection" class="headerlink" title="SQL Injection"></a>SQL Injection</h4><ul>
-<li>just USE <code>Sequelize</code></li>
-</ul>
-<ul>
-<li>parameterized statements</li>
-<li>escaping user inputs</li>
-<li>privileges control</li>
-<li>SQL Injection Prevention Cheatsheet</li>
-</ul>
-<h4 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h4><ul>
-<li>Cross-Site Request Forgery</li>
-<li>forces a user to input st unauthorized</li>
-</ul>
-<h4 id="CSRF-Solutions"><a href="#CSRF-Solutions" class="headerlink" title="CSRF Solutions"></a>CSRF Solutions</h4><ul>
-<li>Identifying source origin</li>
-<li>access-control-allow-origin</li>
-<li>Synchronizer Tokens</li>
-</ul>
-<h4 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h4><ul>
-<li>http is not safe, HTTPS is same with http over TLS</li>
-<li>only expose the host to a DNS server and the target IP<br> &lt; Secured things &gt;<ul>
-<li>path</li>
-<li>query</li>
-<li>payload</li>
-<li>every method</li>
-</ul>
-</li>
-</ul>
-<h5 id="The-Handshake"><a href="#The-Handshake" class="headerlink" title="The Handshake"></a>The Handshake</h5><ul>
-<li>negociation the certificate</li>
-</ul>
-<p>Heroku / Let’s Encrypt<br>gives HTTP certificate for free</p>
-<p>Hack Bounties<br>to test the security</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/03/02/25-Security/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

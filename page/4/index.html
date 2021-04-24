@@ -311,6 +311,145 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/01/28/8-Bitwise-Operation/"
+                            aria-label=": 8. Bitwise Operation"
+                        >
+                            8. Bitwise Operation
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-28T08:37:53+09:00">
+	
+		    Jan 28, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Bitwise-Operation"><a href="#Bitwise-Operation" class="headerlink" title="Bitwise Operation"></a>Bitwise Operation</h2><p>num[index] * 2^(index-1)</p>
+<h3 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h3><p><code>both</code><br><strong>&amp; : return 1 if both has 1 (same)</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>&amp;<blockquote>
+<p>5 &amp; 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<h2 id="amp-1001"><a href="#amp-1001" class="headerlink" title="&amp;1001"></a>&amp;1001</h2><p>0001(2) –&gt; 1</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h3><p><code>at least</code><br><strong>| : return 1 if at least one has 1</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>|<blockquote>
+<p>5 | 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<table>
+<thead>
+<tr>
+<th>1001</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1101(2) –&gt; 13</td>
+</tr>
+</tbody></table>
+</blockquote>
+</li>
+</ol>
+<h3 id="XOR"><a href="#XOR" class="headerlink" title="XOR"></a>XOR</h3><p><code>just one</code><br><strong>^ : return 1 if the value is different, return 0 if same</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>^<blockquote>
+<p>5 ^ 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<h2 id="1001"><a href="#1001" class="headerlink" title="^1001"></a>^1001</h2><p>1100(2) –&gt; 12</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="NOT"><a href="#NOT" class="headerlink" title="NOT"></a>NOT</h3><p><strong>~ : return the oppostie value</strong></p>
+<blockquote>
+<p>actually, there are 0 as many as the size of the integer range(&lt;=256, thus 8개) in front of the bits</p>
+</blockquote>
+<ul>
+<li>-(x) -1 (// in JS)</li>
+<li>negative<ul>
+<li>starts from -1</li>
+<li>meaning of 0, 1 is swtiched: 0 -&gt; decrement<blockquote>
+<p>~5<br>5 –&gt; 0101(2)</p>
+<h2 id="0101-2"><a href="#0101-2" class="headerlink" title="~0101(2)"></a>~0101(2)</h2><p>1010(2) –&gt; -6 (in JS, normally -5) // 1011(2) –&gt; -5 in JS</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Left-Shift"><a href="#Left-Shift" class="headerlink" title="Left Shift"></a>Left Shift</h3><p><strong>&lt;&lt; n : shift bits to the left to the n extent and fill the right bit with 0</strong></p>
+<blockquote>
+<p>5 &lt;&lt; 1<br>0101(2)<br>—– &lt;&lt; 1<br>1010(2)</p>
+</blockquote>
+<h3 id="Sign-propagating-Right-Shift"><a href="#Sign-propagating-Right-Shift" class="headerlink" title="Sign-propagating Right Shift"></a>Sign-propagating Right Shift</h3><p><strong>&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with the same one as the original last right value which is sign property</strong></p>
+<blockquote>
+<p>8 &gt;&gt;&gt; 1<br>0…1000(2)<br>———– &gt;&gt; 1<br>00…0100(2)  // 4<br>-8 &gt;&gt;&gt; 1<br>1…1000(2)<br>———– &gt;&gt; 1<br>11…1100(2) // -4</p>
+</blockquote>
+<h3 id="Zero-fill-Right-Shift"><a href="#Zero-fill-Right-Shift" class="headerlink" title="Zero-fill Right Shift"></a>Zero-fill Right Shift</h3><p><strong>&gt;&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with 0</strong></p>
+<blockquote>
+<p>[1]1…0111 // -8<br>——— &gt;&gt;&gt; 1<br>[0]1…1011 // 2147483644</p>
+</blockquote>
+<p>blog.logrocket.com/interesting-use-cases-for-javascript-bitwise-operators/<br>Interesting use cases for JavaScript bitwise operators - LogRocket Blog<br>Although we don’t often see bitwise operators used in JavaScript, they have some cool use cases. Learn their theory and implementation.<br>blog.logrocket.com</p>
+<hr>
+<dl><dt><em>compare <code>multiple values</code> together</em></dt><dd>first comparison -&gt; compare with the next one -&gt; (((repeat)))</dd></dl><h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>qiao.github.io/PathFinding.js/visual/<br>PathFinding.js<br>qiao.github.io</p>
+<h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><ul>
+<li>only need the weight</li>
+<li>evaluate all the nodes -&gt; slower</li>
+</ul>
+<ol>
+<li>set the weight of starting point to 0, and others to INF (as not started yet)</li>
+</ol>
+<h3 id="A"><a href="#A" class="headerlink" title="A*"></a>A*</h3><ul>
+<li>only evaluate shorter distance -&gt;faster</li>
+<li>need weight and distance both</li>
+</ul>
+<ol>
+<li>set additional array with distance</li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/28/8-Bitwise-Operation/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/01/27/7-BFS-DFS/"
                             aria-label=": 7. BFS &amp; DFS"
                         >
