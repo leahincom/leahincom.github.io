@@ -1827,6 +1827,102 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/04/05/SOAP-Objects-and-DSs/"
+                            aria-label=": Objects and DSs"
+                        >
+                            Objects and DSs
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-04-05T18:20:55+09:00">
+	
+		    Apr 05, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Objects-and-Data-Structures"><a href="#Objects-and-Data-Structures" class="headerlink" title="Objects and Data Structures"></a>Objects and Data Structures</h2><ol>
+<li><p><code>Getter</code> and <code>Setter</code></p>
+<ul>
+<li><p>JS는 인터페이스 / 타입 / 접근제어자 (Access Modifier) 을 가지고 있지 않음</p>
+</li>
+<li><p>Object property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨</p>
+</li>
+<li><p><code>set</code> action 시 validation을 추가하는 것이 좋음</p>
+</li>
+<li><p>internal representation을 encapsulating</p>
+</li>
+<li><p><code>get</code>, <code>set</code>시 logging이나 error handling을 추가하는 것이 용이함</p>
+</li>
+<li><p><code>get</code> 시 lazy load 속성을 추가할 수 있음</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Lazy loading</strong> </p>
+<ul>
+<li>It’s a way to shorten the length of the critical rendering path, which translates into reduced page <strong>load</strong> times</li>
+<li>getting the properties from a server</li>
+</ul>
+<ol>
+<li>identify resources as non-blocking (non-critical)</li>
+<li><strong>load</strong> these only when needed</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeBankAccount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    balance: <span class="number">0</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> account = makeBankAccount();</span><br><span class="line">account.balance = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeBankAccount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// private으로 선언된 변수</span></span><br><span class="line">  <span class="keyword">let</span> balance = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 아래 return을 통해 public으로 선언된 &quot;getter&quot;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getBalance</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> balance;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 아래 return을 통해 public으로 선언된 &quot;setter&quot;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setBalance</span>(<span class="params">amount</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ... balance를 업데이트하기 전 검증로직</span></span><br><span class="line">    balance = amount;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    getBalance,</span><br><span class="line">    setBalance</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> account = makeBankAccount();</span><br><span class="line">account.setBalance(<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>objects의 properties는 private로 만들기</p>
+<ul>
+<li><code>closures</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Employee = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Employee.prototype.getName = <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> employee = <span class="keyword">new</span> Employee(<span class="string">&#x27;John Doe&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br><span class="line"><span class="keyword">delete</span> employee.name;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: undefined</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeEmployee</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="function"><span class="title">getName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> name;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> employee = makeEmployee(<span class="string">&#x27;John Doe&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br><span class="line"><span class="keyword">delete</span> employee.name;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/04/05/SOAP-Objects-and-DSs/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/04/05/SOAP-Functions/"
                             aria-label=": Functions"
                         >
@@ -2665,111 +2761,6 @@
                         <p>
                             <a
                                 href="/2021/04/04/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-03-04-21/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/03/04/27-Redux/"
-                            aria-label=": 27. Redux"
-                        >
-                            27. Redux
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-03-04T04:49:00+09:00">
-	
-		    Mar 04, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="State-Manager"><a href="#State-Manager" class="headerlink" title="State Manager"></a>State Manager</h3><ul>
-<li>Without<br>each component has its own storage =&gt; spaghetti code</li>
-<li>With<br>has one store without having each storage</li>
-</ul>
-<ul>
-<li>predictable state container for JavaScript applications<ul>
-<li>unpredictable; random bugs, hard to fix</li>
-</ul>
-</li>
-<li>application-wide state</li>
-<li>reduce function</li>
-</ul>
-<p>react component = view</p>
-<h4 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h4><ul>
-<li>can have multiple reducers</li>
-<li>receives a state and do an action</li>
-</ul>
-<ul>
-<li>reduce function</li>
-<li>specify how the application’s state changes in response</li>
-<li>pure function</li>
-<li>never do something like : mutate arguments, callign an API, call non-pure function</li>
-</ul>
-<p>identity reducer</p>
-<ul>
-<li>getState()</li>
-<li>dispatch(action)</li>
-<li>subscribe(listener)</li>
-</ul>
-<p>👇but normally uses hooks👇 </p>
-<h4 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h4><p>※ for React<br>react-query.tanstack.com/reference/useQuery<br>useQuery<br>Subscribe to our newsletter The latest TanStack news, articles, and resources, sent to your inbox.<br>react-query.tanstack.com<br>useReducer<br>ko.reactjs.org/docs/hooks-reference.html<br>Hooks API Reference – React<br>A JavaScript library for building user interfaces<br>ko.reactjs.org</p>
-<h3 id="Making-To-Do-List"><a href="#Making-To-Do-List" class="headerlink" title="Making To-Do List"></a>Making To-Do List</h3><p>🚀 redux devTools</p>
-<p>Do one thing -&gt; make sure it is working -&gt; move on to next one﻿</p>
-<h4 id="overview-Tree"><a href="#overview-Tree" class="headerlink" title="overview Tree"></a>overview Tree</h4><p>big loop</p>
-<ul>
-<li>dispatch: sends the action to the reducer =&gt; actions in loop</li>
-</ul>
-<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><p>👇simplified</p>
-<ul>
-<li>&lt; TodoItem todo = {todo} onChange={onChangeTodo} &gt;</li>
-</ul>
-<p>※ Single component as a single responsibility</p>
-<ul>
-<li>Presentational Component<br>blog.naver.com/backsajang420/221368885149<br>[React] Presentational and Container Components<br>[React] 프레젠테이션 컴포넌트와 컨테이너 컴포넌트 (Presentational and Container Components)# 시…<br>blog.naver.com</li>
-</ul>
-<blockquote>
-<p>프레젠테이션 컴포넌트 (Presentational Component)<br>프레젠테이션 컴포넌트(Presentational Component) 는 아래와 같은 성질을 갖는다.<br>● 어떻게 보여지는 지를 책임진다.<br>컨테이너 컴포넌트 (Container Component)<br>컨테이너 컴포넌트(Container Component) 는 아래와 같은 성질을 갖는다.<br>● 어떻게 동작해야 할지를 책임진다.</p>
-</blockquote>
-<h4 id="React-with-Redux"><a href="#React-with-Redux" class="headerlink" title="React with Redux"></a>React with Redux</h4>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/03/04/27-Redux/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
