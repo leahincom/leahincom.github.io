@@ -336,108 +336,150 @@
             </div>
             
                 <div class="postShorten-content">
-                    <h2 id="React-이해하기"><a href="#React-이해하기" class="headerlink" title="React 이해하기"></a>React 이해하기</h2><h3 id="React를-왜-사용하나요"><a href="#React를-왜-사용하나요" class="headerlink" title="React를 왜 사용하나요?"></a>React를 왜 사용하나요?</h3><ul>
-<li><p>지속해서 데이터가 변화하는 <code>대규모 애플리케이션</code> 을 구축하기 좋다.</p>
-</li>
-<li><p>점유율이 가장 높다.</p>
-</li>
-</ul>
-<h4 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h4><p>개발에 필요한 뼈대를 제공하여 사용자가 덧붙이는 형식으로 코드를 완성시킨다.</p>
+                    <h2 id="들어가기에-앞서"><a href="#들어가기에-앞서" class="headerlink" title="들어가기에 앞서"></a>들어가기에 앞서</h2><h4 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h4><p>개발에 필요한 뼈대를 제공하여 사용자가 덧붙이는 형식으로 코드를 완성시킨다.</p>
 <blockquote>
 <p> e.g. 집</p>
 </blockquote>
-<h4 id="Library"><a href="#Library" class="headerlink" title="Library"></a>Library</h4><p>개발에 필요한 도구들을 제공하여 리소스를 가져와 사용한다.</p>
+<br />
+
+<h4 id="Library"><a href="#Library" class="headerlink" title="Library"></a>Library</h4><p>개발에 필요한 도구들을 제공하여 사용자가 필요할 때 리소스를 가져와 사용한다.</p>
 <blockquote>
 <p> e.g. 가구</p>
 </blockquote>
-<p>👉 둘 다) 공통 개발환경을 제공하여 개발 시간과 리소스 비용을 줄여주는 도구</p>
+<br />
+
+<p>👉 둘 다 공통의 <code>개발환경을 제공</code> 하여 개발 시간과 리소스 비용을 줄여주는 도구</p>
+<br />
+
+<h2 id="React-이해하기"><a href="#React-이해하기" class="headerlink" title="React 이해하기"></a>React 이해하기</h2><br />
+
+
+
+<h3 id="React는…"><a href="#React는…" class="headerlink" title="React는…"></a>React는…</h3><ul>
+<li>지속해서 데이터가 변화하는 <code>대규모 애플리케이션</code> 을 구축하기 좋다.</li>
+<li>점유율이 가장 높다.</li>
+</ul>
 <hr>
-<h4 id="JQuery"><a href="#JQuery" class="headerlink" title="JQuery"></a>JQuery</h4><ol>
+<br />
+
+<h4 id="JQuery"><a href="#JQuery" class="headerlink" title="JQuery"></a>JQuery</h4><blockquote>
+<p><code>$</code> 이용</p>
+</blockquote>
+<ol>
 <li>자바스크립트 라이브러리</li>
-<li>DOM 조작을 쉽고 효율적으로 할 수 있다</li>
-<li>브라우저마다 자바스크립트 호환성이 달랐던 문제를 해결했다</li>
+<li>DOM 조작을 쉽고 효율적으로</li>
+<li>브라우저마다 자바스크립트 호환성이 달랐던 문제를 해결</li>
 </ol>
-<ul>
-<li><code>$</code> 이용</li>
-</ul>
+<p>👉 ES6로 인해 사용률 ↓</p>
 <hr>
-<h4 id="SPA-Single-Page-Application-의-등장"><a href="#SPA-Single-Page-Application-의-등장" class="headerlink" title="SPA (Single Page Application) 의 등장"></a>SPA (Single Page Application) 의 등장</h4><ol>
+<br />
+
+
+
+<h3 id="SPA-Single-Page-Application-의-등장"><a href="#SPA-Single-Page-Application-의-등장" class="headerlink" title="SPA (Single Page Application) 의 등장"></a>SPA (Single Page Application) 의 등장</h3><ol>
 <li>웹의 규모가 커지면서 단순한 웹 페이지가 아닌, <code>웹 어플리케이션 </code>으로 발전</li>
-<li>엄청난 JS 파일을 유지/ 보수하기 위해 웹 라이브러리/ 프레임워크의 중요성 대두</li>
+<li>엄청난 JS 파일을 유지, 보수하기 위해 웹 라이브러리/ 프레임워크의 중요성 대두</li>
 </ol>
 <ul>
-<li>웹 페이지 전체를 재로딩하지 않고, 필요한 데이터만 동적으로 로딩하는 웹 어플리케이션</li>
-<li>기존의 MPA는 페이지를 이동할 때마다 HTML, CSS, JS 파일을 전부 로딩해야 해서 속도가 상대적으로 느리다</li>
-<li>SPA는 필요한 정적 파일을 최초 1회 다운받은 후,</li>
+<li>웹 페이지 전체를 재로딩하지 않고, <code>필요한 데이터만 동적으로 로딩</code>하는 웹 어플리케이션</li>
+<li>기존의 MPA (Multiple Page Application) 는 페이지를 이동할 때마다 HTML, CSS, JS 파일을 전부 로딩해야 해서 속도가 상대적으로 느리다.</li>
+<li>SPA는 필요한 <code>정적 파일을 최초 1회 다운</code> 받은 후, 필요한 데이터만 <code>서버로부터 동적으로 전달받아</code> DOM을 조작한다.</li>
 </ul>
-<p>장:</p>
-<ul>
-<li>속도가 빠르고 새로고침이 발생하지 않음</li>
-<li>처리과정이 효율적</li>
-<li>chrome으로 네트워크 동작을 모니터링 가능하여 디버깅하기가 쉬움</li>
-<li>네이티브 앱과 유사한 사용자 경험을 제공하여 UX를 향상시킬 수 있음</li>
-</ul>
-<p>단:</p>
-<ul>
-<li>필요한 모든 정적 리소스를 최초에 한번 다운로드하기 때문에 초기 구동 속도가 상대적으로 느림</li>
-<li>데이터가 AJAX를 통해 로드되기 때문에 검색 엔진 최적화가 어려움<ul>
-<li>SSR (Server Side Rendering) 으로 해결 가능함</li>
-</ul>
-</li>
-</ul>
+<table>
+  <thead>
+      <tr>
+        <th>장점</th>
+      <th>단점</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+      <td>속도가 빠르고 새로고침이 발생하지 않음</td>
+      <td>처음에 필요한 모든 정적 리소스를 다운로드하기 때문에 초기 구동 속도가 상대적으로 느림</td>
+    </tr>
+    <tr>
+        <td>처리과정이 효율적임</td>
+      <td>데이터가 AJAX를 통해 로드되기 때문에 검색 엔진 최적화가 어려움<br />
+      👉 SSR (Server Side Rendering) 으로 해결 가능함
+      </td>
+    </tr>
+    <tr>
+        <td colspan="2">네트워크 동작을 모니터링 할 수 있어 디버깅 하기가 쉬움</td>
+    </tr>
+    <tr>
+        <td>네이티브 앱과 유사한 사용자 경험을 제공함으로써 UX를 향상시킬 수 있음</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<br />
+
 <h4 id="SPA-Web-Framework"><a href="#SPA-Web-Framework" class="headerlink" title="SPA Web Framework"></a>SPA Web Framework</h4><ol>
 <li>Angular<ul>
 <li>Framework에 가까움</li>
-<li>TS 기반</li>
-<li>양방향 바인딩 지원</li>
+<li>TS 기반, 양방향 바인딩 지원</li>
 </ul>
 </li>
 <li>React<ul>
 <li>Library에 가까움</li>
-<li>Native로 앱 개발이 가능함 (React Native)</li>
+<li>Native로 앱 개발도 가능함 (React Native)</li>
 <li>Virtual DOM, JSX</li>
 </ul>
 </li>
 <li>Vue<ul>
 <li>오픈소스 프로젝트</li>
-<li>가장 최근</li>
+<li>가장 최근에 개발됨</li>
 <li>Virtual DOM, 양방향 바인딩 지원, Single File Component</li>
 </ul>
 </li>
 </ol>
-<h3 id="React-기본-문법-익히기"><a href="#React-기본-문법-익히기" class="headerlink" title="React 기본 문법 익히기"></a>React 기본 문법 익히기</h3><ul>
+<br />
+
+<h2 id="React-기본-문법-익히기"><a href="#React-기본-문법-익히기" class="headerlink" title="React 기본 문법 익히기"></a>React 기본 문법 익히기</h2><ul>
 <li><p>Component</p>
 <ul>
-<li>UI 를 구성하는 개별적인 <code>뷰</code> 단위<ul>
-<li>적절하게 분리하여 재사용성을 높이는 게 좋다. (너무 많아도/ 적어도 안 좋다는 소리)</li>
+<li>UI 를 구성하는 <code>개별적인 뷰</code> 단위<ul>
+<li>적절하게 분리하여 재사용성을 높이는 게 좋다. (너무 많아도/ 적어도 안 좋다!)</li>
 </ul>
 </li>
 <li>컴포넌트를 조합하여 새로운 컴포넌트를 만들거나, 복잡한 웹 페이지를 구성할 수 있다.</li>
-<li>클래스형/ <strong>함수형</strong> 2가지 종류의 컴포넌트가 있다.<ul>
-<li>클래스형을 잘 사용하지 않음</li>
-</ul>
-</li>
+<li><strike>클래스형</strike>/ <strong>함수형</strong> 2가지 종류의 컴포넌트가 있다.</li>
 </ul>
 </li>
 <li><p>Virtual DOM</p>
 <p>![image-20210424152641178](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210424152641178.png)</p>
 <ul>
-<li>DOM 요소가 변경되면, Render Tree를 만들어서 다시 화면에 보여주기까지 연산이 오래 걸린다.</li>
-<li>데이터 변경이 자주 발생하는 웹 페이지는 속도가 느려짐 🚀<strong><em>변경된 부분을 한 번에 처리하자!</em></strong></li>
-<li>가상 DOM을 통해 <strong>변경된 부분만 탐지</strong>하여 실제 DOM에 적용<ul>
+<li><p>DOM 요소가 변경되면, Render Tree를 만들어서 다시 화면에 보여주기까지 연산이 오래 걸린다.</p>
+</li>
+<li><p>데이터 변경이 자주 발생하는 웹 페이지는 속도가 느려진다.</p>
+<p>👇 <strong><em>변경된 부분을 한 번에 처리하자!</em></strong> 🚀</p>
+</li>
+<li><p>가상 DOM을 통해 <strong>변경된 부분만 탐지</strong>하여 실제 DOM에 적용</p>
+<ul>
 <li>연산을 최소화하여 성능이 개선됨</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><p>One-way Data Flow</p>
-<p>![image-20210424152933460](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210424152933460.png)</p>
+<blockquote>
+<p>바인딩은 <code>뷰에 보여지는 값</code> 과 <code>메모리 상의 값이 일치하는지</code> 여부에 따라 방식이 달라진다.</p>
+</blockquote>
+<br />
+
+
+
+</li>
+</ul>
+<p>  ![image-20210424152933460](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210424152933460.png)</p>
 <ul>
 <li><p>React는 기본적으로 <code>단방향 데이터 바인딩</code> 이다.</p>
 <ul>
 <li><p>단순하고 예측 가능한 구조</p>
 </li>
-<li><p>뷰에서 사용자가 입력한 값이 변수에 반영되기 위해서는 event를 거쳐야 한다.</p>
+<li><p>뷰에서 사용자가 입력한 값이 변수에 <code>반영</code> 되기 위해서는 <code>event</code> 를 거쳐야 한다.</p>
 <blockquote>
 <p>e.g. onChange()</p>
 </blockquote>
@@ -445,25 +487,24 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<blockquote>
-<p><strong>Two-way Data Flow</strong></p>
+<ul>
+<li><p>Two-way Data Flow</p>
 <p>![image-20210424153008670](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210424153008670.png)</p>
 <ul>
-<li></li>
+<li>양방향 데이터 바인딩에서는 사용자가 입력한 값이 바로 변수에 반영된다.</li>
 </ul>
-</blockquote>
+</li>
+</ul>
 <ul>
 <li>JSX<ul>
 <li>JavaScript를 확장하여 React의 요소를 생성하는 문법</li>
-<li>HTML과 JavaScript를 결합한 형태이며, 중괄호 {} 안에 모든 JS 문법을 사용할 수 있다.<ul>
-<li>JavaScript에 가까운 언어</li>
+<li>HTML과 JavaScript를 결합한 형태이며, 중괄호 <code>&#123;&#125;</code> 안에 모든 JS 문법을 사용할 수 있다.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
+<br />
+
+<hr>
 <blockquote>
 <p><strong>Node.js</strong></p>
 <ul>
@@ -473,14 +514,19 @@
 </li>
 </ul>
 </blockquote>
-<hr>
+<br />
+
 <h4 id="CRA-Create-React-App"><a href="#CRA-Create-React-App" class="headerlink" title="CRA (Create React App)"></a>CRA (Create React App)</h4><p>React를 사용하기 위해 폴더를 초기화하는 과정이 필요함</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app [fileName]</span><br></pre></td></tr></table></figure>
 
 
-<h4 id="Functional-Component"><a href="#Functional-Component" class="headerlink" title="Functional Component"></a>Functional Component</h4><blockquote>
+<h3 id="Functional-Component"><a href="#Functional-Component" class="headerlink" title="Functional Component"></a>Functional Component</h3><blockquote>
 <p>src &gt; App.js에서 시작</p>
 </blockquote>
+<br />
+
+
+
 <ul>
 <li><p>컴포넌트를 만들 때는 react를 <code>import</code> 해야 한다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span></span><br></pre></td></tr></table></figure></li>
@@ -494,82 +540,93 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p>다른 컴포넌트에서 사용하기 위해서는 <code>export</code> 해야 한다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> [name];</span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> [name];</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>최종적으로 <code>App.js</code> 에서 컴포넌트를 import하고, <code>&lt;&gt;</code> 를 통해 요소로써 사용한다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> [name] <span class="keyword">from</span> <span class="string">&#x27;./[file_path]&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (</span><br><span class="line">		&lt;&gt;</span><br><span class="line">			&lt;[name] /&gt;</span><br><span class="line">		&lt;/&gt;</span><br><span class="line">	);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>컴포넌트는 여러번 반복해서 사용할 수 있다.</p>
 </li>
 </ul>
-<h4 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h4><ul>
-<li><p>JSX는 기본적으로 <strong>객체</strong>이며, React 요소를 나타낸다.</p>
+<br />
+
+<h3 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h3><h4 id="JSX-1"><a href="#JSX-1" class="headerlink" title="JSX"></a>JSX</h4><ul>
+<li><p>JSX는 기본적으로 <code>객체</code> 이며, React 요소를 나타낸다.</p>
 </li>
 <li><p>HTML 요소 내부에 JavaScript를 사용할 때는 <strong>중괄호 {} 내부에 변수</strong>를 넣는다.</p>
 </li>
 <li><p>HTML 요소 외부에서는 JavaScript를 자유롭게 사용할 수 있다.</p>
 </li>
-<li><p>HTML attribute의 value에도 사용할 수 있다.</p>
+<li><p>HTML <strong>attribute의 value에도</strong> 사용할 수 있다.</p>
 </li>
-<li><p>JSX는 JavaScript 기반이기 때문에 attribute 이름은 CamelCase로 작성한다.</p>
+<li><p>JavaScript 기반이기 때문에 attribute 이름은 <strong>CamelCase</strong>로 작성한다.</p>
 </li>
 <li><p>inline style은 두가지 방법을 사용할 수 있다.</p>
 <ul>
-<li>직접 지정 : 객체이기 때문에 <code>&#123;&#125;</code> 2번 사용해야 함! ( <code>&#123;&#123;&#125;&#125;</code>  ) 💥</li>
-<li></li>
+<li>직접 지정 : 객체이기 때문에 <code>&#123;&#125;</code> 2번 사용해야 함! ( <code>&#123;&#123;&#125;&#125;`  )
+  - 변수로 지정
+  
+  > 변수 : `&#123;&#125;`
+  >
+  > 객체 : `&#123;&#123;&#125;&#125;</code></li>
 </ul>
 </li>
 </ul>
-<h4 id="Props-amp-State"><a href="#Props-amp-State" class="headerlink" title="Props &amp; State"></a>Props &amp; State</h4><blockquote>
+<br />
+
+<h3 id="Props-amp-State"><a href="#Props-amp-State" class="headerlink" title="Props &amp; State"></a>Props &amp; State</h3><blockquote>
 <p>React에서 다루는 데이터의 종류</p>
 </blockquote>
+<p>![image-20210429233310492](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210429233310492.png)</p>
 <ul>
-<li><strong>Props</strong> 는 정적 데이터로서, 부모 컴포넌트에서 자식 컴포넌트로 데이터를 넘겨주는 방식이다.</li>
-<li>Props를 넘겨줄 때는 <code>넘겨줄 자식변수명=&#123;부모(본인) 변수명&#125;</code>으로, 받을 때는 <code>parameter</code> 에 <code>props 로 전체</code> 를 받아오거나 <code>&#123;자식변수명&#125; 으로 구조분해할당 하여</code> 으로 받아온다.<ul>
+<li><strong>Props</strong> 는 정적 데이터로서, 부모 컴포넌트에서 자식 컴포넌트로 <code>데이터를 넘겨주는</code> 방식이다.</li>
+<li>Props를 넘겨줄 때는 <code>넘겨줄 자식변수명=&#123;부모(본인) 변수명&#125;</code>으로, 받을 때는 <code>parameter</code> 에 전체를 <code>props</code> 로 받아오거나 구조분해할당 하여 <code>&#123;자식변수명&#125;</code> 으로 받아온다.<ul>
 <li>같은 이름으로 지정해서 넘겨주는 것이 좋다.</li>
 </ul>
 </li>
-<li><strong>State</strong>는 동적 데이터를 다루는 방식으로서, <strong>useState</strong>라는 <code>Hook</code> 을 통해서 사용한다.</li>
+<li><strong>State</strong>는 <strong>동적 데이터</strong>를 다루는 방식으로서, <strong>useState</strong>라는 <code>Hook</code> 을 통해서 사용한다.</li>
 </ul>
-<h4 id="LifeCycle"><a href="#LifeCycle" class="headerlink" title="LifeCycle"></a>LifeCycle</h4><blockquote>
+<br />
+
+<h3 id="LifeCycle"><a href="#LifeCycle" class="headerlink" title="LifeCycle"></a>LifeCycle</h3><blockquote>
 <p>Component의 생명 주기</p>
 </blockquote>
 <p>![image-20210424162343959](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210424162343959.png)</p>
 <ul>
 <li>클래스형 컴포넌트는 생명 주기에 따라서 다음 메소드가 실행된다.</li>
-<li>componentDidMount : 최초 렌더링 직후</li>
-<li>componentDidUpdate : 변경된 내용 렌더링 직후</li>
+<li><code>componentDidMount</code> : 최초 렌더링 직후</li>
+<li><code>componentDidUpdate</code> : 변경된 내용 렌더링 직후</li>
+<li><code>componentWillUnmount</code> : DOM에서 제거될 때</li>
 </ul>
-<p>함수형 컴포넌트에서는 <code>useEffect</code> 를 이용하여 한 번에 처리 가능함</p>
-<h4 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h4><blockquote>
+<p>👇</p>
+<p><strong>함수형 컴포넌트</strong>는 <code>useEffect</code> 를 이용하여 한 번에 처리 가능함</p>
+<br />
+
+<h3 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h3><blockquote>
 <p>함수형 컴포넌트에서 State와 LifeCycle을 다룰 수 있는 기술</p>
 </blockquote>
 <ul>
-<li>클래스형 컴포넌트에서는 constructor 내부에서 this.state를 통해 state를 저장하고 관리한다.</li>
-<li>componentDidMount, componentDidUpdate가 컴포넌트 생명주기에 따라</li>
+<li>클래스형 컴포넌트에서는 <strong>constructor 내부</strong>에서 <code>this.state</code>를 통해 state를 저장하고 관리한다.</li>
+<li>componentDidMount, componentDidUpdate가 컴포넌트 생명주기에 따라 호출된다.</li>
 </ul>
-<h4 id="useState"><a href="#useState" class="headerlink" title="useState"></a>useState</h4><blockquote>
-<p>함수형 컴포넌트에서 State와 LifeCycle을 다룰 수 있는 기술</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;useState&#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// count : getter</span></span><br><span class="line"><span class="comment">// setCount : setter</span></span><br><span class="line"><span class="comment">// useState() === React.useState()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> [ count, setCount ] = useState(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useState</span>(<span class="params">initialValue</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> _count = initialValue;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getCount</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> _count;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setCount</span>(<span class="params">newValue</span>) </span>&#123;</span><br><span class="line">    _count = newValue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br />
 
-
-<h4 id="useEffect"><a href="#useEffect" class="headerlink" title="useEffect"></a>useEffect</h4><blockquote>
-<p>함수형 컴포넌트에서 State와 LifeCycle을 다룰 수 있는 기술</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;useEffect&#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="useState"><a href="#useState" class="headerlink" title="useState"></a>useState</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>; <span class="comment">// 가져오기</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// count : getter</span></span><br><span class="line"><span class="comment">// setCount : setter</span></span><br><span class="line"><span class="comment">// useState() === React.useState()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> [ _var, setVar ] = useState(initVal); <span class="comment">// 선언하기</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useState</span>(<span class="params">initialValue</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> _var = initialValue;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getVar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> _count;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setVar</span>(<span class="params">newValue</span>) </span>&#123;</span><br><span class="line">    _var = newValue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>useEffect(callBackFunc, dependencies);<ul>
-<li>deps가 비어있다면 렌더링 할 때마다 초기화</li>
-<li>deps가 [] 라면 최초 렌더링 시에만 초기화</li>
+<li><code>_var</code> 은 <strong>읽기만 가능</strong>한 변수</li>
+<li><code>setVar(newVal)</code> 은 <strong>변수(<code>_var</code>)를 변경</strong>할 수 있는 함수</li>
+</ul>
+<br />
+
+<h4 id="useEffect"><a href="#useEffect" class="headerlink" title="useEffect"></a>useEffect</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line">useEffect(callBackFunc, dependencies);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>useEffect의…<ul>
+<li>deps가 <strong>비어있다면</strong> 렌더링 <code>될 때마다</code> 초기화</li>
+<li>deps가 <strong>[]</strong> 라면 <code>최초 렌더링 시</code> 에만 초기화</li>
+<li>deps에 <strong>state의 배열</strong>이 들어가면 update; <code>최초 렌더링 + 해당 state가 변경되었을 때</code>만 실행</li>
 </ul>
 </li>
 </ul>
-<h3 id="React로-GitHub-Profile-Finder-만들기"><a href="#React로-GitHub-Profile-Finder-만들기" class="headerlink" title="React로 GitHub Profile Finder 만들기"></a>React로 GitHub Profile Finder 만들기</h3><ol>
-<li>CRA에서 사용하지 않는 리소스 정리하기</li>
-<li>전체 Component 구조 정하기</li>
-<li>API 결과 불러오기 + axios 설치하기</li>
-<li>userData를 ResultCard로 넘기기</li>
-<li></li>
-</ol>
 
                     
                         
