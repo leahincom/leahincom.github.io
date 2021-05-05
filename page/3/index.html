@@ -311,6 +311,95 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/02/11/19-Decorators/"
+                            aria-label=": 19. Decorators"
+                        >
+                            19. Decorators
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-11T20:50:45+09:00">
+	
+		    Feb 11, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h3><h3 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h3><p>take the logic</p>
+<h3 id="Data-Binding"><a href="#Data-Binding" class="headerlink" title="Data Binding"></a>Data Binding</h3><ul>
+<li>[(ngModel)] = “property” : binding input property with handling model</li>
+</ul>
+<h2 id="Typescript-and-Angular-Decorators"><a href="#Typescript-and-Angular-Decorators" class="headerlink" title="Typescript and Angular Decorators"></a>Typescript and Angular Decorators</h2><h3 id="Typescript-Decorators"><a href="#Typescript-Decorators" class="headerlink" title="Typescript Decorators"></a>Typescript Decorators</h3><p><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/docs/handbook/decorators.html">www.typescriptlang.org/docs/handbook/decorators.html</a><br>Documentation - Decorators<br>TypeScript Decorators overview<br><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">www.typescriptlang.org</a></p>
+<ul>
+<li>meta programming changing target without modifying metadata (classes)</li>
+<li>annotate or modify the target</li>
+<li></li>
+</ul>
+<p>labelling the target</p>
+<p>@function: function decorator, decorator creater(factory)</p>
+<ul>
+<li>return function (target) =&gt; put class into the target</li>
+<li>return what you decorate (classDecorator -&gt; return class info …)</li>
+</ul>
+<p>…toppings: string[] –&gt; toppings = [‘tomato’, ‘mozzarella’, ‘basil’]</p>
+<p>memoize() : // _.memoize(func)</p>
+<p>Memoizes a given function by caching the computed result.<br>Useful for speeding up slow-running computations.<br>You may assume that the memoized function takes only one argument and that it is a primitive.<br>Memoize should return a function that when called, will check if it has already computed the result for the given argument and return that value instead of recomputing it.</p>
+<h2 id="Object-Properties"><a href="#Object-Properties" class="headerlink" title="Object Properties"></a>Object Properties</h2><h3 id="How-to-define-a-property"><a href="#How-to-define-a-property" class="headerlink" title="How to define a property?"></a>How to define a property?</h3><p>ob.foo = ‘bar’; // direct<br>// Object.defineProperty(obj, ‘foo’, {value: ‘bar’}); //(ppt, ppt_name, object// describe the behaviour of the ppt //ppt_value)</p>
+<blockquote>
+<p>Attribute name</p>
+</blockquote>
+<ul>
+<li>Value (Any type) // actual value<br>// default values of 3 boolean functions of defineProperty(): false // if we define obj with assigning it, then default == true !!!</li>
+<li>Writable (Boolean) // whether the property value can be changed or not</li>
+<li>Enumerable (Boolean) // makes it appear to be in loops (listed in ‘for-in’ enumeration)<br>// 💥 Is Array enumerable?</li>
+<li>Configurable (Boolean) // +Writable +Enumerable // whether we can delete the property or change any attribute apart from attr // configurable lets us change the writable property, writable lets us change the value property</li>
+</ul>
+<h3 id="Angular-Decorators"><a href="#Angular-Decorators" class="headerlink" title="Angular Decorators"></a>Angular Decorators</h3><h4 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h4><p>target: class MyComponent</p>
+<h4 id="Injectable"><a href="#Injectable" class="headerlink" title="Injectable"></a>Injectable</h4><h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>@Input: input decorator =&gt; able to pass the value from parent template using the tag to the child component class</p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>@Output: output decorator =&gt; sen the info to the parent element<br>💥 Child’s view<br>input is meant to receive information from the parent element<br>output is meant to send info to the parent</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/11/19-Decorators/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/02/10/18-Angular/"
                             aria-label=": 18. Angular"
                         >
@@ -1318,72 +1407,6 @@
                         <p>
                             <a
                                 href="/2021/02/02/12-Async-Koa/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/01/31/11-MVC/"
-                            aria-label=": 11. MVC"
-                        >
-                            11. MVC
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-01-31T05:03:34+09:00">
-	
-		    Jan 31, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <ul>
-<li><p>Linux ‘/‘ path</p>
-</li>
-<li><p>GET / POST<br>adrian0220.tistory.com/209</p>
-</li>
-</ul>
-<h3 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h3><p>try {// something that might go wrong} catch (e) {// handle error}</p>
-<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>model: starting making logics from here<br>controller: conductor of orchestra, router<br>receive the request<br>the only part to communicate with the outside part<br>coming to the controller<br>sending from the controller<br>knowing who to call and packages the content, send it to the outside<br>view: html structure filled in template with no data<br>send the filled template back to the controller<br>.gitignore : files to be ignored when creating a repo</p>
-<p>npm handle-bars<br>programmingsummaries.tistory.com/381</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/01/31/11-MVC/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

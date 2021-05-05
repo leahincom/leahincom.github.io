@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="leah">
+    <title>THIREE-Hooks - leah</title>
+    <meta name="author" content="JungHyun">
+    
+        <meta name="keywords" content="hexo,javascript,">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Hooks기본 HookuseState1const [state, setState] = useState(initialState);\n\nuseState() : state 와 setState 을 반환하는 함수\n\ninitialState : 초기값\n보통 null 이나 &quot;&quot; 등의 default value로 설정한다.\n\n\n\n\nstate : 상태 유지 (저장) 값\n\n최초 렌더링 시 반환된 state 는 initialValue 이다.\n\n\nsetState : state 값을 갱신하는 함수\n1setState(newState);\n\n새 state 값을 받으면 컴포넌트 리렌더링을 큐에 등록한다.\n리렌더링 시 useState 가 반환하는 첫번째 값 (인자) 은 갱신된 최신 state 이다.\n\n\n\n\nNote\nReact guarantees that setState function identity is stable and won’t change on re-renders. This is why it’s safe to omit from the useEffect or useCallback dependency list.\n\nFunctional Updates\n 함수적 갱신\n\n\nsetState 가 값을 갱신하는 과정을 직접 코드로 작성하면 다음과 같다.\n12345const [state, setState] = useState(&#123;&#125;);setState(prevState =&gt; &#123;  // Object.assign would also work  return &#123;...prevState, ...updatedValues&#125;;&#125;);\n\n갱신된 객체를 자동으로 merge하는  useState 와 반대로, setState 는 initialValue 를 유지한다.\n\n이전 state 를 이용해서 값을 갱신하는 경우, 이전 값을 받아 갱신된 값을 반환하는 함수를 setState 로 전달하면 된다.\n1234567891011121314151617function Counter (&#123; initialCount &#125;) &#123;  const [count, setCount] = useState(initialCount);  return (    &lt;&gt;      Count: &#123;count&#125;\t\t\t// 초기화      &lt;button onClick=&#123;() =&gt; setCount(initialCount)&#125;&gt;Reset&lt;/button&gt;\t\t\t// 이전 값을 이용해서 값을 갱신하는 경우\t\t\t// parameter value : 현재 값\t\t\t// return value : 갱신할 값      &lt;button onClick=&#123;() =&gt; setCount(prevCount =&gt; prevCount - 1)&#125;&gt;-&lt;/button&gt;      &lt;button onClick=&#123;() =&gt; setCount(prevCount =&gt; prevCount + 1)&#125;&gt;+&lt;/button&gt;    &lt;/&gt;  );&#125;\n\n\n\n\n\nNote\nAnother option is useReducer, which is more suited for managing state objects that contain multiple sub-values.\n\n\n업데이트 함수 (setState에 전달한 함수) 가 현재 상태와 정확히 동일한 값을 반환한다면 바로 뒤에 일어날 리렌더링은 완전히 건너뛰게 된다.\n\n\nReact에서 &#123;&#125; 를 쓰는 경우\n\nJSX 내부에서는 객체를 받아옴\n&#123;&#123;&#125;&#125; : 객체를 받아오는 것이 아니라 JSX 내부에서 생성할 때\n\n\nJSX 외부에서는 일반 JS의 문법 중 function destructurizing을 실행\n\n\nLazy Initial State\n 지연 초기 state\n\ninitialState 인자는 초기 렌더링 시에 사용하는 state (값) 으로, 리렌더링 시 이 값은 무시된다.\n만약 초기 state가 고비용 계산의 결과라면, 초기 렌더링 시에만 실행될 함수를 정의하여 전달하는 것이 효율적이다.\n1234const [state, setState] = useState(() =&gt; &#123;  const initialState = someExpensiveComputation(props);  return initialState;&#125;);\n\n\nBailing Out of a State Update\nstate 갱신의 취소\n\n앞서 설명한 “업데이트 함수 (setState에 전달한 함수) 가 현재 상태와 정확히 동일한 값을 반환한다면 바로 뒤에 일어날 리렌더링은 완전히 건너뛰게 된다.” 를 추가적으로 설명하자면,\nState Hook을 현재 state와 동일한 값으로 갱신 (update) 할 경우, 리액트는 children or firing effects를 렌더링하는 과정을 건너뛰고 실행 (처리) 을 종료한다.\n\nNote\nReact may still need to render that specific component again before bailing out. That shouldn’t be a concern because React won’t unnecessarily go “deeper” into the tree. If you’re doing expensive calculations while rendering, you can optimize them with useMemo.\n\nuseEffect함수형 컴포넌트 내에서는 React’s render phase에 따라 Mutations, subscriptions, timers, logging, and other side effects 가 허용되지 않는다.\n이를 위해 useEffect 를 사용할 수 있다.\n1useEffect(didUpdate);\n\nuseEffect() : 모든 렌더링이 완료된 후 / 어떤 값이 변경되었을 때에만 동작 ( didUpdate ) 을 수행\ndidUpdate : 특정 effect를 발생시키는 (명령형) 함수\n\nCleaning Up an Effect\neffect 정리\n\nEffect는 컴포넌트가 화면에서 제거될 때 정리되어야 하는 요소 (e.g. subscription, timer ID 등) 를 만들곤 한다. 이를 정리하는 함수를 useEffect 에 전달할 수 있다.\n12345678useEffect(() =&gt; &#123;  // new subscription is created on every update  const subscription = props.source.subscribe();  return () =&gt; &#123;    // Clean up the subscription    subscription.unsubscribe();  &#125;;&#125;);\n\nclean-up function (e.g. subscription.unsubscribe() )은 컴포넌트가 제거되기(=== 다음의 effect) 이전 에 실행되어 memory leaks를 방지한다.\n컴포넌트가 여러번 리렌더링 될 경우, 이전의 effect는 다음의 effect가 실행되기 이전 에 정리된다.\n\nTiming of Effects\neffect 타이밍\n\nuseEffect에 전달된 함수의 경우 레이아웃 배치과 그리기를 완료한 후, 지연된 이벤트가 발생하는 동안 실행된다. 이는 브라우저가 화면을 업데이트하는 과정을 방해하지 않기 때문에, 여러 side effects (e.g. setting up subscriptions and event handlers) 를 실행하기에 적합한 때이다.\nuseEffect 는 브라우저가 그려지기 이전까지는 대기하지만, 새로운 렌더링이 발생하기 이전에 실행되는 것을 보장한다. 리액트는 언제나 새로운 업데이트가 발생하기 이전에 이전의 렌더링 effect를 모두 제거한다.\n\nuseLayoutEffect\nDOM 변경과 같이 사용자에게 effect가 보여지는 경우, visual inconsistency 방지를 위해 다음 execution (event) 이 실행되기 이전에 현재 화면이 렌더링이 됨과 동시에 effect가 (synchronously) 발생하여야 한다.\n\nConditionally Firing an Effect\n조건부 effect 발생\n\nEffect의 default behavior은 렌더링이 모두 완료된 이후 실행되는 것이다. 이는 해당 effect의 dependency 중 하나가 변경될 때마다 새로 실행됨을 의미한다.\n앞선 예제를 통해서 자세히 보면,\n12345678useEffect(() =&gt; &#123;  // new subscription is created on every update  const subscription = props.source.subscribe();  return () =&gt; &#123;    // Clean up the subscription    subscription.unsubscribe();  &#125;;&#125;);\nsubscription 은 매 업데이트마다 생성될 필요 없이, source prop 이 변할 때만 새로 생성되면 된다.\n이와 같은 현상을 방지하기 위해,  useEffect 의 2번째 argument로 effect가 의존하는 (depend on, dependency) 배열을 전달한다.\n따라서 위 예제를 수정해보면,\n1234567891011useEffect(  // 전달하는 함수는 동일하되,  () =&gt; &#123;    const subscription = props.source.subscribe();    return () =&gt; &#123;      subscription.unsubscribe();    &#125;;  &#125;,  // 두번째 인자로 dependency array (depend on하는 배열) 을 전달한다.  [props.source],);\n이를 통해 subscription은 props.source가 변경될 때에만 재생성된다.\n만약 effect를 (mount 또는 unmount 시) 한 번만 수행하고 싶다면 두번째 인자로 빈 배열 ( [] ) 을 전달하면 된다. 이를 통해 effect는 컴포넌트 범위에서 가져온 값들 (e.g. props, state 등) 에 전혀 의존하지 않으므로 해당 값들이 변경되어도 다시 실행되지 않는다.\n빈 배열 ( [] ) 은 effect 안에 있는 props 와 state 가 항상 초기값을 가지게 됨을 의미한다. 이는 componentDidMount 와 componentWillUnMount 의 기능과 같다.\n\n두번째 인자로 전달하는 배열은 effect에 사용되는 컴포넌트 범위의 모든 값 (e.g. props, state 등) 들을 포함해야 한다. 이를 위반할 시 이전 렌더링에서 설정한 값을 참조하는 버그가 발생한다.\n이렇게 전달된 dependency 배열은 effect 함수에 인자로 전달되지 않는다. 하지만 effect 함수 내에서 참조된 모든 값들이 해당 배열에 포함되어야 하므로, 전달 여부는 유의미하지 않다.\n\nuseContext1const value = useContext(MyContext);\n\nuseContext() : ( React.createContext 를 통해 반환된 값인 ) context 객체에 **현재 context 값 (MyContext) **을 반환한다.\n가장 가까운 상위 컴포넌트 &lt;MyContext.Provider&gt; 가 업데이트 되면, useContext 는 해당 컴포넌트에 전달 (포함) 된 가장 최신의 context value 에 따라 화면을 리렌더링 한다.\n\n\nMyContext : 현재 context 값 (객체) 으로, 트리 구조에서 해당 컴포넌트의 상위 컴포넌트이면서 가장 가까운 &lt;MyContext.Provider&gt; 의 value prop 에 따라 결정된다.\nuseContext() 의 인자는 context 객체여야 한다.\nCorrect: useContext(MyContext)\nIncorrect: useContext(MyContext.Consumer)\nIncorrect: useContext(MyContext.Provider)\n\n\n\n\n\nuseContext 를 사용한 컴포넌트는 context 값이 변경될 때마다 리렌더링된다. 리렌더링 되는 컴포넌트가 비싸다면, momoization 을 이용해 효율성을 높일 수 있다.\n\n상위 컴포넌트에서 React.memo 나 shouldComponentUpdate 를 쓰더라도, useContext 를 사용한 컴포넌트부터 리렌더링이 진행 (시작) 된다.\n\nuseContext 는 context를 읽고 변경사항을 구독 (확인) 하는 것만 가능하기 때문에, 해당 context의 값을 전달하기 위해 트리 구조 내 상위 컴포넌트로서 &lt;MyContext.Provider&gt; 가 필요하다.\nPutting it together with Context.Provider123456789101112131415161718192021222324252627282930313233343536373839const themes = &#123;  light: &#123;    foreground: &quot;#000000&quot;,    background: &quot;#eeeeee&quot;  &#125;,  dark: &#123;    foreground: &quot;#ffffff&quot;,    background: &quot;#222222&quot;  &#125;&#125;;const ThemeContext = React.createContext(themes.light);function App() &#123;  return (    &lt;ThemeContext.Provider value=&#123;themes.dark&#125;&gt;      &lt;Toolbar /&gt;    &lt;/ThemeContext.Provider&gt;  );&#125;function Toolbar(props) &#123;  return (    &lt;div&gt;      &lt;ThemedButton /&gt;    &lt;/div&gt;  );&#125;function ThemedButton() &#123;  // useContext의 인자로서 ThemeContext 객체 전달  // theme = &lt;ThemeContext.Provider&gt;의 value인 &#123;themes.dark&#125; // 객체  const theme = useContext(ThemeContext);  return (    &lt;button style=&#123;&#123; background: theme.background, color: theme.foreground &#125;&#125;&gt;      I am styled by theme context!    &lt;/button&gt;  );&#125;\n\n\n추가 HooksuseReduceruseCallbackuseMemouseRefuseImperativeHandleuseLayoutEffectuseDebugValue","dateCreated":"2021-05-05T23:44:17+09:00","dateModified":"2021-05-05T19:01:18+09:00","datePublished":"2021-05-05T23:44:17+09:00","description":"","headline":"THIREE-Hooks","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/05/05/THIREE-Hooks/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/05/05/THIREE-Hooks/","keywords":"SOPT, ReactJS, Hook"}</script>
+    <meta name="description" content="Hooks기본 HookuseState1const [state, setState] &#x3D; useState(initialState);  useState() : state 와 setState 을 반환하는 함수  initialState : 초기값 보통 null 이나 &quot;&quot; 등의 default value로 설정한다.     state : 상태 유지 (저">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="THIREE-Hooks">
+<meta property="og:url" content="http://leahincom.github.io/2021/05/05/THIREE-Hooks/index.html">
+<meta property="og:site_name" content="leah">
+<meta property="og:description" content="Hooks기본 HookuseState1const [state, setState] &#x3D; useState(initialState);  useState() : state 와 setState 을 반환하는 함수  initialState : 초기값 보통 null 이나 &quot;&quot; 등의 default value로 설정한다.     state : 상태 유지 (저">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-05T14:44:17.000Z">
+<meta property="article:modified_time" content="2021-05-05T10:01:18.726Z">
+<meta property="article:author" content="JungHyun">
+<meta property="article:tag" content="SOPT">
+<meta property="article:tag" content="ReactJS">
+<meta property="article:tag" content="Hook">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/all.css">
+
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
+
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            leah
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name">JungHyun</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/leahincom"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/junghyun.lah/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="mailto:leahincom@gmail.com"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            THIREE-Hooks
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2021-05-05T23:44:17+09:00">
+	
+		    May 05, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/THIREE/">THIREE</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h2><h3 id="기본-Hook"><a href="#기본-Hook" class="headerlink" title="기본 Hook"></a>기본 Hook</h3><h4 id="useState"><a href="#useState" class="headerlink" title="useState"></a>useState</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, setState] = useState(initialState);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>useState()</code> : <code>state</code> 와 <code>setState</code> 을 반환하는 함수</p>
+<ul>
+<li><code>initialState</code> : 초기값<ul>
+<li>보통 <code>null</code> 이나 <code>&quot;&quot;</code> 등의 default value로 설정한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>state</code> : 상태 유지 (저장) 값</p>
+<ul>
+<li>최초 렌더링 시 반환된 <code>state</code> 는 <code>initialValue</code> 이다.</li>
+</ul>
+</li>
+<li><p><code>setState</code> : <code>state</code> 값을 갱신하는 함수</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setState(newState);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>새 <code>state</code> 값을 받으면 컴포넌트 리렌더링을 큐에 등록한다.</li>
+<li>리렌더링 시 <code>useState</code> 가 반환하는 첫번째 값 (인자) 은 갱신된 최신 <code>state</code> 이다.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Note</p>
+<p>React guarantees that <code>setState</code> function identity is stable and won’t change on re-renders. This is why it’s safe to omit from the <code>useEffect</code> or <code>useCallback</code> dependency list.</p>
+</blockquote>
+<h5 id="Functional-Updates"><a href="#Functional-Updates" class="headerlink" title="Functional Updates"></a>Functional Updates</h5><blockquote>
+<p> 함수적 갱신</p>
+</blockquote>
+<ol>
+<li><p><code>setState</code> 가 값을 갱신하는 과정을 직접 코드로 작성하면 다음과 같다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, setState] = useState(&#123;&#125;);</span><br><span class="line">setState(<span class="function"><span class="params">prevState</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Object.assign would also work</span></span><br><span class="line">  <span class="keyword">return</span> &#123;...prevState, ...updatedValues&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>갱신된 객체를 자동으로 merge하는 <code> useState</code> 와 반대로, <code>setState</code> 는 <code>initialValue</code> 를 유지한다.</p>
+</blockquote>
+<p>이전 <code>state</code> 를 이용해서 값을 <strong>갱신</strong>하는 경우, 이전 값을 받아 갱신된 값을 반환하는 함수를 <code>setState</code> 로 전달하면 된다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Counter</span> (<span class="params">&#123; initialCount &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = useState(initialCount);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      Count: &#123;count&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 초기화</span></span><br><span class="line">      &lt;button onClick=&#123;<span class="function">() =&gt;</span> setCount(initialCount)&#125;&gt;Reset&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 이전 값을 이용해서 값을 갱신하는 경우</span></span><br><span class="line">			<span class="comment">// parameter value : 현재 값</span></span><br><span class="line">			<span class="comment">// return value : 갱신할 값</span></span><br><span class="line">      &lt;button onClick=&#123;<span class="function">() =&gt;</span> setCount(<span class="function"><span class="params">prevCount</span> =&gt;</span> prevCount - <span class="number">1</span>)&#125;&gt;-&lt;/button&gt;</span><br><span class="line">      &lt;button onClick=&#123;<span class="function">() =&gt;</span> setCount(<span class="function"><span class="params">prevCount</span> =&gt;</span> prevCount + <span class="number">1</span>)&#125;&gt;+&lt;/button&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<blockquote>
+<p>Note</p>
+<p>Another option is <code>useReducer</code>, which is more suited for managing state objects that contain multiple sub-values.</p>
+</blockquote>
+<ol start="2">
+<li>업데이트 함수 (setState에 전달한 함수) 가 현재 상태와 정확히 동일한 값을 반환한다면 바로 뒤에 일어날 리렌더링은 완전히 건너뛰게 된다.</li>
+</ol>
+<blockquote>
+<p><strong>React에서 <code>&#123;&#125;</code> 를 쓰는 경우</strong></p>
+<ul>
+<li>JSX 내부에서는 객체를 받아옴<ul>
+<li><code>&#123;&#123;&#125;&#125;</code> : 객체를 받아오는 것이 아니라 JSX 내부에서 생성할 때</li>
+</ul>
+</li>
+<li>JSX 외부에서는 일반 JS의 문법 중 function destructurizing을 실행</li>
+</ul>
+</blockquote>
+<h5 id="Lazy-Initial-State"><a href="#Lazy-Initial-State" class="headerlink" title="Lazy Initial State"></a>Lazy Initial State</h5><blockquote>
+<p> 지연 초기 state</p>
+</blockquote>
+<p><code>initialState</code> 인자는 초기 렌더링 시에 사용하는 <code>state (값)</code> 으로, 리렌더링 시 이 값은 무시된다.</p>
+<p>만약 초기 state가 고비용 계산의 결과라면, 초기 렌더링 시에만 실행될 함수를 정의하여 전달하는 것이 효율적이다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, setState] = useState(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> initialState = someExpensiveComputation(props);</span><br><span class="line">  <span class="keyword">return</span> initialState;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="Bailing-Out-of-a-State-Update"><a href="#Bailing-Out-of-a-State-Update" class="headerlink" title="Bailing Out of a State Update"></a>Bailing Out of a State Update</h5><blockquote>
+<p>state 갱신의 취소</p>
+</blockquote>
+<p>앞서 설명한 <em>“업데이트 함수 (setState에 전달한 함수) 가 현재 상태와 정확히 동일한 값을 반환한다면 바로 뒤에 일어날 리렌더링은 완전히 건너뛰게 된다.”</em> 를 추가적으로 설명하자면,</p>
+<p>State Hook을 현재 state와 동일한 값으로 갱신 (update) 할 경우, 리액트는 children or firing effects를 렌더링하는 과정을 건너뛰고 실행 (처리) 을 종료한다.</p>
+<blockquote>
+<p>Note</p>
+<p>React may still need to render that specific component again before bailing out. That shouldn’t be a concern because React won’t unnecessarily go “deeper” into the tree. If you’re doing expensive calculations while rendering, you can optimize them with <code>useMemo</code>.</p>
+</blockquote>
+<h4 id="useEffect"><a href="#useEffect" class="headerlink" title="useEffect"></a>useEffect</h4><p>함수형 컴포넌트 내에서는 <em>React’s render phase</em>에 따라 <em>Mutations, subscriptions, timers, logging, and other side effects</em> 가 허용되지 않는다.</p>
+<p>이를 위해 <code>useEffect</code> 를 사용할 수 있다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useEffect(didUpdate);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>useEffect()</code> : 모든 렌더링이 완료된 후 / 어떤 값이 변경되었을 때에만 동작 ( <code>didUpdate</code> ) 을 수행</li>
+<li><code>didUpdate</code> : 특정 effect를 발생시키는 (명령형) 함수</li>
+</ul>
+<h5 id="Cleaning-Up-an-Effect"><a href="#Cleaning-Up-an-Effect" class="headerlink" title="Cleaning Up an Effect"></a>Cleaning Up an Effect</h5><blockquote>
+<p>effect 정리</p>
+</blockquote>
+<p>Effect는 컴포넌트가 화면에서 제거될 때 정리되어야 하는 요소 (e.g. subscription, timer ID 등) 를 만들곤 한다. 이를 정리하는 함수를 <code>useEffect</code> 에 전달할 수 있다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// new subscription is created on every update</span></span><br><span class="line">  <span class="keyword">const</span> subscription = props.source.subscribe();</span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Clean up the subscription</span></span><br><span class="line">    subscription.unsubscribe();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>clean-up function</code> (e.g. <code>subscription.unsubscribe()</code> )은 <strong>컴포넌트가 제거되기(=== 다음의 effect) <em>이전</em> 에 실행되어</strong> memory leaks를 방지한다.</li>
+<li>컴포넌트가 여러번 리렌더링 될 경우, <strong>이전의 effect는 다음의 effect가 실행되기 <em>이전</em> 에 정리된다.</strong></li>
+</ul>
+<h5 id="Timing-of-Effects"><a href="#Timing-of-Effects" class="headerlink" title="Timing of Effects"></a>Timing of Effects</h5><blockquote>
+<p>effect 타이밍</p>
+</blockquote>
+<p><code>useEffect</code>에 전달된 함수의 경우 레이아웃 배치과 그리기를 완료한 후, 지연된 이벤트가 발생하는 동안 실행된다. 이는 브라우저가 화면을 업데이트하는 과정을 방해하지 않기 때문에, 여러 <em>side effects (e.g. setting up subscriptions and event handlers)</em> 를 실행하기에 적합한 때이다.</p>
+<p><code>useEffect</code> 는 브라우저가 그려지기 이전까지는 대기하지만, 새로운 렌더링이 발생하기 이전에 실행되는 것을 보장한다. 리액트는 언제나 새로운 업데이트가 발생하기 이전에 이전의 렌더링 effect를 모두 제거한다.</p>
+<blockquote>
+<p><code>useLayoutEffect</code></p>
+<p>DOM 변경과 같이 사용자에게 effect가 보여지는 경우, visual inconsistency 방지를 위해 다음 execution (event) 이 실행되기 이전에 현재 화면이 렌더링이 됨과 동시에 effect가 (<em>synchronously</em>) 발생하여야 한다.</p>
+</blockquote>
+<h5 id="Conditionally-Firing-an-Effect"><a href="#Conditionally-Firing-an-Effect" class="headerlink" title="Conditionally Firing an Effect"></a>Conditionally Firing an Effect</h5><blockquote>
+<p>조건부 effect 발생</p>
+</blockquote>
+<p>Effect의 default behavior은 렌더링이 모두 완료된 이후 실행되는 것이다. 이는 해당 effect의 dependency 중 하나가 변경될 때마다 새로 실행됨을 의미한다.</p>
+<p>앞선 예제를 통해서 자세히 보면,</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// new subscription is created on every update</span></span><br><span class="line">  <span class="keyword">const</span> subscription = props.source.subscribe();</span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Clean up the subscription</span></span><br><span class="line">    subscription.unsubscribe();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>subscription</code> 은 매 업데이트마다 생성될 필요 없이, <code>source prop</code> 이 변할 때만 새로 생성되면 된다.</p>
+<p>이와 같은 현상을 방지하기 위해, <code> useEffect</code> 의 2번째 argument로 effect가 의존하는 (<em>depend on, dependency</em>) 배열을 전달한다.</p>
+<p>따라서 위 예제를 수정해보면,</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">useEffect(</span><br><span class="line">  <span class="comment">// 전달하는 함수는 동일하되,</span></span><br><span class="line">  () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> subscription = props.source.subscribe();</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      subscription.unsubscribe();</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 두번째 인자로 dependency array (depend on하는 배열) 을 전달한다.</span></span><br><span class="line">  [props.source],</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>이를 통해 <code>subscription</code>은 <code>props.source</code>가 변경될 때에만 재생성된다.</p>
+<p>만약 effect를 (mount 또는 unmount 시) 한 번만 수행하고 싶다면 두번째 인자로 빈 배열 ( <code>[]</code> ) 을 전달하면 된다. 이를 통해 effect는 컴포넌트 범위에서 가져온 값들 (e.g. props, state 등) 에 전혀 의존하지 않으므로 해당 값들이 변경되어도 다시 실행되지 않는다.</p>
+<p>빈 배열 ( <code>[]</code> ) 은 effect 안에 있는 <code>props</code> 와 <code>state</code> 가 항상 초기값을 가지게 됨을 의미한다. 이는 <code>componentDidMount</code> 와 <code>componentWillUnMount</code> 의 기능과 같다.</p>
+<blockquote>
+<p>두번째 인자로 전달하는 배열은 effect에 사용되는 컴포넌트 범위의 모든 값 (e.g. props, state 등) 들을 포함해야 한다. 이를 위반할 시 이전 렌더링에서 설정한 값을 참조하는 버그가 발생한다.</p>
+<p>이렇게 전달된 dependency 배열은 effect 함수에 인자로 전달되지 않는다. 하지만 effect 함수 내에서 참조된 모든 값들이 해당 배열에 포함되어야 하므로, 전달 여부는 유의미하지 않다.</p>
+</blockquote>
+<h4 id="useContext"><a href="#useContext" class="headerlink" title="useContext"></a>useContext</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> value = useContext(MyContext);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>useContext()</code> : <em>( <code>React.createContext</code> 를 통해 반환된 값인 )</em> context 객체에 **현재 context 값 (<code>MyContext</code>) **을 반환한다.<ul>
+<li>가장 가까운 상위 컴포넌트 <code>&lt;MyContext.Provider&gt;</code> 가 업데이트 되면, <code>useContext</code> 는 해당 컴포넌트에 전달 (포함) 된 <strong>가장 최신</strong>의 context value 에 따라 화면을 리렌더링 한다.</li>
+</ul>
+</li>
+<li><code>MyContext</code> : <strong>현재 context 값 (객체)</strong> 으로, 트리 구조에서 해당 컴포넌트의 <strong>상위 컴포넌트이면서 가장 가까운</strong> <code>&lt;MyContext.Provider&gt;</code> 의 <code>value prop</code> 에 따라 결정된다.<ul>
+<li><code>useContext()</code> 의 인자는 <strong>context 객체</strong>여야 한다.<ul>
+<li><strong>Correct:</strong> <code>useContext(MyContext)</code></li>
+<li><strong>Incorrect:</strong> <code>useContext(MyContext.Consumer)</code></li>
+<li><strong>Incorrect:</strong> <code>useContext(MyContext.Provider)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><code>useContext</code> 를 사용한 컴포넌트는 context 값이 변경될 때마다 리렌더링된다. 리렌더링 되는 컴포넌트가 비싸다면, <code>momoization</code> 을 이용해 효율성을 높일 수 있다.</p>
+<blockquote>
+<p>상위 컴포넌트에서 <code>React.memo</code> 나 <code>shouldComponentUpdate</code> 를 쓰더라도, <code>useContext</code> 를 사용한 컴포넌트부터 리렌더링이 진행 (시작) 된다.</p>
+</blockquote>
+<p><code>useContext</code> 는 context를 <strong>읽고 변경사항을 구독 (확인)</strong> 하는 것만 가능하기 때문에, 해당 context의 값을 <strong>전달</strong>하기 위해 트리 구조 내 상위 컴포넌트로서 <code>&lt;MyContext.Provider&gt;</code> 가 필요하다.</p>
+<h5 id="Putting-it-together-with-Context-Provider"><a href="#Putting-it-together-with-Context-Provider" class="headerlink" title="Putting it together with Context.Provider"></a>Putting it together with Context.Provider</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> themes = &#123;</span><br><span class="line">  light: &#123;</span><br><span class="line">    foreground: <span class="string">&quot;#000000&quot;</span>,</span><br><span class="line">    background: <span class="string">&quot;#eeeeee&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  dark: &#123;</span><br><span class="line">    foreground: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">    background: <span class="string">&quot;#222222&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ThemeContext = React.createContext(themes.light);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;ThemeContext.Provider value=&#123;themes.dark&#125;&gt;</span><br><span class="line">      &lt;Toolbar /&gt;</span><br><span class="line">    &lt;/ThemeContext.Provider&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Toolbar</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;ThemedButton /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ThemedButton</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// useContext의 인자로서 ThemeContext 객체 전달</span></span><br><span class="line">  <span class="comment">// theme = &lt;ThemeContext.Provider&gt;의 value인 &#123;themes.dark&#125; // 객체</span></span><br><span class="line">  <span class="keyword">const</span> theme = useContext(ThemeContext);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;button style=&#123;&#123; <span class="attr">background</span>: theme.background, <span class="attr">color</span>: theme.foreground &#125;&#125;&gt;</span><br><span class="line">      I am styled by theme context!</span><br><span class="line">    &lt;/button&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="추가-Hooks"><a href="#추가-Hooks" class="headerlink" title="추가 Hooks"></a>추가 Hooks</h3><h4 id="useReducer"><a href="#useReducer" class="headerlink" title="useReducer"></a>useReducer</h4><h4 id="useCallback"><a href="#useCallback" class="headerlink" title="useCallback"></a>useCallback</h4><h4 id="useMemo"><a href="#useMemo" class="headerlink" title="useMemo"></a>useMemo</h4><h4 id="useRef"><a href="#useRef" class="headerlink" title="useRef"></a>useRef</h4><h4 id="useImperativeHandle"><a href="#useImperativeHandle" class="headerlink" title="useImperativeHandle"></a>useImperativeHandle</h4><h4 id="useLayoutEffect"><a href="#useLayoutEffect" class="headerlink" title="useLayoutEffect"></a>useLayoutEffect</h4><h4 id="useDebugValue"><a href="#useDebugValue" class="headerlink" title="useDebugValue"></a>useDebugValue</h4>
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/Hook/" rel="tag">Hook</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/ReactJS/" rel="tag">ReactJS</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/SOPT/" rel="tag">SOPT</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
+                    data-tooltip="3차 세미나_24/04/21"
+                    aria-label="NEXT: 3차 세미나_24/04/21"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/05/THIREE-Hooks/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/05/THIREE-Hooks/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/05/THIREE-Hooks/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 JungHyun. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
+                    data-tooltip="3차 세미나_24/04/21"
+                    aria-label="NEXT: 3차 세미나_24/04/21"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/05/THIREE-Hooks/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/05/THIREE-Hooks/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/05/THIREE-Hooks/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/05/THIREE-Hooks/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/05/THIREE-Hooks/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/05/THIREE-Hooks/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name">JungHyun</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br/>
+                Seoul/South Korea, London/UK
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/jquery.js"></script>
+
+
+<script src="/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/assets/js/thumbs.js"></script>
+
+
+<script src="/assets/js/tranquilpeak.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
