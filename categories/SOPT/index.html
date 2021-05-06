@@ -927,30 +927,30 @@
 
 
 
-<h4 id="useLayoutEffect"><a href="#useLayoutEffect" class="headerlink" title="useLayoutEffect"></a>useLayoutEffect</h4><p>useEffect 와 동일한 기능을 DOM 변경 시 동시에 (synchronously) 실행하는 함수로, DOM 에서 레이아웃을 읽음과 동시에 리렌더링을 해야할 때 사용한다.</p>
-<p>useLayoutEffect 내부에 정의된 예정된 업데이트 또한 브라우저가 레이아웃을 그리기 이전에, 읽음과 동시에 발생한다.</p>
+<h4 id="useLayoutEffect"><a href="#useLayoutEffect" class="headerlink" title="useLayoutEffect"></a>useLayoutEffect</h4><p><code>useEffect</code> 와 동일한 기능을 DOM 변경 시 동시에 (synchronously) 실행하는 함수로, DOM 에서 레이아웃을 읽음과 동시에 리렌더링을 해야할 때 사용한다.</p>
+<p><code>useLayoutEffect</code> 내부에 정의된 예정된 업데이트 또한 브라우저가 레이아웃을 그리기 이전에, 읽음과 동시에 발생한다.</p>
 <blockquote>
-<p>화면 업데이트를 차단하지 않아도 되는 경우에는 useEffect 를 사용하는 것이 좋다.</p>
+<p>화면 업데이트를 차단하지 않아도 되는 경우에는 <code>useEffect</code> 를 사용하는 것이 좋다.</p>
 </blockquote>
 <br />
 
 
 
 <blockquote>
-<p> 클래스 컴포넌트에서 코드를 옮길 때 useLayoutEffect() 는 componentDidMount 나 componentDidUpdate 와 같은 단계에서 발생한다. 하지만, 먼저 useEffect 를 시도해보고 에러가 발생할 때 useLayoutEffect 를 사용하는 것이 좋다.</p>
+<p> 클래스 컴포넌트에서 코드를 옮길 때 <code>useLayoutEffect()</code> 는 <code>componentDidMount</code> 나 <code>componentDidUpdate</code> 와 같은 단계에서 발생한다. 하지만, 먼저 <code>useEffect</code> 를 시도해보고 에러가 발생할 때 <code>useLayoutEffect</code> 를 사용하는 것이 좋다.</p>
 </blockquote>
 <blockquote>
-<p>SSR (서버 사이드 렌더링) 의 경우, useLayoutEffect 나 useEffect 는 JavaScript 가 모두 다운되기 전까지는 실행되지 않는다. SSR 컴포넌트가 useLayoutEffect 를 포함한 경우,</p>
+<p><strong>SSR (서버 사이드 렌더링)</strong> 의 경우, <code>useLayoutEffect</code> 나 <code>useEffect</code> 는 JavaScript 가 모두 다운되기 전까지는 실행되지 않는다. SSR 컴포넌트가 <code>useLayoutEffect</code> 를 포함한 경우,</p>
 <ul>
-<li>첫 렌더링 시 해당 컴포넌트가 필요하지 않다면 useEffect 로 로직을 옮기고,</li>
-<li>useLayoutEffect 가 되기 전까지 HTML이 망가져 보인다면 클라이언트 렌더링이 완료될 때까지 해당 컴포넌트를 보여주는 것을 딜레이시킨다.</li>
+<li>첫 렌더링 시 해당 컴포넌트가 필요하지 않다면 <code>useEffect</code> 로 로직을 옮기고,</li>
+<li><code>useLayoutEffect</code> 가 실행되기 전까지 HTML이 망가져 보인다면 클라이언트 렌더링이 완료될 때까지 해당 컴포넌트를 보여주는 것을 딜레이시킨다.</li>
 </ul>
 <p>서버 렌더링 HTML에서 레이아웃 effect를 필요로 하는 컴포넌트를 제외하기 위해서, </p>
 <ul>
 <li><code>showCild &amp;&amp; &lt;Child /&gt;</code> 를 이용하여 해당 컴포넌트를 조건적으로 렌더링을 하고, </li>
 <li><code>useEffect(() =&gt; &#123; setShowChild(true); &#125;, [])</code> 를 이용하여 보이는 것을 미룬다 (defer).</li>
 </ul>
-<p>이를 통해 HTML이 hydration (useLayoutEffect, useEffect 실행) 이전에 망가져 보이는 것을 방지한다.</p>
+<p>이를 통해 HTML이 hydration (<code>useLayoutEffect</code>, <code>useEffect</code> 실행) 이전에 망가져 보이는 것을 방지한다.</p>
 </blockquote>
 <br />
 
