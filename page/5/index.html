@@ -311,6 +311,73 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/01/13/function-with-multiple-invocations/"
+                            aria-label=": JS) function with multiple invocations"
+                        >
+                            JS) function with multiple invocations
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-13T03:39:15+09:00">
+	
+		    Jan 13, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Algorithm/">Algorithm</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <blockquote>
+<p>a function that adds from two invocations.<br>e.g. twoAdds(3)(4) -&gt; 7</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function twoAdds (num) &#123;</span><br><span class="line">	return function (num2) &#123;</span><br><span class="line">		return num+num2;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; twoAdds(num1)(num2)</span><br><span class="line">&#x2F;&#x2F; twoAdds(num1) &#x2F;&#x2F; return value as a function -&gt; value(num2)</span><br></pre></td></tr></table></figure>
+<p><code>currying</code> is the technique of converting a function that takes multiple arguments into a sequence of functions that each take a single argument.</p>
+<h3 id="Closure-vs-Currying"><a href="#Closure-vs-Currying" class="headerlink" title="Closure vs Currying"></a>Closure vs Currying</h3><ul>
+<li>Closure: allows a function to access variables in a parent scope without passing them in.</li>
+<li>Currying: the pattern of functions that immediately evaluate and return other functions.</li>
+</ul>
+<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p><a target="_blank" rel="noopener" href="http://www.youtube.com/watch?v=hRJrp17WnOE&amp;feature=youtu.be">www.youtube.com/watch?v=hRJrp17WnOE&amp;feature=youtu.be</a></p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/13/function-with-multiple-invocations/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/01/12/1-Git/"
                             aria-label=": 1. Git"
                         >
