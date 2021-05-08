@@ -312,6 +312,87 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/05/08/SOAP-Testing/"
+                            aria-label=": SOAP-Testing"
+                        >
+                            SOAP-Testing
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-05-08T18:03:24+09:00">
+	
+		    May 08, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><p><strong><em>Testing 은 Shipping (배포) 보다 중요하다.</em></strong></p>
+<p>만약 테스트가 없거나 적절하지 않은 양만큼 (부족한) 만 존재할 경우, 배포할 때마다 코드를 break 했는지 혹은 수정한 코드가 올바르게 작동할지 확신할 수 없다.</p>
+<p>적절한 양을 정하는 요소는 팀과 상황에 따라 다르지만, **100%의 Coverage ( <code>보호 범위</code> , 즉, 모든 statement와 branch가 보호됨) **를 갖는 것은 개발 시에 안전함과 자신감을 제공한다.</p>
+<p>따라서, <em>testing framework 에 더하여 <strong>good coverage tool</strong> 또한 필요</em> 하다.</p>
+<blockquote>
+<p><em>e.g.</em></p>
+<p><strong>Testing Framework</strong> : Mocha · QUnit · Jasmine · Karma · Intern · AVA, etc.</p>
+<p><strong>Coverage Tool</strong> : istanbul · Cobertura · CodeCover · Coverage.py · EMMA, etc.</p>
+</blockquote>
+<br />
+
+
+
+<h3 id="Test-Driven-Development-TDD"><a href="#Test-Driven-Development-TDD" class="headerlink" title="Test Driven Development (TDD)"></a>Test Driven Development (TDD)</h3><ul>
+<li><strong>모든</strong> feature / module 에 대한 테스트를 정의하자.</li>
+<li><em>목표 coverage 를 도달한 상태에서 <strong>새로운</strong></em> feature을 배포하자.<ul>
+<li>도달하지 못했다면, <strong><code>refactoring</code> 부터</strong> 하자.</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> assert <span class="keyword">from</span> <span class="string">&quot;assert&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">describe(<span class="string">&quot;MomentJS&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// date boundary를 ☹️한 데 모아😡 처리함.</span></span><br><span class="line">  it(<span class="string">&quot;handles date boundaries&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> date;</span><br><span class="line"></span><br><span class="line">    date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;1/1/2015&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">30</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;1/31/2015&quot;</span>, date);</span><br><span class="line"></span><br><span class="line">    date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;2/1/2016&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">28</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;02/29/2016&quot;</span>, date);</span><br><span class="line"></span><br><span class="line">    date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;2/1/2015&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">28</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;03/01/2015&quot;</span>, date);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">describe(<span class="string">&quot;MomentJS&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// date boundary handler를 😄여러 조건으로 나누어🤩 정의함.</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 30일을 가진 month 의 경우</span></span><br><span class="line">  it(<span class="string">&quot;handles 30-day months&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;1/1/2015&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">30</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;1/31/2015&quot;</span>, date);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 윤년의 경우</span></span><br><span class="line">  it(<span class="string">&quot;handles leap year&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;2/1/2016&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">28</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;02/29/2016&quot;</span>, date);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 그 외, 31일을 가진 month &amp;&amp; 윤년이 아닌 경우</span></span><br><span class="line">  it(<span class="string">&quot;handles non-leap year&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;2/1/2015&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">28</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;03/01/2015&quot;</span>, date);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/05/08/SOAP-Testing/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/05/08/SOAP-SOLID/"
                             aria-label=": SOLID"
                         >
@@ -3090,104 +3171,6 @@
                         <p>
                             <a
                                 href="/2021/04/05/SOAP-Functions/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/04/05/SOAP-Variables/"
-                            aria-label=": Variables"
-                        >
-                            Variables
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-04-05T07:01:36+09:00">
-	
-		    Apr 05, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
-<li><p>변수 이름</p>
-<ol>
-<li><p>의미 있는</p>
-</li>
-<li><p>발음하기 쉬운</p>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> yyyymmdstr = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> currentDate = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>동일한 유형에 동일한 어휘</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">getUserInfo();</span><br><span class="line">getClientData();</span><br><span class="line">getCustomerRecord();</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">getUser();</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>검색 가능한 이름 지정하기</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, <span class="number">86400000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> MILLISECONDS_IN_A_DAY = <span class="number">86400000</span>;</span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, MILLISECONDS_IN_A_DAY);</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>의도를 나타내는</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> address = <span class="string">&#x27;One Infinite Loop, Cupertino 95014&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> cityZipCodeRegex = <span class="regexp">/^[^,\\]+[,\\\s]+(.+?)\s*(\d&#123;5&#125;)?$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">saveCityZipCode(address.match(cityZipCodeRegex)[<span class="number">1</span>], address.match(cityZipCodeRegex)[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> [, city, zipCode] = address.match(cityZipCodeRegex) || [];</span><br><span class="line">saveCityZipCode(city, zipCode);</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>암시적인 것 X, <strong>명시적인 것</strong></li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> locations = [<span class="string">&#x27;서울&#x27;</span>, <span class="string">&#x27;인천&#x27;</span>, <span class="string">&#x27;수원&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">l</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 잠깐, `l`은 또 뭘까요?</span></span><br><span class="line">  dispatch(l);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">location</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  dispatch(location);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<ol start="7">
-<li>필요없는 것 지우기</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  carMake: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  carModel: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  carColor: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.carColor = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  make: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  model: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  color: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.color = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="8">
-<li>short circuiting보다 <strong>default 매개변수 활용하기</strong><ul>
-<li>default 매개변수 : 매개변수가 <code>undefined</code> 일 때 적용됨</li>
-<li>그 외 (‘’, “”, false, null, 0, NaN 등의 <code>falsy</code> 값 포함) 은 적용되지 않음</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> breweryName = name || <span class="string">&#x27;Hipster Brew Co.&#x27;</span>;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name = <span class="string">&#x27;Hipster Brew Co.&#x27;</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/04/05/SOAP-Variables/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
