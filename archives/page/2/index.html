@@ -312,6 +312,172 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
+                            aria-label=": Responsive Web"
+                        >
+                            Responsive Web
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-04-10T04:36:47+09:00">
+	
+		    Apr 10, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/WEB-28th/">WEB_28th</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h1 id="Responsive-Web"><a href="#Responsive-Web" class="headerlink" title="Responsive Web"></a>Responsive Web</h1><blockquote>
+<h3 id="Always-Design-for-Mobile-First"><a href="#Always-Design-for-Mobile-First" class="headerlink" title="Always Design for Mobile First"></a>Always Design for Mobile First</h3></blockquote>
+<center><img src="https://www.marketing91.com/wp-content/uploads/2018/04/website-responsiveness-2.jpg" /></center>
+
+
+
+<ul>
+<li><code>데스크탑</code>, <code>태블릿</code>, <code>노트북</code>, <code>스마트폰</code> 등의 다양한 기기가 등장하면서 데스크탑의 화면에 최적화되어 있던 레이아웃을 각 기기의 화면 크기에 맞게 유동적으로 변동해야 하는 필요성이 대두됨</li>
+<li><code>내용은 동일</code>하지만 최적화된 레이아웃 렌더링</li>
+</ul>
+<h3 id="반응형의-중요성"><a href="#반응형의-중요성" class="headerlink" title="반응형의 중요성"></a>반응형의 중요성</h3><ol>
+<li><p>모바일 시장</p>
+</li>
+<li><p>더 나은 User eXperience</p>
+</li>
+<li><p>빠른 페이지 로딩 속도</p>
+</li>
+<li><p>효율적이고 cost-effective</p>
+<ul>
+<li>버전을 나누어 유지, 보수할 필요가 없음</li>
+</ul>
+</li>
+</ol>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h3 id="종류"><a href="#종류" class="headerlink" title="종류"></a>종류</h3><h4 id="1-Responsive-Layout-adaptive-design"><a href="#1-Responsive-Layout-adaptive-design" class="headerlink" title="1) Responsive Layout (adaptive design)"></a>1) Responsive Layout (adaptive design)</h4><ul>
+<li><code>media query</code> 이용해 <code>breakpoint</code> 적용</li>
+<li>각 component가 <code>px</code> 으로 표현됨</li>
+</ul>
+<h4 id="2-Fluid-Layout"><a href="#2-Fluid-Layout" class="headerlink" title="2) Fluid Layout"></a>2) Fluid Layout</h4><ul>
+<li>페이지의 크기에 따라 레이아웃의 크기도 변경됨</li>
+<li>relative unit인 <code>em</code> 또는 <code>%</code> 으로 표현됨</li>
+<li>time-consuming</li>
+<li>매번 testing 해야 함</li>
+</ul>
+<h4 id="3-Fluid-responsive-Layout"><a href="#3-Fluid-responsive-Layout" class="headerlink" title="3) Fluid-responsive Layout"></a>3) Fluid-responsive Layout</h4><ul>
+<li><p><code>responsive</code> 과 <code>fluid</code> 레이아웃의 결합</p>
+</li>
+<li><p><code>media query</code> 의 <code>breakpoints</code> 이용</p>
+</li>
+<li><p>더 자연스러운 레이아웃 변화</p>
+</li>
+</ul>
+<h2 id="CSS-Media-Query-Fluid-grid-system"><a href="#CSS-Media-Query-Fluid-grid-system" class="headerlink" title="CSS Media Query (Fluid grid system)"></a>CSS Media Query (Fluid grid system)</h2><h3 id="media-rule"><a href="#media-rule" class="headerlink" title="@media rule"></a><code>@media</code> rule</h3><ul>
+<li>width and height of the viewport</li>
+<li>width and height of the device</li>
+<li>orientation (landscape / portrait)</li>
+<li>resolution</li>
+</ul>
+<h3 id="Media-Types"><a href="#Media-Types" class="headerlink" title="Media Types"></a>Media Types</h3><table>
+<thead>
+<tr>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">all</td>
+<td align="left">Default. Used for all media type devices</td>
+</tr>
+<tr>
+<td align="left">print</td>
+<td align="left">Used for printers</td>
+</tr>
+<tr>
+<td align="left">screen</td>
+<td align="left">Used for computer screens, tablets, smart-phones etc.</td>
+</tr>
+<tr>
+<td align="left">speech</td>
+<td align="left">Used for screenreaders that “reads” the page out loud</td>
+</tr>
+</tbody></table>
+<h3 id="Media-Features"><a href="#Media-Features" class="headerlink" title="Media Features"></a>Media Features</h3><table>
+<thead>
+<tr>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">max-height</td>
+<td align="left">The maximum height of the display area, such as a browser window</td>
+</tr>
+<tr>
+<td align="left">min-width</td>
+<td align="left">The minimum width of the display area, such as a browser window</td>
+</tr>
+</tbody></table>
+<p><em>css</em></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> <span class="keyword">not</span>|<span class="keyword">only</span> mediatype <span class="keyword">and</span> (mediafeature <span class="keyword">and</span>|<span class="keyword">or</span>|<span class="keyword">not</span> mediafeature) &#123;</span><br><span class="line">  <span class="selector-tag">CSS-Code</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>scss</em></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Media Query Mixins</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Mobile</span></span><br><span class="line"><span class="keyword">@mixin</span> mediaSm &#123;</span><br><span class="line">  <span class="keyword">@media</span> screen <span class="keyword">and</span> (max-width: <span class="number">500px</span>) &#123;</span><br><span class="line">    <span class="keyword">@content</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Tablet</span></span><br><span class="line"><span class="keyword">@mixin</span> mediaMd &#123;</span><br><span class="line">  <span class="keyword">@media</span> screen <span class="keyword">and</span> (max-width: <span class="number">768px</span>) &#123;</span><br><span class="line">    <span class="keyword">@content</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Desktop</span></span><br><span class="line"><span class="keyword">@mixin</span> mediaLg &#123;</span><br><span class="line">  <span class="keyword">@media</span> screen <span class="keyword">and</span> (min-width: <span class="number">769px</span>) <span class="keyword">and</span> (max-width: <span class="number">1170px</span>) &#123;</span><br><span class="line">    <span class="keyword">@content</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// TV, etc.</span></span><br><span class="line"><span class="keyword">@mixin</span> mediaXl &#123;</span><br><span class="line">  <span class="keyword">@media</span> screen <span class="keyword">and</span> (min-width: <span class="number">1171px</span>) &#123;</span><br><span class="line">    <span class="keyword">@content</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>html</em></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">media</span>=<span class="string">&quot;screen and (min-width: 900px)&quot;</span> <span class="attr">href</span>=<span class="string">&quot;widescreen.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">media</span>=<span class="string">&quot;screen and (max-width: 600px)&quot;</span> <span class="attr">href</span>=<span class="string">&quot;smallscreen.css&quot;</span>&gt;</span></span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+
+
+
+
+<center><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/adc13334-06ab-4732-bb0a-80acb71cda07/sizes.jpg" /></center>
+
+<center><img src="https://www.w3schools.com/css/rwd_desktop.png" /> <img src="https://www.w3schools.com/css/rwd_tablet.png" /> <img src="https://www.w3schools.com/css/rwd_phone.png" /></center>
+
+
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Smartphones (portrait and landscape) ----------- */</span></span><br><span class="line"><span class="keyword">@media</span> <span class="keyword">only</span> screen</span><br><span class="line"><span class="keyword">and</span> (min-device-width : <span class="number">320px</span>)</span><br><span class="line"><span class="keyword">and</span> (max-device-width : <span class="number">480px</span>) &#123;</span><br><span class="line"><span class="comment">/* Styles */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Smartphones (landscape) ----------- */</span></span><br><span class="line"><span class="keyword">@media</span> <span class="keyword">only</span> screen</span><br><span class="line"><span class="keyword">and</span> (min-width : <span class="number">321px</span>) &#123;</span><br><span class="line"><span class="comment">/* Styles */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Smartphones (portrait) ----------- */</span></span><br><span class="line"><span class="keyword">@media</span> <span class="keyword">only</span> screen</span><br><span class="line"><span class="keyword">and</span> (max-width : <span class="number">320px</span>) &#123;</span><br><span class="line"><span class="comment">/* Styles */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h5 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h5><p><a target="_blank" rel="noopener" href="https://css-tricks.com/a-complete-guide-to-css-media-queries/">https://css-tricks.com/a-complete-guide-to-css-media-queries/</a></p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/04/05/SOAP-Objects-and-DSs/"
                             aria-label=": Objects and DSs"
                         >
@@ -1708,107 +1874,6 @@
                         <p>
                             <a
                                 href="/2021/02/18/24-Server-to-Client/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/02/18/23-React-Context/"
-                            aria-label=": 23. ReactContext"
-                        >
-                            23. ReactContext
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-02-18T02:19:20+09:00">
-	
-		    Feb 18, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h3 id="React-Context"><a href="#React-Context" class="headerlink" title="React Context"></a>React Context</h3><p>: pass through App -&gt; Sidebar + ( Dashboard -&gt; AddComment)</p>
-<ol>
-<li>Provider: Owner</li>
-<li>Consumer(s)<ul>
-<li>share the parent</li>
-<li>a subtree of the provider</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><p>argument = null =&gt; inaccessible to the provider</p>
-</li>
-<li><p>value = {42} =&gt; give the value to the CurrentUserContext.Provider, give access</p>
-</li>
-<li><p>{ value =&gt; <User age = {value} /> } =&gt; give CurrentUserContext.Provider a Function</p>
-</li>
-</ul>
-<p>–&gt; Modify</p>
-<h3 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h3><ol>
-<li>Classes</li>
-<li>Reuse stateful logic is hard</li>
-<li>Logic spread into lifecycle methods</li>
-</ol>
-<p>Only call hooks at/from…</p>
-<ul>
-<li>the top level</li>
-<li>function components or custom hooks</li>
-</ul>
-<h4 id="Function-Components"><a href="#Function-Components" class="headerlink" title="Function Components"></a>Function Components</h4><ul>
-<li>function name with ‘use’</li>
-</ul>
-<ul>
-<li>useState()</li>
-</ul>
-<p>setCounter(counter+1) =&gt; (update): counter = counter+1 </p>
-<ul>
-<li>useEffect()</li>
-</ul>
-<ul>
-<li>useEffect without [] (initializing) =&gt; call setInterval exponentially (setInterval itself calls the function exponentially, it’s like ex*ex)</li>
-</ul>
-<ul>
-<li>useContext()</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/02/18/23-React-Context/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
