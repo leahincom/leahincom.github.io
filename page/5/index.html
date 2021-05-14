@@ -311,6 +311,469 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/01/29/9-Networking/"
+                            aria-label=": 9. Networking"
+                        >
+                            9. Networking
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-29T08:09:31+09:00">
+	
+		    Jan 29, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Networking"><a href="#Networking" class="headerlink" title="Networking"></a>Networking</h2><h3 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h3><ol>
+<li>Data formats<br>e.g. language</li>
+<li>Address formats<br>e.g. location</li>
+<li>Routing</li>
+<li>Acknowledgements and Errors</li>
+</ol>
+<h3 id="IP-addresses-and-ports"><a href="#IP-addresses-and-ports" class="headerlink" title="IP addresses and ports"></a>IP addresses and ports</h3><ul>
+<li>IPV4: 32 bits, 4 groups of 8 bits(0~256), 2^32 combinations</li>
+<li>IPV6: 128 bits, 16 groups of 8 bits, 2^128 combinations</li>
+<li>Port range: 0-65535 (first 1023 reserved)</li>
+</ul>
+<p>e.g. IPV4- 192.168.0.4:3000<br>IPV6- [2001:0db8:85a3:0000:0000:8a2e:0370:7334]:3000</p>
+<h3 id="LAN-and-WAN"><a href="#LAN-and-WAN" class="headerlink" title="LAN and WAN"></a>LAN and WAN</h3><p>make connection<br>LAN: office, wifi<br>-&gt; internal (private IP address) -&gt;<br>WAN: extended envir</p>
+<h3 id="Data-serialization-and-transport"><a href="#Data-serialization-and-transport" class="headerlink" title="Data serialization and transport"></a>Data serialization and transport</h3><p>breakdown the data into chunks, called packets<br>protocol controls which packet to deliver</p>
+<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><p>scheme://host[:prt]/path[?query#fragment] =&gt; key-value pairs<br>e.g. https://(ip)218.24.0.93:443 or (address)mydomain.com/recipes?unit=metric&amp;ingredients=bananas</p>
+<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><dl><dt>Domain Name System</dt><dd>receives queries, give corresponding address</dd></dl><h3 id="HTTP-s"><a href="#HTTP-s" class="headerlink" title="HTTP(s)"></a>HTTP(s)</h3><p>Hyper-Tags Transfer Protocol</p>
+<ul>
+<li>HTTPs -&gt; safer </li>
+</ul>
+<ul>
+<li>Request / Response<ul>
+<li>server can’t initiate request, only client can initiate﻿</li>
+</ul>
+</li>
+<li>Stateless<ul>
+<li>protocol(http) doesn’t remember any information, server and client do</li>
+</ul>
+</li>
+</ul>
+<h3 id="REST-API-amp-Methods"><a href="#REST-API-amp-Methods" class="headerlink" title="REST API &amp; Methods"></a>REST API &amp; Methods</h3><p>Representational State Transfer<br><a target="_blank" rel="noopener" href="http://server/entities">http://server/entities</a>(messages, topics, hosts, …)</p>
+<ul>
+<li>indicated (pre-defined) methods to know what to do with entities</li>
+<li>attached to the header of packets</li>
+</ul>
+<ul>
+<li>GET<ul>
+<li>only the safe method, not changing anything</li>
+</ul>
+</li>
+<li>POST</li>
+<li>PUT</li>
+<li>DELETE</li>
+<li>more…</li>
+</ul>
+<p>important to receive good response to smoothly communicate —&gt;</p>
+<h3 id="Status-Codes"><a href="#Status-Codes" class="headerlink" title="Status Codes"></a>Status Codes</h3><p>1xx: Hold on<br>2xx: Here you go<br>e.g. 201: created(posted) successfully<br>3xx: Go away<br>4xx: You fucked up (syntax / fulfilled)<br>e.g. 404: not found<br>5xx: I fucked up</p>
+<p>en.wikipedia.org/wiki/List_of_HTTP_status_codes<br>List of HTTP status codes - Wikipedia<br>From Wikipedia, the free encyclopedia Jump to navigation Jump to search Response codes of the Hypertext Transfer Protocol This is a list of Hypertext Transfer Protocol (HTTP) response status codes. Status codes are issued by a server in response to a clien<br>en.wikipedia.org</p>
+<h3 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h3><p>setting the origin (server) of the client<br>request: carrying around the data to send and receive<br>cb: callback -&gt; assign function, passing the function to the API and api returns the data<br>e.g. cb = fcName</p>
+<ul>
+<li>shouldn’t access the WAPI as it would be from a different origin<br>but ok if we do it using a script —&gt;<ul>
+<li>security check if it’s done indirectly</li>
+</ul>
+</li>
+</ul>
+<h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p>update the scripts (.js)</p>
+<p>callback the function and run the code: callback -&gt; displayWeather func -&gt; put data as an arg</p>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>Client Origin Resource Sharing<br>each server can decide whether to accept the JSON callback from client or not<br>give right (bypass the inability) to access third party APIs</p>
+<ol>
+<li>preflight request -&gt; decide allow or not</li>
+<li>main request</li>
+</ol>
+<h3 id="WebSockets"><a href="#WebSockets" class="headerlink" title="WebSockets"></a>WebSockets</h3><h3 id="WebRTC"><a href="#WebRTC" class="headerlink" title="WebRTC"></a>WebRTC</h3><p>Real Time Communication<br>WebRTC 는 웹 브라우저 간에 플러그인의 도움 없이 서로 통신할 수 있도록 설계된 API이다.<br>e.g. chatroulette</p>
+<p>: Chatroulette is an online chatwebsite that pairs random users for webcam-based conversations. Visitors to the website begin an online chat (text, audio, and video) with another visitor. At any point, either user may leave the current chat by initiating another random connection.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/29/9-Networking/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/01/28/8-Bitwise-Operation/"
+                            aria-label=": 8. Bitwise Operation"
+                        >
+                            8. Bitwise Operation
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-28T08:37:53+09:00">
+	
+		    Jan 28, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Bitwise-Operation"><a href="#Bitwise-Operation" class="headerlink" title="Bitwise Operation"></a>Bitwise Operation</h2><p>num[index] * 2^(index-1)</p>
+<h3 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h3><p><code>both</code><br><strong>&amp; : return 1 if both has 1 (same)</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>&amp;<blockquote>
+<p>5 &amp; 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<h2 id="amp-1001"><a href="#amp-1001" class="headerlink" title="&amp;1001"></a>&amp;1001</h2><p>0001(2) –&gt; 1</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h3><p><code>at least</code><br><strong>| : return 1 if at least one has 1</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>|<blockquote>
+<p>5 | 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<table>
+<thead>
+<tr>
+<th>1001</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1101(2) –&gt; 13</td>
+</tr>
+</tbody></table>
+</blockquote>
+</li>
+</ol>
+<h3 id="XOR"><a href="#XOR" class="headerlink" title="XOR"></a>XOR</h3><p><code>just one</code><br><strong>^ : return 1 if the value is different, return 0 if same</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>^<blockquote>
+<p>5 ^ 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<h2 id="1001"><a href="#1001" class="headerlink" title="^1001"></a>^1001</h2><p>1100(2) –&gt; 12</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="NOT"><a href="#NOT" class="headerlink" title="NOT"></a>NOT</h3><p><strong>~ : return the oppostie value</strong></p>
+<blockquote>
+<p>actually, there are 0 as many as the size of the integer range(&lt;=256, thus 8개) in front of the bits</p>
+</blockquote>
+<ul>
+<li>-(x) -1 (// in JS)</li>
+<li>negative<ul>
+<li>starts from -1</li>
+<li>meaning of 0, 1 is swtiched: 0 -&gt; decrement<blockquote>
+<p>~5<br>5 –&gt; 0101(2)</p>
+<h2 id="0101-2"><a href="#0101-2" class="headerlink" title="~0101(2)"></a>~0101(2)</h2><p>1010(2) –&gt; -6 (in JS, normally -5) // 1011(2) –&gt; -5 in JS</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Left-Shift"><a href="#Left-Shift" class="headerlink" title="Left Shift"></a>Left Shift</h3><p><strong>&lt;&lt; n : shift bits to the left to the n extent and fill the right bit with 0</strong></p>
+<blockquote>
+<p>5 &lt;&lt; 1<br>0101(2)<br>—– &lt;&lt; 1<br>1010(2)</p>
+</blockquote>
+<h3 id="Sign-propagating-Right-Shift"><a href="#Sign-propagating-Right-Shift" class="headerlink" title="Sign-propagating Right Shift"></a>Sign-propagating Right Shift</h3><p><strong>&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with the same one as the original last right value which is sign property</strong></p>
+<blockquote>
+<p>8 &gt;&gt;&gt; 1<br>0…1000(2)<br>———– &gt;&gt; 1<br>00…0100(2)  // 4<br>-8 &gt;&gt;&gt; 1<br>1…1000(2)<br>———– &gt;&gt; 1<br>11…1100(2) // -4</p>
+</blockquote>
+<h3 id="Zero-fill-Right-Shift"><a href="#Zero-fill-Right-Shift" class="headerlink" title="Zero-fill Right Shift"></a>Zero-fill Right Shift</h3><p><strong>&gt;&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with 0</strong></p>
+<blockquote>
+<p>[1]1…0111 // -8<br>——— &gt;&gt;&gt; 1<br>[0]1…1011 // 2147483644</p>
+</blockquote>
+<p>blog.logrocket.com/interesting-use-cases-for-javascript-bitwise-operators/<br>Interesting use cases for JavaScript bitwise operators - LogRocket Blog<br>Although we don’t often see bitwise operators used in JavaScript, they have some cool use cases. Learn their theory and implementation.<br>blog.logrocket.com</p>
+<hr>
+<dl><dt><em>compare <code>multiple values</code> together</em></dt><dd>first comparison -&gt; compare with the next one -&gt; (((repeat)))</dd></dl><h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>qiao.github.io/PathFinding.js/visual/<br>PathFinding.js<br>qiao.github.io</p>
+<h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><ul>
+<li>only need the weight</li>
+<li>evaluate all the nodes -&gt; slower</li>
+</ul>
+<ol>
+<li>set the weight of starting point to 0, and others to INF (as not started yet)</li>
+</ol>
+<h3 id="A"><a href="#A" class="headerlink" title="A*"></a>A*</h3><ul>
+<li>only evaluate shorter distance -&gt;faster</li>
+<li>need weight and distance both</li>
+</ul>
+<ol>
+<li>set additional array with distance</li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/28/8-Bitwise-Operation/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/01/27/7-BFS-DFS/"
+                            aria-label=": 7. BFS &amp; DFS"
+                        >
+                            7. BFS &amp; DFS
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-27T07:40:08+09:00">
+	
+		    Jan 27, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p><strong>Breadth First Search</strong></p>
+<ul>
+<li>Queue<br> : go same level node first and go deeper</li>
+</ul>
+<blockquote>
+<ul>
+<li>push root node</li>
+<li>pop root node<ul>
+<li>push children nodes <em>From Left to Right</em></li>
+</ul>
+</li>
+<li>pop child node one by one and…<ul>
+<li>push children nodes from child (((repeat)))</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">queue.enqueue(this);</span><br><span class="line">while (queue.length &gt; 0) &#123;</span><br><span class="line">    current &#x3D; queue.dequeue();</span><br><span class="line">    children &#x3D; current.children;</span><br><span class="line">    for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    	queue.enqueue(children[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p><strong>Depth First Search</strong></p>
+<ul>
+<li>Stack<br> : go down to the leaf node first and move on to the other children</li>
+</ul>
+<blockquote>
+<ul>
+<li>push root node</li>
+<li>pop root node<ul>
+<li>push children nodes <em>From Left To Right</em></li>
+</ul>
+</li>
+<li>pop child node and…<ul>
+<li>push children nodes of child (((repeat)))</li>
+</ul>
+</li>
+<li>pop the leaf node<ul>
+<li>pop other leaf nodes on the same level / push children nodes of the node on the same level</li>
+</ul>
+</li>
+<li>pop parent node and move on (((repeat)))</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">stack.push(this);</span><br><span class="line">while (stack.length &gt; 0) &#123;</span><br><span class="line">  current &#x3D; stack.pop();</span><br><span class="line">  children &#x3D; current.children;</span><br><span class="line">  for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    stack.push(children[i]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/27/7-BFS-DFS/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/01/24/6-Complexity-Analysis/"
+                            aria-label=": 6. Complexity Analysis"
+                        >
+                            6. Complexity Analysis
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-01-24T08:43:59+09:00">
+	
+		    Jan 24, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h2><ul>
+<li>like a recipe</li>
+<li>concrete steps to solve the problem</li>
+<li>language independent (logic itself)</li>
+</ul>
+<h3 id="Complexity-Analysis"><a href="#Complexity-Analysis" class="headerlink" title="Complexity Analysis"></a>Complexity Analysis</h3><ul>
+<li>Objective Criteria</li>
+</ul>
+<ul>
+<li><code>time</code>, <code>space</code></li>
+<li>best, average, worst (always think in worst case!)</li>
+<li>Big O</li>
+</ul>
+<h5 id="Be-aware-of-the-Complexity"><a href="#Be-aware-of-the-Complexity" class="headerlink" title="Be aware of the Complexity"></a>Be aware of the Complexity</h5><h5 id="Recognise-patterns"><a href="#Recognise-patterns" class="headerlink" title="Recognise patterns"></a>Recognise patterns</h5><h5 id="Think-if-you-can-bring-it-down"><a href="#Think-if-you-can-bring-it-down" class="headerlink" title="Think if you can bring it down"></a>Think if you can bring it down</h5><h3 id="Big-O"><a href="#Big-O" class="headerlink" title="Big O"></a>Big O</h3><p><em>DROP the constant in front of the N</em></p>
+<ol>
+<li>Constant - O(k) <em>(k: constant number)</em><br>: stays the same independently of the size of the problem</li>
+<li>Linear - O(n) <em>(n: number of items)</em><br>: grows proportional to the size of the problem<br>e.g. for loop, linked list- find the item</li>
+<li>Logarithmic - O(logn)</li>
+</ol>
+<ul>
+<li>random array =&gt; cut half =&gt; repeat until find the element (Binary Search)</li>
+<li>sorted =&gt; increase by one<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let count &#x3D; 0;</span><br><span class="line">let limit &#x3D; 100;</span><br><span class="line"></span><br><span class="line">for (let i&#x3D;0; i&lt;limit; i++) &#123;</span><br><span class="line">  limit &#x2F;&#x3D; 2;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li>Quadratic - O(n^2)<br>: nested for loop</li>
+<li>N log n - O (nlogn)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let count &#x3D; 0;</span><br><span class="line">let limit &#x3D; 100;</span><br><span class="line"></span><br><span class="line">for (let i&#x3D;0; i&lt;limit; i++) &#123;</span><br><span class="line">  limit &#x2F;&#x3D; 2;</span><br><span class="line">  for (let j&#x3D;0; j&lt;limit; j++) &#123;</span><br><span class="line">    count++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+e.g. mergeSort</li>
+</ol>
+<h4 id="BAD-Time-Complexity"><a href="#BAD-Time-Complexity" class="headerlink" title="BAD Time Complexity"></a>BAD Time Complexity</h4><ol start="6">
+<li>Exponential - O(2^n)</li>
+<li>Factorial - O(n!)<br>e.g. Queen Problem</li>
+</ol>
+<blockquote>
+<p>Hash Table: O(1) average and amortized case complexity, however it suffers from O(n) worst case time complexity.</p>
+<ul>
+<li>Worst Case</li>
+</ul>
+<ol>
+<li>If too many elements were hashed into the same key: looking inside this key may take O(n) time.</li>
+<li>Once a hash table has passed its load balance - it has to rehash [create a new bigger table, and re-insert each element to the table]. </li>
+</ol>
+<ul>
+<li>average and amortized case</li>
+</ul>
+<ol>
+<li>It is very rare that many items will be hashed to the same key [if you chose a good hash function and you don’t have too big load balance.</li>
+<li>The rehash operation, which is O(n), can at most happen after n/2 ops, which are all assumed O(1): Thus when you sum the average time per op, you get : (n*O(1) + O(n)) / n) = O(1)</li>
+</ol>
+</blockquote>
+<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p><a target="_blank" rel="noopener" href="http://www.bigocheatsheet.com/">www.bigocheatsheet.com/</a></p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/01/24/6-Complexity-Analysis/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/01/23/5-Data-Structure/"
                             aria-label=": 5. Data Structure"
                         >
