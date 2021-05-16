@@ -13,11 +13,11 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"React 실전\n\n\n\n조건부 렌더링\nif-else : 조건에 따라 다른 컴포넌트를 렌더링할 때 사용한다. \n\n\n&amp;&amp; : 조건이 true 면 다음 컴포넌트 (설정값) 를 보여줌 / 다음 조건으로 넘어감\n삼항연산자 : 조건이 true 면 첫번째, 조건이 false 면 두번째 설정값 보여줌\nswitch : 조건이 여러 개  일 때 사용하면 좋음\n\n\n\n\n\nList &amp; Key\nlist를 렌더링 할 때는 반드시 props에 key를 설정해야 한다.\nkey를 설정하지 않으면 오류 메시지가 뜬다.\nkey 는 각 요소의 고유값 (id, index 등) 으로 설정해야 한다.\nkey가 있어야 배열을 효율적으로 렌더링 할 수 있다.\n배열이 변경되면, 바뀌는 부분만 업데이트 한다.\nkey를 설정하지 않으면, 하나만 바뀌어도 전체가 리렌더링 됨\n\n\n\n\n\n\n\nBEM 방법론\nBlock Element Modifier\n\n\n\n\n\n1.block__element--modifier\n\ncss className을 정하는 방법론 중 하나\nclass 이름 에만 사용 가능함\ncamelCase는 class 이름에는 사용하지 않음\n대신 camel-case 처럼 하이픈 사용!\n\n\n\n\n구조를 쉽게 파악할 수 있다는 장점이 있음\n\n\n\n\n\n\n\n\nblock : 재사용 가능한, 기능적으로 독립적인 컴포넌트\nelement : block을 구성 하는 단위\nmodifier : block 이나 element 의 속성\n\n\n\n\n\n\n  \n      \n      장점\n    \n    \n      단점\n    \n  \n  \n      \n        \n          className의 중복 방지\n      \n      \n          className이 길고 복잡해질 수 있음\n      \n    \n    \n        \n          className 만으로 마크업 구조 파악 가능\n      \n    \n    \n        \n          SASS에서 부모 선택자와 사용하면 편리함\n      \n    \n    \n        \n          유지 보수에 유리함\n      \n    \n  \n\n\n\n\n\n\nSASS\nSyntactically Awesome Style Sheets\n\n\n\n\n\n\nCSS Pre-processor (전처리기)\n\nSASS 문법으로 작성하나 CSS로 컴파일 됨\n\n\nCSS의 불편한 점들을 보완하고, 확장된 기능을 사용할 수 있다.\n\nCSS의 확장판으로 볼 수 있으나, 문법이 다르다.\n\n\n\n\n\n\n\nSCSS\nSassy CCS\n\n\n\n\n\n\nSASS의 기능을 지원하는 CSS의 Superset\n\nCSS의 확장판\n\n\n기존의 CSS 문법과 유사하고, SASS보다 사용성이 높다.\n\n변수, 연산자, 내장함수, 중첩 등 다양한 기능 지원\n\n변수\n\n$ 로 변수 선언\nblock scope\n재할당 가능\n\n\n연산\n\n연산자 사용 가능 (e.g. +, -, *, /, %, ==, !=)\n\n\nimport\n\n@import &quot;다른 스타일 파일&quot;\nscss 확장자 생략 가능\n_ 로 시작하는 파일은 컴파일되지 않음\n\n\nextend\n\n@extend 로 상속\n\n\nmixin\n\n@mixin 으로 인수를 받을 수 있음\n@include 를 이용해 선언한 mixin 사용\n\n\n중첩\n\n선택자 중첩 가능\n&amp; 로 부모 선택자 사용\n\n\n\n\n\n\n\n\n\n\n\nGrid Layout\n2차원 레이아웃 시스템\n\n\n\n123456789101112131415161718192021# Grid Layout 적용display: grid;# 가로/ 세로 기준 나열 방법grid-template-columns: 1fr 2fr 3fr;grid-template-rows: 100px 200px;# 속성값으로 사용할 수 있는 함수repeat(반복횟수, 반복값)minmax(최소값, 최대값)repeat(auto-fit, minmax(20%, auto))# Grid 셀을 병합할 때grid-column-start: 2;grid-column-end: 4;### grid-column: 2 / 4;grid-row-start: 1;grid-row-end: 3;### grid-row: 1 / 3;\n\n\n\n\n\nrow 또는 column 만을 사용한 1차원 (i.e. Flexbox) 을 넘어 2차원 시스템 (i.e. Grid) 으로 유연하게 레이아웃 배치 및 사용 가능\n왼쪽 위부터 차례대로 1번~ 순서 할당\n보통 repeat의 반복값에 minmax 함수 이용\nauto-fill : 간격이 자동적으로 조절됨, 균등하게 나누어짐\nauto-fit : 정해진 구역에서 자리 할당\ngrid-@@-end : 끝나는 자리 +1 값\ne.g. grid-column-end = 3 일 때, end 위치는 2임\n\n\n\n\n\n\n\nReact Router\n화면 전환을 도와주는 React의 서드파티 라이브러리\n\n\n\n\n\n\nSPA에서는 하나의 html 파일로 변화하는 부분만 교체함\n\nSPA에서는 React Router의 Link 를 이용해서 페이지 이동\n\na tag 사용하면 안 됨 ( 기존의 웹 페이지는 &lt;a href=&quot;&quot;&gt;&lt;/a&gt; 로 페이지 이동 )\n\n\n\n\n\n\n\n\nLink\n\n페이지 이동\n\n브라우저의 주소만 변경되고 레이아웃에서 변경된 부분만 리렌더링 됨, 전체 화면은 동일 (Single Page Application) 하다!\n\n\n\nRoute\n\n주소가 path 일 때, component를 렌더링한다.\nexact : path가 정확하게 일치할 때만 이동\n\n\nRouter\n\nLink, Route 태그를 묶는 인터페이스\n&lt;BrowserRouter&gt; 태그 안에 &lt;Route&gt; 태그가 존재해야 함!\n\n\n최상위에 하나만 존재한다.\nBrowserRouter &gt;&gt; HashRouter\nBrowserRouter : history 데이터 (API) 가 내장됨\n\n\n\n\nSwitch\n\n첫번째로 매칭되는 path의 component를 렌더링한다.\nDefault 처리를 할 때 유용하다. (e.g. “Page Not Found”)\nSwitch를 사용하지 않은 상태에서 path가 없는 컴포넌트가 밑에 있을 경우 순서에 상관 없이 해당 컴포넌트부터 렌더링 된다. (순서가 무너지게 됨)\n\n\nwithRouter\n\n고차 컴포넌트 ( Higher Order Component )\nRoute가 아닌 컴포넌트에서 match, history, location 사용 가능\n\n12345import &#123; withRouter &#125; from &#x27;react-router-dom&#x27;;const ComponentName = (&#123; history &#125;) =&gt; &#123;&#125;;export default withRouter(ComponentName);\n\n\n\n\n\n\nRoute의 기본 props\nhistory\n주소를 임의로 변경하거나 돌아갈 수 있음\nhistory.push() : 새로운 경로를 history stack에 push하여 이동\nhistory stack에 방문 기록을 저장하기 때문에 go / goBack 등이 가능함\n\n\nmatch\nRoute path와 URL 매칭에 대한 정보\nmatch.params :  path 설정값\n현재 주소창의 위치를 반환\n\n\n\n\nlocation\n현재 페이지의 정보\nlocation.search : url 쿼리스트링\nhistory의 속성에도 location이 있음\n\n\n\n\n\n\n\nReact Hooks\nuseRef\n\nReact에서 DOM 요소를 가져올 때 사용함\n\n\nconst 변수명 = useRef(); 로 선언한다.\n\n가져올 요소의 attribute에 ref=&#123;변수명&#125; 을 추가한다.\n\n변수명.current 로 DOM 요소를 가져올 수 있다.\n\n\n\n\n\n\n\n\njson-server\nJSON 파일로 로컬에 연습용 서버 만들기\n\n\n\n\n\n\nsrc 폴더 밖에 data.json 파일을 생성한 후, 더미 데이터 넣기\nReact 기본 port가 3000번이기 때문에, 서버는 다르게 지정할 것!\n\n","dateCreated":"2021-05-08T22:38:42+09:00","dateModified":"2021-05-11T22:18:38+09:00","datePublished":"2021-05-08T22:38:42+09:00","description":"","headline":"4차 세미나_08/05/21","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/","keywords":"SOPT, WEB, React"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"React 실전\n\n\n\n조건부 렌더링\nif-else : 조건에 따라 다른 컴포넌트를 렌더링할 때 사용한다. \n\n\n&amp;&amp; : 조건이 true 면 다음 컴포넌트 (설정값) 를 보여줌 / 다음 조건으로 넘어감\n삼항연산자 : 조건이 true 면 첫번째, 조건이 false 면 두번째 설정값 보여줌\nswitch : 조건이 여러 개  일 때 사용하면 좋음\n\n\n\n\n\nList &amp; Key\nlist를 렌더링 할 때는 반드시 props에 key를 설정해야 한다.\nkey를 설정하지 않으면 오류 메시지가 뜬다.\nkey 는 각 요소의 고유값 (id, index 등) 으로 설정해야 한다.\nkey가 있어야 배열을 효율적으로 렌더링 할 수 있다.\n배열이 변경되면, 바뀌는 부분만 업데이트 한다.\nkey를 설정하지 않으면, 하나만 바뀌어도 전체가 리렌더링 됨\n\n\n\n\n\n\n\nBEM 방법론\nBlock Element Modifier\n\n\n\n\n\n1.block__element--modifier\n\ncss className을 정하는 방법론 중 하나\nclass 이름 에만 사용 가능함\ncamelCase는 class 이름에는 사용하지 않음\n대신 camel-case 처럼 하이픈 사용!\n\n\n\n\n구조를 쉽게 파악할 수 있다는 장점이 있음\n\n\n\n\n\n\n\n\nblock : 재사용 가능한, 기능적으로 독립적인 컴포넌트\nelement : block을 구성 하는 단위\nmodifier : block 이나 element 의 속성\n\n\n\n\n\n\n  \n      \n      장점\n    \n    \n      단점\n    \n  \n  \n      \n        \n          className의 중복 방지\n      \n      \n          className이 길고 복잡해질 수 있음\n      \n    \n    \n        \n          className 만으로 마크업 구조 파악 가능\n      \n    \n    \n        \n          SASS에서 부모 선택자와 사용하면 편리함\n      \n    \n    \n        \n          유지 보수에 유리함\n      \n    \n  \n\n\n\n\n\n\nSASS\nSyntactically Awesome Style Sheets\n\n\n\n\n\n\nCSS Pre-processor (전처리기)\n\nSASS 문법으로 작성하나 CSS로 컴파일 됨\n\n\nCSS의 불편한 점들을 보완하고, 확장된 기능을 사용할 수 있다.\n\nCSS의 확장판으로 볼 수 있으나, 문법이 다르다.\n\n\n\n\n\n\n\nSCSS\nSassy CCS\n\n\n\n\n\n\nSASS의 기능을 지원하는 CSS의 Superset\n\nCSS의 확장판\n\n\n기존의 CSS 문법과 유사하고, SASS보다 사용성이 높다.\n\n변수, 연산자, 내장함수, 중첩 등 다양한 기능 지원\n\n변수\n\n$ 로 변수 선언\nblock scope\n재할당 가능\n\n\n연산\n\n연산자 사용 가능 (e.g. +, -, *, /, %, ==, !=)\n\n\nimport\n\n@import &quot;다른 스타일 파일&quot;\nscss 확장자 생략 가능\n_ 로 시작하는 파일은 컴파일되지 않음\n\n\nextend\n\n@extend 로 상속\n\n\nmixin\n\n@mixin 으로 인수를 받을 수 있음\n@include 를 이용해 선언한 mixin 사용\n\n\n중첩\n\n선택자 중첩 가능\n&amp; 로 부모 선택자 사용\n\n\n\n\n\n\n\n\n\n\n\nGrid Layout\n2차원 레이아웃 시스템\n\n\n\n123456789101112131415161718192021# Grid Layout 적용display: grid;# 가로/ 세로 기준 나열 방법grid-template-columns: 1fr 2fr 3fr;grid-template-rows: 100px 200px;# 속성값으로 사용할 수 있는 함수repeat(반복횟수, 반복값)minmax(최소값, 최대값)repeat(auto-fit, minmax(20%, auto))# Grid 셀을 병합할 때grid-column-start: 2;grid-column-end: 4;### grid-column: 2 / 4;grid-row-start: 1;grid-row-end: 3;### grid-row: 1 / 3;\n\n\n\n\n\nrow 또는 column 만을 사용한 1차원 (i.e. Flexbox) 을 넘어 2차원 시스템 (i.e. Grid) 으로 유연하게 레이아웃 배치 및 사용 가능\n왼쪽 위부터 차례대로 1번~ 순서 할당\n보통 repeat의 반복값에 minmax 함수 이용\nauto-fill : 간격이 자동적으로 조절됨, 균등하게 나누어짐\nauto-fit : 정해진 구역에서 자리 할당\ngrid-@@-end : 끝나는 자리 +1 값\ne.g. grid-column-end = 3 일 때, end 위치는 2임\n\n\n\n\n\n\n\nReact Router\n화면 전환을 도와주는 React의 서드파티 라이브러리\n\n\n\n\n\n\nSPA에서는 하나의 html 파일로 변화하는 부분만 교체함\n\nSPA에서는 React Router의 Link 를 이용해서 페이지 이동\n\na tag 사용하면 안 됨 ( 기존의 웹 페이지는 &lt;a href=&quot;&quot;&gt;&lt;/a&gt; 로 페이지 이동 )\n\n\n\n\n\n\n\n\nLink\n\n페이지 이동\n\n브라우저의 주소만 변경되고 레이아웃에서 변경된 부분만 리렌더링 됨, 전체 화면은 동일 (Single Page Application) 하다!\n\n\n\nRoute\n\n주소가 path 일 때, component를 렌더링한다.\nexact : path가 정확하게 일치할 때만 이동\n\n\nRouter\n\nLink, Route 태그를 묶는 인터페이스\n&lt;BrowserRouter&gt; 태그 안에 &lt;Route&gt; 태그가 존재해야 함!\n\n\n최상위에 하나만 존재한다.\nBrowserRouter &gt;&gt; HashRouter\nBrowserRouter : history 데이터 (API) 가 내장됨\n\n\n\n\nSwitch\n\n첫번째로 매칭되는 path의 component를 렌더링한다.\nDefault 처리를 할 때 유용하다. (e.g. “Page Not Found”)\nSwitch를 사용하지 않은 상태에서 path가 없는 컴포넌트가 밑에 있을 경우 순서에 상관 없이 해당 컴포넌트부터 렌더링 된다. (순서가 무너지게 됨)\n\n\nwithRouter\n\n고차 컴포넌트 ( Higher Order Component )\nRoute가 아닌 컴포넌트에서 match, history, location 사용 가능\n\n12345import &#123; withRouter &#125; from &#x27;react-router-dom&#x27;;const ComponentName = (&#123; history &#125;) =&gt; &#123;&#125;;export default withRouter(ComponentName);\n\n\n\n\n\n\nRoute의 기본 props\nhistory\n주소를 임의로 변경하거나 돌아갈 수 있음\nhistory.push() : 새로운 경로를 history stack에 push하여 이동\nhistory stack에 방문 기록을 저장하기 때문에 go / goBack 등이 가능함\n\n\nmatch\nRoute path와 URL 매칭에 대한 정보\nmatch.params :  path 설정값\n현재 주소창의 위치를 반환\n\n\n\n\nlocation\n현재 페이지의 정보\nlocation.search : url 쿼리스트링\nhistory의 속성에도 location이 있음\n\n\n\n\n\n\n\nReact Hooks\nuseRef\n\nReact에서 DOM 요소를 가져올 때 사용함\n\n\nconst 변수명 = useRef(); 로 선언한다.\n\n가져올 요소의 attribute에 ref=&#123;변수명&#125; 을 추가한다.\n\n변수명.current 로 DOM 요소를 가져올 수 있다.\n\n\n\n\n\n\n\n\njson-server\nJSON 파일로 로컬에 연습용 서버 만들기\n\n\n\n\n\n\nsrc 폴더 밖에 data.json 파일을 생성한 후, 더미 데이터 넣기\nReact 기본 port가 3000번이기 때문에, 서버는 다르게 지정할 것!\n\n","dateCreated":"2021-05-08T22:38:42+09:00","dateModified":"2021-05-11T22:18:38+09:00","datePublished":"2021-05-08T22:38:42+09:00","description":"","headline":"4차 세미나_08/05/21","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/","keywords":"SOPT, WEB, React"}</script>
     <meta name="description" content="React 실전    조건부 렌더링 if-else : 조건에 따라 다른 컴포넌트를 렌더링할 때 사용한다.    &amp;&amp; : 조건이 true 면 다음 컴포넌트 (설정값) 를 보여줌 &#x2F; 다음 조건으로 넘어감 삼항연산자 : 조건이 true 면 첫번째, 조건이 false 면 두번째 설정값 보여줌 switch : 조건이 여러 개  일 때 사용하면 좋음">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="4차 세미나_08&#x2F;05&#x2F;21">
-<meta property="og:url" content="http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/index.html">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="React 실전    조건부 렌더링 if-else : 조건에 따라 다른 컴포넌트를 렌더링할 때 사용한다.    &amp;&amp; : 조건이 true 면 다음 컴포넌트 (설정값) 를 보여줌 &#x2F; 다음 조건으로 넘어감 삼항연산자 : 조건이 true 면 첫번째, 조건이 false 면 두번째 설정값 보여줌 switch : 조건이 여러 개  일 때 사용하면 좋음">
 <meta property="og:locale" content="en_US">
@@ -37,7 +37,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -743,7 +743,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -756,7 +756,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -769,7 +769,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -858,7 +858,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -871,7 +871,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -884,7 +884,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -918,7 +918,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -931,7 +931,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -944,7 +944,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>

@@ -13,11 +13,11 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"TestingTesting 은 Shipping (배포) 보다 중요하다.\n만약 테스트가 없거나 적절하지 않은 양만큼 (부족한) 만 존재할 경우, 배포할 때마다 코드를 break 했는지 혹은 수정한 코드가 올바르게 작동할지 확신할 수 없다.\n적절한 양을 정하는 요소는 팀과 상황에 따라 다르지만, 100%의 Coverage ( 보호 범위 , 즉, 모든 statement와 branch가 보호됨) 를 갖는 것은 개발 시에 안전함과 자신감을 제공한다.\n따라서, testing framework 에 더하여 good coverage tool 또한 필요 하다.\n\ne.g.\nTesting Framework : Mocha · QUnit · Jasmine · Karma · Intern · AVA, etc.\nCoverage Tool : istanbul · Cobertura · CodeCover · Coverage.py · EMMA, etc.\n\n\n\n\n\nTest Driven Development (TDD)\n모든 feature / module 에 대한 테스트를 정의하자.\n목표 coverage 를 도달한 상태에서 새로운 feature을 배포하자.\n도달하지 못했다면, refactoring 부터 하자.\n\n\n\n\n\n\n\n1234567891011121314151617181920212223242526272829303132333435363738394041424344454647import assert from &quot;assert&quot;;// baddescribe(&quot;MomentJS&quot;, () =&gt; &#123;\t// date boundary를 ☹️한 데 모아😡 처리함.  it(&quot;handles date boundaries&quot;, () =&gt; &#123;    let date;    date = new MomentJS(&quot;1/1/2015&quot;);    date.addDays(30);    assert.equal(&quot;1/31/2015&quot;, date);    date = new MomentJS(&quot;2/1/2016&quot;);    date.addDays(28);    assert.equal(&quot;02/29/2016&quot;, date);    date = new MomentJS(&quot;2/1/2015&quot;);    date.addDays(28);    assert.equal(&quot;03/01/2015&quot;, date);  &#125;);&#125;);// gooddescribe(&quot;MomentJS&quot;, () =&gt; &#123;\t// date boundary handler를 😄여러 조건으로 나누어🤩 정의함.\t\t// 30일을 가진 month 의 경우  it(&quot;handles 30-day months&quot;, () =&gt; &#123;    const date = new MomentJS(&quot;1/1/2015&quot;);    date.addDays(30);    assert.equal(&quot;1/31/2015&quot;, date);  &#125;);\t// 윤년의 경우  it(&quot;handles leap year&quot;, () =&gt; &#123;    const date = new MomentJS(&quot;2/1/2016&quot;);    date.addDays(28);    assert.equal(&quot;02/29/2016&quot;, date);  &#125;);\t// 그 외, 31일을 가진 month &amp;&amp; 윤년이 아닌 경우  it(&quot;handles non-leap year&quot;, () =&gt; &#123;    const date = new MomentJS(&quot;2/1/2015&quot;);    date.addDays(28);    assert.equal(&quot;03/01/2015&quot;, date);  &#125;);&#125;);","dateCreated":"2021-05-08T18:03:24+09:00","dateModified":"2021-05-08T10:25:17+09:00","datePublished":"2021-05-08T18:03:24+09:00","description":"","headline":"Testing","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/05/08/SOAP-Testing/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/05/08/SOAP-Testing/","keywords":"SOPT, clean code, javascript, Testing"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"TestingTesting 은 Shipping (배포) 보다 중요하다.\n만약 테스트가 없거나 적절하지 않은 양만큼 (부족한) 만 존재할 경우, 배포할 때마다 코드를 break 했는지 혹은 수정한 코드가 올바르게 작동할지 확신할 수 없다.\n적절한 양을 정하는 요소는 팀과 상황에 따라 다르지만, 100%의 Coverage ( 보호 범위 , 즉, 모든 statement와 branch가 보호됨) 를 갖는 것은 개발 시에 안전함과 자신감을 제공한다.\n따라서, testing framework 에 더하여 good coverage tool 또한 필요 하다.\n\ne.g.\nTesting Framework : Mocha · QUnit · Jasmine · Karma · Intern · AVA, etc.\nCoverage Tool : istanbul · Cobertura · CodeCover · Coverage.py · EMMA, etc.\n\n\n\n\n\nTest Driven Development (TDD)\n모든 feature / module 에 대한 테스트를 정의하자.\n목표 coverage 를 도달한 상태에서 새로운 feature을 배포하자.\n도달하지 못했다면, refactoring 부터 하자.\n\n\n\n\n\n\n\n1234567891011121314151617181920212223242526272829303132333435363738394041424344454647import assert from &quot;assert&quot;;// baddescribe(&quot;MomentJS&quot;, () =&gt; &#123;\t// date boundary를 ☹️한 데 모아😡 처리함.  it(&quot;handles date boundaries&quot;, () =&gt; &#123;    let date;    date = new MomentJS(&quot;1/1/2015&quot;);    date.addDays(30);    assert.equal(&quot;1/31/2015&quot;, date);    date = new MomentJS(&quot;2/1/2016&quot;);    date.addDays(28);    assert.equal(&quot;02/29/2016&quot;, date);    date = new MomentJS(&quot;2/1/2015&quot;);    date.addDays(28);    assert.equal(&quot;03/01/2015&quot;, date);  &#125;);&#125;);// gooddescribe(&quot;MomentJS&quot;, () =&gt; &#123;\t// date boundary handler를 😄여러 조건으로 나누어🤩 정의함.\t\t// 30일을 가진 month 의 경우  it(&quot;handles 30-day months&quot;, () =&gt; &#123;    const date = new MomentJS(&quot;1/1/2015&quot;);    date.addDays(30);    assert.equal(&quot;1/31/2015&quot;, date);  &#125;);\t// 윤년의 경우  it(&quot;handles leap year&quot;, () =&gt; &#123;    const date = new MomentJS(&quot;2/1/2016&quot;);    date.addDays(28);    assert.equal(&quot;02/29/2016&quot;, date);  &#125;);\t// 그 외, 31일을 가진 month &amp;&amp; 윤년이 아닌 경우  it(&quot;handles non-leap year&quot;, () =&gt; &#123;    const date = new MomentJS(&quot;2/1/2015&quot;);    date.addDays(28);    assert.equal(&quot;03/01/2015&quot;, date);  &#125;);&#125;);","dateCreated":"2021-05-08T18:03:24+09:00","dateModified":"2021-05-08T10:25:17+09:00","datePublished":"2021-05-08T18:03:24+09:00","description":"","headline":"Testing","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/08/SOAP-Testing/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/08/SOAP-Testing/","keywords":"SOPT, clean code, javascript, Testing"}</script>
     <meta name="description" content="TestingTesting 은 Shipping (배포) 보다 중요하다. 만약 테스트가 없거나 적절하지 않은 양만큼 (부족한) 만 존재할 경우, 배포할 때마다 코드를 break 했는지 혹은 수정한 코드가 올바르게 작동할지 확신할 수 없다. 적절한 양을 정하는 요소는 팀과 상황에 따라 다르지만, 100%의 Coverage ( 보호 범위 , 즉, 모든 state">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Testing">
-<meta property="og:url" content="http://leahincom.github.io/2021/05/08/SOAP-Testing/index.html">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/08/SOAP-Testing/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="TestingTesting 은 Shipping (배포) 보다 중요하다. 만약 테스트가 없거나 적절하지 않은 양만큼 (부족한) 만 존재할 경우, 배포할 때마다 코드를 break 했는지 혹은 수정한 코드가 올바르게 작동할지 확신할 수 없다. 적절한 양을 정하는 요소는 팀과 상황에 따라 다르지만, 100%의 Coverage ( 보호 범위 , 즉, 모든 state">
 <meta property="og:locale" content="en_US">
@@ -34,7 +34,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -427,7 +427,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/08/SOAP-Testing/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/08/SOAP-Testing/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -440,7 +440,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/08/SOAP-Testing/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/08/SOAP-Testing/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -453,7 +453,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/08/SOAP-Testing/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/08/SOAP-Testing/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -542,7 +542,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/08/SOAP-Testing/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/08/SOAP-Testing/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -555,7 +555,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/08/SOAP-Testing/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/08/SOAP-Testing/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -568,7 +568,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/08/SOAP-Testing/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/08/SOAP-Testing/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -602,7 +602,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/08/SOAP-Testing/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/08/SOAP-Testing/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -615,7 +615,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/08/SOAP-Testing/"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/08/SOAP-Testing/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -628,7 +628,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/08/SOAP-Testing/"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/08/SOAP-Testing/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>

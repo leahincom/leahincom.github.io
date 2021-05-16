@@ -13,11 +13,11 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Concurrency\nCallback 대신 Promise 사용하기\n\nES2015/ ES6 기준\n\n엄청나게 많은 중괄호 중첩\n\n콜백 지옥\n\n\n\n1234567891011121314151617181920212223242526272829303132333435363738// badrequire(&#x27;request&#x27;)  .get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;, \t(requestErr, response) =&gt; &#123; // 1차 콜백  \t// catch 구문    if (requestErr) &#123;      console.error(requestErr);    &#125;   \t// then 구문 ... 반복  \telse &#123;      require(&#x27;fs&#x27;)        .writeFile(&#x27;article.html&#x27;,          response.body, (writeErr) =&gt; &#123; // 2차 콜백            if (writeErr) &#123;              console.error(writeErr);            &#125; else &#123;              console.log(&#x27;File written&#x27;);            &#125;          &#125;        );      &#125;\t&#125;);// goodrequire(&#x27;request-promise&#x27;)  .get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;)\t// Promise가 resolved를 반환하였을 때  .then((response) =&gt; &#123;    return require(&#x27;fs-promise&#x27;).writeFile(&#x27;article.html&#x27;, response);  &#125;)\t// 다음 Promise  .then(() =&gt; &#123;    console.log(&#x27;File written&#x27;);  &#125;)\t// Promise가 rejected를 반환하였을 때  .catch((err) =&gt; &#123;    console.error(err);  &#125;);\nAsync/ Await은 Promise보다 더욱 깔끔하다.\n\nES2017/ ES8 기준\n콜백에 대한 Promise보다 더 깔끔한 해결책\n함수 앞에 async 붙이기\n함수의 연속적인 처리 (논리적으로 연결) 를 위해 then 을 계속 이어붙여 코드를 작성하지 않아도 됨\n\n1234567891011121314151617181920212223242526272829// not badrequire(&#x27;request-promise&#x27;).get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;)  .then(response =&gt; &#123;    return require(&#x27;fs-promise&#x27;).writeFile(&#x27;article.html&#x27;, response);  &#125;)  .then(() =&gt; &#123;    console.log(&#x27;File written&#x27;);  &#125;)  .catch(err =&gt; &#123;    console.error(err);  &#125;)  // betterasync function getCleanCodeArticle() &#123;  // then 구문  try &#123;    // then 작성 없이 await으로 synchronization    const response = await require(&#x27;request-promise&#x27;) .get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;);    // then 구문 // await로 Promise 처리    await require(&#x27;fs-promise&#x27;).writeFile(&#x27;article.html&#x27;, response);    console.log(&#x27;File written&#x27;);  &#125;   // catch 구문  catch(err) &#123;    console.error(err);  &#125;&#125;\n\n\n","dateCreated":"2021-05-17T00:20:07+09:00","dateModified":"2021-05-16T16:20:49+09:00","datePublished":"2021-05-17T00:20:07+09:00","description":"","headline":"Concurrency","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/05/17/SOAP-Concurrency/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/05/17/SOAP-Concurrency/","keywords":"SOPT, clean code, javascript, concurrency"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Concurrency\nCallback 대신 Promise 사용하기\n\nES2015/ ES6 기준\n\n엄청나게 많은 중괄호 중첩\n\n콜백 지옥\n\n\n\n1234567891011121314151617181920212223242526272829303132333435363738// badrequire(&#x27;request&#x27;)  .get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;, \t(requestErr, response) =&gt; &#123; // 1차 콜백  \t// catch 구문    if (requestErr) &#123;      console.error(requestErr);    &#125;   \t// then 구문 ... 반복  \telse &#123;      require(&#x27;fs&#x27;)        .writeFile(&#x27;article.html&#x27;,          response.body, (writeErr) =&gt; &#123; // 2차 콜백            if (writeErr) &#123;              console.error(writeErr);            &#125; else &#123;              console.log(&#x27;File written&#x27;);            &#125;          &#125;        );      &#125;\t&#125;);// goodrequire(&#x27;request-promise&#x27;)  .get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;)\t// Promise가 resolved를 반환하였을 때  .then((response) =&gt; &#123;    return require(&#x27;fs-promise&#x27;).writeFile(&#x27;article.html&#x27;, response);  &#125;)\t// 다음 Promise  .then(() =&gt; &#123;    console.log(&#x27;File written&#x27;);  &#125;)\t// Promise가 rejected를 반환하였을 때  .catch((err) =&gt; &#123;    console.error(err);  &#125;);\nAsync/ Await은 Promise보다 더욱 깔끔하다.\n\nES2017/ ES8 기준\n콜백에 대한 Promise보다 더 깔끔한 해결책\n함수 앞에 async 붙이기\n함수의 연속적인 처리 (논리적으로 연결) 를 위해 then 을 계속 이어붙여 코드를 작성하지 않아도 됨\n\n1234567891011121314151617181920212223242526272829// not badrequire(&#x27;request-promise&#x27;).get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;)  .then(response =&gt; &#123;    return require(&#x27;fs-promise&#x27;).writeFile(&#x27;article.html&#x27;, response);  &#125;)  .then(() =&gt; &#123;    console.log(&#x27;File written&#x27;);  &#125;)  .catch(err =&gt; &#123;    console.error(err);  &#125;)  // betterasync function getCleanCodeArticle() &#123;  // then 구문  try &#123;    // then 작성 없이 await으로 synchronization    const response = await require(&#x27;request-promise&#x27;) .get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;);    // then 구문 // await로 Promise 처리    await require(&#x27;fs-promise&#x27;).writeFile(&#x27;article.html&#x27;, response);    console.log(&#x27;File written&#x27;);  &#125;   // catch 구문  catch(err) &#123;    console.error(err);  &#125;&#125;\n\n\n","dateCreated":"2021-05-17T00:20:07+09:00","dateModified":"2021-05-16T16:20:49+09:00","datePublished":"2021-05-17T00:20:07+09:00","description":"","headline":"Concurrency","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/17/SOAP-Concurrency/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/17/SOAP-Concurrency/","keywords":"SOPT, clean code, javascript, concurrency"}</script>
     <meta name="description" content="Concurrency Callback 대신 Promise 사용하기  ES2015&#x2F; ES6 기준  엄청나게 많은 중괄호 중첩  콜백 지옥    1234567891011121314151617181920212223242526272829303132333435363738&#x2F;&#x2F; badrequire(&amp;#x27;request&amp;#x27;)  .get(&amp;#x27;https:&#x2F;">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Concurrency">
-<meta property="og:url" content="http://leahincom.github.io/2021/05/17/SOAP-Concurrency/index.html">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/17/SOAP-Concurrency/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="Concurrency Callback 대신 Promise 사용하기  ES2015&#x2F; ES6 기준  엄청나게 많은 중괄호 중첩  콜백 지옥    1234567891011121314151617181920212223242526272829303132333435363738&#x2F;&#x2F; badrequire(&amp;#x27;request&amp;#x27;)  .get(&amp;#x27;https:&#x2F;">
 <meta property="og:locale" content="en_US">
@@ -34,7 +34,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -422,7 +422,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -435,7 +435,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -448,7 +448,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -534,7 +534,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -547,7 +547,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -560,7 +560,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -594,7 +594,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -607,7 +607,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -620,7 +620,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/17/SOAP-Concurrency/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>

@@ -13,11 +13,11 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Responsive Web\nAlways Design for Mobile First\n\n\n\n\n\n데스크탑, 태블릿, 노트북, 스마트폰 등의 다양한 기기가 등장하면서 데스크탑의 화면에 최적화되어 있던 레이아웃을 각 기기의 화면 크기에 맞게 유동적으로 변동해야 하는 필요성이 대두됨\n내용은 동일하지만 최적화된 레이아웃 렌더링\n\n반응형의 중요성\n모바일 시장\n\n더 나은 User eXperience\n\n빠른 페이지 로딩 속도\n\n효율적이고 cost-effective\n\n버전을 나누어 유지, 보수할 필요가 없음\n\n\n\n종류1) Responsive Layout (adaptive design)\nmedia query 이용해 breakpoint 적용\n각 component가 px 으로 표현됨\n\n2) Fluid Layout\n페이지의 크기에 따라 레이아웃의 크기도 변경됨\nrelative unit인 em 또는 % 으로 표현됨\ntime-consuming\n매번 testing 해야 함\n\n3) Fluid-responsive Layout\nresponsive 과 fluid 레이아웃의 결합\n\nmedia query 의 breakpoints 이용\n\n더 자연스러운 레이아웃 변화\n\n\nCSS Media Query (Fluid grid system)@media rule\nwidth and height of the viewport\nwidth and height of the device\norientation (landscape / portrait)\nresolution\n\nMedia Types\n\n\nValue\nDescription\n\n\n\nall\nDefault. Used for all media type devices\n\n\nprint\nUsed for printers\n\n\nscreen\nUsed for computer screens, tablets, smart-phones etc.\n\n\nspeech\nUsed for screenreaders that “reads” the page out loud\n\n\nMedia Features\n\n\nValue\nDescription\n\n\n\nmax-height\nThe maximum height of the display area, such as a browser window\n\n\nmin-width\nThe minimum width of the display area, such as a browser window\n\n\ncss\n123@media not|only mediatype and (mediafeature and|or|not mediafeature) &#123;  CSS-Code;&#125;\nscss\n1234567891011121314151617181920212223242526272829// Media Query Mixins// Mobile@mixin mediaSm &#123;  @media screen and (max-width: 500px) &#123;    @content;  &#125;&#125;// Tablet@mixin mediaMd &#123;  @media screen and (max-width: 768px) &#123;    @content;  &#125;&#125;// Desktop@mixin mediaLg &#123;  @media screen and (min-width: 769px) and (max-width: 1170px) &#123;    @content;  &#125;&#125;// TV, etc.@mixin mediaXl &#123;  @media screen and (min-width: 1171px) &#123;    @content;  &#125;&#125;\nhtml\n123&lt;link rel=&quot;stylesheet&quot; media=&quot;screen and (min-width: 900px)&quot; href=&quot;widescreen.css&quot;&gt;&lt;link rel=&quot;stylesheet&quot; media=&quot;screen and (max-width: 600px)&quot; href=&quot;smallscreen.css&quot;&gt;....\n\n\n\n\n\n\n  \n\n\n\n123456789101112131415161718/* Smartphones (portrait and landscape) ----------- */@media only screenand (min-device-width : 320px)and (max-device-width : 480px) &#123;/* Styles */&#125;/* Smartphones (landscape) ----------- */@media only screenand (min-width : 321px) &#123;/* Styles */&#125;/* Smartphones (portrait) ----------- */@media only screenand (max-width : 320px) &#123;/* Styles */&#125;\n\n\n\n\nReferencehttps://css-tricks.com/a-complete-guide-to-css-media-queries/\n","dateCreated":"2021-04-10T04:36:47+09:00","dateModified":"2021-04-09T20:52:14+09:00","datePublished":"2021-04-10T04:36:47+09:00","description":"","headline":"Responsive Web","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/","keywords":"SOPT, WEB, CSS, media query, responsive web"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Responsive Web\nAlways Design for Mobile First\n\n\n\n\n\n데스크탑, 태블릿, 노트북, 스마트폰 등의 다양한 기기가 등장하면서 데스크탑의 화면에 최적화되어 있던 레이아웃을 각 기기의 화면 크기에 맞게 유동적으로 변동해야 하는 필요성이 대두됨\n내용은 동일하지만 최적화된 레이아웃 렌더링\n\n반응형의 중요성\n모바일 시장\n\n더 나은 User eXperience\n\n빠른 페이지 로딩 속도\n\n효율적이고 cost-effective\n\n버전을 나누어 유지, 보수할 필요가 없음\n\n\n\n종류1) Responsive Layout (adaptive design)\nmedia query 이용해 breakpoint 적용\n각 component가 px 으로 표현됨\n\n2) Fluid Layout\n페이지의 크기에 따라 레이아웃의 크기도 변경됨\nrelative unit인 em 또는 % 으로 표현됨\ntime-consuming\n매번 testing 해야 함\n\n3) Fluid-responsive Layout\nresponsive 과 fluid 레이아웃의 결합\n\nmedia query 의 breakpoints 이용\n\n더 자연스러운 레이아웃 변화\n\n\nCSS Media Query (Fluid grid system)@media rule\nwidth and height of the viewport\nwidth and height of the device\norientation (landscape / portrait)\nresolution\n\nMedia Types\n\n\nValue\nDescription\n\n\n\nall\nDefault. Used for all media type devices\n\n\nprint\nUsed for printers\n\n\nscreen\nUsed for computer screens, tablets, smart-phones etc.\n\n\nspeech\nUsed for screenreaders that “reads” the page out loud\n\n\nMedia Features\n\n\nValue\nDescription\n\n\n\nmax-height\nThe maximum height of the display area, such as a browser window\n\n\nmin-width\nThe minimum width of the display area, such as a browser window\n\n\ncss\n123@media not|only mediatype and (mediafeature and|or|not mediafeature) &#123;  CSS-Code;&#125;\nscss\n1234567891011121314151617181920212223242526272829// Media Query Mixins// Mobile@mixin mediaSm &#123;  @media screen and (max-width: 500px) &#123;    @content;  &#125;&#125;// Tablet@mixin mediaMd &#123;  @media screen and (max-width: 768px) &#123;    @content;  &#125;&#125;// Desktop@mixin mediaLg &#123;  @media screen and (min-width: 769px) and (max-width: 1170px) &#123;    @content;  &#125;&#125;// TV, etc.@mixin mediaXl &#123;  @media screen and (min-width: 1171px) &#123;    @content;  &#125;&#125;\nhtml\n123&lt;link rel=&quot;stylesheet&quot; media=&quot;screen and (min-width: 900px)&quot; href=&quot;widescreen.css&quot;&gt;&lt;link rel=&quot;stylesheet&quot; media=&quot;screen and (max-width: 600px)&quot; href=&quot;smallscreen.css&quot;&gt;....\n\n\n\n\n\n\n  \n\n\n\n123456789101112131415161718/* Smartphones (portrait and landscape) ----------- */@media only screenand (min-device-width : 320px)and (max-device-width : 480px) &#123;/* Styles */&#125;/* Smartphones (landscape) ----------- */@media only screenand (min-width : 321px) &#123;/* Styles */&#125;/* Smartphones (portrait) ----------- */@media only screenand (max-width : 320px) &#123;/* Styles */&#125;\n\n\n\n\nReferencehttps://css-tricks.com/a-complete-guide-to-css-media-queries/\n","dateCreated":"2021-04-10T04:36:47+09:00","dateModified":"2021-04-09T20:52:14+09:00","datePublished":"2021-04-10T04:36:47+09:00","description":"","headline":"Responsive Web","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/","keywords":"SOPT, WEB, CSS, media query, responsive web"}</script>
     <meta name="description" content="Responsive Web Always Design for Mobile First      데스크탑, 태블릿, 노트북, 스마트폰 등의 다양한 기기가 등장하면서 데스크탑의 화면에 최적화되어 있던 레이아웃을 각 기기의 화면 크기에 맞게 유동적으로 변동해야 하는 필요성이 대두됨 내용은 동일하지만 최적화된 레이아웃 렌더링  반응형의 중요성 모바일 시장  더 나은">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Responsive Web">
-<meta property="og:url" content="http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/index.html">
+<meta property="og:url" content="https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="Responsive Web Always Design for Mobile First      데스크탑, 태블릿, 노트북, 스마트폰 등의 다양한 기기가 등장하면서 데스크탑의 화면에 최적화되어 있던 레이아웃을 각 기기의 화면 크기에 맞게 유동적으로 변동해야 하는 필요성이 대두됨 내용은 동일하지만 최적화된 레이아웃 렌더링  반응형의 중요성 모바일 시장  더 나은">
 <meta property="og:locale" content="en_US">
@@ -41,7 +41,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -519,7 +519,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -532,7 +532,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -545,7 +545,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -634,7 +634,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -647,7 +647,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -660,7 +660,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -694,7 +694,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -707,7 +707,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -720,7 +720,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>

@@ -13,11 +13,11 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Function Statement\nhoisted to the top of the full lexical scope\ncan break conflicting scripts\nit’s difficult to debug\n\n\n\n\nnamed function is shown in the stack trace\neasier to debug when error occurs in the function\n\n\n\n12345678910111213141516/*Function declarations are given two passes,where the first lifts them to the top (hoisting),allowing &quot;out of order&quot; usage*/doTheThing();function doTheThing() &#123;  console.log(`This is awesome number $&#123;getAwesome()&#125;`)&#125;function getAwesome() &#123;  return (+((Math.random() * 10000).toString().split(&#x27;.&#x27;)[0]))&#125;\n\n\nConst Declaration\nedge-case hoisting\n\n\ndeclare a variable\ngives it a block scope\nstops the full hoisting\n\n\ncannot be re-declared\nthrows exception if re-declared\neasier to debug\n\n\nwon’t be caught until called\n\n12345678910111213141516171819202122232425262728/*This shows that, because of block-scoping,const function references must be invoked in-orderor else things will fail silently.consts are added serially (in the order in which they appear)and much of the body isn&#x27;t declared when we first try to invoke or functions*/// use `getAwesome()`const tryDoTheThing = () =&gt; &#123;  console.log(`This is me trying to be awesome $&#123;getAwesome()&#125;`)&#125;// &quot;getAwesome is not defined&quot;, because it is referenced too early,// before declaring `getAwesome()` functiontryDoTheThing()const getAwesome = () =&gt; (+((Math.random() * 10000).toString().split(&#x27;.&#x27;)[0]))const doTheThing = () =&gt; &#123;  console.log(`This is awesome! $&#123;getAwesome()&#125;`)&#125;doTheThing()\n","dateCreated":"2021-04-10T20:58:41+09:00","dateModified":"2021-04-10T13:22:48+09:00","datePublished":"2021-04-10T20:58:41+09:00","description":"","headline":"const function","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/04/10/const-function/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/04/10/const-function/","keywords":"WEB, javascript"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Function Statement\nhoisted to the top of the full lexical scope\ncan break conflicting scripts\nit’s difficult to debug\n\n\n\n\nnamed function is shown in the stack trace\neasier to debug when error occurs in the function\n\n\n\n12345678910111213141516/*Function declarations are given two passes,where the first lifts them to the top (hoisting),allowing &quot;out of order&quot; usage*/doTheThing();function doTheThing() &#123;  console.log(`This is awesome number $&#123;getAwesome()&#125;`)&#125;function getAwesome() &#123;  return (+((Math.random() * 10000).toString().split(&#x27;.&#x27;)[0]))&#125;\n\n\nConst Declaration\nedge-case hoisting\n\n\ndeclare a variable\ngives it a block scope\nstops the full hoisting\n\n\ncannot be re-declared\nthrows exception if re-declared\neasier to debug\n\n\nwon’t be caught until called\n\n12345678910111213141516171819202122232425262728/*This shows that, because of block-scoping,const function references must be invoked in-orderor else things will fail silently.consts are added serially (in the order in which they appear)and much of the body isn&#x27;t declared when we first try to invoke or functions*/// use `getAwesome()`const tryDoTheThing = () =&gt; &#123;  console.log(`This is me trying to be awesome $&#123;getAwesome()&#125;`)&#125;// &quot;getAwesome is not defined&quot;, because it is referenced too early,// before declaring `getAwesome()` functiontryDoTheThing()const getAwesome = () =&gt; (+((Math.random() * 10000).toString().split(&#x27;.&#x27;)[0]))const doTheThing = () =&gt; &#123;  console.log(`This is awesome! $&#123;getAwesome()&#125;`)&#125;doTheThing()\n","dateCreated":"2021-04-10T20:58:41+09:00","dateModified":"2021-04-10T13:22:48+09:00","datePublished":"2021-04-10T20:58:41+09:00","description":"","headline":"const function","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/04/10/const-function/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/04/10/const-function/","keywords":"WEB, javascript"}</script>
     <meta name="description" content="Function Statement hoisted to the top of the full lexical scope can break conflicting scripts it’s difficult to debug     named function is shown in the stack trace easier to debug when error occurs i">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="const function">
-<meta property="og:url" content="http://leahincom.github.io/2021/04/10/const-function/index.html">
+<meta property="og:url" content="https://leahincom.github.io/2021/04/10/const-function/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="Function Statement hoisted to the top of the full lexical scope can break conflicting scripts it’s difficult to debug     named function is shown in the stack trace easier to debug when error occurs i">
 <meta property="og:locale" content="en_US">
@@ -32,7 +32,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -434,7 +434,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/10/const-function/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -447,7 +447,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/10/const-function/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -460,7 +460,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/10/const-function/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -549,7 +549,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/10/const-function/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -562,7 +562,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/10/const-function/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -575,7 +575,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/10/const-function/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -609,7 +609,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/10/const-function/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/10/const-function/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -622,7 +622,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/10/const-function/"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/10/const-function/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -635,7 +635,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/10/const-function/"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/10/const-function/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>

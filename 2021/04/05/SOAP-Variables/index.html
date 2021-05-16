@@ -13,11 +13,11 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Variables\n변수 이름\n\n의미 있는\n\n발음하기 쉬운\n\n\n12345// badconst yyyymmdstr = moment().format(&#x27;YYYY/MM/DD&#x27;);// goodconst currentDate = moment().format(&#x27;YYYY/MM/DD&#x27;);\n\n동일한 유형에 동일한 어휘\n\n1234567// badgetUserInfo();getClientData();getCustomerRecord();// goodgetUser();\n\n검색 가능한 이름 지정하기\n\n123456// badsetTimeout(blastOff, 86400000);// goodconst MILLISECONDS_IN_A_DAY = 86400000;setTimeout(blastOff, MILLISECONDS_IN_A_DAY);\n\n의도를 나타내는\n\n123456789const address = &#x27;One Infinite Loop, Cupertino 95014&#x27;;const cityZipCodeRegex = /^[^,\\\\]+[,\\\\\\s]+(.+?)\\s*(\\d&#123;5&#125;)?$/;// badsaveCityZipCode(address.match(cityZipCodeRegex)[1], address.match(cityZipCodeRegex)[2]);// goodconst [, city, zipCode] = address.match(cityZipCodeRegex) || [];saveCityZipCode(city, zipCode);\n\n암시적인 것 X, 명시적인 것\n\n12345678910111213141516171819202122const locations = [&#x27;서울&#x27;, &#x27;인천&#x27;, &#x27;수원&#x27;];// badlocations.forEach(l =&gt; &#123;  doStuff();  doSomeOtherStuff();  // ...  // ...  // ...  // 잠깐, `l`은 또 뭘까요?  dispatch(l);&#125;);// goodlocations.forEach(location =&gt; &#123;  doStuff();  doSomeOtherStuff();  // ...  // ...  // ...  dispatch(location);&#125;);\n\n필요없는 것 지우기\n\n123456789101112131415161718192021// badconst Car = &#123;  carMake: &#x27;BMW&#x27;,  carModel: &#x27;M3&#x27;,  carColor: &#x27;파란색&#x27;&#125;;function paintCar(car) &#123;  car.carColor = &#x27;빨간색&#x27;;&#125;// goodconst Car = &#123;  make: &#x27;BMW&#x27;,  model: &#x27;M3&#x27;,  color: &#x27;파란색&#x27;&#125;;function paintCar(car) &#123;  car.color = &#x27;빨간색&#x27;;&#125;\n\nshort circuiting보다 default 매개변수 활용하기\ndefault 매개변수 : 매개변수가 undefined 일 때 적용됨\n그 외 (‘’, “”, false, null, 0, NaN 등의 falsy 값 포함) 은 적용되지 않음\n\n\n\n12345678910// badfunction createMicrobrewery(name) &#123;  const breweryName = name || &#x27;Hipster Brew Co.&#x27;;  // ...&#125;// goodfunction createMicrobrewery(name = &#x27;Hipster Brew Co.&#x27;) &#123;  // ...&#125;\n\n\n\n\n","dateCreated":"2021-04-05T07:01:36+09:00","dateModified":"2021-04-10T12:57:11+09:00","datePublished":"2021-04-05T07:01:36+09:00","description":"","headline":"Variables","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/04/05/SOAP-Variables/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/04/05/SOAP-Variables/","keywords":"SOPT, clean code, javascript, variable"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Variables\n변수 이름\n\n의미 있는\n\n발음하기 쉬운\n\n\n12345// badconst yyyymmdstr = moment().format(&#x27;YYYY/MM/DD&#x27;);// goodconst currentDate = moment().format(&#x27;YYYY/MM/DD&#x27;);\n\n동일한 유형에 동일한 어휘\n\n1234567// badgetUserInfo();getClientData();getCustomerRecord();// goodgetUser();\n\n검색 가능한 이름 지정하기\n\n123456// badsetTimeout(blastOff, 86400000);// goodconst MILLISECONDS_IN_A_DAY = 86400000;setTimeout(blastOff, MILLISECONDS_IN_A_DAY);\n\n의도를 나타내는\n\n123456789const address = &#x27;One Infinite Loop, Cupertino 95014&#x27;;const cityZipCodeRegex = /^[^,\\\\]+[,\\\\\\s]+(.+?)\\s*(\\d&#123;5&#125;)?$/;// badsaveCityZipCode(address.match(cityZipCodeRegex)[1], address.match(cityZipCodeRegex)[2]);// goodconst [, city, zipCode] = address.match(cityZipCodeRegex) || [];saveCityZipCode(city, zipCode);\n\n암시적인 것 X, 명시적인 것\n\n12345678910111213141516171819202122const locations = [&#x27;서울&#x27;, &#x27;인천&#x27;, &#x27;수원&#x27;];// badlocations.forEach(l =&gt; &#123;  doStuff();  doSomeOtherStuff();  // ...  // ...  // ...  // 잠깐, `l`은 또 뭘까요?  dispatch(l);&#125;);// goodlocations.forEach(location =&gt; &#123;  doStuff();  doSomeOtherStuff();  // ...  // ...  // ...  dispatch(location);&#125;);\n\n필요없는 것 지우기\n\n123456789101112131415161718192021// badconst Car = &#123;  carMake: &#x27;BMW&#x27;,  carModel: &#x27;M3&#x27;,  carColor: &#x27;파란색&#x27;&#125;;function paintCar(car) &#123;  car.carColor = &#x27;빨간색&#x27;;&#125;// goodconst Car = &#123;  make: &#x27;BMW&#x27;,  model: &#x27;M3&#x27;,  color: &#x27;파란색&#x27;&#125;;function paintCar(car) &#123;  car.color = &#x27;빨간색&#x27;;&#125;\n\nshort circuiting보다 default 매개변수 활용하기\ndefault 매개변수 : 매개변수가 undefined 일 때 적용됨\n그 외 (‘’, “”, false, null, 0, NaN 등의 falsy 값 포함) 은 적용되지 않음\n\n\n\n12345678910// badfunction createMicrobrewery(name) &#123;  const breweryName = name || &#x27;Hipster Brew Co.&#x27;;  // ...&#125;// goodfunction createMicrobrewery(name = &#x27;Hipster Brew Co.&#x27;) &#123;  // ...&#125;\n\n\n\n\n","dateCreated":"2021-04-05T07:01:36+09:00","dateModified":"2021-04-10T12:57:11+09:00","datePublished":"2021-04-05T07:01:36+09:00","description":"","headline":"Variables","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/04/05/SOAP-Variables/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/04/05/SOAP-Variables/","keywords":"SOPT, clean code, javascript, variable"}</script>
     <meta name="description" content="Variables 변수 이름  의미 있는  발음하기 쉬운   12345&#x2F;&#x2F; badconst yyyymmdstr &#x3D; moment().format(&amp;#x27;YYYY&#x2F;MM&#x2F;DD&amp;#x27;);&#x2F;&#x2F; goodconst currentDate &#x3D; moment().format(&amp;#x27;YYYY&#x2F;MM&#x2F;DD&amp;#x27;);  동일한 유형에 동일한 어휘  1234567&#x2F;&#x2F; b">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Variables">
-<meta property="og:url" content="http://leahincom.github.io/2021/04/05/SOAP-Variables/index.html">
+<meta property="og:url" content="https://leahincom.github.io/2021/04/05/SOAP-Variables/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="Variables 변수 이름  의미 있는  발음하기 쉬운   12345&#x2F;&#x2F; badconst yyyymmdstr &#x3D; moment().format(&amp;#x27;YYYY&#x2F;MM&#x2F;DD&amp;#x27;);&#x2F;&#x2F; goodconst currentDate &#x3D; moment().format(&amp;#x27;YYYY&#x2F;MM&#x2F;DD&amp;#x27;);  동일한 유형에 동일한 어휘  1234567&#x2F;&#x2F; b">
 <meta property="og:locale" content="en_US">
@@ -34,7 +34,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -444,7 +444,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -457,7 +457,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -470,7 +470,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -559,7 +559,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -572,7 +572,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -585,7 +585,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/05/SOAP-Variables/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -619,7 +619,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/05/SOAP-Variables/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -632,7 +632,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/05/SOAP-Variables/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -645,7 +645,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/SOAP-Variables/"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/05/SOAP-Variables/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>

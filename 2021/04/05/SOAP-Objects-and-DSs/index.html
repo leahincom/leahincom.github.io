@@ -13,11 +13,11 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Objects and Data Structures\nGetter and Setter\n\nJS는 인터페이스 / 타입 / 접근제어자 (Access Modifier) 을 가지고 있지 않음\n\nObject property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨\n\nset action 시 validation을 추가하는 것이 좋음\n\ninternal representation을 encapsulating\n\nget, set시 logging이나 error handling을 추가하는 것이 용이함\n\nget 시 lazy load 속성을 추가할 수 있음\n\n\n\nLazy loading \n\nIt’s a way to shorten the length of the critical rendering path, which translates into reduced page load times\ngetting the properties from a server\n\n\nidentify resources as non-blocking (non-critical)\nload these only when needed\n\n\n\n\n123456789101112131415161718192021222324252627282930313233343536373839// badfunction makeBankAccount() &#123;  // ...  return &#123;    // ...    balance: 0  &#125;;&#125;const account = makeBankAccount();account.balance = 100;// goodfunction makeBankAccount() &#123;  // private으로 선언된 변수  let balance = 0;  // 아래 return을 통해 public으로 선언된 &quot;getter&quot;  function getBalance() &#123;    return balance;  &#125;  // 아래 return을 통해 public으로 선언된 &quot;setter&quot;  function setBalance(amount) &#123;    // ... balance를 업데이트하기 전 검증로직    balance = amount;  &#125;  return &#123;    // ...    getBalance,    setBalance  &#125;;&#125;const account = makeBankAccount();account.setBalance(100);\n\nobjects의 properties는 private로 만들기\n\nclosures\n\n1234567891011121314151617181920212223242526272829303132// badconst Employee = function(name) &#123;  this.name = name;&#125;;Employee.prototype.getName = function getName() &#123;  return this.name;&#125;;const employee = new Employee(&#x27;John Doe&#x27;);console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: John Doedelete employee.name;console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: undefined// goodfunction makeEmployee(name) &#123;  return &#123;    getName() &#123;      return name;    &#125;,  &#125;;&#125;const employee = makeEmployee(&#x27;John Doe&#x27;);console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: John Doedelete employee.name;console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: John Doe\n\n\n\n","dateCreated":"2021-04-05T18:20:55+09:00","dateModified":"2021-04-26T23:05:55+09:00","datePublished":"2021-04-05T18:20:55+09:00","description":"","headline":"Objects and DSs","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/","keywords":"SOPT, clean code, javascript, object, data structure"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Objects and Data Structures\nGetter and Setter\n\nJS는 인터페이스 / 타입 / 접근제어자 (Access Modifier) 을 가지고 있지 않음\n\nObject property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨\n\nset action 시 validation을 추가하는 것이 좋음\n\ninternal representation을 encapsulating\n\nget, set시 logging이나 error handling을 추가하는 것이 용이함\n\nget 시 lazy load 속성을 추가할 수 있음\n\n\n\nLazy loading \n\nIt’s a way to shorten the length of the critical rendering path, which translates into reduced page load times\ngetting the properties from a server\n\n\nidentify resources as non-blocking (non-critical)\nload these only when needed\n\n\n\n\n123456789101112131415161718192021222324252627282930313233343536373839// badfunction makeBankAccount() &#123;  // ...  return &#123;    // ...    balance: 0  &#125;;&#125;const account = makeBankAccount();account.balance = 100;// goodfunction makeBankAccount() &#123;  // private으로 선언된 변수  let balance = 0;  // 아래 return을 통해 public으로 선언된 &quot;getter&quot;  function getBalance() &#123;    return balance;  &#125;  // 아래 return을 통해 public으로 선언된 &quot;setter&quot;  function setBalance(amount) &#123;    // ... balance를 업데이트하기 전 검증로직    balance = amount;  &#125;  return &#123;    // ...    getBalance,    setBalance  &#125;;&#125;const account = makeBankAccount();account.setBalance(100);\n\nobjects의 properties는 private로 만들기\n\nclosures\n\n1234567891011121314151617181920212223242526272829303132// badconst Employee = function(name) &#123;  this.name = name;&#125;;Employee.prototype.getName = function getName() &#123;  return this.name;&#125;;const employee = new Employee(&#x27;John Doe&#x27;);console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: John Doedelete employee.name;console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: undefined// goodfunction makeEmployee(name) &#123;  return &#123;    getName() &#123;      return name;    &#125;,  &#125;;&#125;const employee = makeEmployee(&#x27;John Doe&#x27;);console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: John Doedelete employee.name;console.log(`Employee name: $&#123;employee.getName()&#125;`);// Employee name: John Doe\n\n\n\n","dateCreated":"2021-04-05T18:20:55+09:00","dateModified":"2021-04-26T23:05:55+09:00","datePublished":"2021-04-05T18:20:55+09:00","description":"","headline":"Objects and DSs","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/","keywords":"SOPT, clean code, javascript, object, data structure"}</script>
     <meta name="description" content="Objects and Data Structures Getter and Setter  JS는 인터페이스 &#x2F; 타입 &#x2F; 접근제어자 (Access Modifier) 을 가지고 있지 않음  Object property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨  set a">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Objects and DSs">
-<meta property="og:url" content="http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/index.html">
+<meta property="og:url" content="https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="Objects and Data Structures Getter and Setter  JS는 인터페이스 &#x2F; 타입 &#x2F; 접근제어자 (Access Modifier) 을 가지고 있지 않음  Object property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨  set a">
 <meta property="og:locale" content="en_US">
@@ -35,7 +35,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -443,7 +443,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -456,7 +456,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -469,7 +469,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -558,7 +558,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -571,7 +571,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -584,7 +584,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -618,7 +618,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -631,7 +631,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -644,7 +644,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>

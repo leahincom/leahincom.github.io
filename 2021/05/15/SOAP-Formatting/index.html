@@ -13,11 +13,11 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Formatting포맷팅은 주관적이다.\n포맷팅 체크를 해주는 자동화 도구 가 많이 있기 때문에, 공통적으로 하나를 골라 쓰는 것이 합리적이다. 자동으로 교정되는 서식 외의 것들에 대해서는 다음과 같은 지침을 따르는 것이 좋으나, 무엇보다 일관성 있게 적용하는 것이 중요하다.\n\n\n\n\n\n일관된 대소문자를 사용할 것\n\n 특히 JS에서는 타입을 명시하지 않기 때문에 변수와 함수의 대소문자를 통해 특성을 파악할 수 있다.\n\n123456789101112131415161718const DAYS_IN_WEEK = 7;// const daysInMonth = 30;const DAYS_IN_MONTH = 30;/*const songs = [&#x27;Back In Black&#x27;, &#x27;Stairway to Heaven&#x27;, &#x27;Hey Jude&#x27;];const Artists = [&#x27;ACDC&#x27;, &#x27;Led Zeppelin&#x27;, &#x27;The Beatles&#x27;];*/const SONGS = [&quot;Back In Black&quot;, &quot;Stairway to Heaven&quot;, &quot;Hey Jude&quot;];const ARTISTS = [&quot;ACDC&quot;, &quot;Led Zeppelin&quot;, &quot;The Beatles&quot;];function eraseDatabase() &#123;&#125;// function restore_database() &#123;&#125;function restoreDatabase() &#123;&#125;// class animal &#123;&#125;class Animal &#123;&#125;class Alpaca &#123;&#125;\n함수 callers와 함수 callees는 가깝게 위치시키자\n\n우리는 코드를 위에서부터 아래로 순차적으로 읽어나가기 때문에, caller와 callee를 수직적으로 가깝게 위치시키는 것이 좋다.\n즉, caller 밑에 callee를 놓자.\n\n123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778// badclass PerformanceReview &#123;  constructor(employee) &#123;    this.employee = employee;  &#125;  lookupPeers() &#123;    return db.lookup(this.employee, &quot;peers&quot;);  &#125;  lookupManager() &#123;    return db.lookup(this.employee, &quot;manager&quot;);  &#125;  getPeerReviews() &#123;    const peers = this.lookupPeers();    // ...  &#125;  perfReview() &#123;    this.getPeerReviews();    this.getManagerReview();    this.getSelfReview();  &#125;  getManagerReview() &#123;    const manager = this.lookupManager();  &#125;  getSelfReview() &#123;    // ...  &#125;&#125;const review = new PerformanceReview(employee);review.perfReview();// goodclass PerformanceReview &#123;  constructor(employee) &#123;    this.employee = employee;  &#125;  perfReview() &#123;    this.getPeerReviews(); // 1    this.getManagerReview(); // 2    this.getSelfReview(); // 3  &#125;\t// 1  getPeerReviews() &#123;    const peers = this.lookupPeers(); // 1-1    // ...  &#125;\t// 1-1  lookupPeers() &#123;    return db.lookup(this.employee, &quot;peers&quot;);  &#125;\t// 2  getManagerReview() &#123;    const manager = this.lookupManager(); // 2-1  &#125;\t// 2-1  lookupManager() &#123;    return db.lookup(this.employee, &quot;manager&quot;);  &#125;\t// 3  getSelfReview() &#123;    // ...  &#125;&#125;const review = new PerformanceReview(employee);review.perfReview();\n\n","dateCreated":"2021-05-15T07:28:39+09:00","dateModified":"2021-05-16T16:14:18+09:00","datePublished":"2021-05-15T07:28:39+09:00","description":"","headline":"Formatting","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/05/15/SOAP-Formatting/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/05/15/SOAP-Formatting/","keywords":"SOPT, clean code, javascript, SOLID"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Formatting포맷팅은 주관적이다.\n포맷팅 체크를 해주는 자동화 도구 가 많이 있기 때문에, 공통적으로 하나를 골라 쓰는 것이 합리적이다. 자동으로 교정되는 서식 외의 것들에 대해서는 다음과 같은 지침을 따르는 것이 좋으나, 무엇보다 일관성 있게 적용하는 것이 중요하다.\n\n\n\n\n\n일관된 대소문자를 사용할 것\n\n 특히 JS에서는 타입을 명시하지 않기 때문에 변수와 함수의 대소문자를 통해 특성을 파악할 수 있다.\n\n123456789101112131415161718const DAYS_IN_WEEK = 7;// const daysInMonth = 30;const DAYS_IN_MONTH = 30;/*const songs = [&#x27;Back In Black&#x27;, &#x27;Stairway to Heaven&#x27;, &#x27;Hey Jude&#x27;];const Artists = [&#x27;ACDC&#x27;, &#x27;Led Zeppelin&#x27;, &#x27;The Beatles&#x27;];*/const SONGS = [&quot;Back In Black&quot;, &quot;Stairway to Heaven&quot;, &quot;Hey Jude&quot;];const ARTISTS = [&quot;ACDC&quot;, &quot;Led Zeppelin&quot;, &quot;The Beatles&quot;];function eraseDatabase() &#123;&#125;// function restore_database() &#123;&#125;function restoreDatabase() &#123;&#125;// class animal &#123;&#125;class Animal &#123;&#125;class Alpaca &#123;&#125;\n함수 callers와 함수 callees는 가깝게 위치시키자\n\n우리는 코드를 위에서부터 아래로 순차적으로 읽어나가기 때문에, caller와 callee를 수직적으로 가깝게 위치시키는 것이 좋다.\n즉, caller 밑에 callee를 놓자.\n\n123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778// badclass PerformanceReview &#123;  constructor(employee) &#123;    this.employee = employee;  &#125;  lookupPeers() &#123;    return db.lookup(this.employee, &quot;peers&quot;);  &#125;  lookupManager() &#123;    return db.lookup(this.employee, &quot;manager&quot;);  &#125;  getPeerReviews() &#123;    const peers = this.lookupPeers();    // ...  &#125;  perfReview() &#123;    this.getPeerReviews();    this.getManagerReview();    this.getSelfReview();  &#125;  getManagerReview() &#123;    const manager = this.lookupManager();  &#125;  getSelfReview() &#123;    // ...  &#125;&#125;const review = new PerformanceReview(employee);review.perfReview();// goodclass PerformanceReview &#123;  constructor(employee) &#123;    this.employee = employee;  &#125;  perfReview() &#123;    this.getPeerReviews(); // 1    this.getManagerReview(); // 2    this.getSelfReview(); // 3  &#125;\t// 1  getPeerReviews() &#123;    const peers = this.lookupPeers(); // 1-1    // ...  &#125;\t// 1-1  lookupPeers() &#123;    return db.lookup(this.employee, &quot;peers&quot;);  &#125;\t// 2  getManagerReview() &#123;    const manager = this.lookupManager(); // 2-1  &#125;\t// 2-1  lookupManager() &#123;    return db.lookup(this.employee, &quot;manager&quot;);  &#125;\t// 3  getSelfReview() &#123;    // ...  &#125;&#125;const review = new PerformanceReview(employee);review.perfReview();\n\n","dateCreated":"2021-05-15T07:28:39+09:00","dateModified":"2021-05-16T16:14:18+09:00","datePublished":"2021-05-15T07:28:39+09:00","description":"","headline":"Formatting","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/15/SOAP-Formatting/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/15/SOAP-Formatting/","keywords":"SOPT, clean code, javascript, SOLID"}</script>
     <meta name="description" content="Formatting포맷팅은 주관적이다. 포맷팅 체크를 해주는 자동화 도구 가 많이 있기 때문에, 공통적으로 하나를 골라 쓰는 것이 합리적이다. 자동으로 교정되는 서식 외의 것들에 대해서는 다음과 같은 지침을 따르는 것이 좋으나, 무엇보다 일관성 있게 적용하는 것이 중요하다.      일관된 대소문자를 사용할 것   특히 JS에서는 타입을 명시하지 않기 때문">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Formatting">
-<meta property="og:url" content="http://leahincom.github.io/2021/05/15/SOAP-Formatting/index.html">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/15/SOAP-Formatting/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="Formatting포맷팅은 주관적이다. 포맷팅 체크를 해주는 자동화 도구 가 많이 있기 때문에, 공통적으로 하나를 골라 쓰는 것이 합리적이다. 자동으로 교정되는 서식 외의 것들에 대해서는 다음과 같은 지침을 따르는 것이 좋으나, 무엇보다 일관성 있게 적용하는 것이 중요하다.      일관된 대소문자를 사용할 것   특히 JS에서는 타입을 명시하지 않기 때문">
 <meta property="og:locale" content="en_US">
@@ -34,7 +34,7 @@
         
     
     
-        <meta property="og:image" content="http://leahincom.github.io/assets/images/profile.jpeg"/>
+        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
     
     
     
@@ -422,7 +422,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/15/SOAP-Formatting/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/15/SOAP-Formatting/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -435,7 +435,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/15/SOAP-Formatting/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/15/SOAP-Formatting/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -448,7 +448,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/15/SOAP-Formatting/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/15/SOAP-Formatting/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -537,7 +537,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/15/SOAP-Formatting/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/15/SOAP-Formatting/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -550,7 +550,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/15/SOAP-Formatting/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/15/SOAP-Formatting/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -563,7 +563,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/15/SOAP-Formatting/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/15/SOAP-Formatting/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -597,7 +597,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/15/SOAP-Formatting/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/15/SOAP-Formatting/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -610,7 +610,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/15/SOAP-Formatting/"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/15/SOAP-Formatting/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -623,7 +623,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/15/SOAP-Formatting/"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/15/SOAP-Formatting/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
