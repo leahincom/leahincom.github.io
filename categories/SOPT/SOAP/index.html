@@ -312,6 +312,334 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/05/15/SOAP-Comments/"
+                            aria-label=": SOAP-Comments"
+                        >
+                            SOAP-Comments
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-05-15T07:28:45+09:00">
+	
+		    May 15, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Comments"><a href="#Comments" class="headerlink" title="Comments"></a>Comments</h2><ol>
+<li><p>코드의 단위적 로직이 복잡한 것들 (Business logic complexity) 만 주석 처리를 하자!</p>
+<ul>
+<li>좋은 코드는 그 자체로 이해하기 쉬우므로, 주석은 복잡한 코드에 대한 사과와 같다.</li>
+</ul>
+<blockquote>
+<p><strong>Business Logic Complexity</strong></p>
+<p>Many organizations adopt software to support their business process and business logic is embedded in their system.</p>
+<p>To solve this problem we define <em>business logic complexity</em> to capture <em>business logic</em> from the source code and to quantify how hard it is to understand.</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hashIt</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// The hash</span></span><br><span class="line">  <span class="keyword">let</span> hash = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Length of string</span></span><br><span class="line">  <span class="keyword">const</span> length = data.length;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Loop through every character in data</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    <span class="comment">// Get character code.</span></span><br><span class="line">    <span class="keyword">const</span> char = data.charCodeAt(i);</span><br><span class="line">    <span class="comment">// Make the hash</span></span><br><span class="line">    hash = (hash &lt;&lt; <span class="number">5</span>) - hash + char;</span><br><span class="line">    <span class="comment">// Convert to 32-bit integer</span></span><br><span class="line">    hash &amp;= hash;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hashIt</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> hash = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> length = data.length;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> char = data.charCodeAt(i);</span><br><span class="line">    hash = (hash &lt;&lt; <span class="number">5</span>) - hash + char;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Convert to 32-bit integer</span></span><br><span class="line">    hash &amp;= hash;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>주석 처리된 코드를 codebase에 남겨놓지 말고 지워버리기!</p>
+<ul>
+<li>형상 관리 툴 (버전 관리; version control) 이 이런 코드들을 남겨놓기 위함이니, 오래된 코드는 옛 버전에 남겨놓자.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">doStuff();</span><br><span class="line"><span class="comment">// doOtherStuff();</span></span><br><span class="line"><span class="comment">// doSomeMoreStuff();</span></span><br><span class="line"><span class="comment">// doSoMuchStuff();</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">doStuff();</span><br></pre></td></tr></table></figure></li>
+<li><p>기록용 주석은 사용하지 말자</p>
+<ul>
+<li>위와 동일하게, 형상 관리 툴 (git : <code>git log</code> 를 통해 이전 버전들 확인) 을 이용하고 필요없는 주석은 모두 날려버리자.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 2016-12-20: Removed monads, didn&#x27;t understand them (RM)</span></span><br><span class="line"><span class="comment"> * 2016-10-01: Improved using special monads (JP)</span></span><br><span class="line"><span class="comment"> * 2016-02-03: Removed type-checking (LI)</span></span><br><span class="line"><span class="comment"> * 2015-03-14: Added combine with type-checking (JR)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">combine</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">combine</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>위치 표시 주석도 피하자!</p>
+<ul>
+<li>적절한 <code>indentation</code>, <code>함수명</code> 및 <code>변수명</code> , <code>포맷팅</code> 을 이용한다면 기능 구분을 위한 정신없는 positional marker comments 는 필요하지 않다.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Scope Model Instantiation</span></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line">$scope.model = &#123;</span><br><span class="line">  menu: <span class="string">&quot;foo&quot;</span>,</span><br><span class="line">  nav: <span class="string">&quot;bar&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Action setup</span></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="keyword">const</span> actions = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">$scope.model = &#123;</span><br><span class="line">  menu: <span class="string">&quot;foo&quot;</span>,</span><br><span class="line">  nav: <span class="string">&quot;bar&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> actions = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/05/15/SOAP-Comments/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/05/15/SOAP-Formatting/"
+                            aria-label=": SOAP-Formatting"
+                        >
+                            SOAP-Formatting
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-05-15T07:28:39+09:00">
+	
+		    May 15, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Formatting"><a href="#Formatting" class="headerlink" title="Formatting"></a>Formatting</h2><p><strong><em>포맷팅은 주관적이다.</em></strong></p>
+<p><em>포맷팅 체크를 해주는 자동화 도구</em> 가 많이 있기 때문에, 공통적으로 하나를 골라 쓰는 것이 합리적이다. 자동으로 교정되는 서식 외의 것들에 대해서는 다음과 같은 지침을 따르는 것이 좋으나, 무엇보다 일관성 있게 적용하는 것이 중요하다.</p>
+<br />
+
+
+
+<ol>
+<li><p>일관된 대소문자를 사용할 것</p>
+<ul>
+<li> 특히 JS에서는 타입을 명시하지 않기 때문에 변수와 함수의 대소문자를 통해 특성을 파악할 수 있다.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> DAYS_IN_WEEK = <span class="number">7</span>;</span><br><span class="line"><span class="comment">// const daysInMonth = 30;</span></span><br><span class="line"><span class="keyword">const</span> DAYS_IN_MONTH = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">const songs = [&#x27;Back In Black&#x27;, &#x27;Stairway to Heaven&#x27;, &#x27;Hey Jude&#x27;];</span></span><br><span class="line"><span class="comment">const Artists = [&#x27;ACDC&#x27;, &#x27;Led Zeppelin&#x27;, &#x27;The Beatles&#x27;];</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">const</span> SONGS = [<span class="string">&quot;Back In Black&quot;</span>, <span class="string">&quot;Stairway to Heaven&quot;</span>, <span class="string">&quot;Hey Jude&quot;</span>];</span><br><span class="line"><span class="keyword">const</span> ARTISTS = [<span class="string">&quot;ACDC&quot;</span>, <span class="string">&quot;Led Zeppelin&quot;</span>, <span class="string">&quot;The Beatles&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">eraseDatabase</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// function restore_database() &#123;&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">restoreDatabase</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// class animal &#123;&#125;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Alpaca</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>함수 callers와 함수 callees는 가깝게 위치시키자</p>
+<ul>
+<li>우리는 코드를 위에서부터 아래로 순차적으로 읽어나가기 때문에, caller와 callee를 수직적으로 가깝게 위치시키는 것이 좋다.</li>
+<li>즉, caller 밑에 callee를 놓자.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerformanceReview</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">employee</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.employee = employee;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">lookupPeers</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;peers&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">lookupManager</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;manager&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getPeerReviews</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> peers = <span class="built_in">this</span>.lookupPeers();</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">perfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.getPeerReviews();</span><br><span class="line">    <span class="built_in">this</span>.getManagerReview();</span><br><span class="line">    <span class="built_in">this</span>.getSelfReview();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getManagerReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> manager = <span class="built_in">this</span>.lookupManager();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getSelfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> review = <span class="keyword">new</span> PerformanceReview(employee);</span><br><span class="line">review.perfReview();</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerformanceReview</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">employee</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.employee = employee;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">perfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.getPeerReviews(); <span class="comment">// 1</span></span><br><span class="line">    <span class="built_in">this</span>.getManagerReview(); <span class="comment">// 2</span></span><br><span class="line">    <span class="built_in">this</span>.getSelfReview(); <span class="comment">// 3</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 1</span></span><br><span class="line">  <span class="function"><span class="title">getPeerReviews</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> peers = <span class="built_in">this</span>.lookupPeers(); <span class="comment">// 1-1</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 1-1</span></span><br><span class="line">  <span class="function"><span class="title">lookupPeers</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;peers&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2</span></span><br><span class="line">  <span class="function"><span class="title">getManagerReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> manager = <span class="built_in">this</span>.lookupManager(); <span class="comment">// 2-1</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2-1</span></span><br><span class="line">  <span class="function"><span class="title">lookupManager</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;manager&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 3</span></span><br><span class="line">  <span class="function"><span class="title">getSelfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> review = <span class="keyword">new</span> PerformanceReview(employee);</span><br><span class="line">review.perfReview();</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/05/15/SOAP-Formatting/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/05/15/SOAP-Error-Handling/"
+                            aria-label=": SOAP-Error_Handling"
+                        >
+                            SOAP-Error_Handling
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-05-15T07:28:32+09:00">
+	
+		    May 15, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h2><p>런타임에서 성공적으로 확인된 경우,</p>
+<ol>
+<li>현재 스택에서 함수 실행을 중단하고</li>
+<li>프로세스 노드에서 프로세스를 종료하고</li>
+<li>스택을 추적해 콘솔에서 사용자에게 에러에 대한 설명을 제공한다.</li>
+</ol>
+<br />
+
+
+
+<ol>
+<li><p>단순히 에러를 확인만 하지 말고, <em><strong>Handling</strong></em> 하자!</p>
+<ul>
+<li><code>console.log</code> 를 사용하면 에러 로그와 헷갈리기 쉽기 때문에 자제하고,</li>
+<li><code>try - catch</code> 문으로 감쌌다면 에러를 예상한 것이므로, 해당 에러에 대한 해결 방안을 마련해 놓아야 한다.</li>
+</ul>
+<p>👇</p>
+<ul>
+<li><code>console.error</code> 또는 <code>console.exception</code> 활용하기</li>
+<li>유저에게 error를 알리기</li>
+<li>서비즈 사제체 error를 기록하기</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  functionThatMightThrow();</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="comment">// just logging out</span></span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// error &quot;handling&quot;</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  functionThatMightThrow();</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="comment">// 1. console.error</span></span><br><span class="line">  <span class="comment">// === console.exception</span></span><br><span class="line">  <span class="built_in">console</span>.error(error);</span><br><span class="line">  <span class="comment">// 2. 유저에게 알리기</span></span><br><span class="line">  notifyUserOfError(error);</span><br><span class="line">  <span class="comment">// 3. 서비스 자체에 에러 기록하기</span></span><br><span class="line">  reportErrorToService(error);</span><br><span class="line">  <span class="comment">// ... etc</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Promise가 반환한 rejected를 넘기지 말고, <em><strong>Handling</strong></em> 하자!</p>
+<blockquote>
+<p>Handling 방법은 위와 동일하게, 각 에러에 맞게 정의한다.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">getdata()</span><br><span class="line">.then(data &#x3D;&gt; &#123;</span><br><span class="line">  functionThatMightThrow(data);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(error &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F; just logging out...</span><br><span class="line">  console.log(error);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">getdata()</span><br><span class="line">.then(data &#x3D;&gt; &#123;</span><br><span class="line">  functionThatMightThrow(data);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(error &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F; 1.</span><br><span class="line">  console.error(error);</span><br><span class="line">  &#x2F;&#x2F; 2.</span><br><span class="line">  notifyUserOfError(error);</span><br><span class="line">  &#x2F;&#x2F; 3.</span><br><span class="line">  reportErrorToService(error);</span><br><span class="line">  &#x2F;&#x2F; ...etc</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/05/15/SOAP-Error-Handling/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/05/15/SOAP-Concurrency/"
+                            aria-label=": SOAP-Concurrency"
+                        >
+                            SOAP-Concurrency
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-05-15T07:28:09+09:00">
+	
+		    May 15, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h2><ol>
+<li><p>Callback 대신 Promise 사용하기</p>
+<ul>
+<li><p>ES2015/ ES6 기준</p>
+</li>
+<li><p>엄청나게 많은 중괄호 중첩</p>
+<blockquote>
+<p><strong>콜백 지옥</strong></p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request&#x27;</span>)</span><br><span class="line">  .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>, 	<span class="function">(<span class="params">requestErr, response</span>) =&gt;</span> &#123; <span class="comment">// 1차 콜백</span></span><br><span class="line">  	<span class="comment">// catch 구문</span></span><br><span class="line">    <span class="keyword">if</span> (requestErr) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(requestErr);</span><br><span class="line">    &#125; </span><br><span class="line">  	<span class="comment">// then 구문 ... 반복</span></span><br><span class="line">  	<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line">        .writeFile(<span class="string">&#x27;article.html&#x27;</span>,</span><br><span class="line">          response.body, <span class="function">(<span class="params">writeErr</span>) =&gt;</span> &#123; <span class="comment">// 2차 콜백</span></span><br><span class="line">            <span class="keyword">if</span> (writeErr) &#123;</span><br><span class="line">              <span class="built_in">console</span>.error(writeErr);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        );</span><br><span class="line">      &#125;</span><br><span class="line">	&#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line">  .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>)</span><br><span class="line">	<span class="comment">// Promise가 resolved를 반환하였을 때</span></span><br><span class="line">  .then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">  &#125;)</span><br><span class="line">	<span class="comment">// 다음 Promise</span></span><br><span class="line">  .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">	<span class="comment">// Promise가 rejected를 반환하였을 때</span></span><br><span class="line">  .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></li>
+<li><p>Async/ Await은 Promise보다 더욱 깔끔하다.</p>
+<ul>
+<li>ES2017/ ES8 기준</li>
+<li>콜백에 대한 Promise보다 더 깔끔한 해결책</li>
+<li>함수 앞에 <code>async</code> 붙이기</li>
+<li>함수의 연속적인 처리 (논리적으로 연결) 를 위해 <code>then</code> 을 계속 이어붙여 코드를 작성하지 않아도 됨</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// not bad</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line">.get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>)</span><br><span class="line">  .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line"><span class="comment">// better</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getCleanCodeArticle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// then 구문</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// then 작성 없이 await으로 synchronization</span></span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line"> .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>);</span><br><span class="line">    <span class="comment">// then 구문 // await로 Promise 처리</span></span><br><span class="line">    <span class="keyword">await</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// catch 구문</span></span><br><span class="line">  <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/05/15/SOAP-Concurrency/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/05/08/SOAP-Testing/"
                             aria-label=": Testing"
                         >

@@ -6,28 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>SOAP-Concurrency - leah</title>
+    <title>Tag: concurrency - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Concurrency\nCallback 대신 Promise 사용하기\n\nES2015/ ES6 기준\n\n엄청나게 많은 중괄호 중첩\n\n콜백 지옥\n\n\n\n1234567891011121314151617181920212223242526272829303132333435363738// badrequire(&#x27;request&#x27;)  .get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;, \t(requestErr, response) =&gt; &#123; // 1차 콜백  \t// catch 구문    if (requestErr) &#123;      console.error(requestErr);    &#125;   \t// then 구문 ... 반복  \telse &#123;      require(&#x27;fs&#x27;)        .writeFile(&#x27;article.html&#x27;,          response.body, (writeErr) =&gt; &#123; // 2차 콜백            if (writeErr) &#123;              console.error(writeErr);            &#125; else &#123;              console.log(&#x27;File written&#x27;);            &#125;          &#125;        );      &#125;\t&#125;);// goodrequire(&#x27;request-promise&#x27;)  .get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;)\t// Promise가 resolved를 반환하였을 때  .then((response) =&gt; &#123;    return require(&#x27;fs-promise&#x27;).writeFile(&#x27;article.html&#x27;, response);  &#125;)\t// 다음 Promise  .then(() =&gt; &#123;    console.log(&#x27;File written&#x27;);  &#125;)\t// Promise가 rejected를 반환하였을 때  .catch((err) =&gt; &#123;    console.error(err);  &#125;);\nAsync/ Await은 Promise보다 더욱 깔끔하다.\n\nES2017/ ES8 기준\n콜백에 대한 Promise보다 더 깔끔한 해결책\n함수 앞에 async 붙이기\n함수의 연속적인 처리 (논리적으로 연결) 를 위해 then 을 계속 이어붙여 코드를 작성하지 않아도 됨\n\n1234567891011121314151617181920212223242526272829// not badrequire(&#x27;request-promise&#x27;).get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;)  .then(response =&gt; &#123;    return require(&#x27;fs-promise&#x27;).writeFile(&#x27;article.html&#x27;, response);  &#125;)  .then(() =&gt; &#123;    console.log(&#x27;File written&#x27;);  &#125;)  .catch(err =&gt; &#123;    console.error(err);  &#125;)  // betterasync function getCleanCodeArticle() &#123;  // then 구문  try &#123;    // then 작성 없이 await으로 synchronization    const response = await require(&#x27;request-promise&#x27;) .get(&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;);    // then 구문 // await로 Promise 처리    await require(&#x27;fs-promise&#x27;).writeFile(&#x27;article.html&#x27;, response);    console.log(&#x27;File written&#x27;);  &#125;   // catch 구문  catch(err) &#123;    console.error(err);  &#125;&#125;\n\n\n","dateCreated":"2021-05-15T07:28:09+09:00","dateModified":"2021-05-16T15:24:31+09:00","datePublished":"2021-05-15T07:28:09+09:00","description":"","headline":"SOAP-Concurrency","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://leahincom.github.io/2021/05/15/SOAP-Concurrency/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"http://leahincom.github.io/2021/05/15/SOAP-Concurrency/","keywords":"SOPT, clean code, javascript, concurrency"}</script>
-    <meta name="description" content="Concurrency Callback 대신 Promise 사용하기  ES2015&#x2F; ES6 기준  엄청나게 많은 중괄호 중첩  콜백 지옥    1234567891011121314151617181920212223242526272829303132333435363738&#x2F;&#x2F; badrequire(&amp;#x27;request&amp;#x27;)  .get(&amp;#x27;https:&#x2F;">
+    <script type="application/ld+json">{}</script>
+    <meta name="description" content="Continuously Developing Developer">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="SOAP-Concurrency">
-<meta property="og:url" content="http://leahincom.github.io/2021/05/15/SOAP-Concurrency/index.html">
+<meta property="og:title" content="leah">
+<meta property="og:url" content="http://leahincom.github.io/tags/concurrency/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Concurrency Callback 대신 Promise 사용하기  ES2015&#x2F; ES6 기준  엄청나게 많은 중괄호 중첩  콜백 지옥    1234567891011121314151617181920212223242526272829303132333435363738&#x2F;&#x2F; badrequire(&amp;#x27;request&amp;#x27;)  .get(&amp;#x27;https:&#x2F;">
+<meta property="og:description" content="Continuously Developing Developer">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-05-14T22:28:09.000Z">
-<meta property="article:modified_time" content="2021-05-16T06:24:31.044Z">
 <meta property="article:author" content="JungHyun">
-<meta property="article:tag" content="SOPT">
-<meta property="article:tag" content="clean code">
+<meta property="article:tag" content="hexo">
 <meta property="article:tag" content="javascript">
-<meta property="article:tag" content="concurrency">
 <meta name="twitter:card" content="summary">
     
     
@@ -58,8 +54,6 @@
     
 
     
-        
-    
 </head>
 
     <body>
@@ -73,7 +67,7 @@
         
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="2">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -106,7 +100,7 @@
         
     
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="2">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -302,22 +296,30 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="2"
                  class="
                         hasCoverMetaIn
                         ">
                 
-<article class="post">
+    <section class="postShorten-group main-content-wrap">
     
     
-        <div class="post-header main-content-wrap text-left">
-    
-        <h1 class="post-title">
-            SOAP-Concurrency
-        </h1>
-    
-    
-        <div class="post-meta">
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/05/15/SOAP-Concurrency/"
+                            aria-label=": SOAP-Concurrency"
+                        >
+                            SOAP-Concurrency
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
     <time datetime="2021-05-15T07:28:09+09:00">
 	
 		    May 15, 2021
@@ -332,13 +334,10 @@
     
 </div>
 
-    
-</div>
-
-    
-    <div class="post-content markdown">
-        <div class="main-content-wrap">
-            <h2 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h2><ol>
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h2><ol>
 <li><p>Callback 대신 Promise 사용하기</p>
 <ul>
 <li><p>ES2015/ ES6 기준</p>
@@ -361,125 +360,37 @@
 </li>
 </ol>
 
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/05/15/SOAP-Concurrency/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
             
-
-
         </div>
-    </div>
-    <div id="post-footer" class="post-footer main-content-wrap">
         
-            <div class="post-footer-tags">
-                <span class="text-color-light text-small">TAGGED IN</span><br/>
-                
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/SOPT/" rel="tag">SOPT</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/clean-code/" rel="tag">clean code</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/concurrency/" rel="tag">concurrency</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/javascript/" rel="tag">javascript</a>
-
-            </div>
+    </article>
+    
+    <div class="pagination-bar">
+    <ul class="pagination">
         
         
-            <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/15/SOAP-Error-Handling/"
-                    data-tooltip="SOAP-Error_Handling"
-                    aria-label="PREVIOUS: SOAP-Error_Handling"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
-                    data-tooltip="4차 세미나_08/05/21"
-                    aria-label="NEXT: 4차 세미나_08/05/21"
-                >
-                    
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/15/SOAP-Concurrency/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/15/SOAP-Concurrency/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
-                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/15/SOAP-Concurrency/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
-                    <i class="fab fa-google-plus" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
+        <li class="pagination-number">page 1 of 1</li>
     </ul>
 </div>
 
-
-        
-        
-            
-        
-    </div>
-</article>
-
+</section>
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -489,154 +400,6 @@
 </footer>
 
             </div>
-            
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
-                    <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/15/SOAP-Error-Handling/"
-                    data-tooltip="SOAP-Error_Handling"
-                    aria-label="PREVIOUS: SOAP-Error_Handling"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/"
-                    data-tooltip="4차 세미나_08/05/21"
-                    aria-label="NEXT: 4차 세미나_08/05/21"
-                >
-                    
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/15/SOAP-Concurrency/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/15/SOAP-Concurrency/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
-                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/15/SOAP-Concurrency/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
-                    <i class="fab fa-google-plus" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-                </div>
-                
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
-        <i id="btn-close-shareoptions" class="fa fa-times"></i>
-        <ul class="share-options">
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://leahincom.github.io/2021/05/15/SOAP-Concurrency/"
-                        aria-label="Share on Facebook"
-                    >
-                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
-                    </a>
-                </li>
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://twitter.com/intent/tweet?text=http://leahincom.github.io/2021/05/15/SOAP-Concurrency/"
-                        aria-label="Share on Twitter"
-                    >
-                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
-                    </a>
-                </li>
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://plus.google.com/share?url=http://leahincom.github.io/2021/05/15/SOAP-Concurrency/"
-                        aria-label="Share on Google+"
-                    >
-                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
-                    </a>
-                </li>
-            
-        </ul>
-    </div>
-
-
             
         </div>
         
@@ -695,8 +458,6 @@
 
 <!--SCRIPTS END-->
 
-
-    
 
 
 

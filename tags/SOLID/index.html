@@ -312,6 +312,82 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/05/15/SOAP-Formatting/"
+                            aria-label=": SOAP-Formatting"
+                        >
+                            SOAP-Formatting
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-05-15T07:28:39+09:00">
+	
+		    May 15, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Formatting"><a href="#Formatting" class="headerlink" title="Formatting"></a>Formatting</h2><p><strong><em>포맷팅은 주관적이다.</em></strong></p>
+<p><em>포맷팅 체크를 해주는 자동화 도구</em> 가 많이 있기 때문에, 공통적으로 하나를 골라 쓰는 것이 합리적이다. 자동으로 교정되는 서식 외의 것들에 대해서는 다음과 같은 지침을 따르는 것이 좋으나, 무엇보다 일관성 있게 적용하는 것이 중요하다.</p>
+<br />
+
+
+
+<ol>
+<li><p>일관된 대소문자를 사용할 것</p>
+<ul>
+<li> 특히 JS에서는 타입을 명시하지 않기 때문에 변수와 함수의 대소문자를 통해 특성을 파악할 수 있다.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> DAYS_IN_WEEK = <span class="number">7</span>;</span><br><span class="line"><span class="comment">// const daysInMonth = 30;</span></span><br><span class="line"><span class="keyword">const</span> DAYS_IN_MONTH = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">const songs = [&#x27;Back In Black&#x27;, &#x27;Stairway to Heaven&#x27;, &#x27;Hey Jude&#x27;];</span></span><br><span class="line"><span class="comment">const Artists = [&#x27;ACDC&#x27;, &#x27;Led Zeppelin&#x27;, &#x27;The Beatles&#x27;];</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">const</span> SONGS = [<span class="string">&quot;Back In Black&quot;</span>, <span class="string">&quot;Stairway to Heaven&quot;</span>, <span class="string">&quot;Hey Jude&quot;</span>];</span><br><span class="line"><span class="keyword">const</span> ARTISTS = [<span class="string">&quot;ACDC&quot;</span>, <span class="string">&quot;Led Zeppelin&quot;</span>, <span class="string">&quot;The Beatles&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">eraseDatabase</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// function restore_database() &#123;&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">restoreDatabase</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// class animal &#123;&#125;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Alpaca</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>함수 callers와 함수 callees는 가깝게 위치시키자</p>
+<ul>
+<li>우리는 코드를 위에서부터 아래로 순차적으로 읽어나가기 때문에, caller와 callee를 수직적으로 가깝게 위치시키는 것이 좋다.</li>
+<li>즉, caller 밑에 callee를 놓자.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerformanceReview</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">employee</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.employee = employee;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">lookupPeers</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;peers&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">lookupManager</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;manager&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getPeerReviews</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> peers = <span class="built_in">this</span>.lookupPeers();</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">perfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.getPeerReviews();</span><br><span class="line">    <span class="built_in">this</span>.getManagerReview();</span><br><span class="line">    <span class="built_in">this</span>.getSelfReview();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getManagerReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> manager = <span class="built_in">this</span>.lookupManager();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getSelfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> review = <span class="keyword">new</span> PerformanceReview(employee);</span><br><span class="line">review.perfReview();</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerformanceReview</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">employee</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.employee = employee;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">perfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.getPeerReviews(); <span class="comment">// 1</span></span><br><span class="line">    <span class="built_in">this</span>.getManagerReview(); <span class="comment">// 2</span></span><br><span class="line">    <span class="built_in">this</span>.getSelfReview(); <span class="comment">// 3</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 1</span></span><br><span class="line">  <span class="function"><span class="title">getPeerReviews</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> peers = <span class="built_in">this</span>.lookupPeers(); <span class="comment">// 1-1</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 1-1</span></span><br><span class="line">  <span class="function"><span class="title">lookupPeers</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;peers&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2</span></span><br><span class="line">  <span class="function"><span class="title">getManagerReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> manager = <span class="built_in">this</span>.lookupManager(); <span class="comment">// 2-1</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2-1</span></span><br><span class="line">  <span class="function"><span class="title">lookupManager</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;manager&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 3</span></span><br><span class="line">  <span class="function"><span class="title">getSelfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> review = <span class="keyword">new</span> PerformanceReview(employee);</span><br><span class="line">review.perfReview();</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/05/15/SOAP-Formatting/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/05/08/SOAP-SOLID/"
                             aria-label=": SOLID"
                         >
