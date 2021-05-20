@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>Category: Paper Review - leah</title>
+    <title>Tag: VizML - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
@@ -17,7 +17,7 @@
     <meta name="description" content="Continuously Developing Developer">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="leah">
-<meta property="og:url" content="https://leahincom.github.io/categories/Graduation-Project/Paper-Review/index.html">
+<meta property="og:url" content="https://leahincom.github.io/tags/VizML/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="Continuously Developing Developer">
 <meta property="og:locale" content="en_US">
@@ -302,230 +302,6 @@
                         ">
                 
     <section class="postShorten-group main-content-wrap">
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/05/21/Data2Vis/"
-                            aria-label=": Data2Vis"
-                        >
-                            Data2Vis
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-05-21T00:12:36+09:00">
-	
-		    May 21, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Graduation-Project/">Graduation Project</a>, <a class="category-link" href="/categories/Graduation-Project/Paper-Review/">Paper Review</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p><strong>creating effective visualizations using <em>expressive grammars</em></strong></p>
-<br />
-
-
-
-<p>![image-20210520170526651](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210520170526651.png)</p>
-<br />
-
-
-
-<h4 id="End-to-End-Trainable-Neural-Translation-Model"><a href="#End-to-End-Trainable-Neural-Translation-Model" class="headerlink" title="End-to-End Trainable Neural Translation Model"></a>End-to-End Trainable Neural Translation Model</h4><ul>
-<li><p>visualization generation === language translation problem</p>
-<p><code>formulation</code></p>
-<blockquote>
-<p>Vega-Lite</p>
-</blockquote>
-<ul>
-<li>mapping : data specifications → visualization specifications</li>
-<li>in a declarative language</li>
-</ul>
-<p><code>training</code></p>
-<ul>
-<li><p>a <em>multilayered, attention-based</em> <code>encoder-decoder</code> network</p>
-</li>
-<li><p>with <em>long short-term memory units</em> ( <code>LSTM</code> )</p>
-<blockquote>
-<p><img src="https://developer.nvidia.com/sites/default/files/pictures/2018/lstm.png" alt="LSTM"></p>
-</blockquote>
-</li>
-<li><p>on a corpus of visualization specifications</p>
-</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h4 id="learns…"><a href="#learns…" class="headerlink" title="learns…"></a>learns…</h4><ul>
-<li>the <code>vocabulary</code> and <code>syntax</code> for a valid visualization specification</li>
-<li>appropriate <code>transformations</code><ul>
-<li><em>e.g.</em> count, bins, mean</li>
-</ul>
-</li>
-<li>how to use common <code>data selection patterns</code> that occur within data visualizations</li>
-</ul>
-<br />
-
-
-
-<h2 id="Problem-Formulation"><a href="#Problem-Formulation" class="headerlink" title="Problem Formulation"></a>Problem Formulation</h2><blockquote>
-<p> <em>applies deep learning for <strong>translation and synthesis</strong></em></p>
-</blockquote>
-<br />
-
-
-
-<ol>
-<li><p><strong>data visualization problem === sequence to sequence models</strong> ( <code>seq2seq</code> )</p>
-<ul>
-<li><code>input</code> sequence : dataset<ul>
-<li><em>e.g.</em> fields, values in <em>json format</em></li>
-</ul>
-</li>
-<li><code>output</code> sequence : valid <code>Vega-Lite</code> visualization specification</li>
-</ul>
-</li>
-<li><p><strong>sequence translation === encoder-decoder networks</strong></p>
-<ul>
-<li><code>encoder</code> : reads and encodes a source sequence into <code>a fixed length vector</code></li>
-<li><code>decoder</code> : outputs a <code>translation</code> based on this vector</li>
-</ul>
-<p>👉 jointly trained to <strong>maximize the probability of outputting a correct</strong> translation</p>
-</li>
-</ol>
-<blockquote>
-<p><code>seq2seq</code></p>
-<ol>
-<li><p>generates data that is <em>sequential or temporally dependent</em></p>
-<ul>
-<li><em>e.g.</em> language translation</li>
-</ul>
-</li>
-<li><p>finds applications for problems where the output or input is <em>non-sequential</em></p>
-<ul>
-<li><em>e.g.</em> text summarization, image captioning</li>
-</ul>
-<p>👉 <strong>bidirectional RNN units</strong></p>
-<p>👉 <strong>attention mechanisms</strong></p>
-</li>
-</ol>
-</blockquote>
-<br />
-
-
-
-<h4 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h4><blockquote>
-<p><strong><em>ordinary</em> RNN ( <code>unidirectional</code> )</strong></p>
-<ol>
-<li><p>reads an input sequence x from the first token x_1 to the last x_m</p>
-</li>
-<li><p>generates an encoding only based on the preceding tokens it has seen</p>
-</li>
-</ol>
-<br />
-
-
-
-<p><strong><em>Bidirectional</em> RNN ( <code>BiRNN</code> )</strong></p>
-<ul>
-<li><p>consists of a forward RNN + a backward RNN</p>
-</li>
-<li><p>enables an encoding generation based on both the preceding and following tokens</p>
-</li>
-</ul>
-<ol>
-<li><p>a forward RNN ( <code>→f</code> )</p>
-<ol>
-<li>reads the input sequence as it is ordered from x_1 to x_m</li>
-<li>calculates a sequence of forward hidden states (→h_1, …, →h_m)</li>
-</ol>
-</li>
-<li><p>a backward RNN ( <code>←f</code> )</p>
-<ol>
-<li>reads the sequence in the reverse order from x_m to x_1</li>
-<li>calculates a sequence of backward hidden states (←h_1, …, ←h_m)</li>
-</ol>
-</li>
-<li><p>generates a hidden state <code>→h_j</code></p>
-<p><code>→h_j</code> </p>
-<ul>
-<li>a <u>concatenation</u> of both the forward and backward RNNs <u>( <code>h_j</code> : <code>[→h_j(T); ←h_j(T)]T</code> )</u></li>
-<li>contains summaries of both the preceeding and following tokens</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<blockquote>
-<p><strong>attention mechanism</strong></p>
-<ul>
-<li>focuses on aspects of an input sequence</li>
-<li>generates output tokens</li>
-<li>makes translation models <strong>robust</strong> to performance degradation</li>
-<li>generates <strong>lengthy</strong> sequences</li>
-<li>enables model to <strong>learn mappings</strong> between source and target sequences of <strong>different lengths</strong></li>
-<li>improves the ability to <strong>interpret and debug</strong> sequence to sequence models as providing valuable insights on <em>why a given token is generated at each step</em></li>
-</ul>
-<p><em>e.g.</em></p>
-<p><code>image captioning</code></p>
-<ul>
-<li>model <em>focuses on <strong>specific parts</strong> of objects</em> in an image</li>
-<li><em>generates <strong>each word or token</strong></em> in the image caption</li>
-</ul>
-</blockquote>
-<br />
-
-
-
-<p>👇 <em>enables us to use a <strong>sequence translation model</strong> which…</em> </p>
-<ol>
-<li>first takes into consideration the entire data input (dataset)</li>
-<li>and then focuses on aspects of the input (fields) in generating a visualization specification</li>
-</ol>
-<br />
-
-
-
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/05/21/Data2Vis/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
     
     
     <article class="postShorten postShorten--thumbnailimg-bottom">
@@ -907,7 +683,6 @@
 </div>
 
 </section>
-
 
 
                 <footer id="footer" class="main-content-wrap">

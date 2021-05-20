@@ -1,0 +1,849 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="leah">
+    <title>Data2Vis - leah</title>
+    <meta name="author" content="JungHyun">
+    
+        <meta name="keywords" content="hexo,javascript,">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Abstractcreating effective visualizations using expressive grammars\n\n\n\n\n![image-20210520170526651](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210520170526651.png)\n\n\n\n\nEnd-to-End Trainable Neural Translation Model\nvisualization generation === language translation problem\nformulation\n\nVega-Lite\n\n\nmapping : data specifications → visualization specifications\nin a declarative language\n\ntraining\n\na multilayered, attention-based encoder-decoder network\n\nwith long short-term memory units ( LSTM )\n\n\n\n\non a corpus of visualization specifications\n\n\n\n\n\n\n\n\nlearns…\nthe vocabulary and syntax for a valid visualization specification\nappropriate transformations\ne.g. count, bins, mean\n\n\nhow to use common data selection patterns that occur within data visualizations\n\n\n\n\n\nProblem Formulation\n applies deep learning for translation and synthesis\n\n\n\n\n\n\ndata visualization problem === sequence to sequence models ( seq2seq )\n\ninput sequence : dataset\ne.g. fields, values in json format\n\n\noutput sequence : valid Vega-Lite visualization specification\n\n\nsequence translation === encoder-decoder networks\n\nencoder : reads and encodes a source sequence into a fixed length vector\ndecoder : outputs a translation based on this vector\n\n👉 jointly trained to maximize the probability of outputting a correct translation\n\n\n\nseq2seq\n\ngenerates data that is sequential or temporally dependent\n\ne.g. language translation\n\n\nfinds applications for problems where the output or input is non-sequential\n\ne.g. text summarization, image captioning\n\n👉 bidirectional RNN units\n👉 attention mechanisms\n\n\n\n\n\n\n\nDetails\nordinary RNN ( unidirectional )\n\nreads an input sequence x from the first token x_1 to the last x_m\n\ngenerates an encoding only based on the preceding tokens it has seen\n\n\n\n\n\n\nBidirectional RNN ( BiRNN )\n\nconsists of a forward RNN + a backward RNN\n\nenables an encoding generation based on both the preceding and following tokens\n\n\n\na forward RNN ( →f )\n\nreads the input sequence as it is ordered from x_1 to x_m\ncalculates a sequence of forward hidden states (→h_1, …, →h_m)\n\n\na backward RNN ( ←f )\n\nreads the sequence in the reverse order from x_m to x_1\ncalculates a sequence of backward hidden states (←h_1, …, ←h_m)\n\n\ngenerates a hidden state →h_j\n→h_j \n\na concatenation of both the forward and backward RNNs ( h_j : [→h_j(T); ←h_j(T)]T )\ncontains summaries of both the preceeding and following tokens\n\n\n\n\n\nattention mechanism\n\nfocuses on aspects of an input sequence\ngenerates output tokens\nmakes translation models robust to performance degradation\ngenerates lengthy sequences\nenables model to learn mappings between source and target sequences of different lengths\nimproves the ability to interpret and debug sequence to sequence models as providing valuable insights on why a given token is generated at each step\n\ne.g.\nimage captioning\n\nmodel focuses on specific parts of objects in an image\ngenerates each word or token in the image caption\n\n\n\n\n\n\n👇 enables us to use a sequence translation model which… \n\nfirst takes into consideration the entire data input (dataset)\nand then focuses on aspects of the input (fields) in generating a visualization specification\n\n\n\n\n\nModel","dateCreated":"2021-05-21T00:12:36+09:00","dateModified":"2021-05-20T17:56:11+09:00","datePublished":"2021-05-21T00:12:36+09:00","description":"","headline":"Data2Vis","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/21/Data2Vis/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/21/Data2Vis/","keywords":"recommendation, recommendation system, visualization, data visualization, infobiz, HCI, Data2Vis"}</script>
+    <meta name="description" content="Abstractcreating effective visualizations using expressive grammars     ![image-20210520170526651](&#x2F;Users&#x2F;JungHyunLah&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20210520170526651.png)     En">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Data2Vis">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/21/Data2Vis/index.html">
+<meta property="og:site_name" content="leah">
+<meta property="og:description" content="Abstractcreating effective visualizations using expressive grammars     ![image-20210520170526651](&#x2F;Users&#x2F;JungHyunLah&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20210520170526651.png)     En">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://developer.nvidia.com/sites/default/files/pictures/2018/lstm.png">
+<meta property="article:published_time" content="2021-05-20T15:12:36.000Z">
+<meta property="article:modified_time" content="2021-05-20T08:56:11.139Z">
+<meta property="article:author" content="JungHyun">
+<meta property="article:tag" content="recommendation">
+<meta property="article:tag" content="recommendation system">
+<meta property="article:tag" content="visualization">
+<meta property="article:tag" content="data visualization">
+<meta property="article:tag" content="infobiz">
+<meta property="article:tag" content="HCI">
+<meta property="article:tag" content="Data2Vis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://developer.nvidia.com/sites/default/files/pictures/2018/lstm.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/all.css">
+
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
+
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            leah
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name">JungHyun</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/leahincom"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/junghyun.lah/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="mailto:leahincom@gmail.com"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            Data2Vis
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2021-05-21T00:12:36+09:00">
+	
+		    May 21, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Graduation-Project/">Graduation Project</a>, <a class="category-link" href="/categories/Graduation-Project/Paper-Review/">Paper Review</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p><strong>creating effective visualizations using <em>expressive grammars</em></strong></p>
+<br />
+
+
+
+<p>![image-20210520170526651](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210520170526651.png)</p>
+<br />
+
+
+
+<h4 id="End-to-End-Trainable-Neural-Translation-Model"><a href="#End-to-End-Trainable-Neural-Translation-Model" class="headerlink" title="End-to-End Trainable Neural Translation Model"></a>End-to-End Trainable Neural Translation Model</h4><ul>
+<li><p>visualization generation === language translation problem</p>
+<p><code>formulation</code></p>
+<blockquote>
+<p>Vega-Lite</p>
+</blockquote>
+<ul>
+<li>mapping : data specifications → visualization specifications</li>
+<li>in a declarative language</li>
+</ul>
+<p><code>training</code></p>
+<ul>
+<li><p>a <em>multilayered, attention-based</em> <code>encoder-decoder</code> network</p>
+</li>
+<li><p>with <em>long short-term memory units</em> ( <code>LSTM</code> )</p>
+<blockquote>
+<p><img src="https://developer.nvidia.com/sites/default/files/pictures/2018/lstm.png" alt="LSTM"></p>
+</blockquote>
+</li>
+<li><p>on a corpus of visualization specifications</p>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<h4 id="learns…"><a href="#learns…" class="headerlink" title="learns…"></a>learns…</h4><ul>
+<li>the <code>vocabulary</code> and <code>syntax</code> for a valid visualization specification</li>
+<li>appropriate <code>transformations</code><ul>
+<li><em>e.g.</em> count, bins, mean</li>
+</ul>
+</li>
+<li>how to use common <code>data selection patterns</code> that occur within data visualizations</li>
+</ul>
+<br />
+
+
+
+<h2 id="Problem-Formulation"><a href="#Problem-Formulation" class="headerlink" title="Problem Formulation"></a>Problem Formulation</h2><blockquote>
+<p> <em>applies deep learning for <strong>translation and synthesis</strong></em></p>
+</blockquote>
+<br />
+
+
+
+<ol>
+<li><p><strong>data visualization problem === sequence to sequence models</strong> ( <code>seq2seq</code> )</p>
+<ul>
+<li><code>input</code> sequence : dataset<ul>
+<li><em>e.g.</em> fields, values in <em>json format</em></li>
+</ul>
+</li>
+<li><code>output</code> sequence : valid <code>Vega-Lite</code> visualization specification</li>
+</ul>
+</li>
+<li><p><strong>sequence translation === encoder-decoder networks</strong></p>
+<ul>
+<li><code>encoder</code> : reads and encodes a source sequence into <code>a fixed length vector</code></li>
+<li><code>decoder</code> : outputs a <code>translation</code> based on this vector</li>
+</ul>
+<p>👉 jointly trained to <strong>maximize the probability of outputting a correct</strong> translation</p>
+</li>
+</ol>
+<blockquote>
+<p><code>seq2seq</code></p>
+<ol>
+<li><p>generates data that is <em>sequential or temporally dependent</em></p>
+<ul>
+<li><em>e.g.</em> language translation</li>
+</ul>
+</li>
+<li><p>finds applications for problems where the output or input is <em>non-sequential</em></p>
+<ul>
+<li><em>e.g.</em> text summarization, image captioning</li>
+</ul>
+<p>👉 <strong>bidirectional RNN units</strong></p>
+<p>👉 <strong>attention mechanisms</strong></p>
+</li>
+</ol>
+</blockquote>
+<br />
+
+
+
+<h4 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h4><blockquote>
+<p><strong><em>ordinary</em> RNN ( <code>unidirectional</code> )</strong></p>
+<ol>
+<li><p>reads an input sequence x from the first token x_1 to the last x_m</p>
+</li>
+<li><p>generates an encoding only based on the preceding tokens it has seen</p>
+</li>
+</ol>
+<br />
+
+
+
+<p><strong><em>Bidirectional</em> RNN ( <code>BiRNN</code> )</strong></p>
+<ul>
+<li><p>consists of a forward RNN + a backward RNN</p>
+</li>
+<li><p>enables an encoding generation based on both the preceding and following tokens</p>
+</li>
+</ul>
+<ol>
+<li><p>a forward RNN ( <code>→f</code> )</p>
+<ol>
+<li>reads the input sequence as it is ordered from x_1 to x_m</li>
+<li>calculates a sequence of forward hidden states (→h_1, …, →h_m)</li>
+</ol>
+</li>
+<li><p>a backward RNN ( <code>←f</code> )</p>
+<ol>
+<li>reads the sequence in the reverse order from x_m to x_1</li>
+<li>calculates a sequence of backward hidden states (←h_1, …, ←h_m)</li>
+</ol>
+</li>
+<li><p>generates a hidden state <code>→h_j</code></p>
+<p><code>→h_j</code> </p>
+<ul>
+<li>a <u>concatenation</u> of both the forward and backward RNNs <u>( <code>h_j</code> : <code>[→h_j(T); ←h_j(T)]T</code> )</u></li>
+<li>contains summaries of both the preceeding and following tokens</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>attention mechanism</strong></p>
+<ul>
+<li>focuses on aspects of an input sequence</li>
+<li>generates output tokens</li>
+<li>makes translation models <strong>robust</strong> to performance degradation</li>
+<li>generates <strong>lengthy</strong> sequences</li>
+<li>enables model to <strong>learn mappings</strong> between source and target sequences of <strong>different lengths</strong></li>
+<li>improves the ability to <strong>interpret and debug</strong> sequence to sequence models as providing valuable insights on <em>why a given token is generated at each step</em></li>
+</ul>
+<p><em>e.g.</em></p>
+<p><code>image captioning</code></p>
+<ul>
+<li>model <em>focuses on <strong>specific parts</strong> of objects</em> in an image</li>
+<li><em>generates <strong>each word or token</strong></em> in the image caption</li>
+</ul>
+</blockquote>
+<br />
+
+
+
+<p>👇 <em>enables us to use a <strong>sequence translation model</strong> which…</em> </p>
+<ol>
+<li>first takes into consideration the entire data input (dataset)</li>
+<li>and then focuses on aspects of the input (fields) in generating a visualization specification</li>
+</ol>
+<br />
+
+
+
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2>
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/Data2Vis/" rel="tag">Data2Vis</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/HCI/" rel="tag">HCI</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/data-visualization/" rel="tag">data visualization</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/infobiz/" rel="tag">infobiz</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/recommendation/" rel="tag">recommendation</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/recommendation-system/" rel="tag">recommendation system</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/visualization/" rel="tag">visualization</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/05/19/VizML/"
+                    data-tooltip="VizML: A Machine Learning Approach to Visualizaation Recommendation 논문 리뷰"
+                    aria-label="NEXT: VizML: A Machine Learning Approach to Visualizaation Recommendation 논문 리뷰"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 JungHyun. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/05/19/VizML/"
+                    data-tooltip="VizML: A Machine Learning Approach to Visualizaation Recommendation 논문 리뷰"
+                    aria-label="NEXT: VizML: A Machine Learning Approach to Visualizaation Recommendation 논문 리뷰"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name">JungHyun</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br/>
+                Seoul/South Korea, London/UK
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/jquery.js"></script>
+
+
+<script src="/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/assets/js/thumbs.js"></script>
+
+
+<script src="/assets/js/tranquilpeak.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
