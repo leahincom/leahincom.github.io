@@ -503,7 +503,106 @@
 
 
 
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h4 id="Encoder-Decoder-Architecture-with-Attention-mechanism"><a href="#Encoder-Decoder-Architecture-with-Attention-mechanism" class="headerlink" title="Encoder-Decoder Architecture with Attention mechanism"></a>Encoder-Decoder Architecture with Attention mechanism</h4><ol>
+<li><p>2-layer <code>Encoder</code> </p>
+<ul>
+<li>bidirectional recurrent neural network (RNN)<ul>
+<li>takes in an input <strong>sequence</strong> of <em>source tokens x</em></li>
+<li>and outputs a <strong>sequence</strong> of <em>states h</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2-layer <code>Decoder</code> </p>
+<ul>
+<li><p>RNN</p>
+<ul>
+<li>computes the <strong>probability</strong> of a <em>target sequence y</em> <u>based on the hidden state h</u></li>
+</ul>
+<blockquote>
+<p><code>probability</code></p>
+<ul>
+<li>generated <em>based on the <strong>recurrent state of the decoder</strong> RNN</em>, <strong>previous tokens</strong> in the target sequence and a <strong>context vector <code>c_i</code></strong> </li>
+</ul>
+<p><code>context vector</code> === <code>attention vector</code></p>
+<ul>
+<li><em><strong>a weighted average</strong> of the source states</em></li>
+<li>and designed to capture the context of source sequence that help <strong>predict</strong> the current target token</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><em>each with</em> 512 <code>Long Short-Term Memory</code> (LSTM) units (cells)</p>
+<ul>
+<li>better than Gated Recurrent Unit (GRU)</li>
+</ul>
+</li>
+</ol>
+<br />
+
+
+
+<h2 id="Data-and-Preprocessing"><a href="#Data-and-Preprocessing" class="headerlink" title="Data and Preprocessing"></a>Data and Preprocessing</h2><h4 id="Learning-Objectives"><a href="#Learning-Objectives" class="headerlink" title="Learning Objectives"></a>Learning Objectives</h4><p><em>model should…</em></p>
+<ol>
+<li><p>select a subset of fields to focus on, when creating visualizations</p>
+<ul>
+<li>most datasets have multiple fields which cannot all be simultaneously visualized</li>
+</ul>
+</li>
+<li><p>learn differences in data types across the data fields</p>
+<ul>
+<li><em>e.g.</em> numeric, string, temporal, ordinal, categorical, etc.</li>
+</ul>
+</li>
+<li><p>learn the appropriate transformations to apply to a field given its data type</p>
+<ul>
+<li><em>e.g.</em> aggregate transform does not apply to string fields</li>
+</ul>
+<p>👇</p>
+<p><code>Vega-Lite Grammer</code></p>
+</li>
+</ol>
+<ul>
+<li>view-level transforms (aggregate, bin, calculate, filter, timeUnit)<ul>
+<li>field-level transforms (aggregate, bin, sort, timeUnit)</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<h4 id="Achieving-Objectives"><a href="#Achieving-Objectives" class="headerlink" title="Achieving Objectives"></a>Achieving Objectives</h4><p><em><strong>character based sequence model</strong></em></p>
+<ul>
+<li><p><strong>Challenge</strong> : a <em>character tokenization strategy</em> requires</p>
+<ul>
+<li><strong>more units</strong> to represent a sequence</li>
+<li>a large amount of <strong>hidden layers</strong></li>
+<li>a large amount of <strong>parameters</strong> <em>to model long term dependencies</em></li>
+</ul>
+</li>
+<li><p>Solution</p>
+<ol>
+<li><p>replace string and numeric field names using a <strong>short notation</strong></p>
+<ul>
+<li>e.g.* “str”, “num” in the source sequence (dataset)</li>
+</ul>
+</li>
+<li><p>a <strong>similar backward transformation</strong> is done in the target sequence</p>
+<ul>
+<li>to maintain consistency in field names</li>
+</ul>
+</li>
+</ol>
+<p>👇</p>
+<ul>
+<li>scaffolds the learning process by reducing the vocabulary size</li>
+<li>prevents the LSTM from learning field names (which are not needed to be memorized)</li>
+</ul>
+</li>
+</ul>
+
                     
                         
 
