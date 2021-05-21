@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>Tag: Data2Vis - leah</title>
+    <title>Archives - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
@@ -17,7 +17,7 @@
     <meta name="description" content="Continuously Developing Developer">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="leah">
-<meta property="og:url" content="https://leahincom.github.io/tags/Data2Vis/index.html">
+<meta property="og:url" content="https://leahincom.github.io/archives/page/6/index.html">
 <meta property="og:site_name" content="leah">
 <meta property="og:description" content="Continuously Developing Developer">
 <meta property="og:locale" content="en_US">
@@ -312,23 +312,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/2021/05/22/Data2Vis-code-review/"
-                            aria-label=": Data2Vis 코드 리뷰"
+                            href="/2021/01/12/1-Git/"
+                            aria-label=": 1. Git"
                         >
-                            Data2Vis 코드 리뷰
+                            1. Git
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2021-05-22T07:49:38+09:00">
+    <time datetime="2021-01-12T08:16:22+09:00">
 	
-		    May 22, 2021
+		    Jan 12, 2021
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/Graduation-Project/">Graduation Project</a>, <a class="category-link" href="/categories/Graduation-Project/Paper-Review/">Paper Review</a>
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
 
 
     
@@ -337,334 +337,18 @@
             </div>
             
                 <div class="postShorten-content">
-                    
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/05/22/Data2Vis-code-review/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/05/21/Data2Vis_paper-review/"
-                            aria-label=": Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰"
-                        >
-                            Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-05-21T00:12:36+09:00">
-	
-		    May 21, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Graduation-Project/">Graduation Project</a>, <a class="category-link" href="/categories/Graduation-Project/Paper-Review/">Paper Review</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p><strong>creating effective visualizations using <em>expressive grammars</em></strong></p>
-<br />
-
-
-
-<img width="452" align="center" alt="Screenshot 2021-05-20 at 17 05 21" src="https://user-images.githubusercontent.com/49134038/119007780-8160be00-b9cc-11eb-8994-a13466e5a568.png">
-
-<br />
-
-
-
-<h4 id="End-to-End-Trainable-Neural-Translation-Model"><a href="#End-to-End-Trainable-Neural-Translation-Model" class="headerlink" title="End-to-End Trainable Neural Translation Model"></a>End-to-End Trainable Neural Translation Model</h4><ul>
-<li><p>visualization generation === language translation problem</p>
-<p><code>formulation</code></p>
-<blockquote>
-<p>Vega-Lite</p>
-</blockquote>
-<ul>
-<li>mapping : data specifications → visualization specifications</li>
-<li>in a declarative language</li>
-</ul>
-<p><code>training</code></p>
-<ul>
-<li><p>a <em>multilayered, attention-based</em> <code>encoder-decoder</code> network</p>
-</li>
-<li><p>with <em>long short-term memory units</em> ( <code>LSTM</code> )</p>
-<blockquote>
-<p><img src="https://developer.nvidia.com/sites/default/files/pictures/2018/lstm.png" alt="LSTM"></p>
-</blockquote>
-</li>
-<li><p>on a corpus of visualization specifications</p>
-</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h4 id="learns…"><a href="#learns…" class="headerlink" title="learns…"></a>learns…</h4><ul>
-<li>the <code>vocabulary</code> and <code>syntax</code> for a valid visualization specification</li>
-<li>appropriate <code>transformations</code><ul>
-<li><em>e.g.</em> count, bins, mean</li>
-</ul>
-</li>
-<li>how to use common <code>data selection patterns</code> that occur within data visualizations</li>
-</ul>
-<br />
-
-
-
-<h2 id="Problem-Formulation"><a href="#Problem-Formulation" class="headerlink" title="Problem Formulation"></a>Problem Formulation</h2><blockquote>
-<p> <em>applies deep learning for <strong>translation and synthesis</strong></em></p>
-</blockquote>
-<br />
-
-
-
-<ol>
-<li><p><strong>data visualization problem === sequence to sequence models</strong> ( <code>seq2seq</code> )</p>
-<ul>
-<li><code>input</code> sequence : dataset<ul>
-<li><em>e.g.</em> fields, values in <em>json format</em></li>
-</ul>
-</li>
-<li><code>output</code> sequence : valid <code>Vega-Lite</code> visualization specification</li>
-</ul>
-</li>
-<li><p><strong>sequence translation === encoder-decoder networks</strong></p>
-<ul>
-<li><code>encoder</code> : reads and encodes a source sequence into <code>a fixed length vector</code></li>
-<li><code>decoder</code> : outputs a <code>translation</code> based on this vector</li>
-</ul>
-<p>👉 jointly trained to <strong>maximize the probability of outputting a correct</strong> translation</p>
-</li>
-</ol>
-<blockquote>
-<p><code>seq2seq</code></p>
-<ol>
-<li><p>generates data that is <em>sequential or temporally dependent</em></p>
-<ul>
-<li><em>e.g.</em> language translation</li>
-</ul>
-</li>
-<li><p>finds applications for problems where the output or input is <em>non-sequential</em></p>
-<ul>
-<li><em>e.g.</em> text summarization, image captioning</li>
-</ul>
-<p>👉 <strong>bidirectional RNN units</strong></p>
-<p>👉 <strong>attention mechanisms</strong></p>
-</li>
-</ol>
-</blockquote>
-<br />
-
-
-
-<h4 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h4><blockquote>
-<p><strong><em>ordinary</em> RNN ( <code>unidirectional</code> )</strong></p>
-<ol>
-<li><p>reads an input sequence x from the first token x_1 to the last x_m</p>
-</li>
-<li><p>generates an encoding only based on the preceding tokens it has seen</p>
-</li>
-</ol>
-<br />
-
-
-
-<p><strong><em>Bidirectional</em> RNN ( <code>BiRNN</code> )</strong></p>
-<ul>
-<li><p>consists of a forward RNN + a backward RNN</p>
-</li>
-<li><p>enables an encoding generation based on both the preceding and following tokens</p>
-</li>
-</ul>
-<ol>
-<li><p>a forward RNN ( <code>→f</code> )</p>
-<ol>
-<li>reads the input sequence as it is ordered from x_1 to x_m</li>
-<li>calculates a sequence of forward hidden states (→h_1, …, →h_m)</li>
-</ol>
-</li>
-<li><p>a backward RNN ( <code>←f</code> )</p>
-<ol>
-<li>reads the sequence in the reverse order from x_m to x_1</li>
-<li>calculates a sequence of backward hidden states (←h_1, …, ←h_m)</li>
-</ol>
-</li>
-<li><p>generates a hidden state <code>→h_j</code></p>
-<p><code>→h_j</code> </p>
-<ul>
-<li>a <u>concatenation</u> of both the forward and backward RNNs <u>( <code>h_j</code> : <code>[→h_j(T); ←h_j(T)]T</code> )</u></li>
-<li>contains summaries of both the preceeding and following tokens</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<blockquote>
-<p><strong>attention mechanism</strong></p>
-<ul>
-<li>focuses on aspects of an input sequence</li>
-<li>generates output tokens</li>
-<li>makes translation models <strong>robust</strong> to performance degradation</li>
-<li>generates <strong>lengthy</strong> sequences</li>
-<li>enables model to <strong>learn mappings</strong> between source and target sequences of <strong>different lengths</strong></li>
-<li>improves the ability to <strong>interpret and debug</strong> sequence to sequence models as providing valuable insights on <em>why a given token is generated at each step</em></li>
-</ul>
+                    <h2 id="Git-workflow"><a href="#Git-workflow" class="headerlink" title="Git workflow"></a>Git workflow</h2><p>-fork<br>-clone<br>-commit (status, diff, add)<br>-push<br>(-sync with upstream)<br>-pull requests</p>
 <hr>
-<ul>
-<li><p><em>e.g.</em></p>
-<p><code>image captioning</code></p>
-<ul>
-<li>model <em>focuses on <strong>specific parts</strong> of objects</em> in an image</li>
-<li><em>generates <strong>each word or token</strong></em> in the image caption</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<br />
-
-
-
-<p>👇 <em>enables us to use a <strong>sequence translation model</strong> which…</em> </p>
-<ol>
-<li>first takes into consideration the entire data input (dataset)</li>
-<li>and then focuses on aspects of the input (fields) in generating a visualization specification</li>
-</ol>
-<br />
-
-
-
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h4 id="Encoder-Decoder-Architecture-with-Attention-mechanism"><a href="#Encoder-Decoder-Architecture-with-Attention-mechanism" class="headerlink" title="Encoder-Decoder Architecture with Attention mechanism"></a>Encoder-Decoder Architecture with Attention mechanism</h4><ol>
-<li><p>2-layer <code>Encoder</code> </p>
-<ul>
-<li>bidirectional recurrent neural network (RNN)<ul>
-<li>takes in an input <strong>sequence</strong> of <em>source tokens x</em></li>
-<li>and outputs a <strong>sequence</strong> of <em>states h</em></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>2-layer <code>Decoder</code> </p>
-<ul>
-<li><p>RNN</p>
-<ul>
-<li>computes the <strong>probability</strong> of a <em>target sequence y</em> <u>based on the hidden state h</u></li>
-</ul>
+<p>cd //project root folder//<br>git clone //project url//<br>cd //project folder//<br>npm install: get the all dependencies, environment needed for the repository<br>-&gt; <em>needed for</em> npm test: debugging<br>git checkout – ./: A checkout is an operation that moves the HEAD ref pointer to a specified commit.<br>git status: check changes<br>ls -a: local machine 외에 변경 사항이 확인되는지<br>// lists all files including hidden files starting with ‘. ‘<br>💥 git add . =&gt; git status 시 여전히 modified file이 존재할 수 있음: 다른 폴더에 변경된 파일이 있을 때<br>-&gt; git status로 항상 check하기!!<br>git commit -m “first commit”<br>gs: == git status, branch HEAD 확인할 것!<br>git log: commit log 확인<br>git remote -v: branch 확인<br>git push: push everything to the repo, up-to-date<br>💥 synchronization<br>git remote -v<br>git remote add upstream //original repo url – forked one//<br>git pull upstream master: upstream -&gt; master branch로 if any change exists, pull</p>
 <blockquote>
-<p><code>probability</code></p>
-<ul>
-<li>generated <em>based on the <strong>recurrent state of the decoder</strong> RNN</em>, <strong>previous tokens</strong> in the target sequence and a <strong>context vector <code>c_i</code></strong> </li>
-</ul>
-<p><code>context vector</code> === <code>attention vector</code></p>
-<ul>
-<li><em><strong>a weighted average</strong> of the source states</em></li>
-<li>and designed to capture the context of source sequence that help <strong>predict</strong> the current target token</li>
-</ul>
+<p>Q. override =&gt; version conflict =&gt;<br>pull request로 merge 전 conflict 방지<br>Q. pull request, sync with upstream의 목적 =&gt;</p>
+<ol>
+<li>sync with upstream: orinigal repo의 changes 확인</li>
+<li>pull request: 💥 MERGE와 구분! feedback, review의 목적<br>=&gt; when git history gets merged, adds commit on the top and merge<br>=&gt; pull request before merge minimizes unuseful conflicts -&gt; check others’ codes<br>★ Merge: add changes of ver2. to ver1.</li>
+</ol>
 </blockquote>
-</li>
-</ul>
-</li>
-<li><p><em>each with</em> 512 <code>Long Short-Term Memory</code> (LSTM) units (cells)</p>
-<ul>
-<li>better than Gated Recurrent Unit (GRU)</li>
-</ul>
-</li>
-</ol>
-<br />
-
-
-
-<h2 id="Data-and-Preprocessing"><a href="#Data-and-Preprocessing" class="headerlink" title="Data and Preprocessing"></a>Data and Preprocessing</h2><h4 id="Learning-Objectives"><a href="#Learning-Objectives" class="headerlink" title="Learning Objectives"></a>Learning Objectives</h4><p><em>model should…</em></p>
-<ol>
-<li><p>select a subset of fields to focus on, when creating visualizations</p>
-<ul>
-<li>most datasets have multiple fields which cannot all be simultaneously visualized</li>
-</ul>
-</li>
-<li><p>learn differences in data types across the data fields</p>
-<ul>
-<li><em>e.g.</em> numeric, string, temporal, ordinal, categorical, etc.</li>
-</ul>
-</li>
-<li><p>learn the appropriate transformations to apply to a field given its data type</p>
-<ul>
-<li><em>e.g.</em> aggregate transform does not apply to string fields</li>
-</ul>
-<p>👇</p>
-<p><code>Vega-Lite Grammer</code></p>
-</li>
-</ol>
-<ul>
-<li>view-level transforms (aggregate, bin, calculate, filter, timeUnit)<ul>
-<li>field-level transforms (aggregate, bin, sort, timeUnit)</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h4 id="Achieving-Objectives"><a href="#Achieving-Objectives" class="headerlink" title="Achieving Objectives"></a>Achieving Objectives</h4><p><em><strong>character based sequence model</strong></em></p>
-<ul>
-<li><p><strong>Challenge</strong> : a <em>character tokenization strategy</em> requires</p>
-<ul>
-<li><strong>more units</strong> to represent a sequence</li>
-<li>a large amount of <strong>hidden layers</strong></li>
-<li>a large amount of <strong>parameters</strong> <em>to model long term dependencies</em></li>
-</ul>
-</li>
-<li><p>Solution</p>
-<ol>
-<li><p>replace string and numeric field names using a <strong>short notation</strong></p>
-<ul>
-<li>e.g.* “str”, “num” in the source sequence (dataset)</li>
-</ul>
-</li>
-<li><p>a <strong>similar backward transformation</strong> is done in the target sequence</p>
-<ul>
-<li>to maintain consistency in field names</li>
-</ul>
-</li>
-</ol>
-<p>👇</p>
-<ul>
-<li>scaffolds the learning process by reducing the vocabulary size</li>
-<li>prevents the LSTM from learning field names (which are not needed to be memorized)</li>
-</ul>
-</li>
-</ul>
+<p>git commit //file1// //file2// : individually commit 가능</p>
+<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p>velog.io/@zansol/Pull-Request-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0</p>
 
                     
                         
@@ -674,7 +358,7 @@
                     
                         <p>
                             <a
-                                href="/2021/05/21/Data2Vis_paper-review/#post-footer"
+                                href="/2021/01/12/1-Git/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -691,12 +375,24 @@
     <div class="pagination-bar">
     <ul class="pagination">
         
+          <li class="pagination-prev">
+            <a
+                class="btn btn--default btn--small"
+                href="/archives/page/5/"
+                aria-label="NEWER POSTS"
+            >
+              <i class="fa fa-angle-left text-base icon-mr"></i>
+              <span>NEWER POSTS</span>
+            </a>
+          </li>
         
-        <li class="pagination-number">page 1 of 1</li>
+        
+        <li class="pagination-number">page 6 of 6</li>
     </ul>
 </div>
 
 </section>
+
 
 
                 <footer id="footer" class="main-content-wrap">

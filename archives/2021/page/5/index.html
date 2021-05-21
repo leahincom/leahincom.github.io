@@ -312,6 +312,117 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/02/02/12-Async-Koa/"
+                            aria-label=": 12. Async, Koa"
+                        >
+                            12. Async, Koa
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-02T03:56:16+09:00">
+	
+		    Feb 02, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="Async-Patterns"><a href="#Async-Patterns" class="headerlink" title="Async Patterns"></a>Async Patterns</h3><ol>
+<li>Callbacks</li>
+</ol>
+<p>too complicated -&gt; simplified in ES6</p>
+<ol start="2">
+<li>Promises<br>reduce too many handlings, make into clean code (sugar coding)</li>
+</ol>
+<p>Promise -&gt; invoke reject/ resolve as callbacks</p>
+<p>then -&gt; happen arg first and then ‘then’ method</p>
+<ul>
+<li>resolve : when we find the answer</li>
+<li>reject : st went wrong</li>
+</ul>
+<ol start="3">
+<li>Async / Await</li>
+</ol>
+<ul>
+<li>async === setTimeOut</li>
+<li>await : pending promise/ valid answer from crypto.compare</li>
+</ul>
+<p>☝️</p>
+<dl><dt>callback functions are stacked<br>: first cb -&gt; first wait + call the second stacked callback function</dt><dd>second cb -&gt; second wait + third callback</dd></dl><p>✌️</p>
+<dl><dt>nested callback functions</dt><dd>wait for set time and execute the next one</dd></dl><p>=&gt; create new Promise and put setTimeOut in it, use resolve function</p>
+<p>async<br>=&gt; create asyn function, use await</p>
+<p>print 1 time</p>
+<ul>
+<li>async itself is just a normal function, but return the value as Promise</li>
+</ul>
+<h2 id="Koa"><a href="#Koa" class="headerlink" title="Koa"></a>Koa</h2><p>Search everything by ‘koa ~’</p>
+<ul>
+<li>promise based -&gt; always use ‘async’ !</li>
+<li>app.use() : go to the next() middleware</li>
+<li>express : req/res each send/receive info to/from the client<br>koa : ctx controls everything, koa sends/receives the info all by itself, control everything related to the client</li>
+</ul>
+<p>await next() -&gt; call bodyParser -&gt; call router -&gt; call allowedMethods…<br>*** install packages needed !!</p>
+<ul>
+<li>controller -&gt; usually the end of the chain (next -&gt; next -&gt; … -&gt; ctrl)</li>
+<li>controller doesn’t send anything to the client (no res.send()) =&gt; app (koa obj) sends the info to the client after receiving everything from the chain of next &amp; controller</li>
+</ul>
+<p>response aliases : Not method!, just variables!</p>
+<ul>
+<li>ctx.request.body -&gt; approach the request of body</li>
+</ul>
+<h3 id="Pre-requisite"><a href="#Pre-requisite" class="headerlink" title="Pre-requisite"></a>Pre-requisite</h3><p>code . // vscode<br>npm init –y // npm initialise<br>touch index.js router.js controller.js // make files<br>npm i koa<br>@ npm i “koa pkg” // search!</p>
+<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><p>middleware ( 1 -&gt; 2 -&gt; 3 ) -&gt; router: doorman –&gt; controller: manager)</p>
+<ul>
+<li>app.use(router) : always the last, right before to the controller</li>
+</ul>
+<p>set the middleware next(), which is the ‘router.routes()’ in this case</p>
+<h4 id="router-js"><a href="#router-js" class="headerlink" title="router.js"></a>router.js</h4><p>const Router = require(‘koa-router’)</p>
+<h4 id="controller-js"><a href="#controller-js" class="headerlink" title="controller.js"></a>controller.js</h4><p>get the id as params.id</p>
+<ul>
+<li>all the vars sent via the address are saved in the ctx.request.params!<br>e.g. /:name/:id –&gt; ctx.request.params.name, ctx.request.params.id</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/02/02/12-Async-Koa/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/01/31/11-MVC/"
                             aria-label=": 11. MVC"
                         >
@@ -1287,75 +1398,6 @@ e.g. mergeSort</li>
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/01/12/1-Git/"
-                            aria-label=": 1. Git"
-                        >
-                            1. Git
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-01-12T08:16:22+09:00">
-	
-		    Jan 12, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/Overview/">Overview</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Git-workflow"><a href="#Git-workflow" class="headerlink" title="Git workflow"></a>Git workflow</h2><p>-fork<br>-clone<br>-commit (status, diff, add)<br>-push<br>(-sync with upstream)<br>-pull requests</p>
-<hr>
-<p>cd //project root folder//<br>git clone //project url//<br>cd //project folder//<br>npm install: get the all dependencies, environment needed for the repository<br>-&gt; <em>needed for</em> npm test: debugging<br>git checkout – ./: A checkout is an operation that moves the HEAD ref pointer to a specified commit.<br>git status: check changes<br>ls -a: local machine 외에 변경 사항이 확인되는지<br>// lists all files including hidden files starting with ‘. ‘<br>💥 git add . =&gt; git status 시 여전히 modified file이 존재할 수 있음: 다른 폴더에 변경된 파일이 있을 때<br>-&gt; git status로 항상 check하기!!<br>git commit -m “first commit”<br>gs: == git status, branch HEAD 확인할 것!<br>git log: commit log 확인<br>git remote -v: branch 확인<br>git push: push everything to the repo, up-to-date<br>💥 synchronization<br>git remote -v<br>git remote add upstream //original repo url – forked one//<br>git pull upstream master: upstream -&gt; master branch로 if any change exists, pull</p>
-<blockquote>
-<p>Q. override =&gt; version conflict =&gt;<br>pull request로 merge 전 conflict 방지<br>Q. pull request, sync with upstream의 목적 =&gt;</p>
-<ol>
-<li>sync with upstream: orinigal repo의 changes 확인</li>
-<li>pull request: 💥 MERGE와 구분! feedback, review의 목적<br>=&gt; when git history gets merged, adds commit on the top and merge<br>=&gt; pull request before merge minimizes unuseful conflicts -&gt; check others’ codes<br>★ Merge: add changes of ver2. to ver1.</li>
-</ol>
-</blockquote>
-<p>git commit //file1// //file2// : individually commit 가능</p>
-<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p>velog.io/@zansol/Pull-Request-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/01/12/1-Git/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1371,7 +1413,18 @@ e.g. mergeSort</li>
           </li>
         
         
-        <li class="pagination-number">page 5 of 5</li>
+          <li class="pagination-next">
+            <a
+                class="btn btn--default btn--small"
+                href="/archives/2021/page/6/"
+                aria-label="OLDER POSTS"
+            >
+              <span>OLDER POSTS</span>
+              <i class="fa fa-angle-right text-base icon-ml"></i>
+            </a>
+          </li>
+        
+        <li class="pagination-number">page 5 of 6</li>
     </ul>
 </div>
 

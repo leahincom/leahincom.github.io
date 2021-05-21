@@ -6,25 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰 - leah</title>
+    <title>Data2Vis 코드 리뷰 - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Abstractcreating effective visualizations using expressive grammars\n\n\n\n\n\n\n\n\n\n\nEnd-to-End Trainable Neural Translation Model\nvisualization generation === language translation problem\nformulation\n\nVega-Lite\n\n\nmapping : data specifications → visualization specifications\nin a declarative language\n\ntraining\n\na multilayered, attention-based encoder-decoder network\n\nwith long short-term memory units ( LSTM )\n\n\n\n\non a corpus of visualization specifications\n\n\n\n\n\n\n\n\nlearns…\nthe vocabulary and syntax for a valid visualization specification\nappropriate transformations\ne.g. count, bins, mean\n\n\nhow to use common data selection patterns that occur within data visualizations\n\n\n\n\n\nProblem Formulation\n applies deep learning for translation and synthesis\n\n\n\n\n\n\ndata visualization problem === sequence to sequence models ( seq2seq )\n\ninput sequence : dataset\ne.g. fields, values in json format\n\n\noutput sequence : valid Vega-Lite visualization specification\n\n\nsequence translation === encoder-decoder networks\n\nencoder : reads and encodes a source sequence into a fixed length vector\ndecoder : outputs a translation based on this vector\n\n👉 jointly trained to maximize the probability of outputting a correct translation\n\n\n\nseq2seq\n\ngenerates data that is sequential or temporally dependent\n\ne.g. language translation\n\n\nfinds applications for problems where the output or input is non-sequential\n\ne.g. text summarization, image captioning\n\n👉 bidirectional RNN units\n👉 attention mechanisms\n\n\n\n\n\n\n\nDetails\nordinary RNN ( unidirectional )\n\nreads an input sequence x from the first token x_1 to the last x_m\n\ngenerates an encoding only based on the preceding tokens it has seen\n\n\n\n\n\n\nBidirectional RNN ( BiRNN )\n\nconsists of a forward RNN + a backward RNN\n\nenables an encoding generation based on both the preceding and following tokens\n\n\n\na forward RNN ( →f )\n\nreads the input sequence as it is ordered from x_1 to x_m\ncalculates a sequence of forward hidden states (→h_1, …, →h_m)\n\n\na backward RNN ( ←f )\n\nreads the sequence in the reverse order from x_m to x_1\ncalculates a sequence of backward hidden states (←h_1, …, ←h_m)\n\n\ngenerates a hidden state →h_j\n→h_j \n\na concatenation of both the forward and backward RNNs ( h_j : [→h_j(T); ←h_j(T)]T )\ncontains summaries of both the preceeding and following tokens\n\n\n\n\n\nattention mechanism\n\nfocuses on aspects of an input sequence\ngenerates output tokens\nmakes translation models robust to performance degradation\ngenerates lengthy sequences\nenables model to learn mappings between source and target sequences of different lengths\nimproves the ability to interpret and debug sequence to sequence models as providing valuable insights on why a given token is generated at each step\n\n\n\ne.g.\nimage captioning\n\nmodel focuses on specific parts of objects in an image\ngenerates each word or token in the image caption\n\n\n\n\n\n\n\n\n👇 enables us to use a sequence translation model which… \n\nfirst takes into consideration the entire data input (dataset)\nand then focuses on aspects of the input (fields) in generating a visualization specification\n\n\n\n\n\nModelEncoder-Decoder Architecture with Attention mechanism\n2-layer Encoder \n\nbidirectional recurrent neural network (RNN)\ntakes in an input sequence of source tokens x\nand outputs a sequence of states h\n\n\n\n\n2-layer Decoder \n\nRNN\n\ncomputes the probability of a target sequence y based on the hidden state h\n\n\nprobability\n\ngenerated based on the recurrent state of the decoder RNN, previous tokens in the target sequence and a context vector c_i \n\ncontext vector === attention vector\n\na weighted average of the source states\nand designed to capture the context of source sequence that help predict the current target token\n\n\n\n\n\neach with 512 Long Short-Term Memory (LSTM) units (cells)\n\nbetter than Gated Recurrent Unit (GRU)\n\n\n\n\n\n\n\nData and PreprocessingLearning Objectivesmodel should…\n\nselect a subset of fields to focus on, when creating visualizations\n\nmost datasets have multiple fields which cannot all be simultaneously visualized\n\n\nlearn differences in data types across the data fields\n\ne.g. numeric, string, temporal, ordinal, categorical, etc.\n\n\nlearn the appropriate transformations to apply to a field given its data type\n\ne.g. aggregate transform does not apply to string fields\n\n👇\nVega-Lite Grammer\n\n\n\nview-level transforms (aggregate, bin, calculate, filter, timeUnit)\nfield-level transforms (aggregate, bin, sort, timeUnit)\n\n\n\n\n\n\n\nAchieving Objectivescharacter based sequence model\n\nChallenge : a character tokenization strategy requires\n\nmore units to represent a sequence\na large amount of hidden layers\na large amount of parameters to model long term dependencies\n\n\nSolution\n\nreplace string and numeric field names using a short notation\n\ne.g.* “str”, “num” in the source sequence (dataset)\n\n\na similar backward transformation is done in the target sequence\n\nto maintain consistency in field names\n\n\n\n👇\n\nscaffolds the learning process by reducing the vocabulary size\nprevents the LSTM from learning field names (which are not needed to be memorized)\n\n\n\n","dateCreated":"2021-05-21T00:12:36+09:00","dateModified":"2021-05-21T00:40:47+09:00","datePublished":"2021-05-21T00:12:36+09:00","description":"","headline":"Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/21/Data2Vis/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/21/Data2Vis/","keywords":"recommendation, recommendation system, visualization, data visualization, infobiz, HCI, Data2Vis"}</script>
-    <meta name="description" content="Abstractcreating effective visualizations using expressive grammars           End-to-End Trainable Neural Translation Model visualization generation &#x3D;&#x3D;&#x3D; language translation problem formulation  Vega-">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"","dateCreated":"2021-05-22T07:49:38+09:00","dateModified":"2021-05-21T23:50:40+09:00","datePublished":"2021-05-22T07:49:38+09:00","description":"","headline":"Data2Vis 코드 리뷰","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/22/Data2Vis-code-review/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/22/Data2Vis-code-review/","keywords":"recommendation, recommendation system, visualization, data visualization, infobiz, HCI, Data2Vis"}</script>
+    <meta name="description" content="Continuously Developing Developer">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰">
-<meta property="og:url" content="https://leahincom.github.io/2021/05/21/Data2Vis/index.html">
+<meta property="og:title" content="Data2Vis 코드 리뷰">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/22/Data2Vis-code-review/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Abstractcreating effective visualizations using expressive grammars           End-to-End Trainable Neural Translation Model visualization generation &#x3D;&#x3D;&#x3D; language translation problem formulation  Vega-">
+<meta property="og:description" content="Continuously Developing Developer">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://user-images.githubusercontent.com/49134038/119007780-8160be00-b9cc-11eb-8994-a13466e5a568.png">
-<meta property="og:image" content="https://developer.nvidia.com/sites/default/files/pictures/2018/lstm.png">
-<meta property="article:published_time" content="2021-05-20T15:12:36.000Z">
-<meta property="article:modified_time" content="2021-05-20T15:40:47.343Z">
+<meta property="article:published_time" content="2021-05-21T22:49:38.000Z">
+<meta property="article:modified_time" content="2021-05-21T14:50:40.261Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="recommendation">
 <meta property="article:tag" content="recommendation system">
@@ -34,7 +32,6 @@
 <meta property="article:tag" content="HCI">
 <meta property="article:tag" content="Data2Vis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://user-images.githubusercontent.com/49134038/119007780-8160be00-b9cc-11eb-8994-a13466e5a568.png">
     
     
         
@@ -319,14 +316,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰
+            Data2Vis 코드 리뷰
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-05-21T00:12:36+09:00">
+    <time datetime="2021-05-22T07:49:38+09:00">
 	
-		    May 21, 2021
+		    May 22, 2021
     	
     </time>
     
@@ -344,278 +341,7 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p><strong>creating effective visualizations using <em>expressive grammars</em></strong></p>
-<br />
-
-
-
-<img width="452" align="center" alt="Screenshot 2021-05-20 at 17 05 21" src="https://user-images.githubusercontent.com/49134038/119007780-8160be00-b9cc-11eb-8994-a13466e5a568.png">
-
-<br />
-
-
-
-<h4 id="End-to-End-Trainable-Neural-Translation-Model"><a href="#End-to-End-Trainable-Neural-Translation-Model" class="headerlink" title="End-to-End Trainable Neural Translation Model"></a>End-to-End Trainable Neural Translation Model</h4><ul>
-<li><p>visualization generation === language translation problem</p>
-<p><code>formulation</code></p>
-<blockquote>
-<p>Vega-Lite</p>
-</blockquote>
-<ul>
-<li>mapping : data specifications → visualization specifications</li>
-<li>in a declarative language</li>
-</ul>
-<p><code>training</code></p>
-<ul>
-<li><p>a <em>multilayered, attention-based</em> <code>encoder-decoder</code> network</p>
-</li>
-<li><p>with <em>long short-term memory units</em> ( <code>LSTM</code> )</p>
-<blockquote>
-<p><img src="https://developer.nvidia.com/sites/default/files/pictures/2018/lstm.png" alt="LSTM"></p>
-</blockquote>
-</li>
-<li><p>on a corpus of visualization specifications</p>
-</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h4 id="learns…"><a href="#learns…" class="headerlink" title="learns…"></a>learns…</h4><ul>
-<li>the <code>vocabulary</code> and <code>syntax</code> for a valid visualization specification</li>
-<li>appropriate <code>transformations</code><ul>
-<li><em>e.g.</em> count, bins, mean</li>
-</ul>
-</li>
-<li>how to use common <code>data selection patterns</code> that occur within data visualizations</li>
-</ul>
-<br />
-
-
-
-<h2 id="Problem-Formulation"><a href="#Problem-Formulation" class="headerlink" title="Problem Formulation"></a>Problem Formulation</h2><blockquote>
-<p> <em>applies deep learning for <strong>translation and synthesis</strong></em></p>
-</blockquote>
-<br />
-
-
-
-<ol>
-<li><p><strong>data visualization problem === sequence to sequence models</strong> ( <code>seq2seq</code> )</p>
-<ul>
-<li><code>input</code> sequence : dataset<ul>
-<li><em>e.g.</em> fields, values in <em>json format</em></li>
-</ul>
-</li>
-<li><code>output</code> sequence : valid <code>Vega-Lite</code> visualization specification</li>
-</ul>
-</li>
-<li><p><strong>sequence translation === encoder-decoder networks</strong></p>
-<ul>
-<li><code>encoder</code> : reads and encodes a source sequence into <code>a fixed length vector</code></li>
-<li><code>decoder</code> : outputs a <code>translation</code> based on this vector</li>
-</ul>
-<p>👉 jointly trained to <strong>maximize the probability of outputting a correct</strong> translation</p>
-</li>
-</ol>
-<blockquote>
-<p><code>seq2seq</code></p>
-<ol>
-<li><p>generates data that is <em>sequential or temporally dependent</em></p>
-<ul>
-<li><em>e.g.</em> language translation</li>
-</ul>
-</li>
-<li><p>finds applications for problems where the output or input is <em>non-sequential</em></p>
-<ul>
-<li><em>e.g.</em> text summarization, image captioning</li>
-</ul>
-<p>👉 <strong>bidirectional RNN units</strong></p>
-<p>👉 <strong>attention mechanisms</strong></p>
-</li>
-</ol>
-</blockquote>
-<br />
-
-
-
-<h4 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h4><blockquote>
-<p><strong><em>ordinary</em> RNN ( <code>unidirectional</code> )</strong></p>
-<ol>
-<li><p>reads an input sequence x from the first token x_1 to the last x_m</p>
-</li>
-<li><p>generates an encoding only based on the preceding tokens it has seen</p>
-</li>
-</ol>
-<br />
-
-
-
-<p><strong><em>Bidirectional</em> RNN ( <code>BiRNN</code> )</strong></p>
-<ul>
-<li><p>consists of a forward RNN + a backward RNN</p>
-</li>
-<li><p>enables an encoding generation based on both the preceding and following tokens</p>
-</li>
-</ul>
-<ol>
-<li><p>a forward RNN ( <code>→f</code> )</p>
-<ol>
-<li>reads the input sequence as it is ordered from x_1 to x_m</li>
-<li>calculates a sequence of forward hidden states (→h_1, …, →h_m)</li>
-</ol>
-</li>
-<li><p>a backward RNN ( <code>←f</code> )</p>
-<ol>
-<li>reads the sequence in the reverse order from x_m to x_1</li>
-<li>calculates a sequence of backward hidden states (←h_1, …, ←h_m)</li>
-</ol>
-</li>
-<li><p>generates a hidden state <code>→h_j</code></p>
-<p><code>→h_j</code> </p>
-<ul>
-<li>a <u>concatenation</u> of both the forward and backward RNNs <u>( <code>h_j</code> : <code>[→h_j(T); ←h_j(T)]T</code> )</u></li>
-<li>contains summaries of both the preceeding and following tokens</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<blockquote>
-<p><strong>attention mechanism</strong></p>
-<ul>
-<li>focuses on aspects of an input sequence</li>
-<li>generates output tokens</li>
-<li>makes translation models <strong>robust</strong> to performance degradation</li>
-<li>generates <strong>lengthy</strong> sequences</li>
-<li>enables model to <strong>learn mappings</strong> between source and target sequences of <strong>different lengths</strong></li>
-<li>improves the ability to <strong>interpret and debug</strong> sequence to sequence models as providing valuable insights on <em>why a given token is generated at each step</em></li>
-</ul>
-<hr>
-<ul>
-<li><p><em>e.g.</em></p>
-<p><code>image captioning</code></p>
-<ul>
-<li>model <em>focuses on <strong>specific parts</strong> of objects</em> in an image</li>
-<li><em>generates <strong>each word or token</strong></em> in the image caption</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<br />
-
-
-
-<p>👇 <em>enables us to use a <strong>sequence translation model</strong> which…</em> </p>
-<ol>
-<li>first takes into consideration the entire data input (dataset)</li>
-<li>and then focuses on aspects of the input (fields) in generating a visualization specification</li>
-</ol>
-<br />
-
-
-
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h4 id="Encoder-Decoder-Architecture-with-Attention-mechanism"><a href="#Encoder-Decoder-Architecture-with-Attention-mechanism" class="headerlink" title="Encoder-Decoder Architecture with Attention mechanism"></a>Encoder-Decoder Architecture with Attention mechanism</h4><ol>
-<li><p>2-layer <code>Encoder</code> </p>
-<ul>
-<li>bidirectional recurrent neural network (RNN)<ul>
-<li>takes in an input <strong>sequence</strong> of <em>source tokens x</em></li>
-<li>and outputs a <strong>sequence</strong> of <em>states h</em></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>2-layer <code>Decoder</code> </p>
-<ul>
-<li><p>RNN</p>
-<ul>
-<li>computes the <strong>probability</strong> of a <em>target sequence y</em> <u>based on the hidden state h</u></li>
-</ul>
-<blockquote>
-<p><code>probability</code></p>
-<ul>
-<li>generated <em>based on the <strong>recurrent state of the decoder</strong> RNN</em>, <strong>previous tokens</strong> in the target sequence and a <strong>context vector <code>c_i</code></strong> </li>
-</ul>
-<p><code>context vector</code> === <code>attention vector</code></p>
-<ul>
-<li><em><strong>a weighted average</strong> of the source states</em></li>
-<li>and designed to capture the context of source sequence that help <strong>predict</strong> the current target token</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p><em>each with</em> 512 <code>Long Short-Term Memory</code> (LSTM) units (cells)</p>
-<ul>
-<li>better than Gated Recurrent Unit (GRU)</li>
-</ul>
-</li>
-</ol>
-<br />
-
-
-
-<h2 id="Data-and-Preprocessing"><a href="#Data-and-Preprocessing" class="headerlink" title="Data and Preprocessing"></a>Data and Preprocessing</h2><h4 id="Learning-Objectives"><a href="#Learning-Objectives" class="headerlink" title="Learning Objectives"></a>Learning Objectives</h4><p><em>model should…</em></p>
-<ol>
-<li><p>select a subset of fields to focus on, when creating visualizations</p>
-<ul>
-<li>most datasets have multiple fields which cannot all be simultaneously visualized</li>
-</ul>
-</li>
-<li><p>learn differences in data types across the data fields</p>
-<ul>
-<li><em>e.g.</em> numeric, string, temporal, ordinal, categorical, etc.</li>
-</ul>
-</li>
-<li><p>learn the appropriate transformations to apply to a field given its data type</p>
-<ul>
-<li><em>e.g.</em> aggregate transform does not apply to string fields</li>
-</ul>
-<p>👇</p>
-<p><code>Vega-Lite Grammer</code></p>
-</li>
-</ol>
-<ul>
-<li>view-level transforms (aggregate, bin, calculate, filter, timeUnit)<ul>
-<li>field-level transforms (aggregate, bin, sort, timeUnit)</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h4 id="Achieving-Objectives"><a href="#Achieving-Objectives" class="headerlink" title="Achieving Objectives"></a>Achieving Objectives</h4><p><em><strong>character based sequence model</strong></em></p>
-<ul>
-<li><p><strong>Challenge</strong> : a <em>character tokenization strategy</em> requires</p>
-<ul>
-<li><strong>more units</strong> to represent a sequence</li>
-<li>a large amount of <strong>hidden layers</strong></li>
-<li>a large amount of <strong>parameters</strong> <em>to model long term dependencies</em></li>
-</ul>
-</li>
-<li><p>Solution</p>
-<ol>
-<li><p>replace string and numeric field names using a <strong>short notation</strong></p>
-<ul>
-<li>e.g.* “str”, “num” in the source sequence (dataset)</li>
-</ul>
-</li>
-<li><p>a <strong>similar backward transformation</strong> is done in the target sequence</p>
-<ul>
-<li>to maintain consistency in field names</li>
-</ul>
-</li>
-</ol>
-<p>👇</p>
-<ul>
-<li>scaffolds the learning process by reducing the vocabulary size</li>
-<li>prevents the LSTM from learning field names (which are not needed to be memorized)</li>
-</ul>
-</li>
-</ul>
-
+            
             
 
 
@@ -650,9 +376,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/19/VizML/"
-                    data-tooltip="VizML: A Machine Learning Approach to Visualization Recommendation 논문 리뷰"
-                    aria-label="NEXT: VizML: A Machine Learning Approach to Visualization Recommendation 논문 리뷰"
+                    href="/2021/05/21/Data2Vis_paper-review/"
+                    data-tooltip="Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰"
+                    aria-label="NEXT: Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -677,7 +403,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/22/Data2Vis-code-review/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -690,7 +416,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/22/Data2Vis-code-review/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -703,7 +429,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/22/Data2Vis-code-review/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -762,9 +488,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/19/VizML/"
-                    data-tooltip="VizML: A Machine Learning Approach to Visualization Recommendation 논문 리뷰"
-                    aria-label="NEXT: VizML: A Machine Learning Approach to Visualization Recommendation 논문 리뷰"
+                    href="/2021/05/21/Data2Vis_paper-review/"
+                    data-tooltip="Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰"
+                    aria-label="NEXT: Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -789,7 +515,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/22/Data2Vis-code-review/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -802,7 +528,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/22/Data2Vis-code-review/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -815,7 +541,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/22/Data2Vis-code-review/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -849,7 +575,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/22/Data2Vis-code-review/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -862,7 +588,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/22/Data2Vis-code-review/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -875,7 +601,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/21/Data2Vis/"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/22/Data2Vis-code-review/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
