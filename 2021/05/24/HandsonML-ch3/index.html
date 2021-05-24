@@ -1,0 +1,847 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="leah">
+    <title>3장: 분류 - leah</title>
+    <meta name="author" content="JungHyun">
+    
+        <meta name="keywords" content="hexo,javascript,">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"3.1 MNISTsklearn.datasets : Toy datasets를 담은 lib (크기가 작아 학습용이 아닌 샘플용으로 사용)\n일반적인 구조 ⇒ 쓸 수 있는 keys :\n\n데이터셋을 설명하는 DESCR 키\n샘플이 하나의 행, 특성이 하나의 열로 구성된 배열을 가진 data 키\n레이블 배열을 담은 target 키\n등등\n\n\n\n\n\n1234from sklearn.datasets import fetch_openml mnist = fetch_openml(&#x27;mnist_784&#x27;, version=1) mnist.keys()  &gt;&gt;&gt; dict_keys([&#x27;data&#x27;, &#x27;target&#x27;, &#x27;feature_names&#x27;, &#x27;DESCR&#x27;, &#x27;details&#x27;, &#x27;categories&#x27;, &#x27;url&#x27;])\n위의 결과는 mnist의 key들로, dictionary 구조를 가진 mnist에 대해 쓸 수 있는 명령들을 의미한다.\n\n\n\n\n\n\ndata : 학습용(feed) 데이터\ntarget : label 데이터로, 분류될 class를 의미\n\n따라서,\n12X, y = mnist[&quot;data&quot;], mnist[&quot;target&quot;] X.shape &gt;&gt;&gt; (70000, 784) # 784 = 28*28 y.shape &gt;&gt;&gt; (70000,)\nX.shape는 70000개의 data에 대해 각 data 당 28*28에 해당하는 pixel 강도(0~255)을 담고 있는 배열을 나타내고,\ny.shape는 70000개의 분류된 class를 나타낸다.\n\nmnist의 data를 담은 X 배열에서 하나의 이미지를 예시로 추출하여 출력해보도록 한다.\n1some_digit = X[0] # 0번째 data some_digit_image = some_digit.reshape(28, 28) # 28*28 size에 맞게 벡터 reshape\nsome_digit.reshape(28, 28)이 의미하는 바는, 현재 [1, 784]로 저장되어 있는 X[0]의 이미지 벡터는 [28,28]의 배열로 reshaping한다는 것이다.\n1y[0] &gt;&gt;&gt; &#x27;5&#x27;\ny에는 분류된 class가 담기므로, X[0]은 ‘5’ class에 속하는 data라는 것이다.\n위에서 출력된 것은 ‘(작은따옴표)’로부터 알 수 있듯이 string data이므로 이를 정수로 바꾸는 코드가 다음과 같다.\n1y = y.astype(np.uint8)\n\n\n\n\n\n1장에서 공부했듯이, 위의 MNIST은 지도 학습 모델이므로,\n더 좋은 training result를 내기 위해서는 하나의 dataset에서 train dataset과 test dataset을 적절히 나누어야 한다. 따라서 해당 MNIST에서는 6:1로(전체 7만개의 dataset) train 및 test dataset을 나누었다.\n또한 MNIST dataset은 데이터셋이 적절히 섞여 있어, 교차 검증 폴드(train / test set 간 분포의 균질성)가 비슷하고 훈련 샘플의 순서에 따른 성능 저하를 방지한다.\n\n\n\n\n3.2 이진 분류기 훈련이진 분류기 : YES or NO로 class 분류\n12y_train_5 = (y_train == 5)y_test_5 = (y_test == 5)\n위의 2가지 변수는 “감지기” 그 자체이다. 즉, 오른쪽 조건이 True인지 False인지 판단하는 감지기의 역할을 한다.\n분류 모델로 사용할 SGD(Stochastic Gradient Descent) 분류기는 손실함수 자체를 최소화하는 것이 아닌, 손실함수의 기댓값을 최소화하는 방법을 이용한다. 즉, gradient가 아닌 gradient의 기댓값의 추정치를 이용한다. 이에 사용되는 수식은 다음과 같다. 𝑤(𝑘+1)=𝑤(𝑘)+E[∇𝐿]. 모든 학습 데이터를 사용하는 것이 아닌 minibatch(일부 데이터, 하나의 훈련 샘플 그룹)를 이용하여 gradient의 추정치를 구하므로, gradient의 기댓값의 추정치는 표본 평균으로 작용한다. 따라서 계산량과 학습 데이터가 많은 deep learning과 온라인 학습(미니배치 이용)에 적합하다.\n1234from sklearn.linear_model import SGDClassifier sgd_clf = SGDClassifier(random_state=42) sgd_clf.fit(X_train, y_train_5) sgd_clf.predict([some_digit]) &gt;&gt;&gt; array([ True])\nSGDClassifier(random_state=42)에서 random_state은 무작위 값을 넣으며 최적값을 찾는 SGDClassifier의 특성에 따라, 이전에 실행했던 결과값을 repeatable하게 받기 위해 특정값을 저장하는 것을 의미한다. 값의 의미는 딱히 없으므로, 아무 정수로 설정할 수 있다. 이 후 classifier에 data와 y_train_5를 넣어 classifier을 fitting한다.\nclassifier은 predict의 결과로 some_digit(=X[0])을 넣었을 때 y_train_5에 따라 5 여부를 감지한 결과를 array에 담는다.\n\n\n\n\n3.3 성능 측정3.3.1 교차 검증을 사용한 정확도 측정1234567891011121314from sklearn.model_selection import StratifiedKFold from sklearn.base import clone skfolds = StratifiedKFold(n_splits=3, random_state=42) for train_index, test_index in skfolds.split(X_train, y_train_5) : \tclone_clf = clone(sgd_clf) \tX_train_folds = X_train[train_index] \ty_train_folds = y_train_5[train_index] \tX_test_fold = X_train[test_index] \ty_test_fold = y_train[test_index] clone_clf.fit(X_train_folds, y_train_folds) y_pred = clone_clf.predict(X_test_fold) n_correct = sum(y_pred == y_test_fold) print(n_correct / len(y_pred)) &gt;&gt;&gt; 0.9502, 0.96565, 0.96495\nStartifiedKFold에서 n_splits=3으로 설정하였으므로, 폴드가 3개인 k-겹 교차 검증이 수행된다.\ntrain/test_index으로 skfolds 객체의 split()을 호출하여 학습용/검증용 데이터로 분할할 수 있는 인덱스를 반환받고 실제 분할된 데이터를 해당 index를 대입하여 추출한다. 이 때, split()의 대상은 X_train → y_train_5 집합이다. 이를 토대로 y 값의 prediction인 y_pred를 X_test_fold로부터 predict하고, 올바른 예측의 수를 y_pred와 y_test_fold를 비교하여 sum 값을 통해 계산한다.\n위의 과정은 sklearn의 cross_val_score과 거의 같은 기능을 나타내므로 다음과 같은 코드로 정리할 수 있다.\n12from sklearn.model_selection import cross_val_score cross_val_score(sgd_clf, X_train, y_train_5, cv=3, scoring=&quot;accuracy&quot;) &gt;&gt;&gt; array([0.96355, 0.93795, 0.95615])\n이는 약 95%로 굉장히 높은 정확도를 나타낸다. 하지만, 이러한 정확도를 성능 측정 지표로 사용하지 않는 이유는 다음과 같다.\n\n\n\n\n\n위의 예시와 반대로, 5가 아닌 클래스를 분류하는 더미 분류기를 만들어 정확도를 비교해볼 수 있다.\n1234567891011from sklearn.base import BaseEstimator class Never5Classifier(BaseEstimator) : \tdef fit(self, X, y=None) : \t\treturn self \t\t\tdef predict(self, X) : \t\treturn np.zeros((len(X), 1), dtype=bool) never_5_clf = Never5Classifier() cross_val_score(never_5_clf, X_train, y_train_5, cv=3, scoring=&quot;accuracy&quot;) &gt;&gt;&gt; array([0.91125, 0.90855, 0.90915])\n이 때 Never5Classifier의 predict 함수는 배열의 결과를 전부 False로 세팅하여 배열을 반환한다.\n해당 classifier을 cross_val_score에 적용할 시 정확도가 90% 가량 나오는 것을 확인할 수 있다. 이는 약 10%의 이미지가 숫자 5이므로 이를 제외한 90%를 정확도로 출력한다. 따라서, 불균형한 데이터셋(5임/5가 아님 = 어떤 클래스가 다른 것보다 월등히 많음)을 다룰 때는 정확도를 분류기의 성능 측정 지표로 선호하지 않는다.\n\n\n\n\n3.3.2 오차 행렬오차 행렬 : 데이터와 다른 클래스로 잘못 분류한 횟수를 담은 행렬\n123from sklearn.model_selection import cross_val_predict y_train_pred = cross_val_predict(sgd_clf, X_train, y_train_5, cv=3)\ncross_val_score() : 테스트 세트의 output의 평균을 이용해 평가 점수 반환\ncross_val_predict() : 테스트 세트의 input의 각 element에 대한 깨끗한 예측 반환 (훈련하는 동안 사용되지 않은 데이터에 대해 예측)\n1confusion_matrix(y_train_5, y_train_pred) &gt;&gt;&gt; array([[53057, 1522], [1325, 4096]])\n\n행 : 실제 클래스 (데이터)\n열 : 예측한 클래스\n\n따라서, 위의 결과에서 첫 번째 행이 “5 아님”(음성 클래스)일 때, 첫 번째 열은 True Negative(예측 N, 실제 N)을 나타내며, 두 번째 열은 False Positive(예측 P, 실제 N)를 나타낸다. 두 번째 행은 “5임”(양성 클래스)이며, 첫 번째 열은 FN(예측 N, 실제 P), 두 번째 열은 TP(예측 P, 실제 P)이다.\n\n이에 완벽한 분류기는 TP와 TN만 가지고 있을 것이므로, 실제 confusion matrix의 출력값은 주대각선 값만 존재한다.\n1y_train_perfect_predictions = y_train_5 confusion_matrix(y_train_5, y_train_perfect_predictions) &gt;&gt;&gt; array([[54579, 0], [0, 5421]])\n\n\n\n\n3.3.3 정밀도와 재현율\n정밀도 = 정확도 = TP / (TP+FP)\n재현율 = 민감도 = TP / (TP+FN)\n\n정밀도는 예측이 양성인 결과(TP, FP)를, 재현율은 실제 양성인 결과(TP,FN)를 이용한다.\n즉, 정밀도는 확실한 양성 샘플 하나만 예측할 시 1이 나오지만 이는 다른 모든 양성 샘플을 무시한 결과이므로, 재현율(민감도 또는 진짜 양성 비율)과 같은 다른 지표와 함께 사용해야 한다.\n12precision_score(y_train_5, y_train_pred) // 정밀도 &gt;&gt;&gt; 0.729085... recall_score(y_train_5, y_train_pred) // 재현율 &gt;&gt;&gt; 0.755580...\n0.729는 정밀도로, 5로 판별된 이미지 중 72.9%가 정확하다는 의미이며, 0.756은 재현율으로, 전체 숫자 5에서 75.6%의 5만 감지한 것을 의미한다.\n\n\n\n이를 하나의 숫자로 통합해 살펴볼 수 있는 평가 지표가 F1 점수, 즉 정밀도와 재현율의 조화 평균이다.\n\nF1 = TP / (TP + (FN + FP) / 2)\n\n1f1_score(y_train_5, y_train_pred) &gt;&gt;&gt; 0.742096...\n정밀도와 재현율이 비슷할 시 F1의 값이 높게 나오므로 간단한 평가 지표로 이용할 수 있지만,\n정밀도/재현율 트레이드오프에 따라 정밀도와 재현율이 반비례하는 경우 상황에 따라 둘의 중요성이 달라지므로 F1을 주요 평가 지표로 사용하는 것이 바람직하지 않다.\n\n\n\n\n3.3.4 정밀도/재현율 트레이드오프정밀도와 재현율은 결정 함수의 결과로 나온 output dataset에 적용하는 임곗값에 따라 달라진다.\n즉, 임곗값을 높게 설정할 경우 정밀도는 높아지나 포함되는 TP가 낮아지므로 재현율은 떨어지며, 임곗값을 낮게 설정할 경우 정밀도는 떨어지나 재현율은 높아진다. some_digit의 예측에 사용한 점수를 확인하고 임곗값을 정해 양성/음성 예측을 만들기 위해 decision_function()을 이용한다.\n123456y_scores = sgd_clf.decision_function([some_digit]) y_scores &gt;&gt;&gt; array([2412.53175101]) threshold = 0 y_some_digit_pred = (y_scores &gt; threshold) &gt;&gt;&gt; array([ True]) threshold = 8000 y_some_digit_pred = (y_scores &gt; threshold) y_some_digit_[red &gt;&gt;&gt; array([False])\n따라서 적절한 임곗값을 설정하기 위하여, cross_val_predict()의 decision_function을 이용하여 모든 샘플의 결정 점수를 얻는다. 이후 precision_recall_curve()를 이용해 가능한 임곗값에 대한 정밀도와 재현율을 얻는다.\n12y_scores = cross_val_predict(sgd_clf, X_train, y_train_5, cv=3, method=&quot;decision_function&quot;) precisions, recalls, thresholds = precision_recall_curve(y_train_5, y_scores)\n좋은 정밀도/재현율 트레이드오프는 재현율에 대한 정밀도 곡선에서 정밀도가 급격하게 줄어드는 지점 직전의 값으로 임곗값을 설정하면 된다.\n또한 특정한 목표치의 정밀도를 달성하는 것이 목표(n%라고 가정해보자.)일 때는, 다음과 같이 임곗값을 설정하면 된다.\n1234threshold_90_precision = thresholds[np.argmax(precisions &gt;= n / 100)] y_train_pred_90 = (y_scores &gt;= threshold_90_precision) precision_score(y_train_5, y_train_pred_90) &gt;&gt;&gt; 0.900038... recall_score(y_train_5, y_train_pred_90) &gt;&gt;&gt; 0.436819...\n하지만 재현율이 너무 낮을 경우, 높은 정밀도의 분류기는 유용하지 않다.\n\n\n\n\n3.3.5 ROC 곡선ROC 곡선 : 거짓 양성 비율(FPR)에 대한 진짜 양성 비율(TPR, 재현율)의 곡선으로, FPR = 1(실제 음성) - TNR이다. 이 때 TNR을 특이도라고 하며, ROC를 재현율에 대한 1-특이도라고 한다.\nTPR과 FPR을 계산하기 위해 사용되는 함수는 roc_curve()로, 다음과 같이 사용된다.\n1fpr, tpr, thresholds = roc_curve(y_train_5, y_scores)\nTPR이 높아질 수록 FPR도 높아지므로, 좋은 분류기는 완전한 랜덤 분류기(TPR : FPR = 1 : 1)에서 최대한 왼쪽 위 모서리(TPR은 높고 FPR은 낮은)로 멀리 떨어져야 한다. 이를 평가하는 지표로는 곡선 아래의 면적(AUC)가 있는데, AUC를 계산하기 위해 RandomForestClassifier을 이용한다.\n12345from sklearn.ensemble import RandomForestClassifier forest_clf = RandomForestClassifier(random_state = 42) y_probas_forest = cross_val_predict(forest_clf, X_train, y_train_5, cv=3, method=&quot;predict_proba&quot;) y_scores_forest = y_probas_forest[:, 1] roc_auc_score(y_train_5, y_scores_forest)\nRandomForestClassifier에서는 decision_function 대신 predict_proba 기능을 제공한다.\n그 결과로서, RandomForestClassifier는 SGDClassifier보다 왼쪽 위 모서리에 더 가까운 ROC 곡선을 생성하므로 AUC 점수로 더 높다.\n\n\n\n\n3.4 다중 분류다중 분류기로 둘 이상의 클래스를 구별할 수 있으나, 보통 이진 분류기를 이용해 다음과 같은 2가지의 방법으로 다중 클래스를 구별한다. 보통 다중 클래스 분류 작업에 이진 분류 알고리즘을 선택하면 자동적으로 OvR이나 OvO를 실행하지만, import를 통해 클래스 객체를 생성하여 강제적으로 원하는 Classifier을 설정할 수도 있다.\n\nOvR(OvA) : 특정 클래스만 구분하는 클래스별 이진 분류기 n개를 훈련시켜 클래스가 n개의 클래스 분류 시스템을 만든다. 이후 각 분류기의 결정 점수 중에서 가장 높은 것을 클래스로 선택한다. 이는 큰 훈련 세트에서 적은 분류기를 훈련시킨다.\n\n1from sklearn.multiclass import OneVsRestClassifier\n\nOvO : 각 클래스의 조합마다 이진 분류기를 훈련시킨다. 이 중 가장 많이 양성으로 분류된 클래스를 선택한다. 이는 각 분류기의 훈련에 전체 훈련 세트 중 구별할 두 클래스의 샘플만 필요하므로, 작은 훈련 세트에서 많은 분류기를 훈련시킬 수 있다.\n\n1from sklearn.multiclass import OneVsOneClassifier\n더 높은 정확도를 위해, 입력의 스케일을 조정하면 분류기의 성능을 높일 수 있다.\n123from sklearn.preprocessing import StandartScaler scaler = StandardScaler() X_train_scaled = scaler.fit_transform(X_train.astype(float64))\n\n\n\n\n3.5 에러 분석cross_val_predict()를 이용해 결과값을 예측하고, 이 후 confusion_matrix()를 이용해 오차 행렬을 생성한다. 그 후 matshow()를 실행 시, 각 클래스 별로 예측한 클래스의 확률이 밝기로 나타나는데, 밝을 수록 높은 확률을 나타낸다. 따라서 올바른 오차 행렬은 주대각선의 밝기가 밝고, 나머지는 어두워야 한다.\n이러한 오차 행렬의 특성에 따라 잘못 분류된 클래스를 파악하고 분류기의 성능 향상 방안에 대해 생각해볼 수 있다. 특히 이 과정에서 데이터의 전처리가 중요한데, 3과 5의 클래스를 분류하는 예시의 경우 SGDClassifier을 적용할 경우 미세한 픽셀 강도의 차이가 클래스 분류의 오류로 이어지므로 이미지의 회전값을 0으로 조정하는 것이 이에 해당한다.\n\n\n\n\n3.6 다중 레이블 분류다중 레이블 분류 시스템 : 하나의 샘플에 여러 개의 클래스가 포함될 경우, 레이블을 달아 각 클래스를 구별하는 시스템\n다중 레이블 분류 시 적절한 지표를 사용하는 것이 중요한데, 다음과 같이 F1 점수에 다른 가중치 기준을 적용하여 분류기를 평가할 수 있다.\n123y_train_knn_pred = cross_val_predict(knn_clf, X_train, y_multilabel, cv=3) f1_score(y_multilabel, y_train_knn_pred, average = &quot;macro&quot;) # 모든 레이블의 가중치가 같음 f1_score(y_multilabel, y_train_knn_pred, average = &quot;weighted&quot;) # 타깃 레이블에 속한 샘플 수(지지도)에 가중치를 둠\n\n\n\n\n3.7 다중 출력 분류다중 출력 분류(다중 출력 다중 클래스 분류) 시스템 : 다중 레이블 분류에서 각 레이블이 다중 클래스가 될 수 있도록 일반화한 시스템\n이를 잡음이 포함된 이미지를 예시로 설명해보자면, 잡음이 포함된 이미지의 각 픽셀은 하나의 레이블에 해당되며 모든 픽셀은 0~255의 다양한 값을 가질 수 있다. 해당 이미지에서 잡음을 제거 시 각 픽셀의 값은 변화하므로 다중 클래스가 될 수 있다. 따라서 이는 다중 레이블에 다중 클래스가 합쳐진 다중 출력 다중 클래스 분류이다.\n","dateCreated":"2021-05-24T23:24:28+09:00","dateModified":"2021-05-24T15:36:43+09:00","datePublished":"2021-05-24T23:24:28+09:00","description":"","headline":"3장: 분류","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/24/HandsonML-ch3/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/24/HandsonML-ch3/","keywords":"machine learning, Hands-On Machine Learning, Keras, Tensorflow"}</script>
+    <meta name="description" content="3.1 MNISTsklearn.datasets : Toy datasets를 담은 lib (크기가 작아 학습용이 아닌 샘플용으로 사용) 일반적인 구조 ⇒ 쓸 수 있는 keys :  데이터셋을 설명하는 DESCR 키 샘플이 하나의 행, 특성이 하나의 열로 구성된 배열을 가진 data 키 레이블 배열을 담은 target 키 등등      1234from skle">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="3장: 분류">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/24/HandsonML-ch3/index.html">
+<meta property="og:site_name" content="leah">
+<meta property="og:description" content="3.1 MNISTsklearn.datasets : Toy datasets를 담은 lib (크기가 작아 학습용이 아닌 샘플용으로 사용) 일반적인 구조 ⇒ 쓸 수 있는 keys :  데이터셋을 설명하는 DESCR 키 샘플이 하나의 행, 특성이 하나의 열로 구성된 배열을 가진 data 키 레이블 배열을 담은 target 키 등등      1234from skle">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-24T14:24:28.000Z">
+<meta property="article:modified_time" content="2021-05-24T06:36:43.234Z">
+<meta property="article:author" content="JungHyun">
+<meta property="article:tag" content="machine learning">
+<meta property="article:tag" content="Hands-On Machine Learning">
+<meta property="article:tag" content="Keras">
+<meta property="article:tag" content="Tensorflow">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/all.css">
+
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
+
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            leah
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name">JungHyun</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/leahincom"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/junghyun.lah/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="mailto:leahincom@gmail.com"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            3장: 분류
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2021-05-24T23:24:28+09:00">
+	
+		    May 24, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/ML/">ML</a>, <a class="category-link" href="/categories/ML/Hands-On/">Hands-On</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="3-1-MNIST"><a href="#3-1-MNIST" class="headerlink" title="3.1 MNIST"></a>3.1 MNIST</h2><p>sklearn.datasets : Toy datasets를 담은 lib (크기가 작아 학습용이 아닌 샘플용으로 사용)</p>
+<p>일반적인 구조 ⇒ 쓸 수 있는 keys :</p>
+<ul>
+<li>데이터셋을 설명하는 DESCR 키</li>
+<li>샘플이 하나의 행, 특성이 하나의 열로 구성된 배열을 가진 data 키</li>
+<li>레이블 배열을 담은 target 키</li>
+<li>등등</li>
+</ul>
+<br />
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets </span><br><span class="line"><span class="keyword">import</span> fetch_openml </span><br><span class="line">mnist = fetch_openml(<span class="string">&#x27;mnist_784&#x27;</span>, version=<span class="number">1</span>) </span><br><span class="line">mnist.keys()  &gt;&gt;&gt; dict_keys([<span class="string">&#x27;data&#x27;</span>, <span class="string">&#x27;target&#x27;</span>, <span class="string">&#x27;feature_names&#x27;</span>, <span class="string">&#x27;DESCR&#x27;</span>, <span class="string">&#x27;details&#x27;</span>, <span class="string">&#x27;categories&#x27;</span>, <span class="string">&#x27;url&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<p>위의 결과는 mnist의 key들로, dictionary 구조를 가진 mnist에 대해 쓸 수 있는 명령들을 의미한다.</p>
+<br />
+
+
+
+<hr>
+<ol>
+<li>data : 학습용(feed) 데이터</li>
+<li>target : label 데이터로, 분류될 class를 의미</li>
+</ol>
+<p>따라서,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X, y = mnist[<span class="string">&quot;data&quot;</span>], mnist[<span class="string">&quot;target&quot;</span>] </span><br><span class="line">X.shape &gt;&gt;&gt; (<span class="number">70000</span>, <span class="number">784</span>) <span class="comment"># 784 = 28*28 y.shape &gt;&gt;&gt; (70000,)</span></span><br></pre></td></tr></table></figure>
+<p>X.shape는 70000개의 data에 대해 각 data 당 28*28에 해당하는 pixel 강도(0~255)을 담고 있는 배열을 나타내고,</p>
+<p>y.shape는 70000개의 분류된 class를 나타낸다.</p>
+<hr>
+<p>mnist의 data를 담은 X 배열에서 하나의 이미지를 예시로 추출하여 출력해보도록 한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">some_digit = X[<span class="number">0</span>] <span class="comment"># 0번째 data some_digit_image = some_digit.reshape(28, 28) # 28*28 size에 맞게 벡터 reshape</span></span><br></pre></td></tr></table></figure>
+<p>some_digit.reshape(28, 28)이 의미하는 바는, 현재 [1, 784]로 저장되어 있는 X[0]의 이미지 벡터는 [28,28]의 배열로 reshaping한다는 것이다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y[<span class="number">0</span>] &gt;&gt;&gt; <span class="string">&#x27;5&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>y에는 분류된 class가 담기므로, X[0]은 ‘5’ class에 속하는 data라는 것이다.</p>
+<p>위에서 출력된 것은 ‘(작은따옴표)’로부터 알 수 있듯이 string data이므로 이를 정수로 바꾸는 코드가 다음과 같다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = y.astype(np.uint8)</span><br></pre></td></tr></table></figure>
+<hr>
+<br />
+
+
+
+<p>1장에서 공부했듯이, 위의 MNIST은 지도 학습 모델이므로,</p>
+<p>더 좋은 training result를 내기 위해서는 하나의 dataset에서 train dataset과 test dataset을 적절히 나누어야 한다. 따라서 해당 MNIST에서는 6:1로(전체 7만개의 dataset) train 및 test dataset을 나누었다.</p>
+<p>또한 MNIST dataset은 데이터셋이 적절히 섞여 있어, 교차 검증 폴드(train / test set 간 분포의 균질성)가 비슷하고 훈련 샘플의 순서에 따른 성능 저하를 방지한다.</p>
+<br />
+
+
+
+<h2 id="3-2-이진-분류기-훈련"><a href="#3-2-이진-분류기-훈련" class="headerlink" title="3.2 이진 분류기 훈련"></a>3.2 이진 분류기 훈련</h2><p>이진 분류기 : YES or NO로 class 분류</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_train_5 = (y_train == <span class="number">5</span>)</span><br><span class="line">y_test_5 = (y_test == <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p>위의 2가지 변수는 “감지기” 그 자체이다. 즉, 오른쪽 조건이 True인지 False인지 판단하는 감지기의 역할을 한다.</p>
+<p>분류 모델로 사용할 SGD(Stochastic Gradient Descent) 분류기는 손실함수 자체를 최소화하는 것이 아닌, 손실함수의 기댓값을 최소화하는 방법을 이용한다. 즉, gradient가 아닌 gradient의 기댓값의 추정치를 이용한다. 이에 사용되는 수식은 다음과 같다. 𝑤(𝑘+1)=𝑤(𝑘)+E[∇𝐿]. 모든 학습 데이터를 사용하는 것이 아닌 minibatch(일부 데이터, 하나의 훈련 샘플 그룹)를 이용하여 gradient의 추정치를 구하므로, gradient의 기댓값의 추정치는 표본 평균으로 작용한다. 따라서 계산량과 학습 데이터가 많은 deep learning과 온라인 학습(미니배치 이용)에 적합하다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model </span><br><span class="line"><span class="keyword">import</span> SGDClassifier </span><br><span class="line">sgd_clf = SGDClassifier(random_state=<span class="number">42</span>) </span><br><span class="line">sgd_clf.fit(X_train, y_train_5) sgd_clf.predict([some_digit]) &gt;&gt;&gt; array([ <span class="literal">True</span>])</span><br></pre></td></tr></table></figure>
+<p>SGDClassifier(random_state=42)에서 random_state은 무작위 값을 넣으며 최적값을 찾는 SGDClassifier의 특성에 따라, 이전에 실행했던 결과값을 repeatable하게 받기 위해 특정값을 저장하는 것을 의미한다. 값의 의미는 딱히 없으므로, 아무 정수로 설정할 수 있다. 이 후 classifier에 data와 y_train_5를 넣어 classifier을 fitting한다.</p>
+<p>classifier은 predict의 결과로 some_digit(=X[0])을 넣었을 때 y_train_5에 따라 5 여부를 감지한 결과를 array에 담는다.</p>
+<br />
+
+
+
+<h2 id="3-3-성능-측정"><a href="#3-3-성능-측정" class="headerlink" title="3.3 성능 측정"></a>3.3 성능 측정</h2><h3 id="3-3-1-교차-검증을-사용한-정확도-측정"><a href="#3-3-1-교차-검증을-사용한-정확도-측정" class="headerlink" title="3.3.1 교차 검증을 사용한 정확도 측정"></a>3.3.1 교차 검증을 사용한 정확도 측정</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection </span><br><span class="line"><span class="keyword">import</span> StratifiedKFold </span><br><span class="line"><span class="keyword">from</span> sklearn.base </span><br><span class="line"><span class="keyword">import</span> clone skfolds = StratifiedKFold(n_splits=<span class="number">3</span>, random_state=<span class="number">42</span>) </span><br><span class="line"><span class="keyword">for</span> train_index, test_index <span class="keyword">in</span> skfolds.split(X_train, y_train_5) : </span><br><span class="line">	clone_clf = clone(sgd_clf) </span><br><span class="line">	X_train_folds = X_train[train_index] </span><br><span class="line">	y_train_folds = y_train_5[train_index] </span><br><span class="line">	X_test_fold = X_train[test_index] </span><br><span class="line">	y_test_fold = y_train[test_index] </span><br><span class="line">clone_clf.fit(X_train_folds, y_train_folds) </span><br><span class="line">y_pred = clone_clf.predict(X_test_fold) </span><br><span class="line">n_correct = <span class="built_in">sum</span>(y_pred == y_test_fold) </span><br><span class="line">print(n_correct / <span class="built_in">len</span>(y_pred)) &gt;&gt;&gt; <span class="number">0.9502</span>, <span class="number">0.96565</span>, <span class="number">0.96495</span></span><br></pre></td></tr></table></figure>
+<p>StartifiedKFold에서 n_splits=3으로 설정하였으므로, 폴드가 3개인 k-겹 교차 검증이 수행된다.</p>
+<p>train/test_index으로 skfolds 객체의 split()을 호출하여 학습용/검증용 데이터로 분할할 수 있는 인덱스를 반환받고 실제 분할된 데이터를 해당 index를 대입하여 추출한다. 이 때, split()의 대상은 X_train → y_train_5 집합이다. 이를 토대로 y 값의 prediction인 y_pred를 X_test_fold로부터 predict하고, 올바른 예측의 수를 y_pred와 y_test_fold를 비교하여 sum 값을 통해 계산한다.</p>
+<p>위의 과정은 sklearn의 cross_val_score과 거의 같은 기능을 나타내므로 다음과 같은 코드로 정리할 수 있다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score </span><br><span class="line">cross_val_score(sgd_clf, X_train, y_train_5, cv=<span class="number">3</span>, scoring=<span class="string">&quot;accuracy&quot;</span>) &gt;&gt;&gt; array([<span class="number">0.96355</span>, <span class="number">0.93795</span>, <span class="number">0.95615</span>])</span><br></pre></td></tr></table></figure>
+<p>이는 약 95%로 굉장히 높은 정확도를 나타낸다. 하지만, 이러한 정확도를 성능 측정 지표로 사용하지 않는 이유는 다음과 같다.</p>
+<br />
+
+
+
+<hr>
+<p>위의 예시와 반대로, 5가 아닌 클래스를 분류하는 더미 분류기를 만들어 정확도를 비교해볼 수 있다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.base </span><br><span class="line"><span class="keyword">import</span> BaseEstimator </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Never5Classifier</span>(<span class="params">BaseEstimator</span>) :</span> </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">fit</span>(<span class="params">self, X, y=<span class="literal">None</span></span>) :</span> </span><br><span class="line">		<span class="keyword">return</span> self </span><br><span class="line">		</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">predict</span>(<span class="params">self, X</span>) :</span> </span><br><span class="line">		<span class="keyword">return</span> np.zeros((<span class="built_in">len</span>(X), <span class="number">1</span>), dtype=<span class="built_in">bool</span>) </span><br><span class="line"></span><br><span class="line">never_5_clf = Never5Classifier() </span><br><span class="line">cross_val_score(never_5_clf, X_train, y_train_5, cv=<span class="number">3</span>, scoring=<span class="string">&quot;accuracy&quot;</span>) &gt;&gt;&gt; array([<span class="number">0.91125</span>, <span class="number">0.90855</span>, <span class="number">0.90915</span>])</span><br></pre></td></tr></table></figure>
+<p>이 때 Never5Classifier의 predict 함수는 배열의 결과를 전부 False로 세팅하여 배열을 반환한다.</p>
+<p>해당 classifier을 cross_val_score에 적용할 시 정확도가 90% 가량 나오는 것을 확인할 수 있다. 이는 약 10%의 이미지가 숫자 5이므로 이를 제외한 90%를 정확도로 출력한다. 따라서, 불균형한 데이터셋(5임/5가 아님 = 어떤 클래스가 다른 것보다 월등히 많음)을 다룰 때는 정확도를 분류기의 성능 측정 지표로 선호하지 않는다.</p>
+<br />
+
+
+
+<h3 id="3-3-2-오차-행렬"><a href="#3-3-2-오차-행렬" class="headerlink" title="3.3.2 오차 행렬"></a>3.3.2 오차 행렬</h3><p>오차 행렬 : 데이터와 다른 클래스로 잘못 분류한 횟수를 담은 행렬</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection </span><br><span class="line"><span class="keyword">import</span> cross_val_predict </span><br><span class="line">y_train_pred = cross_val_predict(sgd_clf, X_train, y_train_5, cv=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><code>cross_val_score()</code> : 테스트 세트의 output의 평균을 이용해 평가 점수 반환</p>
+<p><code>cross_val_predict()</code> : 테스트 세트의 input의 각 element에 대한 깨끗한 예측 반환 (훈련하는 동안 사용되지 않은 데이터에 대해 예측)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">confusion_matrix(y_train_5, y_train_pred) &gt;&gt;&gt; array([[<span class="number">53057</span>, <span class="number">1522</span>], [<span class="number">1325</span>, <span class="number">4096</span>]])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>행 : 실제 클래스 (데이터)</li>
+<li>열 : 예측한 클래스</li>
+</ul>
+<p>따라서, 위의 결과에서 첫 번째 행이 “5 아님”(음성 클래스)일 때, 첫 번째 열은 True Negative(예측 N, 실제 N)을 나타내며, 두 번째 열은 False Positive(예측 P, 실제 N)를 나타낸다. 두 번째 행은 “5임”(양성 클래스)이며, 첫 번째 열은 FN(예측 N, 실제 P), 두 번째 열은 TP(예측 P, 실제 P)이다.</p>
+<hr>
+<p>이에 완벽한 분류기는 TP와 TN만 가지고 있을 것이므로, 실제 confusion matrix의 출력값은 주대각선 값만 존재한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_train_perfect_predictions = y_train_5 confusion_matrix(y_train_5, y_train_perfect_predictions) &gt;&gt;&gt; array([[<span class="number">54579</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">5421</span>]])</span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+<h3 id="3-3-3-정밀도와-재현율"><a href="#3-3-3-정밀도와-재현율" class="headerlink" title="3.3.3 정밀도와 재현율"></a>3.3.3 정밀도와 재현율</h3><ul>
+<li>정밀도 = 정확도 = TP / (TP+FP)</li>
+<li>재현율 = 민감도 = TP / (TP+FN)</li>
+</ul>
+<p>정밀도는 예측이 양성인 결과(TP, FP)를, 재현율은 실제 양성인 결과(TP,FN)를 이용한다.</p>
+<p>즉, 정밀도는 확실한 양성 샘플 하나만 예측할 시 1이 나오지만 이는 다른 모든 양성 샘플을 무시한 결과이므로, 재현율(민감도 또는 진짜 양성 비율)과 같은 다른 지표와 함께 사용해야 한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">precision_score(y_train_5, y_train_pred) // 정밀도 &gt;&gt;&gt; <span class="number">0.729085</span>... </span><br><span class="line">recall_score(y_train_5, y_train_pred) // 재현율 &gt;&gt;&gt; <span class="number">0.755580</span>...</span><br></pre></td></tr></table></figure>
+<p>0.729는 정밀도로, 5로 판별된 이미지 중 72.9%가 정확하다는 의미이며, 0.756은 재현율으로, 전체 숫자 5에서 75.6%의 5만 감지한 것을 의미한다.</p>
+<br />
+
+<hr>
+<p>이를 하나의 숫자로 통합해 살펴볼 수 있는 평가 지표가 F1 점수, 즉 정밀도와 재현율의 조화 평균이다.</p>
+<ul>
+<li>F1 = TP / (TP + (FN + FP) / 2)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f1_score(y_train_5, y_train_pred) &gt;&gt;&gt; <span class="number">0.742096</span>...</span><br></pre></td></tr></table></figure>
+<p>정밀도와 재현율이 비슷할 시 F1의 값이 높게 나오므로 간단한 평가 지표로 이용할 수 있지만,</p>
+<p>정밀도/재현율 트레이드오프에 따라 정밀도와 재현율이 반비례하는 경우 상황에 따라 둘의 중요성이 달라지므로 F1을 주요 평가 지표로 사용하는 것이 바람직하지 않다.</p>
+<br />
+
+
+
+<h3 id="3-3-4-정밀도-재현율-트레이드오프"><a href="#3-3-4-정밀도-재현율-트레이드오프" class="headerlink" title="3.3.4 정밀도/재현율 트레이드오프"></a>3.3.4 정밀도/재현율 트레이드오프</h3><p>정밀도와 재현율은 결정 함수의 결과로 나온 output dataset에 적용하는 임곗값에 따라 달라진다.</p>
+<p>즉, 임곗값을 높게 설정할 경우 정밀도는 높아지나 포함되는 TP가 낮아지므로 재현율은 떨어지며, 임곗값을 낮게 설정할 경우 정밀도는 떨어지나 재현율은 높아진다. some_digit의 예측에 사용한 점수를 확인하고 임곗값을 정해 양성/음성 예측을 만들기 위해 decision_function()을 이용한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y_scores = sgd_clf.decision_function([some_digit]) </span><br><span class="line">y_scores &gt;&gt;&gt; array([<span class="number">2412.53175101</span>]) </span><br><span class="line">threshold = <span class="number">0</span> </span><br><span class="line">y_some_digit_pred = (y_scores &gt; threshold) &gt;&gt;&gt; array([ <span class="literal">True</span>]) </span><br><span class="line">threshold = <span class="number">8000</span> </span><br><span class="line">y_some_digit_pred = (y_scores &gt; threshold) y_some_digit_[red &gt;&gt;&gt; array([<span class="literal">False</span>])</span><br></pre></td></tr></table></figure>
+<p>따라서 적절한 임곗값을 설정하기 위하여, cross_val_predict()의 decision_function을 이용하여 모든 샘플의 결정 점수를 얻는다. 이후 precision_recall_curve()를 이용해 가능한 임곗값에 대한 정밀도와 재현율을 얻는다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_scores = cross_val_predict(sgd_clf, X_train, y_train_5, cv=<span class="number">3</span>, method=<span class="string">&quot;decision_function&quot;</span>) </span><br><span class="line">precisions, recalls, thresholds = precision_recall_curve(y_train_5, y_scores)</span><br></pre></td></tr></table></figure>
+<p>좋은 정밀도/재현율 트레이드오프는 재현율에 대한 정밀도 곡선에서 정밀도가 급격하게 줄어드는 지점 직전의 값으로 임곗값을 설정하면 된다.</p>
+<p>또한 특정한 목표치의 정밀도를 달성하는 것이 목표(n%라고 가정해보자.)일 때는, 다음과 같이 임곗값을 설정하면 된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">threshold_90_precision = thresholds[np.argmax(precisions &gt;= n / <span class="number">100</span>)] </span><br><span class="line">y_train_pred_90 = (y_scores &gt;= threshold_90_precision) </span><br><span class="line">precision_score(y_train_5, y_train_pred_90) &gt;&gt;&gt; <span class="number">0.900038</span>... </span><br><span class="line">recall_score(y_train_5, y_train_pred_90) &gt;&gt;&gt; <span class="number">0.436819</span>...</span><br></pre></td></tr></table></figure>
+<p>하지만 재현율이 너무 낮을 경우, 높은 정밀도의 분류기는 유용하지 않다.</p>
+<br />
+
+
+
+<h3 id="3-3-5-ROC-곡선"><a href="#3-3-5-ROC-곡선" class="headerlink" title="3.3.5 ROC 곡선"></a>3.3.5 ROC 곡선</h3><p>ROC 곡선 : 거짓 양성 비율(FPR)에 대한 진짜 양성 비율(TPR, 재현율)의 곡선으로, FPR = 1(실제 음성) - TNR이다. 이 때 TNR을 특이도라고 하며, ROC를 재현율에 대한 1-특이도라고 한다.</p>
+<p>TPR과 FPR을 계산하기 위해 사용되는 함수는 roc_curve()로, 다음과 같이 사용된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fpr, tpr, thresholds = roc_curve(y_train_5, y_scores)</span><br></pre></td></tr></table></figure>
+<p>TPR이 높아질 수록 FPR도 높아지므로, 좋은 분류기는 완전한 랜덤 분류기(TPR : FPR = 1 : 1)에서 최대한 왼쪽 위 모서리(TPR은 높고 FPR은 낮은)로 멀리 떨어져야 한다. 이를 평가하는 지표로는 곡선 아래의 면적(AUC)가 있는데, AUC를 계산하기 위해 RandomForestClassifier을 이용한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier </span><br><span class="line">forest_clf = RandomForestClassifier(random_state = <span class="number">42</span>) </span><br><span class="line">y_probas_forest = cross_val_predict(forest_clf, X_train, y_train_5, cv=<span class="number">3</span>, method=<span class="string">&quot;predict_proba&quot;</span>) </span><br><span class="line">y_scores_forest = y_probas_forest[:, <span class="number">1</span>] </span><br><span class="line">roc_auc_score(y_train_5, y_scores_forest)</span><br></pre></td></tr></table></figure>
+<p>RandomForestClassifier에서는 decision_function 대신 predict_proba 기능을 제공한다.</p>
+<p>그 결과로서, RandomForestClassifier는 SGDClassifier보다 왼쪽 위 모서리에 더 가까운 ROC 곡선을 생성하므로 AUC 점수로 더 높다.</p>
+<br />
+
+
+
+<h2 id="3-4-다중-분류"><a href="#3-4-다중-분류" class="headerlink" title="3.4 다중 분류"></a>3.4 다중 분류</h2><p>다중 분류기로 둘 이상의 클래스를 구별할 수 있으나, 보통 이진 분류기를 이용해 다음과 같은 2가지의 방법으로 다중 클래스를 구별한다. 보통 다중 클래스 분류 작업에 이진 분류 알고리즘을 선택하면 자동적으로 OvR이나 OvO를 실행하지만, import를 통해 클래스 객체를 생성하여 강제적으로 원하는 Classifier을 설정할 수도 있다.</p>
+<ul>
+<li>OvR(OvA) : 특정 클래스만 구분하는 클래스별 이진 분류기 n개를 훈련시켜 클래스가 n개의 클래스 분류 시스템을 만든다. 이후 각 분류기의 결정 점수 중에서 가장 높은 것을 클래스로 선택한다. 이는 큰 훈련 세트에서 적은 분류기를 훈련시킨다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier</span><br></pre></td></tr></table></figure>
+<ul>
+<li>OvO : 각 클래스의 조합마다 이진 분류기를 훈련시킨다. 이 중 가장 많이 양성으로 분류된 클래스를 선택한다. 이는 각 분류기의 훈련에 전체 훈련 세트 중 구별할 두 클래스의 샘플만 필요하므로, 작은 훈련 세트에서 많은 분류기를 훈련시킬 수 있다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsOneClassifier</span><br></pre></td></tr></table></figure>
+<p>더 높은 정확도를 위해, 입력의 스케일을 조정하면 분류기의 성능을 높일 수 있다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandartScaler </span><br><span class="line">scaler = StandardScaler() </span><br><span class="line">X_train_scaled = scaler.fit_transform(X_train.astype(float64))</span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+<h2 id="3-5-에러-분석"><a href="#3-5-에러-분석" class="headerlink" title="3.5 에러 분석"></a>3.5 에러 분석</h2><p>cross_val_predict()를 이용해 결과값을 예측하고, 이 후 confusion_matrix()를 이용해 오차 행렬을 생성한다. 그 후 matshow()를 실행 시, 각 클래스 별로 예측한 클래스의 확률이 밝기로 나타나는데, 밝을 수록 높은 확률을 나타낸다. 따라서 올바른 오차 행렬은 주대각선의 밝기가 밝고, 나머지는 어두워야 한다.</p>
+<p>이러한 오차 행렬의 특성에 따라 잘못 분류된 클래스를 파악하고 분류기의 성능 향상 방안에 대해 생각해볼 수 있다. 특히 이 과정에서 데이터의 전처리가 중요한데, 3과 5의 클래스를 분류하는 예시의 경우 SGDClassifier을 적용할 경우 미세한 픽셀 강도의 차이가 클래스 분류의 오류로 이어지므로 이미지의 회전값을 0으로 조정하는 것이 이에 해당한다.</p>
+<br />
+
+
+
+<h2 id="3-6-다중-레이블-분류"><a href="#3-6-다중-레이블-분류" class="headerlink" title="3.6 다중 레이블 분류"></a>3.6 다중 레이블 분류</h2><p>다중 레이블 분류 시스템 : 하나의 샘플에 여러 개의 클래스가 포함될 경우, 레이블을 달아 각 클래스를 구별하는 시스템</p>
+<p>다중 레이블 분류 시 적절한 지표를 사용하는 것이 중요한데, 다음과 같이 F1 점수에 다른 가중치 기준을 적용하여 분류기를 평가할 수 있다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y_train_knn_pred = cross_val_predict(knn_clf, X_train, y_multilabel, cv=<span class="number">3</span>) </span><br><span class="line">f1_score(y_multilabel, y_train_knn_pred, average = <span class="string">&quot;macro&quot;</span>) <span class="comment"># 모든 레이블의 가중치가 같음 </span></span><br><span class="line">f1_score(y_multilabel, y_train_knn_pred, average = <span class="string">&quot;weighted&quot;</span>) <span class="comment"># 타깃 레이블에 속한 샘플 수(지지도)에 가중치를 둠</span></span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+<h2 id="3-7-다중-출력-분류"><a href="#3-7-다중-출력-분류" class="headerlink" title="3.7 다중 출력 분류"></a>3.7 다중 출력 분류</h2><p>다중 출력 분류(다중 출력 다중 클래스 분류) 시스템 : 다중 레이블 분류에서 각 레이블이 다중 클래스가 될 수 있도록 일반화한 시스템</p>
+<p>이를 잡음이 포함된 이미지를 예시로 설명해보자면, 잡음이 포함된 이미지의 각 픽셀은 하나의 레이블에 해당되며 모든 픽셀은 0~255의 다양한 값을 가질 수 있다. 해당 이미지에서 잡음을 제거 시 각 픽셀의 값은 변화하므로 다중 클래스가 될 수 있다. 따라서 이는 다중 레이블에 다중 클래스가 합쳐진 다중 출력 다중 클래스 분류이다.</p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/Hands-On-Machine-Learning/" rel="tag">Hands-On Machine Learning</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/Keras/" rel="tag">Keras</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/machine-learning/" rel="tag">machine learning</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/05/22/Data2Vis-code-review/"
+                    data-tooltip="Data2Vis 코드 리뷰"
+                    aria-label="NEXT: Data2Vis 코드 리뷰"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/24/HandsonML-ch3/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/24/HandsonML-ch3/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/24/HandsonML-ch3/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 JungHyun. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/05/22/Data2Vis-code-review/"
+                    data-tooltip="Data2Vis 코드 리뷰"
+                    aria-label="NEXT: Data2Vis 코드 리뷰"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/24/HandsonML-ch3/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/24/HandsonML-ch3/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/24/HandsonML-ch3/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/24/HandsonML-ch3/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/24/HandsonML-ch3/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/24/HandsonML-ch3/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name">JungHyun</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br/>
+                Seoul/South Korea, London/UK
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/jquery.js"></script>
+
+
+<script src="/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/assets/js/thumbs.js"></script>
+
+
+<script src="/assets/js/tranquilpeak.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
