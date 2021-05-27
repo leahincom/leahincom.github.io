@@ -1,0 +1,888 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="leah">
+    <title>Redux - leah</title>
+    <meta name="author" content="JungHyun">
+    
+        <meta name="keywords" content="hexo,javascript,">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Introduction많은 상태를 관리할 필요가 생겨났다.\n\n\n 상태란 서버 응답, 캐시 데이터, 지역적으로 생성해서 사용하고 있지만 아직 서버에 저장되지 않은 데이터를 의미한다. 이외에도 활성화된 라우트, 선택된 탭, 로딩을 보여줄지 여부, 페이지네이션 컨트롤 등 다양한 UI 상태도 포함한다.\n\n모델이 다른 모델을 업데이트하고, 그리고 뷰가 모델을 업데이트 할 수 있고, 이 뷰가 다시 다른 모델을 업데이트하고, 이에 따라 또 다른 뷰가 업데이트 된다.\n더하여, 프론트엔트 제품 개발에 있어서 새로 갖춰야할 복잡한 요건들이 늘어나고 있다. 낙관적 업데이트(Optimistic update), 서버 렌더링, 라우트가 일어나기 전에 데이터 가져오기 등이 이에 해당한다. 이러한 복잡함은 변화(mutation) 나 비동기(asyncronicity) 와 같이 사람이 연동하여 추론하기 어려운 개념을 섞어서 사용한다 는 데서 비롯된다.\n\n비관적(pessimistic) 업데이트\n사용자 입력 -&gt; 수정 요청 -&gt; 성공 시 화면 갱신\n\n사용자에게는 불편하지만, 개발자에게는 쉬움\n\n낙관적(optimistic) 업데이트\n사용자 입력 -&gt; 바로 화면 먼저 갱신 -&gt; 수정 요청\n\ne.g. slack, trello\n\n\n\n\n\n\nRedux\n\n\n자바스크립트 앱을 위한 예측 가능한 상태 컨테이너\n\n일관적, 서로 다른 환경(서버, 클라이언트, 네이티브)에서 작동, 테스트하기 쉬운 앱 작성을 도와준다.\n\n\n12npx create-react-app my-app --template reduxnpm install redux\n\n\n\n\n\n애플리케이션의 모든 상태는 하나의 저장소 안에 하나의 객체 트리 구조로 저장\n\n범용적인 애플리케이션(universal application, 하나의 코드 베이스로 다양한 환경에서 실행 가능한 코드)을 만들기 쉽다.\n서버로부터 가져온 상태 는 시리얼라이즈되거나(serialized) 수화되어(hydrated) 전달되며 클라이언트에서 추가적인 코딩 없이도 사용할 수 있다.\n\n\n상태를 변화시키는 유일한 방법은 무슨 일이 벌어지는 지를 묘사하는 액션 객체를 전달하는 방법뿐\n\n뷰나 네트워크 콜백 등에서 상태를 직접 바꾸지 못 하도록 보장한다.\n\n\n변화는 순수 함수로 작성되어야\n\n리듀서는 그저 이전 상태와 액션을 받아 다음 상태를 반환하는 순수 함수이다. 이 때, 이전 상태를 변경하는 대신 새로운 상태 객체를 생성해서 반환해야한다.\n처음에는 하나의 리듀서만으로 충분하지만, 애플리케이션이 성장해나가면 상태 트리의 특정한 부분들을 조작하는 더 작은 개별적인 리듀서들로 나누는 것도 가능하다. (React 앱을 하나의 루트 컴포넌트에서 시작해서 여러 작은 컴포넌트의 조합으로 바꾸는 것과 동일)\n\n\n\n\n\n\n\nConcepts상태\n상태(상태 트리)는 넓은 의미의 단어이지만, Redux API에서는 보통 저장소에 의해 관리되고 getState()에 의해 반환되는 하나의 상태값을 지칭한다.\n\n(넓은 의미의) 상태는 Redux 애플리케이션의 전체 상태를 나타내며, 보통 깊게 중첩되어 있는 객체입니다.\n\n\n\n\n\n\n액션\n액션은 상태를 변화시키려는 객체이다.\n어떤 형태의 액션이 행해질지 표시하는 type 필드를 가져야 한다. 타입은 상수로 정의되고 다른 모듈에서 임포트할 수 있다.\n\n\n\n\n\n리듀서1type Reducer&lt;S, A&gt; &#x3D; (state: S, action: A) &#x3D;&gt; S\n\n리듀서(리듀싱 함수)는 누적값과 값을 받아서 새로운 누적값을 반환하는 함수이다. 이들은 값들의 컬렉션을 받아서 하나의 값으로 줄이는데 사용된다.\n\nRedux에서 누적값은 상태 객체이고, 누적될 값은 액션이다. 리듀서는 주어진 이전 상태와 액션에서 새로운 상태를 계산한다. \n\n반드시 같은 입력이 있으면 같은 출력을 반환 하는 순수 함수여야 한다.\n\n\n\n![image-20210527130716974](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210527130716974.png)\n\n\n\n\n디스패치 함수1234&#x2F;&#x2F; 기본 디스패치 함수type BaseDispatch &#x3D; (a: Action) &#x3D;&gt; Action&#x2F;&#x2F; 비동기 디스패치 함수 (보통 디스패치 함수)type Dispatch &#x3D; (a: Action | AsyncAction) &#x3D;&gt; any\n\n디스패치 함수는 액션이나 비동기 액션을 받는 함수이다. 전달받은 하나 또는 여러개의 액션을 저장소에 보낼 수도, 보내지 않을 수도 있다.\n\n\n저장소 인스턴스가 미들웨어를 거치지 않고 제공하는 기본 dispatch 함수\n\n*반드시** 동기적으로 저장소의 리듀서에 액션을 보내야 한다. 그러면 리듀서는 저장소가 반환한 이전 상태와 함께 새 상태를 계산한다.\n👾 리듀서를 사용하기 위해서 액션은 평범한 객체여야 한다.\n\n\n비동기 dispatch 함수 (보통 dispatch 함수)\n\n미들웨어를 통해 디스패치 함수는 비동기 액션을 처리할 수도 있다. 미들웨어가 기본 디스패치 함수를 감쌈으로써 액션이나 비동기 액션을 다음 미들웨어에 넘기기 전에, 변환하거나, 지연시키거나, 무시하거나, 해석할 수 있다.\n\n\n\n\n\n\n\n\n\n\n액션 생산자1type ActionCreator&lt;A, P extends any[] &#x3D; any[]&gt; &#x3D; (...args: P) &#x3D;&gt; Action | AsyncAction\n\n액션 생산자는 단지 액션을 만드는 함수이다. 이 때, 액션은 정보의 묶음이고, 액션 생산자는 액션을 만드는 곳이다.\n\n액션 생산자를 호출하면 액션을 만들어낼 뿐 디스패치하지는 않는다. 따라서 저장소를 변경하기 위해서는 dispatch 함수를 호출해야 한다.\n\n액션 생산자를 호출해 그 결과를 저장소 인스턴스로 바로 디스패치하는 함수를 바인드된 액션 생산자라고 부르기도 한다.\n비동기 액션은 디스패치 함수로 보내지는 값이지만 아직 리듀서에게 받아들여질 준비가 되어 있지 않아, 기본 dispatch() 함수로 전달되기 전에 미들웨어를 통해 액션(이나 일련의 액션들)으로 바뀌어야 한다. 이들은 종종 Promise나 Thunk와 같은 비동기 기본형으로, 리듀서에게 직접 전달되지는 않지만, 작업이 완료되면 액션을 보낸다.\n\n\n\n\n\n\n\n미들웨어12type MiddlewareAPI &#x3D; &#123; dispatch: Dispatch, getState: () &#x3D;&gt; State &#125;type Middleware &#x3D; (api: MiddlewareAPI) &#x3D;&gt; (next: Dispatch) &#x3D;&gt; Dispatch\n\n미들웨어는 디스패치 함수를 결합해서 새 디스패치 함수를 반환하는 고차함수이다. \n\n종종 비동기 액션을 액션으로 전환합니다.\n\n\n\n\n\n\n저장소123456type Store &#x3D; &#123;  dispatch: Dispatch,  getState: () &#x3D;&gt; State,  subscribe: (listener: () &#x3D;&gt; void) &#x3D;&gt; () &#x3D;&gt; void,  replaceReducer: (reducer: Reducer) &#x3D;&gt; void&#125;\n\n저장소는 애플리케이션의 상태 트리를 가지고 있는 객체이다. 리듀서 수준에서 결합이 일어나기 때문에, Redux 앱에는 단 하나의 저장소만 있어야 한다.\ndispatch(action) : 기본 디스패치 함수\ngetState() : 저장소의 현재 상태를 반환\nsubscribe(listener) : 상태가 바뀔 때 호출될 함수를 등록\nreplaceReducer(nextReducer) : 핫 리로딩과 코드 분할을 구현할때 사용\n\n\n\n\n\n\n\n저장소 생산자1type StoreCreator &#x3D; (reducer: Reducer, preloadedState: ?State) &#x3D;&gt; Store\n\nRedux 저장소를 만드는 함수\n\n\n\n\n\n저장소 인핸서1type StoreEnhancer &#x3D; (next: StoreCreator) &#x3D;&gt; StoreCreator\n\n저장소 생산자를 결합하여 강화된 새 저장소 생산자를 반환하는 고차함수\n미들웨어와 비슷하게 조합가능한 방식으로 저장소 인터페이스를 바꿀 수 있도록 한다.\n\n\n\n\n\nDo you really need?Redux를 사용하기 적절한 때는,\n\n계속해서 바뀌는 상당한 양의 데이터가 있다\n상태를 위한 단 하나의 근원이 필요하다\n최상위 컴포넌트가 모든 상태를 가지고 있는 것은 더 이상 적절하지 않다\n\n\n\n\n\nBasic Example\n앱의 상태 전부는 하나의 저장소(store)안에 있는 객체 트리에 저장된다.\n\n상태 트리를 변경하는 유일한 방법은 무엇이 일어날지 서술하는 객체인 액션(action)을 보내는 것 뿐이며,\n\n액션이 상태 트리를 어떻게 변경할지 명시하기 위해 리듀서(reducers)를 작성해야 한다.\n\n\n1234567891011121314151617181920212223242526272829303132333435import &#123; createStore &#125; from &#x27;redux&#x27;/* * 이것이 (state, action) =&gt; state 형태의 순수 함수인 리듀서입니다. * 리듀서는 액션이 어떻게 상태를 다음 상태로 변경하는지 서술합니다. */function counter(state = 0, action) &#123;  switch (action.type) &#123;    case &#x27;INCREMENT&#x27;:      return state + 1    case &#x27;DECREMENT&#x27;:      return state - 1    default:      return state  &#125;&#125;// 앱의 상태를 보관하는 Redux 저장소를 만듭니다.// API로는 &#123; subscribe, dispatch, getState &#125;가 있습니다.let store = createStore(counter)// subscribe()를 이용해 상태 변화에 따라 UI가 변경되게 할 수 있습니다.// 보통은 subscribe()를 직접 사용하기보다는,// 뷰 바인딩 라이브러리(예를 들어 React Redux)를 사용합니다.// 하지만 현재 상태를 localStorage에 영속적으로 저장할 때도 편리합니다.store.subscribe(() =&gt; console.log(store.getState())))// 내부 상태를 변경하는 유일한 방법은 액션을 보내는 것뿐입니다.// 액션은 직렬화할수도, 로깅할수도, 저장할수도 있으며 나중에 재실행할수도 있습니다.store.dispatch(&#123; type: &#x27;INCREMENT&#x27; &#125;)// 1store.dispatch(&#123; type: &#x27;INCREMENT&#x27; &#125;)// 2store.dispatch(&#123; type: &#x27;DECREMENT&#x27; &#125;)// 1\n상태를 바로 변경하는 대신, 액션이라 불리는 평범한 객체를 통해 일어날 변경을 명시한다. \n그리고 각각의 액션이 전체 애플리케이션의 상태를 어떻게 변경할지 결정하는 특별한 함수인 리듀서를 작성합니다.\n보통의 Redux 앱에는 하나의 루트 리듀서 함수를 가진 단 하나의 저장소가 있다. \n\n\n\n\nSampleaction은 setter가 없는 모델과 같은 객체이다. 다른 코드가 임의로 이를 수정할 수 없기 때문에, 버그 발생률을 낮춘다.\n12345678910&#123;  todos: [&#123;    text: &#x27;Eat food&#x27;,    completed: true  &#125;, &#123;    text: &#x27;Exercise&#x27;,    completed: false  &#125;],  visibilityFilter: &#x27;SHOW_COMPLETED&#x27;&#125;\nstate을 바꾸기 위해서는 action을 dispatch 해야 한다. action은 plain 자바스크립트 객체로 전달한다.\n123&#123; type: &#x27;ADD_TODO&#x27;, text: &#x27;Go to swimming pool&#x27; &#125;&#123; type: &#x27;TOGGLE_TODO&#x27;, index: 1 &#125;&#123; type: &#x27;SET_VISIBILITY_FILTER&#x27;, filter: &#x27;SHOW_ALL&#x27; &#125;\n이렇게 모든 변화를 acion으로 표현하는 것은 앱의 세부적인 변화부터 전체적인 변화까지 파악할 수 있도록 한다.\n이러한 state과 action을 묶기 위해서, reducer를 사용한다.\n다만, reducer은 큰 규모로 다루는 것보다 작은 규모로 나누어서 함수당 하나의 역할을 담당할 수 있도록 한다.\n123456789101112131415161718192021222324// reducer 1function visibilityFilter(state = &#x27;SHOW_ALL&#x27;, action) &#123;  if (action.type === &#x27;SET_VISIBILITY_FILTER&#x27;) &#123;    return action.filter  &#125; else &#123;    return state  &#125;&#125;// reducer 2function todos(state = [], action) &#123;  switch (action.type) &#123;    case &#x27;ADD_TODO&#x27;:      return state.concat([&#123; text: action.text, completed: false &#125;])    case &#x27;TOGGLE_TODO&#x27;:      return state.map((todo, index) =&gt;        action.index === index          ? &#123; text: todo.text, completed: !todo.completed &#125;          : todo      )    default:      return state  &#125;&#125;\n최종적으로, 위와 같이 잘게 나눈 reducer를 통합하여 전체적인 reducer 기능을 하는 통합 reducer를 생성한다.\n123456function todoApp(state = &#123;&#125;, action) &#123;  return &#123;    todos: todos(state.todos, action),    visibilityFilter: visibilityFilter(state.visibilityFilter, action)  &#125;&#125;\n\n\n","dateCreated":"2021-05-27T20:56:54+09:00","dateModified":"2021-05-27T14:45:44+09:00","datePublished":"2021-05-27T20:56:54+09:00","description":"","headline":"Redux","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/27/THUREE-Redux/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/27/THUREE-Redux/","keywords":"SOPT, WEB, ReactJS, Redux"}</script>
+    <meta name="description" content="Introduction많은 상태를 관리할 필요가 생겨났다.    상태란 서버 응답, 캐시 데이터, 지역적으로 생성해서 사용하고 있지만 아직 서버에 저장되지 않은 데이터를 의미한다. 이외에도 활성화된 라우트, 선택된 탭, 로딩을 보여줄지 여부, 페이지네이션 컨트롤 등 다양한 UI 상태도 포함한다.  모델이 다른 모델을 업데이트하고, 그리고 뷰가 모델을 업데이">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Redux">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/27/THUREE-Redux/index.html">
+<meta property="og:site_name" content="leah">
+<meta property="og:description" content="Introduction많은 상태를 관리할 필요가 생겨났다.    상태란 서버 응답, 캐시 데이터, 지역적으로 생성해서 사용하고 있지만 아직 서버에 저장되지 않은 데이터를 의미한다. 이외에도 활성화된 라우트, 선택된 탭, 로딩을 보여줄지 여부, 페이지네이션 컨트롤 등 다양한 UI 상태도 포함한다.  모델이 다른 모델을 업데이트하고, 그리고 뷰가 모델을 업데이">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-27T11:56:54.000Z">
+<meta property="article:modified_time" content="2021-05-27T05:45:44.893Z">
+<meta property="article:author" content="JungHyun">
+<meta property="article:tag" content="SOPT">
+<meta property="article:tag" content="WEB">
+<meta property="article:tag" content="ReactJS">
+<meta property="article:tag" content="Redux">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/all.css">
+
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
+
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            leah
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name">JungHyun</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/leahincom"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/junghyun.lah/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="mailto:leahincom@gmail.com"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            Redux
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2021-05-27T20:56:54+09:00">
+	
+		    May 27, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/THUREE/">THUREE</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p style="color: orange; font-weight: bold;">많은 상태를 관리할 필요가 생겨났다.</p>
+
+<blockquote>
+<p> 상태란 서버 응답, 캐시 데이터, 지역적으로 생성해서 사용하고 있지만 아직 서버에 저장되지 않은 데이터를 의미한다. 이외에도 활성화된 라우트, 선택된 탭, 로딩을 보여줄지 여부, 페이지네이션 컨트롤 등 다양한 UI 상태도 포함한다.</p>
+</blockquote>
+<p>모델이 다른 모델을 업데이트하고, 그리고 뷰가 모델을 업데이트 할 수 있고, 이 뷰가 다시 다른 모델을 업데이트하고, 이에 따라 또 다른 뷰가 업데이트 된다.</p>
+<p>더하여, <strong>프론트엔트 제품 개발에 있어서 새로 갖춰야할 복잡한 요건들이 늘어나고 있다.</strong> 낙관적 업데이트(Optimistic update), 서버 렌더링, 라우트가 일어나기 전에 데이터 가져오기 등이 이에 해당한다. 이러한 복잡함은 <code>변화(mutation)</code> 나 <code>비동기(asyncronicity)</code> 와 같이 사람이 연동하여 추론하기 어려운 개념을 <em>섞어서 사용한다</em> 는 데서 비롯된다.</p>
+<blockquote>
+<p><strong>비관적(pessimistic) 업데이트</strong></p>
+<p><code>사용자 입력 -&gt; 수정 요청 -&gt; 성공 시 화면 갱신</code></p>
+<ul>
+<li>사용자에게는 불편하지만, 개발자에게는 쉬움</li>
+</ul>
+<p><strong>낙관적(optimistic) 업데이트</strong></p>
+<p><code>사용자 입력 -&gt; 바로 화면 먼저 갱신 -&gt; 수정 요청</code></p>
+<ul>
+<li><code>e.g.</code> slack, trello</li>
+</ul>
+</blockquote>
+<br />
+
+
+
+<h3 style="color: purple">Redux</h3>
+
+<ul>
+<li><p>자바스크립트 앱을 위한 <strong>예측 가능한 상태 컨테이너</strong></p>
+</li>
+<li><p><strong>일관적</strong>, 서로 <strong>다른 환경</strong>(서버, 클라이언트, 네이티브)에서 작동, <strong>테스트하기 쉬운</strong> 앱 작성을 도와준다.</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app my-app --template redux</span><br><span class="line">npm install redux</span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+<ol>
+<li><p><strong>애플리케이션의 모든 <u>상태</u>는 하나의 <u>저장소</u> 안에 하나의 <u>객체 트리 구조</u>로 저장</strong></p>
+<ul>
+<li>범용적인 애플리케이션(universal application, 하나의 코드 베이스로 다양한 환경에서 실행 가능한 코드)을 만들기 쉽다.</li>
+<li>서버로부터 가져온 <code>상태</code> 는 시리얼라이즈되거나(serialized) 수화되어(hydrated) 전달되며 클라이언트에서 추가적인 코딩 없이도 사용할 수 있다.</li>
+</ul>
+</li>
+<li><p><strong>상태를 변화시키는 유일한 방법은 무슨 일이 벌어지는 지를 묘사하는 <u>액션</u> 객체를 전달하는 방법뿐</strong></p>
+<ul>
+<li>뷰나 네트워크 콜백 등에서 상태를 직접 바꾸지 못 하도록 보장한다.</li>
+</ul>
+</li>
+<li><p><strong>변화는 순수 함수로 작성되어야</strong></p>
+<ul>
+<li>리듀서는 그저 이전 상태와 액션을 받아 다음 상태를 반환하는 순수 함수이다. 이 때, 이전 상태를 변경하는 대신 <strong>새로운 상태 객체를 생성</strong>해서 반환해야한다.</li>
+<li>처음에는 하나의 리듀서만으로 충분하지만, 애플리케이션이 성장해나가면 상태 트리의 특정한 부분들을 조작하는 더 작은 개별적인 리듀서들로 나누는 것도 가능하다. (React 앱을 하나의 루트 컴포넌트에서 시작해서 여러 작은 컴포넌트의 조합으로 바꾸는 것과 동일)</li>
+</ul>
+</li>
+</ol>
+<br />
+
+
+
+<h2 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h2><h3 id="상태"><a href="#상태" class="headerlink" title="상태"></a>상태</h3><ul>
+<li><p><strong>상태</strong>(<strong>상태 트리</strong>)는 넓은 의미의 단어이지만, Redux API에서는 보통 저장소에 의해 관리되고 <a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#getState"><code>getState()</code></a>에 의해 반환되는 하나의 상태값을 지칭한다.</p>
+</li>
+<li><p>(넓은 의미의) 상태는 Redux 애플리케이션의 전체 상태를 나타내며, 보통 깊게 중첩되어 있는 객체입니다.</p>
+</li>
+</ul>
+<br />
+
+
+
+<h3 id="액션"><a href="#액션" class="headerlink" title="액션"></a>액션</h3><ul>
+<li><strong>액션</strong>은 상태를 변화시키려는 객체이다.</li>
+<li>어떤 형태의 액션이 행해질지 표시하는 <code>type</code> 필드를 가져야 한다. 타입은 상수로 정의되고 다른 모듈에서 임포트할 수 있다.</li>
+</ul>
+<br />
+
+
+
+<h3 id="리듀서"><a href="#리듀서" class="headerlink" title="리듀서"></a>리듀서</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type Reducer&lt;S, A&gt; &#x3D; (state: S, action: A) &#x3D;&gt; S</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>리듀서</strong>(<strong>리듀싱 함수</strong>)는 누적값과 값을 받아서 새로운 누적값을 반환하는 함수이다. 이들은 값들의 컬렉션을 받아서 하나의 값으로 줄이는데 사용된다.</p>
+</li>
+<li><p>Redux에서 누적값은 상태 객체이고, 누적될 값은 액션이다. 리듀서는 주어진 이전 상태와 액션에서 새로운 상태를 계산한다. </p>
+</li>
+<li><p>반드시 <em>같은 입력이 있으면 같은 출력을 반환</em> 하는 <strong>순수 함수</strong>여야 한다.</p>
+</li>
+</ul>
+<hr>
+<p>![image-20210527130716974](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210527130716974.png)</p>
+<br />
+
+
+
+<h3 id="디스패치-함수"><a href="#디스패치-함수" class="headerlink" title="디스패치 함수"></a>디스패치 함수</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 기본 디스패치 함수</span><br><span class="line">type BaseDispatch &#x3D; (a: Action) &#x3D;&gt; Action</span><br><span class="line">&#x2F;&#x2F; 비동기 디스패치 함수 (보통 디스패치 함수)</span><br><span class="line">type Dispatch &#x3D; (a: Action | AsyncAction) &#x3D;&gt; any</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>디스패치 함수</strong>는 액션이나 비동기 액션을 받는 함수이다. 전달받은 하나 또는 여러개의 액션을 저장소에 보낼 수도, 보내지 않을 수도 있다.</p>
+<blockquote>
+<ol>
+<li><p>저장소 인스턴스가 미들웨어를 거치지 않고 제공하는 <strong>기본 <a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#dispatchaction"><code>dispatch</code></a> 함수</strong></p>
+<ul>
+<li>*반드시** <em>동기적으로</em> 저장소의 리듀서에 액션을 보내야 한다. 그러면 리듀서는 저장소가 반환한 이전 상태와 함께 새 상태를 계산한다.</li>
+<li>👾 리듀서를 사용하기 위해서 액션은 평범한 객체여야 한다.</li>
+</ul>
+</li>
+<li><p>비동기 dispatch 함수 (<strong>보통 dispatch 함수</strong>)</p>
+<ul>
+<li><em>미들웨어를 통해</em> 디스패치 함수는 <strong>비동기 액션</strong>을 처리할 수도 있다. 미들웨어가 기본 디스패치 함수를 감쌈으로써 액션이나 비동기 액션을 다음 미들웨어에 넘기기 전에, 변환하거나, 지연시키거나, 무시하거나, 해석할 수 있다.</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<br />
+
+
+
+<h3 id="액션-생산자"><a href="#액션-생산자" class="headerlink" title="액션 생산자"></a>액션 생산자</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type ActionCreator&lt;A, P extends any[] &#x3D; any[]&gt; &#x3D; (...args: P) &#x3D;&gt; Action | AsyncAction</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>액션 생산자</strong>는 단지 액션을 만드는 함수이다. 이 때, 액션은 정보의 묶음이고, 액션 생산자는 액션을 만드는 곳이다.</p>
+</li>
+<li><p>액션 생산자를 호출하면 액션을 만들어낼 뿐 디스패치하지는 않는다. 따라서 저장소를 변경하기 위해서는 <code>dispatch</code> 함수를 호출해야 한다.</p>
+<ul>
+<li>액션 생산자를 호출해 그 결과를 저장소 인스턴스로 바로 디스패치하는 함수를 <strong>바인드된 액션 생산자</strong>라고 부르기도 한다.</li>
+<li><strong>비동기 액션</strong>은 디스패치 함수로 보내지는 값이지만 아직 리듀서에게 받아들여질 준비가 되어 있지 않아, 기본 <code>dispatch()</code> 함수로 전달되기 전에 미들웨어를 통해 액션(이나 일련의 액션들)으로 바뀌어야 한다. 이들은 종종 Promise나 Thunk와 같은 비동기 기본형으로, 리듀서에게 직접 전달되지는 않지만, 작업이 완료되면 액션을 보낸다.</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<h3 id="미들웨어"><a href="#미들웨어" class="headerlink" title="미들웨어"></a>미들웨어</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type MiddlewareAPI &#x3D; &#123; dispatch: Dispatch, getState: () &#x3D;&gt; State &#125;</span><br><span class="line">type Middleware &#x3D; (api: MiddlewareAPI) &#x3D;&gt; (next: Dispatch) &#x3D;&gt; Dispatch</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>미들웨어는 디스패치 함수를 결합해서 새 디스패치 함수를 반환하는 고차함수이다. </p>
+</li>
+<li><p>종종 비동기 액션을 액션으로 전환합니다.</p>
+</li>
+</ul>
+<br />
+
+
+
+<h3 id="저장소"><a href="#저장소" class="headerlink" title="저장소"></a>저장소</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">type Store &#x3D; &#123;</span><br><span class="line">  dispatch: Dispatch,</span><br><span class="line">  getState: () &#x3D;&gt; State,</span><br><span class="line">  subscribe: (listener: () &#x3D;&gt; void) &#x3D;&gt; () &#x3D;&gt; void,</span><br><span class="line">  replaceReducer: (reducer: Reducer) &#x3D;&gt; void</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>저장소는 애플리케이션의 상태 트리를 가지고 있는 객체이다. 리듀서 수준에서 결합이 일어나기 때문에, Redux 앱에는 단 하나의 저장소만 있어야 한다.<ul>
+<li><a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#dispatchaction"><code>dispatch(action)</code> </a>: 기본 디스패치 함수</li>
+<li><a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#getState"><code>getState()</code></a> : 저장소의 현재 상태를 반환</li>
+<li><a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#subscribelistener"><code>subscribe(listener)</code></a> : 상태가 바뀔 때 호출될 함수를 등록</li>
+<li><a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#replacereducernextreducer"><code>replaceReducer(nextReducer)</code></a> : 핫 리로딩과 코드 분할을 구현할때 사용</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<h3 id="저장소-생산자"><a href="#저장소-생산자" class="headerlink" title="저장소 생산자"></a>저장소 생산자</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type StoreCreator &#x3D; (reducer: Reducer, preloadedState: ?State) &#x3D;&gt; Store</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Redux 저장소를 만드는 함수</li>
+</ul>
+<br />
+
+
+
+<h3 id="저장소-인핸서"><a href="#저장소-인핸서" class="headerlink" title="저장소 인핸서"></a>저장소 인핸서</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type StoreEnhancer &#x3D; (next: StoreCreator) &#x3D;&gt; StoreCreator</span><br></pre></td></tr></table></figure>
+<ul>
+<li>저장소 생산자를 결합하여 강화된 새 저장소 생산자를 반환하는 고차함수</li>
+<li>미들웨어와 비슷하게 조합가능한 방식으로 저장소 인터페이스를 바꿀 수 있도록 한다.</li>
+</ul>
+<br />
+
+
+
+<h2 id="Do-you-really-need"><a href="#Do-you-really-need" class="headerlink" title="Do you really need?"></a>Do you really need?</h2><p>Redux를 사용하기 적절한 때는,</p>
+<ul>
+<li><strong>계속해서 바뀌는 상당한 양</strong>의 데이터가 있다</li>
+<li>상태를 위한 <strong>단 하나의 근원</strong>이 필요하다</li>
+<li>최상위 컴포넌트가 <strike><strong>모든 상태를 가지고 있는 것</strong></strike>은 더 이상 적절하지 않다</li>
+</ul>
+<br />
+
+
+
+<h2 id="Basic-Example"><a href="#Basic-Example" class="headerlink" title="Basic Example"></a>Basic Example</h2><ol>
+<li><p>앱의 상태 전부는 하나의 저장소(<em>store</em>)안에 있는 객체 트리에 저장된다.</p>
+</li>
+<li><p>상태 트리를 변경하는 유일한 방법은 무엇이 일어날지 서술하는 객체인 액션(<em>action</em>)을 보내는 것 뿐이며,</p>
+</li>
+<li><p>액션이 상태 트리를 어떻게 변경할지 명시하기 위해 리듀서(<em>reducers</em>)를 작성해야 한다.</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 이것이 (state, action) =&gt; state 형태의 순수 함수인 리듀서입니다.</span></span><br><span class="line"><span class="comment"> * 리듀서는 액션이 어떻게 상태를 다음 상태로 변경하는지 서술합니다.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">counter</span>(<span class="params">state = <span class="number">0</span>, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;INCREMENT&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state + <span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;DECREMENT&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state - <span class="number">1</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 앱의 상태를 보관하는 Redux 저장소를 만듭니다.</span></span><br><span class="line"><span class="comment">// API로는 &#123; subscribe, dispatch, getState &#125;가 있습니다.</span></span><br><span class="line"><span class="keyword">let</span> store = createStore(counter)</span><br><span class="line"></span><br><span class="line"><span class="comment">// subscribe()를 이용해 상태 변화에 따라 UI가 변경되게 할 수 있습니다.</span></span><br><span class="line"><span class="comment">// 보통은 subscribe()를 직접 사용하기보다는,</span></span><br><span class="line"><span class="comment">// 뷰 바인딩 라이브러리(예를 들어 React Redux)를 사용합니다.</span></span><br><span class="line"><span class="comment">// 하지만 현재 상태를 localStorage에 영속적으로 저장할 때도 편리합니다.</span></span><br><span class="line">store.subscribe(<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(store.getState())))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 내부 상태를 변경하는 유일한 방법은 액션을 보내는 것뿐입니다.</span></span><br><span class="line"><span class="comment">// 액션은 직렬화할수도, 로깅할수도, 저장할수도 있으며 나중에 재실행할수도 있습니다.</span></span><br><span class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">&#x27;INCREMENT&#x27;</span> &#125;)</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">&#x27;INCREMENT&#x27;</span> &#125;)</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">&#x27;DECREMENT&#x27;</span> &#125;)</span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>상태를 바로 변경하는 대신, <strong>액션</strong>이라 불리는 평범한 객체를 통해 일어날 변경을 명시한다. </p>
+<p>그리고 각각의 액션이 전체 애플리케이션의 상태를 어떻게 변경할지 결정하는 특별한 함수인 <strong>리듀서</strong>를 작성합니다.</p>
+<p>보통의 Redux 앱에는 하나의 루트 리듀서 함수를 가진 단 하나의 저장소가 있다. </p>
+<br />
+
+
+
+<h2 id="Sample"><a href="#Sample" class="headerlink" title="Sample"></a>Sample</h2><p>action은 setter가 없는 모델과 같은 객체이다. 다른 코드가 임의로 이를 수정할 수 없기 때문에, 버그 발생률을 낮춘다.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  todos: [&#123;</span><br><span class="line">    text: &#x27;Eat food&#x27;,</span><br><span class="line">    completed: true</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    text: &#x27;Exercise&#x27;,</span><br><span class="line">    completed: false</span><br><span class="line">  &#125;],</span><br><span class="line">  visibilityFilter: &#x27;SHOW_COMPLETED&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>state을 바꾸기 위해서는 action을 dispatch 해야 한다. action은 plain 자바스크립트 객체로 전달한다.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; type: &#x27;ADD_TODO&#x27;, text: &#x27;Go to swimming pool&#x27; &#125;</span><br><span class="line">&#123; type: &#x27;TOGGLE_TODO&#x27;, index: 1 &#125;</span><br><span class="line">&#123; type: &#x27;SET_VISIBILITY_FILTER&#x27;, filter: &#x27;SHOW_ALL&#x27; &#125;</span><br></pre></td></tr></table></figure>
+<p>이렇게 모든 변화를 acion으로 표현하는 것은 앱의 세부적인 변화부터 전체적인 변화까지 파악할 수 있도록 한다.</p>
+<p>이러한 state과 action을 묶기 위해서, reducer를 사용한다.</p>
+<p>다만, reducer은 큰 규모로 다루는 것보다 작은 규모로 나누어서 함수당 하나의 역할을 담당할 수 있도록 한다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// reducer 1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">visibilityFilter</span>(<span class="params">state = <span class="string">&#x27;SHOW_ALL&#x27;</span>, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (action.type === <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> action.filter</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// reducer 2</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">todos</span>(<span class="params">state = [], action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ADD_TODO&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state.concat([&#123; <span class="attr">text</span>: action.text, <span class="attr">completed</span>: <span class="literal">false</span> &#125;])</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;TOGGLE_TODO&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state.map(<span class="function">(<span class="params">todo, index</span>) =&gt;</span></span><br><span class="line">        action.index === index</span><br><span class="line">          ? &#123; <span class="attr">text</span>: todo.text, <span class="attr">completed</span>: !todo.completed &#125;</span><br><span class="line">          : todo</span><br><span class="line">      )</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>최종적으로, 위와 같이 잘게 나눈 reducer를 통합하여 전체적인 reducer 기능을 하는 통합 reducer를 생성한다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">todoApp</span>(<span class="params">state = &#123;&#125;, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    todos: todos(state.todos, action),</span><br><span class="line">    visibilityFilter: visibilityFilter(state.visibilityFilter, action)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/ReactJS/" rel="tag">ReactJS</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/Redux/" rel="tag">Redux</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/SOPT/" rel="tag">SOPT</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/WEB/" rel="tag">WEB</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/05/26/basic-Python/"
+                    data-tooltip="Python Overview"
+                    aria-label="NEXT: Python Overview"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 JungHyun. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/05/26/basic-Python/"
+                    data-tooltip="Python Overview"
+                    aria-label="NEXT: Python Overview"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name">JungHyun</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br/>
+                Seoul/South Korea, London/UK
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/jquery.js"></script>
+
+
+<script src="/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/assets/js/thumbs.js"></script>
+
+
+<script src="/assets/js/tranquilpeak.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
