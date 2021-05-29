@@ -6,24 +6,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>Tag: JavaScript - leah</title>
+    <title>Closure - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{}</script>
-    <meta name="description" content="Continuously Developing Developer">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Closures\n\n\n\n클로저란?\n함수 번들과 이들이 참조하는 주변 상태 ( lexical environment 라 칭한다) 의 조합을 의미한다. \n쉽게 말하자면, 클로저는 독립적인 (자유) 변수를 가리키는 함수로, 클로저 안에 정의된 함수는 만들어진 환경을 기억한다. 즉, 클로저를 통해 inner function scope 에서 outer function scope에 접근할 수 있으며, JavaScript 에서는 함수가 생성되는 시점에 클로저도 생성된다.\n흔히 함수 내에서 함수를 정의하고 사용하면 클로저라고 한다. 하지만 대개는 정의한 함수를 리턴하고 사용은 바깥에서 하게된다.\n이해를 돕기 위해 다음 코드를 보자.\n123456789function getClosure() &#123;  var text = &#x27;variable 1&#x27;;  return function() &#123;    return text;  &#125;;&#125;var closure = getClosure();console.log(closure()); // &#x27;variable 1&#x27;\n위에서 정의한 getClosure()는 함수를 반환하고, 반환된 함수는 getClosure() 내부에서 선언된 변수를 참조하고 있다. 또한 이렇게 참조된 변수는 함수 실행이 끝났다고 해서 사라지지 않았고, 여전히 제대로 된 값을 반환하고 있는 걸 알 수 있다. 여기서 반환된 함수가 클로저이다.\n1234567891011121314var base = &#x27;Hello, &#x27;;function sayHelloTo(name) &#123;  var text = base + name;  return function() &#123;    console.log(text);  &#125;;&#125;var hello1 = sayHelloTo(&#x27;승민&#x27;);var hello2 = sayHelloTo(&#x27;현섭&#x27;);var hello3 = sayHelloTo(&#x27;유근&#x27;);hello1(); // &#x27;Hello, 승민&#x27;hello2(); // &#x27;Hello, 현섭&#x27;hello3(); // &#x27;Hello, 유근&#x27;\n출력된 결과를 보면 text 변수가 동적으로 변화하고 있는 것처럼 보인다. 실제로는 text라는 변수 자체가 여러 번 생성된 것이다. 즉, hello1()과 hello2(), hello3()은 서로 다른 환경을 가지고 있다.\n\n\n\n\nLexical ScopingLexical Scoping 은 함수들이 중첩되어 있을 때, parser가 변수 이름을 어떻게 해석하는지에 대해 설명한다. 즉, lexical scope는 중첩 함수가 연속적으로 존재하는 그룹에서, inner function이 그의 parent scope의 변수를 포함한 자원들에 접근이 가능함을 의미한다. 결국 자식 함수들이 부모 함수가 실행되는 문맥에 어휘적으로 묶이는 것 을 의미한다.  이를 static scope 라고 칭하기도 한다.\n이를 직관적으로 이해하기 위해 다음 코드를 보자.\n12345678910111213function grandfather() &#123;    var name = &#x27;Hammad&#x27;;    // &#x27;likes&#x27; is not accessible here    function parent() &#123;        // &#x27;name&#x27; is accessible here        // &#x27;likes&#x27; is not accessible here        function child() &#123;            // Innermost level of the scope chain            // &#x27;name&#x27; is also accessible here            var likes = &#x27;Coding&#x27;;        &#125;    &#125;&#125;\n위 예시에서 lexical scope은 forward 방향으로 작동한다는 것을 알 수 있다. 이는 child 함수가 실행될 때 해당 문맥에 name 변수가 포함되어 접근이 가능하다는 것을 의미한다. 하지만 반대로, backward로는 작동하지 않기 때문에 likes는 child의 부모 함수에서 접근이 불가능하다.\n이는 같은 이름을 가졌지만 다른 실행 문맥을 가진 변수들이 위에서부터 아래로 코드가 작동하면서 실행 스택 (execution stack) 에 선행 값들 (우선순위) 을 가지고 있음을 의미한다. 이 때 같은 이름을 가진 변수의 경우 안쪽에 존재하는 함수 (실행 스택에서 위쪽에 존재하는 문맥, 함수) 일수록 높은 우선순위를 가진다.\n다른 예시를 보자.\n12345678function init() &#123;  var name = &#x27;Mozilla&#x27;; // name is a local variable created by init  function displayName() &#123; // displayName() is the inner function, a closure    alert(name); // use variable declared in the parent function  &#125;  displayName();&#125;init();\n위 코드에서,\n\nouter(parent) function 은 init() 이 되고,\ninner(child) function 은 displayName() 이 된다.\n\ninit 함수가 지역변수인 name 과 displayName 함수를 생성한다. 이 때, displayName은 init 안에 정의된 inner function 이므로 init 내에서만 작동할 수 있다. 특히 해당 함수는 그만의 지역 변수를 생성하지 않는데, inner function의 경우 outer function의 변수에 접근할 수 있으므로 displayName은 그의 parent function인 init 함수의 지역변수인 name에 접근할 수 있다.\n\n\n\n\nClosure12345678910function makeFunc() &#123;  var name = &#x27;Mozilla&#x27;;  function displayName() &#123;    alert(name);  &#125;  return displayName;&#125;var myFunc = makeFunc();myFunc();\n위와 동일한 코드이지만, displayName이 실행되기 전 outer function에서 반환된다는 점이 다르다.\n보통 함수의 실행이 끝나면 그 내부에 있는 지역변수에 더이상 접근이 불가한 것이 일반적인 경우이지만, 위 코드에서는 makeFunc의 실행이 종료되어도 name 변수에 접근이 가능하다. \n그 이유는 JavaScript의 함수는 클로저를 생성하기 때문이다. 클로저는 앞서 말했듯이 함수와 해당 함수가 선언된 lexical environment을 아울러 정의하는데, 이 ‘환경’ 은 클로저가 생성된 그 시기의, in-scope에 해당하는 모든 지역변수를 포함한다.\n따라서 위 코드의 경우, myFunc은 makeFunc이 실행될 때 생성된 displayName instance의 참조변수이며, displayName 인스턴스는 그의 lexical environment - name 변수가 존재하는 - 를 지속적으로 참조 (유지) 한다. 따라서, myFunc이 호출되었을 때 name 변수에 계속해서 접근 가능하므로 alert에 “Mozilla”가 전달된다.\n또 다른 예시를 보자.\n1234567891011function makeAdder(x) &#123;  return function(y) &#123;    return x + y;  &#125;;&#125;var add5 = makeAdder(5);var add10 = makeAdder(10);console.log(add5(2));  // 7console.log(add10(2)); // 12\n위 코드에서는 하나의 인자 x 를 받는 makeAdder(x) 함수가 존재하고, 이는 또 다시 다른 하나의 인자 y 를 받아 x와 y의 합을 반환하는 함수를 반환한다. 결국 makeAdder는 함수 공장으로 작용하는데, 이는 특정 값(y) 을 인자(x) 에 더하는 함수를 생성한다.\n위 예시에서는 2개의 함수가 생성되는데,\n\nadd5 : 하나는 5를 그의 인자에 더하는 함수이고\nadd10 : 다른 하나는 10을 더하는 함수이다.\n\nadd5 와 add10 은 모두 클로저이다. 이들은 같은 body를 가진 함수를 공유하지만 다른 lexical environment를 가진다. 이는 add5 의 lexical environment는 x=5이고, add10 에서는 x=10 임을 의미한다.\n\n\n\n\nClosure Scope Chain모든 클로저는\n\nLocal Scope (Own Scope)\nOuter Functions Scope\nGlobal Scope\n\n를 가진다.\n주의해야 할 부분은 outer function이 중첩된 함수 (중 하나) 일 경우에, 해당 함수의 scope에 접근하는 것은 그를 둘러싼 scope 또한 포함한다는 것 - 결국 함수 scope의 chain을 생성한다 - 이다.\n12345678910111213141516171819202122232425262728293031323334353637// global scopevar e = 10;function sum(a)&#123;  return function(b)&#123;    return function(c)&#123;      // outer functions scope      return function(d)&#123;        // local scope        return a + b + c + d + e;      &#125;    &#125;  &#125;&#125;console.log(sum(1)(2)(3)(4)); // log 20// You can also write without anonymous functions:// global scopevar e = 10;function sum(a)&#123;  return function sum2(b)&#123;    return function sum3(c)&#123;      // outer functions scope      return function sum4(d)&#123;        // local scope        return a + b + c + d + e;      &#125;    &#125;  &#125;&#125;var s = sum(1);var s1 = s(2);var s2 = s1(3);var s3 = s2(4);console.log(s3) // log 20\n위 예시에서는 중첩 함수가 연속적으로 정의되어 있으며 이들은 모두 outer function scope에 접근이 가능하다. 이 때, 클로저는 모든 outer function scope에 접근 가능하다고 정의된다.\n\n\n\n\n\nReferencehttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures\nhttps://hyunseob.github.io/2016/08/30/javascript-closure/\n","dateCreated":"2021-05-29T20:08:44+09:00","dateModified":"2021-05-29T13:33:19+09:00","datePublished":"2021-05-29T20:08:44+09:00","description":"","headline":"Closure","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/","keywords":"SOPT, WEB, JavaScript, closure, lexical scope, scope"}</script>
+    <meta name="description" content="Closures    클로저란? 함수 번들과 이들이 참조하는 주변 상태 ( lexical environment 라 칭한다) 의 조합을 의미한다.  쉽게 말하자면, 클로저는 독립적인 (자유) 변수를 가리키는 함수로, 클로저 안에 정의된 함수는 만들어진 환경을 기억한다. 즉, 클로저를 통해 inner function scope 에서 outer function">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="leah">
-<meta property="og:url" content="https://leahincom.github.io/tags/JavaScript/index.html">
+<meta property="og:title" content="Closure">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Continuously Developing Developer">
+<meta property="og:description" content="Closures    클로저란? 함수 번들과 이들이 참조하는 주변 상태 ( lexical environment 라 칭한다) 의 조합을 의미한다.  쉽게 말하자면, 클로저는 독립적인 (자유) 변수를 가리키는 함수로, 클로저 안에 정의된 함수는 만들어진 환경을 기억한다. 즉, 클로저를 통해 inner function scope 에서 outer function">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-29T11:08:44.000Z">
+<meta property="article:modified_time" content="2021-05-29T04:33:19.404Z">
 <meta property="article:author" content="JungHyun">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="SOPT">
+<meta property="article:tag" content="WEB">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="closure">
+<meta property="article:tag" content="lexical scope">
+<meta property="article:tag" content="scope">
 <meta name="twitter:card" content="summary">
     
     
@@ -54,6 +60,8 @@
     
 
     
+        
+    
 </head>
 
     <body>
@@ -67,7 +75,7 @@
         
     
 
-<header id="header" data-behavior="2">
+<header id="header" data-behavior="5">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -100,7 +108,7 @@
         
     
 
-<nav id="sidebar" data-behavior="2">
+<nav id="sidebar" data-behavior="5">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -296,30 +304,22 @@
 </nav>
 
             
-            <div id="main" data-behavior="2"
+            <div id="main" data-behavior="5"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
-                            aria-label=": Closure"
-                        >
-                            Closure
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            Closure
+        </h1>
+    
+    
+        <div class="post-meta">
     <time datetime="2021-05-29T20:08:44+09:00">
 	
 		    May 29, 2021
@@ -334,10 +334,13 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Closures"><a href="#Closures" class="headerlink" title="Closures"></a>Closures</h2><br />
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="Closures"><a href="#Closures" class="headerlink" title="Closures"></a>Closures</h2><br />
 
 
 
@@ -407,304 +410,122 @@
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures</a></p>
 <p><a target="_blank" rel="noopener" href="https://hyunseob.github.io/2016/08/30/javascript-closure/">https://hyunseob.github.io/2016/08/30/javascript-closure/</a></p>
 
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
+
+
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/04/24/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-DOM/"
-                            aria-label=": DOM"
-                        >
-                            DOM
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-04-24T18:20:30+09:00">
-	
-		    Apr 24, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/WEB-28th/">WEB_28th</a>
-
-
-    
-</div>
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/JavaScript/" rel="tag">JavaScript</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/SOPT/" rel="tag">SOPT</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/WEB/" rel="tag">WEB</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/closure/" rel="tag">closure</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/lexical-scope/" rel="tag">lexical scope</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/scope/" rel="tag">scope</a>
 
             </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="DOM-Document-Object-Model"><a href="#DOM-Document-Object-Model" class="headerlink" title="DOM (Document Object Model)"></a>DOM (Document Object Model)</h2><h3 id="1-HTML-코드-Page-Source-코드-DOM"><a href="#1-HTML-코드-Page-Source-코드-DOM" class="headerlink" title="1. HTML 코드 (Page Source 코드) === DOM?"></a>1. HTML 코드 (Page Source 코드) === DOM?</h3><blockquote>
-<p>코드 자체는 아님.</p>
-<p>하지만 해당 코드가 브라우저에 파싱되면 DOM 임.</p>
-</blockquote>
-<h3 id="2-DevTools-코드-DOM"><a href="#2-DevTools-코드-DOM" class="headerlink" title="2. DevTools 코드 === DOM?"></a>2. DevTools 코드 === DOM?</h3><blockquote>
-<p>맞음.</p>
-<p>기존에 작성한 HTML 코드와 동일할 수도 있지만, 대게 브라우저에 파싱됨에 따라 변경사항이 적용되어 브라우저에 보여지는 형태로 변형되어 보여짐.</p>
-</blockquote>
-<ul>
-<li><p>웹 페이지는 일종의 문서(document)</p>
-<ul>
-<li>The backbone of an HTML document is <code>tag</code>s</li>
-</ul>
-</li>
-<li><p>웹 페이지의 객체 지향 표현 (독립적인 객체) 이며, 자바스크립트와 같은 스크립팅 언어를 이용해 DOM 을 수정</p>
-</li>
-<li><p>HTML, XML 문서의 <code>프로그래밍 interface</code> 로, 프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공한다.</p>
-<ul>
-<li>DOM 은 문서를 표현하고, 저장하고, 조작하는 (문서 구조, 스타일, 내용 등을 변경) 방법을 제공한다.</li>
-<li>웹 페이지를 스크립트 또는 프로그래밍 언어들에서 사용될 수 있게 연결시켜주는 역할</li>
-</ul>
-</li>
-<li><p>문서의 구조화된 표현(structured representation)</p>
-<ul>
-<li><p>node, property, method 를 갖고 있는 object들로 구조화된 문서를 표현</p>
-</li>
-<li><p>document object 는 document 자체</p>
-<blockquote>
-<p>e.g. table object 는 HTML table 에 접근하기 위한 <code>HTMLTableElement</code> DOM interface를 구현하는 것이다.</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p><em>동일한 문서를 사용하여 다른 형태로 나타날 수 있다.</em></p>
-<ul>
-<li>웹 브라우저를 통해 그 내용이 파싱(해석)되어 웹 브라우저 화면에 나타나거나,</li>
-<li>기존 HTML 소스 자체로 나타나기도 한다.</li>
-</ul>
-</li>
-<li><p><strong>Everything in HTML, even comments, becomes a part of the DOM.</strong></p>
-</li>
-</ul>
-<h3 id="DOM과-기존-HTML-코드가-달라지는-경우"><a href="#DOM과-기존-HTML-코드가-달라지는-경우" class="headerlink" title="DOM과 기존 HTML 코드가 달라지는 경우"></a>DOM과 기존 HTML 코드가 달라지는 경우</h3><ol>
-<li><p>브라우저가 HTML을 수정하는 경우 : 브라우저 파싱 시 <strong>자동 교정 (Autocorrection)</strong></p>
-<blockquote>
-<ol>
-<li>Spaces and newlines before <code>&lt;head&gt;</code> are ignored for historical reasons.</li>
-<li>If we put something after <code>&lt;/body&gt;</code>, then that is automatically moved inside the <code>body</code>, at the end, as the HTML spec requires that all content must be inside <code>&lt;body&gt;</code>. So there can’t be any spaces after <code>&lt;/body&gt;</code>.<ul>
-<li>if there are spaces (just like any character) in the document, then they become text nodes in the DOM</li>
-</ul>
-</li>
-<li>Tables always have <code>&lt;tbody&gt;</code></li>
-</ol>
-</blockquote>
-</li>
-<li><p><strong>JavaScript로 DOM을 조작하는 경우</strong> : 조작 (변경) 사항이 반영되어 DOM 출력</p>
-</li>
-<li><p>Ajax : 컨텐츠를 가져와 (c.f. <code>fetch</code>) 페이지에 추가하는 경우</p>
-</li>
-<li><p>Templating : server의 내용을 테스트하기 위해 임의의 client-side template을 적용</p>
-<blockquote>
-<p>e.g. handlebars.js</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="DOM과-JavaScript"><a href="#DOM과-JavaScript" class="headerlink" title="DOM과 JavaScript"></a>DOM과 JavaScript</h3><blockquote>
-<p>JavaScript : 브라우저가 <code>읽고 작업</code>을 할 수 있는 언어, 브라우저에 기록되는 것들을 조작할 수 있는 문법/ 언어</p>
-<ul>
-<li><code>DOM API</code> 를 이용해서 작업</li>
-</ul>
-<p>DOM : 작업이 이루어지는 <code>장소</code>, 브라우저에 의해 기록되는 모든 것</p>
-</blockquote>
-<ul>
-<li><p>DOM 이 없다면 자바스크립트 언어는 웹 페이지 또는 XML 페이지의 요소들과 관련된 모델이나 개념들에 대한 정보를 갖지 (불러오지) 못하게 된다.</p>
-</li>
-<li><p>문서의 모든 element는 DOM의 한 부분</p>
-</li>
-<li><p>페이지 콘텐츠 (element) 는 DOM 에 저장되고 자바스크립트를 통해 접근하거나 조작</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">API (web or XML page) &#x3D; DOM + JS (scripting language)</span><br></pre></td></tr></table></figure></li>
-<li><p>DOM 의 구현은 어떠한 언어에서도 가능</p>
-<blockquote>
-<p>e.g. python 에서도 구현 가능</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="DOM에-접근하는-방법"><a href="#DOM에-접근하는-방법" class="headerlink" title="DOM에 접근하는 방법"></a>DOM에 접근하는 방법</h3><ul>
-<li><p>문서가 로드될 때는 모든 DOM을 사용할 수 있게 되는 때이다.</p>
-</li>
-<li><p>스크립트를 작성할 때</p>
-<ul>
-<li>직접적으로 문서 자체를 조작하거나,</li>
-<li>간접적인 조작을 위해 문서의 children 을 얻는, <code>document</code> 또는 <code>window</code> element 를 이용하는 <code>API 를 사용</code>할 수 있다.</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">&quot;window.alert(&#x27;welcome to my home page!&#x27;);&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">       <span class="comment">// run this function when the document is loaded</span></span></span><br><span class="line"><span class="javascript">       <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">         <span class="comment">// create a couple of elements in an otherwise empty HTML page</span></span></span><br><span class="line"><span class="javascript">         <span class="keyword">var</span> heading = <span class="built_in">document</span>.createElement(<span class="string">&quot;h1&quot;</span>);</span></span><br><span class="line"><span class="javascript">         <span class="keyword">var</span> heading_text = <span class="built_in">document</span>.createTextNode(<span class="string">&quot;Big Head!&quot;</span>);</span></span><br><span class="line">         heading.appendChild(heading_text);</span><br><span class="line"><span class="javascript">         <span class="built_in">document</span>.body.appendChild(heading);</span></span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-</li>
-</ul>
-<h3 id="Data-Type"><a href="#Data-Type" class="headerlink" title="Data Type"></a>Data Type</h3><blockquote>
-<p><code>Tag</code>s are <em>element nodes</em> (or just elements) and form the tree structure.</p>
-<ul>
-<li><p>DOM <code>node</code>는 <code>element</code> 로,</p>
-<ul>
-<li><code>document</code> – the “entry point” into DOM.</li>
-<li>element nodes – HTML-tags, the tree building blocks.</li>
-<li>text nodes – contain text.</li>
-<li>comments – sometimes we can put information there, it won’t be shown, but JS can read it from the DOM.</li>
-</ul>
-</li>
-<li><p>노드의 array는 <code>nodeList</code> (또는 <code>element</code>),</p>
-</li>
-<li><p>attribute 노드는 <code>attribute </code>로</p>
-</li>
-</ul>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th><code>document</code></th>
-<th>document type 의 object 를 리턴할 때, 이 object 는 root document object 자체이다. <br />예를 들어 element의 <strong><code>ownerDocument</code></strong> property 는 그것이 속해 있는 document 를 return 한다.</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>element</code></td>
-<td><code>element</code> 는 DOM API에 의해 리턴된 <code>element</code> 또는 element type 의 DOM <code>node</code> 를 의미한다.  <br />예를 들어 <code>document.createElement()</code> 는 node를 참조하는 object 를 리턴하며, DOM 안에서 생성되는 element를 리턴한다고 말할 수 있다.</td>
-</tr>
-<tr>
-<td><code>nodeList</code></td>
-<td><code>nodeList</code> 는 element들의 배열이다. <code>document.getElementsByTagName()</code> 와 같은 method에 의해 리턴된 nodeList의 Item들은 <code>index</code> 를 통해 접근 가능하며, 다음과 같이 두 가지 방식이 있다 (동일한 방식임) : <br />- list.item(1) <br />- list[1] <br /><strong><code>item()</code></strong> 은 <code>nodeList</code> object 의 단일 method 이다. <br />두번째 방식은 list 에서 두번째 item 을 <code>fetch </code>하는 전형적인 array syntax 이다.</td>
-</tr>
-<tr>
-<td><code>attribute</code></td>
-<td>API에 의해 attribute가 리턴되는 것은 attribute에 대한 특별한 인터페이스를 노출하는 object reference 가 표현됨을 의미한다. attribute는 DOM 에서 element와 같은 <code>node</code>이다.</td>
-</tr>
-<tr>
-<td><code>namedNodeMap</code></td>
-<td><code>namedNodeMap</code> 는 array 와 유사한 list로, item은 <code>name</code> 또는 <code>index</code> 에 의해 접근 가능하다. 리스트는 특별한 정렬이 적용되지 않았기 enumeration (열거, 목록화) 할 때 index 를 주로 사용한다. <code>namedNodeMap</code> 는 이를 위해 <code>item()</code> method 가 있으며, <code>namedNodeMap</code> 에 item 을 추가하거나 삭제할 수 있다.</td>
-</tr>
-</tbody></table>
-<h3 id="DOM-interface"><a href="#DOM-interface" class="headerlink" title="DOM interface"></a>DOM interface</h3><ul>
-<li>object 와 DOM 에서 <code>조작 가능</code> 한 것</li>
-<li><code>API</code> 를 이용해 접근 및 조작</li>
-</ul>
-<h4 id="Interface와-Object"><a href="#Interface와-Object" class="headerlink" title="Interface와 Object"></a>Interface와 Object</h4><ul>
-<li><p>Every tree <code>node</code> is an <code>object</code>.</p>
-</li>
-<li><p>많은 object가 여러 개의 다른 interface와 연관되어 있다.</p>
-</li>
-<li><p>HTML <code>element</code> 는 DOM 이 연관되어 있는 한 node 트리에서 하나의 <code>node</code>를 담당한다.</p>
-<ul>
-<li><code>Node</code> : 기본적인 <code>Element</code></li>
-</ul>
-</li>
-<li><p>node 트리는 웹 페이지 또는 XML 페이지를 위한 <code>object</code> model을 구성한다.</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">table object 는 createCaption, insertRow method 들이 포함된 HTMLTableElement 을 구현한 것이다</span><br></pre></td></tr></table></figure>
-<ul>
-<li>table <code>Element</code> 는 <code>Node</code> interface 를 구현하고 있다.</li>
-<li>table <code>object</code> 는 HTML <code>Element</code> (object model) 이기도 하기 때문에, <code>table</code> 은 <code>Element</code> interface도 구현한다.</li>
-<li>table <code>object</code> 를 참조하게 되면, 기본적으로 이 3 가지 interface를 사용할 수 있다.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> table = <span class="built_in">document</span>.getElementById(<span class="string">&quot;table&quot;</span>); <span class="comment">// table === node/ element</span></span><br><span class="line"><span class="keyword">var</span> tableAttrs = table.attributes; <span class="comment">// Node/Element interface</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tableAttrs.length; i++) &#123;</span><br><span class="line">  <span class="comment">// HTMLTableElement interface: border attribute</span></span><br><span class="line">  <span class="keyword">if</span>(tableAttrs[i].nodeName.toLowerCase() == <span class="string">&quot;border&quot;</span>)</span><br><span class="line">    table.border = <span class="string">&quot;1&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// HTMLTableElement interface: summary attribute</span></span><br><span class="line">table.summary = <span class="string">&quot;note: increased border&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h4 id="핵심-Interface"><a href="#핵심-Interface" class="headerlink" title="핵심 Interface"></a>핵심 Interface</h4><p><em><code>Document</code> 와 <code>window</code> object 는 DOM 프로그래밍에서 가장 자주 사용하는 object</em></p>
-<ul>
-<li><code>window</code> object 는 브라우저와 같다.</li>
-<li><code>document</code> object 는 root document 자체이다.</li>
-</ul>
-<h5 id="DOM-을-사용하는-공통적인-API"><a href="#DOM-을-사용하는-공통적인-API" class="headerlink" title="DOM 을 사용하는 공통적인 API"></a>DOM 을 사용하는 공통적인 API</h5><blockquote>
-<ul>
-<li><code>document.getElementById(id)</code></li>
-<li><code>document.getElementsByTagName(name)</code></li>
-<li><code>document.createElement(name)</code></li>
-<li><code>parentNode.appendChild(node)</code></li>
-<li><code>element.innerHTML</code></li>
-<li><code>element.style.left</code></li>
-<li><code>element.setAttribute()</code></li>
-<li><code>element.getAttribute()</code></li>
-<li><code>element.addEventListener()</code></li>
-<li><code>window.content</code></li>
-<li><code>window.onload</code></li>
-<li><code>window.dump</code></li>
-<li><code>window.scrollTo</code></li>
-</ul>
-</blockquote>
-<h3 id="Interaction-with-console"><a href="#Interaction-with-console" class="headerlink" title="Interaction with console"></a>Interaction with console</h3><ol>
-<li><p>select the particular element (e.g. <code>&lt;li&gt;</code>) and press <code>Esc</code> opens the console</p>
-<ul>
-<li>or just run <code>inspect(node)</code></li>
-</ul>
-</li>
-<li><p>the last selected element is available as <code>$0</code>, the previously selected is <code>$1</code> etc.</p>
-</li>
-<li><p>in console tab, run the command on the element</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// changes the background color of the inspected &lt;li&gt; element</span></span><br><span class="line">$<span class="number">0.</span>style.background = <span class="string">&#x27;red&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-</li>
-</ol>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction</a></p>
-<p><a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes">https://javascript.info/dom-nodes</a></p>
-
-                    
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
                         
-
-
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
                     
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/05/28/ERP-Overview/"
+                    data-tooltip="Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템"
+                    aria-label="NEXT: Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템"
+                >
                     
-                        <p>
-                            <a
-                                href="/2021/04/24/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-DOM/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
             
-        </div>
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
         
         
-        <li class="pagination-number">page 1 of 1</li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+        
+    </div>
+</article>
+
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -714,6 +535,151 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/05/28/ERP-Overview/"
+                    data-tooltip="Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템"
+                    aria-label="NEXT: Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
             
         </div>
         
@@ -772,6 +738,8 @@
 
 <!--SCRIPTS END-->
 
+
+    
 
 
 
