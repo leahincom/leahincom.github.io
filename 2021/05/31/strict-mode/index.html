@@ -6,25 +6,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>Tag: language - leah</title>
+    <title>strict mode - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{}</script>
-    <meta name="description" content="Continuously Developing Developer">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"JavaScriptJavaScript의 제한된 버전을 선택하여 기본값인 sloppy mode를 해제하는 방법으로, 일반적인 코드와 다른 semantics를 지니고 있다. 하지만 sloppy mode와 strict mode의 코드는 공존할 수 있어, 차후 strict mode를 이용하여 스크립트의 모드를 변경할 수도 있다.\n\n\n\n\n그래서 strict mode란 무엇일까?\n\n기존에 문제를 발생시키지 않고 조용히 무시되던 에러들을 throwing한다.\nJavaScript 엔진의 최적화 작업을 어렵게 만드는 실수들을 바로잡는다. 이는 동일한 내용이지만 sloppy mode 코드일 때보다 더 빨리 작동하도록 돕는다.\n이후의 ECMAScript 업데이트로 인한 자동적인 변경을 제한한다.\n모듈은 기본적으로 strict mode이다.\n\n\n\n\n\n이를 적용하는 조건은 다음과 같다.\n123456789// 스크립트 전체&quot;use strict&quot;;...// 일부function strict() &#123;  &quot;use strict&quot;;  ...&#125;\n전체 스크립트 또는 부분 함수에 적용 가능하다.\n\n{} 로 묶여진 블럭문에는 적용되지 않는다. 따라서, context와 같은 곳에 적용을 시도하면 동작하지 않는다.\n\neval, Function 코드, 이벤트 핸들러 속성, setTimeout() 등의 함수에 전달된 문자열은 전체 스크립트로, 적용 가능하다.\n\n\n\n\n\n\n변경 사항이러한 strict mode는 구문과 런타임 동작 등을 모두 변경시킨다. 예를 들어,\n\n변환 실수를 오류로 해석하거나 (문법 오류/ 런타임 에러 발생),\n특정 이름의 특정 용도에 대한 특정 변수를 계산하는 방법을 단순화하며,\neval 과 arguments 를 단순화하고,\n“안전한 “자바 스크립트를 작성하도록 돕고, \n미래 ECMAScript의 진화에 대비합니다.\n\n\n\n\n\n위와 같은 변경으로 인해, 기존에는 인정되던 실수를 에러로 인식하여 발생시킨다. \n\n글로벌 변수를 생성하는 것을 금한다.\n123&quot;use strict&quot;;&#x2F;&#x2F; 전역 변수 mistypedVariable 이 존재한다고 가정mistypedVaraible &#x3D; 17; &#x2F;&#x2F; ReferenceError 를 발생시킴\n일반 코드에서 조용히 넘어가는 모든 실패 (쓸 수 없는 전역 또는 프로퍼티에 할당, getter-only 프로퍼티에 할당, 확장 불가 객체에 새 프로퍼티 할당) 에 대해 예외를 발생시킨다.\n\nNaN 은 쓸 수 없는 전역 변수 ( NaN 에 할당하는 일반적인 코드는 아무 것도 하지 않는다. ) 로, 예외를 발생시킨다.\n\n12345678910111213141516171819&quot;use strict&quot;;// 쓸 수 없는 프로퍼티에 할당var undefined = 5; // TypeError 발생var Infinity = 5; // TypeError 발생// 쓸 수 없는 프로퍼티에 할당var obj1 = &#123;&#125;;Object.defineProperty(obj1, &quot;x&quot;, &#123; value: 42, writable: false &#125;);obj1.x = 9; // TypeError 발생// getter-only 프로퍼티에 할당var obj2 = &#123; get x() &#123; return 17; &#125; &#125;;obj2.x = 5; // TypeError 발생// 확장 불가 객체에 새 프로퍼티 할당var fixed = &#123;&#125;;Object.preventExtensions(fixed);fixed.newProp = &quot;ohai&quot;; // TypeError 발생\n삭제할 수 없는 프로퍼티를 삭제하려 할 때; 시도가 어떤 효과도 없을 때, 예외를 발생시킨다.\n12&quot;use strict&quot;;delete Object.prototype; // TypeError 발생\n일반 코드에서는 마지막으로 중복된 인수가 이전에 지정된 인수를 숨기지만, 유니크한 함수 파라미터 이름을 요구한다.\n1234function sum(a, a, c)&#123; // !!! 구문 에러  &quot;use strict&quot;;  return a + b + c; // 코드가 실행되면 잘못된 것임&#125;\n\n\n\n\n\n\n장점변수 사용 단순화\n코드상의 변수 이름을 특정 변수 정의로 매핑하는 방법을 단순화한다.\n자바스크립트는 때때로 이름을 코드상의 변수 정의로 기본 매핑하는 것을 런타임때까지 실행이 불가하게 하는데, 이것이 발생하는 대부분의 경우를 제거하여 컴파일러가 strict mode 코드를 더 잘 최적화 할 수 있게 한다.\n\n\nwith 를 사용하지 못하게 한다.\n\n엄격모드 코드의 eval 은 새로운 변수를 주위 스코프에 추가하지 않는다.\n\n셋째로, 엄격모드는 일반 이름을 제거하는 것을 금지합니다. 엄격 모드에서 delete name 은 구문 에러입니다.\n123456&quot;use strict&quot;;var x;delete x; // !!! 구문 에러eval(&quot;var y; delete y;&quot;); // !!! syntax error\n\n\n\n\n\n\neval 과 arguments 를 더 간단하게 하기\n\n바인딩을 추가하거나 삭제하고 바인딩 값을 변경하기 위한 eval\n\n명명된 인수를 가리키는, indexed 프로퍼티 arguments\n\n\n\n\n\n\n\nJavaScript “보안”브라우저에서 자바스크립트는 사용자의 개인정보에 접근할 수 있기 때문에, 자바스크립트는 금지된 기능에 접근을 막기 위해 실행 전, 반드시 부분적으로 변경되어야 한다. 하지만 자바스크립트의 유연성으로 인해 런타임 체크없이 이것을 수행하는 것은 사실상 불가능하다. strict mode를 이용하면 특정 방식으로 호출되므로 런타임 검사의 필요성이 크게 줄어든다.\n\nthis 로 함수에 전달된 값은 강제로 객체가 되지 않는다 (a.k.a. “boxed”). 즉, 브라우저에서 엄격모드의 함수내 에서는 더 이상 window 객체를 this 를 통해 참조할 수 없다.\n정의된 this 는 boxed 객체가 되지 않으며,\n정의되지 않은 경우 this 는 undefined 가 된다. \n\n\n\n\n\n\n\n미래의 ECMAScript 버전을 위한 준비\n새롭게 선보일 ECMAScript 버전은 새로운 구문을 소개할 것이고, ECMAScript5에서의 엄격 모드는 변환을 쉽게 하기 위해 몇 가지의 제한을 적용한다.\n\n\n\n\n\nReact아래와 같은 코드를 index.js 에서 많이 보았을 것이다.\n12345678import React from &#x27;react&#x27;;ReactDOM.render(  &lt;React.StrictMode&gt;    &lt;App /&gt;  &lt;/React.StrictMode&gt;,  document.getElementById(&quot;root&quot;));\n\n\n\n\nReact에서 strict mode는 &lt;React.StrictMode&gt;&lt;/React.StrictMode&gt; 을 이용해 적용한다.\n\nStrictMode는 잠재적인 에러를 잡는 툴이다.\nFragment와 같이, StrictMode는 가시적인 UI를 렌더링하지 않지만, 안에 정의되는 후손 (자식 노드) 들에 추가적인 검사를 시행하고 경고를 띄운다.\nstrict mode 체크는 development mode에서만 시행되고, production 빌딩에 영향을 주지 않는다.\n\n12345678910111213141516import React from &#x27;react&#x27;;function ExampleApplication() &#123;  return (    &lt;div&gt;      &lt;Header /&gt;      &lt;React.StrictMode&gt;        &lt;div&gt;          &lt;ComponentOne /&gt;          &lt;ComponentTwo /&gt;        &lt;/div&gt;      &lt;/React.StrictMode&gt;      &lt;Footer /&gt;    &lt;/div&gt;  );&#125;\n\nStrictMode는 Header 나 Footer 컴포넌트에 영향을 주지 않는다.\n하지만, ComponentOne 과 ComponentTwo 및 그 후손들은 영향을 받는다.\n\n\n\n\n\nReact에서 strict mode는 어떻게 작동할까?\n\n안전하지 않은 생명주기를 사용하는 컴포넌트 발견\n레거시 문자열 ref 사용에 대한 경고\n권장되지 않는 findDOMNode 사용에 대한 경고\n예상치 못한 부작용 검사\n레거시 context API 검사\n\n\n\n\n\n이를 좀 더 자세히 알아보자.\n\n\n\n\n특징안전하지 않은 생명주기를 사용하는 컴포넌트 발견Strict 모드가 활성화되면, React는 안전하지 않은 생명주기 메서드를 사용하는 모든 클래스 컴포넌트 목록을 정리해 다음과 같이 컴포넌트에 대한 정보가 담긴 경고 로그를 출력한다.\n\n\n\n\n\n레거시 문자열 ref 사용에 대한 경고이전의 React에서 레거시 문자열 ref API와 콜백 API라는, ref를 관리하는 두 가지 방법을 제공하였었다. 이제는 객체 ref가 문자열 ref를 교체하는 용도로 널리 더해졌기 때문에, Strict 모드는 문자열 ref의 사용에 대해 경고한다.\n\n\n\n\n권장되지 않는 findDOMNode 사용에 대한 경고이전의 React에서 주어진 클래스 인스턴스를 바탕으로 트리를 탐색해 DOM 노드를 찾을 수 있는 findDOMNode를 지원하였었다. 이제는 DOM 노드에 바로 ref를 지정할 수 있기 때문에 보통 필요로 하지 않는다.\n\n\n\n\n예상치 못한 부작용 검사개념적으로 React는 두 단계로 동작한다.\n\n렌더링 단계 는 특정 환경 (DOM과 같은) 에 어떤 변화가 필요한 지 결정하는 단계로, 이 과정에서 React는 render 를 호출하여 이전 렌더와 결과값을 비교한다.\n커밋 단계 는 React가 변경 사항을 반영하는 단계로 (React DOM의 경우 React가 DOM 노드를 추가, 변경 및 제거하는 단계), 이 단계에서 React는 componentDidMount 나 componentDidUpdate 와 같은 생명주기 메서드를 호출한다.\n\n커밋 단계는 일반적으로 매우 빠르지만, 렌더링 단계는 느릴 수 있어 문제가 발생할 수 있다.\n)\n특히 위의 메서드들은 여러 번 호출될 수 있기 때문에, 부작용을 포함하지 않는 것이 중요하다. Strict 모드가 자동으로 부작용을 찾아주는 것은 불가능하지만, 조금 더 예측할 수 있게끔 만들어서 문제가 되는 부분을 발견할 수 있게 도와준다. \n이를 위해 다음과 같은 함수를 의도적으로 이중으로 호출하여 찾을 수 있다.\n\n클래스 컴포넌트의 constructor, render 그리고 shouldComponentUpdate 메서드\n클래스 컴포넌트의 getDerivedStateFromProps static 메서드\n함수 컴포넌트 바디\nState updater 함수 (setState의 첫 번째 인자)\nuseState, useMemo 그리고 useReducer에 전달되는 함수\n\n\n\n\n\n레거시 context API 검사레거시 context API는 오류가 발생하기 쉬워 이후 릴리즈에서 삭제될 예정이다.\n\n\n\n\n\n\nReferencehttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode\nhttps://ko.reactjs.org/docs/strict-mode.html\n","dateCreated":"2021-05-31T03:23:11+09:00","dateModified":"2021-05-30T20:50:43+09:00","datePublished":"2021-05-31T03:23:11+09:00","description":"","headline":"strict mode","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/31/strict-mode/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/31/strict-mode/","keywords":"WEB, javascript, language"}</script>
+    <meta name="description" content="JavaScriptJavaScript의 제한된 버전을 선택하여 기본값인 sloppy mode를 해제하는 방법으로, 일반적인 코드와 다른 semantics를 지니고 있다. 하지만 sloppy mode와 strict mode의 코드는 공존할 수 있어, 차후 strict mode를 이용하여 스크립트의 모드를 변경할 수도 있다.     그래서 strict mode">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="leah">
-<meta property="og:url" content="https://leahincom.github.io/tags/language/index.html">
+<meta property="og:title" content="strict mode">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/31/strict-mode/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Continuously Developing Developer">
+<meta property="og:description" content="JavaScriptJavaScript의 제한된 버전을 선택하여 기본값인 sloppy mode를 해제하는 방법으로, 일반적인 코드와 다른 semantics를 지니고 있다. 하지만 sloppy mode와 strict mode의 코드는 공존할 수 있어, 차후 strict mode를 이용하여 스크립트의 모드를 변경할 수도 있다.     그래서 strict mode">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ko.reactjs.org/static/e4fdbff774b356881123e69ad88eda88/1628f/strict-mode-unsafe-lifecycles-warning.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/49134038/120103031-a0a7da00-c188-11eb-92d0-a1ca76acb969.png">
+<meta property="og:image" content="https://ko.reactjs.org/static/fca5c5e1fb2ef2e2d59afb100b432c12/51800/warn-legacy-context-in-strict-mode.png">
+<meta property="article:published_time" content="2021-05-30T18:23:11.000Z">
+<meta property="article:modified_time" content="2021-05-30T11:50:43.768Z">
 <meta property="article:author" content="JungHyun">
-<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="WEB">
 <meta property="article:tag" content="javascript">
+<meta property="article:tag" content="language">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ko.reactjs.org/static/e4fdbff774b356881123e69ad88eda88/1628f/strict-mode-unsafe-lifecycles-warning.png">
     
     
         
@@ -54,6 +61,8 @@
     
 
     
+        
+    
 </head>
 
     <body>
@@ -67,7 +76,7 @@
         
     
 
-<header id="header" data-behavior="2">
+<header id="header" data-behavior="5">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -100,7 +109,7 @@
         
     
 
-<nav id="sidebar" data-behavior="2">
+<nav id="sidebar" data-behavior="5">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -296,30 +305,22 @@
 </nav>
 
             
-            <div id="main" data-behavior="2"
+            <div id="main" data-behavior="5"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/05/31/strict-mode/"
-                            aria-label=": strict mode"
-                        >
-                            strict mode
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            strict mode
+        </h1>
+    
+    
+        <div class="post-meta">
     <time datetime="2021-05-31T03:23:11+09:00">
 	
 		    May 31, 2021
@@ -334,10 +335,13 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p>JavaScript의 제한된 버전을 선택하여 기본값인 sloppy mode를 해제하는 방법으로, 일반적인 코드와 다른 semantics를 지니고 있다. 하지만 sloppy mode와 strict mode의 코드는 공존할 수 있어, 차후 strict mode를 이용하여 스크립트의 모드를 변경할 수도 있다.</p>
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p>JavaScript의 제한된 버전을 선택하여 기본값인 sloppy mode를 해제하는 방법으로, 일반적인 코드와 다른 semantics를 지니고 있다. 하지만 sloppy mode와 strict mode의 코드는 공존할 수 있어, 차후 strict mode를 이용하여 스크립트의 모드를 변경할 수도 있다.</p>
 <br />
 
 
@@ -529,246 +533,122 @@
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode</a></p>
 <p><a target="_blank" rel="noopener" href="https://ko.reactjs.org/docs/strict-mode.html">https://ko.reactjs.org/docs/strict-mode.html</a></p>
 
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/05/31/strict-mode/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
+
+
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/05/26/basic-Python/"
-                            aria-label=": Python Overview"
-                        >
-                            Python Overview
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-05-26T02:16:12+09:00">
-	
-		    May 26, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Language/">Language</a>, <a class="category-link" href="/categories/Language/Python/">Python</a>
-
-
-    
-</div>
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/WEB/" rel="tag">WEB</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/javascript/" rel="tag">javascript</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/language/" rel="tag">language</a>
 
             </div>
-            
-                <div class="postShorten-content">
-                    <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>매개변수(parameter)와 인수(arguments)는 혼용해서 사용되는 헷갈리는 용어이므로 잘 기억해 두자. 매개변수는 함수에 입력으로 전달된 값을 받는 변수를 의미하고 인수는 함수를 호출할 때 전달하는 입력값을 의미한다.</p>
-<p><code>*args</code>처럼 매개변수 이름 앞에 <code>*</code>을 붙이면 입력값을 전부 모아서 튜플로 만들어 주기 때문이다.</p>
-<p><code>**kwargs</code>처럼 매개변수 이름 앞에 <code>**</code>을 붙이면 매개변수 kwargs는 딕셔너리가 되고 모든 <code>key=value</code> 형태의 결괏값이 그 딕셔너리에 저장된다.</p>
-<p>함수의 결괏값은 2개가 아니라 언제나 1개라는 데 있다. add_and_mul 함수의 결괏값 <code>a+b</code>와 <code>a*b</code>는 튜플값 하나인 <code>(a+b, a*b)</code>로 돌려준다.</p>
-<p>함수는 return문을 만나는 순간 결괏값을 돌려준 다음 함수를 빠져나가게 된다.</p>
-<p>문자열을 출력한다는 것과 반환 값이 있다는 것은 전혀 다른 말이다. 혼동하지 말자. 함수의 반환 값은 오로지 return문에 의해서만 생성된다.</p>
-<p>함수의 매개변수에 들어갈 값이 항상 변하는 것이 아닐 경우에는 이렇게 함수의 초깃값을 미리 설정해 두면 유용하다.</p>
-<p>하지만,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SyntaxError: non-default argument follows default argument</span><br></pre></td></tr></table></figure>
-<p>위 오류 메시지는 초깃값을 설정해 놓은 매개변수 뒤에 초깃값을 설정해 놓지 않은 매개변수는 사용할 수 없다는 뜻이다. 즉 매개변수로 <code>(name, old, man=True)</code>는 되지만 <code>(name, man=True, old)</code>는 안 된다는 것이다. 초기화시키고 싶은 매개변수를 항상 뒤쪽에 놓는 것을 잊지 말자.</p>
-<p>함수 안에서 새로 만든 매개변수는 함수 안에서만 사용하는 “함수만의 변수”이기 때문이다.</p>
-<p>즉 함수 안에서 사용하는 매개변수는 함수 밖의 변수 이름과는 전혀 상관이 없다는 뜻이다.</p>
-<p>첫 번째 방법은 return을 사용하는 방법이다.</p>
-<p>여기에서도 물론 vartest 함수 안의 a 매개변수는 함수 밖의 a와는 다른 것이다.</p>
-<p>두 번째 방법은 global 명령어를 사용하는 방법이다. ( <code>global a</code> )</p>
-<p>하지만 프로그래밍을 할 때 global 명령어는 사용하지 않는 것이 좋다. 왜냐하면 함수는 독립적으로 존재하는 것이 좋기 때문이다.</p>
-<p>lambda는 함수를 생성할 때 사용하는 예약어로 def와 동일한 역할을 한다. 보통 함수를 한줄로 간결하게 만들 때 사용한다. 우리말로는 “람다”라고 읽고 def를 사용해야 할 정도로 복잡하지 않거나 def를 사용할 수 없는 곳에 주로 쓰인다.</p>
-<blockquote>
-<p>※ lambda 예약어로 만든 함수는 return 명령어가 없어도 결괏값을 돌려준다.</p>
-</blockquote>
-<p>input은 입력되는 모든 것을 문자열로 취급한다.</p>
-<p>따옴표로 둘러싸인 문자열을 연속해서 쓰면 + 연산을 한 것과 같다.</p>
-<p>콤마(,)를 사용하면 문자열 사이에 띄어쓰기를 할 수 있다.</p>
-<p>print() 사용 시 한 줄에 결괏값을 계속 이어서 출력하려면 매개변수 end를 사용해 끝 문자를 지정해야 한다.</p>
-<p>파일을 쓰기 모드로 열면 해당 파일이 이미 존재할 경우 원래 있던 내용이 모두 사라지고, 해당 파일이 존재하지 않으면 새로운 파일이 생성된다. </p>
-<p>프로그램을 종료할 때 파이썬 프로그램이 열려 있는 파일의 객체를 자동으로 닫아주기 때문이다. 하지만 <code>close()</code>를 사용해서 열려 있는 파일을 직접 닫아 주는 것이 좋다. 쓰기모드로 열었던 파일을 닫지 않고 다시 사용하려고 하면 오류가 발생하기 때문이다.</p>
-<p><code>readline()</code>을 사용해서 파일의 첫 번째 줄을 읽어 출력한다.</p>
-<p><code>readline()</code>은 더 이상 읽을 줄이 없을 경우 빈 문자열(‘’)을 리턴한다.</p>
-<p><code>readlines()</code>는 파일의 모든 줄을 읽어서 각각의 줄을 요소로 갖는 리스트로 돌려준다.</p>
-<p><code>f.read()</code>는 파일의 내용 전체를 문자열로 돌려준다.</p>
-<p>추가 모드로 파일을 열었기 때문에 새파일.txt 파일이 원래 가지고 있던 내용 바로 다음부터 결괏값을 적기 시작한다.</p>
-<p>with문을 사용하면 with 블록을 벗어나는 순간 열린 파일 객체 f가 자동으로 close되어 편리하다.</p>
-<p>인스턴스라는 말은 특정 객체(a)가 어떤 클래스(Cookie)의 객체인지를 관계 위주로 설명할 때 사용한다.</p>
-<p>“a는 인스턴스”보다는 “a는 객체”라는 표현이 어울리며 “a는 Cookie의 객체”보다는 “a는 Cookie의 인스턴스”라는 표현이 훨씬 잘 어울린다.</p>
-<p>클래스 안에 구현된 함수는 다른 말로 <strong>메서드</strong>(Method)라고 부른다.</p>
-<p>일반 함수와는 달리 메서드의 첫 번째 매개변수 self는 특별한 의미를 가진다.</p>
-<p>메서드의 첫 번째 매개변수 self에는 setdata메서드를 호출한 객체 a가 자동으로 전달된다.</p>
-<p><img src="https://wikidocs.net/images/page/12392/setdata.png"></p>
-<p>잘 사용하지는 않지만 다음과 같이 클래스를 통해 메서드를 호출하는 것도 가능하다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; FourCal()</span><br><span class="line">&gt;&gt;&gt; FourCal.setdata(a, 4, 2)</span><br></pre></td></tr></table></figure>
-<p>위와 같이 <code>클래스 이름.메서드</code> 형태로 호출할 때는 객체 a를 첫 번째 매개변수 self에 꼭 전달해 주어야 한다. 반면에 다음처럼 <code>객체.메서드</code> 형태로 호출할 때는 self를 반드시 생략해서 호출해야 한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; FourCal()</span><br><span class="line">&gt;&gt;&gt; a.setdata(4, 2)</span><br></pre></td></tr></table></figure>
-
-
-<p>객체에 생성되는 객체만의 변수를 객체변수라고 부른다.</p>
-<p>클래스로 만든 객체의 객체변수는 다른 객체의 객체변수에 상관없이 독립적인 값을 유지한다.</p>
-<p>객체에 초깃값을 설정해야 할 필요가 있을 때는 setdata와 같은 메서드를 호출하여 초깃값을 설정하기보다는 생성자를 구현하는 것이 안전한 방법이다. 생성자(Constructor)란 객체가 생성될 때 자동으로 호출되는 메서드를 의미한다.</p>
-<p>보통 상속은 기존 클래스를 변경하지 않고 기능을 추가하거나 기존 기능을 변경하려고 할 때 사용한다.</p>
-<p>“클래스에 기능을 추가하고 싶으면 기존 클래스를 수정하면 되는데 왜 굳이 상속을 받아서 처리해야 하지?” 라는 의문이 들 수도 있다. 하지만 기존 클래스가 라이브러리 형태로 제공되거나 수정이 허용되지 않는 상황이라면 상속을 사용해야 한다.</p>
-<p>클래스 변수는 위 예와 같이 <code>클래스이름.클래스 변수</code>로 사용할 수 있다.</p>
-<p>또는 클래스로 만든 객체를 통해서도 클래스 변수를 사용할 수 있다.</p>
-<p>클래스 변수는 클래스로 만든 모든 객체에 공유된다는 특징이 있다.</p>
-<p>import는 현재 디렉터리에 있는 파일이나 파이썬 라이브러리가 저장된 디렉터리에 있는 모듈만 불러올 수 있다.</p>
-<p>모듈 이름 없이 함수 이름만 쓰고 싶은 경우도 있을 것이다. 이럴 때는 “from 모듈 이름 import 모듈 함수”를 사용하면 된다.</p>
-<p><code>if __name__ == &quot;__main__&quot;</code>을 사용하면 <code>C:\doit&gt;python mod1.py</code>처럼 직접 이 파일을 실행했을 때는 <code>__name__ == &quot;__main__&quot;</code>이 참이 되어 if문 다음 문장이 수행된다. 반대로 대화형 인터프리터나 다른 파일에서 이 모듈을 불러서 사용할 때는 <code>__name__ == &quot;__main__&quot;</code>이 거짓이 되어 if문 다음 문장이 수행되지 않는다.</p>
-<p>파이썬의 <code>__name__</code> 변수는 파이썬이 내부적으로 사용하는 특별한 변수 이름이다. 만약 <code>C:\doit&gt;python mod1.py</code>처럼 직접 mod1.py 파일을 실행할 경우 mod1.py의 <code>__name__</code> 변수에는 <code>__main__</code> 값이 저장된다. 하지만 파이썬 셸이나 다른 파이썬 모듈에서 mod1을 import 할 경우에는 mod1.py의 <code>__name__</code> 변수에는 mod1.py의 모듈 이름 값 mod1이 저장된다.</p>
-<p><code>sys.path</code>는 파이썬 라이브러리가 설치되어 있는 디렉터리를 보여 준다. 만약 파이썬 모듈이 위 디렉터리에 들어 있다면 모듈이 저장된 디렉터리로 이동할 필요 없이 바로 불러서 사용할 수 있다. 그렇다면 <code>sys.path</code>에 <code>C:\doit\mymod</code> 디렉터리를 추가하면 아무 곳에서나 불러 사용할 수 있다.</p>
-<p>sys.path.append를 사용해서 <code>C:/doit/mymod</code>라는 디렉터리를 sys.path에 추가한다.</p>
-<p>set 명령어를 사용해 <code>PYTHONPATH</code> 환경 변수에 mod2.py 파일이 있는 <code>C:\doit\mymod</code> 디렉터리를 설정한다. 그러면 디렉터리 이동이나 별도의 모듈 추가 작업 없이 mod2 모듈을 불러와서 사용할 수 있다.</p>
-<p>파이썬 패키지는 디렉터리와 파이썬 모듈로 이루어진다.</p>
-<p>패키지 === 폴더</p>
-<p>모듈 === 파일</p>
-
-                    
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
                         
-
-
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
                     
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"
+                    data-tooltip="7차-세미나_29-05-21"
+                    aria-label="NEXT: 7차-세미나_29-05-21"
+                >
                     
-                        <p>
-                            <a
-                                href="/2021/05/26/basic-Python/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
             
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
             
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/04/10/const-function/"
-                            aria-label=": const function"
-                        >
-                            const function
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-04-10T20:58:41+09:00">
-	
-		    Apr 10, 2021
-    	
-    </time>
-    
-        <span>in </span>
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/31/strict-mode/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
         
-    <a class="category-link" href="/categories/Language/">Language</a>, <a class="category-link" href="/categories/Language/JavaScript/">JavaScript</a>
-
-
-    
-</div>
-
-            </div>
             
-                <div class="postShorten-content">
-                    <h3 id="Function-Statement"><a href="#Function-Statement" class="headerlink" title="Function Statement"></a>Function Statement</h3><ul>
-<li><em>hoisted</em> to the top of the <em>full lexical scope</em><ul>
-<li>can break conflicting scripts</li>
-<li>it’s difficult to debug</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>named function is shown in the stack trace<ul>
-<li>easier to debug when error occurs in the function</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function declarations are given two passes,</span></span><br><span class="line"><span class="comment">where the first lifts them to the top (hoisting),</span></span><br><span class="line"><span class="comment">allowing &quot;out of order&quot; usage</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">doTheThing();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTheThing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome number <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAwesome</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Const-Declaration"><a href="#Const-Declaration" class="headerlink" title="Const Declaration"></a>Const Declaration</h3><ul>
-<li><em>edge-case hoisting</em></li>
-</ul>
-<ul>
-<li>declare a variable<ul>
-<li>gives it a block scope</li>
-<li>stops the full hoisting</li>
-</ul>
-</li>
-<li>cannot be re-declared<ul>
-<li>throws exception if re-declared</li>
-<li>easier to debug</li>
-</ul>
-</li>
-<li>won’t be caught until called</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">This shows that, because of block-scoping,</span></span><br><span class="line"><span class="comment">const function references must be invoked in-order</span></span><br><span class="line"><span class="comment">or else things will fail silently.</span></span><br><span class="line"><span class="comment">consts are added serially (in the order in which they appear)</span></span><br><span class="line"><span class="comment">and much of the body isn&#x27;t declared when we first try to invoke or functions</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// use `getAwesome()`</span></span><br><span class="line"><span class="keyword">const</span> tryDoTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is me trying to be awesome <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;getAwesome is not defined&quot;, because it is referenced too early,</span></span><br><span class="line"><span class="comment">// before declaring `getAwesome()` function</span></span><br><span class="line">tryDoTheThing()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getAwesome = <span class="function">() =&gt;</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome! <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doTheThing()</span><br></pre></td></tr></table></figure>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/04/10/const-function/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
-        </div>
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/31/strict-mode/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/31/strict-mode/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
         
         
-        <li class="pagination-number">page 1 of 1</li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+        
+    </div>
+</article>
+
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -778,6 +658,151 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"
+                    data-tooltip="7차-세미나_29-05-21"
+                    aria-label="NEXT: 7차-세미나_29-05-21"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/31/strict-mode/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/31/strict-mode/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/31/strict-mode/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/31/strict-mode/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/31/strict-mode/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/31/strict-mode/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
             
         </div>
         
@@ -836,6 +861,8 @@
 
 <!--SCRIPTS END-->
 
+
+    
 
 
 

@@ -312,6 +312,271 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2021/05/17/SOAP-Concurrency/"
+                            aria-label=": Concurrency"
+                        >
+                            Concurrency
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-05-17T00:20:07+09:00">
+	
+		    May 17, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h2><blockquote>
+<p>동시성</p>
+</blockquote>
+<br />
+
+
+
+<h3 id="자바스크립트는…"><a href="#자바스크립트는…" class="headerlink" title="자바스크립트는…"></a>자바스크립트는…</h3><p><strong><code>동기식</code>, <code>싱글스레드</code> 언어 이다.</strong> 이는 즉,</p>
+<ul>
+<li><em>호이스팅 이후</em> 순차적으로 코드를 실행함을 의미하며,</li>
+<li>페이지에서 자바스크립트 블록이 실행 중이라면 다른 자바스크립트는 페이지에서 실행되지 못함</li>
+</ul>
+<p>을 의미한다.</p>
+<p>이 때, 싱글스레드 프로그래밍 언어이기 때문에 동기적 방식에 <strong>비동기 처리가 필수적이다.</strong> 비동기 처리는 그 결과가 언제 반환 될지 알 수 없기 때문에 동기식과 같이 결과 반환을 예상할 수 있게 처리하는 기법들이 사용되어야 한다. 자바스크립트에서 이와 같은 비동기 처리의 대표적 방식은 <code>setTimeOut</code> , <code>callback</code> , <code>promise</code> 등이 있다.</p>
+<p>자바스크립트는 <strong>Ajax를 호출하는 등의 기능을 수행할 때만 (자동적으로) 비동기식 언어로 작동</strong>한다. Ajax 호출에 대한 <strong>응답이 돌아와야만 (성공적이든 거절되든) Ajax 호출 실행이 중단되고 다른 (다음) 코드가 실행된다.</strong> 이 때, <strong>콜백함수는 동기적으로 작동한다.</strong> 응답이 돌아오기 전까지, 콜백함수가 실행 중일 때는 다른 코드는 실행되지 않으며 실행 중인 다른 코드 (작동 중인 다른 프로그램) 를 방해하지는 않는다.</p>
+<br />
+
+
+
+<blockquote>
+<p><strong><code>동기(synchronous)적</code> 방식</strong> : 현재 실행 중인 코드가 완료된 후 다음 코드를 실행</p>
+<ul>
+<li>요청 처리가 완료된 후 다음 요청을 처리 하는 방식으로 이전 요청을 처리하는 시간이 다음 요청에 영향을 준다.<ul>
+<li>요청과 응답이 같은 시간대에 있다. (사이에 시간 간격을 두지 않음)</li>
+</ul>
+</li>
+<li>일반적으로 작성한 코드는 보통 동기 방식으로 처리된다.</li>
+</ul>
+<p><strong><code>비동기(asynchronous)적</code> 방식</strong> : 현재 실행 중인 코드의 완료 여부 (매개변수가 아닌 함수 실행 여부) 와 무관하게 즉시 다음 코드로 넘어가서 실행</p>
+<ul>
+<li><p>요청과 응답이 다른 시간대에 일어날 수 있다.</p>
+</li>
+<li><p><code>setTimeout()</code> </p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong><code>single-threaded</code></strong></p>
+<p>싱글스레드 언어는 <strong>한 번에 하나의 작업만 수행</strong>할 수 있다.</p>
+<p>🤔 <em>그렇다면 자바스크립트를 주로 사용하는 웹 사이트에서는 어떻게 한번에 여러 요청을 받을까? 그리고 여러 요청이 오갈 수 있는 자바스크립트는 왜 싱글 쓰레드일까?</em></p>
+<p>정확하게 말하면 <strong>자바스크립트의 메인 쓰레드인 이벤트 루프가 싱글 쓰레드</strong>이기 때문에 자바스크립트를 싱글 쓰레드 언어라고 부른다. <em>하지만 이벤트 루프만 독립적으로 실행되지 않고 웹 브라우저나 NodeJS같은 멀티 쓰레드 환경에서 실행된다.</em> <strong>즉, 자바스크립트 자체는 싱글 쓰레드가 맞지만 자바스크립트 런타임은 싱글 쓰레드가 아니다.</strong></p>
+</blockquote>
+<br />
+
+
+
+<h4 id="콜백-지옥"><a href="#콜백-지옥" class="headerlink" title="콜백 지옥"></a>콜백 지옥</h4><p>콜백 함수를 익명 함수로 전달하는 과정이 반복되어 코드의 복잡도가 커지는 현상으로, 엄청나게 많은 중괄호 중첩을 사용하여 가독성이 떨어지고 코드를 수정하기 어려움. </p>
+<ul>
+<li>이벤트 처리나 서버 통신과 같은 비동기적인 작업을 수행하기 위해 콜백 함수를 이용함</li>
+</ul>
+<p><em>e.g.</em> 아래 코드는 0.5초마다 커피 목록을 수집하고 출력합니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(</span><br><span class="line">  (name) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> coffeeList = name;</span><br><span class="line">    <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">setTimeout</span>(</span><br><span class="line">      (name) =&gt; &#123;</span><br><span class="line">        coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">        <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">setTimeout</span>(</span><br><span class="line">          (name) =&gt; &#123;</span><br><span class="line">            coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">            <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line"></span><br><span class="line">            <span class="built_in">setTimeout</span>(</span><br><span class="line">              (name) =&gt; &#123;</span><br><span class="line">                coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">                <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">              &#125;,</span><br><span class="line">              <span class="number">500</span>,</span><br><span class="line">              <span class="string">&#x27;Latte&#x27;</span>,</span><br><span class="line">            );</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="number">500</span>,</span><br><span class="line">          <span class="string">&#x27;Mocha&#x27;</span>,</span><br><span class="line">        );</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="number">500</span>,</span><br><span class="line">      <span class="string">&#x27;Americano&#x27;</span>,</span><br><span class="line">    );</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="number">500</span>,</span><br><span class="line">  <span class="string">&#x27;Espresso&#x27;</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; 출력값</span><br><span class="line">Espresso (0.5초)</span><br><span class="line">Espresso, Americano (1.0초)</span><br><span class="line">Espresso, Americano, Mocha (1.5초)</span><br><span class="line">Espresso, Americano, Mocha, Latte (2.0초)</span><br></pre></td></tr></table></figure>
+<p>각 콜백은 커피 이름을 전달하고 목록에 이름을 추가합니다. 정상적으로 실행되지만 들여쓰기 수준이 과도하게 깊어지고 값이 아래에서 위로 전달되어 가독성이 떨어집니다.</p>
+<br />
+
+
+
+<h5 id="콜백-지옥-탈출"><a href="#콜백-지옥-탈출" class="headerlink" title="콜백 지옥 탈출"></a>콜백 지옥 탈출</h5><ul>
+<li><p><code>기명함수</code> : 가독성 문제와 어색함을 동시에 해결하는 가장 간단한 방법은 익명의 콜백 함수를 모두 기명함수로 전환하는 것입니다.</p>
+<ul>
+<li>코드의 가독성을 높일 수 있고 함수 선언과 함수 호출만 구분할 수 있다면 위에서부터 아래로 순서대로 읽는데 어려움이 없다.</li>
+<li>일회성 함수를 전부 변수에 할당하는 것은 코드명을 일일이 따라다녀야 하기 때문에 오히려 헷갈림을 유발할 소지가 있다.</li>
+</ul>
+<p><em>e.g.</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> coffeeList = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addEspresso = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList = name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="built_in">setTimeout</span>(addAmericano, <span class="number">500</span>, <span class="string">&#x27;Americano&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addAmericano = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="built_in">setTimeout</span>(addMocha, <span class="number">500</span>, <span class="string">&#x27;Mocha&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addMocha = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="built_in">setTimeout</span>(addLatte, <span class="number">500</span>, <span class="string">&#x27;Latte&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addLatte = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(addEspresso, <span class="number">500</span>, <span class="string">&#x27;Espresso&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p><code>Promise</code></p>
+<ul>
+<li><code>new</code> 연산자와 함께 호출한, <code>Promise</code> 의 인자로 넘겨주는 <code>콜백 함수</code> 는 <em>호출 시 바로 실행되지만</em> <strong>(비동기적)</strong> <em>그 내부에 <code>resolve</code> 또는 <code>reject</code>함수를 호출하는 구문이 있을 경우 둘 중 하나가 실행되기 전까지는 <code>then</code>또는 <code>catch</code>로 넘어가지 않는다</em> <strong>(동기적)</strong>. 따라서 비동기 작업이 완료될 때 <code>resolve</code> 또는 <code>reject</code> 를 호출하는 방법으로 비동기 작업의 동기적 표현이 가능해진다.</li>
+</ul>
+<p><em>e.g.</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="string">&#x27;Espresso&#x27;</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(name);</span><br><span class="line">    resolve(name);</span><br><span class="line">  &#125;, <span class="number">500</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> name = prevName + <span class="string">&#x27;, Americano&#x27;</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">        resolve(name);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> name = prevName + <span class="string">&#x27;, Mocha&#x27;</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">        resolve(name);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> name = prevName + <span class="string">&#x27;, Latte&#x27;</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">        resolve(name);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>아래는 위 코드와 같은 내용을 간결하게 표현한 코드이다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addCoffee = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newName = prevName ? <span class="string">`<span class="subst">$&#123;prevName&#125;</span>, <span class="subst">$&#123;name&#125;</span>`</span> : name;</span><br><span class="line">        <span class="built_in">console</span>.log(newName);</span><br><span class="line">        resolve(newName);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">addCoffee(<span class="string">&#x27;Espresso&#x27;</span>)()</span><br><span class="line">  .then(addCoffee(<span class="string">&#x27;Americano&#x27;</span>))</span><br><span class="line">  .then(addCoffee(<span class="string">&#x27;Mocha&#x27;</span>))</span><br><span class="line">  .then(addCoffee(<span class="string">&#x27;Latte&#x27;</span>));</span><br></pre></td></tr></table></figure></li>
+<li><p><code>Generator</code></p>
+<ul>
+<li><code>Generator</code> 함수 : <code>function* () &#123;&#125;</code> </li>
+<li><code>Generator</code> 함수를 실행하면 <code>Iterator</code>가 반환되는데, <code>Iterator </code>는 <code>next </code>메서드를 가지고 있다. 이 <code>next</code> 메서드를 호출하면 앞서 멈췄던 부분부터 시작해서 그 다음에 등장하는 <code>yield</code> 전까지 코드를 실행한다. 따라서 비동기 작업이 완료되는 시점마다 <code>next</code> 메서드를 호출하면 <code>Generator</code> 함수 내부의 소스가 위에서부터 아래로 순차적으로 진행되는 것과 같다.</li>
+</ul>
+<p><em>e.g.</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addCoffee = <span class="function">(<span class="params">prevName, name</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    coffeeMaker.next(prevName ? <span class="string">`<span class="subst">$&#123;prevName&#125;</span>, <span class="subst">$&#123;name&#125;</span>`</span> : name);</span><br><span class="line">  &#125;, <span class="number">500</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> coffeeGenerator = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> espresso = <span class="keyword">yield</span> addCoffee(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;Espresso&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(espresso);</span><br><span class="line">  <span class="keyword">const</span> americano = <span class="keyword">yield</span> addCoffee(espresso, <span class="string">&#x27;Americano&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(americano);</span><br><span class="line">  <span class="keyword">const</span> mocha = <span class="keyword">yield</span> addCoffee(americano, <span class="string">&#x27;Mocha&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(mocha);</span><br><span class="line">  <span class="keyword">const</span> latte = <span class="keyword">yield</span> addCoffee(mocha, <span class="string">&#x27;Latte&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(latte);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> coffeeMaker = coffeeGenerator();</span><br><span class="line">coffeeMaker.next();</span><br></pre></td></tr></table></figure></li>
+<li><p><code>Promise</code> + <code>async/ await</code></p>
+<ul>
+<li>비동기 작업을 수행하고자 하는 함수 앞에 <code>async</code> 를 붙이고, 함수 내부에서 비동기 작업이 필요한 위치에 <code>await</code> 를 붙임으로써 해당 라인의 코드 내용을 <code>Promise</code> 로 (자동) 전환하고 해당 내용이 <code>resolve</code> 된 이후에야 그에 대한 코드가 진행된다.</li>
+</ul>
+<p><em>e.g.</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addCoffee = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      resolve(name);</span><br><span class="line">    &#125;, <span class="number">500</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> coffeeMaker = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> coffeeList = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">let</span> _addCoffee = <span class="keyword">async</span> (name) =&gt; &#123;</span><br><span class="line">    coffeeList += (coffeeList ? <span class="string">&#x27;, &#x27;</span> : <span class="string">&#x27;&#x27;</span>) + (<span class="keyword">await</span> addCoffee(name));</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Espresso&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Americano&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Mocha&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Latte&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">coffeeMaker();</span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+</li>
+</ul>
+<hr>
+<br />
+
+
+
+<ol>
+<li><p>Callback 대신 <code>Promise</code> 사용하기</p>
+<ul>
+<li>ES2015/ ES6 기준</li>
+<li>콜백 지옥 방지</li>
+</ul>
+</li>
+</ol>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request&#x27;</span>)</span><br><span class="line">  .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>, 	<span class="function">(<span class="params">requestErr, response</span>) =&gt;</span> &#123; <span class="comment">// 1차 콜백</span></span><br><span class="line">  	<span class="comment">// catch 구문</span></span><br><span class="line">    <span class="keyword">if</span> (requestErr) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(requestErr);</span><br><span class="line">    &#125; </span><br><span class="line">  	<span class="comment">// then 구문 ... 반복</span></span><br><span class="line">  	<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line">        .writeFile(<span class="string">&#x27;article.html&#x27;</span>,</span><br><span class="line">          response.body, <span class="function">(<span class="params">writeErr</span>) =&gt;</span> &#123; <span class="comment">// 2차 콜백</span></span><br><span class="line">            <span class="keyword">if</span> (writeErr) &#123;</span><br><span class="line">              <span class="built_in">console</span>.error(writeErr);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        );</span><br><span class="line">      &#125;</span><br><span class="line">	&#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line">  .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>)</span><br><span class="line">	<span class="comment">// Promise가 resolved를 반환하였을 때</span></span><br><span class="line">  .then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">  &#125;)</span><br><span class="line">	<span class="comment">// 다음 Promise</span></span><br><span class="line">  .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">	<span class="comment">// Promise가 rejected를 반환하였을 때</span></span><br><span class="line">  .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p><code>Async/ Await</code> 은 Promise보다 더욱 깔끔하다.</p>
+<ul>
+<li>ES2017/ ES8 기준</li>
+<li>콜백에 대한 Promise을 단독으로 이용할 때보다 더 깔끔한 해결책으로, Promise을 활용한 방식이다.</li>
+<li>함수 앞에 <code>async</code> 붙이기</li>
+<li>함수의 연속적인 처리 (논리적으로 연결) 를 위해 <code>then</code> 을 계속 이어붙여 코드를 작성하지 않아도 됨</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// not bad</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line">.get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>)</span><br><span class="line">  .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line"><span class="comment">// better</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getCleanCodeArticle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// then 구문</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// then 작성 없이 await으로 synchronization</span></span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line"> .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>);</span><br><span class="line">    <span class="comment">// then 구문 // await로 Promise 처리</span></span><br><span class="line">    <span class="keyword">await</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// catch 구문</span></span><br><span class="line">  <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+</li>
+</ol>
+<hr>
+<h3 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h3><p><a target="_blank" rel="noopener" href="https://velog.io/@yujo/JS%EC%BD%9C%EB%B0%B1-%EC%A7%80%EC%98%A5%EA%B3%BC-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%A0%9C%EC%96%B4">https://velog.io/@yujo/JS%EC%BD%9C%EB%B0%B1-%EC%A7%80%EC%98%A5%EA%B3%BC-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%A0%9C%EC%96%B4</a></p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/05/17/SOAP-Concurrency/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2021/05/15/SOAP-Comments/"
+                            aria-label=": Comments"
+                        >
+                            Comments
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-05-15T07:28:45+09:00">
+	
+		    May 15, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="Comments"><a href="#Comments" class="headerlink" title="Comments"></a>Comments</h2><ol>
+<li><p>코드의 단위적 로직이 복잡한 것들 (Business logic complexity) 만 주석 처리를 하자!</p>
+<ul>
+<li>좋은 코드는 그 자체로 이해하기 쉬우므로, 주석은 복잡한 코드에 대한 사과와 같다.</li>
+</ul>
+<blockquote>
+<p><strong>Business Logic Complexity</strong></p>
+<p>Many organizations adopt software to support their business process and business logic is embedded in their system.</p>
+<p>To solve this problem we define <em>business logic complexity</em> to capture <em>business logic</em> from the source code and to quantify how hard it is to understand.</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hashIt</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// The hash</span></span><br><span class="line">  <span class="keyword">let</span> hash = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Length of string</span></span><br><span class="line">  <span class="keyword">const</span> length = data.length;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Loop through every character in data</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    <span class="comment">// Get character code.</span></span><br><span class="line">    <span class="keyword">const</span> char = data.charCodeAt(i);</span><br><span class="line">    <span class="comment">// Make the hash</span></span><br><span class="line">    hash = (hash &lt;&lt; <span class="number">5</span>) - hash + char;</span><br><span class="line">    <span class="comment">// Convert to 32-bit integer</span></span><br><span class="line">    hash &amp;= hash;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hashIt</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> hash = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> length = data.length;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> char = data.charCodeAt(i);</span><br><span class="line">    hash = (hash &lt;&lt; <span class="number">5</span>) - hash + char;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Convert to 32-bit integer</span></span><br><span class="line">    hash &amp;= hash;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>주석 처리된 코드를 codebase에 남겨놓지 말고 지워버리기!</p>
+<ul>
+<li>형상 관리 툴 (버전 관리; version control) 이 이런 코드들을 남겨놓기 위함이니, 오래된 코드는 옛 버전에 남겨놓자.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">doStuff();</span><br><span class="line"><span class="comment">// doOtherStuff();</span></span><br><span class="line"><span class="comment">// doSomeMoreStuff();</span></span><br><span class="line"><span class="comment">// doSoMuchStuff();</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">doStuff();</span><br></pre></td></tr></table></figure></li>
+<li><p>기록용 주석은 사용하지 말자</p>
+<ul>
+<li>위와 동일하게, 형상 관리 툴 (git : <code>git log</code> 를 통해 이전 버전들 확인) 을 이용하고 필요없는 주석은 모두 날려버리자.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 2016-12-20: Removed monads, didn&#x27;t understand them (RM)</span></span><br><span class="line"><span class="comment"> * 2016-10-01: Improved using special monads (JP)</span></span><br><span class="line"><span class="comment"> * 2016-02-03: Removed type-checking (LI)</span></span><br><span class="line"><span class="comment"> * 2015-03-14: Added combine with type-checking (JR)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">combine</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">combine</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>위치 표시 주석도 피하자!</p>
+<ul>
+<li>적절한 <code>indentation</code>, <code>함수명</code> 및 <code>변수명</code> , <code>포맷팅</code> 을 이용한다면 기능 구분을 위한 정신없는 positional marker comments 는 필요하지 않다.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Scope Model Instantiation</span></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line">$scope.model = &#123;</span><br><span class="line">  menu: <span class="string">&quot;foo&quot;</span>,</span><br><span class="line">  nav: <span class="string">&quot;bar&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Action setup</span></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="keyword">const</span> actions = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">$scope.model = &#123;</span><br><span class="line">  menu: <span class="string">&quot;foo&quot;</span>,</span><br><span class="line">  nav: <span class="string">&quot;bar&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> actions = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2021/05/15/SOAP-Comments/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2021/05/15/SOAP-Formatting/"
                             aria-label=": Formatting"
                         >
@@ -2355,346 +2620,6 @@
                         <p>
                             <a
                                 href="/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/04/24/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-DOM/"
-                            aria-label=": DOM"
-                        >
-                            DOM
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-04-24T18:20:30+09:00">
-	
-		    Apr 24, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/WEB-28th/">WEB_28th</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="DOM-Document-Object-Model"><a href="#DOM-Document-Object-Model" class="headerlink" title="DOM (Document Object Model)"></a>DOM (Document Object Model)</h2><h3 id="1-HTML-코드-Page-Source-코드-DOM"><a href="#1-HTML-코드-Page-Source-코드-DOM" class="headerlink" title="1. HTML 코드 (Page Source 코드) === DOM?"></a>1. HTML 코드 (Page Source 코드) === DOM?</h3><blockquote>
-<p>코드 자체는 아님.</p>
-<p>하지만 해당 코드가 브라우저에 파싱되면 DOM 임.</p>
-</blockquote>
-<h3 id="2-DevTools-코드-DOM"><a href="#2-DevTools-코드-DOM" class="headerlink" title="2. DevTools 코드 === DOM?"></a>2. DevTools 코드 === DOM?</h3><blockquote>
-<p>맞음.</p>
-<p>기존에 작성한 HTML 코드와 동일할 수도 있지만, 대게 브라우저에 파싱됨에 따라 변경사항이 적용되어 브라우저에 보여지는 형태로 변형되어 보여짐.</p>
-</blockquote>
-<ul>
-<li><p>웹 페이지는 일종의 문서(document)</p>
-<ul>
-<li>The backbone of an HTML document is <code>tag</code>s</li>
-</ul>
-</li>
-<li><p>웹 페이지의 객체 지향 표현 (독립적인 객체) 이며, 자바스크립트와 같은 스크립팅 언어를 이용해 DOM 을 수정</p>
-</li>
-<li><p>HTML, XML 문서의 <code>프로그래밍 interface</code> 로, 프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공한다.</p>
-<ul>
-<li>DOM 은 문서를 표현하고, 저장하고, 조작하는 (문서 구조, 스타일, 내용 등을 변경) 방법을 제공한다.</li>
-<li>웹 페이지를 스크립트 또는 프로그래밍 언어들에서 사용될 수 있게 연결시켜주는 역할</li>
-</ul>
-</li>
-<li><p>문서의 구조화된 표현(structured representation)</p>
-<ul>
-<li><p>node, property, method 를 갖고 있는 object들로 구조화된 문서를 표현</p>
-</li>
-<li><p>document object 는 document 자체</p>
-<blockquote>
-<p>e.g. table object 는 HTML table 에 접근하기 위한 <code>HTMLTableElement</code> DOM interface를 구현하는 것이다.</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p><em>동일한 문서를 사용하여 다른 형태로 나타날 수 있다.</em></p>
-<ul>
-<li>웹 브라우저를 통해 그 내용이 파싱(해석)되어 웹 브라우저 화면에 나타나거나,</li>
-<li>기존 HTML 소스 자체로 나타나기도 한다.</li>
-</ul>
-</li>
-<li><p><strong>Everything in HTML, even comments, becomes a part of the DOM.</strong></p>
-</li>
-</ul>
-<h3 id="DOM과-기존-HTML-코드가-달라지는-경우"><a href="#DOM과-기존-HTML-코드가-달라지는-경우" class="headerlink" title="DOM과 기존 HTML 코드가 달라지는 경우"></a>DOM과 기존 HTML 코드가 달라지는 경우</h3><ol>
-<li><p>브라우저가 HTML을 수정하는 경우 : 브라우저 파싱 시 <strong>자동 교정 (Autocorrection)</strong></p>
-<blockquote>
-<ol>
-<li>Spaces and newlines before <code>&lt;head&gt;</code> are ignored for historical reasons.</li>
-<li>If we put something after <code>&lt;/body&gt;</code>, then that is automatically moved inside the <code>body</code>, at the end, as the HTML spec requires that all content must be inside <code>&lt;body&gt;</code>. So there can’t be any spaces after <code>&lt;/body&gt;</code>.<ul>
-<li>if there are spaces (just like any character) in the document, then they become text nodes in the DOM</li>
-</ul>
-</li>
-<li>Tables always have <code>&lt;tbody&gt;</code></li>
-</ol>
-</blockquote>
-</li>
-<li><p><strong>JavaScript로 DOM을 조작하는 경우</strong> : 조작 (변경) 사항이 반영되어 DOM 출력</p>
-</li>
-<li><p>Ajax : 컨텐츠를 가져와 (c.f. <code>fetch</code>) 페이지에 추가하는 경우</p>
-</li>
-<li><p>Templating : server의 내용을 테스트하기 위해 임의의 client-side template을 적용</p>
-<blockquote>
-<p>e.g. handlebars.js</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="DOM과-JavaScript"><a href="#DOM과-JavaScript" class="headerlink" title="DOM과 JavaScript"></a>DOM과 JavaScript</h3><blockquote>
-<p>JavaScript : 브라우저가 <code>읽고 작업</code>을 할 수 있는 언어, 브라우저에 기록되는 것들을 조작할 수 있는 문법/ 언어</p>
-<ul>
-<li><code>DOM API</code> 를 이용해서 작업</li>
-</ul>
-<p>DOM : 작업이 이루어지는 <code>장소</code>, 브라우저에 의해 기록되는 모든 것</p>
-</blockquote>
-<ul>
-<li><p>DOM 이 없다면 자바스크립트 언어는 웹 페이지 또는 XML 페이지의 요소들과 관련된 모델이나 개념들에 대한 정보를 갖지 (불러오지) 못하게 된다.</p>
-</li>
-<li><p>문서의 모든 element는 DOM의 한 부분</p>
-</li>
-<li><p>페이지 콘텐츠 (element) 는 DOM 에 저장되고 자바스크립트를 통해 접근하거나 조작</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">API (web or XML page) &#x3D; DOM + JS (scripting language)</span><br></pre></td></tr></table></figure></li>
-<li><p>DOM 의 구현은 어떠한 언어에서도 가능</p>
-<blockquote>
-<p>e.g. python 에서도 구현 가능</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="DOM에-접근하는-방법"><a href="#DOM에-접근하는-방법" class="headerlink" title="DOM에 접근하는 방법"></a>DOM에 접근하는 방법</h3><ul>
-<li><p>문서가 로드될 때는 모든 DOM을 사용할 수 있게 되는 때이다.</p>
-</li>
-<li><p>스크립트를 작성할 때</p>
-<ul>
-<li>직접적으로 문서 자체를 조작하거나,</li>
-<li>간접적인 조작을 위해 문서의 children 을 얻는, <code>document</code> 또는 <code>window</code> element 를 이용하는 <code>API 를 사용</code>할 수 있다.</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">&quot;window.alert(&#x27;welcome to my home page!&#x27;);&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">       <span class="comment">// run this function when the document is loaded</span></span></span><br><span class="line"><span class="javascript">       <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">         <span class="comment">// create a couple of elements in an otherwise empty HTML page</span></span></span><br><span class="line"><span class="javascript">         <span class="keyword">var</span> heading = <span class="built_in">document</span>.createElement(<span class="string">&quot;h1&quot;</span>);</span></span><br><span class="line"><span class="javascript">         <span class="keyword">var</span> heading_text = <span class="built_in">document</span>.createTextNode(<span class="string">&quot;Big Head!&quot;</span>);</span></span><br><span class="line">         heading.appendChild(heading_text);</span><br><span class="line"><span class="javascript">         <span class="built_in">document</span>.body.appendChild(heading);</span></span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-</li>
-</ul>
-<h3 id="Data-Type"><a href="#Data-Type" class="headerlink" title="Data Type"></a>Data Type</h3><blockquote>
-<p><code>Tag</code>s are <em>element nodes</em> (or just elements) and form the tree structure.</p>
-<ul>
-<li><p>DOM <code>node</code>는 <code>element</code> 로,</p>
-<ul>
-<li><code>document</code> – the “entry point” into DOM.</li>
-<li>element nodes – HTML-tags, the tree building blocks.</li>
-<li>text nodes – contain text.</li>
-<li>comments – sometimes we can put information there, it won’t be shown, but JS can read it from the DOM.</li>
-</ul>
-</li>
-<li><p>노드의 array는 <code>nodeList</code> (또는 <code>element</code>),</p>
-</li>
-<li><p>attribute 노드는 <code>attribute </code>로</p>
-</li>
-</ul>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th><code>document</code></th>
-<th>document type 의 object 를 리턴할 때, 이 object 는 root document object 자체이다. <br />예를 들어 element의 <strong><code>ownerDocument</code></strong> property 는 그것이 속해 있는 document 를 return 한다.</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>element</code></td>
-<td><code>element</code> 는 DOM API에 의해 리턴된 <code>element</code> 또는 element type 의 DOM <code>node</code> 를 의미한다.  <br />예를 들어 <code>document.createElement()</code> 는 node를 참조하는 object 를 리턴하며, DOM 안에서 생성되는 element를 리턴한다고 말할 수 있다.</td>
-</tr>
-<tr>
-<td><code>nodeList</code></td>
-<td><code>nodeList</code> 는 element들의 배열이다. <code>document.getElementsByTagName()</code> 와 같은 method에 의해 리턴된 nodeList의 Item들은 <code>index</code> 를 통해 접근 가능하며, 다음과 같이 두 가지 방식이 있다 (동일한 방식임) : <br />- list.item(1) <br />- list[1] <br /><strong><code>item()</code></strong> 은 <code>nodeList</code> object 의 단일 method 이다. <br />두번째 방식은 list 에서 두번째 item 을 <code>fetch </code>하는 전형적인 array syntax 이다.</td>
-</tr>
-<tr>
-<td><code>attribute</code></td>
-<td>API에 의해 attribute가 리턴되는 것은 attribute에 대한 특별한 인터페이스를 노출하는 object reference 가 표현됨을 의미한다. attribute는 DOM 에서 element와 같은 <code>node</code>이다.</td>
-</tr>
-<tr>
-<td><code>namedNodeMap</code></td>
-<td><code>namedNodeMap</code> 는 array 와 유사한 list로, item은 <code>name</code> 또는 <code>index</code> 에 의해 접근 가능하다. 리스트는 특별한 정렬이 적용되지 않았기 enumeration (열거, 목록화) 할 때 index 를 주로 사용한다. <code>namedNodeMap</code> 는 이를 위해 <code>item()</code> method 가 있으며, <code>namedNodeMap</code> 에 item 을 추가하거나 삭제할 수 있다.</td>
-</tr>
-</tbody></table>
-<h3 id="DOM-interface"><a href="#DOM-interface" class="headerlink" title="DOM interface"></a>DOM interface</h3><ul>
-<li>object 와 DOM 에서 <code>조작 가능</code> 한 것</li>
-<li><code>API</code> 를 이용해 접근 및 조작</li>
-</ul>
-<h4 id="Interface와-Object"><a href="#Interface와-Object" class="headerlink" title="Interface와 Object"></a>Interface와 Object</h4><ul>
-<li><p>Every tree <code>node</code> is an <code>object</code>.</p>
-</li>
-<li><p>많은 object가 여러 개의 다른 interface와 연관되어 있다.</p>
-</li>
-<li><p>HTML <code>element</code> 는 DOM 이 연관되어 있는 한 node 트리에서 하나의 <code>node</code>를 담당한다.</p>
-<ul>
-<li><code>Node</code> : 기본적인 <code>Element</code></li>
-</ul>
-</li>
-<li><p>node 트리는 웹 페이지 또는 XML 페이지를 위한 <code>object</code> model을 구성한다.</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">table object 는 createCaption, insertRow method 들이 포함된 HTMLTableElement 을 구현한 것이다</span><br></pre></td></tr></table></figure>
-<ul>
-<li>table <code>Element</code> 는 <code>Node</code> interface 를 구현하고 있다.</li>
-<li>table <code>object</code> 는 HTML <code>Element</code> (object model) 이기도 하기 때문에, <code>table</code> 은 <code>Element</code> interface도 구현한다.</li>
-<li>table <code>object</code> 를 참조하게 되면, 기본적으로 이 3 가지 interface를 사용할 수 있다.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> table = <span class="built_in">document</span>.getElementById(<span class="string">&quot;table&quot;</span>); <span class="comment">// table === node/ element</span></span><br><span class="line"><span class="keyword">var</span> tableAttrs = table.attributes; <span class="comment">// Node/Element interface</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tableAttrs.length; i++) &#123;</span><br><span class="line">  <span class="comment">// HTMLTableElement interface: border attribute</span></span><br><span class="line">  <span class="keyword">if</span>(tableAttrs[i].nodeName.toLowerCase() == <span class="string">&quot;border&quot;</span>)</span><br><span class="line">    table.border = <span class="string">&quot;1&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// HTMLTableElement interface: summary attribute</span></span><br><span class="line">table.summary = <span class="string">&quot;note: increased border&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h4 id="핵심-Interface"><a href="#핵심-Interface" class="headerlink" title="핵심 Interface"></a>핵심 Interface</h4><p><em><code>Document</code> 와 <code>window</code> object 는 DOM 프로그래밍에서 가장 자주 사용하는 object</em></p>
-<ul>
-<li><code>window</code> object 는 브라우저와 같다.</li>
-<li><code>document</code> object 는 root document 자체이다.</li>
-</ul>
-<h5 id="DOM-을-사용하는-공통적인-API"><a href="#DOM-을-사용하는-공통적인-API" class="headerlink" title="DOM 을 사용하는 공통적인 API"></a>DOM 을 사용하는 공통적인 API</h5><blockquote>
-<ul>
-<li><code>document.getElementById(id)</code></li>
-<li><code>document.getElementsByTagName(name)</code></li>
-<li><code>document.createElement(name)</code></li>
-<li><code>parentNode.appendChild(node)</code></li>
-<li><code>element.innerHTML</code></li>
-<li><code>element.style.left</code></li>
-<li><code>element.setAttribute()</code></li>
-<li><code>element.getAttribute()</code></li>
-<li><code>element.addEventListener()</code></li>
-<li><code>window.content</code></li>
-<li><code>window.onload</code></li>
-<li><code>window.dump</code></li>
-<li><code>window.scrollTo</code></li>
-</ul>
-</blockquote>
-<h3 id="Interaction-with-console"><a href="#Interaction-with-console" class="headerlink" title="Interaction with console"></a>Interaction with console</h3><ol>
-<li><p>select the particular element (e.g. <code>&lt;li&gt;</code>) and press <code>Esc</code> opens the console</p>
-<ul>
-<li>or just run <code>inspect(node)</code></li>
-</ul>
-</li>
-<li><p>the last selected element is available as <code>$0</code>, the previously selected is <code>$1</code> etc.</p>
-</li>
-<li><p>in console tab, run the command on the element</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// changes the background color of the inspected &lt;li&gt; element</span></span><br><span class="line">$<span class="number">0.</span>style.background = <span class="string">&#x27;red&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-</li>
-</ol>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction</a></p>
-<p><a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes">https://javascript.info/dom-nodes</a></p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/04/24/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-DOM/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/04/22/position/"
-                            aria-label=": position"
-                        >
-                            position
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-04-22T02:00:36+09:00">
-	
-		    Apr 22, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Web/">Web</a>, <a class="category-link" href="/categories/Web/CSS/">CSS</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h3 id="Position-value"><a href="#Position-value" class="headerlink" title="Position value"></a>Position value</h3><ol>
-<li><p>static</p>
-<ul>
-<li>default value</li>
-</ul>
-</li>
-<li><p>relative</p>
-<ul>
-<li>move relatively from static position</li>
-</ul>
-</li>
-<li><p>absolute</p>
-</li>
-<li><p>sticky</p>
-</li>
-</ol>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/04/22/position/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

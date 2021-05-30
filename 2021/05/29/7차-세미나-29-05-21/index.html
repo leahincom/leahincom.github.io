@@ -6,27 +6,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="leah">
-    <title>const function - leah</title>
+    <title>7차-세미나_29-05-21 - leah</title>
     <meta name="author" content="JungHyun">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Function Statement\nhoisted to the top of the full lexical scope\ncan break conflicting scripts\nit’s difficult to debug\n\n\n\n\nnamed function is shown in the stack trace\neasier to debug when error occurs in the function\n\n\n\n12345678910111213141516/*Function declarations are given two passes,where the first lifts them to the top (hoisting),allowing &quot;out of order&quot; usage*/doTheThing();function doTheThing() &#123;  console.log(`This is awesome number $&#123;getAwesome()&#125;`)&#125;function getAwesome() &#123;  return (+((Math.random() * 10000).toString().split(&#x27;.&#x27;)[0]))&#125;\n\n\nConst Declaration\nedge-case hoisting\n\n\ndeclare a variable\ngives it a block scope\nstops the full hoisting\n\n\ncannot be re-declared\nthrows exception if re-declared\neasier to debug\n\n\nwon’t be caught until called\n\n12345678910111213141516171819202122232425262728/*This shows that, because of block-scoping,const function references must be invoked in-orderor else things will fail silently.consts are added serially (in the order in which they appear)and much of the body isn&#x27;t declared when we first try to invoke or functions*/// use `getAwesome()`const tryDoTheThing = () =&gt; &#123;  console.log(`This is me trying to be awesome $&#123;getAwesome()&#125;`)&#125;// &quot;getAwesome is not defined&quot;, because it is referenced too early,// before declaring `getAwesome()` functiontryDoTheThing()const getAwesome = () =&gt; (+((Math.random() * 10000).toString().split(&#x27;.&#x27;)[0]))const doTheThing = () =&gt; &#123;  console.log(`This is awesome! $&#123;getAwesome()&#125;`)&#125;doTheThing()\n","dateCreated":"2021-04-10T20:58:41+09:00","dateModified":"2021-05-30T19:56:17+09:00","datePublished":"2021-04-10T20:58:41+09:00","description":"","headline":"const function","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/04/10/const-function/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/04/10/const-function/","keywords":"WEB, javascript, language"}</script>
-    <meta name="description" content="Function Statement hoisted to the top of the full lexical scope can break conflicting scripts it’s difficult to debug     named function is shown in the stack trace easier to debug when error occurs i">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"React UI Library 사용법Ant DesignMaterial UI \n\n\n\nCORS\nSame-Origin Policy\n\n웹 브라우저 보안을 위해 프로토콜, 도메인, 포트가 동일한 서버로만 요청을 주고 받을 수 있는 정책\n👇\n\nCross-Origin Resource Sharing\n\n도메인이나 포트가 달라도 서버에 자원을 요청할 수 있는 메커니즘\n![image-20210529152418689](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210529152418689.png)\n아래와 같은 문제 발생 시; 서버에서 Access-Control-Allow-Origin을 수정해야 함!\n![image-20210529152436081](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210529152436081.png)\n\n\n\n\nRedux 기초\n예측 가능한\n중앙화된\n디버깅이 쉬운\n유연한\n\n\n자바스크립트 앱을 위한 예측 가능한 상태 컨테이너 (오픈소스 JS 라이브러리)\nReact, Vue 등 JS 라이브러리와 함께 사용된다.\n\n언제, 왜 사용할까?\n기존에는 useState를 통해 정의한 상태를 props를 통해 자식 컴포넌트로 전달하는 구조\n프로젝트가 복잡해지면 거쳐야 하는 컴포넌트가 많아지므로 상태 전달이 비효율적일 수 있음\n\n👇\n\n상태 관리를 한 곳에서 하고 싶을 때\n원하는 컴포넌트에 상태값과 함수를 직접 전달하고 싶을 때\n\n전체적인 구조\nstore\naction\nreducer\nstore 내장 함수\n\nstore\n어플리케이션의 상태는 하나의 저장소 안에 있는 객체 트리에 저장된다.\n상태 트리는 \n\nactionreducer\n실질적인 함수\naction이 상태 트리를 어떻게 변경할 지 작성한 순수한 함수\n\nRedux는 꼭 필요할 때 사용하자!\n지속적으로 상태가 변화하는 데이터가 많을 때\n모든 상태를 한 곳에서 관리해야 할 때\n최상위 컴포넌트에서 모든 상태를 가지고 있기 힘들 때\n\n","dateCreated":"2021-05-29T23:11:53+09:00","dateModified":"2021-05-29T17:30:55+09:00","datePublished":"2021-05-29T23:11:53+09:00","description":"","headline":"7차-세미나_29-05-21","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/","keywords":"SOPT, WEB, React"}</script>
+    <meta name="description" content="React UI Library 사용법Ant DesignMaterial UI     CORS Same-Origin Policy  웹 브라우저 보안을 위해 프로토콜, 도메인, 포트가 동일한 서버로만 요청을 주고 받을 수 있는 정책 👇  Cross-Origin Resource Sharing  도메인이나 포트가 달라도 서버에 자원을 요청할 수 있는 메커니즘 ![">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="const function">
-<meta property="og:url" content="https://leahincom.github.io/2021/04/10/const-function/index.html">
+<meta property="og:title" content="7차-세미나_29-05-21">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Function Statement hoisted to the top of the full lexical scope can break conflicting scripts it’s difficult to debug     named function is shown in the stack trace easier to debug when error occurs i">
+<meta property="og:description" content="React UI Library 사용법Ant DesignMaterial UI     CORS Same-Origin Policy  웹 브라우저 보안을 위해 프로토콜, 도메인, 포트가 동일한 서버로만 요청을 주고 받을 수 있는 정책 👇  Cross-Origin Resource Sharing  도메인이나 포트가 달라도 서버에 자원을 요청할 수 있는 메커니즘 ![">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-04-10T11:58:41.000Z">
-<meta property="article:modified_time" content="2021-05-30T10:56:17.945Z">
+<meta property="article:published_time" content="2021-05-29T14:11:53.000Z">
+<meta property="article:modified_time" content="2021-05-29T08:30:55.801Z">
 <meta property="article:author" content="JungHyun">
+<meta property="article:tag" content="SOPT">
 <meta property="article:tag" content="WEB">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="language">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
     
     
@@ -312,20 +312,20 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            const function
+            7차-세미나_29-05-21
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-04-10T20:58:41+09:00">
+    <time datetime="2021-05-29T23:11:53+09:00">
 	
-		    Apr 10, 2021
+		    May 29, 2021
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/Language/">Language</a>, <a class="category-link" href="/categories/Language/JavaScript/">JavaScript</a>
+    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/WEB-28th/">WEB_28th</a>
 
 
     
@@ -337,39 +337,64 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h3 id="Function-Statement"><a href="#Function-Statement" class="headerlink" title="Function Statement"></a>Function Statement</h3><ul>
-<li><em>hoisted</em> to the top of the <em>full lexical scope</em><ul>
-<li>can break conflicting scripts</li>
-<li>it’s difficult to debug</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>named function is shown in the stack trace<ul>
-<li>easier to debug when error occurs in the function</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function declarations are given two passes,</span></span><br><span class="line"><span class="comment">where the first lifts them to the top (hoisting),</span></span><br><span class="line"><span class="comment">allowing &quot;out of order&quot; usage</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">doTheThing();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTheThing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome number <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAwesome</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h2 id="React-UI-Library-사용법"><a href="#React-UI-Library-사용법" class="headerlink" title="React UI Library 사용법"></a>React UI Library 사용법</h2><h3 id="Ant-Design"><a href="#Ant-Design" class="headerlink" title="Ant Design"></a>Ant Design</h3><h3 id="Material-UI"><a href="#Material-UI" class="headerlink" title="Material UI"></a>Material UI</h3> <br />
 
 
-<h3 id="Const-Declaration"><a href="#Const-Declaration" class="headerlink" title="Const Declaration"></a>Const Declaration</h3><ul>
-<li><em>edge-case hoisting</em></li>
-</ul>
+
+<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><blockquote>
+<p>Same-Origin Policy</p>
+</blockquote>
+<p>웹 브라우저 보안을 위해 프로토콜, 도메인, 포트가 동일한 서버로만 요청을 주고 받을 수 있는 정책</p>
+<p>👇</p>
+<blockquote>
+<p>Cross-Origin Resource Sharing</p>
+</blockquote>
+<p>도메인이나 포트가 달라도 서버에 자원을 요청할 수 있는 메커니즘</p>
+<p>![image-20210529152418689](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210529152418689.png)</p>
+<p>아래와 같은 문제 발생 시; 서버에서 Access-Control-Allow-Origin을 수정해야 함!</p>
+<p>![image-20210529152436081](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210529152436081.png)</p>
+<br />
+
+
+
+<h2 id="Redux-기초"><a href="#Redux-기초" class="headerlink" title="Redux 기초"></a>Redux 기초</h2><ol>
+<li>예측 가능한</li>
+<li>중앙화된</li>
+<li>디버깅이 쉬운</li>
+<li>유연한</li>
+</ol>
 <ul>
-<li>declare a variable<ul>
-<li>gives it a block scope</li>
-<li>stops the full hoisting</li>
+<li>자바스크립트 앱을 위한 예측 가능한 상태 컨테이너 (오픈소스 JS 라이브러리)</li>
+<li>React, Vue 등 JS 라이브러리와 함께 사용된다.</li>
 </ul>
-</li>
-<li>cannot be re-declared<ul>
-<li>throws exception if re-declared</li>
-<li>easier to debug</li>
+<h4 id="언제-왜-사용할까"><a href="#언제-왜-사용할까" class="headerlink" title="언제, 왜 사용할까?"></a>언제, 왜 사용할까?</h4><ul>
+<li>기존에는 useState를 통해 정의한 상태를 props를 통해 자식 컴포넌트로 전달하는 구조</li>
+<li>프로젝트가 복잡해지면 거쳐야 하는 컴포넌트가 많아지므로 상태 전달이 비효율적일 수 있음</li>
 </ul>
-</li>
-<li>won’t be caught until called</li>
+<p>👇</p>
+<ol>
+<li>상태 관리를 한 곳에서 하고 싶을 때</li>
+<li>원하는 컴포넌트에 상태값과 함수를 직접 전달하고 싶을 때</li>
+</ol>
+<h4 id="전체적인-구조"><a href="#전체적인-구조" class="headerlink" title="전체적인 구조"></a>전체적인 구조</h4><ol>
+<li>store</li>
+<li>action</li>
+<li>reducer</li>
+<li>store 내장 함수</li>
+</ol>
+<h4 id="store"><a href="#store" class="headerlink" title="store"></a>store</h4><ul>
+<li>어플리케이션의 상태는 하나의 저장소 안에 있는 객체 트리에 저장된다.</li>
+<li>상태 트리는 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">This shows that, because of block-scoping,</span></span><br><span class="line"><span class="comment">const function references must be invoked in-order</span></span><br><span class="line"><span class="comment">or else things will fail silently.</span></span><br><span class="line"><span class="comment">consts are added serially (in the order in which they appear)</span></span><br><span class="line"><span class="comment">and much of the body isn&#x27;t declared when we first try to invoke or functions</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// use `getAwesome()`</span></span><br><span class="line"><span class="keyword">const</span> tryDoTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is me trying to be awesome <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;getAwesome is not defined&quot;, because it is referenced too early,</span></span><br><span class="line"><span class="comment">// before declaring `getAwesome()` function</span></span><br><span class="line">tryDoTheThing()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getAwesome = <span class="function">() =&gt;</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome! <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doTheThing()</span><br></pre></td></tr></table></figure>
+<h4 id="action"><a href="#action" class="headerlink" title="action"></a>action</h4><h4 id="reducer"><a href="#reducer" class="headerlink" title="reducer"></a>reducer</h4><ul>
+<li>실질적인 함수</li>
+<li>action이 상태 트리를 어떻게 변경할 지 작성한 순수한 함수</li>
+</ul>
+<h3 id="Redux는-꼭-필요할-때-사용하자"><a href="#Redux는-꼭-필요할-때-사용하자" class="headerlink" title="Redux는 꼭 필요할 때 사용하자!"></a>Redux는 꼭 필요할 때 사용하자!</h3><ol>
+<li>지속적으로 상태가 변화하는 데이터가 많을 때</li>
+<li>모든 상태를 한 곳에서 관리해야 할 때</li>
+<li>최상위 컴포넌트에서 모든 상태를 가지고 있기 힘들 때</li>
+</ol>
 
             
 
@@ -381,7 +406,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/WEB/" rel="tag">WEB</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/javascript/" rel="tag">javascript</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/language/" rel="tag">language</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/React/" rel="tag">React</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/SOPT/" rel="tag">SOPT</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/WEB/" rel="tag">WEB</a>
 
             </div>
         
@@ -394,9 +419,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/10/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-10-04-21/"
-                    data-tooltip="2차 세미나_10/04/21"
-                    aria-label="PREVIOUS: 2차 세미나_10/04/21"
+                    href="/2021/05/31/strict-mode/"
+                    data-tooltip="strict mode"
+                    aria-label="PREVIOUS: strict mode"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -408,9 +433,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
-                    data-tooltip="Responsive Web"
-                    aria-label="NEXT: Responsive Web"
+                    href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
+                    data-tooltip="Closure"
+                    aria-label="NEXT: Closure"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -435,7 +460,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -448,7 +473,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -461,7 +486,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -509,9 +534,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/10/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-10-04-21/"
-                    data-tooltip="2차 세미나_10/04/21"
-                    aria-label="PREVIOUS: 2차 세미나_10/04/21"
+                    href="/2021/05/31/strict-mode/"
+                    data-tooltip="strict mode"
+                    aria-label="PREVIOUS: strict mode"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -523,9 +548,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/"
-                    data-tooltip="Responsive Web"
-                    aria-label="NEXT: Responsive Web"
+                    href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
+                    data-tooltip="Closure"
+                    aria-label="NEXT: Closure"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -550,7 +575,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -563,7 +588,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -576,7 +601,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/10/const-function/"
+                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -610,7 +635,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/10/const-function/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -623,7 +648,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/10/const-function/"
+                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -636,7 +661,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/10/const-function/"
+                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
