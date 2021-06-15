@@ -12,12 +12,12 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto Sans KR:300,300italic,400,400italic,700,700italic|Source Code Pro for Powerline:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="이 글은 이화여자대학교 2021-1학기 캡스톤디자인프로젝트B - 스타트7팀(이화BTS) 나정현의 기술 블로그 제출물입니다. 본 팀은 “ERP: Customizing Recommended Data Visualization Plots” 을 주제로 웹 서비스를 제작 중에 있으며, 해당 서비스는 Data2Vis의 Encoder-Decoder 모델, Seq2Seq2">
@@ -116,7 +116,7 @@
       <h1 class="site-title">leah</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">Dev_log</p>
+      <p class="site-subtitle" itemprop="description">my dev_log</p>
   </div>
 
   <div class="site-nav-right">
@@ -133,6 +133,16 @@
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -171,9 +181,9 @@
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/28/ERP-Overview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/profile.jpeg">
       <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Developing Developer">
+      <meta itemprop="description" content="Continuously Growing Developer">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -584,8 +594,10 @@ Data2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실�
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="JungHyun"
+      src="/images/profile.jpeg">
   <p class="site-author-name" itemprop="name">JungHyun</p>
-  <div class="site-description" itemprop="description">Continuously Developing Developer</div>
+  <div class="site-description" itemprop="description">Continuously Growing Developer</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -597,15 +609,27 @@ Data2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실�
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">18</span>
-        <span class="site-state-item-name">categories</span>
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
         <span class="site-state-item-count">50</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/leahincom" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;leahincom" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:leahincom@gmail.com" title="E-Mail → mailto:leahincom@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
 
 
 
