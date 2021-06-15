@@ -1,21 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="leah">
-    <title>Tag: concurrency - leah</title>
-    <meta name="author" content="JungHyun">
-    
-        <meta name="keywords" content="hexo,javascript,">
-    
-    
-    
-    <script type="application/ld+json">{}</script>
-    <meta name="description" content="Continuously Developing Developer">
-<meta property="og:type" content="blog">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Continuously Developing Developer">
+<meta property="og:type" content="website">
 <meta property="og:title" content="leah">
 <meta property="og:url" content="https://leahincom.github.io/tags/concurrency/index.html">
 <meta property="og:site_name" content="leah">
@@ -23,546 +29,329 @@
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="hexo">
+<meta property="article:tag" content="frontend">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="developer">
 <meta property="article:tag" content="javascript">
 <meta name="twitter:card" content="summary">
-    
-    
-        
-    
-    
-        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
-    
-    
-    
-    
-    <!--STYLES-->
-    
-<link rel="stylesheet" href="/assets/css/all.css">
 
-    
-<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+<link rel="canonical" href="https://leahincom.github.io/tags/concurrency/">
 
-    
-<link rel="stylesheet" href="/assets/css/thumbs.css">
 
-    
-<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
 
-    <!--STYLES END-->
-    
+  <title>Tag: concurrency | leah</title>
+  
 
-    
 
-    
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-    <body>
-        <div id="blog">
-            <!-- Define author's picture -->
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-
-    
-        
-            
-        
-    
-
-<header id="header" data-behavior="2">
-    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-    <div class="header-title">
-        <a
-            class="header-title-link"
-            href="/"
-            aria-label=""
-        >
-            leah
-        </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    
-        
-            <a
-                class="header-right-picture "
-                href="#about"
-                aria-label="Open the link: /#about"
-            >
-        
-        
-            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-        
-        </a>
-    
-</header>
+  </div>
 
-            <!-- Define author's picture -->
+  <div class="site-meta">
 
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">leah</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dev_log</p>
+  </div>
 
-
-        
-    
-
-<nav id="sidebar" data-behavior="2">
-    <div class="sidebar-container">
-        
-            <div class="sidebar-profile">
-                <a
-                    href="/#about"
-                    aria-label="Read more about the author"
-                >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-                </a>
-                <h4 class="sidebar-profile-name">JungHyun</h4>
-                
-                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
-</h5>
-                
-            </div>
-        
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-categories"
-                            
-                            rel="noopener"
-                            title="Categories"
-                        >
-                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Categories</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-archives"
-                            
-                            rel="noopener"
-                            title="Archives"
-                        >
-                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Archives</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link open-algolia-search"
-                            href="#search"
-                            
-                            rel="noopener"
-                            title="Search"
-                        >
-                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Search</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="#about"
-                            
-                            rel="noopener"
-                            title="About"
-                        >
-                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">About</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://github.com/leahincom"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="GitHub"
-                        >
-                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">GitHub</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://facebook.com/junghyun.lah/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Facebook"
-                        >
-                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Facebook</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://www.linkedin.com/profile"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="LinkedIn"
-                        >
-                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">LinkedIn</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="mailto:leahincom@gmail.com"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Mail"
-                        >
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Mail</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/atom.xml"
-                            
-                            rel="noopener"
-                            title="RSS"
-                        >
-                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">RSS</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
 </nav>
 
-            
-            <div id="main" data-behavior="2"
-                 class="
-                        hasCoverMetaIn
-                        ">
-                
-    <section class="postShorten-group main-content-wrap">
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2021/05/17/SOAP-Concurrency/"
-                            aria-label=": Concurrency"
-                        >
-                            Concurrency
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-05-17T00:20:07+09:00">
-	
-		    May 17, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/SOAP/">SOAP</a>
 
 
-    
+
 </div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h2><blockquote>
-<p>동시성</p>
-</blockquote>
-<br />
-
-
-
-<h3 id="자바스크립트는…"><a href="#자바스크립트는…" class="headerlink" title="자바스크립트는…"></a>자바스크립트는…</h3><p><strong><code>동기식</code>, <code>싱글스레드</code> 언어 이다.</strong> 이는 즉,</p>
-<ul>
-<li><em>호이스팅 이후</em> 순차적으로 코드를 실행함을 의미하며,</li>
-<li>페이지에서 자바스크립트 블록이 실행 중이라면 다른 자바스크립트는 페이지에서 실행되지 못함</li>
-</ul>
-<p>을 의미한다.</p>
-<p>이 때, 싱글스레드 프로그래밍 언어이기 때문에 동기적 방식에 <strong>비동기 처리가 필수적이다.</strong> 비동기 처리는 그 결과가 언제 반환 될지 알 수 없기 때문에 동기식과 같이 결과 반환을 예상할 수 있게 처리하는 기법들이 사용되어야 한다. 자바스크립트에서 이와 같은 비동기 처리의 대표적 방식은 <code>setTimeOut</code> , <code>callback</code> , <code>promise</code> 등이 있다.</p>
-<p>자바스크립트는 <strong>Ajax를 호출하는 등의 기능을 수행할 때만 (자동적으로) 비동기식 언어로 작동</strong>한다. Ajax 호출에 대한 <strong>응답이 돌아와야만 (성공적이든 거절되든) Ajax 호출 실행이 중단되고 다른 (다음) 코드가 실행된다.</strong> 이 때, <strong>콜백함수는 동기적으로 작동한다.</strong> 응답이 돌아오기 전까지, 콜백함수가 실행 중일 때는 다른 코드는 실행되지 않으며 실행 중인 다른 코드 (작동 중인 다른 프로그램) 를 방해하지는 않는다.</p>
-<br />
-
-
-
-<blockquote>
-<p><strong><code>동기(synchronous)적</code> 방식</strong> : 현재 실행 중인 코드가 완료된 후 다음 코드를 실행</p>
-<ul>
-<li>요청 처리가 완료된 후 다음 요청을 처리 하는 방식으로 이전 요청을 처리하는 시간이 다음 요청에 영향을 준다.<ul>
-<li>요청과 응답이 같은 시간대에 있다. (사이에 시간 간격을 두지 않음)</li>
-</ul>
-</li>
-<li>일반적으로 작성한 코드는 보통 동기 방식으로 처리된다.</li>
-</ul>
-<p><strong><code>비동기(asynchronous)적</code> 방식</strong> : 현재 실행 중인 코드의 완료 여부 (매개변수가 아닌 함수 실행 여부) 와 무관하게 즉시 다음 코드로 넘어가서 실행</p>
-<ul>
-<li><p>요청과 응답이 다른 시간대에 일어날 수 있다.</p>
-</li>
-<li><p><code>setTimeout()</code> </p>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<p><strong><code>single-threaded</code></strong></p>
-<p>싱글스레드 언어는 <strong>한 번에 하나의 작업만 수행</strong>할 수 있다.</p>
-<p>🤔 <em>그렇다면 자바스크립트를 주로 사용하는 웹 사이트에서는 어떻게 한번에 여러 요청을 받을까? 그리고 여러 요청이 오갈 수 있는 자바스크립트는 왜 싱글 쓰레드일까?</em></p>
-<p>정확하게 말하면 <strong>자바스크립트의 메인 쓰레드인 이벤트 루프가 싱글 쓰레드</strong>이기 때문에 자바스크립트를 싱글 쓰레드 언어라고 부른다. <em>하지만 이벤트 루프만 독립적으로 실행되지 않고 웹 브라우저나 NodeJS같은 멀티 쓰레드 환경에서 실행된다.</em> <strong>즉, 자바스크립트 자체는 싱글 쓰레드가 맞지만 자바스크립트 런타임은 싱글 쓰레드가 아니다.</strong></p>
-</blockquote>
-<br />
-
-
-
-<h4 id="콜백-지옥"><a href="#콜백-지옥" class="headerlink" title="콜백 지옥"></a>콜백 지옥</h4><p>콜백 함수를 익명 함수로 전달하는 과정이 반복되어 코드의 복잡도가 커지는 현상으로, 엄청나게 많은 중괄호 중첩을 사용하여 가독성이 떨어지고 코드를 수정하기 어려움. </p>
-<ul>
-<li>이벤트 처리나 서버 통신과 같은 비동기적인 작업을 수행하기 위해 콜백 함수를 이용함</li>
-</ul>
-<p><em>e.g.</em> 아래 코드는 0.5초마다 커피 목록을 수집하고 출력합니다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(</span><br><span class="line">  (name) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> coffeeList = name;</span><br><span class="line">    <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">setTimeout</span>(</span><br><span class="line">      (name) =&gt; &#123;</span><br><span class="line">        coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">        <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">setTimeout</span>(</span><br><span class="line">          (name) =&gt; &#123;</span><br><span class="line">            coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">            <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line"></span><br><span class="line">            <span class="built_in">setTimeout</span>(</span><br><span class="line">              (name) =&gt; &#123;</span><br><span class="line">                coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">                <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">              &#125;,</span><br><span class="line">              <span class="number">500</span>,</span><br><span class="line">              <span class="string">&#x27;Latte&#x27;</span>,</span><br><span class="line">            );</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="number">500</span>,</span><br><span class="line">          <span class="string">&#x27;Mocha&#x27;</span>,</span><br><span class="line">        );</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="number">500</span>,</span><br><span class="line">      <span class="string">&#x27;Americano&#x27;</span>,</span><br><span class="line">    );</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="number">500</span>,</span><br><span class="line">  <span class="string">&#x27;Espresso&#x27;</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; 출력값</span><br><span class="line">Espresso (0.5초)</span><br><span class="line">Espresso, Americano (1.0초)</span><br><span class="line">Espresso, Americano, Mocha (1.5초)</span><br><span class="line">Espresso, Americano, Mocha, Latte (2.0초)</span><br></pre></td></tr></table></figure>
-<p>각 콜백은 커피 이름을 전달하고 목록에 이름을 추가합니다. 정상적으로 실행되지만 들여쓰기 수준이 과도하게 깊어지고 값이 아래에서 위로 전달되어 가독성이 떨어집니다.</p>
-<br />
-
-
-
-<h5 id="콜백-지옥-탈출"><a href="#콜백-지옥-탈출" class="headerlink" title="콜백 지옥 탈출"></a>콜백 지옥 탈출</h5><ul>
-<li><p><code>기명함수</code> : 가독성 문제와 어색함을 동시에 해결하는 가장 간단한 방법은 익명의 콜백 함수를 모두 기명함수로 전환하는 것입니다.</p>
-<ul>
-<li>코드의 가독성을 높일 수 있고 함수 선언과 함수 호출만 구분할 수 있다면 위에서부터 아래로 순서대로 읽는데 어려움이 없다.</li>
-<li>일회성 함수를 전부 변수에 할당하는 것은 코드명을 일일이 따라다녀야 하기 때문에 오히려 헷갈림을 유발할 소지가 있다.</li>
-</ul>
-<p><em>e.g.</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> coffeeList = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addEspresso = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList = name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="built_in">setTimeout</span>(addAmericano, <span class="number">500</span>, <span class="string">&#x27;Americano&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addAmericano = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="built_in">setTimeout</span>(addMocha, <span class="number">500</span>, <span class="string">&#x27;Mocha&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addMocha = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="built_in">setTimeout</span>(addLatte, <span class="number">500</span>, <span class="string">&#x27;Latte&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addLatte = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(addEspresso, <span class="number">500</span>, <span class="string">&#x27;Espresso&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
-<li><p><code>Promise</code></p>
-<ul>
-<li><code>new</code> 연산자와 함께 호출한, <code>Promise</code> 의 인자로 넘겨주는 <code>콜백 함수</code> 는 <em>호출 시 바로 실행되지만</em> <strong>(비동기적)</strong> <em>그 내부에 <code>resolve</code> 또는 <code>reject</code>함수를 호출하는 구문이 있을 경우 둘 중 하나가 실행되기 전까지는 <code>then</code>또는 <code>catch</code>로 넘어가지 않는다</em> <strong>(동기적)</strong>. 따라서 비동기 작업이 완료될 때 <code>resolve</code> 또는 <code>reject</code> 를 호출하는 방법으로 비동기 작업의 동기적 표현이 가능해진다.</li>
-</ul>
-<p><em>e.g.</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="string">&#x27;Espresso&#x27;</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(name);</span><br><span class="line">    resolve(name);</span><br><span class="line">  &#125;, <span class="number">500</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> name = prevName + <span class="string">&#x27;, Americano&#x27;</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">        resolve(name);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> name = prevName + <span class="string">&#x27;, Mocha&#x27;</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">        resolve(name);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> name = prevName + <span class="string">&#x27;, Latte&#x27;</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">        resolve(name);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-<p>아래는 위 코드와 같은 내용을 간결하게 표현한 코드이다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addCoffee = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newName = prevName ? <span class="string">`<span class="subst">$&#123;prevName&#125;</span>, <span class="subst">$&#123;name&#125;</span>`</span> : name;</span><br><span class="line">        <span class="built_in">console</span>.log(newName);</span><br><span class="line">        resolve(newName);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">addCoffee(<span class="string">&#x27;Espresso&#x27;</span>)()</span><br><span class="line">  .then(addCoffee(<span class="string">&#x27;Americano&#x27;</span>))</span><br><span class="line">  .then(addCoffee(<span class="string">&#x27;Mocha&#x27;</span>))</span><br><span class="line">  .then(addCoffee(<span class="string">&#x27;Latte&#x27;</span>));</span><br></pre></td></tr></table></figure></li>
-<li><p><code>Generator</code></p>
-<ul>
-<li><code>Generator</code> 함수 : <code>function* () &#123;&#125;</code> </li>
-<li><code>Generator</code> 함수를 실행하면 <code>Iterator</code>가 반환되는데, <code>Iterator </code>는 <code>next </code>메서드를 가지고 있다. 이 <code>next</code> 메서드를 호출하면 앞서 멈췄던 부분부터 시작해서 그 다음에 등장하는 <code>yield</code> 전까지 코드를 실행한다. 따라서 비동기 작업이 완료되는 시점마다 <code>next</code> 메서드를 호출하면 <code>Generator</code> 함수 내부의 소스가 위에서부터 아래로 순차적으로 진행되는 것과 같다.</li>
-</ul>
-<p><em>e.g.</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addCoffee = <span class="function">(<span class="params">prevName, name</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    coffeeMaker.next(prevName ? <span class="string">`<span class="subst">$&#123;prevName&#125;</span>, <span class="subst">$&#123;name&#125;</span>`</span> : name);</span><br><span class="line">  &#125;, <span class="number">500</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> coffeeGenerator = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> espresso = <span class="keyword">yield</span> addCoffee(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;Espresso&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(espresso);</span><br><span class="line">  <span class="keyword">const</span> americano = <span class="keyword">yield</span> addCoffee(espresso, <span class="string">&#x27;Americano&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(americano);</span><br><span class="line">  <span class="keyword">const</span> mocha = <span class="keyword">yield</span> addCoffee(americano, <span class="string">&#x27;Mocha&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(mocha);</span><br><span class="line">  <span class="keyword">const</span> latte = <span class="keyword">yield</span> addCoffee(mocha, <span class="string">&#x27;Latte&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(latte);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> coffeeMaker = coffeeGenerator();</span><br><span class="line">coffeeMaker.next();</span><br></pre></td></tr></table></figure></li>
-<li><p><code>Promise</code> + <code>async/ await</code></p>
-<ul>
-<li>비동기 작업을 수행하고자 하는 함수 앞에 <code>async</code> 를 붙이고, 함수 내부에서 비동기 작업이 필요한 위치에 <code>await</code> 를 붙임으로써 해당 라인의 코드 내용을 <code>Promise</code> 로 (자동) 전환하고 해당 내용이 <code>resolve</code> 된 이후에야 그에 대한 코드가 진행된다.</li>
-</ul>
-<p><em>e.g.</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addCoffee = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      resolve(name);</span><br><span class="line">    &#125;, <span class="number">500</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> coffeeMaker = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> coffeeList = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">let</span> _addCoffee = <span class="keyword">async</span> (name) =&gt; &#123;</span><br><span class="line">    coffeeList += (coffeeList ? <span class="string">&#x27;, &#x27;</span> : <span class="string">&#x27;&#x27;</span>) + (<span class="keyword">await</span> addCoffee(name));</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Espresso&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Americano&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Mocha&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Latte&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">coffeeMaker();</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-</li>
-</ul>
-<hr>
-<br />
-
-
-
-<ol>
-<li><p>Callback 대신 <code>Promise</code> 사용하기</p>
-<ul>
-<li>ES2015/ ES6 기준</li>
-<li>콜백 지옥 방지</li>
-</ul>
-</li>
-</ol>
-   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request&#x27;</span>)</span><br><span class="line">  .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>, 	<span class="function">(<span class="params">requestErr, response</span>) =&gt;</span> &#123; <span class="comment">// 1차 콜백</span></span><br><span class="line">  	<span class="comment">// catch 구문</span></span><br><span class="line">    <span class="keyword">if</span> (requestErr) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(requestErr);</span><br><span class="line">    &#125; </span><br><span class="line">  	<span class="comment">// then 구문 ... 반복</span></span><br><span class="line">  	<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line">        .writeFile(<span class="string">&#x27;article.html&#x27;</span>,</span><br><span class="line">          response.body, <span class="function">(<span class="params">writeErr</span>) =&gt;</span> &#123; <span class="comment">// 2차 콜백</span></span><br><span class="line">            <span class="keyword">if</span> (writeErr) &#123;</span><br><span class="line">              <span class="built_in">console</span>.error(writeErr);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        );</span><br><span class="line">      &#125;</span><br><span class="line">	&#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line">  .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>)</span><br><span class="line">	<span class="comment">// Promise가 resolved를 반환하였을 때</span></span><br><span class="line">  .then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">  &#125;)</span><br><span class="line">	<span class="comment">// 다음 Promise</span></span><br><span class="line">  .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">	<span class="comment">// Promise가 rejected를 반환하였을 때</span></span><br><span class="line">  .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><p><code>Async/ Await</code> 은 Promise보다 더욱 깔끔하다.</p>
-<ul>
-<li>ES2017/ ES8 기준</li>
-<li>콜백에 대한 Promise을 단독으로 이용할 때보다 더 깔끔한 해결책으로, Promise을 활용한 방식이다.</li>
-<li>함수 앞에 <code>async</code> 붙이기</li>
-<li>함수의 연속적인 처리 (논리적으로 연결) 를 위해 <code>then</code> 을 계속 이어붙여 코드를 작성하지 않아도 됨</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// not bad</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line">.get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>)</span><br><span class="line">  .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line"><span class="comment">// better</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getCleanCodeArticle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// then 구문</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// then 작성 없이 await으로 synchronization</span></span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line"> .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>);</span><br><span class="line">    <span class="comment">// then 구문 // await로 Promise 처리</span></span><br><span class="line">    <span class="keyword">await</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// catch 구문</span></span><br><span class="line">  <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-</li>
-</ol>
-<hr>
-<h3 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h3><p><a target="_blank" rel="noopener" href="https://velog.io/@yujo/JS%EC%BD%9C%EB%B0%B1-%EC%A7%80%EC%98%A5%EA%B3%BC-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%A0%9C%EC%96%B4">https://velog.io/@yujo/JS%EC%BD%9C%EB%B0%B1-%EC%A7%80%EC%98%A5%EA%B3%BC-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%A0%9C%EC%96%B4</a></p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2021/05/17/SOAP-Concurrency/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
-        
-        
-        <li class="pagination-number">page 1 of 1</li>
-    </ul>
-</div>
-
-</section>
-
-
-                <footer id="footer" class="main-content-wrap">
-    <span class="copyrights">
-        Copyrights &copy; 2021 JungHyun. All Rights Reserved.
-    </span>
-</footer>
-
-            </div>
-            
-        </div>
-        
-
+    </header>
 
     
-        
-    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
-<div id="about">
-    <div id="about-card">
-        <div id="about-btn-close">
-            <i class="fa fa-times"></i>
-        </div>
-        
-            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-        
-            <h4 id="about-card-name">JungHyun</h4>
-        
-            <div id="about-card-bio"><p>author.bio</p>
-</div>
-        
-        
-            <div id="about-card-job">
-                <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>author.job</p>
 
-            </div>
-        
-        
-            <div id="about-card-location">
-                <i class="fa fa-map-marker-alt"></i>
-                <br/>
-                Seoul/South Korea, London/UK
-            </div>
-        
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content tag">
+            
+
+  
+  
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">concurrency
+          <small>Tag</small>
+        </h2>
+      </div>
+
+      
+    <div class="collection-year">
+      <span class="collection-header">2021</span>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-05-16T16:20:07+01:00"
+              content="2021-05-16">
+          05-16
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/05/17/SOAP-Concurrency/" itemprop="url">
+            <span itemprop="name">Concurrency</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+    </div>
+  </div>
+  
+  
+  
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JungHyun</p>
+  <div class="site-description" itemprop="description">Continuously Developing Developer</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
 </div>
 
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
         
+
         
-<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
-        <!--SCRIPTS-->
 
-<script src="/assets/js/jquery.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JungHyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
 
-
-<script src="/assets/js/jquery.fancybox.js"></script>
-
-
-<script src="/assets/js/thumbs.js"></script>
-
-
-<script src="/assets/js/tranquilpeak.js"></script>
-
-<!--SCRIPTS END-->
-
+        
 
 
 
 
-    </body>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
 </html>

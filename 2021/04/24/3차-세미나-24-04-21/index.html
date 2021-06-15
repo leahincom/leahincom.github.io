@@ -1,21 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="leah">
-    <title>3차 세미나_24/04/21 - leah</title>
-    <meta name="author" content="JungHyun">
-    
-        <meta name="keywords" content="hexo,javascript,">
-    
-    
-    
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"들어가기에 앞서Framework개발에 필요한 뼈대를 제공하여 사용자가 덧붙이는 형식으로 코드를 완성시킨다.\n\n e.g. 집\n\n\n\nLibrary개발에 필요한 도구들을 제공하여 사용자가 필요할 때 리소스를 가져와 사용한다.\n\n e.g. 가구\n\n\n\n👉 둘 다 공통의 개발환경을 제공 하여 개발 시간과 리소스 비용을 줄여주는 도구\n\n\nReact 이해하기\n\n\n\nReact는…\n지속해서 데이터가 변화하는 대규모 애플리케이션 을 구축하기 좋다.\n점유율이 가장 높다.\n\n\n\n\nJQuery\n$ 이용\n\n\n자바스크립트 라이브러리\nDOM 조작을 쉽고 효율적으로\n브라우저마다 자바스크립트 호환성이 달랐던 문제를 해결\n\n👉 ES6로 인해 사용률 ↓\n\n\n\n\n\nSPA (Single Page Application) 의 등장\n웹의 규모가 커지면서 단순한 웹 페이지가 아닌, 웹 어플리케이션 으로 발전\n엄청난 JS 파일을 유지, 보수하기 위해 웹 라이브러리/ 프레임워크의 중요성 대두\n\n\n웹 페이지 전체를 재로딩하지 않고, 필요한 데이터만 동적으로 로딩하는 웹 어플리케이션\n기존의 MPA (Multiple Page Application) 는 페이지를 이동할 때마다 HTML, CSS, JS 파일을 전부 로딩해야 해서 속도가 상대적으로 느리다.\nSPA는 필요한 정적 파일을 최초 1회 다운 받은 후, 필요한 데이터만 서버로부터 동적으로 전달받아 DOM을 조작한다.\n\n\n  \n      \n        장점\n      단점\n    \n  \n  \n      \n      속도가 빠르고 새로고침이 발생하지 않음\n      처음에 필요한 모든 정적 리소스를 다운로드하기 때문에 초기 구동 속도가 상대적으로 느림\n    \n    \n        처리과정이 효율적임\n      데이터가 AJAX를 통해 로드되기 때문에 검색 엔진 최적화가 어려움\n      👉 SSR (Server Side Rendering) 으로 해결 가능함\n      \n    \n    \n        네트워크 동작을 모니터링 할 수 있어 디버깅 하기가 쉬움\n    \n    \n        네이티브 앱과 유사한 사용자 경험을 제공함으로써 UX를 향상시킬 수 있음\n    \n  \n\n\n\n\n\n\nSPA Web Framework\nAngular\nFramework에 가까움\nTS 기반, 양방향 바인딩 지원\n\n\nReact\nLibrary에 가까움\nNative로 앱 개발도 가능함 (React Native)\nVirtual DOM, JSX\n\n\nVue\n오픈소스 프로젝트\n가장 최근에 개발됨\nVirtual DOM, 양방향 바인딩 지원, Single File Component\n\n\n\n\n\nReact 기본 문법 익히기\nComponent\n\nUI 를 구성하는 개별적인 뷰 단위\n적절하게 분리하여 재사용성을 높이는 게 좋다. (너무 많아도/ 적어도 안 좋다!)\n\n\n컴포넌트를 조합하여 새로운 컴포넌트를 만들거나, 복잡한 웹 페이지를 구성할 수 있다.\n클래스형/ 함수형 2가지 종류의 컴포넌트가 있다.\n\n\nVirtual DOM\n\n\nDOM 요소가 변경되면, Render Tree를 만들어서 다시 화면에 보여주기까지 연산이 오래 걸린다.\n\n데이터 변경이 자주 발생하는 웹 페이지는 속도가 느려진다.\n👇 변경된 부분을 한 번에 처리하자! 🚀\n\n가상 DOM을 통해 변경된 부분만 탐지하여 실제 DOM에 적용\n\n연산을 최소화하여 성능이 개선됨\n\n\n\n\nOne-way Data Flow\n\n바인딩은 뷰에 보여지는 값 과 메모리 상의 값이 일치하는지 여부에 따라 방식이 달라진다.\n\n\n\n\n\n\n\n  \n\nReact는 기본적으로 단방향 데이터 바인딩 이다.\n\n단순하고 예측 가능한 구조\n\n뷰에서 사용자가 입력한 값이 변수에 반영 되기 위해서는 event 를 거쳐야 한다.\n\ne.g. onChange()\n\n\n\n\n\n\nTwo-way Data Flow\n\n\n양방향 데이터 바인딩에서는 사용자가 입력한 값이 바로 변수에 반영된다.\n\n\n\n\nJSX\nJavaScript를 확장하여 React의 요소를 생성하는 문법\nHTML과 JavaScript를 결합한 형태이며, 중괄호 &#123;&#125; 안에 모든 JS 문법을 사용할 수 있다.\n\n\n\n\n\n\n\nNode.js\n\nnpm 패키지 매니저를 사용하기 위해서 필요한 라이브러리\n\nReact 패키지가 포함되어 있음\n\n\n\n\n\nCRA (Create React App)React를 사용하기 위해 폴더를 초기화하는 과정이 필요함\n1npx create-react-app [fileName]\n\n\nFunctional Component\nsrc &gt; App.js에서 시작\n\n\n\n\n\n\n컴포넌트를 만들 때는 react를 import 해야 한다.\n1import React from &quot;react&quot;\n함수형 컴포넌트의 이름은 반드시 대문자로 시작해야 한다.\n\nreturn 값이 실질적으로 화면에 보여지는 내용이다.\n\nreturn 값의 최상위에는 하나의 요소만 있어야 한다.\n\n&lt;&gt; 는 &lt;React.Fragment&gt; 와 동일하며, return 값의 최상위에 의미 없는 &lt;div&gt; 를 추가하지 않도록 사용한다.\n\n123&lt;&gt;...&lt;/&gt;\n다른 컴포넌트에서 사용하기 위해서는 export 해야 한다.\n1export default [name];\n\n\n최종적으로 App.js 에서 컴포넌트를 import하고, &lt;&gt; 를 통해 요소로써 사용한다.\n123456789import [name] from &#x27;./[file_path]&#x27;;function App() &#123;\treturn (\t\t&lt;&gt;\t\t\t&lt;[name] /&gt;\t\t&lt;/&gt;\t);&#125;\n컴포넌트는 여러번 반복해서 사용할 수 있다.\n\n\n\n\nJSX\nJSX는 기본적으로 객체 이며, React 요소를 나타낸다.\n\nHTML 요소 내부에 JavaScript를 사용할 때는 중괄호 {} 내부에 변수를 넣는다.\n\nHTML 요소 외부에서는 JavaScript를 자유롭게 사용할 수 있다.\n\nHTML attribute의 value에도 사용할 수 있다.\n\nJavaScript 기반이기 때문에 attribute 이름은 CamelCase로 작성한다.\n\ninline style은 두가지 방법을 사용할 수 있다.\n\n직접 지정 : 객체이기 때문에 &#123;&#125; 2번 사용해야 함!\n변수로 지정\n\n\n변수 : &#123;&#125;\n객체 : &#123;&#123;&#125;&#125;\n\n\n\n\n\nProps &amp; State\nReact에서 다루는 데이터의 종류\n\n\n\n\n\n\nProps 는 정적 데이터로서, 부모 컴포넌트에서 자식 컴포넌트로 데이터를 넘겨주는 방식이다.\nProps를 넘겨줄 때는 넘겨줄 자식변수명=&#123;부모(본인) 변수명&#125;으로, 받을 때는 parameter 에 전체를 props 로 받아오거나 구조분해할당 하여 &#123;자식변수명&#125; 으로 받아온다.\n같은 이름으로 지정해서 넘겨주는 것이 좋다.\n\n\nState는 동적 데이터를 다루는 방식으로서, useState라는 Hook 을 통해서 사용한다.\n\n\n\nLifeCycle\nComponent의 생명 주기\n\n\n\n\n\n클래스형 컴포넌트는 생명 주기에 따라서 다음 메소드가 실행된다.\ncomponentDidMount : 최초 렌더링 직후\ncomponentDidUpdate : 변경된 내용 렌더링 직후\ncomponentWillUnmount : DOM에서 제거될 때\n\n👇\n함수형 컴포넌트는 useEffect 를 이용하여 한 번에 처리 가능함\n\n\nHooks\n함수형 컴포넌트에서 State와 LifeCycle을 다룰 수 있는 기술\n\n\n\n\n클래스형 컴포넌트에서는 constructor 내부에서 this.state를 통해 state를 저장하고 관리한다.\ncomponentDidMount, componentDidUpdate가 컴포넌트 생명주기에 따라 호출된다.\n\n\n\nuseState12345678910111213141516171819import &#123; useState &#125; from &quot;react&quot;; // 가져오기// count : getter// setCount : setter// useState() === React.useState()const [ _var, setVar ] = useState(initVal); // 선언하기function useState(initialValue) &#123;  let _var = initialValue;  function getVar () &#123;    return _count;  &#125;  function setVar(newValue) &#123;    _var = newValue;  &#125;&#125;\n\n_var 은 읽기만 가능한 변수\nsetVar(newVal) 은 변수(_var)를 변경할 수 있는 함수\n\n\n\nuseEffect123import &#123; useEffect &#125; from &quot;react&quot;;useEffect(callBackFunc, dependencies);\n\nuseEffect의…\ndeps가 비어있다면 렌더링 될 때마다 초기화\ndeps가 [] 라면 최초 렌더링 시 에만 초기화\ndeps에 state의 배열이 들어가면 update; 최초 렌더링 + 해당 state가 변경되었을 때만 실행\n\n\n\n","dateCreated":"2021-04-24T21:45:11+09:00","dateModified":"2021-05-03T22:33:32+09:00","datePublished":"2021-04-24T21:45:11+09:00","description":"","headline":"3차 세미나_24/04/21","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/","keywords":"SOPT, WEB, React"}</script>
-    <meta name="description" content="들어가기에 앞서Framework개발에 필요한 뼈대를 제공하여 사용자가 덧붙이는 형식으로 코드를 완성시킨다.   e.g. 집    Library개발에 필요한 도구들을 제공하여 사용자가 필요할 때 리소스를 가져와 사용한다.   e.g. 가구    👉 둘 다 공통의 개발환경을 제공 하여 개발 시간과 리소스 비용을 줄여주는 도구   React 이해하기    Re">
-<meta property="og:type" content="blog">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="들어가기에 앞서Framework개발에 필요한 뼈대를 제공하여 사용자가 덧붙이는 형식으로 코드를 완성시킨다.   e.g. 집    Library개발에 필요한 도구들을 제공하여 사용자가 필요할 때 리소스를 가져와 사용한다.   e.g. 가구    👉 둘 다 공통의 개발환경을 제공 하여 개발 시간과 리소스 비용을 줄여주는 도구   React 이해하기    Re">
+<meta property="og:type" content="article">
 <meta property="og:title" content="3차 세미나_24&#x2F;04&#x2F;21">
 <meta property="og:url" content="https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/index.html">
 <meta property="og:site_name" content="leah">
@@ -34,316 +40,184 @@
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://user-images.githubusercontent.com/49134038/116570542-4f1bed80-a945-11eb-8e27-007628e88ddb.png">
-    
-    
-        
-    
-    
-        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
-    
-    
-    
-    
-    <!--STYLES-->
-    
-<link rel="stylesheet" href="/assets/css/all.css">
 
-    
-<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+<link rel="canonical" href="https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/">
 
-    
-<link rel="stylesheet" href="/assets/css/thumbs.css">
 
-    
-<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
 
-    <!--STYLES END-->
-    
+  <title>3차 세미나_24/04/21 | leah</title>
+  
 
-    
 
-    
-        
-    
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-    <body>
-        <div id="blog">
-            <!-- Define author's picture -->
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-
-    
-        
-            
-        
-    
-
-<header id="header" data-behavior="5">
-    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-    <div class="header-title">
-        <a
-            class="header-title-link"
-            href="/"
-            aria-label=""
-        >
-            leah
-        </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    
-        
-            <a
-                class="header-right-picture "
-                href="#about"
-                aria-label="Open the link: /#about"
-            >
-        
-        
-            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-        
-        </a>
-    
-</header>
+  </div>
 
-            <!-- Define author's picture -->
+  <div class="site-meta">
 
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">leah</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dev_log</p>
+  </div>
 
-
-        
-    
-
-<nav id="sidebar" data-behavior="5">
-    <div class="sidebar-container">
-        
-            <div class="sidebar-profile">
-                <a
-                    href="/#about"
-                    aria-label="Read more about the author"
-                >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-                </a>
-                <h4 class="sidebar-profile-name">JungHyun</h4>
-                
-                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
-</h5>
-                
-            </div>
-        
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-categories"
-                            
-                            rel="noopener"
-                            title="Categories"
-                        >
-                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Categories</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-archives"
-                            
-                            rel="noopener"
-                            title="Archives"
-                        >
-                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Archives</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link open-algolia-search"
-                            href="#search"
-                            
-                            rel="noopener"
-                            title="Search"
-                        >
-                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Search</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="#about"
-                            
-                            rel="noopener"
-                            title="About"
-                        >
-                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">About</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://github.com/leahincom"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="GitHub"
-                        >
-                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">GitHub</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://facebook.com/junghyun.lah/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Facebook"
-                        >
-                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Facebook</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://www.linkedin.com/profile"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="LinkedIn"
-                        >
-                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">LinkedIn</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="mailto:leahincom@gmail.com"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Mail"
-                        >
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Mail</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/atom.xml"
-                            
-                            rel="noopener"
-                            title="RSS"
-                        >
-                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">RSS</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
 </nav>
 
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
             
-            <div id="main" data-behavior="5"
-                 class="
-                        hasCoverMetaIn
-                        ">
-                
-<article class="post">
+
     
-    
-        <div class="post-header main-content-wrap text-left">
-    
-        <h1 class="post-title">
-            3차 세미나_24/04/21
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Developing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          3차 세미나_24/04/21
         </h1>
-    
-    
+
         <div class="post-meta">
-    <time datetime="2021-04-24T21:45:11+09:00">
-	
-		    Apr 24, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/WEB-28th/">WEB_28th</a>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
 
+              <time title="Created: 2021-04-24 13:45:11" itemprop="dateCreated datePublished" datetime="2021-04-24T13:45:11+01:00">2021-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-03 14:33:32" itemprop="dateModified" datetime="2021-05-03T14:33:32+01:00">2021-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/WEB-28th/" itemprop="url" rel="index"><span itemprop="name">WEB_28th</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
 
     
-</div>
-
     
-</div>
-
     
-    <div class="post-content markdown">
-        <div class="main-content-wrap">
-            <h2 id="들어가기에-앞서"><a href="#들어가기에-앞서" class="headerlink" title="들어가기에 앞서"></a>들어가기에 앞서</h2><h4 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h4><p>개발에 필요한 뼈대를 제공하여 사용자가 덧붙이는 형식으로 코드를 완성시킨다.</p>
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="들어가기에-앞서"><a href="#들어가기에-앞서" class="headerlink" title="들어가기에 앞서"></a>들어가기에 앞서</h2><h4 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h4><p>개발에 필요한 뼈대를 제공하여 사용자가 덧붙이는 형식으로 코드를 완성시킨다.</p>
 <blockquote>
 <p> e.g. 집</p>
 </blockquote>
@@ -642,345 +516,199 @@
 </li>
 </ul>
 
-            
-
-
-        </div>
     </div>
-    <div id="post-footer" class="post-footer main-content-wrap">
-        
-            <div class="post-footer-tags">
-                <span class="text-color-light text-small">TAGGED IN</span><br/>
-                
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/React/" rel="tag">React</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/SOPT/" rel="tag">SOPT</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/WEB/" rel="tag">WEB</a>
-
-            </div>
-        
-        
-            <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/05/THUREE-Hooks/"
-                    data-tooltip="Hooks"
-                    aria-label="PREVIOUS: Hooks"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/24/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-DOM/"
-                    data-tooltip="DOM"
-                    aria-label="NEXT: DOM"
-                >
-                    
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
-                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
-                    <i class="fab fa-google-plus" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-        
-        
-            
-        
-    </div>
-</article>
-
-
-
-                <footer id="footer" class="main-content-wrap">
-    <span class="copyrights">
-        Copyrights &copy; 2021 JungHyun. All Rights Reserved.
-    </span>
-</footer>
-
-            </div>
-            
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
-                    <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/05/THUREE-Hooks/"
-                    data-tooltip="Hooks"
-                    aria-label="PREVIOUS: Hooks"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/24/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-DOM/"
-                    data-tooltip="DOM"
-                    aria-label="NEXT: DOM"
-                >
-                    
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
-                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
-                    <i class="fab fa-google-plus" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-                </div>
-                
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
-        <i id="btn-close-shareoptions" class="fa fa-times"></i>
-        <ul class="share-options">
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
-                        aria-label="Share on Facebook"
-                    >
-                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
-                    </a>
-                </li>
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
-                        aria-label="Share on Twitter"
-                    >
-                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
-                    </a>
-                </li>
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
-                        aria-label="Share on Google+"
-                    >
-                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
-                    </a>
-                </li>
-            
-        </ul>
-    </div>
-
-
-            
-        </div>
-        
-
 
     
-        
+    
     
 
-<div id="about">
-    <div id="about-card">
-        <div id="about-btn-close">
-            <i class="fa fa-times"></i>
-        </div>
-        
-            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-        
-            <h4 id="about-card-name">JungHyun</h4>
-        
-            <div id="about-card-bio"><p>author.bio</p>
-</div>
-        
-        
-            <div id="about-card-job">
-                <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>author.job</p>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SOPT/" rel="tag"># SOPT</a>
+              <a href="/tags/WEB/" rel="tag"># WEB</a>
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
 
-            </div>
         
+
+
         
-            <div id="about-card-location">
-                <i class="fa fa-map-marker-alt"></i>
-                <br/>
-                Seoul/South Korea, London/UK
-            </div>
-        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/24/2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-DOM/" rel="prev" title="DOM">
+      <i class="fa fa-chevron-left"></i> DOM
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/05/THUREE-Hooks/" rel="next" title="Hooks">
+      Hooks <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%93%A4%EC%96%B4%EA%B0%80%EA%B8%B0%EC%97%90-%EC%95%9E%EC%84%9C"><span class="nav-number">1.</span> <span class="nav-text">들어가기에 앞서</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Framework"><span class="nav-number">1.0.1.</span> <span class="nav-text">Framework</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Library"><span class="nav-number">1.0.2.</span> <span class="nav-text">Library</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0"><span class="nav-number">2.</span> <span class="nav-text">React 이해하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#React%EB%8A%94%E2%80%A6"><span class="nav-number">2.1.</span> <span class="nav-text">React는…</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JQuery"><span class="nav-number">2.1.1.</span> <span class="nav-text">JQuery</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPA-Single-Page-Application-%EC%9D%98-%EB%93%B1%EC%9E%A5"><span class="nav-number">2.2.</span> <span class="nav-text">SPA (Single Page Application) 의 등장</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SPA-Web-Framework"><span class="nav-number">2.2.1.</span> <span class="nav-text">SPA Web Framework</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-%EA%B8%B0%EB%B3%B8-%EB%AC%B8%EB%B2%95-%EC%9D%B5%ED%9E%88%EA%B8%B0"><span class="nav-number">3.</span> <span class="nav-text">React 기본 문법 익히기</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CRA-Create-React-App"><span class="nav-number">3.0.1.</span> <span class="nav-text">CRA (Create React App)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Functional-Component"><span class="nav-number">3.1.</span> <span class="nav-text">Functional Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSX"><span class="nav-number">3.2.</span> <span class="nav-text">JSX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Props-amp-State"><span class="nav-number">3.3.</span> <span class="nav-text">Props &amp; State</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LifeCycle"><span class="nav-number">3.4.</span> <span class="nav-text">LifeCycle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hooks"><span class="nav-number">3.5.</span> <span class="nav-text">Hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#useState"><span class="nav-number">3.5.1.</span> <span class="nav-text">useState</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#useEffect"><span class="nav-number">3.5.2.</span> <span class="nav-text">useEffect</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JungHyun</p>
+  <div class="site-description" itemprop="description">Continuously Developing Developer</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
 </div>
 
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
         
+
         
-<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
-        <!--SCRIPTS-->
 
-<script src="/assets/js/jquery.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JungHyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
 
-
-<script src="/assets/js/jquery.fancybox.js"></script>
-
-
-<script src="/assets/js/thumbs.js"></script>
-
-
-<script src="/assets/js/tranquilpeak.js"></script>
-
-<!--SCRIPTS END-->
-
-
-    
+        
 
 
 
 
-    </body>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
 </html>

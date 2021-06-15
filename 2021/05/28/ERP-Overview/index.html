@@ -1,21 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="leah">
-    <title>Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템 - leah</title>
-    <meta name="author" content="JungHyun">
-    
-        <meta name="keywords" content="hexo,javascript,">
-    
-    
-    
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"이 글은 이화여자대학교 2021-1학기 캡스톤디자인프로젝트B - 스타트7팀(이화BTS) 나정현의 기술 블로그 제출물입니다. 본 팀은 “ERP: Customizing Recommended Data Visualization Plots” 을 주제로 웹 서비스를 제작 중에 있으며, 해당 서비스는 Data2Vis의 Encoder-Decoder 모델, Seq2Seq2 모델에 기반하여 Plot 추천 시스템을 제공합니다.\n\nGitHub 소스코드 : https://github.com/Ewha-BTS/ERP\n(※ 현재 비공개인 상태입니다.)\n\n\n\n\n\n\n\n\n\n\n\n\n  Project Overview\n\n\n들어가기 앞서, Visualization Recommender System이란 무엇일까?\n이는 이름 그대로, 전문가가 일일이 차트를 만들지 않아도 제공되는 차트 리스트 중에 가장 적합한 것을 고를 수 있도록, 자동적으로 차트를 만들어 주는 추천 시스템이다.\n본 팀은 큰 데이터셋과 이와 관련된 차트를 이용하여 학습시킨 모델을 통해 시각화 타입과 디자인 초이스를 추천해주는 시스템을 설계하고, 이를 웹에 올려 웹 서비스로서 Visualization 추천 시스템을 제공하는 ERP를 제작하고자 한다.\n\n\n\n\ndata를 활용하는 일이 급진적으로 증가하고 있고, 이에 따라 data specialist도 많아지고 있다. 이 트렌드에 맞게 굳이 플랏을 그리기까지의 모든 과정을 다 컨트롤하지 않아도 (길었지만, 흔히 노가다 라고 합니다..) 자동적으로 플랏을 추천해주는 서비스에 대한 요구도 증가하고 있다. 실제로 이에 가장 유명한 서비스는 Tableau 인데, 직접 사용해 본 결과 UI 도 복잡하고 UX도 좋지 못하다고 느꼈다. 하나의 윈도우에 너무 많은 정보가 한꺼번에 떠있는 느낌이었고, UX 플로우가 원활하지 못해 그리는 동안 엑셀에 엔터가 안 쳐지는 것과 비슷한 불편함을 느꼈다.\n\n\n\n\n\n\n이를 보완하기 위해, 최근 핫하고 사용성으로 유명한 노션 의 UI와 UX를 차용하여 위 서비스를 사용자 중심 서비스로 탈바꿈하는 것이 어떨까, 생각하였다. 여기에 연구 결과(성능)가 좋아 사용하고 싶었던 Data2Vis 모델을 이용하고, 부족했다고 느꼈거나 원했던 점도 추가해 볼 예정이다. \n더하여, - 노션이 가진 최대 장점이라고 생각하는 - 자유자재로 element를 배치하여 활용할 수 있는 대시보드의 편리함을 서비스의 2번째 메인 기능으로 제공하고자 한다. 사용자가 임의로 플랏을 그릴 수 있는 기능을 마지막 메인 기능으로 추가할 예정이다.\n이렇게 총 3가지의 메인 기능을 가지고 있는 본 팀의 서비스는 가장 중요한 분야 중 하나인 data 의 활용을 돕고 사용성을 증대시키고자 하며, 이를 통해 전문가가 데이터를 활용함에 있어서 중요한 부분에 집중할 수 있도록 돕고자 한다.\n\n\n\n\n\n🌝 그럼, 이제부터 전체적인 data 플로우와 웹 UI, 사용한 테크 스택, 실행 방법 및 데모 등에 대해 소개해보겠다.\n\n\n\n\n\n\n\n\n\n\n\n  Model\n\n전체적인 서비스의 흐름도를 ~~아주, 아주!~~ 간단하게 표현해보자면 다음과 같다.\n\n\n\n일단 사용자는 플랏으로 그리고자 하는 데이터가 배열에 담긴 .json .csv 과 같은 유형의 data 파일을 input으로 넣는다. \n해당 데이터는 앞으로 설명하게 될 Encoder-Decoder과 Seq2Seq2 모델을 기반으로 한 모델을 통해 플랏으로 그려진다. 이 때 데이터는 한개의 플랏이 아닌 모델에서 제시하는 추천 플랏들 k (임의 설정) 개로 표현된다. \n이를 토대로 사용자가 원하는 플랏을 선택한 후 세부적인 사항을 조정한 뒤 저장하면, 사용자의 ‘마이 리스트’에 해당 플랏이 저장되어 메인 대시보드에서 이를 이용할 수 있다. 이 때 이용이란, 그래프를 격자 형태를 가진 대시보드에 임의로 배치하고 크기 등을 조정하여 서로 연관된 플랏들을 한눈에 파악 가능하도록 하는 것을 의미한다.\n\n\n\n\n본 팀이 베이스로 사용하게 될 모델은 Vega-Lite를 기반으로 한 Data2Vis 모델이다. 이에 대해 자세히 알아보자.\n\n\n\n\n\n  Data2Vis\n\nData2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실해 Data Visualization에 대한 이해도를 높일 수 있는 [VizML](https://leahincom.github.io/2021/05/19/VizML-paper-review/) 논문을 리뷰하였으며, 이후 [Data2Vis](https://leahincom.github.io/2021/05/21/Data2Vis-paper-review/) 논문을 리뷰하였다. 이와 관련한 요약본은 다음과 같다.\n\n\n\n이 때, 모델에 학습시킬 데이터셋 마련을 위해 양질의 데이터를 크롤링하는 데 한계가 있다고 판단하여, 오픈 소스로 공개되어 있는 Vega-Lite 기반의 Data2Vis의 데이터셋을 이용하여 1차적으로 training 시켰으며, 이후 Plotly 기반의 VizML 데이터셋을 이용하여 Plotly JavaScript 라이브러리를 이용하여 프론트엔드를 구현할 예정이다.\n\n\n\n\n\n  Specification\n\n\nData2Vis의 examplesdata에서 가져온 airports.json 의 structure는 다음과 같다.\n\n\n해당 데이터를 plot으로 그리기 위해 사용된 Vega-Lite grammer은 다음과 같다.\n\n\n위와 같은 그래머를 training data로 학습시킨 모델이 Vega Editor를 통해 그린 plot들은 다음과 같다.\n\n\n\n\n\n\n\n결론적으로, 본 팀이 사용하고자 하는 모델의 input 과 output , dataset 및 model 개요 는 다음과 같다.\n\n  \n      \n        input\n    \n    \n        model\n    \n    \n        output\n    \n    \n        dataset\n    \n  \n  \n      \n        \n          1개의 dataset(.csv)\n      \n      \n          Seq2Seq + Encoder-Decoder Model\n      \n      \n          visualization recommended plots (Top-k개)\n      \n      \n          Data2Vis의 dataset\n      \n    \n  \n\n\n\n\ninput dataset의 경우 Training : Eval : Test = 0.8 : 0.1 : 0.1 의 비율로 구성한다.\n\n \n\n\n\n\n\n\n\n\n\n\n  WEB\n\n\n\n\n\n  Guideline\n\n1. 먼저, 소스를 받기 위해 `git clone` 으로 모든 파일을 local server로 가져온다.\n2. 이후, 필요한 모든 npm package를 다운받아 프로젝트를 run할 준비를 마친다.\n3. 아직 배포를 하지 않은 상태이므로, localhost로 실행하기 위해 client 폴더로 이동한다.\n4. client를 실행시킨다.\n\n\n※ 자동으로 브라우저가 실행되지 않는 경우, http://localhost:3000 를 주소창에 입력하여 프론트를 확인해 주세요.\n\n1234git clone https://github.com/Ewha-BTS/ERP.gitnpm icd erp-clientnpm start\n\n\n\n\n\n\n  Front-end\n\n\n\nTech Stack\nReact.js\nRecoil\nstyled-components (SASS 기반)\naxios\n\n\n\n\n\nStructure123456789101112131415161718192021222324public/\t├ index.htmlsrc/\t├ assets/\t├ components/\t\t├ common/\t\t\t├ TabBar.js\t\t├ main/\t\t\t├ Dashboard.js\t\t\t├ Graph.js\t\t\t├ DetailBar.js\t\t\t├ RecBar.js\t\t\t├ MyList.js\t├ lib/\t\t├ api.js\t\t├ state.js\t├ pages/\t\t├ MainDashboard.js\t\t├ UserDefine.js\t\t├ Recommendation.js\t\t├ MyPage.js\t├ App.js\t├ index.css\t├ index.js\n\n\n\n\nUI\n\n\n\n\n\n\n\n\n\nDetailsRecoilcomponent 내 data 이동이 많아 state를 유연하게 관리하기 위해 필자는 Recoil을 사용하였다. App.js에서 state 관리가 이루어지기 때문에 index.js 에서 컴포넌트를  RecoilRoot 로 감싼 후, data 이동을 관리하였다.\n1import &#123; RecoilRoot &#125; from &quot;recoil&quot;;\n12345678ReactDOM.render(  &lt;React.StrictMode&gt;    &lt;RecoilRoot&gt;      &lt;App /&gt;    &lt;/RecoilRoot&gt;  &lt;/React.StrictMode&gt;,  document.getElementById(&quot;root&quot;));\n\n\n\n\nAxiosserver와의 통신을 위해 필자는 axios 를 사용하였다. 기본적으로 생성한 객체는 다음과 같다.\n1import axios from &quot;axios&quot;;\n1234const instance = axios.create(&#123;  baseURL: &quot;http://203.255.176.80:5016&quot;,  timeout: 1000&#125;);\n세부적인 API는 서버가 구축된 후 구현할 예정이다.\n\n\n\n\n\n\n  Back-end\n\n\n서버의 경우 Data2Vis의 웹 데모 오픈 소스에서 webserver.py 를 본 팀의 프론트엔드에 맞게  변형하여 라우팅 및 기능을 구현하였으며, 모델의 경우 직접 학습시킨 model.ckpt-15000 을 연동시켰다.\n\n\n\n\n\n\n\n\n\n\n\n  Conclusion\n\n본 팀은 현재 Recommendation System Model을 서버에 올려 메인 기능인 \"추천 플랏 보여주기\" 을 구현하였다.\n\n이후,\n\n남은 메인 기능 구현\n그에 따른 서버 연동\n모델 수정\n배포\n\n등을 수행하고, 이 과정에서 Plotly 와 같은 다양한 모델과 그에 따른 JavaScript 라이브러리를 이용하여 더 나은 서비스를 구축할 예정이다. 결론적으로 목표하는 바는 Customizing Recommended Data Visualization Plots 을 제공하는 서비스의 완성도를 높이고 직접 배포한 후 유지, 보수 관리를 꾸준히 이어나가는 것이다.\n","dateCreated":"2021-05-28T00:42:19+09:00","dateModified":"2021-05-28T18:34:57+09:00","datePublished":"2021-05-28T00:42:19+09:00","description":"","headline":"Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/28/ERP-Overview/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/28/ERP-Overview/","keywords":"recommendation, recommendation system, visualization, data visualization, Data2Vis, Seq2Seq, RNN"}</script>
-    <meta name="description" content="이 글은 이화여자대학교 2021-1학기 캡스톤디자인프로젝트B - 스타트7팀(이화BTS) 나정현의 기술 블로그 제출물입니다. 본 팀은 “ERP: Customizing Recommended Data Visualization Plots” 을 주제로 웹 서비스를 제작 중에 있으며, 해당 서비스는 Data2Vis의 Encoder-Decoder 모델, Seq2Seq2">
-<meta property="og:type" content="blog">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="이 글은 이화여자대학교 2021-1학기 캡스톤디자인프로젝트B - 스타트7팀(이화BTS) 나정현의 기술 블로그 제출물입니다. 본 팀은 “ERP: Customizing Recommended Data Visualization Plots” 을 주제로 웹 서비스를 제작 중에 있으며, 해당 서비스는 Data2Vis의 Encoder-Decoder 모델, Seq2Seq2">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템">
 <meta property="og:url" content="https://leahincom.github.io/2021/05/28/ERP-Overview/index.html">
 <meta property="og:site_name" content="leah">
@@ -42,316 +48,184 @@
 <meta property="article:tag" content="RNN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://nova-praxis.com/wp-content/uploads/2018/08/tableau-desktop.png">
-    
-    
-        
-    
-    
-        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
-    
-    
-    
-    
-    <!--STYLES-->
-    
-<link rel="stylesheet" href="/assets/css/all.css">
 
-    
-<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+<link rel="canonical" href="https://leahincom.github.io/2021/05/28/ERP-Overview/">
 
-    
-<link rel="stylesheet" href="/assets/css/thumbs.css">
 
-    
-<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
 
-    <!--STYLES END-->
-    
+  <title>Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템 | leah</title>
+  
 
-    
 
-    
-        
-    
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-    <body>
-        <div id="blog">
-            <!-- Define author's picture -->
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-
-    
-        
-            
-        
-    
-
-<header id="header" data-behavior="5">
-    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-    <div class="header-title">
-        <a
-            class="header-title-link"
-            href="/"
-            aria-label=""
-        >
-            leah
-        </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    
-        
-            <a
-                class="header-right-picture "
-                href="#about"
-                aria-label="Open the link: /#about"
-            >
-        
-        
-            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-        
-        </a>
-    
-</header>
+  </div>
 
-            <!-- Define author's picture -->
+  <div class="site-meta">
 
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">leah</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dev_log</p>
+  </div>
 
-
-        
-    
-
-<nav id="sidebar" data-behavior="5">
-    <div class="sidebar-container">
-        
-            <div class="sidebar-profile">
-                <a
-                    href="/#about"
-                    aria-label="Read more about the author"
-                >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-                </a>
-                <h4 class="sidebar-profile-name">JungHyun</h4>
-                
-                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
-</h5>
-                
-            </div>
-        
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-categories"
-                            
-                            rel="noopener"
-                            title="Categories"
-                        >
-                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Categories</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-archives"
-                            
-                            rel="noopener"
-                            title="Archives"
-                        >
-                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Archives</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link open-algolia-search"
-                            href="#search"
-                            
-                            rel="noopener"
-                            title="Search"
-                        >
-                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Search</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="#about"
-                            
-                            rel="noopener"
-                            title="About"
-                        >
-                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">About</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://github.com/leahincom"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="GitHub"
-                        >
-                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">GitHub</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://facebook.com/junghyun.lah/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Facebook"
-                        >
-                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Facebook</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://www.linkedin.com/profile"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="LinkedIn"
-                        >
-                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">LinkedIn</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="mailto:leahincom@gmail.com"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Mail"
-                        >
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Mail</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/atom.xml"
-                            
-                            rel="noopener"
-                            title="RSS"
-                        >
-                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">RSS</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
 </nav>
 
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
             
-            <div id="main" data-behavior="5"
-                 class="
-                        hasCoverMetaIn
-                        ">
-                
-<article class="post">
+
     
-    
-        <div class="post-header main-content-wrap text-left">
-    
-        <h1 class="post-title">
-            Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/28/ERP-Overview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Developing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템
         </h1>
-    
-    
+
         <div class="post-meta">
-    <time datetime="2021-05-28T00:42:19+09:00">
-	
-		    May 28, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Graduation-Project/">Graduation Project</a>, <a class="category-link" href="/categories/Graduation-Project/About/">About</a>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
 
+              <time title="Created: 2021-05-27 16:42:19" itemprop="dateCreated datePublished" datetime="2021-05-27T16:42:19+01:00">2021-05-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-28 10:34:57" itemprop="dateModified" datetime="2021-05-28T10:34:57+01:00">2021-05-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Graduation-Project/" itemprop="url" rel="index"><span itemprop="name">Graduation Project</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Graduation-Project/About/" itemprop="url" rel="index"><span itemprop="name">About</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
 
     
-</div>
-
     
-</div>
-
     
-    <div class="post-content markdown">
-        <div class="main-content-wrap">
-            <p>이 글은 이화여자대학교 2021-1학기 캡스톤디자인프로젝트B - 스타트7팀(이화BTS) 나정현의 기술 블로그 제출물입니다. 본 팀은 “ERP: Customizing Recommended Data Visualization Plots” 을 주제로 웹 서비스를 제작 중에 있으며, 해당 서비스는 Data2Vis의 Encoder-Decoder 모델, Seq2Seq2 모델에 기반하여 Plot 추천 시스템을 제공합니다.</p>
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>이 글은 이화여자대학교 2021-1학기 캡스톤디자인프로젝트B - 스타트7팀(이화BTS) 나정현의 기술 블로그 제출물입니다. 본 팀은 “ERP: Customizing Recommended Data Visualization Plots” 을 주제로 웹 서비스를 제작 중에 있으며, 해당 서비스는 Data2Vis의 Encoder-Decoder 모델, Seq2Seq2 모델에 기반하여 Plot 추천 시스템을 제공합니다.</p>
 <blockquote>
 <p>GitHub 소스코드 : <a target="_blank" rel="noopener" href="https://github.com/Ewha-BTS/ERP">https://github.com/Ewha-BTS/ERP</a></p>
 <p>(※ 현재 비공개인 상태입니다.)</p>
@@ -598,345 +472,221 @@ Data2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실�
 </ol>
 <p>등을 수행하고, 이 과정에서 Plotly 와 같은 다양한 모델과 그에 따른 JavaScript 라이브러리를 이용하여 더 나은 서비스를 구축할 예정이다. 결론적으로 목표하는 바는 Customizing Recommended Data Visualization Plots 을 제공하는 서비스의 완성도를 높이고 직접 배포한 후 유지, 보수 관리를 꾸준히 이어나가는 것이다.</p>
 
-            
-
-
-        </div>
     </div>
-    <div id="post-footer" class="post-footer main-content-wrap">
-        
-            <div class="post-footer-tags">
-                <span class="text-color-light text-small">TAGGED IN</span><br/>
-                
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/Data2Vis/" rel="tag">Data2Vis</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/RNN/" rel="tag">RNN</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/Seq2Seq/" rel="tag">Seq2Seq</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/data-visualization/" rel="tag">data visualization</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/recommendation/" rel="tag">recommendation</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/recommendation-system/" rel="tag">recommendation system</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/visualization/" rel="tag">visualization</a>
-
-            </div>
-        
-        
-            <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
-                    data-tooltip="Closure"
-                    aria-label="PREVIOUS: Closure"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/27/THUREE-Redux/"
-                    data-tooltip="Redux"
-                    aria-label="NEXT: Redux"
-                >
-                    
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/28/ERP-Overview/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/28/ERP-Overview/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
-                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/28/ERP-Overview/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
-                    <i class="fab fa-google-plus" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-        
-        
-            
-        
-    </div>
-</article>
-
-
-
-                <footer id="footer" class="main-content-wrap">
-    <span class="copyrights">
-        Copyrights &copy; 2021 JungHyun. All Rights Reserved.
-    </span>
-</footer>
-
-            </div>
-            
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
-                    <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/"
-                    data-tooltip="Closure"
-                    aria-label="PREVIOUS: Closure"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/27/THUREE-Redux/"
-                    data-tooltip="Redux"
-                    aria-label="NEXT: Redux"
-                >
-                    
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/28/ERP-Overview/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/28/ERP-Overview/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
-                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/28/ERP-Overview/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
-                    <i class="fab fa-google-plus" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-                </div>
-                
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
-        <i id="btn-close-shareoptions" class="fa fa-times"></i>
-        <ul class="share-options">
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/28/ERP-Overview/"
-                        aria-label="Share on Facebook"
-                    >
-                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
-                    </a>
-                </li>
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/28/ERP-Overview/"
-                        aria-label="Share on Twitter"
-                    >
-                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
-                    </a>
-                </li>
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/28/ERP-Overview/"
-                        aria-label="Share on Google+"
-                    >
-                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
-                    </a>
-                </li>
-            
-        </ul>
-    </div>
-
-
-            
-        </div>
-        
-
 
     
-        
+    
     
 
-<div id="about">
-    <div id="about-card">
-        <div id="about-btn-close">
-            <i class="fa fa-times"></i>
-        </div>
-        
-            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-        
-            <h4 id="about-card-name">JungHyun</h4>
-        
-            <div id="about-card-bio"><p>author.bio</p>
-</div>
-        
-        
-            <div id="about-card-job">
-                <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>author.job</p>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/recommendation/" rel="tag"># recommendation</a>
+              <a href="/tags/recommendation-system/" rel="tag"># recommendation system</a>
+              <a href="/tags/visualization/" rel="tag"># visualization</a>
+              <a href="/tags/data-visualization/" rel="tag"># data visualization</a>
+              <a href="/tags/Data2Vis/" rel="tag"># Data2Vis</a>
+              <a href="/tags/Seq2Seq/" rel="tag"># Seq2Seq</a>
+              <a href="/tags/RNN/" rel="tag"># RNN</a>
+          </div>
 
-            </div>
         
+
+
         
-            <div id="about-card-location">
-                <i class="fa fa-map-marker-alt"></i>
-                <br/>
-                Seoul/South Korea, London/UK
-            </div>
-        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/27/THUREE-Redux/" rel="prev" title="Redux">
+      <i class="fa fa-chevron-left"></i> Redux
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/" rel="next" title="Closure">
+      Closure <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">
+  Project Overview
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">
+  Model
+</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">
+  Data2Vis
+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">
+  Specification
+</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">
+  WEB
+</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">
+  Guideline
+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">
+  Front-end
+</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tech-Stack"><span class="nav-number">3.2.1.</span> <span class="nav-text">Tech Stack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Structure"><span class="nav-number">3.2.2.</span> <span class="nav-text">Structure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UI"><span class="nav-number">3.2.3.</span> <span class="nav-text">UI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Details"><span class="nav-number">3.2.4.</span> <span class="nav-text">Details</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Recoil"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">Recoil</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Axios"><span class="nav-number">3.2.4.2.</span> <span class="nav-text">Axios</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">
+  Back-end
+</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">
+  Conclusion
+</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JungHyun</p>
+  <div class="site-description" itemprop="description">Continuously Developing Developer</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
 </div>
 
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
         
+
         
-<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
-        <!--SCRIPTS-->
 
-<script src="/assets/js/jquery.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JungHyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
 
-
-<script src="/assets/js/jquery.fancybox.js"></script>
-
-
-<script src="/assets/js/thumbs.js"></script>
-
-
-<script src="/assets/js/tranquilpeak.js"></script>
-
-<!--SCRIPTS END-->
-
-
-    
+        
 
 
 
 
-    </body>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
 </html>

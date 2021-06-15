@@ -1,21 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="leah">
-    <title>Hooks - leah</title>
-    <meta name="author" content="JungHyun">
-    
-        <meta name="keywords" content="hexo,javascript,">
-    
-    
-    
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Hooks\n\n\n\n기본 Hook\n\n\n\nuseState1const [state, setState] = useState(initialState);\n\nuseState() : state 와 setState 을 반환하는 함수\n\ninitialState : 초기값\n보통 null 이나 &quot;&quot; 등의 default value로 설정한다.\n\n\n\n\nstate : 상태 유지 (저장) 값\n\n최초 렌더링 시 반환된 state 는 initialValue 이다.\n\n\nsetState : state 값을 갱신하는 함수\n1setState(newState);\n\n새 state 값을 받으면 컴포넌트 리렌더링을 큐에 등록한다.\n리렌더링 시 useState 가 반환하는 첫번째 값 (인자) 은 갱신된 최신 state 이다.\n\n\n\n\n\n\n\n\nNote\nReact guarantees that setState function identity is stable and won’t change on re-renders. This is why it’s safe to omit from the useEffect or useCallback dependency list.\n\n\n\nFunctional Updates\n 함수적 갱신\n\n\n\n\n\n\nsetState 가 값을 갱신하는 과정을 직접 코드로 작성하면 다음과 같다.\n12345const [state, setState] = useState(&#123;&#125;);setState(prevState =&gt; &#123;  // Object.assign would also work  return &#123;...prevState, ...updatedValues&#125;;&#125;);\n\n갱신된 객체를 자동으로 merge하는  useState 와 반대로, setState 는 initialValue 를 유지한다.\n\n이전 state 를 이용해서 값을 갱신하는 경우, 이전 값을 받아 갱신된 값을 반환하는 함수를 setState 로 전달하면 된다.\n1234567891011121314151617function Counter (&#123; initialCount &#125;) &#123;  const [count, setCount] = useState(initialCount);  return (    &lt;&gt;      Count: &#123;count&#125;\t\t\t// 초기화      &lt;button onClick=&#123;() =&gt; setCount(initialCount)&#125;&gt;Reset&lt;/button&gt;\t\t\t// 이전 값을 이용해서 값을 갱신하는 경우\t\t\t// parameter value : 현재 값\t\t\t// return value : 갱신할 값      &lt;button onClick=&#123;() =&gt; setCount(prevCount =&gt; prevCount - 1)&#125;&gt;-&lt;/button&gt;      &lt;button onClick=&#123;() =&gt; setCount(prevCount =&gt; prevCount + 1)&#125;&gt;+&lt;/button&gt;    &lt;/&gt;  );&#125;\n\n\n\n\n\n\n\nNote\nAnother option is useReducer, which is more suited for managing state objects that contain multiple sub-values.\n\n\n\n\n\n\n업데이트 함수 (setState에 전달한 함수) 가 현재 상태와 정확히 동일한 값을 반환한다면 바로 뒤에 일어날 리렌더링은 완전히 건너뛰게 된다.\n\n\n\n\n\n\nReact에서 &#123;&#125; 를 쓰는 경우\n\nJSX 내부에서는 객체를 받아옴\n&#123;&#123;&#125;&#125; : 객체를 받아오는 것이 아니라 JSX 내부에서 생성할 때\n\n\nJSX 외부에서는 일반 JS의 문법 중 function destructurizing을 실행\n\n\n\n\n\n\nLazy Initial State\n 지연 초기 state\n\n\n\n\n\ninitialState 인자는 초기 렌더링 시에 사용하는 state (값) 으로, 리렌더링 시 이 값은 무시된다.\n만약 초기 state가 고비용 계산의 결과라면, 초기 렌더링 시에만 실행될 함수를 정의하여 전달하는 것이 효율적이다.\n1234const [state, setState] = useState(() =&gt; &#123;  const initialState = someExpensiveComputation(props);  return initialState;&#125;);\n\n\n\n\nBailing Out of a State Update\nstate 갱신의 취소\n\n\n\n\n\n앞서 설명한 “업데이트 함수 (setState에 전달한 함수) 가 현재 상태와 정확히 동일한 값을 반환한다면 바로 뒤에 일어날 리렌더링은 완전히 건너뛰게 된다.” 를 추가적으로 설명하자면,\nState Hook을 현재 state와 동일한 값으로 갱신 (update) 할 경우, 리액트는 children or firing effects를 렌더링하는 과정을 건너뛰고 실행 (처리) 을 종료한다.\n\n\n\n\n\nNote\nReact may still need to render that specific component again before bailing out. That shouldn’t be a concern because React won’t unnecessarily go “deeper” into the tree. If you’re doing expensive calculations while rendering, you can optimize them with useMemo.\n\n\n\n\n\nuseEffect함수형 컴포넌트 내에서는 React’s render phase에 따라 Mutations, subscriptions, timers, logging, and other side effects 가 허용되지 않는다.\n이를 위해 useEffect 를 사용할 수 있다.\n1useEffect(didUpdate);\n\nuseEffect() : 모든 렌더링이 완료된 후 / 어떤 값이 변경되었을 때에만 동작 ( didUpdate ) 을 수행\ndidUpdate : 특정 effect를 발생시키는 (명령형) 함수\n\n\n\n\n\nCleaning Up an Effect\neffect 정리\n\n\n\n\n\nEffect는 컴포넌트가 화면에서 제거될 때 정리되어야 하는 요소 (e.g. subscription, timer ID 등) 를 만들곤 한다. 이를 정리하는 함수를 useEffect 에 전달할 수 있다.\n12345678useEffect(() =&gt; &#123;  // new subscription is created on every update  const subscription = props.source.subscribe();  return () =&gt; &#123;    // Clean up the subscription    subscription.unsubscribe();  &#125;;&#125;);\n\nclean-up function (e.g. subscription.unsubscribe() )은 컴포넌트가 제거되기(=== 다음의 effect) 이전 에 실행되어 memory leaks를 방지한다.\n컴포넌트가 여러번 리렌더링 될 경우, 이전의 effect는 다음의 effect가 실행되기 이전 에 정리된다.\n\n\n\n\n\nTiming of Effects\neffect 타이밍\n\n\n\n\n\nuseEffect에 전달된 함수의 경우 레이아웃 배치과 그리기를 완료한 후, 지연된 이벤트가 발생하는 동안 실행된다. 이는 브라우저가 화면을 업데이트하는 과정을 방해하지 않기 때문에, 여러 side effects (e.g. setting up subscriptions and event handlers) 를 실행하기에 적합한 때이다.\nuseEffect 는 브라우저가 그려지기 이전까지는 대기하지만, 새로운 렌더링이 발생하기 이전에 실행되는 것을 보장한다. 리액트는 언제나 새로운 업데이트가 발생하기 이전에 이전의 렌더링 effect를 모두 제거한다.\n\n\n\n\n\nuseLayoutEffect\nDOM 변경과 같이 사용자에게 effect가 보여지는 경우, visual inconsistency 방지를 위해 다음 execution (event) 이 실행되기 이전에 현재 화면이 렌더링이 됨과 동시에 effect가 (synchronously) 발생하여야 한다.\n\n\n\n\n\nConditionally Firing an Effect\n조건부 effect 발생\n\n\n\n\n\nEffect의 default behavior은 렌더링이 모두 완료된 이후 실행되는 것이다. 이는 해당 effect의 dependency 중 하나가 변경될 때마다 새로 실행됨을 의미한다.\n앞선 예제를 통해서 자세히 보면,\n12345678useEffect(() =&gt; &#123;  // new subscription is created on every update  const subscription = props.source.subscribe();  return () =&gt; &#123;    // Clean up the subscription    subscription.unsubscribe();  &#125;;&#125;);\nsubscription 은 매 업데이트마다 생성될 필요 없이, source prop 이 변할 때만 새로 생성되면 된다.\n이와 같은 현상을 방지하기 위해,  useEffect 의 2번째 argument로 effect가 의존하는 (depend on, dependency) 배열을 전달한다.\n따라서 위 예제를 수정해보면,\n1234567891011useEffect(  // 전달하는 함수는 동일하되,  () =&gt; &#123;    const subscription = props.source.subscribe();    return () =&gt; &#123;      subscription.unsubscribe();    &#125;;  &#125;,  // 두번째 인자로 dependency array (depend on하는 배열) 을 전달한다.  [props.source],);\n이를 통해 subscription은 props.source가 변경될 때에만 재생성된다.\n\n\n\n\n만약 effect를 (mount 또는 unmount 시) 한 번만 수행하고 싶다면 두번째 인자로 빈 배열 ( [] ) 을 전달하면 된다. 이를 통해 effect는 컴포넌트 범위에서 가져온 값들 (e.g. props, state 등) 에 전혀 의존하지 않으므로 해당 값들이 변경되어도 다시 실행되지 않는다.\n빈 배열 ( [] ) 은 effect 안에 있는 props 와 state 가 항상 초기값을 가지게 됨을 의미한다. 이는 componentDidMount 와 componentWillUnMount 의 기능과 같다.\n\n\n\n\n\n두번째 인자로 전달하는 배열은 effect에 사용되는 컴포넌트 범위의 모든 값 (e.g. props, state 등) 들을 포함해야 한다. 이를 위반할 시 이전 렌더링에서 설정한 값을 참조하는 버그가 발생한다.\n이렇게 전달된 dependency 배열은 effect 함수에 인자로 전달되지 않는다. 하지만 effect 함수 내에서 참조된 모든 값들이 해당 배열에 포함되어야 하므로, 전달 여부는 유의미하지 않다.\n\n\n\n\n\nuseContext1const value = useContext(MyContext);\n\nuseContext() : ( React.createContext 를 통해 반환된 값인 ) context 객체에 **현재 context 값 (MyContext) **을 반환한다.\n가장 가까운 상위 컴포넌트 &lt;MyContext.Provider&gt; 가 업데이트 되면, useContext 는 해당 컴포넌트에 전달 (포함) 된 가장 최신의 context value 에 따라 화면을 리렌더링 한다.\n\n\nMyContext : 현재 context 값 (객체) 으로, 트리 구조에서 해당 컴포넌트의 상위 컴포넌트이면서 가장 가까운 &lt;MyContext.Provider&gt; 의 value prop 에 따라 결정된다.\nuseContext() 의 인자는 context 객체여야 한다.\nCorrect: useContext(MyContext)\nIncorrect: useContext(MyContext.Consumer)\nIncorrect: useContext(MyContext.Provider)\n\n\n\n\n\n\n\n\n\nuseContext 를 사용한 컴포넌트는 context 값이 변경될 때마다 리렌더링된다. 리렌더링 되는 컴포넌트가 비싸다면, momoization 을 이용해 효율성을 높일 수 있다.\n\n상위 컴포넌트에서 React.memo 나 shouldComponentUpdate 를 쓰더라도, useContext 를 사용한 컴포넌트부터 리렌더링이 진행 (시작) 된다.\n\n\n\n\n\nuseContext 는 context를 읽고 변경사항을 구독 (확인) 하는 것만 가능하기 때문에, 해당 context의 값을 전달하기 위해 트리 구조 내 상위 컴포넌트로서 &lt;MyContext.Provider&gt; 가 필요하다.\n\n\n\n\nPutting it together with Context.Provider123456789101112131415161718192021222324252627282930313233343536373839const themes = &#123;  light: &#123;    foreground: &quot;#000000&quot;,    background: &quot;#eeeeee&quot;  &#125;,  dark: &#123;    foreground: &quot;#ffffff&quot;,    background: &quot;#222222&quot;  &#125;&#125;;const ThemeContext = React.createContext(themes.light);function App() &#123;  return (    &lt;ThemeContext.Provider value=&#123;themes.dark&#125;&gt;      &lt;Toolbar /&gt;    &lt;/ThemeContext.Provider&gt;  );&#125;function Toolbar(props) &#123;  return (    &lt;div&gt;      &lt;ThemedButton /&gt;    &lt;/div&gt;  );&#125;function ThemedButton() &#123;  // useContext의 인자로서 ThemeContext 객체 전달  // theme = &lt;ThemeContext.Provider&gt;의 value인 &#123;themes.dark&#125; // 객체  const theme = useContext(ThemeContext);  return (    &lt;button style=&#123;&#123; background: theme.background, color: theme.foreground &#125;&#125;&gt;      I am styled by theme context!    &lt;/button&gt;  );&#125;\n\n\n\n\n\n\n\n추가 Hooks\n\n\n\nuseReduceruseState() 의 대체재로서 사용한다. 여러 하위 값을 포함하거나 다음 state가 이전의 state 값에 영향을 받는 복잡한 state 로직을 가진 경우 선호된다.\n컴포넌트의 state 업데이트 로직을 컴포넌트에서 분리하여 컴포넌트 바깥에서 작성하거나 다른 파일에서 작성한 후 불러와서 사용할 수도 있다.\n또한 callback 대신 dispatch를 전달한 수 있어 deep update를 요구하는 컴포넌트의 경우 performance를 최적화할 수 있다.\n\nWhat is deep update in React?\n먼저, React에서 update란; useState() 를 사용하는 모든 리액트 컴포넌트에서 사용가능한 함수로, 컴포넌트 state가 변경되었을 때 리액트에게 이를 알림으로써 해당 state에 종속된 UI를 업데이트하기 위해 컴포넌트에게 리렌더링이 필요하다는 것을 전달한다. \n따라서, deep update란 deep nested 객체 (many pieces of information과 fixed 스키마를 가진) 를 update 하는 것을 의미한다. \n\n\n\n\n\n1const [state, dispatch] = useReducer(reducer, initialArg, init);\n\nuseReducer() : reducer 를 받아 현재 state와 짝지어진 dispatch 함수를 반환한다.\n\nreducer : 현재 state와 action 객체를 파라미터로 받아와서 ( (state, action) ) 새로운 state를 반환하는 함수\n\n(state, action) =&gt; newState 의 구조를 가진다.\n12345function reducer(state, action) &#123;  // 새로운 state를 만드는 로직  // const nextState = ...  return nextState;&#125;\n반환하는 해당 state는 컴포넌트가 지닐 새로운 state가 된다.\n\naction : 업데이트를 위한 정보를 가지고 있다.\n\n주로 type 값을 지닌 객체 형태로 사용한다.\n\n type 의 경우, 대문자 를 사용하거나 _ 로 시작하는 관습이 있다.\n\n\n\n\n\n\nstate : 컴포넌트에서 사용할 수 있는 상태\n\ndispatch : action 을 (인자로 받아) 발생시키는 함수\n1dispatch(&#123; type: &#x27;INCREMENT&#x27; &#125;)\n\n\n\n\n\n\n12345678910111213141516171819202122232425const initialState = &#123;count: 0&#125;;function reducer(state, action) &#123;  switch (action.type) &#123;    case &#x27;increment&#x27;:      return &#123;count: state.count + 1&#125;;    case &#x27;decrement&#x27;:      return &#123;count: state.count - 1&#125;;    default:      throw new Error();  &#125;&#125;function Counter() &#123;  const [state, dispatch] = useReducer(reducer, initialState);  return (    &lt;&gt;      Count: &#123;state.count&#125;\t\t\t// dispatch의 인자로 action (type) 전달      &lt;button onClick=&#123;() =&gt; dispatch(&#123;type: &#x27;decrement&#x27;&#125;)&#125;&gt;-&lt;/button&gt;      &lt;button onClick=&#123;() =&gt; dispatch(&#123;type: &#x27;increment&#x27;&#125;)&#125;&gt;+&lt;/button&gt;    &lt;/&gt;  );&#125;\n\n\n\n\n\nNote\n리액트는 리렌더링이 되더라도 dispatch 함수의 identity 는 동일하게 유지하기 때문에, useEffect 나 useCallback 의 dependency list에 포함하지 않는다.\n\n\n\n\n\nSpecifying the Initial State\n초기 state의 구체화\n\n\n\n\n\nuseReducer() 의 state를 초기화하는 방법에는 2가지가 있다.\n\n가장 간단한 방법으로는, initial state를 2번째 인자로 전달하는 방법이 있다.\n\n1234const [state, dispatch] = useReducer(\treducer,  &#123;count: initialCount&#125;);\n\n\n\n\nLazy Initialization\n 초기화 지연\n\n\n\n\n\n\ninitial state를 lazily 생성하는 방법으로, init 함수를 3번째 인자로 전달하여 initial state를 init(initialArg) 로 설정할 수 있다.\ninitial state 를 계산하는 로직을 reducer 밖에 정의하여 action 에 따른 state 재설정 시 유용하게 사용할 수 있다.\n\n\n\n1234567891011121314151617181920212223242526272829303132333435363738// initialization 함수를 외부에 정의function init(initialCount) &#123;  return &#123;count: initialCount&#125;;&#125;function reducer(state, action) &#123;  switch (action.type) &#123;    case &#x27;increment&#x27;:      return &#123;count: state.count + 1&#125;;    case &#x27;decrement&#x27;:      return &#123;count: state.count - 1&#125;;          // 재설정 시 init 함수 호출    case &#x27;reset&#x27;:      return init(action.payload);    default:      throw new Error();  &#125;&#125;function Counter(&#123;initialCount&#125;) &#123;    // 3개의 인자 전달 (reducer, initial_value, initialization_function)  const [state, dispatch] = useReducer(reducer, initialCount, init);  return (    &lt;&gt;      Count: &#123;state.count&#125;\t\t\t// 재설정 시 action 객체에 &#123;type, payload&#125; 전달      &lt;button        onClick=&#123;() =&gt; dispatch(&#123;type: &#x27;reset&#x27;, payload: initialCount&#125;)&#125;&gt;        Reset      &lt;/button&gt;      &lt;button onClick=&#123;() =&gt; dispatch(&#123;type: &#x27;decrement&#x27;&#125;)&#125;&gt;-&lt;/button&gt;      &lt;button onClick=&#123;() =&gt; dispatch(&#123;type: &#x27;increment&#x27;&#125;)&#125;&gt;+&lt;/button&gt;    &lt;/&gt;  );&#125;\n\npayload\n전송되는 데이터\n\n\n\n\n\nBailing Out of a Dispatch\n dispatch의 회피\n\n\n\n\n\n앞서 useState() 에서 설명한 것과 같이, Reducer Hook ( useReducer() ) 이 현재 state과 동일한 값을 반환할 경우, 자식을 렌더링하거나 effect를 실행하지 않고 처리 (i.e. 렌더링, 이벤트) 를 종료한다.\n\nObject.is() comparison 알고리즘을 이용\n\n처리를 종료하기 전에 해당 컴포넌트를 다시 렌더링해야 하는 경우가 존재하지만, 그 이상으로 깊게 트리를 탐색하지 않으므로 문제가 되지는 않는다. 만약 렌더링에 비싼 계산 과정 이 포함된다면, useMemo() 를 사용할 수 있다.\n\n\n\n\nuseCallbackmemoized callback 을 반환한다.\n\n\n\n\n\nmemoization\n\n비싼 함수의 호출 결과를 저장하고 같은 input이 발생할 경우 저장된 (캐시) 값을 반환하여 프로그램의 수행 속도를 증가시키는 최적화 (optimization) 기술\n\n(some sort of) 캐시를 이용하여 (비싼) 함수를 부르는 횟수를 제한하는 것\n\n특정 input에 대한 캐시값이 없다면, original 함수가 한번 호출되어 (캐시) map에 결과값이 추가된다.\n캐시를 지우지 않는 한 결과는 캐시 map에서 반환된다.\n\n\n\n\n\n\n\n👉 useCallback hook 은 다른 기능을 한다.\n\n🌈 REFERENCE를 꼭 읽어보세염 (:-&gt;\nuseCallback() 을 이용하는 이유는, callback 함수인 cb의 memoized 버전을 받기 위해서이다.\n컴포넌트가 처음으로 렌더링될 때, 새로운 cb 가 생성되고 똑같은 cb 함수가 useCallback() 에 의해 반환된다.\n\n\n\n\n\n\n위 예시에서 memoizedCb() 가 호출되면, original cb 콜백함수가 호출되어 결과적으로 original cb 함수를 호출한다.\n컴포넌트가 리렌더링 (2번째) 되면, 새로운 cb 가 생성된다. 하지만 useCallback() 에 전달된 dependency가 변하지 않았기 때문에, 생성된 cb는 버려지고 memoizedCb는 첫번째 렌더링 때 생성된 cb를 유지한다. 결국 이 때의 memoizedCb 호출은 이전과 같이 기존의 (old) cb 를 호출하여 original cb 함수를 호출하게 된다.\ndependency가 변하지 않는 이상, 모든 렌더링은 위와 같은 과정을 반복하여 사용하지 않는 콜백함수를 생성하고 기존의, memoized 콜백을 호출하여 결국 original cb 함수를 호출한다.\n\n\n\n\n\n\ndependency 가 변한 경우, memoizedCb 도 변한다.\n이전의 memoizedCb 가 첫번째 cb를 호출하는 과정과 비슷하게, 이 때의 memoizedCb 또한 dependency 가 변한 시점부터 첫번째 cb 를 호출한다.\n\n\n\n\n\n\n\ncallback\n특정 함수 (콜백함수) 를 다른 함수에 전달하고 이를 호출하는 특정 이벤트 (e.g. a query finished or an error occurs) 가 발생하면 콜백함수를 발생시키는 것\n\n여러 조각의 코드의 소통을 정의하여, 콜백함수를 호출하는 모듈이 결과를 사용하는 것이 아니라 이벤트가 발생했을 때 호출을 받는 함수에 콜백함수를 전달한다.\n여기서 중요한 점은, one piece of code가 콜백함수를 호출하면 다른 (조각의) 코드가 이 호출을 받는다는 것이다. 여기서 어떠한 호출 코드도 잃으면 (생략되면) 안 되기 때문에, 콜백함수를 memoizing하여 모듈 간 소통 line을 끊는 방법이 탄생한 것이다.\n\n\n결과적으로 useCallback() 이 하는 것은 똑같은 callback 의 횟수를 제한하는 것이다. 결과값들은 캐시에서 반환되지 않고, dependency 가 변한 시점으로부터 첫번째의 cb 와 같은 memoizedCb 를 반환한다.\n\n\n\n\n123456const memoizedCallback = useCallback(  () =&gt; &#123;    doSomething(a, b);  &#125;,  [a, b],);\n\nuseCallback() : inline callback 함수와 dependencies 배열을 전달\nmemoized version of the callback을 반환하며, dependencies가 변했을 때만 memoized version 도 변경된다.\nuseCallback(fn, deps) === useMemo(() =&gt; fn, deps)\n\n\n\n\n\n\n\n불필요한 렌더링을 방지하기 위해 reference의 동일성에 의존하는 (동일성에만 영향을 받는) (최적화된) 자식 컴포넌트에 콜백함수를 전달할 때 유용하다.\n\n앞선 useEffect와 마찬가지로, dependencies 배열은 콜백함수에 인자로 전달되지 않는다.\n하지만 정의 자체가, “콜백함수에서 참조하는 모든 값들은 dependencies 배열에 포함되어야 한다” 이다.\n\n\n\n\n\nuseMemomemoized 값을 반환한다.\n\nuseMemo vs. useCallback\nuseCallback() : 함수 반환\nuseMemo() : 값 반환\n\n\n\n\n\n1const memoizedValue = useMemo(() =&gt; computeExpensiveValue(a, b), [a, b]);\n\nuseMemo() : create 함수와 dependencies 배열 을 전달\ndependency 가 변할 때에만 memoized 값을 다시 계산한다. 이를 통해 비싼 계산 과정이 매 렌더링마다 발생하는 것을 방지한다.\n2번째 인자 (dependencies 배열 로서) 에 빈 배열 ( [] ) 이 전달되면, 매 렌더링 마다 새로운 값이 계산된다.\n\n\n\n\n\n\n\nuseMemo() 에 전달된 create 함수 는 렌더링 동안 실행된다.\n\n보통 side effect는 useMemo 가 아니라 useEffect 에서 발생한다. 따라서 렌더링 동안은 다른 행동을 하지 않아야 한다. (당연함 -.-)\n\n\n\n\n\n\n❗️useMemo() 는 성능 최적화에만 사용하고, 큰 의미적 기능 (semantic guarantee) 을 담지 않아야 한다. 따라서 useMemo() 를 사용하지 않고도 동작할 수 있도록 코드를 작성하고, 성능 최적화를 위해 useMemo() 를 추가하도록 한다.\n\n\n앞선 useEffect, useCallback 과 마찬가지로, depedencies 배열 은 콜백함수에 인자로 전달되지 않는다.\n\n\n\n\n\nuseRefJavaScript를 이용해 특정 DOM 을 선택해야 하는 경우 getElementById, querySelector 와 같은 DOM Selector 함수 를 사용한다.\n리액트를 사용할 때도 특정 DOM 을 선택해야 하는 상황이 발생하는데, 이 때 ref 를 사용한다.\n\n함수형 컴포넌트에서 ref 를 사용 할 때에는 useRef 라는 Hook 함수 를 사용한다.\n클래스형 컴포넌트에서는 콜백 함수를 사용하거나 React.createRef 라는 함수를 사용한다.\n\n\n\n\n\n1const refContainer = useRef(initialValue);\n\nuseRef() : (생성된 ref 객체의) .current 프로퍼티 (속성) 가 전달된 인자 (e.g. initialValue) 로 초기화된, 변경 가능한 ref 객체를 반환한다.\n변경가능한 값을 넣을 수 있는 .current 프로퍼티를 갖고 있는 “박스” 와 같다.\n해당 객체는 컴포넌트의 full lifetime 동안 지속된다.\n\n\n\n\n\n\n\nuseRef() 는 DOM에 접근하는 방법으로 많이 사용된다.\nuseRef() 를 사용하여\n\nRef 객체를 만들고,\n이 객체를 우리가 선택하고 싶은 DOM (노드) 에 ref 값으로 설정한다.\n그러면, Ref 객체의 .current 값은 우리가 원하는 DOM 을 가르키게 된다.\n\n\n\n\n\n1&lt;div ref=&#123;refContainer&#125; /&gt;\nrefContainer 의 .current 프로퍼티를 해당 ref 객체  ( refContainer ) 를 ref 로 설정한 DOM 노드로 설정하고, 노드가 변경될 때마다 그에 맞게 .current 프로퍼티를 조정한다.\n\n하지만 useRef() 는 .current 에 변경 사항이 존재하더라도 리렌더링 하지 않기 때문에, 이에 대해 notify 하지 않는다. 만약 리액트가 DOM 노드에 ref 객체를 연결하거나 제거할 때 notify 하고 싶다면, callback ref 를 이용해야 한다.\n\n\n\n\n\n12345678910111213141516171819function TextInput_With_FocusButton() &#123;  // inputEl : ref 객체 (null로 초기화됨)  const inputEl = useRef(null);    // button을 클릭하면 inputEl.current 인 input node에 focus() 를 적용한다.  const onButtonClick = () =&gt; &#123;    // `current` points to the mounted text input element    inputEl.current.focus();  &#125;;  return (    &lt;&gt;    \t// inputEl ref 객체를 ref로 설정하여 inputEl.current 프로퍼티를 input node 로 설정한다.      &lt;input ref=&#123;inputEl&#125; type=&quot;text&quot; /&gt;        \t// onClick 시 onButtonClick 함수를 실행하고 // 👉 goto onButtonClick comment      &lt;button onClick=&#123;onButtonClick&#125;&gt;Focus the input&lt;/button&gt;    &lt;/&gt;  );&#125;\n\nHTMLElement.focus()\n특정 element 에 (focus를 맞출 수 있을 때) focus를 맞추는 함수로, 해당 element는 키보드 등의 이벤트를 받는 default element로 정의된다.\n\n\n\n\n\n\n\n\n\n\nuseRef() 는 ref 속성 외에도, 클래스가 instance field (인스턴스 변수) 를 가지고 있는 것처럼 ref 객체에 변경 가능한 어떠한 값도 담을 수 있다는 장점이 있다.\n이는 useRef() 가 plain JavaScript 객체 를 생성하기 때문인데, 직접 &#123;current: ...&#125; 로 객체를 생성하는 것과 유일한 차이점은 useRef() 는 매 렌더링마다 똑같은 ref 객체를 제공 (반환) 한다는 것이다.\n\nclass field (클래스 변수) vs. instance field (인스턴스 변수)\n\n클래스 변수 : 여러 인스턴스 (서로 다른 객체) 간에 공유해야 하는 값을 바인딩\n인스턴스 변수 : 각 인스턴스 (객체) 마다 가지고 있는 고유한 값\n\n파이썬은 인스턴스를 통해 접근한 이름 (변수) 이 인스턴스의 name_space (name들을 정의한 공간) 에 없을 경우, 그 다음으로 클래스의 name_space에서 찾아본다.\n참고로 클래스 변수에 접근할 때에는 클래스 이름을 사용하여 바로 변수 (값) 에 접근할 수 있다.\n\n\n\n\n\nuseImperativeHandle\n❗️ref를 사용하는 imperative code 는 되도록이면 피하는 것이 좋다. ):-&lt;\n\nref를 사용할 때 부모 컴포넌트에 노출되는 인스턴스 값 (변수) 을 커스터마이징 한다.\n즉, forwarding된 ref를 replace할 수 있는 기능을 제공한다.\n\n\n\n\n1useImperativeHandle(ref, createHandle, [deps])\n\nuseImperativeHandle() : ref, 콜백함수 (createHandle), dependnecies 배열 을 전달\n\ncreateHandle() : 현재 컴포넌트의 값을 부모 컴포넌트가 접근할 수 있도록 하는 콜백함수\n\n\nforwardRef() 와 함께 사용되어야 한다.\n\nforwardRef() \n(말 그대로) reference를 전달해주는 기능을 하는 함수\n\n\n\n\n\n\n\n12345678910function FancyInput(props, ref) &#123;  const inputRef = useRef();  useImperativeHandle(ref, () =&gt; (&#123;    focus: () =&gt; &#123;      inputRef.current.focus();    &#125;  &#125;));  return &lt;input ref=&#123;inputRef&#125; ... /&gt;;&#125;FancyInput = forwardRef(FancyInput);\n&lt;FancyInput ref=&#123;inputRef&#125; /&gt; 를 수행 (렌더링) 하는 부모 컴포넌트는 inputRef.current.focus() 를 호출할 수 있다.\n\n\n\n\nuseLayoutEffectuseEffect 와 동일한 기능을 DOM 변경 시 동시에 (synchronously) 실행하는 함수로, DOM 에서 레이아웃을 읽음과 동시에 리렌더링을 해야할 때 사용한다.\nuseLayoutEffect 내부에 정의된 예정된 업데이트 또한 브라우저가 레이아웃을 그리기 이전에, 읽음과 동시에 발생한다.\n\n화면 업데이트를 차단하지 않아도 되는 경우에는 useEffect 를 사용하는 것이 좋다.\n\n\n\n\n\n\n 클래스 컴포넌트에서 코드를 옮길 때 useLayoutEffect() 는 componentDidMount 나 componentDidUpdate 와 같은 단계에서 발생한다. 하지만, 먼저 useEffect 를 시도해보고 에러가 발생할 때 useLayoutEffect 를 사용하는 것이 좋다.\n\n\nSSR (서버 사이드 렌더링) 의 경우, useLayoutEffect 나 useEffect 는 JavaScript 가 모두 다운되기 전까지는 실행되지 않는다. SSR 컴포넌트가 useLayoutEffect 를 포함한 경우,\n\n첫 렌더링 시 해당 컴포넌트가 필요하지 않다면 useEffect 로 로직을 옮기고,\nuseLayoutEffect 가 실행되기 전까지 HTML이 망가져 보인다면 클라이언트 렌더링이 완료될 때까지 해당 컴포넌트를 보여주는 것을 딜레이시킨다.\n\n서버 렌더링 HTML에서 레이아웃 effect를 필요로 하는 컴포넌트를 제외하기 위해서, \n\nshowCild &amp;&amp; &lt;Child /&gt; 를 이용하여 해당 컴포넌트를 조건적으로 렌더링을 하고, \nuseEffect(() =&gt; &#123; setShowChild(true); &#125;, []) 를 이용하여 보이는 것을 미룬다 (defer).\n\n이를 통해 HTML이 hydration (useLayoutEffect, useEffect 실행) 이전에 망가져 보이는 것을 방지한다.\n\n\n\n\n\nuseDebugValue1useDebugValue(value)\nReact DevTools 에서 커스텀 Hooks의 label (value) 을 보여준다.\n\n\n\n\n1234567891011function useFriendStatus(friendID) &#123;  const [isOnline, setIsOnline] = useState(null);  // ...  // Show a label in DevTools next to this Hook  // e.g. &quot;FriendStatus: Online&quot;  useDebugValue(isOnline ? &#x27;Online&#x27; : &#x27;Offline&#x27;);  return isOnline;&#125;\n\n\n\n\n\n모든 커스텀 Hook에 debug value를 추가하는 것은 좋지 않다.\nshared libraries에 속하는 커스텀 Hooks에 유용하게 사용될 수 있다.\n\n\n\n\n\nDefer Formatting Debug Values\n 디버그 값 포맷팅 지연하기\n\n\n\n\n\n디스플레이 (되는) 값을 포매팅하는 것은 고비용 연산일 수 있고, Hook이 감지되지 않은 경우 사실상 포매팅은 불필요하다. 따라서, useDebugValue 의 (optional한) 2번째 인자로 포매팅 함수 를 전달하여 Hook이 감지되었을 때만 해당 함수를 호출하여 포매팅할 수 있다.\n\n\n\n\n1useDebugValue(value, value =&gt; value.formatting_function());\n\nuseDebugValue() : value 와 optional formatting 함수 를 전달\noptional formatting function : debug value 를 인자로 전달하고 formatted display value 를 반환한다.\n\n\n\n\n\n\n\n1useDebugValue(date, date =&gt; date.toDateString());\n2번째 인자로 fomatting function 을 전달하여 Date value 를 반환하는 커스텀 Hook이 toDateString() 을 불필요하게 호출하는 것을 방지한다.\n\n\n\n\n\n\n\n\n\nReferencehttps://ko.reactjs.org/docs/hooks-reference.html\nhttps://reactjs.org/docs/hooks-reference.html\n","dateCreated":"2021-05-05T23:44:17+09:00","dateModified":"2021-05-06T17:19:40+09:00","datePublished":"2021-05-05T23:44:17+09:00","description":"","headline":"Hooks","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/05/THUREE-Hooks/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/05/THUREE-Hooks/","keywords":"SOPT, WEB, ReactJS, Hooks"}</script>
-    <meta name="description" content="Hooks    기본 Hook    useState1const [state, setState] &#x3D; useState(initialState);  useState() : state 와 setState 을 반환하는 함수  initialState : 초기값 보통 null 이나 &quot;&quot; 등의 default value로 설정한다.     state :">
-<meta property="og:type" content="blog">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Hooks    기본 Hook    useState1const [state, setState] &#x3D; useState(initialState);  useState() : state 와 setState 을 반환하는 함수  initialState : 초기값 보통 null 이나 &quot;&quot; 등의 default value로 설정한다.     state :">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hooks">
 <meta property="og:url" content="https://leahincom.github.io/2021/05/05/THUREE-Hooks/index.html">
 <meta property="og:site_name" content="leah">
@@ -33,316 +39,184 @@
 <meta property="article:tag" content="Hooks">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://coder.earth/static/usecallback_1-aa6572c6cb98757914009ef9063d2204-04c70.png">
-    
-    
-        
-    
-    
-        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
-    
-    
-    
-    
-    <!--STYLES-->
-    
-<link rel="stylesheet" href="/assets/css/all.css">
 
-    
-<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+<link rel="canonical" href="https://leahincom.github.io/2021/05/05/THUREE-Hooks/">
 
-    
-<link rel="stylesheet" href="/assets/css/thumbs.css">
 
-    
-<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
 
-    <!--STYLES END-->
-    
+  <title>Hooks | leah</title>
+  
 
-    
 
-    
-        
-    
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-    <body>
-        <div id="blog">
-            <!-- Define author's picture -->
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-
-    
-        
-            
-        
-    
-
-<header id="header" data-behavior="5">
-    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-    <div class="header-title">
-        <a
-            class="header-title-link"
-            href="/"
-            aria-label=""
-        >
-            leah
-        </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    
-        
-            <a
-                class="header-right-picture "
-                href="#about"
-                aria-label="Open the link: /#about"
-            >
-        
-        
-            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-        
-        </a>
-    
-</header>
+  </div>
 
-            <!-- Define author's picture -->
+  <div class="site-meta">
 
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">leah</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dev_log</p>
+  </div>
 
-
-        
-    
-
-<nav id="sidebar" data-behavior="5">
-    <div class="sidebar-container">
-        
-            <div class="sidebar-profile">
-                <a
-                    href="/#about"
-                    aria-label="Read more about the author"
-                >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-                </a>
-                <h4 class="sidebar-profile-name">JungHyun</h4>
-                
-                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
-</h5>
-                
-            </div>
-        
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-categories"
-                            
-                            rel="noopener"
-                            title="Categories"
-                        >
-                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Categories</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-archives"
-                            
-                            rel="noopener"
-                            title="Archives"
-                        >
-                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Archives</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link open-algolia-search"
-                            href="#search"
-                            
-                            rel="noopener"
-                            title="Search"
-                        >
-                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Search</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="#about"
-                            
-                            rel="noopener"
-                            title="About"
-                        >
-                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">About</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://github.com/leahincom"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="GitHub"
-                        >
-                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">GitHub</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://facebook.com/junghyun.lah/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Facebook"
-                        >
-                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Facebook</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://www.linkedin.com/profile"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="LinkedIn"
-                        >
-                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">LinkedIn</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="mailto:leahincom@gmail.com"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Mail"
-                        >
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Mail</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/atom.xml"
-                            
-                            rel="noopener"
-                            title="RSS"
-                        >
-                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">RSS</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
 </nav>
 
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
             
-            <div id="main" data-behavior="5"
-                 class="
-                        hasCoverMetaIn
-                        ">
-                
-<article class="post">
+
     
-    
-        <div class="post-header main-content-wrap text-left">
-    
-        <h1 class="post-title">
-            Hooks
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/05/THUREE-Hooks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Developing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hooks
         </h1>
-    
-    
+
         <div class="post-meta">
-    <time datetime="2021-05-05T23:44:17+09:00">
-	
-		    May 05, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/THUREE/">THUREE</a>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
 
+              <time title="Created: 2021-05-05 15:44:17" itemprop="dateCreated datePublished" datetime="2021-05-05T15:44:17+01:00">2021-05-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-06 09:19:40" itemprop="dateModified" datetime="2021-05-06T09:19:40+01:00">2021-05-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/THUREE/" itemprop="url" rel="index"><span itemprop="name">THUREE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
 
     
-</div>
-
     
-</div>
-
     
-    <div class="post-content markdown">
-        <div class="main-content-wrap">
-            <h2 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h2><br />
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h2><br />
 
 
 
@@ -1017,345 +891,200 @@
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://ko.reactjs.org/docs/hooks-reference.html">https://ko.reactjs.org/docs/hooks-reference.html</a></p>
 <p><a target="_blank" rel="noopener" href="https://reactjs.org/docs/hooks-reference.html">https://reactjs.org/docs/hooks-reference.html</a></p>
 
-            
-
-
-        </div>
     </div>
-    <div id="post-footer" class="post-footer main-content-wrap">
-        
-            <div class="post-footer-tags">
-                <span class="text-color-light text-small">TAGGED IN</span><br/>
-                
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/Hooks/" rel="tag">Hooks</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/ReactJS/" rel="tag">ReactJS</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/SOPT/" rel="tag">SOPT</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/WEB/" rel="tag">WEB</a>
-
-            </div>
-        
-        
-            <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/08/SOAP-Classes/"
-                    data-tooltip="Classes"
-                    aria-label="PREVIOUS: Classes"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
-                    data-tooltip="3차 세미나_24/04/21"
-                    aria-label="NEXT: 3차 세미나_24/04/21"
-                >
-                    
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/05/THUREE-Hooks/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/05/THUREE-Hooks/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
-                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/05/THUREE-Hooks/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
-                    <i class="fab fa-google-plus" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-        
-        
-            
-        
-    </div>
-</article>
-
-
-
-                <footer id="footer" class="main-content-wrap">
-    <span class="copyrights">
-        Copyrights &copy; 2021 JungHyun. All Rights Reserved.
-    </span>
-</footer>
-
-            </div>
-            
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
-                    <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/08/SOAP-Classes/"
-                    data-tooltip="Classes"
-                    aria-label="PREVIOUS: Classes"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/"
-                    data-tooltip="3차 세미나_24/04/21"
-                    aria-label="NEXT: 3차 세미나_24/04/21"
-                >
-                    
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/05/THUREE-Hooks/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/05/THUREE-Hooks/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
-                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/05/THUREE-Hooks/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
-                    <i class="fab fa-google-plus" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-                </div>
-                
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
-        <i id="btn-close-shareoptions" class="fa fa-times"></i>
-        <ul class="share-options">
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/05/THUREE-Hooks/"
-                        aria-label="Share on Facebook"
-                    >
-                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
-                    </a>
-                </li>
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/05/THUREE-Hooks/"
-                        aria-label="Share on Twitter"
-                    >
-                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
-                    </a>
-                </li>
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/05/THUREE-Hooks/"
-                        aria-label="Share on Google+"
-                    >
-                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
-                    </a>
-                </li>
-            
-        </ul>
-    </div>
-
-
-            
-        </div>
-        
-
 
     
-        
+    
     
 
-<div id="about">
-    <div id="about-card">
-        <div id="about-btn-close">
-            <i class="fa fa-times"></i>
-        </div>
-        
-            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-        
-            <h4 id="about-card-name">JungHyun</h4>
-        
-            <div id="about-card-bio"><p>author.bio</p>
-</div>
-        
-        
-            <div id="about-card-job">
-                <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>author.job</p>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SOPT/" rel="tag"># SOPT</a>
+              <a href="/tags/WEB/" rel="tag"># WEB</a>
+              <a href="/tags/ReactJS/" rel="tag"># ReactJS</a>
+              <a href="/tags/Hooks/" rel="tag"># Hooks</a>
+          </div>
 
-            </div>
         
+
+
         
-            <div id="about-card-location">
-                <i class="fa fa-map-marker-alt"></i>
-                <br/>
-                Seoul/South Korea, London/UK
-            </div>
-        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/24/3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-24-04-21/" rel="prev" title="3차 세미나_24/04/21">
+      <i class="fa fa-chevron-left"></i> 3차 세미나_24/04/21
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/08/SOAP-Classes/" rel="next" title="Classes">
+      Classes <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hooks"><span class="nav-number">1.</span> <span class="nav-text">Hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B8%B0%EB%B3%B8-Hook"><span class="nav-number">1.1.</span> <span class="nav-text">기본 Hook</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#useState"><span class="nav-number">1.1.1.</span> <span class="nav-text">useState</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Functional-Updates"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Functional Updates</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Lazy-Initial-State"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">Lazy Initial State</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bailing-Out-of-a-State-Update"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">Bailing Out of a State Update</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#useEffect"><span class="nav-number">1.1.2.</span> <span class="nav-text">useEffect</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Cleaning-Up-an-Effect"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Cleaning Up an Effect</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Timing-of-Effects"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Timing of Effects</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Conditionally-Firing-an-Effect"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">Conditionally Firing an Effect</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#useContext"><span class="nav-number">1.1.3.</span> <span class="nav-text">useContext</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Putting-it-together-with-Context-Provider"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Putting it together with Context.Provider</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%B6%94%EA%B0%80-Hooks"><span class="nav-number">1.2.</span> <span class="nav-text">추가 Hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#useReducer"><span class="nav-number">1.2.1.</span> <span class="nav-text">useReducer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Specifying-the-Initial-State"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Specifying the Initial State</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Lazy-Initialization"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Lazy Initialization</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bailing-Out-of-a-Dispatch"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Bailing Out of a Dispatch</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#useCallback"><span class="nav-number">1.2.2.</span> <span class="nav-text">useCallback</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#useMemo"><span class="nav-number">1.2.3.</span> <span class="nav-text">useMemo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#useRef"><span class="nav-number">1.2.4.</span> <span class="nav-text">useRef</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#useImperativeHandle"><span class="nav-number">1.2.5.</span> <span class="nav-text">useImperativeHandle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#useLayoutEffect"><span class="nav-number">1.2.6.</span> <span class="nav-text">useLayoutEffect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#useDebugValue"><span class="nav-number">1.2.7.</span> <span class="nav-text">useDebugValue</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Defer-Formatting-Debug-Values"><span class="nav-number">1.2.7.1.</span> <span class="nav-text">Defer Formatting Debug Values</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">1.3.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JungHyun</p>
+  <div class="site-description" itemprop="description">Continuously Developing Developer</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
 </div>
 
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
         
+
         
-<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
-        <!--SCRIPTS-->
 
-<script src="/assets/js/jquery.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JungHyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
 
-
-<script src="/assets/js/jquery.fancybox.js"></script>
-
-
-<script src="/assets/js/thumbs.js"></script>
-
-
-<script src="/assets/js/tranquilpeak.js"></script>
-
-<!--SCRIPTS END-->
-
-
-    
+        
 
 
 
 
-    </body>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
 </html>

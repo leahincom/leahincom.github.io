@@ -1,21 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="leah">
-    <title>Redux - leah</title>
-    <meta name="author" content="JungHyun">
-    
-        <meta name="keywords" content="hexo,javascript,">
-    
-    
-    
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg"},"articleBody":"Introduction많은 상태를 관리할 필요가 생겨났다.\n\n\n 상태 \n 서버 응답, 캐시 데이터, 지역적으로 생성해서 사용하고 있지만 아직 서버에 저장되지 않은 데이터,\n 활성화된 라우트, 선택된 탭, 로딩을 보여줄지 여부, 페이지네이션 컨트롤 등 다양한 UI 상태\n\n모델이 다른 모델을 업데이트하고, 그리고 뷰가 모델을 업데이트 할 수 있고, 이 뷰가 다시 다른 모델을 업데이트하고, 이에 따라 또 다른 뷰가 업데이트 된다.\n더하여, 프론트엔트 제품 개발에 있어서 새로 갖춰야할 복잡한 요건들이 늘어나고 있다. 낙관적 업데이트(Optimistic update), 서버 렌더링, 라우트가 일어나기 전에 데이터 가져오기 등이 이에 해당한다. 이러한 복잡함은 변화(mutation) 나 비동기(asyncronicity) 와 같이 사람이 연동하여 추론하기 어려운 개념을 섞어서 사용한다 는 데서 비롯된다.\n\n비관적(pessimistic) 업데이트\n사용자 입력 -&gt; 수정 요청 -&gt; 성공 시 화면 갱신\n\n사용자에게는 불편하지만, 개발자에게는 쉬움\n\n낙관적(optimistic) 업데이트\n사용자 입력 -&gt; 바로 화면 먼저 갱신 -&gt; 수정 요청\n\ne.g. slack, trello\n\n\n\n\n\n\nRedux\n\n\n자바스크립트 앱을 위한 예측 가능한 상태 컨테이너\n\n일관적, 서로 다른 환경(서버, 클라이언트, 네이티브)에서 작동, 테스트하기 쉬운 앱 작성을 도와준다.\n\n\n12npx create-react-app my-app --template reduxnpm install redux\n\n\n\n\n\n애플리케이션의 모든 상태는 하나의 저장소 안에 하나의 객체 트리 구조로 저장\n\n범용적인 애플리케이션(universal application, 하나의 코드 베이스로 다양한 환경에서 실행 가능한 코드)을 만들기 쉽다.\n서버로부터 가져온 상태 는 연결되거나(serialized) 수화되어(hydrated) 전달되며 클라이언트에서 추가적인 코딩 없이도 사용할 수 있다.\n\n\n상태를 변화시키는 유일한 방법은 무슨 일이 벌어지는 지를 묘사하는 액션 객체를 전달하는 방법뿐\n\n뷰나 네트워크 콜백 등에서 상태를 직접 바꾸지 못 하도록 보장한다.\n\n\n변화는 순수 함수로 작성되어야\n\nreducer는 이전 상태 와 액션 을 받아 다음 상태를 반환하는 순수 함수이다. 이 때, 이전 상태를 변경하는 대신 새로운 상태 객체를 생성해서 반환해야한다.\n처음에는 하나의 reducer 만으로 충분하지만, 애플리케이션이 성장해나가면 상태 트리의 특정한 부분들을 조작하는 더 작은 개별적인 리듀서들로 나누는 것도 가능하다. (React 의 경우 하나의 루트 컴포넌트에서 시작해서 여러 작은 컴포넌트의 조합으로 나누는 것과 동일)\n\n\n\n\n\n\n\nConcepts상태1type State &#x3D; any\n\n상태(상태 트리)는 넓은 의미의 단어이지만, Redux API에서는 보통 저장소에 의해 관리되고 getState()에 의해 반환되는 하나의 상태값 을 지칭한다.\n\n(넓은 의미의) 상태는 Redux 애플리케이션의 전체 상태 를 나타내며, 보통 깊게 중첩되어 있는 객체입니다.\n\n\n\n\n\n\n액션1type Action &#x3D; Object\n\n액션은 상태를 변화시키려는 객체이다.\n어떤 형태의 액션이 행해질지 표시하는 type 필드를 가져야 한다. type은 상수로 정의되고 다른 모듈에서 임포트할 수 있다.\n\n\n\n\n\n리듀서1type Reducer&lt;S, A&gt; &#x3D; (state: S, action: A) &#x3D;&gt; S\n\n리듀서(리듀싱 함수)는 누적(state)값 과 (누적될) 값 을 받아서 새로운 누적값을 반환 하는 함수이다. 이들은 값들의 컬렉션을 받아서 하나의 값으로 줄이는데 사용된다.\n\nRedux에서 누적”값”은 상태 객체이고, 누적”될” 값은 액션이다. 리듀서는 주어진 이전 상태와 액션에서 새로운 상태를 계산한다. \n\n반드시 같은 입력이 있으면 같은 출력을 반환 하는 순수 함수여야 한다.\n\n\n\n![image-20210527130716974](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210527130716974.png)\n\n\n\n\n디스패치 함수1234// 기본 디스패치 함수type BaseDispatch = (a: Action) =&gt; Action// 비동기 디스패치 함수 (보통 디스패치 함수)type Dispatch = (a: Action | AsyncAction) =&gt; any\n\n디스패치 함수는 액션이나 비동기 액션을 받는 함수이다.\n\n\n저장소 인스턴스가 미들웨어를 거치지 않고 제공하는 기본 dispatch 함수\n\n반드시 동기적으로 저장소의 리듀서에 액션을 보내야 한다. 그러면 리듀서는 저장소가 반환한 이전 상태와 함께 새 상태를 계산한다.\n👾 리듀서를 사용하기 위해서 액션은 평범한 객체여야 한다.\n\n\n비동기 dispatch 함수 (보통 dispatch 함수)\n\n미들웨어를 통해 디스패치 함수는 비동기 액션을 처리할 수도 있다. 미들웨어가 기본 디스패치 함수를 감쌈으로써 액션이나 비동기 액션을 다음 미들웨어에 넘기기 전에, 변환하거나, 지연시키거나, 무시하거나, 해석할 수 있다.\n\n\n\n\n\n\n\n\n\n\n액션 생산자1type ActionCreator&lt;A, P extends any[] = any[]&gt; = (...args: P) =&gt; Action | AsyncAction\n\n액션 생산자는 단지 액션을 만드는 함수이다. 이 때, 액션은 정보의 묶음이고, 액션 생산자는 액션을 만드는 곳이다.\n\n액션 생산자를 호출하면 액션을 만들어낼 뿐 dispatch하지는 않는다. 따라서 저장소를 변경하기 위해서는 dispatch 함수를 호출해야 한다.\n\n액션 생산자를 호출해 그 결과를 저장소 인스턴스로 바로 dispatch하는 함수를 바인드된 액션 생산자라고 부르기도 한다.\n비동기 액션은 디스패치 함수로 보내지는 값이지만 아직 reducer에게 받아들여질 준비가 되어 있지 않아, 기본 dispatch() 함수로 전달되기 전에 미들웨어를 통해 액션(이나 일련의 액션들)으로 바뀌어야 한다.\n이들은 종종 Promise 나 Thunk 와 같은 비동기 기본형으로, 리듀서에게 직접 전달되지는 않지만, 작업이 완료되면 액션을 보낸다.\n\n\n\n\n\n\n\n\n\n미들웨어12type MiddlewareAPI = &#123; dispatch: Dispatch, getState: () =&gt; State &#125;type Middleware = (api: MiddlewareAPI) =&gt; (next: Dispatch) =&gt; Dispatch\n\n중간 (단계) 역할자\n\n\n미들웨어는 dispatch 함수를 결합해서 새 dispatch 함수를 반환하는 고차함수이다. \n종종 비동기 액션을 액션으로 전환한다.\n\n\n\n\n\n저장소123456type Store = &#123;  dispatch: Dispatch,  getState: () =&gt; State,  subscribe: (listener: () =&gt; void) =&gt; () =&gt; void,  replaceReducer: (reducer: Reducer) =&gt; void&#125;\n\n저장소는 애플리케이션의 상태 트리를 가지고 있는 객체이다. reducer 수준 (상태 관리) 에서 결합이 일어나기 때문에, Redux 앱에는 단 하나의 저장소만 있어야 한다.\ndispatch(action) : 기본 디스패치 함수\ngetState() : 저장소의 현재 상태를 반환\nsubscribe(listener) : 상태가 바뀔 때 호출될 함수를 등록\nreplaceReducer(nextReducer) : 핫 리로딩과 코드 분할을 구현할때 사용\n\n\n\n\n\n\n\n저장소 생산자1type StoreCreator &#x3D; (reducer: Reducer, preloadedState: ?State) &#x3D;&gt; Store\n\nRedux 저장소를 만드는 함수\n\n\n\n\n\n저장소 인핸서1type StoreEnhancer &#x3D; (next: StoreCreator) &#x3D;&gt; StoreCreator\n\n저장소 생산자를 결합하여 강화된 새 저장소 생산자를 반환하는 고차함수\n미들웨어와 비슷하게 조합가능 한 방식으로 저장소 인터페이스를 바꿀 수 있도록 한다.\n\n\n\n\n\nDo I really need?Redux를 사용하기 적절한 때는,\n\n계속해서 바뀌는 상당한 양의 데이터가 있다\n상태를 위한 단 하나의 근원 (루트 저장소) 이 필요하다\n최상위 컴포넌트가 모든 상태를 가지고 있는 것은 더 이상 적절하지 않다.\n\n\n\n\n\nBasic Example\n앱의 상태 전부는 하나의 저장소(store)안에 있는 객체 트리에 저장된다.\n\n상태 트리를 변경하는 유일한 방법은 무엇이 일어날지 서술하는 객체인 액션(action)을 보내는 것 뿐이며,\n\n액션이 상태 트리를 어떻게 변경할지 명시하기 위해 리듀서(reducer)를 작성해야 한다.\n\n\n1234567891011121314151617181920212223242526272829303132333435import &#123; createStore &#125; from &#x27;redux&#x27;/* * 이것이 (state, action) =&gt; state 형태의 순수 함수인 리듀서입니다. * 리듀서는 액션이 어떻게 상태를 다음 상태로 변경하는지 서술합니다. */function counter(state = 0, action) &#123;  switch (action.type) &#123;    case &#x27;INCREMENT&#x27;:      return state + 1    case &#x27;DECREMENT&#x27;:      return state - 1    default:      return state  &#125;&#125;// 앱의 상태를 보관하는 Redux 저장소를 만듭니다.// API로는 &#123; subscribe, dispatch, getState &#125;가 있습니다.let store = createStore(counter)// subscribe()를 이용해 상태 변화에 따라 UI가 변경되게 할 수 있습니다.// 보통은 subscribe()를 직접 사용하기보다는,// 뷰 바인딩 라이브러리(예를 들어 React Redux)를 사용합니다.// 하지만 현재 상태를 localStorage에 영속적으로 저장할 때도 편리합니다.store.subscribe(() =&gt; console.log(store.getState())))// 내부 상태를 변경하는 유일한 방법은 액션을 보내는 것뿐입니다.// 액션은 직렬화할수도, 로깅할수도, 저장할수도 있으며 나중에 재실행할수도 있습니다.store.dispatch(&#123; type: &#x27;INCREMENT&#x27; &#125;)// 1store.dispatch(&#123; type: &#x27;INCREMENT&#x27; &#125;)// 2store.dispatch(&#123; type: &#x27;DECREMENT&#x27; &#125;)// 1\n상태를 바로 변경하는 대신, 액션이라 불리는 평범한 객체를 통해 일어날 변경을 명시한다. \n그리고 각각의 액션이 전체 애플리케이션의 상태를 어떻게 변경할지 결정하는 특별한 함수인 리듀서를 작성합니다.\n\n보통의 Redux 앱에는 하나의 루트 리듀서 함수를 가진 단 하나의 저장소가 있다. \n\n\n\n\n\nSampleaction은 setter 가 없는 모델(클래스)과 같은 객체이다. 다른 코드가 임의로 이를 수정할 수 없기 때문에, 버그 발생률을 낮춘다.\n12345678910&#123;  todos: [&#123;    text: &#x27;Eat food&#x27;,    completed: true  &#125;, &#123;    text: &#x27;Exercise&#x27;,    completed: false  &#125;],  visibilityFilter: &#x27;SHOW_COMPLETED&#x27;&#125;\nstate을 바꾸기 위해서는 action을 dispatch 해야 한다. action은 (플레인) 자바스크립트 객체로 전달한다.\n123&#123; type: &#x27;ADD_TODO&#x27;, text: &#x27;Go to swimming pool&#x27; &#125;&#123; type: &#x27;TOGGLE_TODO&#x27;, index: 1 &#125;&#123; type: &#x27;SET_VISIBILITY_FILTER&#x27;, filter: &#x27;SHOW_ALL&#x27; &#125;\n이렇게 모든 변화를 action으로 표현하는 것은 앱의 세부적인 변화부터 전체적인 변화까지 파악할 수 있도록 한다.\n이러한 state과 action을 묶기 위해서, reducer를 사용한다. 다만, reducer은 큰 규모로 다루는 것보다 작은 규모로 나누어서 함수당 하나의 역할을 담당 하도록 한다.\n123456789101112131415161718192021222324// reducer 1function visibilityFilter(state = &#x27;SHOW_ALL&#x27;, action) &#123;  if (action.type === &#x27;SET_VISIBILITY_FILTER&#x27;) &#123;    return action.filter  &#125; else &#123;    return state  &#125;&#125;// reducer 2function todos(state = [], action) &#123;  switch (action.type) &#123;    case &#x27;ADD_TODO&#x27;:      return state.concat([&#123; text: action.text, completed: false &#125;])    case &#x27;TOGGLE_TODO&#x27;:      return state.map((todo, index) =&gt;        action.index === index          ? &#123; text: todo.text, completed: !todo.completed &#125;          : todo      )    default:      return state  &#125;&#125;\n최종적으로, 위와 같이 잘게 나눈 reducer를 통합하여 전체적인 reducer 기능을 하는 루트 reducer를 생성한다.\n123456function todoApp(state = &#123;&#125;, action) &#123;  return &#123;    todos: todos(state.todos, action),    visibilityFilter: visibilityFilter(state.visibilityFilter, action)  &#125;&#125;\n\n\n","dateCreated":"2021-05-27T20:56:54+09:00","dateModified":"2021-05-27T19:53:16+09:00","datePublished":"2021-05-27T20:56:54+09:00","description":"","headline":"Redux","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://leahincom.github.io/2021/05/27/THUREE-Redux/"},"publisher":{"@type":"Organization","name":"JungHyun","sameAs":["https://github.com/leahincom","https://facebook.com/junghyun.lah/","https://www.linkedin.com/profile","mailto:leahincom@gmail.com"],"image":"profile.jpeg","logo":{"@type":"ImageObject","url":"profile.jpeg"}},"url":"https://leahincom.github.io/2021/05/27/THUREE-Redux/","keywords":"SOPT, WEB, ReactJS, Redux"}</script>
-    <meta name="description" content="Introduction많은 상태를 관리할 필요가 생겨났다.    상태   서버 응답, 캐시 데이터, 지역적으로 생성해서 사용하고 있지만 아직 서버에 저장되지 않은 데이터,  활성화된 라우트, 선택된 탭, 로딩을 보여줄지 여부, 페이지네이션 컨트롤 등 다양한 UI 상태  모델이 다른 모델을 업데이트하고, 그리고 뷰가 모델을 업데이트 할 수 있고, 이 뷰가 다">
-<meta property="og:type" content="blog">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Introduction많은 상태를 관리할 필요가 생겨났다.    상태   서버 응답, 캐시 데이터, 지역적으로 생성해서 사용하고 있지만 아직 서버에 저장되지 않은 데이터,  활성화된 라우트, 선택된 탭, 로딩을 보여줄지 여부, 페이지네이션 컨트롤 등 다양한 UI 상태  모델이 다른 모델을 업데이트하고, 그리고 뷰가 모델을 업데이트 할 수 있고, 이 뷰가 다">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Redux">
 <meta property="og:url" content="https://leahincom.github.io/2021/05/27/THUREE-Redux/index.html">
 <meta property="og:site_name" content="leah">
@@ -29,316 +35,178 @@
 <meta property="article:tag" content="ReactJS">
 <meta property="article:tag" content="Redux">
 <meta name="twitter:card" content="summary">
-    
-    
-        
-    
-    
-        <meta property="og:image" content="https://leahincom.github.io/assets/images/profile.jpeg"/>
-    
-    
-    
-    
-    <!--STYLES-->
-    
-<link rel="stylesheet" href="/assets/css/all.css">
 
-    
-<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+<link rel="canonical" href="https://leahincom.github.io/2021/05/27/THUREE-Redux/">
 
-    
-<link rel="stylesheet" href="/assets/css/thumbs.css">
 
-    
-<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
 
-    <!--STYLES END-->
-    
+  <title>Redux | leah</title>
+  
 
-    
 
-    
-        
-    
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-    <body>
-        <div id="blog">
-            <!-- Define author's picture -->
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-
-    
-        
-            
-        
-    
-
-<header id="header" data-behavior="5">
-    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-    <div class="header-title">
-        <a
-            class="header-title-link"
-            href="/"
-            aria-label=""
-        >
-            leah
-        </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    
-        
-            <a
-                class="header-right-picture "
-                href="#about"
-                aria-label="Open the link: /#about"
-            >
-        
-        
-            <img class="header-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-        
-        </a>
-    
-</header>
+  </div>
 
-            <!-- Define author's picture -->
+  <div class="site-meta">
 
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">leah</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dev_log</p>
+  </div>
 
-
-        
-    
-
-<nav id="sidebar" data-behavior="5">
-    <div class="sidebar-container">
-        
-            <div class="sidebar-profile">
-                <a
-                    href="/#about"
-                    aria-label="Read more about the author"
-                >
-                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-                </a>
-                <h4 class="sidebar-profile-name">JungHyun</h4>
-                
-                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
-</h5>
-                
-            </div>
-        
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-categories"
-                            
-                            rel="noopener"
-                            title="Categories"
-                        >
-                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Categories</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-archives"
-                            
-                            rel="noopener"
-                            title="Archives"
-                        >
-                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Archives</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link open-algolia-search"
-                            href="#search"
-                            
-                            rel="noopener"
-                            title="Search"
-                        >
-                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Search</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="#about"
-                            
-                            rel="noopener"
-                            title="About"
-                        >
-                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">About</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://github.com/leahincom"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="GitHub"
-                        >
-                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">GitHub</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://facebook.com/junghyun.lah/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Facebook"
-                        >
-                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Facebook</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://www.linkedin.com/profile"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="LinkedIn"
-                        >
-                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">LinkedIn</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="mailto:leahincom@gmail.com"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Mail"
-                        >
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Mail</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/atom.xml"
-                            
-                            rel="noopener"
-                            title="RSS"
-                        >
-                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">RSS</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
 </nav>
 
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
             
-            <div id="main" data-behavior="5"
-                 class="
-                        hasCoverMetaIn
-                        ">
-                
-<article class="post">
+
     
-    
-        <div class="post-header main-content-wrap text-left">
-    
-        <h1 class="post-title">
-            Redux
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/27/THUREE-Redux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Developing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redux
         </h1>
-    
-    
+
         <div class="post-meta">
-    <time datetime="2021-05-27T20:56:54+09:00">
-	
-		    May 27, 2021
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/SOPT/">SOPT</a>, <a class="category-link" href="/categories/SOPT/THUREE/">THUREE</a>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
 
+              <time title="Created: 2021-05-27 12:56:54 / Modified: 11:53:16" itemprop="dateCreated datePublished" datetime="2021-05-27T12:56:54+01:00">2021-05-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/THUREE/" itemprop="url" rel="index"><span itemprop="name">THUREE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
 
     
-</div>
-
     
-</div>
-
     
-    <div class="post-content markdown">
-        <div class="main-content-wrap">
-            <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p style="color: orange; font-weight: bold;">많은 상태를 관리할 필요가 생겨났다.</p>
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p style="color: orange; font-weight: bold;">많은 상태를 관리할 필요가 생겨났다.</p>
 
 <blockquote>
 <p> <code>상태</code> </p>
@@ -559,345 +427,200 @@
 
 
 
-            
-
-
-        </div>
     </div>
-    <div id="post-footer" class="post-footer main-content-wrap">
-        
-            <div class="post-footer-tags">
-                <span class="text-color-light text-small">TAGGED IN</span><br/>
-                
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/ReactJS/" rel="tag">ReactJS</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/Redux/" rel="tag">Redux</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/SOPT/" rel="tag">SOPT</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/WEB/" rel="tag">WEB</a>
-
-            </div>
-        
-        
-            <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/28/ERP-Overview/"
-                    data-tooltip="Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템"
-                    aria-label="PREVIOUS: Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/26/basic-Python/"
-                    data-tooltip="Python Overview"
-                    aria-label="NEXT: Python Overview"
-                >
-                    
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
-                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
-                    <i class="fab fa-google-plus" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-        
-        
-            
-        
-    </div>
-</article>
-
-
-
-                <footer id="footer" class="main-content-wrap">
-    <span class="copyrights">
-        Copyrights &copy; 2021 JungHyun. All Rights Reserved.
-    </span>
-</footer>
-
-            </div>
-            
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
-                    <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/28/ERP-Overview/"
-                    data-tooltip="Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템"
-                    aria-label="PREVIOUS: Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/05/26/basic-Python/"
-                    data-tooltip="Python Overview"
-                    aria-label="NEXT: Python Overview"
-                >
-                    
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
-                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
-                    <i class="fab fa-google-plus" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-                </div>
-                
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
-        <i id="btn-close-shareoptions" class="fa fa-times"></i>
-        <ul class="share-options">
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
-                        aria-label="Share on Facebook"
-                    >
-                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
-                    </a>
-                </li>
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://twitter.com/intent/tweet?text=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
-                        aria-label="Share on Twitter"
-                    >
-                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
-                    </a>
-                </li>
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://plus.google.com/share?url=https://leahincom.github.io/2021/05/27/THUREE-Redux/"
-                        aria-label="Share on Google+"
-                    >
-                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
-                    </a>
-                </li>
-            
-        </ul>
-    </div>
-
-
-            
-        </div>
-        
-
 
     
-        
+    
     
 
-<div id="about">
-    <div id="about-card">
-        <div id="about-btn-close">
-            <i class="fa fa-times"></i>
-        </div>
-        
-            <img id="about-card-picture" src="/assets/images/profile.jpeg" alt="Author&#39;s picture"/>
-        
-            <h4 id="about-card-name">JungHyun</h4>
-        
-            <div id="about-card-bio"><p>author.bio</p>
-</div>
-        
-        
-            <div id="about-card-job">
-                <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>author.job</p>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SOPT/" rel="tag"># SOPT</a>
+              <a href="/tags/WEB/" rel="tag"># WEB</a>
+              <a href="/tags/ReactJS/" rel="tag"># ReactJS</a>
+              <a href="/tags/Redux/" rel="tag"># Redux</a>
+          </div>
 
-            </div>
         
+
+
         
-            <div id="about-card-location">
-                <i class="fa fa-map-marker-alt"></i>
-                <br/>
-                Seoul/South Korea, London/UK
-            </div>
-        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/26/basic-Python/" rel="prev" title="Python Overview">
+      <i class="fa fa-chevron-left"></i> Python Overview
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/28/ERP-Overview/" rel="next" title="Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템">
+      Encoder-Decoder Seq2Seq2 Model을 이용한 Data Visualization 추천 시스템 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">Redux</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Concepts"><span class="nav-number">2.</span> <span class="nav-text">Concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%83%81%ED%83%9C"><span class="nav-number">2.1.</span> <span class="nav-text">상태</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%95%A1%EC%85%98"><span class="nav-number">2.2.</span> <span class="nav-text">액션</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%A6%AC%EB%93%80%EC%84%9C"><span class="nav-number">2.3.</span> <span class="nav-text">리듀서</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%94%94%EC%8A%A4%ED%8C%A8%EC%B9%98-%ED%95%A8%EC%88%98"><span class="nav-number">2.4.</span> <span class="nav-text">디스패치 함수</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%95%A1%EC%85%98-%EC%83%9D%EC%82%B0%EC%9E%90"><span class="nav-number">2.5.</span> <span class="nav-text">액션 생산자</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%AF%B8%EB%93%A4%EC%9B%A8%EC%96%B4"><span class="nav-number">2.6.</span> <span class="nav-text">미들웨어</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%A0%80%EC%9E%A5%EC%86%8C"><span class="nav-number">2.7.</span> <span class="nav-text">저장소</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%83%9D%EC%82%B0%EC%9E%90"><span class="nav-number">2.8.</span> <span class="nav-text">저장소 생산자</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%9D%B8%ED%95%B8%EC%84%9C"><span class="nav-number">2.9.</span> <span class="nav-text">저장소 인핸서</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Do-I-really-need"><span class="nav-number">3.</span> <span class="nav-text">Do I really need?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Example"><span class="nav-number">4.</span> <span class="nav-text">Basic Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample"><span class="nav-number">5.</span> <span class="nav-text">Sample</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JungHyun</p>
+  <div class="site-description" itemprop="description">Continuously Developing Developer</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
 </div>
 
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
         
+
         
-<div id="cover" style="background-image:url('/assets/images/IMG_5960.jpeg');"></div>
-        <!--SCRIPTS-->
 
-<script src="/assets/js/jquery.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JungHyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
 
-
-<script src="/assets/js/jquery.fancybox.js"></script>
-
-
-<script src="/assets/js/thumbs.js"></script>
-
-
-<script src="/assets/js/tranquilpeak.js"></script>
-
-<!--SCRIPTS END-->
-
-
-    
+        
 
 
 
 
-    </body>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
 </html>
