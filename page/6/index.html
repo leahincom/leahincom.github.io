@@ -163,6 +163,125 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/05/14-NoSQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/05/14-NoSQL/" class="post-title-link" itemprop="url">14. NoSQL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-04 20:05:54" itemprop="dateCreated datePublished" datetime="2021-02-04T20:05:54Z">2021-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-05 02:46:38" itemprop="dateModified" datetime="2021-04-05T02:46:38+01:00">2021-04-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><p>Non-relational databases</p>
+<ul>
+<li>don’t enforce a predeifend structure on data</li>
+<li>main families are: document, key-value, and graph</li>
+<li>offer a lot of flexibility, but less guarantees</li>
+</ul>
+<h3 id="Document-Databases"><a href="#Document-Databases" class="headerlink" title="Document Databases"></a>Document Databases</h3><ul>
+<li>document looks like JSON</li>
+<li>don’t need constraints</li>
+<li>id: automatically generated</li>
+<li>each document can be represented as a row, BUT document is document inside the collection!</li>
+<li>structured to store big data</li>
+</ul>
+<ul>
+<li>mongoDB</li>
+</ul>
+<ul>
+<li>faster than SQL</li>
+</ul>
+<h3 id="Key-Value-Databases"><a href="#Key-Value-Databases" class="headerlink" title="Key-Value Databases"></a>Key-Value Databases</h3><p>key-value pair</p>
+<ul>
+<li>faster than any other dbs</li>
+<li>set as a pair and get right away</li>
+<li>used for caching</li>
+</ul>
+<ul>
+<li>Redis<br>You can run atomic operations on these types, like appending to a string;incrementing the value in a hash; pushing an element to a list; computing set intersection, union and difference; or getting the member with highest ranking in a sorted set.</li>
+</ul>
+<p>To achieve top performance, Redis works with an in-memory dataset. Depending on your use case, you can persist your data either by periodically dumping the dataset to disk or by appending each command to a disk-based log. You can also disable persistence if you just need a feature-rich, networked, in-memory cache.<br>Redis also supports asynchronous replication, with very fast non-blocking first synchronization, auto-reconnection with partial resynchronization on net split.</p>
+<h3 id="Graph-Databases"><a href="#Graph-Databases" class="headerlink" title="Graph Databases"></a>Graph Databases</h3><ul>
+<li>arrow: who follows whom</li>
+</ul>
+<ul>
+<li>similar to ASCII Art</li>
+<li>graph structure: map, social network</li>
+</ul>
+<h3 id="Relational-vs-Non-relational"><a href="#Relational-vs-Non-relational" class="headerlink" title="Relational vs. Non-relational"></a>Relational vs. Non-relational</h3><p>Dimension    Relational    Non-relational<br>Schema    Predefined    Flexible<br>Scaling    Vertical    Horizontal<br>ACID    Yes    No guarantees</p>
+<p>In database systems, ACID (Atomicity, Consistency, Isolation, Durability) refers to a standard set of properties that guarantee database transactions are processed reliably. ACID is especially concerned with how a database recovers from any failure that might occur while processing a transaction.</p>
+<ul>
+<li>Non-relational =&gt; covers the relational databases’ constraints<br>SQL: MySQL is a relational database management system (RDBMS) from the Oracle Corporation. Like other relational systems, MySQL stores data in tables and uses structured query language (SQL) for database access. When MySQL developers need to access data in an application, they merge data from multiple tables together in a process called a join. In MySQL, you predefine your database schema and set up rules to govern the relationships between fields in your tables.</li>
+</ul>
+<p>NoSQL: MongoDB is a NoSQL database that stores data as JSON-like documents. Documents store related information together and use the MongoDB query language (MQL) for access. Fields can vary from document to document - there is no need to declare the structure of documents to the system, as documents are self-describing. Optionally, schema validation can be used to enforce data governance controls over each collection.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/04/13-ORM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -362,7 +481,7 @@
 <li>-&gt; (because a primary key is ordered,) binary_search =&gt; O(logN)</li>
 </ul>
 <h4 id="SQL-Indexes"><a href="#SQL-Indexes" class="headerlink" title="SQL - Indexes"></a>SQL - Indexes</h4><ol start="3">
-<li>SELECT “Email” FROM “Users” WHERE Email = “<a href="mailto:&#98;&#x69;&#x6c;&#x6c;&#46;&#103;&#x61;&#116;&#x65;&#115;&#64;&#x6d;&#x69;&#x63;&#x72;&#x6f;&#115;&#x6f;&#102;&#116;&#x2e;&#x63;&#111;&#x6d;">&#98;&#x69;&#x6c;&#x6c;&#46;&#103;&#x61;&#116;&#x65;&#115;&#64;&#x6d;&#x69;&#x63;&#x72;&#x6f;&#115;&#x6f;&#102;&#116;&#x2e;&#x63;&#111;&#x6d;</a>“ </li>
+<li>SELECT “Email” FROM “Users” WHERE Email = “<a href="mailto:&#x62;&#105;&#x6c;&#108;&#x2e;&#x67;&#97;&#x74;&#x65;&#115;&#x40;&#109;&#105;&#99;&#x72;&#x6f;&#115;&#111;&#102;&#x74;&#x2e;&#x63;&#x6f;&#109;">&#x62;&#105;&#x6c;&#108;&#x2e;&#x67;&#97;&#x74;&#x65;&#115;&#x40;&#109;&#105;&#99;&#x72;&#x6f;&#115;&#111;&#102;&#x74;&#x2e;&#x63;&#x6f;&#109;</a>“ </li>
 </ol>
 <ul>
 <li>Time Complexity<br>approach table by checking each element =&gt; O(n)</li>
@@ -1278,191 +1397,6 @@ e.g. mergeSort</li>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/23/5-Data-Structure/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/23/5-Data-Structure/" class="post-title-link" itemprop="url">5. Data Structure</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-22 22:03:51" itemprop="dateCreated datePublished" datetime="2021-01-22T22:03:51Z">2021-01-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 02:46:10" itemprop="dateModified" datetime="2021-04-05T02:46:10+01:00">2021-04-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Data-Structure"><a href="#Data-Structure" class="headerlink" title="Data Structure"></a>Data Structure</h2><ul>
-<li>The way to organize the data</li>
-</ul>
-<h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><p><code>push</code> : put at the top<br><code>pop</code> : remove from the top</p>
-<ul>
-<li><strong>LIFO (Last In First Out)</strong></li>
-<li>Call Stack (e.g. factorial function)<ul>
-<li>always interact with the top element</li>
-</ul>
-</li>
-</ul>
-<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><p><code>enqueue</code> : put at the back<br><code>dequeue</code> : remove from the first</p>
-<ul>
-<li><strong>FIFO (First In First Out)</strong></li>
-</ul>
-<h3 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked-List"></a>Linked-List</h3><p><code>head</code><br><code>tail</code><br><code>next</code></p>
-<ul>
-<li>Node and Pointer<ul>
-<li>just store two nodes as a pointer (head/ tail)</li>
-</ul>
-</li>
-<li>No need to initialise</li>
-<li>No need to relocate (linking)</li>
-<li>No need of indices (head / tail linking)<ul>
-<li>change the point of next when add the element<blockquote>
-<p>Block Chain<br>Delegation Chain</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="What-If-we-want-to-go-back"><a href="#What-If-we-want-to-go-back" class="headerlink" title="What If we want to go back?"></a>What If we want to go back?</h4><h3 id="Double-Linked-List"><a href="#Double-Linked-List" class="headerlink" title="Double-Linked-List"></a>Double-Linked-List</h3><ul>
-<li>first : <code>H -&gt; null, T -&gt; null</code></li>
-<li>add the node : <code>H, T -&gt; node</code></li>
-<li>add one more : <code>H -&gt; new node, T -&gt; old node, new -&gt; old node</code></li>
-</ul>
-<blockquote>
-<p>LL: {head: Node7, tail: Node29}<br>Node7: {val: 7, next: Node34}<br>Node34: {val: 34, next: Node29}<br>Node29: {val: 29, next: null}</p>
-</blockquote>
-<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><h3 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h3><ul>
-<li><strong>Can’t Have a LOOP</strong></li>
-<li>subTree<ul>
-<li>Root</li>
-<li>Children / Parent</li>
-<li>Siblings</li>
-<li>Cousins</li>
-<li>Descendent</li>
-</ul>
-</li>
-<li>Leaf Node: bottom node without any children (null)</li>
-</ul>
-<hr>
-<blockquote>
-<p>Implementations</p>
-</blockquote>
-<h4 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h4><h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><hr>
-<h3 id="Hash-Table-Hash-Map"><a href="#Hash-Table-Hash-Map" class="headerlink" title="Hash Table/ Hash Map"></a>Hash Table/ Hash Map</h3><ul>
-<li>Object in JS: Hash Table/ Map</li>
-<li>same input -&gt; same output</li>
-<li>elements are evenly distributed along the range using <strong>hash function</strong><ul>
-<li>hash function: MAX === size of the array</li>
-<li>multiple values in the same key: contains() -&gt; return true;<br><code>Array</code> : used to keep objecs as elements<br>=&gt; arr = [obj1, obj2, …]<br><code>Linked-List</code> : used to link the elements that object has<br>=&gt; obj1 = {[<code>key</code>, <code>value</code>] -&gt; [<code>key</code>, <code>value</code>], …}<br>e.g. Person = [name: ‘Lisa’] -&gt; [age: 28] -&gt; …</li>
-</ul>
-</li>
-</ul>
-<hr>
-<blockquote>
-<p>해시 테이블은 (Key, Value)로 데이터를 저장하는 자료구조 중 하나로 빠르게 데이터를 검색할 수 있는 자료구조이다. 해시 테이블이 빠른 검색속도를 제공하는 이유는 내부적으로 배열(버킷)을 사용하여 데이터를 저장하기 때문이다. 해시 테이블은 각각의 Key값에 해시함수를 적용해 배열의 고유한 index를 생성하고, 이 index를 활용해 값을 저장하거나 검색하게 된다. 여기서 실제 값이 저장되는 장소를 버킷 또는 슬롯이라고 한다.<br>예를 들어 우리가 (Key, Value)가 (“John Smith”, “521-1234”)인 데이터를 크기가 16인 해시 테이블에 저장한다고 하자. 그러면 먼저 index = hash_function(“John Smith”) % 16 연산을 통해 index 값을 계산한다. 그리고 array[index] = “521-1234” 로 전화번호를 저장하게 된다.</p>
-</blockquote>
-<p><strong>REF</strong><br>mangkyu.tistory.com/102</p>
-<hr>
-<h4 id="Tree-Family"><a href="#Tree-Family" class="headerlink" title="Tree Family"></a>Tree Family</h4><h3 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h3><ul>
-<li>type of Tree</li>
-<li>parent has higher priority than children (root: most important)</li>
-<li>highest property is retrieved first</li>
-</ul>
-<h3 id="Binary-Heap"><a href="#Binary-Heap" class="headerlink" title="Binary Heap"></a>Binary Heap</h3><p><code>Add</code> : the leaf node, check the priority through the entire tree by going up<br><code>Delete</code> : the root node, put the last leaf node in the root and check the priority by going down the entire tree layer by layer</p>
-<ul>
-<li>Max Heap</li>
-<li>Min Heap</li>
-<li>fully filled layer by layer, with at most 2 leaf nodes</li>
-</ul>
-<p><strong>REF</strong><br><a target="_blank" rel="noopener" href="http://www.cs.usfca.edu/~galles/visualization/Heap.html">www.cs.usfca.edu/~galles/visualization/Heap.html</a></p>
-<h3 id="Binary-Search-Tree-BST"><a href="#Binary-Search-Tree-BST" class="headerlink" title="Binary Search Tree (BST)"></a>Binary Search Tree (BST)</h3><ul>
-<li>divide the tree into two parts<ul>
-<li>Left: smaller than the root node</li>
-<li>Right: bigger than the root node</li>
-</ul>
-</li>
-<li><strong>UNBALANCED TREE</strong>: if adds onlly bigger/ smaller elements, the height of the tree will be longer, thus unbalanced</li>
-</ul>
-<p><strong>REF</strong><br><a target="_blank" rel="noopener" href="http://www.cs.usfca.edu/~galles/visualization/BST.html">www.cs.usfca.edu/~galles/visualization/BST.html</a></p>
-<h3 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B-Tree"></a>B-Tree</h3><ul>
-<li>evolution of the binary search tree</li>
-<li>can have more than 2 children</li>
-<li>can have more than 1 key in 1 node<blockquote>
-<p>one key -&gt; 2 children<br>two keys -&gt; 3 children<br>three keys -&gt; divide into 2 keys with promotting the mid-value to the parent node</p>
-</blockquote>
-</li>
-<li>maintain a balance (complement the cons of a BST)</li>
-<li>can have duplicated keys</li>
-</ul>
-<p><strong>REF</strong><br><a target="_blank" rel="noopener" href="http://www.cs.usfca.edu/~galles/visualization/BTree.html">www.cs.usfca.edu/~galles/visualization/BTree.html</a></p>
-<h3 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h3><p><code>path</code><br><code>adjacency</code></p>
-<ul>
-<li>connection between edges with weights (e.g. facebook familiarity)</li>
-<li>pair of sets (Vertices: V, Edges: E)</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1534,7 +1468,7 @@ e.g. mergeSort</li>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
