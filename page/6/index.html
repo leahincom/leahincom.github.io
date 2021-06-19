@@ -163,6 +163,146 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/02/13-Database/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/02/13-Database/" class="post-title-link" itemprop="url">13. Database</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-02 10:53:41" itemprop="dateCreated datePublished" datetime="2021-02-02T10:53:41Z">2021-02-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-05 02:46:32" itemprop="dateModified" datetime="2021-04-05T02:46:32+01:00">2021-04-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h2><ul>
+<li>piece of software, store and retrieve</li>
+<li>similar to data.json()</li>
+</ul>
+<h3 id="Relational-Databases"><a href="#Relational-Databases" class="headerlink" title="Relational Databases"></a>Relational Databases</h3><ul>
+<li>Primary Key</li>
+</ul>
+<ul>
+<li>unique</li>
+<li>ordered</li>
+<li>can’t be null</li>
+</ul>
+<ul>
+<li>Foreign Key</li>
+</ul>
+<ul>
+<li>reference the primary key of other table</li>
+</ul>
+<h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><ul>
+<li>can use various types of tables<br>e.g. B-tree …</li>
+</ul>
+<h4 id="SQL-Relations"><a href="#SQL-Relations" class="headerlink" title="SQL - Relations"></a>SQL - Relations</h4><ul>
+<li>One to many</li>
+<li>Many to many<br>Combine…</li>
+</ul>
+<ul>
+<li>Many to one</li>
+<li>one to Many</li>
+</ul>
+<ul>
+<li>One to One</li>
+</ul>
+<h4 id="SQL-Queries"><a href="#SQL-Queries" class="headerlink" title="SQL - Queries"></a>SQL - Queries</h4><p>SELECT _ FROM _ WHERE _ : SELECT COL FROM TABLE WHERE CONDITION</p>
+<ol>
+<li>SELECT * FROM “Users”</li>
+</ol>
+<ul>
+<li>*: everything</li>
+</ul>
+<ol start="2">
+<li>SELECT “Email” FROM “Users” WHERE Id=7</li>
+</ol>
+<ul>
+<li>Time Complexity<br>approach table by index, not directly by primary key =&gt; O(n)</li>
+<li>-&gt; (because a primary key is ordered,) binary_search =&gt; O(logN)</li>
+</ul>
+<h4 id="SQL-Indexes"><a href="#SQL-Indexes" class="headerlink" title="SQL - Indexes"></a>SQL - Indexes</h4><ol start="3">
+<li>SELECT “Email” FROM “Users” WHERE Email = “<a href="mailto:&#98;&#x69;&#x6c;&#x6c;&#46;&#103;&#97;&#116;&#101;&#x73;&#64;&#x6d;&#105;&#99;&#114;&#111;&#115;&#111;&#102;&#116;&#x2e;&#x63;&#111;&#x6d;">&#98;&#x69;&#x6c;&#x6c;&#46;&#103;&#97;&#116;&#101;&#x73;&#64;&#x6d;&#105;&#99;&#114;&#111;&#115;&#111;&#102;&#116;&#x2e;&#x63;&#111;&#x6d;</a>“ </li>
+</ol>
+<ul>
+<li>Time Complexity<br>approach table by checking each element =&gt; O(n)</li>
+<li>-&gt; set email as a primary key by adding a table and search in the original table using id as a reference key =&gt; O(2*logN)</li>
+</ul>
+<h4 id="SQL-Joins"><a href="#SQL-Joins" class="headerlink" title="SQL - Joins"></a>SQL - Joins</h4><h4 id="Sharding-and-Replicating"><a href="#Sharding-and-Replicating" class="headerlink" title="Sharding and Replicating"></a>Sharding and Replicating</h4><p>Not good in developer stand, but for safety (backup)</p>
+<ul>
+<li>Sharding : divide into half and put each one into different machines</li>
+<li>Replicating : write the same data into different machines<br>In case of sharding the data might be nicely distributed and hence the queries.</li>
+<li>To “improve query” response on reading data, replication will help. You could write away to your primary and read from secondaries to distribute the queries. Also the primary then is relieved of the expensive reads, and can be busy with only writing.</li>
+</ul>
+<p>In case of replicating existing shards, there will be more hosts to respond to a query request.</p>
+<ul>
+<li>There is a some improvement with sharding if you choose a good shard key. Writing queries away ‘might’ be distributed if you do that correctly. The main reason for sharding is to “horizontally expand your database”. Working with big data, and not wanting to create/insert bigger and bigger disks … you can just create new servers next to it, as much as you want.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/02/12-Async-Koa/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1367,89 +1507,6 @@ e.g. mergeSort</li>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/13/function-with-multiple-invocations/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/13/function-with-multiple-invocations/" class="post-title-link" itemprop="url">JS) function with multiple invocations</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-12 18:39:15" itemprop="dateCreated datePublished" datetime="2021-01-12T18:39:15Z">2021-01-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 02:47:46" itemprop="dateModified" datetime="2021-04-05T02:47:46+01:00">2021-04-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>a function that adds from two invocations.<br>e.g. twoAdds(3)(4) -&gt; 7</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function twoAdds (num) &#123;</span><br><span class="line">	return function (num2) &#123;</span><br><span class="line">		return num+num2;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; twoAdds(num1)(num2)</span><br><span class="line">&#x2F;&#x2F; twoAdds(num1) &#x2F;&#x2F; return value as a function -&gt; value(num2)</span><br></pre></td></tr></table></figure>
-<p><code>currying</code> is the technique of converting a function that takes multiple arguments into a sequence of functions that each take a single argument.</p>
-<h3 id="Closure-vs-Currying"><a href="#Closure-vs-Currying" class="headerlink" title="Closure vs Currying"></a>Closure vs Currying</h3><ul>
-<li>Closure: allows a function to access variables in a parent scope without passing them in.</li>
-<li>Currying: the pattern of functions that immediately evaluate and return other functions.</li>
-</ul>
-<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p><a target="_blank" rel="noopener" href="http://www.youtube.com/watch?v=hRJrp17WnOE&amp;feature=youtu.be">www.youtube.com/watch?v=hRJrp17WnOE&amp;feature=youtu.be</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1521,7 +1578,7 @@ e.g. mergeSort</li>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

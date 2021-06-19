@@ -20,24 +20,22 @@
     var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="ORMSObject Relational Mappings Sequelizemodel&#x2F;user.jsnot need to define model.js by ourselves  table not exists: create table&#x2F; exists: send the related table  models&#x2F;task.jsconnecting db with new Sequ">
+  <meta name="description" content="with문과 함께 사용하기12with open(&quot;foo.txt&quot;, &quot;w&quot;) as f:    f.write(&quot;Life is too short, you need python&quot;) 12with open(&quot;foo.txt&quot;, &quot;r&quot;) as f:    lines &#x3D; [line.rs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="13. ORM">
-<meta property="og:url" content="https://leahincom.github.io/2021/02/04/13-ORM/index.html">
+<meta property="og:title" content="파일 읽고 쓰기">
+<meta property="og:url" content="https://leahincom.github.io/2021/06/19/python-file/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="ORMSObject Relational Mappings Sequelizemodel&#x2F;user.jsnot need to define model.js by ourselves  table not exists: create table&#x2F; exists: send the related table  models&#x2F;task.jsconnecting db with new Sequ">
+<meta property="og:description" content="with문과 함께 사용하기12with open(&quot;foo.txt&quot;, &quot;w&quot;) as f:    f.write(&quot;Life is too short, you need python&quot;) 12with open(&quot;foo.txt&quot;, &quot;r&quot;) as f:    lines &#x3D; [line.rs">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-03T21:01:17.000Z">
-<meta property="article:modified_time" content="2021-04-05T01:46:36.262Z">
+<meta property="article:published_time" content="2021-06-19T12:42:20.000Z">
+<meta property="article:modified_time" content="2021-06-19T04:43:33.536Z">
 <meta property="article:author" content="JungHyun">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="frontend">
-<meta property="article:tag" content="web">
-<meta property="article:tag" content="developer">
-<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="language">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="basic">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://leahincom.github.io/2021/02/04/13-ORM/">
+<link rel="canonical" href="https://leahincom.github.io/2021/06/19/python-file/">
 
 
 <script id="page-configurations">
@@ -50,7 +48,7 @@
   };
 </script>
 
-  <title>13. ORM | leah</title>
+  <title>파일 읽고 쓰기 | leah</title>
   
 
 
@@ -166,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/04/13-ORM/">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/19/python-file/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpeg">
@@ -179,7 +177,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          13. ORM
+          파일 읽고 쓰기
         </h1>
 
         <div class="post-meta">
@@ -188,27 +186,21 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-02-03 21:01:17" itemprop="dateCreated datePublished" datetime="2021-02-03T21:01:17Z">2021-02-03</time>
+              <time title="Created: 2021-06-19 13:42:20 / Modified: 05:43:33" itemprop="dateCreated datePublished" datetime="2021-06-19T13:42:20+01:00">2021-06-19</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 02:46:36" itemprop="dateModified" datetime="2021-04-05T02:46:36+01:00">2021-04-05</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                  <a href="/categories/Language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                  <a href="/categories/Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
                 </span>
             </span>
 
@@ -223,23 +215,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="ORMS"><a href="#ORMS" class="headerlink" title="ORMS"></a>ORMS</h2><p>Object Relational Mappings</p>
-<h3 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h3><h4 id="model-user-js"><a href="#model-user-js" class="headerlink" title="model/user.js"></a>model/user.js</h4><p>not need to define model.js by ourselves</p>
-<ul>
-<li>table not exists: create table/ exists: send the related table</li>
-</ul>
-<h4 id="models-task-js"><a href="#models-task-js" class="headerlink" title="models/task.js"></a>models/task.js</h4><p>connecting db with new Sequelize<br>.readditSync(__dirname) : return array of files in __dirname<br>// [index.js, task.js, user.js, .hide]<br>.filter(file =&gt; {<br>return (file.indexOf(‘.’) !== 0) &amp;&amp; (file !== ‘index.js’) &amp;&amp; (file.slice(-3) === ‘.js’);<br>// [task.js, user.js]<br>.forEach(file =&gt; {<br>const model = require(path.join(__dirname, file))<br>// create absolute path to the file<br>(sequelize, Sequelize.DataTypes);<br>// requiring models/task.js function<br>db[model.name] = model<br>// model: task / user<br>// each file will be the model object<br>db.sequelize = sequelize;<br>db.Sequelize = Sequelize;<br>// take the code and put it individually<br>// leave this code without changing anything in this file<br>module.exports = db<br>exports db with passing db</p>
-<p>👇</p>
-<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><ul>
-<li>set-up everything in the db perfectly and then connect to the client</li>
-</ul>
-<h4 id="router-js"><a href="#router-js" class="headerlink" title="router.js"></a>router.js</h4><p>not changed</p>
-<h4 id="controllers-user-js"><a href="#controllers-user-js" class="headerlink" title="controllers/user.js"></a>controllers/user.js</h4><h4 id="models-user-js"><a href="#models-user-js" class="headerlink" title="models/user.js"></a>models/user.js</h4><h4 id="models-task-js-1"><a href="#models-task-js-1" class="headerlink" title="models/task.js"></a>models/task.js</h4><p>— complete declare, now run —</p>
-<h4 id="models-index-js"><a href="#models-index-js" class="headerlink" title="models/index.js"></a>models/index.js</h4><p>mkcd [dir]<br>npm init -y<br>touch [index.js] [router.js]<br>npm i sequelize koa koa-router</p>
-<p>create table</p>
-<p>get the model : model/index.js, createStudent -&gt; not view, create template with the data</p>
-<p>get student by id, bodyparser -&gt; router.post</p>
-<p><strong>* npm weekly downloads : &gt;= 7M *</strong></p>
+        <h2 id="with문과-함께-사용하기"><a href="#with문과-함께-사용하기" class="headerlink" title="with문과 함께 사용하기"></a>with문과 함께 사용하기</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;foo.txt&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">&quot;Life is too short, you need python&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;foo.txt&quot;</span>, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    lines = [line.rsplit(<span class="string">&quot;\n&quot;</span>) <span class="keyword">for</span> line <span class="keyword">in</span> f]</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -248,6 +225,11 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/language/" rel="tag"># language</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/basic/" rel="tag"># basic</a>
+          </div>
 
         
 
@@ -255,13 +237,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/02/02/13-Database/" rel="prev" title="13. Database">
-      <i class="fa fa-chevron-left"></i> 13. Database
+    <a href="/2021/06/19/python-input-list-map/" rel="prev" title="입력에 따른 리스트 생성">
+      <i class="fa fa-chevron-left"></i> 입력에 따른 리스트 생성
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/02/05/14-NoSQL/" rel="next" title="14. NoSQL">
-      14. NoSQL <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -320,7 +299,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORMS"><span class="nav-number">1.</span> <span class="nav-text">ORMS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequelize"><span class="nav-number">1.1.</span> <span class="nav-text">Sequelize</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#model-user-js"><span class="nav-number">1.1.1.</span> <span class="nav-text">model&#x2F;user.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#models-task-js"><span class="nav-number">1.1.2.</span> <span class="nav-text">models&#x2F;task.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#index-js"><span class="nav-number">1.1.3.</span> <span class="nav-text">index.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#router-js"><span class="nav-number">1.1.4.</span> <span class="nav-text">router.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#controllers-user-js"><span class="nav-number">1.1.5.</span> <span class="nav-text">controllers&#x2F;user.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#models-user-js"><span class="nav-number">1.1.6.</span> <span class="nav-text">models&#x2F;user.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#models-task-js-1"><span class="nav-number">1.1.7.</span> <span class="nav-text">models&#x2F;task.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#models-index-js"><span class="nav-number">1.1.8.</span> <span class="nav-text">models&#x2F;index.js</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#with%EB%AC%B8%EA%B3%BC-%ED%95%A8%EA%BB%98-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"><span class="nav-number">1.</span> <span class="nav-text">with문과 함께 사용하기</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
