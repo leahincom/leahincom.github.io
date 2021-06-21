@@ -28,7 +28,7 @@
 <meta property="og:description" content="with문과 함께 사용하기12with open(&quot;foo.txt&quot;, &quot;w&quot;) as f:    f.write(&quot;Life is too short, you need python&quot;) 12with open(&quot;foo.txt&quot;, &quot;r&quot;) as f:    lines &#x3D; [line.rs">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-06-19T12:42:20.000Z">
-<meta property="article:modified_time" content="2021-06-19T04:43:33.536Z">
+<meta property="article:modified_time" content="2021-06-21T14:49:24.564Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="language">
 <meta property="article:tag" content="python">
@@ -186,10 +186,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-19 13:42:20 / Modified: 05:43:33" itemprop="dateCreated datePublished" datetime="2021-06-19T13:42:20+01:00">2021-06-19</time>
+              <time title="Created: 2021-06-19 13:42:20" itemprop="dateCreated datePublished" datetime="2021-06-19T13:42:20+01:00">2021-06-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-21 15:49:24" itemprop="dateModified" datetime="2021-06-21T15:49:24+01:00">2021-06-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -216,7 +222,8 @@
 
       
         <h2 id="with문과-함께-사용하기"><a href="#with문과-함께-사용하기" class="headerlink" title="with문과 함께 사용하기"></a>with문과 함께 사용하기</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;foo.txt&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">&quot;Life is too short, you need python&quot;</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;foo.txt&quot;</span>, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    lines = [line.rsplit(<span class="string">&quot;\n&quot;</span>) <span class="keyword">for</span> line <span class="keyword">in</span> f]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;foo.txt&quot;</span>, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    lines = [line.rstrip(<span class="string">&quot;\n&quot;</span>) <span class="keyword">for</span> line <span class="keyword">in</span> f]</span><br></pre></td></tr></table></figure>
+<p><code>rstrip()</code> 을 이용해 <code>\n</code> 을 제외한 line 값을 배열에 저장한다.</p>
 
     </div>
 

@@ -186,10 +186,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-20 22:33:12 / Modified: 14:34:36" itemprop="dateCreated datePublished" datetime="2021-06-20T22:33:12+01:00">2021-06-20</time>
+              <time title="Created: 2021-06-20 22:33:12" itemprop="dateCreated datePublished" datetime="2021-06-20T22:33:12+01:00">2021-06-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-21 15:50:20" itemprop="dateModified" datetime="2021-06-21T15:50:20+01:00">2021-06-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -217,11 +223,10 @@
       
           <p>자료형 set은 크게 두가지 특징을 가지고 있다.</p>
 <ol>
-<li><p>중복을 허용하지 않는다.</p>
-</li>
-<li><p>set 내부에 있는 값(value) 들은 순서가 존재하지 않는다.</p>
-</li>
+<li>중복을 허용하지 않는다.</li>
+<li>set 내부에 있는 값(value) 들은 순서가 존재하지 않는다.</li>
 </ol>
+<p>👉 <code>1</code> 의 특징을 이용하여 중복된 값을 list에서 제거한다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listExample = <span class="built_in">list</span>(<span class="built_in">set</span>(listExample))</span><br></pre></td></tr></table></figure>
 
       
@@ -417,10 +422,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-19 13:42:20 / Modified: 05:43:33" itemprop="dateCreated datePublished" datetime="2021-06-19T13:42:20+01:00">2021-06-19</time>
+              <time title="Created: 2021-06-19 13:42:20" itemprop="dateCreated datePublished" datetime="2021-06-19T13:42:20+01:00">2021-06-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-21 15:49:24" itemprop="dateModified" datetime="2021-06-21T15:49:24+01:00">2021-06-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -447,7 +458,8 @@
 
       
           <h2 id="with문과-함께-사용하기"><a href="#with문과-함께-사용하기" class="headerlink" title="with문과 함께 사용하기"></a>with문과 함께 사용하기</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;foo.txt&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">&quot;Life is too short, you need python&quot;</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;foo.txt&quot;</span>, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    lines = [line.rsplit(<span class="string">&quot;\n&quot;</span>) <span class="keyword">for</span> line <span class="keyword">in</span> f]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;foo.txt&quot;</span>, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    lines = [line.rstrip(<span class="string">&quot;\n&quot;</span>) <span class="keyword">for</span> line <span class="keyword">in</span> f]</span><br></pre></td></tr></table></figure>
+<p><code>rstrip()</code> 을 이용해 <code>\n</code> 을 제외한 line 값을 배열에 저장한다.</p>
 
       
     </div>
@@ -498,7 +510,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-18 18:41:08" itemprop="dateModified" datetime="2021-06-18T18:41:08+01:00">2021-06-18</time>
+                <time title="Modified: 2021-06-21 15:48:40" itemprop="dateModified" datetime="2021-06-21T15:48:40+01:00">2021-06-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -525,7 +537,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">n,m=<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line"></span><br><span class="line"><span class="comment">#1</span></span><br><span class="line">mylist=[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    mylist[i]=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#2</span></span><br><span class="line">mylist=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    mylist.append(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#3</span></span><br><span class="line">mylist=[<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br></pre></td></tr></table></figure>
+          <p>#1.</p>
+<ul>
+<li>1차원 배열을 0으로 초기화 시켜놓고,</li>
+<li>input을 한 줄씩 읽으며 split 시킨 값을 int로 변환하여 list에 담아, 배열의 0 값들을 대체한다.</li>
+</ul>
+<p>#2.</p>
+<ul>
+<li>빈 배열을 만들어,</li>
+<li>input으로 들어온 값을 split하여 int로 변환한 후 list로 만들고, 빈 배열에 append한다.</li>
+</ul>
+<p>#3.</p>
+<ul>
+<li>input으로 들어온 값을 split하여 int로 변환한 후 list에 담고, 이를 [] 안에서 n번 반복하여 최종적으로 2차원 배열을 생성한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">n,m=<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line"></span><br><span class="line"><span class="comment">#1</span></span><br><span class="line">mylist=[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    mylist[i]=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#2</span></span><br><span class="line">mylist=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    mylist.append(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#3</span></span><br><span class="line">mylist=[<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br></pre></td></tr></table></figure>
 
 
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://minjoos.tistory.com/2">https://minjoos.tistory.com/2</a></p>
