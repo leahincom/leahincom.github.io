@@ -163,6 +163,319 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/22/git-commit-message/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/22/git-commit-message/" class="post-title-link" itemprop="url">알아두면 좋을 commit message 관습</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-22 15:29:27 / Modified: 07:35:39" itemprop="dateCreated datePublished" datetime="2021-06-22T15:29:27+01:00">2021-06-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="commit-하는-습관을-들이자-✨"><a href="#commit-하는-습관을-들이자-✨" class="headerlink" title="commit 하는 습관을 들이자! ✨"></a>commit 하는 습관을 들이자! ✨</h2><p><code> Initial commit</code> : 처음 세팅 (e.g. npx create-react-app 이후)</p>
+<p><code>feat</code> : feature 수정 시</p>
+<p><code>fix</code> : error fix 시</p>
+<p><code>chore</code> : production code는 변함 없지만 부가적인 정보 수정 시</p>
+<p><code>docs</code> : docs 업데이트 (e.g. readme.md 수정 시)</p>
+<p><code>merge</code> : merge 시…</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/22/SOPT-diary-app/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/22/SOPT-diary-app/" class="post-title-link" itemprop="url">Diary App 만들기 - 1. Main 구현</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-22 15:04:25 / Modified: 09:12:24" itemprop="dateCreated datePublished" datetime="2021-06-22T15:04:25+01:00">2021-06-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/WEB-28th/" itemprop="url" rel="index"><span itemprop="name">WEB_28th</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Diary-App"><a href="#Diary-App" class="headerlink" title="Diary App"></a>Diary App</h2><p>0️⃣</p>
+<p><code>data.json</code> 파일</p>
+<ul>
+<li>이 mock data 파일은 <code>npx create-react-app</code> 으로 생성된 리액트 폴더의 root에 저장해야 한다. ( <code>src</code> 폴더 밖에 )</li>
+<li>해당 파일을 읽기 위해<ol>
+<li> <code>npm i json-server --save-dev</code> 을 통해 json-server을 설치하고</li>
+<li> <code>npx json-server --watch data.json --port port#</code> 을 통해 json-server을 실행하여 읽을 data 파일과 서버 포트 번호를 지정해준다.</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;posts&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;2021&quot;</span>: [</span><br></pre></td></tr></table></figure>
+<p>여기서 posts는 <code>/posts</code> url을 의미하고, data는 그 페이지 안에 들어있는 data 묶음을 의미한다.</p>
+<p>data 안에는 2021년에 대한 data 배열이 있는데, 이를 자세히 보면</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&quot;2021&quot;: [</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;id&quot;</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="attr">&quot;date&quot;</span>: <span class="number">20210501</span>,</span><br><span class="line">            <span class="attr">&quot;title&quot;</span>: <span class="string">&quot;다이어리 제목 어쩌고 저쩌고&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;image&quot;</span>: <span class="string">&quot;https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a1108dc0-bf35-418b-956d-338d154a5911/image1.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210508%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210508T050603Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=4c752ad0fba5a98411eafd63ba9c406626003981a362eb9b675739cd386846e0&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22image1.jpg%22&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;weather&quot;</span>: <span class="string">&quot;맑음&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;tags&quot;</span>: [<span class="string">&quot;태그1&quot;</span>, <span class="string">&quot;태그2&quot;</span>]</span><br><span class="line">          &#125;,</span><br><span class="line">          .</span><br><span class="line">          .</span><br><span class="line">          .</span><br><span class="line">        ],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        []</span><br><span class="line">      ]</span><br></pre></td></tr></table></figure>
+<p>이렇게 12개의 배열이 담겨있다. 즉, 월별 데이터가 각 배열에 들어있다는 의미.</p>
+<hr>
+<p>1️⃣</p>
+<p><code>component 구조</code></p>
+<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/3ebb4c18-d088-4dd1-bc95-15c4faa703d7/1st_44.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210622%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210622T061543Z&X-Amz-Expires=86400&X-Amz-Signature=e86ddcce1f6c25f34d52836d59964477848d4c9c83f0625ac077add46b0f5b86&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%221st_44.jpg%22" align="center" />
+
+<ol>
+<li> <code>/components</code></li>
+</ol>
+<p>Main 페이지를 보면, <strong>크게</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├ MainHeader</span><br><span class="line">├ Calendar</span><br><span class="line">├ Title</span><br><span class="line">├ Main</span><br><span class="line">	├ Card</span><br><span class="line">	├ NewCard</span><br><span class="line">├ Footer</span><br></pre></td></tr></table></figure>
+<p>이렇게 나뉜다.</p>
+<p>여기서 <strong>공통적</strong>으로 적용되는 부분은</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;common</span><br><span class="line">├ MainHeader</span><br><span class="line">├ Calendar</span><br><span class="line">├ Title</span><br><span class="line">├ Footer</span><br></pre></td></tr></table></figure>
+<p>이다.</p>
+<p>이 외에 <strong>페이지 (Main / Diary) 에 따라</strong> 달라지는 부분은</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;main</span><br><span class="line">├ Card</span><br><span class="line">├ NewCard</span><br><span class="line">&#x2F;diary</span><br><span class="line">├ ...</span><br></pre></td></tr></table></figure>
+<p>가 있을 것이다.</p>
+<ol start="2">
+<li> <code>pages</code></li>
+</ol>
+<p>위의 컴포넌트를 모두 적용시킨 페이지의 경우 따로 폴더를 만들어 페이지별로 컴포넌트를 생성한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;pages</span><br><span class="line">├ Main</span><br><span class="line">├ Diary</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>그 외…</li>
+</ol>
+<ul>
+<li> <code>assets</code></li>
+<li><code>lib</code></li>
+</ul>
+<hr>
+<p>2️⃣</p>
+<p><code>App.js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import React from &quot;react&quot;;</span><br><span class="line">import &#123; BrowserRouter, Route, Switch &#125; from &quot;react-router-dom&quot;;</span><br><span class="line">import MainHeader from &quot;.&#x2F;components&#x2F;common&#x2F;MainHeader&quot;;</span><br><span class="line">import Calendar from &quot;.&#x2F;components&#x2F;common&#x2F;Calendar&quot;;</span><br><span class="line">import Title from &quot;.&#x2F;components&#x2F;common&#x2F;Title&quot;;</span><br><span class="line">import Footer from &quot;.&#x2F;components&#x2F;common&#x2F;Footer&quot;;</span><br><span class="line">import Main from &quot;.&#x2F;pages&#x2F;Main&quot;;</span><br><span class="line">import Diary from &quot;.&#x2F;pages&#x2F;Diary&quot;;</span><br><span class="line">&#x2F;&#x2F; Card와 NewCard를 제외하고 모두 불러와주세요!</span><br></pre></td></tr></table></figure>
+<p>root ( <code>App.js</code> ) 에서 부를 모든 컴포넌트 import 하기</p>
+<p>데이터 이동이 있는 등 리렌더링이 진행되는 컴포넌트는 모두 <code>BrowserRouter</code> 에 넣는다. main, diary 페이지가 모두 사용하는 <code>MainHeader</code> , <code>Calendar</code> , <code>Title</code> 가 이에 해당하며, 특히 컴포넌트 클릭시 url이 바뀌고 렌더링 되는 컴포넌트가 달라져야 하는 경우 <code>Switch</code> 안에 넣는다. Switch 내에는 <code>Route</code> 로 url 별 컴포넌트 렌더링을 달리 정의한다.</p>
+<p>여기서 main은 <code>path=&quot;/&quot;</code> 일 때이므로 exact를 설정해 Main을 넘겨주고, <code>/diary</code> 일 때는 Diary 컴포넌트를, 그 외에는 <code>Page Not Found</code> 를 띄워준다. <code>Route</code> 는 위에서부터 차례로 내려가며 path를 비교해 <strong>처음으로</strong> 매칭되는 컴포넌트를 렌더링한다!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; BrowserRouter 내부에 모두 넣어줍시다</span><br><span class="line">&#x2F;&#x2F; Switch를 사용하는 이유 -&gt; URL이 path에 없으면 Page Not Found를 불러오기 위해서</span><br><span class="line">function App() &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &lt;BrowserRouter&gt;</span><br><span class="line">        &lt;MainHeader &#x2F;&gt;</span><br><span class="line">        &lt;Calendar &#x2F;&gt;</span><br><span class="line">        &lt;Title &#x2F;&gt;</span><br><span class="line">        &lt;Switch&gt;</span><br><span class="line">          &lt;Route exact path&#x3D;&quot;&#x2F;&quot; component&#x3D;&#123;Main&#125; &#x2F;&gt;</span><br><span class="line">          &lt;Route path&#x3D;&quot;&#x2F;diary&#x2F;:id&quot; component&#x3D;&#123;Diary&#125; &#x2F;&gt;</span><br><span class="line">          &lt;Route component&#x3D;&#123;() &#x3D;&gt; &lt;div&gt;Page Not Found&lt;&#x2F;div&gt;&#125; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Switch&gt;</span><br><span class="line">      &lt;&#x2F;BrowserRouter&gt;</span><br><span class="line">      &lt;Footer &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>exact에 대한 자세한 설명은 다음을 참고하자.</p>
+<blockquote>
+<p>For example, imagine we had a <code>Users</code> component that displayed a list of users. We also have a <code>CreateUser</code> component that is used to create users. The url for <code>CreateUsers</code> should be nested under <code>Users</code>. So our setup could look something like this:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Switch&gt;</span><br><span class="line">  &lt;Route path=<span class="string">&quot;/users&quot;</span> component=&#123;Users&#125; /&gt;</span><br><span class="line">  &lt;Route path=<span class="string">&quot;/users/create&quot;</span> component=&#123;CreateUser&#125; /&gt;</span><br><span class="line">&lt;/Switch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Now the problem here, when we go to <code>http://app.com/users</code> the router will go through all of our defined routes and return the FIRST match it finds. So in this case, it would find the <code>Users</code> route first and then return it. All good.</p>
+<p>But, if we went to <code>http://app.com/users/create</code>, it would again go through all of our defined routes and return the FIRST match it finds. React router does partial matching, so <code>/users</code> partially matches <code>/users/create</code>, so it would incorrectly return the <code>Users</code> route again!</p>
+<p>The <code>exact</code> param disables the partial matching for a route and makes sure that it only returns the route if the path is an EXACT match to the current url.</p>
+<p>So in this case, we should add <code>exact</code> to our <code>Users</code> route so that it will only match on <code>/users</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Switch&gt;</span><br><span class="line">  &lt;Route exact path&#x3D;&quot;&#x2F;users&quot; component&#x3D;&#123;Users&#125; &#x2F;&gt;</span><br><span class="line">  &lt;Route path&#x3D;&quot;&#x2F;users&#x2F;create&quot; component&#x3D;&#123;CreateUser&#125; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;Switch&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<p>3️⃣</p>
+<p>공통 컴포넌트 update!</p>
+<ol>
+<li><code>MainHeader.js</code></li>
+</ol>
+<blockquote>
+<h2 id="Router-Props"><a href="#Router-Props" class="headerlink" title="Router Props"></a><strong>Router Props</strong></h2><p>브라우저와 리액트앱의 라우터를 연결하게 되면 그 결과 라우터가 history api에 접근할 수 있게 되며 <strong>각각의 Route와 연결된 컴포넌트에 props로 match, location, history라는 객체를 전달하게 된다.</strong></p>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbRLIbr%2FbtqBgEoPo8a%2FMEMteDVODq4zH2k3VTZbLK%2Fimg.png" align="center" />
+
+<h3 id="Match"><a href="#Match" class="headerlink" title="Match"></a><strong>Match</strong></h3><p><strong>match 객체에는 <Route path>와 URL이 매칭된 대한 정보가 담겨져있다.</strong> 대표적으로 match.params로 path에 설정한 파라미터값을 가져올 수 있다.</p>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbyxn34%2FbtqBgD4x6VK%2Fq7EWXRnRivdZ99U5PBvci0%2Fimg.png" />
+
+<h3 id="Location"><a href="#Location" class="headerlink" title="Location"></a><strong>Location</strong></h3><p><strong>location 객체에는 현재 페이지의 정보를 가지고 있다.</strong> 대표적으로 location.search로 현재 url의 쿼리 스트링을 가져올 수 있다.</p>
+ <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FoU9Bn%2FbtqBh0Y2TXE%2FICzkxw2pK20f49o8owXdF1%2Fimg.png" />
+
+<p>👆 요청 url</p>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb6COzX%2FbtqBkpJUrQy%2FHTSMnlRGJc2kVDB8nnvyrk%2Fimg.png" />
+
+<h3 id="History"><a href="#History" class="headerlink" title="History"></a><strong>History</strong></h3><p>history 객체는 브라우저의 history와 유사하다. <strong>스택(stack)에 현재까지 이동한 url 경로들이 담겨있는 형태로 주소를 임의로 변경하거나 되돌아갈 수 있도록 해준다.</strong></p>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRRFXi%2FbtqBjCwnKb8%2F7GKGdzmyC8tWANyA5ktRoK%2Fimg.png" />
+</blockquote>
+<p><code>withRouter</code> 을 이용해 컴포넌트를 감싸면 컴포넌트 자체에서도 <code>location</code> , <code>history</code> 와 같이 url을 활용할 수 있도록 한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Route가 아닌 요소에서 location을 사용하기 위해서 withRouter를 사용합니다</span><br><span class="line">import &#123; withRouter &#125; from &quot;react-router-dom&quot;;</span><br><span class="line">import styled from &quot;styled-components&quot;;</span><br><span class="line">import MenuIcon from &quot;..&#x2F;..&#x2F;assets&#x2F;MenuIcon.svg&quot;;</span><br><span class="line">import ProfileIcon from &quot;..&#x2F;..&#x2F;assets&#x2F;ProfileIcon.svg&quot;;</span><br><span class="line"></span><br><span class="line">export default withRouter(MainHeader);</span><br><span class="line"></span><br><span class="line">const MainHeaderWrap &#x3D; styled.div&#96;</span><br><span class="line">  .header &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-direction: row;</span><br><span class="line">    align-items: center;</span><br><span class="line">    justify-content: space-between;</span><br><span class="line">    height: 91px;</span><br><span class="line"></span><br><span class="line">    &amp;__title &#123;</span><br><span class="line">      font-size: 36px;</span><br><span class="line">      font-weight: bold;</span><br><span class="line">      font-style: italic;</span><br><span class="line">      color: #cea0e3;</span><br><span class="line">      &amp;:hover &#123;</span><br><span class="line">        cursor: pointer;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;__profile &#123;</span><br><span class="line">      margin-right: 10px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;__hr &#123;</span><br><span class="line">      width: 1200px;</span><br><span class="line">      height: 13px;</span><br><span class="line">      background: linear-gradient(90deg, white, #cea0e3);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#96;;</span><br></pre></td></tr></table></figure>
+
+
+<p>props에 <code>history</code> 을 받아와 컴포넌트 간 이동을 컨트롤한다. <code>history.push()</code> 를 통해 url 이동이 가능하다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const MainHeader &#x3D; (&#123; history &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  &#x2F;&#x2F; history를 props로 가져옵니다.</span><br><span class="line">  return (</span><br><span class="line">    &lt;MainHeaderWrap&gt;</span><br><span class="line">      &lt;div className&#x3D;&quot;header&quot;&gt;</span><br><span class="line">        &#123;&#x2F;* header는 menu, title, profile의 flex-container 입니다. *&#x2F;&#125;</span><br><span class="line">        &lt;img className&#x3D;&quot;header__menu&quot; src&#x3D;&#123;MenuIcon&#125; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">        &lt;div className&#x3D;&quot;header__title&quot; onClick&#x3D;&#123;() &#x3D;&gt; history.push(&quot;&#x2F;&quot;)&#125;&gt;</span><br><span class="line">          &#123;&#x2F;* title을 누르면 path&#x3D;&quot;&#x2F;&quot;, 즉 Main 페이지로 이동 *&#x2F;&#125;</span><br><span class="line">          Diary App</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;img className&#x3D;&quot;header__profile&quot; src&#x3D;&#123;ProfileIcon&#125; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div className&#x3D;&quot;header__hr&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">      &#123;&#x2F;* hr은 위의 menu, title, profile과 수직상에 있기 때문에 flex를 적용시키지 않기 위해 밖으로 뺐습니다 *&#x2F;&#125;</span><br><span class="line">      &#123;&#x2F;* hr을 header div 안으로 넣으면 menu, title, profile과 동일 선상에서 가로로 정렬됩니다. 궁금하면 넣어보세요 ㅎㅅㅎ *&#x2F;&#125;</span><br><span class="line">    &lt;&#x2F;MainHeaderWrap&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<ol start="2">
+<li> <code>Title.js</code></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const Title &#x3D; (&#123; location &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  &#x2F;&#x2F; location을 props로 가져옵니다 (현재 페이지 정보를 담고 있는 객체)</span><br><span class="line">  &#x2F;&#x2F; location.pathname이 &quot;&#x2F;&quot;이면 &quot;이번 달 일기&quot;를 저장하고, 아니면 &quot;오늘의 일기&quot;를 저장합니다.</span><br><span class="line">  const title &#x3D; location.pathname &#x3D;&#x3D;&#x3D; &quot;&#x2F;&quot; ? &quot;이번 달 일기&quot; : &quot;오늘의 일기&quot;;</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;TitleWrap&gt;</span><br><span class="line">      &lt;div className&#x3D;&quot;title&quot;&gt;&#123;title&#125;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;TitleWrap&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<ol start="3">
+<li> <code>Footer.js</code></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const Footer &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;FooterWrap&gt;</span><br><span class="line">      &lt;div className&#x3D;&quot;footer&quot;&gt;</span><br><span class="line">        Copyright&amp;copy; 2021. BE SOPT Web part. All rights reserved.</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;FooterWrap&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>&amp;copy</code> 는 Copyright 표시인 © 를 보여주는 html 요소이다 👾</p>
+<ol start="4">
+<li><code>Calendar.js</code></li>
+</ol>
+<p>Calendar 컴포넌트 및 다른 컴포넌트에도 공통된 state를 내려주기 위해 App.js에서 공통된 state를 생성 및 설정하고, props로 내려준다.</p>
+<blockquote>
+<p>App.js에서 년도와 월을 저장한 후, 데이터를 Calendar.js로 전달해주는 방식입니다!</p>
+</blockquote>
+<p><code>App.js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState &#125; from &#39;react&#39;; &#x2F;&#x2F; state를 사용하기 위해 useState를 불러옵니다</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Default 값으로 현재 연도와 월을 저장하기 위해, 현재 연도와 월을 불러오는 함수입니다</span><br><span class="line">const getCurrDate &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  const now &#x3D; new Date();</span><br><span class="line">  const currYear &#x3D; now.getFullYear();</span><br><span class="line">  const currMonth &#x3D; now.getMonth();</span><br><span class="line">  return &#123; year: currYear, month: currMonth &#125;; &#x2F;&#x2F; 객체로 한 번에 리턴해줍시다</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function App() &#123;</span><br><span class="line">	&#x2F;&#x2F; state를 각각 선언해주세요~ useState()의 인자로 각각 현재 연도와 월을 전달합니다</span><br><span class="line">  const [year, setYear] &#x3D; useState(getCurrDate().year); </span><br><span class="line">  const [month, setMonth] &#x3D; useState(getCurrDate().month);</span><br><span class="line">  return (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &lt;BrowserRouter&gt;</span><br><span class="line">        &lt;MainHeader &#x2F;&gt;</span><br><span class="line">        &lt;Calendar</span><br><span class="line">          currYear&#x3D;&#123;year&#125;</span><br><span class="line">          setCurrYear&#x3D;&#123;setYear&#125;</span><br><span class="line">          currMonth&#x3D;&#123;month&#125;</span><br><span class="line">          setCurrMonth&#x3D;&#123;setMonth&#125;</span><br><span class="line">        &#x2F;&gt; &#123;&#x2F;&#x2F; Calendar 컴포넌트에 state로 선언한 모든 것들을 props로 전달합니다 &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><code>Calendar.js</code></p>
+<p>App.js에서 넘겨준 props를 받아준다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const Calendar &#x3D; (&#123; currYear, setCurrYear, currMonth, setCurrMonth &#125;) &#x3D;&gt; &#123;</span><br></pre></td></tr></table></figure>
+
+
+<p>useRef는 DOM 요소를 조작하기 위해 생성하는 상응하는 리액트 내 DOM 객체이다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; useRef를 사용하여 &quot;DOM 요소를 가져올 수 있는 변수&quot;를 선언합니다</span><br><span class="line">const leftButton &#x3D; useRef();</span><br><span class="line">const rightButton &#x3D; useRef();</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;img</span><br><span class="line">  src&#x3D;&#123;LeftOff&#125;</span><br><span class="line">  alt&#x3D;&quot;&quot;</span><br><span class="line">  onClick&#x3D;&#123;() &#x3D;&gt; setCurrYear(currYear - 1)&#125;</span><br><span class="line">  onMouseEnter&#x3D;&#123;() &#x3D;&gt; (leftButton.current.src &#x3D; LeftOn)&#125;</span><br><span class="line">  onMouseLeave&#x3D;&#123;() &#x3D;&gt; (leftButton.current.src &#x3D; LeftOff)&#125;</span><br><span class="line">  ref&#x3D;&#123;leftButton&#125;</span><br><span class="line">  className&#x3D;&quot;calendar__year--left&quot;</span><br><span class="line">  &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+<p><code>onClick</code> 시에는 year를 다시 세팅해야 하므로 props로 받은 setCurrYear 함수를 이용해 year를 알맞게 설정한다.</p>
+<p><code>onMouseEnter</code> 과 <code>onMouseLeave</code> 의 경우에는 마우스를 DOM 요소에 호버 온/오프 했을 때의 변화를 설정하는 것이므로, ref를 전달하고 해당 ref의 <code>current.src</code> 에 알맞은 <code>svg</code> 을 전달하여 알맞은 아이콘을 렌더링하도록 한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className&#x3D;&quot;calendar__month&quot;&gt;</span><br><span class="line">  &#123;monthList.map((month) &#x3D;&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div</span><br><span class="line">        key&#x3D;&#123;month&#125;</span><br><span class="line">        onClick&#x3D;&#123;() &#x3D;&gt; setCurrMonth(month)&#125;</span><br><span class="line">        style&#x3D;&#123;</span><br><span class="line">          month &#x3D;&#x3D;&#x3D; currMonth</span><br><span class="line">            ? &#123; fontSize: &quot;22px&quot;, fontWeight: &quot;bold&quot; &#125;</span><br><span class="line">            : &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        className&#x3D;&quot;calendar__month--button&quot;</span><br><span class="line">      &gt;</span><br><span class="line">        &#123;month&#125;월</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;)&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p><code>map</code> 함수를 사용할 시, 되도록 <code>key</code> props를 설정하도록 습관을 들이자! 또한, map 사용 시 꼭 <code>return</code> 문을 사용해야하는 것은 아니지만, 만약 사용한다면 <code>&#123;&#125;</code> 로 return 문을 감싸야 한다!</p>
+<p>여기서는 월을 선택했을 때 <code>currMonth</code> 을 다시 세팅하고, 그에 맞는 스타일을 적용해야 하므로 style 객체에 조건문을 설정하여 알맞게 렌더링되도록 한다. 여기서 <strong>jsx</strong> 의 특성을 엿볼 수 있는데, 일단 javascript 문법이 들어가기 때문에 <code>style=&#123;&#125;</code> 로 문법임을 선언해주고, 이 안에 조건문을 설정한 후 실제 스타일 객체는 <code>&#123;&#125;</code> 로 전달해준다!</p>
+<p>4️⃣</p>
+<p>Card 설정</p>
+<p><code>Main.js</code></p>
+<p>Main 페이지는 Card를 포함하는 최상단 페이지이므로, 자식 컴포넌트로 Card를 렌더링하고 props로 userData를 전달한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">return (</span><br><span class="line">  &lt;MainWrap&gt;</span><br><span class="line">    &lt;Card userData&#x3D;&#123;userData&#125; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;MainWrap&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+<p><code>Card.js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 서버에 date가 20200509 형식으로 저장되어있기 때문에, 이를 &quot;5월 9일&quot; 형태로 반환하는 함수입니다</span><br><span class="line">const getDateFormat &#x3D; (date) &#x3D;&gt; &#123;</span><br><span class="line">  const month &#x3D; parseInt((date % 10000) &#x2F; 100);</span><br><span class="line">  const day &#x3D; date % 100;</span><br><span class="line">  return &#96;$&#123;month&#125;월 $&#123;day&#125;일&#96;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<p>props로 받은 <code>userData</code> 객체를 구조분해할당하여 개별적인 변수에 담는다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const Card &#x3D; (&#123; userData &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  const &#123; date, title, image, weather, tags &#125; &#x3D; userData;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// <span class="selector-tag">text</span> 길이가 길어지면 ... 로 생략하는 방법(아래의 3가지 속성을 세트로 사용합니다)</span><br><span class="line">// <span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>; <span class="selector-tag">-</span>&gt; <span class="selector-tag">text</span>가 길면 보통 다음 줄로 넘어가는데, &quot;한 줄에만; <span class="selector-tag">nowrap</span>&quot; 작성하여 넘치게 합니다</span><br><span class="line">// <span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>; <span class="selector-tag">-</span>&gt; 넘친 텍스트를 숨깁니다</span><br><span class="line">// <span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>; <span class="selector-tag">-</span>&gt; 넘친 텍스트를 ... 로 표시합니다</span><br><span class="line"></span><br><span class="line">&amp;__<span class="selector-tag">title</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">25px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">12px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: left;</span><br><span class="line">  <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>5️⃣</p>
+<p>API 설정</p>
+<p>Main 컴포넌트 자체만 넘기지 않고 props도 함께 전달하기 위해 Route 내 component props을 변경한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Main 컴포넌트에서는 &quot;해당 월의 데이터만&quot; 가지고 있어야하므로 Main에 현재 연도와 월을 넘겨줍니다</span><br><span class="line">&#x2F;&#x2F; ex) 2021년 5월에 해당하는 데이터만 가지고 오기 위함! 연도나 월이 변경되면 자동으로 API를 다시 요청합니다</span><br><span class="line">&lt;Switch&gt;</span><br><span class="line">          &lt;Route</span><br><span class="line">            exact</span><br><span class="line">            path&#x3D;&quot;&#x2F;&quot;</span><br><span class="line">            component&#x3D;&#123;&lt;Main year&#x3D;&#123;year&#125; month&#x3D;&#123;month&#125; &#x2F;&gt;&#125;</span><br><span class="line">          &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>GetUserData API를 작성하여 json-server에 있는 data를 가져옵니다. 실제로 가져오기 전에 Postman으로 테스트 해보면 좋겠죠?</p>
+</blockquote>
+<p>api 요청 함수는 무조건 <code>async</code> , <code>await</code> 으로 작성하여 비동기 처리한다! 데이터를 받지 않으면 진행되지 않아야 버그를 방지한다.</p>
+<p>get url 의 경우, 앞서 <code>data.json</code> 에서 설명했듯이 설정한 서버 포트 넘버 3001번에서 <code>/posts</code> url 에서 data를 가져온다. 이 때, api로 가져오는 data는 객체 내에 data에 대한 metadata와 함께 data를 가져오므로 기본적으로 다음과 같은 구조를 가지고 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rawData &#123;</span><br><span class="line">	...metadata,</span><br><span class="line">	data: &#123;</span><br><span class="line">		.</span><br><span class="line">		.</span><br><span class="line">		.</span><br><span class="line">		data: &#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>여기서는 <code>data</code> 라고 명명하였으므로, data 내 data에 접근하여 data를 가져온다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export const getCardData &#x3D; async () &#x3D;&gt; &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    const rawData &#x3D; await axios.get(&quot;http:&#x2F;&#x2F;localhost:3001&#x2F;posts&quot;);</span><br><span class="line">    return rawData.data.data;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>App.js에서 내려준 <code>year</code> , <code>month</code> 를 props로 받아 data의 property로서 접근하여 알맞은 데이터를 가져온다. api에서 data를 받아올 것이므로 초기값은 <code>null</code> 로 설정하고, <code>useEffect</code> 를 이용해 setState한다. 이 때, useEffect 에 전달하는 callback 함수의 경우 밖에서 정의 후 전달하는 것이 아닌 함수 내에서 정의하는 것이므로, <strong>IFFY</strong> 를 위해 기본적인 함수 생성문 <code>() =&gt; &#123;&#125;</code> 정의 후 내부에 IFFY를 위한 <code>(() =&gt; &#123;&#125;)()</code> 를 정의한다. 이 때, api를 이용해 data를 호출하므로 async, await로 data를 받아오고 설정해야 한다. (api 함수 자체가 async, await 함수이므로) 또한, year과 month가 바뀔 때에만 리렌더링을 해야하므로 dependency 배열에 이 두 변수를 설정한다. 즉, dependencies가 year, month 이므로 year와 month가 변경되면 api를 다시 요청하게 된다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const Main &#x3D; (&#123; year, month &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  &#x2F;&#x2F; useState를 사용하여 전체 데이터 값을 저장합니다. 여기서는 테스트를 위해 초기값으로 더미 데이터를 넣었습니다!</span><br><span class="line">  &#x2F;&#x2F; 이후에는 서버에서 API 요청 결과값을 받으면 userData에 저장합니다.</span><br><span class="line">  const [userData, setUserData] &#x3D; useState(null);</span><br><span class="line"></span><br><span class="line">  useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">    (async () &#x3D;&gt; &#123;</span><br><span class="line">      const data &#x3D; await getCardData();</span><br><span class="line">      data[year] &amp;&amp; setUserData(data[year][month]);</span><br><span class="line">    &#125;)();</span><br><span class="line">  &#125;, [year, month]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>Router : <a target="_blank" rel="noopener" href="https://gongbu-ing.tistory.com/45">https://gongbu-ing.tistory.com/45</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/22/python-list-reverse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -177,7 +490,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/22/python-list-reverse/" class="post-title-link" itemprop="url">python_list-reverse</a>
+            <a href="/2021/06/22/python-list-reverse/" class="post-title-link" itemprop="url">리스트 요소 reverse 시키기</a>
         </h2>
 
         <div class="post-meta">
@@ -188,7 +501,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-22 11:55:07 / Modified: 04:06:14" itemprop="dateCreated datePublished" datetime="2021-06-22T11:55:07+01:00">2021-06-22</time>
+              <time title="Created: 2021-06-22 11:55:07 / Modified: 07:34:20" itemprop="dateCreated datePublished" datetime="2021-06-22T11:55:07+01:00">2021-06-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -808,397 +1121,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/31/strict-mode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/31/strict-mode/" class="post-title-link" itemprop="url">strict mode</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-05-30 19:23:11 / Modified: 12:50:43" itemprop="dateCreated datePublished" datetime="2021-05-30T19:23:11+01:00">2021-05-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Language/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p>JavaScript의 제한된 버전을 선택하여 기본값인 sloppy mode를 해제하는 방법으로, 일반적인 코드와 다른 semantics를 지니고 있다. 하지만 sloppy mode와 strict mode의 코드는 공존할 수 있어, 차후 strict mode를 이용하여 스크립트의 모드를 변경할 수도 있다.</p>
-<br />
-
-
-
-<p><em><strong>그래서 strict mode란 무엇일까?</strong></em></p>
-<ol>
-<li>기존에 문제를 발생시키지 않고 조용히 무시되던 에러들을 throwing한다.</li>
-<li>JavaScript 엔진의 최적화 작업을 어렵게 만드는 실수들을 바로잡는다. 이는 동일한 내용이지만 sloppy mode 코드일 때보다 더 빨리 작동하도록 돕는다.</li>
-<li>이후의 ECMAScript 업데이트로 인한 자동적인 변경을 제한한다.</li>
-<li>모듈은 기본적으로 strict mode이다.</li>
-</ol>
-<br />
-
-
-
-<p>이를 적용하는 조건은 다음과 같다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 스크립트 전체</span></span><br><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 일부</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">strict</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">  &quot;use strict&quot;</span>;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>전체 스크립트 또는 부분 함수에 적용 가능하다.</p>
-<ul>
-<li><p>{} 로 묶여진 블럭문에는 적용되지 않는다. 따라서, context와 같은 곳에 적용을 시도하면 동작하지 않는다.</p>
-</li>
-<li><p>eval, Function 코드, 이벤트 핸들러 속성, setTimeout() 등의 함수에 전달된 문자열은 전체 스크립트로, 적용 가능하다.</p>
-</li>
-</ul>
-<br />
-
-
-
-<h4 id="변경-사항"><a href="#변경-사항" class="headerlink" title="변경 사항"></a>변경 사항</h4><p>이러한 strict mode는 구문과 런타임 동작 등을 모두 변경시킨다. 예를 들어,</p>
-<ol>
-<li>변환 실수를 오류로 해석하거나 (문법 오류/ 런타임 에러 발생),</li>
-<li>특정 이름의 특정 용도에 대한 특정 변수를 계산하는 방법을 단순화하며,</li>
-<li><code>eval</code> 과 <code>arguments</code> 를 단순화하고,</li>
-<li>“안전한 “자바 스크립트를 작성하도록 돕고, </li>
-<li>미래 ECMAScript의 진화에 대비합니다.</li>
-</ol>
-<br />
-
-
-
-<p>위와 같은 변경으로 인해, 기존에는 인정되던 실수를 에러로 인식하여 발생시킨다. </p>
-<ol>
-<li><p>글로벌 변수를 생성하는 것을 금한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line">&#x2F;&#x2F; 전역 변수 mistypedVariable 이 존재한다고 가정</span><br><span class="line">mistypedVaraible &#x3D; 17; &#x2F;&#x2F; ReferenceError 를 발생시킴</span><br></pre></td></tr></table></figure></li>
-<li><p>일반 코드에서 조용히 넘어가는 모든 실패 (쓸 수 없는 전역 또는 프로퍼티에 할당, getter-only 프로퍼티에 할당, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions">확장 불가</a> 객체에 새 프로퍼티 할당) 에 대해 예외를 발생시킨다.</p>
-<ul>
-<li><code>NaN</code> 은 쓸 수 없는 전역 변수 ( <code>NaN</code> 에 할당하는 일반적인 코드는 아무 것도 하지 않는다. ) 로, 예외를 발생시킨다.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 쓸 수 없는 프로퍼티에 할당</span></span><br><span class="line"><span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">5</span>; <span class="comment">// TypeError 발생</span></span><br><span class="line"><span class="keyword">var</span> <span class="literal">Infinity</span> = <span class="number">5</span>; <span class="comment">// TypeError 발생</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 쓸 수 없는 프로퍼티에 할당</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj1, <span class="string">&quot;x&quot;</span>, &#123; <span class="attr">value</span>: <span class="number">42</span>, <span class="attr">writable</span>: <span class="literal">false</span> &#125;);</span><br><span class="line">obj1.x = <span class="number">9</span>; <span class="comment">// TypeError 발생</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// getter-only 프로퍼티에 할당</span></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123; <span class="keyword">get</span> <span class="title">x</span>() &#123; <span class="keyword">return</span> <span class="number">17</span>; &#125; &#125;;</span><br><span class="line">obj2.x = <span class="number">5</span>; <span class="comment">// TypeError 발생</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 확장 불가 객체에 새 프로퍼티 할당</span></span><br><span class="line"><span class="keyword">var</span> fixed = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.preventExtensions(fixed);</span><br><span class="line">fixed.newProp = <span class="string">&quot;ohai&quot;</span>; <span class="comment">// TypeError 발생</span></span><br></pre></td></tr></table></figure></li>
-<li><p>삭제할 수 없는 프로퍼티를 삭제하려 할 때; 시도가 어떤 효과도 없을 때, 예외를 발생시킨다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">Object</span>.prototype; <span class="comment">// TypeError 발생</span></span><br></pre></td></tr></table></figure></li>
-<li><p>일반 코드에서는 마지막으로 중복된 인수가 이전에 지정된 인수를 숨기지만, 유니크한 함수 파라미터 이름을 요구한다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, a, c</span>)</span>&#123; <span class="comment">// !!! 구문 에러</span></span><br><span class="line"><span class="meta">  &quot;use strict&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> a + b + c; <span class="comment">// 코드가 실행되면 잘못된 것임</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-</li>
-</ol>
-<h4 id="장점"><a href="#장점" class="headerlink" title="장점"></a>장점</h4><h5 id="변수-사용-단순화"><a href="#변수-사용-단순화" class="headerlink" title="변수 사용 단순화"></a>변수 사용 단순화</h5><ul>
-<li>코드상의 변수 이름을 특정 변수 정의로 매핑하는 방법을 단순화한다.</li>
-<li>자바스크립트는 때때로 이름을 코드상의 변수 정의로 기본 매핑하는 것을 런타임때까지 실행이 불가하게 하는데, 이것이 발생하는 대부분의 경우를 제거하여 컴파일러가 strict mode 코드를 더 잘 최적화 할 수 있게 한다.</li>
-</ul>
-<ol>
-<li><p><code>with</code> 를 사용하지 못하게 한다.</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://whereswalden.com/2011/01/10/new-es5-strict-mode-support-new-vars-created-by-strict-mode-eval-code-are-local-to-that-code-only/">엄격모드 코드의 <code>eval</code> 은 새로운 변수를 주위 스코프에 추가하지 않는다</a>.</p>
-</li>
-<li><p>셋째로, 엄격모드는 일반 이름을 제거하는 것을 금지합니다. 엄격 모드에서 <code>delete name</code> 은 구문 에러입니다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x;</span><br><span class="line"><span class="keyword">delete</span> x; <span class="comment">// !!! 구문 에러</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;var y; delete y;&quot;</span>); <span class="comment">// !!! syntax error</span></span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-</li>
-</ol>
-<h5 id="eval-과-arguments-를-더-간단하게-하기"><a href="#eval-과-arguments-를-더-간단하게-하기" class="headerlink" title="eval 과 arguments 를 더 간단하게 하기"></a>eval 과 arguments 를 더 간단하게 하기</h5><blockquote>
-<ul>
-<li><p>바인딩을 추가하거나 삭제하고 바인딩 값을 변경하기 위한 <code>eval</code></p>
-</li>
-<li><p>명명된 인수를 가리키는, indexed 프로퍼티 <code>arguments</code></p>
-</li>
-</ul>
-</blockquote>
-<br />
-
-
-
-<h5 id="JavaScript-“보안”"><a href="#JavaScript-“보안”" class="headerlink" title="JavaScript “보안”"></a>JavaScript “보안”</h5><p>브라우저에서 자바스크립트는 사용자의 개인정보에 접근할 수 있기 때문에, 자바스크립트는 금지된 기능에 접근을 막기 위해 실행 전, 반드시 부분적으로 변경되어야 한다. 하지만 자바스크립트의 유연성으로 인해 런타임 체크없이 이것을 수행하는 것은 사실상 불가능하다. strict mode를 이용하면 특정 방식으로 호출되므로 런타임 검사의 필요성이 크게 줄어든다.</p>
-<ol>
-<li><code>this</code> 로 함수에 전달된 값은 강제로 객체가 되지 않는다 (a.k.a. “boxed”). 즉, 브라우저에서 엄격모드의 함수내 에서는 더 이상 <code>window</code> 객체를 <code>this</code> 를 통해 참조할 수 없다.<ul>
-<li>정의된 <code>this</code> 는 boxed 객체가 되지 않으며,</li>
-<li>정의되지 않은 경우 <code>this</code> 는 <code>undefined</code> 가 된다. </li>
-</ul>
-</li>
-</ol>
-<br />
-
-
-
-<h5 id="미래의-ECMAScript-버전을-위한-준비"><a href="#미래의-ECMAScript-버전을-위한-준비" class="headerlink" title="미래의 ECMAScript 버전을 위한 준비"></a>미래의 ECMAScript 버전을 위한 준비</h5><ul>
-<li>새롭게 선보일 ECMAScript 버전은 새로운 구문을 소개할 것이고, ECMAScript5에서의 엄격 모드는 변환을 쉽게 하기 위해 몇 가지의 제한을 적용한다.</li>
-</ul>
-<br />
-
-
-
-<h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><p>아래와 같은 코드를 <code>index.js</code> 에서 많이 보았을 것이다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;React.StrictMode&gt;</span><br><span class="line">    &lt;App /&gt;</span><br><span class="line">  &lt;/React.StrictMode&gt;,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&quot;root&quot;</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-<p>React에서 strict mode는 <code>&lt;React.StrictMode&gt;&lt;/React.StrictMode&gt;</code> 을 이용해 적용한다.</p>
-<ul>
-<li>StrictMode는 잠재적인 에러를 잡는 툴이다.</li>
-<li>Fragment와 같이, StrictMode는 가시적인 UI를 렌더링하지 않지만, 안에 정의되는 후손 (자식 노드) 들에 추가적인 검사를 시행하고 경고를 띄운다.</li>
-<li>strict mode 체크는 development mode에서만 시행되고, production 빌딩에 영향을 주지 않는다.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ExampleApplication</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;Header /&gt;</span><br><span class="line">      &lt;React.StrictMode&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;ComponentOne /&gt;</span><br><span class="line">          &lt;ComponentTwo /&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/React.StrictMode&gt;</span><br><span class="line">      &lt;Footer /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>StrictMode는 <code>Header</code> 나 <code>Footer</code> 컴포넌트에 영향을 주지 않는다.</li>
-<li>하지만, <code>ComponentOne</code> 과 <code>ComponentTwo</code> 및 그 후손들은 영향을 받는다.</li>
-</ol>
-<br />
-
-
-
-<p><em><strong>React에서 strict mode는 어떻게 작동할까?</strong></em></p>
-<ol>
-<li>안전하지 않은 생명주기를 사용하는 컴포넌트 발견</li>
-<li>레거시 문자열 ref 사용에 대한 경고</li>
-<li>권장되지 않는 findDOMNode 사용에 대한 경고</li>
-<li>예상치 못한 부작용 검사</li>
-<li>레거시 context API 검사</li>
-</ol>
-<br />
-
-
-
-<p>이를 좀 더 자세히 알아보자.</p>
-<br />
-
-
-
-<h4 id="특징"><a href="#특징" class="headerlink" title="특징"></a>특징</h4><h5 id="안전하지-않은-생명주기를-사용하는-컴포넌트-발견"><a href="#안전하지-않은-생명주기를-사용하는-컴포넌트-발견" class="headerlink" title="안전하지 않은 생명주기를 사용하는 컴포넌트 발견"></a>안전하지 않은 생명주기를 사용하는 컴포넌트 발견</h5><p>Strict 모드가 활성화되면, React는 안전하지 않은 생명주기 메서드를 사용하는 모든 클래스 컴포넌트 목록을 정리해 다음과 같이 컴포넌트에 대한 정보가 담긴 경고 로그를 출력한다.</p>
-<p><img src="https://ko.reactjs.org/static/e4fdbff774b356881123e69ad88eda88/1628f/strict-mode-unsafe-lifecycles-warning.png" alt="1"></p>
-<br />
-
-
-
-<h5 id="레거시-문자열-ref-사용에-대한-경고"><a href="#레거시-문자열-ref-사용에-대한-경고" class="headerlink" title="레거시 문자열 ref 사용에 대한 경고"></a>레거시 문자열 ref 사용에 대한 경고</h5><p>이전의 React에서 레거시 문자열 ref API와 콜백 API라는, ref를 관리하는 두 가지 방법을 제공하였었다. 이제는 객체 ref가 문자열 ref를 교체하는 용도로 널리 더해졌기 때문에, Strict 모드는 문자열 ref의 사용에 대해 경고한다.</p>
-<br />
-
-
-
-<h5 id="권장되지-않는-findDOMNode-사용에-대한-경고"><a href="#권장되지-않는-findDOMNode-사용에-대한-경고" class="headerlink" title="권장되지 않는 findDOMNode 사용에 대한 경고"></a>권장되지 않는 findDOMNode 사용에 대한 경고</h5><p>이전의 React에서 주어진 클래스 인스턴스를 바탕으로 트리를 탐색해 DOM 노드를 찾을 수 있는 <code>findDOMNode</code>를 지원하였었다. 이제는 DOM 노드에 바로 ref를 지정할 수 있기 때문에 보통 필요로 하지 않는다.</p>
-<br />
-
-
-
-<h5 id="예상치-못한-부작용-검사"><a href="#예상치-못한-부작용-검사" class="headerlink" title="예상치 못한 부작용 검사"></a>예상치 못한 부작용 검사</h5><p>개념적으로 React는 두 단계로 동작한다.</p>
-<ul>
-<li><code>렌더링 단계</code> 는 특정 환경 (DOM과 같은) 에 어떤 변화가 필요한 지 결정하는 단계로, 이 과정에서 React는 <code>render</code> 를 호출하여 이전 렌더와 결과값을 비교한다.</li>
-<li><code>커밋 단계</code> 는 React가 변경 사항을 반영하는 단계로 (React DOM의 경우 React가 DOM 노드를 추가, 변경 및 제거하는 단계), 이 단계에서 React는 <code>componentDidMount</code> 나 <code>componentDidUpdate</code> 와 같은 생명주기 메서드를 호출한다.</li>
-</ul>
-<p>커밋 단계는 일반적으로 매우 빠르지만, 렌더링 단계는 느릴 수 있어 문제가 발생할 수 있다.</p>
-<p><img width="349" align="center" alt="Screenshot 2021-05-30 at 20 45 33" src="https://user-images.githubusercontent.com/49134038/120103031-a0a7da00-c188-11eb-92d0-a1ca76acb969.png">)</p>
-<p>특히 위의 메서드들은 여러 번 호출될 수 있기 때문에, 부작용을 포함하지 않는 것이 중요하다. Strict 모드가 자동으로 부작용을 찾아주는 것은 불가능하지만, 조금 더 예측할 수 있게끔 만들어서 문제가 되는 부분을 발견할 수 있게 도와준다. </p>
-<p>이를 위해 다음과 같은 함수를 의도적으로 이중으로 호출하여 찾을 수 있다.</p>
-<ul>
-<li>클래스 컴포넌트의 <code>constructor</code>, <code>render</code> 그리고 <code>shouldComponentUpdate</code> 메서드</li>
-<li>클래스 컴포넌트의 <code>getDerivedStateFromProps</code> static 메서드</li>
-<li>함수 컴포넌트 바디</li>
-<li>State updater 함수 (<code>setState</code>의 첫 번째 인자)</li>
-<li><code>useState</code>, <code>useMemo</code> 그리고 <code>useReducer</code>에 전달되는 함수</li>
-</ul>
-<br />
-
-
-
-<h5 id="레거시-context-API-검사"><a href="#레거시-context-API-검사" class="headerlink" title="레거시 context API 검사"></a>레거시 context API 검사</h5><p>레거시 context API는 오류가 발생하기 쉬워 이후 릴리즈에서 삭제될 예정이다.</p>
-<p><img src="https://ko.reactjs.org/static/fca5c5e1fb2ef2e2d59afb100b432c12/51800/warn-legacy-context-in-strict-mode.png" alt="2"></p>
-<br />
-
-
-
-<hr>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode</a></p>
-<p><a target="_blank" rel="noopener" href="https://ko.reactjs.org/docs/strict-mode.html">https://ko.reactjs.org/docs/strict-mode.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/" class="post-title-link" itemprop="url">7차-세미나_29-05-21</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-05-29 15:11:53 / Modified: 09:30:55" itemprop="dateCreated datePublished" datetime="2021-05-29T15:11:53+01:00">2021-05-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SOPT/WEB-28th/" itemprop="url" rel="index"><span itemprop="name">WEB_28th</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="React-UI-Library-사용법"><a href="#React-UI-Library-사용법" class="headerlink" title="React UI Library 사용법"></a>React UI Library 사용법</h2><h3 id="Ant-Design"><a href="#Ant-Design" class="headerlink" title="Ant Design"></a>Ant Design</h3><h3 id="Material-UI"><a href="#Material-UI" class="headerlink" title="Material UI"></a>Material UI</h3> <br />
-
-
-
-<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><blockquote>
-<p>Same-Origin Policy</p>
-</blockquote>
-<p>웹 브라우저 보안을 위해 프로토콜, 도메인, 포트가 동일한 서버로만 요청을 주고 받을 수 있는 정책</p>
-<p>👇</p>
-<blockquote>
-<p>Cross-Origin Resource Sharing</p>
-</blockquote>
-<p>도메인이나 포트가 달라도 서버에 자원을 요청할 수 있는 메커니즘</p>
-<p>![image-20210529152418689](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210529152418689.png)</p>
-<p>아래와 같은 문제 발생 시; 서버에서 Access-Control-Allow-Origin을 수정해야 함!</p>
-<p>![image-20210529152436081](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210529152436081.png)</p>
-<br />
-
-
-
-<h2 id="Redux-기초"><a href="#Redux-기초" class="headerlink" title="Redux 기초"></a>Redux 기초</h2><ol>
-<li>예측 가능한</li>
-<li>중앙화된</li>
-<li>디버깅이 쉬운</li>
-<li>유연한</li>
-</ol>
-<ul>
-<li>자바스크립트 앱을 위한 예측 가능한 상태 컨테이너 (오픈소스 JS 라이브러리)</li>
-<li>React, Vue 등 JS 라이브러리와 함께 사용된다.</li>
-</ul>
-<h4 id="언제-왜-사용할까"><a href="#언제-왜-사용할까" class="headerlink" title="언제, 왜 사용할까?"></a>언제, 왜 사용할까?</h4><ul>
-<li>기존에는 useState를 통해 정의한 상태를 props를 통해 자식 컴포넌트로 전달하는 구조</li>
-<li>프로젝트가 복잡해지면 거쳐야 하는 컴포넌트가 많아지므로 상태 전달이 비효율적일 수 있음</li>
-</ul>
-<p>👇</p>
-<ol>
-<li>상태 관리를 한 곳에서 하고 싶을 때</li>
-<li>원하는 컴포넌트에 상태값과 함수를 직접 전달하고 싶을 때</li>
-</ol>
-<h4 id="전체적인-구조"><a href="#전체적인-구조" class="headerlink" title="전체적인 구조"></a>전체적인 구조</h4><ol>
-<li>store</li>
-<li>action</li>
-<li>reducer</li>
-<li>store 내장 함수</li>
-</ol>
-<h4 id="store"><a href="#store" class="headerlink" title="store"></a>store</h4><ul>
-<li>어플리케이션의 상태는 하나의 저장소 안에 있는 객체 트리에 저장된다.</li>
-<li>상태 트리는 </li>
-</ul>
-<h4 id="action"><a href="#action" class="headerlink" title="action"></a>action</h4><h4 id="reducer"><a href="#reducer" class="headerlink" title="reducer"></a>reducer</h4><ul>
-<li>실질적인 함수</li>
-<li>action이 상태 트리를 어떻게 변경할 지 작성한 순수한 함수</li>
-</ul>
-<h3 id="Redux는-꼭-필요할-때-사용하자"><a href="#Redux는-꼭-필요할-때-사용하자" class="headerlink" title="Redux는 꼭 필요할 때 사용하자!"></a>Redux는 꼭 필요할 때 사용하자!</h3><ol>
-<li>지속적으로 상태가 변화하는 데이터가 많을 때</li>
-<li>모든 상태를 한 곳에서 관리해야 할 때</li>
-<li>최상위 컴포넌트에서 모든 상태를 가지고 있기 힘들 때</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1270,20 +1192,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

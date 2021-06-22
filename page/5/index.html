@@ -163,6 +163,271 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/03/03/26-authentication/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/03/26-authentication/" class="post-title-link" itemprop="url">26. authentication</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-02 22:31:30" itemprop="dateCreated datePublished" datetime="2021-03-02T22:31:30Z">2021-03-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-05 02:47:19" itemprop="dateModified" datetime="2021-04-05T02:47:19+01:00">2021-04-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h2><ul>
+<li>Authentication: who you are</li>
+<li>Authorization: what you are authorized to do</li>
+</ul>
+<h3 id="The-Authorization-Header"><a href="#The-Authorization-Header" class="headerlink" title="The Authorization Header"></a>The Authorization Header</h3><p>HTTP/1.1</p>
+<ul>
+<li>browser ‘Inspect’ -&gt; Network</li>
+</ul>
+<h3 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h3><h4 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h4><p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">http://www.base64decode.org</a></p>
+<p>Base64 Decode and Encode - Online</p>
+<p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">www.base64decode.org</a><br>Autehntication based on username and password<br>concatenation with <code>:</code></p>
+<ul>
+<li>Don’t store passwords in raw text, always hash it!</li>
+<li>Don’t use MD5 (Brute Force) since is becoming more insecure with the current computing power</li>
+<li>USE BCrypt(the standard nowadays): hash same input into different everytime<br>npm bcrypt</li>
+</ul>
+<h4 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h4><ul>
+<li>github personal access tokens<br>random token is shared between the server and the client, usually on another request<br>lasts for short time (normally 30sec)<br>Authorization = Bearer</li>
+</ul>
+<p>clinet: React, Angular …</p>
+<h4 id="JWT-Jason-Web-Tokens"><a href="#JWT-Jason-Web-Tokens" class="headerlink" title="JWT (Jason Web Tokens)"></a>JWT (Jason Web Tokens)</h4><p><a target="_blank" rel="noopener" href="https://jwt.io/">https://jwt.io</a><br>[algorithm &amp; token type]header-[data: that needs to be secured]payload(userId, iat)-[verifying key]verify signature: no one can change the content<br>signature =&gt; only if I have a secret, generates the signature / if input is different, signature will be different too</p>
+<ul>
+<li>can’t change the payload if the signature hasn’t been changed</li>
+</ul>
+<ul>
+<li>most bearer strategy: the token has all the info needed</li>
+<li>the only thing stored in the server is the stored passphrase</li>
+<li>the token is composed by the encryption information, the payload encoded in base64 and the signature</li>
+<li>less control on the token, the only way not to accept it is by using a blacklist</li>
+</ul>
+<h3 id="Sesson"><a href="#Sesson" class="headerlink" title="Sesson"></a>Sesson</h3><ul>
+<li>payload of data that relates to a user</li>
+<li>persisted in the server and is tagged with the ID</li>
+<li>writes ID in the cookie (piece of information)-&gt; how we are saved and tracked// and sends it to the browser</li>
+</ul>
+<ul>
+<li>everytime the browser performs a request to the server, it sends back the cookie with the ID in it</li>
+</ul>
+<p>session store: mongodb, file, etc…<br>npm express-session<br>npm helmet</p>
+<ul>
+<li>iframe: build website inside the website (element)</li>
+</ul>
+<h4 id="Oauth"><a href="#Oauth" class="headerlink" title="Oauth"></a>Oauth</h4><ul>
+<li>FireFox</li>
+</ul>
+<ul>
+<li>user, app and authentication provider</li>
+<li>lets us authenticate a user through an authentication provider, who manages the account of the user</li>
+<li>Authenticates a user within the activity of an app</li>
+<li>The credentials are not leaked to the app</li>
+<li>BUT gives the provider the information (e.g. google)<br>passport.js<br>oauth0<br>firebase authentication</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/03/02/25-Security/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/02/25-Security/" class="post-title-link" itemprop="url">25. Security</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-01 22:39:07" itemprop="dateCreated datePublished" datetime="2021-03-01T22:39:07Z">2021-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-05 02:47:17" itemprop="dateModified" datetime="2021-04-05T02:47:17+01:00">2021-04-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Web-Security"><a href="#Web-Security" class="headerlink" title="Web Security"></a>Web Security</h2><ul>
+<li>Assume the worst case *</li>
+</ul>
+<ul>
+<li>Exposed to threats<ul>
+<li>Data theft/ destruction</li>
+<li>System attacks</li>
+</ul>
+</li>
+<li>vulnerabilities</li>
+<li>defencsive using automated alerts</li>
+</ul>
+<h3 id="Attack-Types"><a href="#Attack-Types" class="headerlink" title="Attack Types"></a>Attack Types</h3><ul>
+<li>Malicious code execution</li>
+<li>Cryptography attacks: hide secrets</li>
+<li>Data interception</li>
+<li>Denial of Service</li>
+</ul>
+<p>owasp.org/www-project-top-ten/<br>OWASP Top Ten Web Application Security Risks | OWASP<br>The OWASP Top 10 is the reference standard for the most critical web application security risks. Adopting the OWASP Top 10 is perhaps the most effective first step towards changing your software development culture focused on producing secure code.<br>owasp.org</p>
+<h4 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h4><ul>
+<li>Cross-Site Scripting: request from one domain to another domain<br> -&gt; html entities</li>
+<li>A type of injection</li>
+<li>Malicious scripts are injected into web sites</li>
+<li>scripts could be entered on any inputs</li>
+</ul>
+<h4 id="XSS-Solutions"><a href="#XSS-Solutions" class="headerlink" title="XSS Solutions"></a>XSS Solutions</h4><p>Escape/ Sanitiza all user inputs<br>Escape all the input before actually putting it on sensible places<br>XSS Protection Cheatsheet</p>
+<h4 id="SQL-Injection"><a href="#SQL-Injection" class="headerlink" title="SQL Injection"></a>SQL Injection</h4><ul>
+<li>just USE <code>Sequelize</code></li>
+</ul>
+<ul>
+<li>parameterized statements</li>
+<li>escaping user inputs</li>
+<li>privileges control</li>
+<li>SQL Injection Prevention Cheatsheet</li>
+</ul>
+<h4 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h4><ul>
+<li>Cross-Site Request Forgery</li>
+<li>forces a user to input st unauthorized</li>
+</ul>
+<h4 id="CSRF-Solutions"><a href="#CSRF-Solutions" class="headerlink" title="CSRF Solutions"></a>CSRF Solutions</h4><ul>
+<li>Identifying source origin</li>
+<li>access-control-allow-origin</li>
+<li>Synchronizer Tokens</li>
+</ul>
+<h4 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h4><ul>
+<li>http is not safe, HTTPS is same with http over TLS</li>
+<li>only expose the host to a DNS server and the target IP<br> &lt; Secured things &gt;<ul>
+<li>path</li>
+<li>query</li>
+<li>payload</li>
+<li>every method</li>
+</ul>
+</li>
+</ul>
+<h5 id="The-Handshake"><a href="#The-Handshake" class="headerlink" title="The Handshake"></a>The Handshake</h5><ul>
+<li>negociation the certificate</li>
+</ul>
+<p>Heroku / Let’s Encrypt<br>gives HTTP certificate for free</p>
+<p>Hack Bounties<br>to test the security</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/22/DCGAN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1063,281 +1328,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/" class="post-title-link" itemprop="url">Data Sitting from MongoDB to GraphQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-09 16:47:19" itemprop="dateCreated datePublished" datetime="2021-02-09T16:47:19Z">2021-02-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 02:46:49" itemprop="dateModified" datetime="2021-04-05T02:46:49+01:00">2021-04-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="TRY-THIS-🌈✨"><a href="#TRY-THIS-🌈✨" class="headerlink" title="TRY THIS 🌈✨"></a>TRY THIS 🌈✨</h4><p>buddy.works/tutorials/how-to-connect-mongodb-to-graphql-server</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/09/17-GraphQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/09/17-GraphQL/" class="post-title-link" itemprop="url">17. GraphQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-08 21:44:47" itemprop="dateCreated datePublished" datetime="2021-02-08T21:44:47Z">2021-02-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 02:46:47" itemprop="dateModified" datetime="2021-04-05T02:46:47+01:00">2021-04-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h2><ul>
-<li>more efficient</li>
-<li>alternative to REST API</li>
-</ul>
-<ul>
-<li>Not a Framework!</li>
-<li>similar to router</li>
-</ul>
-<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><ul>
-<li>pattern, standard for APIs</li>
-<li>interface that tells the external how to get the datas</li>
-<li>have endpoints (e.g. ‘/messages’)</li>
-</ul>
-<dl><dt>/teams/CH</dt><dd>send all the info</dd></dl><p>–&gt; moduler<br>/teams/CH/info<br>/teams/CH/players<br>/teams/CH/matches</p>
-<ul>
-<li>Query Language (Standard)</li>
-</ul>
-<p>order also matches!</p>
-<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><ol>
-<li>Schema<ul>
-<li>Types</li>
-</ul>
-</li>
-</ol>
-<p>id =&gt; unique<br>[]! =&gt; need [] type, you need to pass [] thing<br>team: Team! =&gt; team is related to type Team (Team: object)</p>
-<ol start="2">
-<li>Resolvers</li>
-</ol>
-<ul>
-<li>Scalar Types<br>(Built-In)</li>
-</ul>
-<ul>
-<li>Int</li>
-<li>Float</li>
-<li>String</li>
-<li>Boolean</li>
-<li>ID<br>(Custom Scalar)</li>
-<li>Date, Url, EmailAddress …<br>id, name, age: primitive type<br>team: object -&gt; sub-doc. type =&gt; repeat the same process to find the type</li>
-</ul>
-<ol start="3">
-<li>Queries &amp; Mutations<br>one single endpoint</li>
-</ol>
-<p>-&gt; perform queries</p>
-<ul>
-<li>Sub-Selection<br>pass the object to the type -&gt; give the right interface of information of that object</li>
-</ul>
-<ul>
-<li>have to ask the property of the object</li>
-</ul>
-<ul>
-<li><p>Arguments</p>
-</li>
-<li><p>Variables</p>
-</li>
-</ul>
-<p>put “DEF” into $position var</p>
-<ul>
-<li><ul>
-<li><ul>
-<li>fetching data - - -<br>👇</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>change (mutate) data - - -</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Mutations</p>
-</li>
-</ul>
-<ul>
-<li>another type of action like query that performs changes on the resources</li>
-<li>diff is like <code>GET - POST</code>: doesn’t change anything in the server - change something in the server<br> -&gt; do st that doesn’t suppose to do, run semantic, perform changes by manipulating inside my DB</li>
-</ul>
-<ol>
-<li>create new data <code>POST</code></li>
-<li>update existing data <code>PUT</code></li>
-<li>delete existing data <code>DELETE</code></li>
-</ol>
-<p>name, position: response<br>1st: input type checking -&gt; 2nd: actually executing the mutation</p>
-<ul>
-<li>ID: created internally by the program</li>
-</ul>
-<ul>
-<li>send the request to the root (4000-graphQL as the endpoint)</li>
-<li>reliable, flexible</li>
-</ul>
-<ul>
-<li>Execution<br>search for syntax error</li>
-</ul>
-<p>undefined height -&gt; null, name ~ pass height ~ go inside team obj</p>
-<ul>
-<li>Resolvers<br>Schema: define, Resolver: interact =&gt; interplay to call server flexibly</li>
-</ul>
-<p>get id:42 from upper example</p>
-<ul>
-<li>obj : the previous resolved obj, parent element that has been previously resolved</li>
-<li>args : the arguments object for the field in the query, include id .. all the args that we want to pass</li>
-<li>context : shared object provided to every resolver, communicate and share information, later function can access to it (i.e. ctx in Koa)</li>
-<li>info : extra information about the current query to mutate, etc.</li>
-</ul>
-<h4 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h4><p>typeDefs: routers<br>resolvers: controllers</p>
-<ul>
-<li><p>index.js</p>
-</li>
-<li><p>typeDefs.js</p>
-</li>
-</ul>
-<ul>
-<li>resolvers.js</li>
-</ul>
-<p>not using obj =&gt; replace it with <code>_</code><br>👇</p>
-<ul>
-<li>resolvers.js</li>
-</ul>
-<p>※ express / koa : REST API = apollo-server : gql</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1409,20 +1399,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
