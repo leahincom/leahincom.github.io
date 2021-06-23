@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb6COzX%2FbtqBkpJUrQy%2FHTSMnlRGJc2kVDB8nnvyrk%2Fimg.png">
 <meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRRFXi%2FbtqBjCwnKb8%2F7GKGdzmyC8tWANyA5ktRoK%2Fimg.png">
 <meta property="article:published_time" content="2021-06-22T14:04:25.000Z">
-<meta property="article:modified_time" content="2021-06-22T08:12:24.715Z">
+<meta property="article:modified_time" content="2021-06-23T09:17:51.804Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="SOPT">
 <meta property="article:tag" content="WEB">
@@ -193,10 +193,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-22 15:04:25 / Modified: 09:12:24" itemprop="dateCreated datePublished" datetime="2021-06-22T15:04:25+01:00">2021-06-22</time>
+              <time title="Created: 2021-06-22 15:04:25" itemprop="dateCreated datePublished" datetime="2021-06-22T15:04:25+01:00">2021-06-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-23 10:17:51" itemprop="dateModified" datetime="2021-06-23T10:17:51+01:00">2021-06-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -346,12 +352,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; useRef를 사용하여 &quot;DOM 요소를 가져올 수 있는 변수&quot;를 선언합니다</span><br><span class="line">const leftButton &#x3D; useRef();</span><br><span class="line">const rightButton &#x3D; useRef();</span><br></pre></td></tr></table></figure>
 
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;img</span><br><span class="line">  src&#x3D;&#123;LeftOff&#125;</span><br><span class="line">  alt&#x3D;&quot;&quot;</span><br><span class="line">  onClick&#x3D;&#123;() &#x3D;&gt; setCurrYear(currYear - 1)&#125;</span><br><span class="line">  onMouseEnter&#x3D;&#123;() &#x3D;&gt; (leftButton.current.src &#x3D; LeftOn)&#125;</span><br><span class="line">  onMouseLeave&#x3D;&#123;() &#x3D;&gt; (leftButton.current.src &#x3D; LeftOff)&#125;</span><br><span class="line">  ref&#x3D;&#123;leftButton&#125;</span><br><span class="line">  className&#x3D;&quot;calendar__year--left&quot;</span><br><span class="line">  &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-<p><code>onClick</code> 시에는 year를 다시 세팅해야 하므로 props로 받은 setCurrYear 함수를 이용해 year를 알맞게 설정한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const isMain &#x3D; location.pathname &#x3D;&#x3D;&#x3D; &quot;&#x2F;&quot; ? true : false;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;img</span><br><span class="line">  src&#x3D;&#123;LeftOff&#125;</span><br><span class="line">  alt&#x3D;&quot;&quot;</span><br><span class="line">  onClick&#x3D;&#123;() &#x3D;&gt; isMain &amp;&amp; setCurrYear(currYear - 1)&#125;</span><br><span class="line">  onMouseEnter&#x3D;&#123;() &#x3D;&gt; (leftButton.current.src &#x3D; LeftOn)&#125;</span><br><span class="line">  onMouseLeave&#x3D;&#123;() &#x3D;&gt; (leftButton.current.src &#x3D; LeftOff)&#125;</span><br><span class="line">  ref&#x3D;&#123;leftButton&#125;</span><br><span class="line">  className&#x3D;&quot;calendar__year--left&quot;</span><br><span class="line">  &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+<p><code>onClick</code> 시에는 year를 다시 세팅해야 하므로 props로 받은 setCurrYear 함수를 이용해 year를 알맞게 설정한다. 이 때, url이 “/“ 인 경우에만 월 이동이 가능하게 설정하기 위해 <code>isMain &amp;&amp;</code> 조건을 적용한다.</p>
 <p><code>onMouseEnter</code> 과 <code>onMouseLeave</code> 의 경우에는 마우스를 DOM 요소에 호버 온/오프 했을 때의 변화를 설정하는 것이므로, ref를 전달하고 해당 ref의 <code>current.src</code> 에 알맞은 <code>svg</code> 을 전달하여 알맞은 아이콘을 렌더링하도록 한다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className&#x3D;&quot;calendar__month&quot;&gt;</span><br><span class="line">  &#123;monthList.map((month) &#x3D;&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div</span><br><span class="line">        key&#x3D;&#123;month&#125;</span><br><span class="line">        onClick&#x3D;&#123;() &#x3D;&gt; setCurrMonth(month)&#125;</span><br><span class="line">        style&#x3D;&#123;</span><br><span class="line">          month &#x3D;&#x3D;&#x3D; currMonth</span><br><span class="line">            ? &#123; fontSize: &quot;22px&quot;, fontWeight: &quot;bold&quot; &#125;</span><br><span class="line">            : &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        className&#x3D;&quot;calendar__month--button&quot;</span><br><span class="line">      &gt;</span><br><span class="line">        &#123;month&#125;월</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;)&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
 <p><code>map</code> 함수를 사용할 시, 되도록 <code>key</code> props를 설정하도록 습관을 들이자! 또한, map 사용 시 꼭 <code>return</code> 문을 사용해야하는 것은 아니지만, 만약 사용한다면 <code>&#123;&#125;</code> 로 return 문을 감싸야 한다!</p>
 <p>여기서는 월을 선택했을 때 <code>currMonth</code> 을 다시 세팅하고, 그에 맞는 스타일을 적용해야 하므로 style 객체에 조건문을 설정하여 알맞게 렌더링되도록 한다. 여기서 <strong>jsx</strong> 의 특성을 엿볼 수 있는데, 일단 javascript 문법이 들어가기 때문에 <code>style=&#123;&#125;</code> 로 문법임을 선언해주고, 이 안에 조건문을 설정한 후 실제 스타일 객체는 <code>&#123;&#125;</code> 로 전달해준다!</p>
+<hr>
 <p>4️⃣</p>
 <p>Card 설정</p>
 <p><code>Main.js</code></p>
@@ -368,8 +376,7 @@
 
 
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// <span class="selector-tag">text</span> 길이가 길어지면 ... 로 생략하는 방법(아래의 3가지 속성을 세트로 사용합니다)</span><br><span class="line">// <span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>; <span class="selector-tag">-</span>&gt; <span class="selector-tag">text</span>가 길면 보통 다음 줄로 넘어가는데, &quot;한 줄에만; <span class="selector-tag">nowrap</span>&quot; 작성하여 넘치게 합니다</span><br><span class="line">// <span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>; <span class="selector-tag">-</span>&gt; 넘친 텍스트를 숨깁니다</span><br><span class="line">// <span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>; <span class="selector-tag">-</span>&gt; 넘친 텍스트를 ... 로 표시합니다</span><br><span class="line"></span><br><span class="line">&amp;__<span class="selector-tag">title</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">25px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">12px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: left;</span><br><span class="line">  <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<hr>
 <p>5️⃣</p>
 <p>API 설정</p>
 <p>Main 컴포넌트 자체만 넘기지 않고 props도 함께 전달하기 위해 Route 내 component props을 변경한다.</p>
@@ -492,7 +499,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

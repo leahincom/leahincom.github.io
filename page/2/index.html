@@ -163,6 +163,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/02/heroku-react/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/02/heroku-react/" class="post-title-link" itemprop="url">heroku로 react 배포하기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-02 03:18:19" itemprop="dateCreated datePublished" datetime="2021-06-02T03:18:19+01:00">2021-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-15 08:15:10" itemprop="dateModified" datetime="2021-06-15T08:15:10+01:00">2021-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/Deploy/" itemprop="url" rel="index"><span itemprop="name">Deploy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1. 터미널에서 원하는 폴더 진입</span><br><span class="line">2. npm install -g create-react-app</span><br><span class="line">3. create-react-app <span class="string">&quot;리액트 프로젝트명&quot;</span></span><br><span class="line">4. <span class="built_in">cd</span> <span class="string">&quot;리액트 프로젝트명&quot;</span></span><br><span class="line">5. git init</span><br><span class="line">6. heroku create <span class="string">&quot;프로젝트명&quot;</span> -b https://github.com/mars/create-react-app-buildpack.git</span><br><span class="line">7. git add .</span><br><span class="line">8. git commit -m <span class="string">&quot;커밋 메시지&quot;</span></span><br><span class="line">9. git push heroku master</span><br><span class="line">10. heroku open</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/31/strict-mode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2253,397 +2331,6 @@ Data2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/19/VizML-paper-review/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/19/VizML-paper-review/" class="post-title-link" itemprop="url">VizML: A Machine Learning Approach to Visualization Recommendation 논문 리뷰</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-05-18 23:19:37" itemprop="dateCreated datePublished" datetime="2021-05-18T23:19:37+01:00">2021-05-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-20 09:58:09" itemprop="dateModified" datetime="2021-05-20T09:58:09+01:00">2021-05-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Graduation-Project/" itemprop="url" rel="index"><span itemprop="name">Graduation Project</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Graduation-Project/Paper-Review/" itemprop="url" rel="index"><span itemprop="name">Paper Review</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<h3 id="Visualization-Recommender-System"><a href="#Visualization-Recommender-System" class="headerlink" title="Visualization Recommender System"></a>Visualization Recommender System</h3><p>lower the barrier to exploring basic visualizations</p>
-<ul>
-<li>by <em>automatically generating results</em></li>
-<li>for analysts to <em>search and select</em>, not manually specify</li>
-</ul>
-</blockquote>
-<br />
-
-
-
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><br />
-
-
-
-<img width="586" aligned="center" alt="Screenshot 2021-05-19 at 14 20 00" src="https://user-images.githubusercontent.com/49134038/118769577-4884f400-b8bb-11eb-98b6-7314c700938f.png">
-
-<br />
-
-
-
-<h4 id="machine-learning-based-approach"><a href="#machine-learning-based-approach" class="headerlink" title="machine learning-based approach"></a>machine learning-based approach</h4><ul>
-<li><strong>learns</strong> visualization <code>design choices</code> </li>
-<li><em>from</em> a large corpus of <code>datasets</code> </li>
-<li><em>from</em> associated <code>visualisations</code> </li>
-</ul>
-<br />
-
-
-
-<h4 id="by…"><a href="#by…" class="headerlink" title="by…"></a>by…</h4><ol>
-<li>identify <strong>five key design choices</strong></li>
-<li>using one million dataset-visualisation pairs</li>
-</ol>
-<br />
-
-
-
-<h4 id="evaluation"><a href="#evaluation" class="headerlink" title="evaluation"></a>evaluation</h4><p><strong>for</strong> : generalizability and uncertainty</p>
-<p><strong>by</strong> : benchmark with a crowdsourced test set</p>
-<p><strong>result</strong> : comparable to human performance</p>
-<br />
-
-
-
-<h2 id="Problem-Formulation"><a href="#Problem-Formulation" class="headerlink" title="Problem Formulation"></a>Problem Formulation</h2><p><strong>Data visualization communicates information <em>by representing data with visual elements</em></strong></p>
-<br />
-
-
-
-<p><code>representations</code> are specified <em>using…</em></p>
-<ul>
-<li><p><code>encodings</code> : map from data to the <code>retinal properties</code> of <code>graphical marks</code></p>
-</li>
-<li><p><code>retinal properties</code></p>
-<ul>
-<li><em>e.g.</em> position, length, colour</li>
-</ul>
-</li>
-<li><p><code>graphical marks</code></p>
-<ul>
-<li><em>e.g.</em> point, line, rectangle</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<p><em>e.g.</em></p>
-<img width="368" aligned="center" alt="Screenshot 2021-05-19 at 15 04 20" src="https://user-images.githubusercontent.com/49134038/118769573-47ec5d80-b8bb-11eb-918f-c34c5a51f0e2.png">
-
-<p>To create <strong>scatterplot</strong> showing the relationship between <em>MPG</em> and <em>Hp</em>,</p>
-<ul>
-<li><p><strong>encoding each pair</strong> of data points of a circle on a 2D plane</p>
-</li>
-<li><p>while <strong>specifying other retinal properties</strong> such as size and colour</p>
-</li>
-</ul>
-<br />
-
-
-
-<h5 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h5><p><code>Vega-lite</code></p>
-<ul>
-<li>selecting  <code>mark type</code> and <code>fields</code> to be <em>encoded along the x- and y-axes</em></li>
-</ul>
-<p><code>Tableau</code></p>
-<ul>
-<li><em>placing the 2 columns</em> onto the respective column and row shelves</li>
-</ul>
-<br />
-
-
-
-<hr>
-<br />
-
-
-
-<ol>
-<li><p><strong>formulate</strong> basic visualization of a <em>dataset</em> <code>d</code> <strong>as</strong> a <em>set of interrelated design choices</em> <code>C = &#123;c&#125;</code></p>
-<blockquote>
-<p> <code>set of choices</code> that result in valid visualizations</p>
-<p>=== a <code>subset</code> of the space of <strong>all possible choices</strong></p>
-</blockquote>
-</li>
-<li><p><strong>automatically suggest</strong> a <em>subset of design choices</em> <code>C_rec ⊆ C</code> that <em>maximize effectiveness</em></p>
-<blockquote>
-<p> <code>effectiveness</code> can be defined by informational measures</p>
-<ul>
-<li><em>e.g.</em> efficiency, accuracy, memorability, emotive measures</li>
-</ul>
-</blockquote>
-</li>
-</ol>
-<br />
-
-
-
-<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h4 id="Rule-based-Visualization-Recommender-Systems"><a href="#Rule-based-Visualization-Recommender-Systems" class="headerlink" title="Rule-based Visualization Recommender Systems"></a>Rule-based Visualization Recommender Systems</h4><br />
-
-
-
-<h4 id="ML-based-Visualization-Recommender-Systems"><a href="#ML-based-Visualization-Recommender-Systems" class="headerlink" title="ML-based Visualization Recommender Systems"></a>ML-based Visualization Recommender Systems</h4><blockquote>
-<h5 id="DeepEye"><a href="#DeepEye" class="headerlink" title="DeepEye"></a>DeepEye</h5><h5 id="Data2Vis"><a href="#Data2Vis" class="headerlink" title="Data2Vis"></a>Data2Vis</h5><h5 id="Draco-Learn"><a href="#Draco-Learn" class="headerlink" title="Draco-Learn"></a>Draco-Learn</h5></blockquote>
-<h5 id="VizML"><a href="#VizML" class="headerlink" title="VizML"></a>VizML</h5><ul>
-<li><p><em>Pros</em></p>
-<ul>
-<li><p><code>learning task</code> : <em>learn to…</em></p>
-<p><strong>predict design choices</strong></p>
-<ul>
-<li>easier to <strong>quantitatively</strong> validate</li>
-<li>easier to provide <strong>interpretable measures</strong> of feature importance</li>
-<li>easily <strong>integrated</strong> into visualization systems</li>
-</ul>
-<blockquote>
-<p>DeepEye : classify and rank visualizations</p>
-<p>Data2Vis : end-to-end generation model</p>
-<p>Draco-Learn : soft constraints weights</p>
-</blockquote>
-</li>
-<li><p><code>data quantity</code> : <em>training corpus is…</em></p>
-<p><strong>orders of magnitude larger</strong> than DeepEye and Data2Vis</p>
-<ul>
-<li>permits the use of <strong>large feature sets</strong> that <em>capture many aspects</em> of a dataset</li>
-<li>permits the use of <strong>high-capacity models</strong> such as deep neural network</li>
-</ul>
-</li>
-<li><p><code>data quality</code> : the datasets used are…</p>
-<p><strong>extremely diverse</strong> in shape, structure, and distribution</p>
-<p>the result of <strong>real visual analysis by analysts</strong> on their own datasets</p>
-<blockquote>
-<p>others</p>
-<ul>
-<li>few datasets used to train</li>
-<li>visualisations are generated by rule-based systems</li>
-<li>evaluated number controlled settings</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<ul>
-<li><em>cons</em><ul>
-<li>only recommends <strong>visual encodings, not data queries</strong></li>
-<li>do not create ★ an <strong>application</strong> that employs the visualization model ★</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><h3 id="Feature-Extraction"><a href="#Feature-Extraction" class="headerlink" title="Feature Extraction"></a>Feature Extraction</h3><p><em>distinguish the feature categories to…</em></p>
-<ol>
-<li>organize <strong>how to</strong> create and interpret features</li>
-<li>observe the <strong>contribution</strong> of different types of features</li>
-<li>to capture if <strong>less generalizable</strong> than other categories</li>
-</ol>
-<br />
-
-
-
-<img width="320" aligned="center" alt="Screenshot 2021-05-19 at 15 26 21" src="https://user-images.githubusercontent.com/49134038/118769569-46bb3080-b8bb-11eb-8a7e-548703c05715.png">
-
-<ul>
-<li><code>Dimensions D</code> : <em>the number of rows</em> in a column</li>
-<li><code>Types T</code> : whether a column is <em>categorical, temporal, or quantitative</em></li>
-<li><code>Values V</code> : <em>the statistical and structural properties</em> of the values within a column</li>
-<li><code>Names N</code> : the <em>column name</em></li>
-</ul>
-<p>👉 <strong>order in <code>D - T - V - N</code></strong>  by <em>how biased</em> the features to be towards the corpus </p>
-<br />
-
-
-
-<h5 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h5><ol>
-<li><p>describe each pair of columns with <code>30 pairwise-column features</code></p>
-</li>
-<li><p>divide into 2 categories : <code>Values</code> and <code>Names</code> </p>
-<blockquote>
-<p>many pairwise-column features depend on the individual column types</p>
-</blockquote>
-</li>
-<li><p>create <code>841dataset-level features</code> by aggregating single- and pairwise-column features using <code>16 aggregation functions</code></p>
-<blockquote>
-<p><strong>aggregation function</strong> : convert single- and pairwise-column features into scalar values</p>
-<ol>
-<li>train separate models per number of columns</li>
-<li>include column features with padding</li>
-</ol>
-</blockquote>
-</li>
-</ol>
-<br />
-
-
-
-<h3 id="Design-Choice-Extraction"><a href="#Design-Choice-Extraction" class="headerlink" title="Design Choice Extraction"></a>Design Choice Extraction</h3><p><em>extract an analyst’s design choices to…</em></p>
-<p><strong>parse the traces</strong> because each visualization consists of traces that associate collections of data with visual elements</p>
-<br />
-
-
-
-<h4 id="Encoding-level-Desing-Choices"><a href="#Encoding-level-Desing-Choices" class="headerlink" title="Encoding-level Desing Choices"></a>Encoding-level Desing Choices</h4><ul>
-<li><code>mark type</code> : scatter, etc.</li>
-<li><code>column encoding</code> : which column is represented on which axis, whether or not an X or Y column is the single column represented along that axis</li>
-</ul>
-<br />
-
-
-
-<p><em>by aggregating these choices…</em></p>
-<p>👇 </p>
-<h4 id="Visualization-level-Design-Choices"><a href="#Visualization-level-Design-Choices" class="headerlink" title="Visualization-level Design Choices"></a>Visualization-level Design Choices</h4><ol>
-<li><p>describe the <strong>type shared</strong> among all traces</p>
-</li>
-<li><p>determine whether the visualization has a <strong>shared axis</strong></p>
-</li>
-</ol>
-<br />
-
-
-
-<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><h3 id="Feature-Processing"><a href="#Feature-Processing" class="headerlink" title="Feature Processing"></a>Feature Processing</h3><ol>
-<li><p>apply <code>one-hot encoding</code> to <em>categorical features</em></p>
-</li>
-<li><p>set <code>numeric values</code> <em>above 99% or below 1%</em> to respective cut-offs</p>
-</li>
-<li><p>impute <code>missing categorical values</code> using <em>the mode of non-missing values, and missing numeric values with the mean of non-missing values</em></p>
-</li>
-<li><p><strong>remove</strong> the mean of numeric fields and <strong>scale</strong> to unit variance</p>
-</li>
-<li><p><strong>randomly remove</strong> datasets that are <em>exact deduplicates of each other</em></p>
-<blockquote>
-<p>remove all but one randomly selected dataset per user</p>
-<p>👉 remove bias towards more prolific users</p>
-</blockquote>
-</li>
-</ol>
-<br />
-
-
-
-<h3 id="Prediction-Tasks"><a href="#Prediction-Tasks" class="headerlink" title="Prediction Tasks"></a>Prediction Tasks</h3><h4 id="Two-visualization-level-prediction-tasks"><a href="#Two-visualization-level-prediction-tasks" class="headerlink" title="Two visualization-level prediction tasks"></a>Two visualization-level prediction tasks</h4><p>use <em><strong>dataset-level</strong> features</em></p>
-<img width="298" aligned="center" alt="Screenshot 2021-05-19 at 15 49 37" src="https://user-images.githubusercontent.com/49134038/118769566-46229a00-b8bb-11eb-9228-6ea36108c95c.png">
-
-<p>to predict <strong>visualization-level</strong> design choices</p>
-<br />
-
-
-
-<h4 id="Three-encoding-level-prediction-tasks"><a href="#Three-encoding-level-prediction-tasks" class="headerlink" title="Three encoding-level prediction tasks"></a>Three encoding-level prediction tasks</h4><p>use <em>features about <strong>individual columns</strong></em></p>
-<img width="300" aligned="center" alt="Screenshot 2021-05-19 at 15 49 50" src="https://user-images.githubusercontent.com/49134038/118769559-43c04000-b8bb-11eb-9db5-9b2623274252.png">
-
-<p>to predict <strong>how</strong> they are visually <strong>encoded</strong></p>
-<blockquote>
-<p>consider each column <em>indepedently,</em></p>
-<p>instead of alongside other columns in the same dataset</p>
-</blockquote>
-<br />
-
-
-
-<hr>
-<h5 id="Visualization-Type-amp-Mark-Type-task"><a href="#Visualization-Type-amp-Mark-Type-task" class="headerlink" title="Visualization Type &amp; Mark Type task"></a>Visualization Type &amp; Mark Type task</h5><p>2 class task : line vs. bar</p>
-<p>3 class task : scatter vs. line vs. var</p>
-<hr>
-<h3 id="Neural-Network-and-Baseline-Models"><a href="#Neural-Network-and-Baseline-Models" class="headerlink" title="Neural Network and Baseline Models"></a>Neural Network and Baseline Models</h3><ul>
-<li><p>fully-connected feedforward neural network</p>
-</li>
-<li><p>with 3 hidden layers, each consisting of 1000 neurons</p>
-</li>
-<li><p>with ReLU activation functions</p>
-</li>
-<li><p>split the data in 60/ 20/ 20 (train/ validation/ test sets) 5 times using 5-fold cross-validation</p>
-</li>
-</ul>
-<br />
-
-
-
-<h4 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h4><ol>
-<li>D</li>
-<li>D+T</li>
-<li>D+T+V</li>
-<li>D+T+V+N = ALL</li>
-</ol>
-<br />
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2715,7 +2402,7 @@ Data2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

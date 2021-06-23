@@ -163,6 +163,131 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/03/04/27-Redux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/04/27-Redux/" class="post-title-link" itemprop="url">27. Redux</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-03 19:49:00" itemprop="dateCreated datePublished" datetime="2021-03-03T19:49:00Z">2021-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-05 02:47:15" itemprop="dateModified" datetime="2021-04-05T02:47:15+01:00">2021-04-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="State-Manager"><a href="#State-Manager" class="headerlink" title="State Manager"></a>State Manager</h3><ul>
+<li>Without<br>each component has its own storage =&gt; spaghetti code</li>
+<li>With<br>has one store without having each storage</li>
+</ul>
+<ul>
+<li>predictable state container for JavaScript applications<ul>
+<li>unpredictable; random bugs, hard to fix</li>
+</ul>
+</li>
+<li>application-wide state</li>
+<li>reduce function</li>
+</ul>
+<p>react component = view</p>
+<h4 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h4><ul>
+<li>can have multiple reducers</li>
+<li>receives a state and do an action</li>
+</ul>
+<ul>
+<li>reduce function</li>
+<li>specify how the application’s state changes in response</li>
+<li>pure function</li>
+<li>never do something like : mutate arguments, callign an API, call non-pure function</li>
+</ul>
+<p>identity reducer</p>
+<ul>
+<li>getState()</li>
+<li>dispatch(action)</li>
+<li>subscribe(listener)</li>
+</ul>
+<p>👇but normally uses hooks👇 </p>
+<h4 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h4><p>※ for React<br>react-query.tanstack.com/reference/useQuery<br>useQuery<br>Subscribe to our newsletter The latest TanStack news, articles, and resources, sent to your inbox.<br>react-query.tanstack.com<br>useReducer<br>ko.reactjs.org/docs/hooks-reference.html<br>Hooks API Reference – React<br>A JavaScript library for building user interfaces<br>ko.reactjs.org</p>
+<h3 id="Making-To-Do-List"><a href="#Making-To-Do-List" class="headerlink" title="Making To-Do List"></a>Making To-Do List</h3><p>🚀 redux devTools</p>
+<p>Do one thing -&gt; make sure it is working -&gt; move on to next one﻿</p>
+<h4 id="overview-Tree"><a href="#overview-Tree" class="headerlink" title="overview Tree"></a>overview Tree</h4><p>big loop</p>
+<ul>
+<li>dispatch: sends the action to the reducer =&gt; actions in loop</li>
+</ul>
+<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><p>👇simplified</p>
+<ul>
+<li>&lt; TodoItem todo = {todo} onChange={onChangeTodo} &gt;</li>
+</ul>
+<p>※ Single component as a single responsibility</p>
+<ul>
+<li>Presentational Component<br>blog.naver.com/backsajang420/221368885149<br>[React] Presentational and Container Components<br>[React] 프레젠테이션 컴포넌트와 컨테이너 컴포넌트 (Presentational and Container Components)# 시…<br>blog.naver.com</li>
+</ul>
+<blockquote>
+<p>프레젠테이션 컴포넌트 (Presentational Component)<br>프레젠테이션 컴포넌트(Presentational Component) 는 아래와 같은 성질을 갖는다.<br>● 어떻게 보여지는 지를 책임진다.<br>컨테이너 컴포넌트 (Container Component)<br>컨테이너 컴포넌트(Container Component) 는 아래와 같은 성질을 갖는다.<br>● 어떻게 동작해야 할지를 책임진다.</p>
+</blockquote>
+<h4 id="React-with-Redux"><a href="#React-with-Redux" class="headerlink" title="React with Redux"></a>React with Redux</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/03/03/26-authentication/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1163,171 +1288,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/10/18-Angular/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/10/18-Angular/" class="post-title-link" itemprop="url">18. Angular</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-10 12:28:55" itemprop="dateCreated datePublished" datetime="2021-02-10T12:28:55Z">2021-02-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 02:46:51" itemprop="dateModified" datetime="2021-04-05T02:46:51+01:00">2021-04-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h2><h3 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h3><p><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/docs/handbook/intro.html">www.typescriptlang.org/docs/handbook/intro.html</a></p>
-<p>Handbook - The TypeScript Handbook<br>Your first step to learn TypeScript<br><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">www.typescriptlang.org</a></p>
-<p>let [varName] : [varType] = [value];</p>
-<ul>
-<li>enum : dictionary</li>
-<li>function =&gt; need to specify the types of parameters</li>
-</ul>
-<ul>
-<li>getting rid of any error of classes…</li>
-<li>testing if we generate any error</li>
-<li>typing faster</li>
-</ul>
-<p>imraccoon-developer.tistory.com/11</p>
-<p>TypeScript, 왜 써야되나?? (feat. 장단점)<br>JavaScript가 es6로 바뀌면서 큰 인기를 끌기 시작했습니다. 또한, Node.js로 할 수 있는 것들이 점점 많아졌으며, 지금도 많아지고 있습니다. 처음에는 웹에서 사용하기 위한 스크립트 언어로 활용되<br>imraccoon-developer.tistory.com</p>
-<h3 id="Angular-Architecture"><a href="#Angular-Architecture" class="headerlink" title="Angular Architecture"></a>Angular Architecture</h3><ul>
-<li>Modules</li>
-<li>Components</li>
-<li>Services<br>…</li>
-</ul>
-<h4 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h4><ul>
-<li>connected through Metadata</li>
-<li>Component === View</li>
-<li>Service: share functionality through entire app</li>
-<li>dependency injector</li>
-</ul>
-<p>@NgModule: function</p>
-<ul>
-<li>bootstrap: starting point, start compiling</li>
-<li>decorators: annotate data to give extra info to(of) the target</li>
-</ul>
-<p>–&gt; decorating: NgModule targeting AppModule</p>
-<h4 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h4><ul>
-<li><p>A class meant to be as reusable (when applies) as possible</p>
-</li>
-<li><p>Defines application data and logic</p>
-</li>
-<li><p>Bound to a template, an HTML file</p>
-</li>
-<li><blockquote>
-<p>give users all the functionality of the app</p>
-</blockquote>
-</li>
-<li><p>create DOM and add components thus drawing a tree: [tree] template -&gt; components (+ template) -&gt; … </p>
-</li>
-<li><p>communicate with each other and give access of information to users</p>
-</li>
-<li><p>component = instance of a class, independent element but communicate with others as a class</p>
-</li>
-<li><p>render the DOM as a new node</p>
-</li>
-<li><dl><dt>shadow DOM to encapsulate the component, not affected by exeternal interventions<br>Shadow DOM</dt><dd>different DOM, OWN capsulated environment</dd></dl></li>
-</ul>
-<p>polymer-library.polymer-project.org/2.0/docs/devguide/shadow-dom<br>Shadow DOM is a new DOM feature that helps you build components. You can think of shadow DOM as a scoped subtreeinside your element.</p>
-<ul>
-<li>Root Component</li>
-</ul>
-<ul>
-<li>contain everything</li>
-</ul>
-<ul>
-<li>Root Template</li>
-</ul>
-<ul>
-<li>Navigation Component: works itself, alone</li>
-<li>Container Component: including other components</li>
-</ul>
-<ul>
-<li>Filtering Component</li>
-</ul>
-<ul>
-<li>receive the input data</li>
-<li>render into different components (list, map)</li>
-</ul>
-<p>e.g. Scenario<br>if like one of the list component item -&gt; passed up to the container -&gt; reflect that to the map component<br>filtering info in the filter component -&gt; passed up to the container -&gt; reflect that to the map component</p>
-<h4 id="Data-Binding"><a href="#Data-Binding" class="headerlink" title="Data Binding"></a>Data Binding</h4><p>when user gives the input, then DOM will communicate using property in [(ng-model)] = “property”</p>
-<ul>
-<li>handler: function declared component </li>
-</ul>
-<p>object =&gt; {}</p>
-<ul>
-<li>2 way binding: class component &lt;-&gt; template </li>
-</ul>
-<ul>
-<li>selector: ‘movie-details’ –&gt; director obj go in trhough selector</li>
-</ul>
-<h4 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h4><ul>
-<li>private: TS property, can’t access it from other classes</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1399,7 +1359,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
