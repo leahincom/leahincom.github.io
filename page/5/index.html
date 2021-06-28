@@ -163,6 +163,122 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/05/SOAP-Objects-and-DSs/" class="post-title-link" itemprop="url">Objects and DSs</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-05 10:20:55" itemprop="dateCreated datePublished" datetime="2021-04-05T10:20:55+01:00">2021-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-26 15:05:55" itemprop="dateModified" datetime="2021-04-26T15:05:55+01:00">2021-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/SOAP/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Objects-and-Data-Structures"><a href="#Objects-and-Data-Structures" class="headerlink" title="Objects and Data Structures"></a>Objects and Data Structures</h2><ol>
+<li><p><code>Getter</code> and <code>Setter</code></p>
+<ul>
+<li><p>JS는 인터페이스 / 타입 / 접근제어자 (Access Modifier) 을 가지고 있지 않음</p>
+</li>
+<li><p>Object property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨</p>
+</li>
+<li><p><code>set</code> action 시 validation을 추가하는 것이 좋음</p>
+</li>
+<li><p>internal representation을 encapsulating</p>
+</li>
+<li><p><code>get</code>, <code>set</code>시 logging이나 error handling을 추가하는 것이 용이함</p>
+</li>
+<li><p><code>get</code> 시 lazy load 속성을 추가할 수 있음</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Lazy loading</strong> </p>
+<ul>
+<li>It’s a way to shorten the length of the critical rendering path, which translates into reduced page <strong>load</strong> times</li>
+<li>getting the properties from a server</li>
+</ul>
+<ol>
+<li>identify resources as non-blocking (non-critical)</li>
+<li><strong>load</strong> these only when needed</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeBankAccount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    balance: <span class="number">0</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> account = makeBankAccount();</span><br><span class="line">account.balance = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeBankAccount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// private으로 선언된 변수</span></span><br><span class="line">  <span class="keyword">let</span> balance = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 아래 return을 통해 public으로 선언된 &quot;getter&quot;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getBalance</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> balance;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 아래 return을 통해 public으로 선언된 &quot;setter&quot;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setBalance</span>(<span class="params">amount</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ... balance를 업데이트하기 전 검증로직</span></span><br><span class="line">    balance = amount;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    getBalance,</span><br><span class="line">    setBalance</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> account = makeBankAccount();</span><br><span class="line">account.setBalance(<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>objects의 properties는 private로 만들기</p>
+<ul>
+<li><code>closures</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Employee = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Employee.prototype.getName = <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> employee = <span class="keyword">new</span> Employee(<span class="string">&#x27;John Doe&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br><span class="line"><span class="keyword">delete</span> employee.name;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: undefined</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeEmployee</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="function"><span class="title">getName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> name;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> employee = makeEmployee(<span class="string">&#x27;John Doe&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br><span class="line"><span class="keyword">delete</span> employee.name;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/05/SOAP-Functions/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1743,90 +1859,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/17/22-React-Component/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/17/22-React-Component/" class="post-title-link" itemprop="url">22. React Component</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-16 19:15:07" itemprop="dateCreated datePublished" datetime="2021-02-16T19:15:07Z">2021-02-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 02:47:01" itemprop="dateModified" datetime="2021-04-05T02:47:01+01:00">2021-04-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="React-Component-Lifecycle"><a href="#React-Component-Lifecycle" class="headerlink" title="React Component Lifecycle"></a>React Component Lifecycle</h3><ul>
-<li>Mounting</li>
-<li>Updating</li>
-<li>Unmounting: remove the component =&gt; without any re-rendering or updating</li>
-</ul>
-<p>render -&gt; mount -&gt; (setState()) -&gt; render -&gt; update</p>
-<h3 id="The-form-tag"><a href="#The-form-tag" class="headerlink" title="The form tag"></a>The <code>form</code> tag</h3><h3 id="Controlled-Components"><a href="#Controlled-Components" class="headerlink" title="Controlled Components"></a>Controlled Components</h3><p>export the parent element -&gt; pass to the child data -&gt; repeat … to the grandchild<br>LIKE A TREE</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1898,7 +1930,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">73</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
