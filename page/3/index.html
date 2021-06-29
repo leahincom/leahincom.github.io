@@ -163,6 +163,146 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/" class="post-title-link" itemprop="url">Closure</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-05-29 12:08:44 / Modified: 05:33:19" itemprop="dateCreated datePublished" datetime="2021-05-29T12:08:44+01:00">2021-05-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/WEB-28th/" itemprop="url" rel="index"><span itemprop="name">WEB_28th</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Closures"><a href="#Closures" class="headerlink" title="Closures"></a>Closures</h2><br />
+
+
+
+<p><em><strong>클로저란?</strong></em></p>
+<p>함수 번들과 이들이 <u>참조하는 주변 상태 ( <code>lexical environment</code> 라 칭한다)</u> 의 조합을 의미한다. </p>
+<p>쉽게 말하자면, 클로저는 독립적인 (자유) 변수를 가리키는 함수로, 클로저 안에 정의된 함수는 만들어진 환경을 기억한다. 즉, 클로저를 통해 inner function scope 에서 outer function scope에 접근할 수 있으며, JavaScript 에서는 함수가 생성되는 시점에 클로저도 생성된다.</p>
+<p>흔히 함수 내에서 함수를 정의하고 사용하면 클로저라고 한다. 하지만 대개는 정의한 함수를 리턴하고 사용은 바깥에서 하게된다.</p>
+<p>이해를 돕기 위해 다음 코드를 보자.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getClosure</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> text = <span class="string">&#x27;variable 1&#x27;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> text;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> closure = getClosure();</span><br><span class="line"><span class="built_in">console</span>.log(closure()); <span class="comment">// &#x27;variable 1&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>위에서 정의한 <code>getClosure()</code>는 함수를 반환하고, 반환된 함수는 <code>getClosure()</code> 내부에서 선언된 변수를 참조하고 있다. 또한 이렇게 참조된 변수는 함수 실행이 끝났다고 해서 사라지지 않았고, 여전히 제대로 된 값을 반환하고 있는 걸 알 수 있다. <strong>여기서 반환된 함수가 클로저이다.</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> base = <span class="string">&#x27;Hello, &#x27;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHelloTo</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> text = base + name;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(text);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hello1 = sayHelloTo(<span class="string">&#x27;승민&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> hello2 = sayHelloTo(<span class="string">&#x27;현섭&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> hello3 = sayHelloTo(<span class="string">&#x27;유근&#x27;</span>);</span><br><span class="line">hello1(); <span class="comment">// &#x27;Hello, 승민&#x27;</span></span><br><span class="line">hello2(); <span class="comment">// &#x27;Hello, 현섭&#x27;</span></span><br><span class="line">hello3(); <span class="comment">// &#x27;Hello, 유근&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>출력된 결과를 보면 <code>text</code> 변수가 동적으로 변화하고 있는 것처럼 보인다. 실제로는 <code>text</code>라는 변수 자체가 여러 번 생성된 것이다. 즉, <code>hello1()</code>과 <code>hello2()</code>, <code>hello3()</code>은 서로 다른 환경을 가지고 있다.</p>
+<br />
+
+
+
+<h3 id="Lexical-Scoping"><a href="#Lexical-Scoping" class="headerlink" title="Lexical Scoping"></a>Lexical Scoping</h3><p><code>Lexical Scoping</code> 은 함수들이 중첩되어 있을 때, parser가 변수 이름을 어떻게 해석하는지에 대해 설명한다. 즉, lexical scope는 중첩 함수가 연속적으로 존재하는 그룹에서, inner function이 그의 parent scope의 변수를 포함한 자원들에 접근이 가능함을 의미한다. 결국 자식 함수들이 부모 함수가 실행되는 문맥에 <em>어휘적으로 묶이는 것</em> 을 의미한다.  이를 <code>static scope</code> 라고 칭하기도 한다.</p>
+<p>이를 직관적으로 이해하기 위해 다음 코드를 보자.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">grandfather</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">&#x27;Hammad&#x27;</span>;</span><br><span class="line">    <span class="comment">// &#x27;likes&#x27; is not accessible here</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">parent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// &#x27;name&#x27; is accessible here</span></span><br><span class="line">        <span class="comment">// &#x27;likes&#x27; is not accessible here</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">child</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="comment">// Innermost level of the scope chain</span></span><br><span class="line">            <span class="comment">// &#x27;name&#x27; is also accessible here</span></span><br><span class="line">            <span class="keyword">var</span> likes = <span class="string">&#x27;Coding&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위 예시에서 lexical scope은 forward 방향으로 작동한다는 것을 알 수 있다. 이는 child 함수가 실행될 때 해당 문맥에 name 변수가 포함되어 접근이 가능하다는 것을 의미한다. 하지만 반대로, backward로는 작동하지 않기 때문에 likes는 child의 부모 함수에서 접근이 불가능하다.</p>
+<p>이는 같은 이름을 가졌지만 다른 실행 문맥을 가진 변수들이 위에서부터 아래로 코드가 작동하면서 실행 스택 (execution stack) 에 선행 값들 (우선순위) 을 가지고 있음을 의미한다. 이 때 같은 이름을 가진 변수의 경우 안쪽에 존재하는 함수 (실행 스택에서 위쪽에 존재하는 문맥, 함수) 일수록 높은 우선순위를 가진다.</p>
+<p>다른 예시를 보자.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">&#x27;Mozilla&#x27;</span>; <span class="comment">// name is a local variable created by init</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">displayName</span>(<span class="params"></span>) </span>&#123; <span class="comment">// displayName() is the inner function, a closure</span></span><br><span class="line">    alert(name); <span class="comment">// use variable declared in the parent function</span></span><br><span class="line">  &#125;</span><br><span class="line">  displayName();</span><br><span class="line">&#125;</span><br><span class="line">init();</span><br></pre></td></tr></table></figure>
+<p>위 코드에서,</p>
+<ul>
+<li><code>outer(parent) function</code> 은 <code>init()</code> 이 되고,</li>
+<li><code>inner(child) function</code> 은 <code>displayName()</code> 이 된다.</li>
+</ul>
+<p><code>init</code> 함수가 지역변수인 <code>name</code> 과 <code>displayName</code> 함수를 생성한다. 이 때, displayName은 init 안에 정의된 inner function 이므로 init 내에서만 작동할 수 있다. 특히 해당 함수는 그만의 지역 변수를 생성하지 않는데, inner function의 경우 outer function의 변수에 접근할 수 있으므로 displayName은 그의 parent function인 init 함수의 지역변수인 name에 접근할 수 있다.</p>
+<br />
+
+
+
+<h3 id="Closure"><a href="#Closure" class="headerlink" title="Closure"></a>Closure</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">&#x27;Mozilla&#x27;</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">displayName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(name);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> displayName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myFunc = makeFunc();</span><br><span class="line">myFunc();</span><br></pre></td></tr></table></figure>
+<p>위와 동일한 코드이지만, displayName이 실행되기 전 outer function에서 반환된다는 점이 다르다.</p>
+<p>보통 함수의 실행이 끝나면 그 내부에 있는 지역변수에 더이상 접근이 불가한 것이 일반적인 경우이지만, 위 코드에서는 makeFunc의 실행이 종료되어도 name 변수에 접근이 가능하다. </p>
+<p>그 이유는 JavaScript의 함수는 클로저를 생성하기 때문이다. 클로저는 앞서 말했듯이 함수와 해당 함수가 선언된 lexical environment을 아울러 정의하는데, 이 ‘환경’ 은 클로저가 생성된 그 시기의, in-scope에 해당하는 모든 지역변수를 포함한다.</p>
+<p>따라서 위 코드의 경우, myFunc은 makeFunc이 실행될 때 생성된 displayName instance의 참조변수이며, displayName 인스턴스는 그의 lexical environment - name 변수가 존재하는 - 를 지속적으로 참조 (유지) 한다. 따라서, myFunc이 호출되었을 때 name 변수에 계속해서 접근 가능하므로 alert에 “Mozilla”가 전달된다.</p>
+<p>또 다른 예시를 보자.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeAdder</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add5 = makeAdder(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">var</span> add10 = makeAdder(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add5(<span class="number">2</span>));  <span class="comment">// 7</span></span><br><span class="line"><span class="built_in">console</span>.log(add10(<span class="number">2</span>)); <span class="comment">// 12</span></span><br></pre></td></tr></table></figure>
+<p>위 코드에서는 하나의 인자 x 를 받는 makeAdder(x) 함수가 존재하고, 이는 또 다시 다른 하나의 인자 y 를 받아 x와 y의 합을 반환하는 함수를 반환한다. 결국 makeAdder는 함수 공장으로 작용하는데, 이는 특정 값(y) 을 인자(x) 에 더하는 함수를 생성한다.</p>
+<p>위 예시에서는 2개의 함수가 생성되는데,</p>
+<ul>
+<li><code>add5</code> : 하나는 5를 그의 인자에 더하는 함수이고</li>
+<li><code>add10</code> : 다른 하나는 10을 더하는 함수이다.</li>
+</ul>
+<p><code>add5</code> 와 <code>add10</code> 은 모두 클로저이다. 이들은 같은 body를 가진 함수를 공유하지만 다른 lexical environment를 가진다. 이는 <code>add5</code> 의 lexical environment는 x=5이고, <code>add10</code> 에서는 x=10 임을 의미한다.</p>
+<br />
+
+
+
+<h3 id="Closure-Scope-Chain"><a href="#Closure-Scope-Chain" class="headerlink" title="Closure Scope Chain"></a>Closure Scope Chain</h3><p>모든 클로저는</p>
+<ol>
+<li>Local Scope (Own Scope)</li>
+<li>Outer Functions Scope</li>
+<li>Global Scope</li>
+</ol>
+<p>를 가진다.</p>
+<p>주의해야 할 부분은 outer function이 중첩된 함수 (중 하나) 일 경우에, 해당 함수의 scope에 접근하는 것은 그를 둘러싼 scope 또한 포함한다는 것 - 결국 함수 scope의 chain을 생성한다 - 이다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// global scope</span></span><br><span class="line"><span class="keyword">var</span> e = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">c</span>)</span>&#123;</span><br><span class="line">      <span class="comment">// outer functions scope</span></span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">d</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// local scope</span></span><br><span class="line">        <span class="keyword">return</span> a + b + c + d + e;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sum(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>)(<span class="number">4</span>)); <span class="comment">// log 20</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// You can also write without anonymous functions:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// global scope</span></span><br><span class="line"><span class="keyword">var</span> e = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">sum2</span>(<span class="params">b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">sum3</span>(<span class="params">c</span>)</span>&#123;</span><br><span class="line">      <span class="comment">// outer functions scope</span></span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">sum4</span>(<span class="params">d</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// local scope</span></span><br><span class="line">        <span class="keyword">return</span> a + b + c + d + e;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s = sum(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> s1 = s(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">var</span> s2 = s1(<span class="number">3</span>);</span><br><span class="line"><span class="keyword">var</span> s3 = s2(<span class="number">4</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s3) <span class="comment">// log 20</span></span><br></pre></td></tr></table></figure>
+<p>위 예시에서는 중첩 함수가 연속적으로 정의되어 있으며 이들은 모두 outer function scope에 접근이 가능하다. 이 때, 클로저는 모든 outer function scope에 접근 가능하다고 정의된다.</p>
+<br />
+
+
+
+<hr>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures</a></p>
+<p><a target="_blank" rel="noopener" href="https://hyunseob.github.io/2016/08/30/javascript-closure/">https://hyunseob.github.io/2016/08/30/javascript-closure/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/28/ERP-Overview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2418,102 +2558,6 @@ Data2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/15/SOAP-Formatting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/15/SOAP-Formatting/" class="post-title-link" itemprop="url">Formatting</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-05-14 23:28:39" itemprop="dateCreated datePublished" datetime="2021-05-14T23:28:39+01:00">2021-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-16 08:32:07" itemprop="dateModified" datetime="2021-05-16T08:32:07+01:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SOPT/SOAP/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Formatting"><a href="#Formatting" class="headerlink" title="Formatting"></a>Formatting</h2><p><strong><em>포맷팅은 주관적이다.</em></strong></p>
-<p><em>포맷팅 체크를 해주는 자동화 도구</em> 가 많이 있기 때문에, 공통적으로 하나를 골라 쓰는 것이 합리적이다. 자동으로 교정되는 서식 외의 것들에 대해서는 다음과 같은 지침을 따르는 것이 좋으나, 무엇보다 일관성 있게 적용하는 것이 중요하다.</p>
-<br />
-
-
-
-<ol>
-<li><p>일관된 대소문자를 사용할 것</p>
-<ul>
-<li> 특히 JS에서는 타입을 명시하지 않기 때문에 변수와 함수의 대소문자를 통해 특성을 파악할 수 있다.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> DAYS_IN_WEEK = <span class="number">7</span>;</span><br><span class="line"><span class="comment">// const daysInMonth = 30;</span></span><br><span class="line"><span class="keyword">const</span> DAYS_IN_MONTH = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">const songs = [&#x27;Back In Black&#x27;, &#x27;Stairway to Heaven&#x27;, &#x27;Hey Jude&#x27;];</span></span><br><span class="line"><span class="comment">const Artists = [&#x27;ACDC&#x27;, &#x27;Led Zeppelin&#x27;, &#x27;The Beatles&#x27;];</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">const</span> SONGS = [<span class="string">&quot;Back In Black&quot;</span>, <span class="string">&quot;Stairway to Heaven&quot;</span>, <span class="string">&quot;Hey Jude&quot;</span>];</span><br><span class="line"><span class="keyword">const</span> ARTISTS = [<span class="string">&quot;ACDC&quot;</span>, <span class="string">&quot;Led Zeppelin&quot;</span>, <span class="string">&quot;The Beatles&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">eraseDatabase</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// function restore_database() &#123;&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">restoreDatabase</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// class animal &#123;&#125;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Alpaca</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>함수 callers와 함수 callees는 가깝게 위치시키자</p>
-<ul>
-<li>우리는 코드를 위에서부터 아래로 순차적으로 읽어나가기 때문에, caller와 callee를 수직적으로 가깝게 위치시키는 것이 좋다.</li>
-<li>즉, caller 밑에 callee를 놓자.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerformanceReview</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">employee</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.employee = employee;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">lookupPeers</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;peers&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">lookupManager</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;manager&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getPeerReviews</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> peers = <span class="built_in">this</span>.lookupPeers();</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">perfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.getPeerReviews();</span><br><span class="line">    <span class="built_in">this</span>.getManagerReview();</span><br><span class="line">    <span class="built_in">this</span>.getSelfReview();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getManagerReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> manager = <span class="built_in">this</span>.lookupManager();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getSelfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> review = <span class="keyword">new</span> PerformanceReview(employee);</span><br><span class="line">review.perfReview();</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerformanceReview</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">employee</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.employee = employee;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">perfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.getPeerReviews(); <span class="comment">// 1</span></span><br><span class="line">    <span class="built_in">this</span>.getManagerReview(); <span class="comment">// 2</span></span><br><span class="line">    <span class="built_in">this</span>.getSelfReview(); <span class="comment">// 3</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 1</span></span><br><span class="line">  <span class="function"><span class="title">getPeerReviews</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> peers = <span class="built_in">this</span>.lookupPeers(); <span class="comment">// 1-1</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 1-1</span></span><br><span class="line">  <span class="function"><span class="title">lookupPeers</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;peers&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2</span></span><br><span class="line">  <span class="function"><span class="title">getManagerReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> manager = <span class="built_in">this</span>.lookupManager(); <span class="comment">// 2-1</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2-1</span></span><br><span class="line">  <span class="function"><span class="title">lookupManager</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> db.lookup(<span class="built_in">this</span>.employee, <span class="string">&quot;manager&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 3</span></span><br><span class="line">  <span class="function"><span class="title">getSelfReview</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> review = <span class="keyword">new</span> PerformanceReview(employee);</span><br><span class="line">review.perfReview();</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2585,7 +2629,7 @@ Data2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
