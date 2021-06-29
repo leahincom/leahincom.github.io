@@ -163,6 +163,116 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/10/const-function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/10/const-function/" class="post-title-link" itemprop="url">const function</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-10 12:58:41" itemprop="dateCreated datePublished" datetime="2021-04-10T12:58:41+01:00">2021-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-30 11:56:17" itemprop="dateModified" datetime="2021-05-30T11:56:17+01:00">2021-05-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Language/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Function-Statement"><a href="#Function-Statement" class="headerlink" title="Function Statement"></a>Function Statement</h3><ul>
+<li><em>hoisted</em> to the top of the <em>full lexical scope</em><ul>
+<li>can break conflicting scripts</li>
+<li>it’s difficult to debug</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>named function is shown in the stack trace<ul>
+<li>easier to debug when error occurs in the function</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function declarations are given two passes,</span></span><br><span class="line"><span class="comment">where the first lifts them to the top (hoisting),</span></span><br><span class="line"><span class="comment">allowing &quot;out of order&quot; usage</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">doTheThing();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTheThing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome number <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAwesome</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Const-Declaration"><a href="#Const-Declaration" class="headerlink" title="Const Declaration"></a>Const Declaration</h3><ul>
+<li><em>edge-case hoisting</em></li>
+</ul>
+<ul>
+<li>declare a variable<ul>
+<li>gives it a block scope</li>
+<li>stops the full hoisting</li>
+</ul>
+</li>
+<li>cannot be re-declared<ul>
+<li>throws exception if re-declared</li>
+<li>easier to debug</li>
+</ul>
+</li>
+<li>won’t be caught until called</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">This shows that, because of block-scoping,</span></span><br><span class="line"><span class="comment">const function references must be invoked in-order</span></span><br><span class="line"><span class="comment">or else things will fail silently.</span></span><br><span class="line"><span class="comment">consts are added serially (in the order in which they appear)</span></span><br><span class="line"><span class="comment">and much of the body isn&#x27;t declared when we first try to invoke or functions</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// use `getAwesome()`</span></span><br><span class="line"><span class="keyword">const</span> tryDoTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is me trying to be awesome <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;getAwesome is not defined&quot;, because it is referenced too early,</span></span><br><span class="line"><span class="comment">// before declaring `getAwesome()` function</span></span><br><span class="line">tryDoTheThing()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getAwesome = <span class="function">() =&gt;</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome! <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doTheThing()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/10/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Responsive-Web/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1818,106 +1928,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/18/24-Server-to-Client/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/18/24-Server-to-Client/" class="post-title-link" itemprop="url">24. Server to Client</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-18 13:12:44" itemprop="dateCreated datePublished" datetime="2021-02-18T13:12:44Z">2021-02-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 02:47:06" itemprop="dateModified" datetime="2021-04-05T02:47:06+01:00">2021-04-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Server -&gt; Client</p>
-<ul>
-<li>test server with Postman</li>
-<li>fix react server err with adding err_msg keyword (SKIP_PREFLIGHT_CHECK) in .env file in client</li>
-</ul>
-<p>*<br>Date.now : function reference<br>Date.now() : create Date object</p>
-<p>*<br>require(folder) =&gt; exports ‘index.js’ file in the folder</p>
-<p>*<br>req.params(id) -&gt; findById(id) works<br>Because id is the primary key of the Schma, which works as Index</p>
-<p>*<br>findByIdAndUpdate()<br>mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate</p>
-<p>Mongoose v5.11.17: API docs</p>
-<p>mongoosejs.com</p>
-<p>*<br>always put cors at the top, otherwise router will work without applying cors</p>
-<p>*<br>import .vs. require<br>masteringjs.io/tutorials/node/import-vs-require</p>
-<p>Import vs Require in Node.js<br>Now that Node.js has native support for ESM imports, should you use <code>require()</code> or <code>import</code>? Here’s what you need to know.<br>masteringjs.io<br>*<br>personalise Date type fomat<br>momentjs.com/</p>
-<p>Moment.js | Home<br>Format Dates moment().format(‘MMMM Do YYYY, h:mm:ss a’); moment().format(‘dddd’); moment().format(“MMM Do YY”); moment().format(‘YYYY [escaped] YYYY’); moment().format(); Relative Time moment(“20111031”, “YYYYMMDD”).fromNow(); moment(“20120620”, “YYYYMMDD”<br>momentjs.com<br>[ Index ]</p>
-<p>[ Router ]</p>
-<p>[ Controller ]</p>
-<p>[ Model ]</p>
-<p>[ App ]</p>
-<p>[ ApiService ]</p>
-<p>[ TopicForm ]</p>
-<p>[ TopicList ]</p>
-<p>[ TopicItem ]</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1989,7 +1999,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
