@@ -163,6 +163,153 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/" class="post-title-link" itemprop="url">7차 세미나_29/05/21</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-29 15:11:53" itemprop="dateCreated datePublished" datetime="2021-05-29T15:11:53+01:00">2021-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-01 16:23:27" itemprop="dateModified" datetime="2021-07-01T16:23:27+01:00">2021-07-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/WEB-28th/" itemprop="url" rel="index"><span itemprop="name">WEB_28th</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="React-UI-Library-사용법"><a href="#React-UI-Library-사용법" class="headerlink" title="React UI Library 사용법"></a>React UI Library 사용법</h2><h3 id="Ant-Design"><a href="#Ant-Design" class="headerlink" title="Ant Design"></a>Ant Design</h3><h3 id="Material-UI"><a href="#Material-UI" class="headerlink" title="Material UI"></a>Material UI</h3> <br />
+
+
+
+<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><blockquote>
+<p>Same-Origin Policy</p>
+</blockquote>
+<p>웹 브라우저 보안을 위해 프로토콜, 도메인, 포트가 동일한 서버로만 요청을 주고 받을 수 있는 정책</p>
+<p>👇</p>
+<blockquote>
+<p>Cross-Origin Resource Sharing</p>
+</blockquote>
+<p>도메인이나 포트가 달라도 서버에 자원을 요청할 수 있는 메커니즘</p>
+<p>![image-20210529152418689](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210529152418689.png)</p>
+<p>아래와 같은 문제 발생 시; 서버에서 Access-Control-Allow-Origin을 수정해야 함!</p>
+<p>![image-20210529152436081](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210529152436081.png)</p>
+<br />
+
+
+
+<h2 id="Redux-기초"><a href="#Redux-기초" class="headerlink" title="Redux 기초"></a>Redux 기초</h2><ol>
+<li>예측 가능한</li>
+<li>중앙화된</li>
+<li>디버깅이 쉬운</li>
+<li>유연한</li>
+</ol>
+<ul>
+<li>자바스크립트 앱을 위한 <strong>예측 가능한 상태 컨테이너</strong> (오픈소스 JS 라이브러리)</li>
+<li>React, Vue 등 JS 라이브러리와 함께 사용된다.</li>
+</ul>
+<h4 id="언제-왜-사용할까"><a href="#언제-왜-사용할까" class="headerlink" title="언제, 왜 사용할까?"></a>언제, 왜 사용할까?</h4><ul>
+<li>기존에는 useState를 통해 정의한 상태를 props를 통해 자식 컴포넌트로 전달하는 구조</li>
+<li>프로젝트가 복잡해지면 거쳐야 하는 컴포넌트가 많아지므로 상태 전달이 비효율적일 수 있음</li>
+</ul>
+<p>👇</p>
+<ol>
+<li>상태 관리를 <strong>한 곳</strong>에서 하고 싶을 때</li>
+<li>원하는 컴포넌트에 상태값과 함수를 <strong>직접</strong> 전달하고 싶을 때</li>
+</ol>
+<h4 id="전체적인-구조"><a href="#전체적인-구조" class="headerlink" title="전체적인 구조"></a>전체적인 구조</h4><ol>
+<li>store</li>
+<li>action</li>
+<li>reducer</li>
+<li>store 내장 함수</li>
+</ol>
+<h4 id="store"><a href="#store" class="headerlink" title="store"></a>store</h4><ul>
+<li>어플리케이션의 상태는 하나의 저장소 <code>store</code> 안에 있는 객체 트리(상태 트리)에 저장된다.</li>
+<li>상태 트리는 <strong>불변</strong> 상태를 가져야 한다.</li>
+<li>상태가 업데이트되면 관련된 뷰가 다시 그려진다.</li>
+<li>내장 메소드<ul>
+<li> <code>getState()</code> : store에 등록된 상태 정보를 불러옴</li>
+<li> <code>dispatch()</code> : action을 발생시킴</li>
+<li> <code>subscribe()</code> : 인자로 특정 함수를 전달하면, action이 발생할 때마다 해당 함수를 호출함</li>
+</ul>
+</li>
+</ul>
+<h4 id="action"><a href="#action" class="headerlink" title="action"></a>action</h4><ul>
+<li>상태 변경을 나타내는 객체</li>
+<li> <code>type</code> 필드는 필수이며, <strong>상수</strong>로 관리하는 것이 좋다.</li>
+</ul>
+<h4 id="reducer"><a href="#reducer" class="headerlink" title="reducer"></a>reducer</h4><ul>
+<li>실질적인 함수</li>
+<li>action이 상태 트리를 어떻게 변경할 지 작성한 순수한 함수</li>
+<li>인자로 현재 <code>state</code> 와 <code>action</code> 을 받아 <strong>액션에 따라 교체된 새로운 상태</strong>를 반환한다.</li>
+</ul>
+<h3 id="Redux는-꼭-필요할-때-사용하자"><a href="#Redux는-꼭-필요할-때-사용하자" class="headerlink" title="Redux는 꼭 필요할 때 사용하자!"></a>Redux는 꼭 필요할 때 사용하자!</h3><ol>
+<li><strong>지속적으로</strong> 상태가 변화하는 데이터가 많을 때</li>
+<li>모든 상태를 <strong>한 곳</strong>에서 관리해야 할 때</li>
+<li><em>최상위 컴포넌트</em> 에서 모든 상태를 가지고 있기 힘들 때</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-Closure/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2454,110 +2601,6 @@ Data2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/15/SOAP-Comments/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/15/SOAP-Comments/" class="post-title-link" itemprop="url">Comments</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-05-14 23:28:45" itemprop="dateCreated datePublished" datetime="2021-05-14T23:28:45+01:00">2021-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-16 08:19:21" itemprop="dateModified" datetime="2021-05-16T08:19:21+01:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SOPT/SOAP/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Comments"><a href="#Comments" class="headerlink" title="Comments"></a>Comments</h2><ol>
-<li><p>코드의 단위적 로직이 복잡한 것들 (Business logic complexity) 만 주석 처리를 하자!</p>
-<ul>
-<li>좋은 코드는 그 자체로 이해하기 쉬우므로, 주석은 복잡한 코드에 대한 사과와 같다.</li>
-</ul>
-<blockquote>
-<p><strong>Business Logic Complexity</strong></p>
-<p>Many organizations adopt software to support their business process and business logic is embedded in their system.</p>
-<p>To solve this problem we define <em>business logic complexity</em> to capture <em>business logic</em> from the source code and to quantify how hard it is to understand.</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hashIt</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// The hash</span></span><br><span class="line">  <span class="keyword">let</span> hash = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Length of string</span></span><br><span class="line">  <span class="keyword">const</span> length = data.length;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Loop through every character in data</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    <span class="comment">// Get character code.</span></span><br><span class="line">    <span class="keyword">const</span> char = data.charCodeAt(i);</span><br><span class="line">    <span class="comment">// Make the hash</span></span><br><span class="line">    hash = (hash &lt;&lt; <span class="number">5</span>) - hash + char;</span><br><span class="line">    <span class="comment">// Convert to 32-bit integer</span></span><br><span class="line">    hash &amp;= hash;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hashIt</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> hash = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> length = data.length;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> char = data.charCodeAt(i);</span><br><span class="line">    hash = (hash &lt;&lt; <span class="number">5</span>) - hash + char;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Convert to 32-bit integer</span></span><br><span class="line">    hash &amp;= hash;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>주석 처리된 코드를 codebase에 남겨놓지 말고 지워버리기!</p>
-<ul>
-<li>형상 관리 툴 (버전 관리; version control) 이 이런 코드들을 남겨놓기 위함이니, 오래된 코드는 옛 버전에 남겨놓자.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">doStuff();</span><br><span class="line"><span class="comment">// doOtherStuff();</span></span><br><span class="line"><span class="comment">// doSomeMoreStuff();</span></span><br><span class="line"><span class="comment">// doSoMuchStuff();</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">doStuff();</span><br></pre></td></tr></table></figure></li>
-<li><p>기록용 주석은 사용하지 말자</p>
-<ul>
-<li>위와 동일하게, 형상 관리 툴 (git : <code>git log</code> 를 통해 이전 버전들 확인) 을 이용하고 필요없는 주석은 모두 날려버리자.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 2016-12-20: Removed monads, didn&#x27;t understand them (RM)</span></span><br><span class="line"><span class="comment"> * 2016-10-01: Improved using special monads (JP)</span></span><br><span class="line"><span class="comment"> * 2016-02-03: Removed type-checking (LI)</span></span><br><span class="line"><span class="comment"> * 2015-03-14: Added combine with type-checking (JR)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">combine</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">combine</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>위치 표시 주석도 피하자!</p>
-<ul>
-<li>적절한 <code>indentation</code>, <code>함수명</code> 및 <code>변수명</code> , <code>포맷팅</code> 을 이용한다면 기능 구분을 위한 정신없는 positional marker comments 는 필요하지 않다.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Scope Model Instantiation</span></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line">$scope.model = &#123;</span><br><span class="line">  menu: <span class="string">&quot;foo&quot;</span>,</span><br><span class="line">  nav: <span class="string">&quot;bar&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Action setup</span></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="keyword">const</span> actions = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">$scope.model = &#123;</span><br><span class="line">  menu: <span class="string">&quot;foo&quot;</span>,</span><br><span class="line">  nav: <span class="string">&quot;bar&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> actions = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2629,7 +2672,7 @@ Data2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">77</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
