@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Input첫째 줄에 A(1 ≤ A ≤ 9999), P(1 ≤ P ≤ 5)가 주어진다. 1A, P &#x3D; map(int, input().split())   DFS 반복되는 수를 찾을 때까지 같은 작업 반복 반복되는 수를 찾았을 경우, 배열에 추가하지 않고 처음에 담겨있는 index를 받아 출력하면 중복되지 않는 수의 개수와 동일하다.  12345678910111">
+  <meta name="description" content="Input12N &#x3D; int(input())latitude &#x3D; [list(map(int, input().split())) for _ in range(N)]   DFSrecursion limit 설정하기 이 문제를 파이썬에서 풀기 위해서 무조건 sys.setrecursionlimit()을 추가해줘야 한다. 이 코드를 삽입하지 않으면 런타임 에러가 발생한다. 공">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BOJ 2331">
-<meta property="og:url" content="https://leahincom.github.io/2021/06/29/boj-2331/index.html">
+<meta property="og:title" content="BOJ 2468">
+<meta property="og:url" content="https://leahincom.github.io/2021/07/03/boj-2468/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Input첫째 줄에 A(1 ≤ A ≤ 9999), P(1 ≤ P ≤ 5)가 주어진다. 1A, P &#x3D; map(int, input().split())   DFS 반복되는 수를 찾을 때까지 같은 작업 반복 반복되는 수를 찾았을 경우, 배열에 추가하지 않고 처음에 담겨있는 index를 받아 출력하면 중복되지 않는 수의 개수와 동일하다.  12345678910111">
+<meta property="og:description" content="Input12N &#x3D; int(input())latitude &#x3D; [list(map(int, input().split())) for _ in range(N)]   DFSrecursion limit 설정하기 이 문제를 파이썬에서 풀기 위해서 무조건 sys.setrecursionlimit()을 추가해줘야 한다. 이 코드를 삽입하지 않으면 런타임 에러가 발생한다. 공">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-06-29T11:32:24.000Z">
-<meta property="article:modified_time" content="2021-07-03T01:16:45.472Z">
+<meta property="article:published_time" content="2021-07-03T10:35:23.000Z">
+<meta property="article:modified_time" content="2021-07-03T08:28:49.285Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="algorithm">
 <meta property="article:tag" content="dfs">
@@ -36,7 +36,7 @@
 <meta property="article:tag" content="boj">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://leahincom.github.io/2021/06/29/boj-2331/">
+<link rel="canonical" href="https://leahincom.github.io/2021/07/03/boj-2468/">
 
 
 <script id="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>BOJ 2331 | leah</title>
+  <title>BOJ 2468 | leah</title>
   
 
 
@@ -165,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/boj-2331/">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/03/boj-2468/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpeg">
@@ -178,7 +178,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          BOJ 2331
+          BOJ 2468
         </h1>
 
         <div class="post-meta">
@@ -187,16 +187,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-06-29 12:32:24" itemprop="dateCreated datePublished" datetime="2021-06-29T12:32:24+01:00">2021-06-29</time>
+              <time title="Created: 2021-07-03 11:35:23 / Modified: 09:28:49" itemprop="dateCreated datePublished" datetime="2021-07-03T11:35:23+01:00">2021-07-03</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-03 02:16:45" itemprop="dateModified" datetime="2021-07-03T02:16:45+01:00">2021-07-03</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -222,19 +216,55 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>첫째 줄에 A(1 ≤ A ≤ 9999), P(1 ≤ P ≤ 5)가 주어진다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A, P = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br></pre></td></tr></table></figure>
+        <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">latitude = [<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N)]</span><br></pre></td></tr></table></figure>
 
 
-<h4 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h4><ul>
-<li>반복되는 수를 찾을 때까지 같은 작업 반복</li>
-<li>반복되는 수를 찾았을 경우, 배열에 추가하지 않고 처음에 담겨있는 index를 받아 출력하면 중복되지 않는 수의 개수와 동일하다.</li>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><h4 id="recursion-limit-설정하기"><a href="#recursion-limit-설정하기" class="headerlink" title="recursion limit 설정하기"></a>recursion limit 설정하기</h4><blockquote>
+<p>이 문제를 파이썬에서 풀기 위해서 무조건 <code>sys.setrecursionlimit()</code>을 추가해줘야 한다. 이 코드를 삽입하지 않으면 런타임 에러가 발생한다. 공식 도큐먼트에 의하면 해당 코드는 파이썬 인터프리터 stack에 최대 깊이를 지정하는 것이다. 무한대의 recursion이 발생해서 overflow가 발생하는 것을 방지하기 위함이다. 이 문제에서는 그 만큼 깊이 있게 recursion으로 stack이 쌓이기 때문에 어느 정도가 진행되면 제한을 둬야 하는 것이다.</p>
+<p><em>ref</em> &gt; <a target="_blank" rel="noopener" href="https://dojinkimm.github.io/problem_solving/2019/11/15/boj-2468-safezone.html">https://dojinkimm.github.io/problem_solving/2019/11/15/boj-2468-safezone.html</a></p>
+</blockquote>
+<ul>
+<li><code>recursion</code> 을 사용할 때 <em>runtime error</em> 가 발생한다면 <strong><code>sys.setrecursionlimit()</code></strong> 을 설정하자!!</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">visited = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">num</span>):</span></span><br><span class="line">	.</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 중복되지 않을 경우</span></span><br><span class="line">  visited.append(num)</span><br><span class="line">  digit = [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">str</span>(num)]</span><br><span class="line">  now = <span class="number">0</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> digit:</span><br><span class="line">    now += x ** P</span><br><span class="line">  </span><br><span class="line">  dfs(now)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">100000</span>)</span><br></pre></td></tr></table></figure>
 
 
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>첫째 줄에 반복되는 부분을 제외했을 때, 수열에 남게 되는 수들의 개수를 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> num <span class="keyword">in</span> visited:</span><br><span class="line">  idx = visited.index(num)</span><br><span class="line">  print(idx)</span><br><span class="line">  <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<h4 id="direction-배열-선언해놓기"><a href="#direction-배열-선언해놓기" class="headerlink" title="direction 배열 선언해놓기"></a>direction 배열 선언해놓기</h4><ul>
+<li>배열로 x, y 한번에 만들어도 좋고</li>
+<li>x, y 따로 선언해서 같은 index로 접근해도 좋다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dir</span> = [[-<span class="number">1</span>,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">0</span>,-<span class="number">1</span>],[<span class="number">0</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="visited-배열-생성하기"><a href="#visited-배열-생성하기" class="headerlink" title="visited 배열 생성하기"></a>visited 배열 생성하기</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">visited = [[<span class="number">0</span>]*N <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N)]</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="조건"><a href="#조건" class="headerlink" title="조건"></a>조건</h4><ul>
+<li>가능한 높이를 조건에 따라 세팅해놓고,</li>
+<li>매번 비교하며 <code>max</code>  값을 구해야 하므로 기본 변수들을 초기화시킨다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">maxHeight = <span class="number">100</span></span><br><span class="line"><span class="keyword">for</span> height <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">  count = <span class="number">0</span></span><br><span class="line">  visited = [[<span class="number">0</span>]*N <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N)]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>영역을 연속적으로 구하는 것이므로, 동일한 조건을 동일하게 반복하며 실행한다 === <strong>DFS</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">dy, dx</span>):</span></span><br><span class="line">  visited[dy][dx] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">dir</span>:</span><br><span class="line">    y = dy + d[<span class="number">0</span>]</span><br><span class="line">    x = dx + d[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="number">0</span> &lt;= x &lt; N <span class="keyword">and</span> <span class="number">0</span> &lt;= y &lt; N:</span><br><span class="line">      <span class="keyword">if</span> visited[y][x] == <span class="number">0</span> <span class="keyword">and</span> latitude[y][x] &gt;= height:</span><br><span class="line">        dfs(y, x)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2차원 배열을 모두 돌며 조건에 맞는 경우 <strong>DFS</strong> <ol>
+<li>방문하지 않음</li>
+<li>고도가 기준보다 높거나 같음 (잠기지 않음)</li>
+</ol>
+</li>
+<li>이후 빠져나온 경우는 영역이 정해졌다는 의미이므로 <code>count++</code> 를 실행한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N): </span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">    <span class="keyword">if</span> visited[i][j] == <span class="number">0</span> <span class="keyword">and</span> latitude[i][j] &gt;= height:</span><br><span class="line">      <span class="comment"># visited 체크용 (세트 만들기)</span></span><br><span class="line">      dfs(i, j)</span><br><span class="line">      count += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>배열을 모두 검사하면 해당 <code>height</code> 에 대한 검사가 완료되었다는 뜻이므로 <code>max</code> 값을 구한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxCount = <span class="built_in">max</span>(maxCount, count)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 장마철에 물에 잠기지 않는 안전한 영역의 최대 개수를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(maxCount)</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -256,13 +286,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/29/yarn-dependencies/" rel="prev" title="yarn dependencies">
-      <i class="fa fa-chevron-left"></i> yarn dependencies
+    <a href="/2021/07/03/boj-2667/" rel="prev" title="BOJ 2667">
+      <i class="fa fa-chevron-left"></i> BOJ 2667
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/06/29/python-list-index/" rel="next" title="리스트에서 요소의 index 찾기">
-      리스트에서 요소의 index 찾기 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -321,7 +348,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Input"><span class="nav-number">1.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DFS"><span class="nav-number">2.</span> <span class="nav-text">DFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Input"><span class="nav-number">1.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DFS"><span class="nav-number">2.</span> <span class="nav-text">DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#recursion-limit-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0"><span class="nav-number">2.1.</span> <span class="nav-text">recursion limit 설정하기</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#direction-%EB%B0%B0%EC%97%B4-%EC%84%A0%EC%96%B8%ED%95%B4%EB%86%93%EA%B8%B0"><span class="nav-number">2.2.</span> <span class="nav-text">direction 배열 선언해놓기</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#visited-%EB%B0%B0%EC%97%B4-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0"><span class="nav-number">2.3.</span> <span class="nav-text">visited 배열 생성하기</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%A1%B0%EA%B1%B4"><span class="nav-number">2.4.</span> <span class="nav-text">조건</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
