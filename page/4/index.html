@@ -163,6 +163,348 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/21/Data2Vis-paper-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/21/Data2Vis-paper-review/" class="post-title-link" itemprop="url">Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-05-20 16:12:36 / Modified: 16:40:47" itemprop="dateCreated datePublished" datetime="2021-05-20T16:12:36+01:00">2021-05-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Graduation-Project/" itemprop="url" rel="index"><span itemprop="name">Graduation Project</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Graduation-Project/Paper-Review/" itemprop="url" rel="index"><span itemprop="name">Paper Review</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p><strong>creating effective visualizations using <em>expressive grammars</em></strong></p>
+<br />
+
+
+
+<img width="452" align="center" alt="Screenshot 2021-05-20 at 17 05 21" src="https://user-images.githubusercontent.com/49134038/119007780-8160be00-b9cc-11eb-8994-a13466e5a568.png">
+
+<br />
+
+
+
+<h4 id="End-to-End-Trainable-Neural-Translation-Model"><a href="#End-to-End-Trainable-Neural-Translation-Model" class="headerlink" title="End-to-End Trainable Neural Translation Model"></a>End-to-End Trainable Neural Translation Model</h4><ul>
+<li><p>visualization generation === language translation problem</p>
+<p><code>formulation</code></p>
+<blockquote>
+<p>Vega-Lite</p>
+</blockquote>
+<ul>
+<li>mapping : data specifications → visualization specifications</li>
+<li>in a declarative language</li>
+</ul>
+<p><code>training</code></p>
+<ul>
+<li><p>a <em>multilayered, attention-based</em> <code>encoder-decoder</code> network</p>
+</li>
+<li><p>with <em>long short-term memory units</em> ( <code>LSTM</code> )</p>
+<blockquote>
+<p><img src="https://developer.nvidia.com/sites/default/files/pictures/2018/lstm.png" alt="LSTM"></p>
+</blockquote>
+</li>
+<li><p>on a corpus of visualization specifications</p>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<h4 id="learns…"><a href="#learns…" class="headerlink" title="learns…"></a>learns…</h4><ul>
+<li>the <code>vocabulary</code> and <code>syntax</code> for a valid visualization specification</li>
+<li>appropriate <code>transformations</code><ul>
+<li><em>e.g.</em> count, bins, mean</li>
+</ul>
+</li>
+<li>how to use common <code>data selection patterns</code> that occur within data visualizations</li>
+</ul>
+<br />
+
+
+
+<h2 id="Problem-Formulation"><a href="#Problem-Formulation" class="headerlink" title="Problem Formulation"></a>Problem Formulation</h2><blockquote>
+<p> <em>applies deep learning for <strong>translation and synthesis</strong></em></p>
+</blockquote>
+<br />
+
+
+
+<ol>
+<li><p><strong>data visualization problem === sequence to sequence models</strong> ( <code>seq2seq</code> )</p>
+<ul>
+<li><code>input</code> sequence : dataset<ul>
+<li><em>e.g.</em> fields, values in <em>json format</em></li>
+</ul>
+</li>
+<li><code>output</code> sequence : valid <code>Vega-Lite</code> visualization specification</li>
+</ul>
+</li>
+<li><p><strong>sequence translation === encoder-decoder networks</strong></p>
+<ul>
+<li><code>encoder</code> : reads and encodes a source sequence into <code>a fixed length vector</code></li>
+<li><code>decoder</code> : outputs a <code>translation</code> based on this vector</li>
+</ul>
+<p>👉 jointly trained to <strong>maximize the probability of outputting a correct</strong> translation</p>
+</li>
+</ol>
+<blockquote>
+<p><code>seq2seq</code></p>
+<ol>
+<li><p>generates data that is <em>sequential or temporally dependent</em></p>
+<ul>
+<li><em>e.g.</em> language translation</li>
+</ul>
+</li>
+<li><p>finds applications for problems where the output or input is <em>non-sequential</em></p>
+<ul>
+<li><em>e.g.</em> text summarization, image captioning</li>
+</ul>
+<p>👉 <strong>bidirectional RNN units</strong></p>
+<p>👉 <strong>attention mechanisms</strong></p>
+</li>
+</ol>
+</blockquote>
+<br />
+
+
+
+<h4 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h4><blockquote>
+<p><strong><em>ordinary</em> RNN ( <code>unidirectional</code> )</strong></p>
+<ol>
+<li><p>reads an input sequence x from the first token x_1 to the last x_m</p>
+</li>
+<li><p>generates an encoding only based on the preceding tokens it has seen</p>
+</li>
+</ol>
+<br />
+
+
+
+<p><strong><em>Bidirectional</em> RNN ( <code>BiRNN</code> )</strong></p>
+<ul>
+<li><p>consists of a forward RNN + a backward RNN</p>
+</li>
+<li><p>enables an encoding generation based on both the preceding and following tokens</p>
+</li>
+</ul>
+<ol>
+<li><p>a forward RNN ( <code>→f</code> )</p>
+<ol>
+<li>reads the input sequence as it is ordered from x_1 to x_m</li>
+<li>calculates a sequence of forward hidden states (→h_1, …, →h_m)</li>
+</ol>
+</li>
+<li><p>a backward RNN ( <code>←f</code> )</p>
+<ol>
+<li>reads the sequence in the reverse order from x_m to x_1</li>
+<li>calculates a sequence of backward hidden states (←h_1, …, ←h_m)</li>
+</ol>
+</li>
+<li><p>generates a hidden state <code>→h_j</code></p>
+<p><code>→h_j</code> </p>
+<ul>
+<li>a <u>concatenation</u> of both the forward and backward RNNs <u>( <code>h_j</code> : <code>[→h_j(T); ←h_j(T)]T</code> )</u></li>
+<li>contains summaries of both the preceeding and following tokens</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>attention mechanism</strong></p>
+<ul>
+<li>focuses on aspects of an input sequence</li>
+<li>generates output tokens</li>
+<li>makes translation models <strong>robust</strong> to performance degradation</li>
+<li>generates <strong>lengthy</strong> sequences</li>
+<li>enables model to <strong>learn mappings</strong> between source and target sequences of <strong>different lengths</strong></li>
+<li>improves the ability to <strong>interpret and debug</strong> sequence to sequence models as providing valuable insights on <em>why a given token is generated at each step</em></li>
+</ul>
+<hr>
+<ul>
+<li><p><em>e.g.</em></p>
+<p><code>image captioning</code></p>
+<ul>
+<li>model <em>focuses on <strong>specific parts</strong> of objects</em> in an image</li>
+<li><em>generates <strong>each word or token</strong></em> in the image caption</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<br />
+
+
+
+<p>👇 <em>enables us to use a <strong>sequence translation model</strong> which…</em> </p>
+<ol>
+<li>first takes into consideration the entire data input (dataset)</li>
+<li>and then focuses on aspects of the input (fields) in generating a visualization specification</li>
+</ol>
+<br />
+
+
+
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h4 id="Encoder-Decoder-Architecture-with-Attention-mechanism"><a href="#Encoder-Decoder-Architecture-with-Attention-mechanism" class="headerlink" title="Encoder-Decoder Architecture with Attention mechanism"></a>Encoder-Decoder Architecture with Attention mechanism</h4><ol>
+<li><p>2-layer <code>Encoder</code> </p>
+<ul>
+<li>bidirectional recurrent neural network (RNN)<ul>
+<li>takes in an input <strong>sequence</strong> of <em>source tokens x</em></li>
+<li>and outputs a <strong>sequence</strong> of <em>states h</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2-layer <code>Decoder</code> </p>
+<ul>
+<li><p>RNN</p>
+<ul>
+<li>computes the <strong>probability</strong> of a <em>target sequence y</em> <u>based on the hidden state h</u></li>
+</ul>
+<blockquote>
+<p><code>probability</code></p>
+<ul>
+<li>generated <em>based on the <strong>recurrent state of the decoder</strong> RNN</em>, <strong>previous tokens</strong> in the target sequence and a <strong>context vector <code>c_i</code></strong> </li>
+</ul>
+<p><code>context vector</code> === <code>attention vector</code></p>
+<ul>
+<li><em><strong>a weighted average</strong> of the source states</em></li>
+<li>and designed to capture the context of source sequence that help <strong>predict</strong> the current target token</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><em>each with</em> 512 <code>Long Short-Term Memory</code> (LSTM) units (cells)</p>
+<ul>
+<li>better than Gated Recurrent Unit (GRU)</li>
+</ul>
+</li>
+</ol>
+<br />
+
+
+
+<h2 id="Data-and-Preprocessing"><a href="#Data-and-Preprocessing" class="headerlink" title="Data and Preprocessing"></a>Data and Preprocessing</h2><h4 id="Learning-Objectives"><a href="#Learning-Objectives" class="headerlink" title="Learning Objectives"></a>Learning Objectives</h4><p><em>model should…</em></p>
+<ol>
+<li><p>select a subset of fields to focus on, when creating visualizations</p>
+<ul>
+<li>most datasets have multiple fields which cannot all be simultaneously visualized</li>
+</ul>
+</li>
+<li><p>learn differences in data types across the data fields</p>
+<ul>
+<li><em>e.g.</em> numeric, string, temporal, ordinal, categorical, etc.</li>
+</ul>
+</li>
+<li><p>learn the appropriate transformations to apply to a field given its data type</p>
+<ul>
+<li><em>e.g.</em> aggregate transform does not apply to string fields</li>
+</ul>
+<p>👇</p>
+<p><code>Vega-Lite Grammer</code></p>
+</li>
+</ol>
+<ul>
+<li>view-level transforms (aggregate, bin, calculate, filter, timeUnit)<ul>
+<li>field-level transforms (aggregate, bin, sort, timeUnit)</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<h4 id="Achieving-Objectives"><a href="#Achieving-Objectives" class="headerlink" title="Achieving Objectives"></a>Achieving Objectives</h4><p><em><strong>character based sequence model</strong></em></p>
+<ul>
+<li><p><strong>Challenge</strong> : a <em>character tokenization strategy</em> requires</p>
+<ul>
+<li><strong>more units</strong> to represent a sequence</li>
+<li>a large amount of <strong>hidden layers</strong></li>
+<li>a large amount of <strong>parameters</strong> <em>to model long term dependencies</em></li>
+</ul>
+</li>
+<li><p>Solution</p>
+<ol>
+<li><p>replace string and numeric field names using a <strong>short notation</strong></p>
+<ul>
+<li>e.g.* “str”, “num” in the source sequence (dataset)</li>
+</ul>
+</li>
+<li><p>a <strong>similar backward transformation</strong> is done in the target sequence</p>
+<ul>
+<li>to maintain consistency in field names</li>
+</ul>
+</li>
+</ol>
+<p>👇</p>
+<ul>
+<li>scaffolds the learning process by reducing the vocabulary size</li>
+<li>prevents the LSTM from learning field names (which are not needed to be memorized)</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/19/VizML-paper-review/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1942,757 +2284,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/05/THUREE-Hooks/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/05/THUREE-Hooks/" class="post-title-link" itemprop="url">Hooks</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-05-05 15:44:17" itemprop="dateCreated datePublished" datetime="2021-05-05T15:44:17+01:00">2021-05-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-06 09:19:40" itemprop="dateModified" datetime="2021-05-06T09:19:40+01:00">2021-05-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SOPT/THUREE/" itemprop="url" rel="index"><span itemprop="name">THUREE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h2><br />
-
-
-
-<h3 id="기본-Hook"><a href="#기본-Hook" class="headerlink" title="기본 Hook"></a>기본 Hook</h3><br />
-
-
-
-<h4 id="useState"><a href="#useState" class="headerlink" title="useState"></a>useState</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, setState] = useState(initialState);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><code>useState()</code> : <code>state</code> 와 <code>setState</code> 을 반환하는 함수</p>
-<ul>
-<li><code>initialState</code> : 초기값<ul>
-<li>보통 <code>null</code> 이나 <code>&quot;&quot;</code> 등의 default value로 설정한다.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>state</code> : 상태 유지 (저장) 값</p>
-<ul>
-<li>최초 렌더링 시 반환된 <code>state</code> 는 <code>initialValue</code> 이다.</li>
-</ul>
-</li>
-<li><p><code>setState</code> : <code>state</code> 값을 갱신하는 함수</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setState(newState);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>새 <code>state</code> 값을 받으면 컴포넌트 리렌더링을 큐에 등록한다.</li>
-<li>리렌더링 시 <code>useState</code> 가 반환하는 첫번째 값 (인자) 은 갱신된 최신 <code>state</code> 이다.</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<blockquote>
-<p>Note</p>
-<p>React guarantees that <code>setState</code> function identity is stable and won’t change on re-renders. This is why it’s safe to omit from the <code>useEffect</code> or <code>useCallback</code> dependency list.</p>
-</blockquote>
-<br />
-
-<h5 id="Functional-Updates"><a href="#Functional-Updates" class="headerlink" title="Functional Updates"></a>Functional Updates</h5><blockquote>
-<p> 함수적 갱신</p>
-</blockquote>
-<br />
-
-
-
-<ol>
-<li><p><code>setState</code> 가 값을 갱신하는 과정을 직접 코드로 작성하면 다음과 같다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, setState] = useState(&#123;&#125;);</span><br><span class="line">setState(<span class="function"><span class="params">prevState</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Object.assign would also work</span></span><br><span class="line">  <span class="keyword">return</span> &#123;...prevState, ...updatedValues&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>갱신된 객체를 자동으로 merge하는 <code> useState</code> 와 반대로, <code>setState</code> 는 <code>initialValue</code> 를 유지한다.</p>
-</blockquote>
-<p>이전 <code>state</code> 를 이용해서 값을 <strong>갱신</strong>하는 경우, 이전 값을 받아 갱신된 값을 반환하는 함수를 <code>setState</code> 로 전달하면 된다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Counter</span> (<span class="params">&#123; initialCount &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = useState(initialCount);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      Count: &#123;count&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 초기화</span></span><br><span class="line">      &lt;button onClick=&#123;<span class="function">() =&gt;</span> setCount(initialCount)&#125;&gt;Reset&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 이전 값을 이용해서 값을 갱신하는 경우</span></span><br><span class="line">			<span class="comment">// parameter value : 현재 값</span></span><br><span class="line">			<span class="comment">// return value : 갱신할 값</span></span><br><span class="line">      &lt;button onClick=&#123;<span class="function">() =&gt;</span> setCount(<span class="function"><span class="params">prevCount</span> =&gt;</span> prevCount - <span class="number">1</span>)&#125;&gt;-&lt;/button&gt;</span><br><span class="line">      &lt;button onClick=&#123;<span class="function">() =&gt;</span> setCount(<span class="function"><span class="params">prevCount</span> =&gt;</span> prevCount + <span class="number">1</span>)&#125;&gt;+&lt;/button&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-</li>
-</ol>
-<blockquote>
-<p>Note</p>
-<p>Another option is <code>useReducer</code>, which is more suited for managing state objects that contain multiple sub-values.</p>
-</blockquote>
-<br />
-
-
-
-<ol start="2">
-<li>업데이트 함수 (setState에 전달한 함수) 가 현재 상태와 정확히 동일한 값을 반환한다면 바로 뒤에 일어날 리렌더링은 완전히 건너뛰게 된다.</li>
-</ol>
-<br />
-
-
-
-<blockquote>
-<p><strong>React에서 <code>&#123;&#125;</code> 를 쓰는 경우</strong></p>
-<ul>
-<li>JSX 내부에서는 객체를 받아옴<ul>
-<li><code>&#123;&#123;&#125;&#125;</code> : 객체를 받아오는 것이 아니라 JSX 내부에서 생성할 때</li>
-</ul>
-</li>
-<li>JSX 외부에서는 일반 JS의 문법 중 function destructurizing을 실행</li>
-</ul>
-</blockquote>
-<br />
-
-
-
-<h5 id="Lazy-Initial-State"><a href="#Lazy-Initial-State" class="headerlink" title="Lazy Initial State"></a>Lazy Initial State</h5><blockquote>
-<p> 지연 초기 state</p>
-</blockquote>
-<br />
-
-
-
-<p><code>initialState</code> 인자는 초기 렌더링 시에 사용하는 <code>state (값)</code> 으로, 리렌더링 시 이 값은 무시된다.</p>
-<p>만약 초기 state가 고비용 계산의 결과라면, 초기 렌더링 시에만 실행될 함수를 정의하여 전달하는 것이 효율적이다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, setState] = useState(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> initialState = someExpensiveComputation(props);</span><br><span class="line">  <span class="keyword">return</span> initialState;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-<h5 id="Bailing-Out-of-a-State-Update"><a href="#Bailing-Out-of-a-State-Update" class="headerlink" title="Bailing Out of a State Update"></a>Bailing Out of a State Update</h5><blockquote>
-<p>state 갱신의 취소</p>
-</blockquote>
-<br />
-
-
-
-<p>앞서 설명한 <em>“업데이트 함수 (setState에 전달한 함수) 가 현재 상태와 정확히 동일한 값을 반환한다면 바로 뒤에 일어날 리렌더링은 완전히 건너뛰게 된다.”</em> 를 추가적으로 설명하자면,</p>
-<p>State Hook을 현재 state와 동일한 값으로 갱신 (update) 할 경우, 리액트는 children or firing effects를 렌더링하는 과정을 건너뛰고 실행 (처리) 을 종료한다.</p>
-<br />
-
-
-
-<blockquote>
-<p>Note</p>
-<p>React may still need to render that specific component again before bailing out. That shouldn’t be a concern because React won’t unnecessarily go “deeper” into the tree. If you’re doing expensive calculations while rendering, you can optimize them with <code>useMemo</code>.</p>
-</blockquote>
-<br />
-
-
-
-<h4 id="useEffect"><a href="#useEffect" class="headerlink" title="useEffect"></a>useEffect</h4><p>함수형 컴포넌트 내에서는 <em>React’s render phase</em>에 따라 <em>Mutations, subscriptions, timers, logging, and other side effects</em> 가 허용되지 않는다.</p>
-<p>이를 위해 <code>useEffect</code> 를 사용할 수 있다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useEffect(didUpdate);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>useEffect()</code> : 모든 렌더링이 완료된 후 / 어떤 값이 변경되었을 때에만 동작 ( <code>didUpdate</code> ) 을 수행</li>
-<li><code>didUpdate</code> : 특정 effect를 발생시키는 (명령형) 함수</li>
-</ul>
-<br />
-
-
-
-<h5 id="Cleaning-Up-an-Effect"><a href="#Cleaning-Up-an-Effect" class="headerlink" title="Cleaning Up an Effect"></a>Cleaning Up an Effect</h5><blockquote>
-<p>effect 정리</p>
-</blockquote>
-<br />
-
-
-
-<p>Effect는 컴포넌트가 화면에서 제거될 때 정리되어야 하는 요소 (e.g. subscription, timer ID 등) 를 만들곤 한다. 이를 정리하는 함수를 <code>useEffect</code> 에 전달할 수 있다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// new subscription is created on every update</span></span><br><span class="line">  <span class="keyword">const</span> subscription = props.source.subscribe();</span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Clean up the subscription</span></span><br><span class="line">    subscription.unsubscribe();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>clean-up function</code> (e.g. <code>subscription.unsubscribe()</code> )은 <strong>컴포넌트가 제거되기(=== 다음의 effect) <em>이전</em> 에 실행되어</strong> memory leaks를 방지한다.</li>
-<li>컴포넌트가 여러번 리렌더링 될 경우, <strong>이전의 effect는 다음의 effect가 실행되기 <em>이전</em> 에 정리된다.</strong></li>
-</ul>
-<br />
-
-
-
-<h5 id="Timing-of-Effects"><a href="#Timing-of-Effects" class="headerlink" title="Timing of Effects"></a>Timing of Effects</h5><blockquote>
-<p>effect 타이밍</p>
-</blockquote>
-<br />
-
-
-
-<p><code>useEffect</code>에 전달된 함수의 경우 레이아웃 배치과 그리기를 완료한 후, 지연된 이벤트가 발생하는 동안 실행된다. 이는 브라우저가 화면을 업데이트하는 과정을 방해하지 않기 때문에, 여러 <em>side effects (e.g. setting up subscriptions and event handlers)</em> 를 실행하기에 적합한 때이다.</p>
-<p><code>useEffect</code> 는 브라우저가 그려지기 이전까지는 대기하지만, 새로운 렌더링이 발생하기 이전에 실행되는 것을 보장한다. 리액트는 언제나 새로운 업데이트가 발생하기 이전에 이전의 렌더링 effect를 모두 제거한다.</p>
-<br />
-
-
-
-<blockquote>
-<p><code>useLayoutEffect</code></p>
-<p>DOM 변경과 같이 사용자에게 effect가 보여지는 경우, visual inconsistency 방지를 위해 다음 execution (event) 이 실행되기 이전에 현재 화면이 렌더링이 됨과 동시에 effect가 (<em>synchronously</em>) 발생하여야 한다.</p>
-</blockquote>
-<br />
-
-
-
-<h5 id="Conditionally-Firing-an-Effect"><a href="#Conditionally-Firing-an-Effect" class="headerlink" title="Conditionally Firing an Effect"></a>Conditionally Firing an Effect</h5><blockquote>
-<p>조건부 effect 발생</p>
-</blockquote>
-<br />
-
-
-
-<p>Effect의 default behavior은 렌더링이 모두 완료된 이후 실행되는 것이다. 이는 해당 effect의 dependency 중 하나가 변경될 때마다 새로 실행됨을 의미한다.</p>
-<p>앞선 예제를 통해서 자세히 보면,</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// new subscription is created on every update</span></span><br><span class="line">  <span class="keyword">const</span> subscription = props.source.subscribe();</span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Clean up the subscription</span></span><br><span class="line">    subscription.unsubscribe();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><code>subscription</code> 은 매 업데이트마다 생성될 필요 없이, <code>source prop</code> 이 변할 때만 새로 생성되면 된다.</p>
-<p>이와 같은 현상을 방지하기 위해, <code> useEffect</code> 의 2번째 argument로 effect가 의존하는 (<em>depend on, dependency</em>) 배열을 전달한다.</p>
-<p>따라서 위 예제를 수정해보면,</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">useEffect(</span><br><span class="line">  <span class="comment">// 전달하는 함수는 동일하되,</span></span><br><span class="line">  () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> subscription = props.source.subscribe();</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      subscription.unsubscribe();</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 두번째 인자로 dependency array (depend on하는 배열) 을 전달한다.</span></span><br><span class="line">  [props.source],</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>이를 통해 <code>subscription</code>은 <code>props.source</code>가 변경될 때에만 재생성된다.</p>
-<br />
-
-
-
-<p>만약 effect를 (mount 또는 unmount 시) 한 번만 수행하고 싶다면 두번째 인자로 빈 배열 ( <code>[]</code> ) 을 전달하면 된다. 이를 통해 effect는 컴포넌트 범위에서 가져온 값들 (e.g. props, state 등) 에 전혀 의존하지 않으므로 해당 값들이 변경되어도 다시 실행되지 않는다.</p>
-<p>빈 배열 ( <code>[]</code> ) 은 effect 안에 있는 <code>props</code> 와 <code>state</code> 가 항상 초기값을 가지게 됨을 의미한다. 이는 <code>componentDidMount</code> 와 <code>componentWillUnMount</code> 의 기능과 같다.</p>
-<br />
-
-
-
-<blockquote>
-<p>두번째 인자로 전달하는 배열은 effect에 사용되는 컴포넌트 범위의 모든 값 (e.g. props, state 등) 들을 포함해야 한다. 이를 위반할 시 이전 렌더링에서 설정한 값을 참조하는 버그가 발생한다.</p>
-<p>이렇게 전달된 dependency 배열은 effect 함수에 인자로 전달되지 않는다. 하지만 effect 함수 내에서 참조된 모든 값들이 해당 배열에 포함되어야 하므로, 전달 여부는 유의미하지 않다.</p>
-</blockquote>
-<br />
-
-
-
-<h4 id="useContext"><a href="#useContext" class="headerlink" title="useContext"></a>useContext</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> value = useContext(MyContext);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>useContext()</code> : <em>( <code>React.createContext</code> 를 통해 반환된 값인 )</em> context 객체에 **현재 context 값 (<code>MyContext</code>) **을 반환한다.<ul>
-<li>가장 가까운 상위 컴포넌트 <code>&lt;MyContext.Provider&gt;</code> 가 업데이트 되면, <code>useContext</code> 는 해당 컴포넌트에 전달 (포함) 된 <strong>가장 최신</strong>의 context value 에 따라 화면을 리렌더링 한다.</li>
-</ul>
-</li>
-<li><code>MyContext</code> : <strong>현재 context 값 (객체)</strong> 으로, 트리 구조에서 해당 컴포넌트의 <strong>상위 컴포넌트이면서 가장 가까운</strong> <code>&lt;MyContext.Provider&gt;</code> 의 <code>value prop</code> 에 따라 결정된다.<ul>
-<li><code>useContext()</code> 의 인자는 <strong>context 객체</strong>여야 한다.<ul>
-<li><strong>Correct:</strong> <code>useContext(MyContext)</code></li>
-<li><strong>Incorrect:</strong> <code>useContext(MyContext.Consumer)</code></li>
-<li><strong>Incorrect:</strong> <code>useContext(MyContext.Provider)</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<p><code>useContext</code> 를 사용한 컴포넌트는 context 값이 변경될 때마다 리렌더링된다. 리렌더링 되는 컴포넌트가 비싸다면, <code>momoization</code> 을 이용해 효율성을 높일 수 있다.</p>
-<blockquote>
-<p>상위 컴포넌트에서 <code>React.memo</code> 나 <code>shouldComponentUpdate</code> 를 쓰더라도, <code>useContext</code> 를 사용한 컴포넌트부터 리렌더링이 진행 (시작) 된다.</p>
-</blockquote>
-<br />
-
-
-
-<p><code>useContext</code> 는 context를 <strong>읽고 변경사항을 구독 (확인)</strong> 하는 것만 가능하기 때문에, 해당 context의 값을 <strong>전달</strong>하기 위해 트리 구조 내 상위 컴포넌트로서 <code>&lt;MyContext.Provider&gt;</code> 가 필요하다.</p>
-<br />
-
-
-
-<h5 id="Putting-it-together-with-Context-Provider"><a href="#Putting-it-together-with-Context-Provider" class="headerlink" title="Putting it together with Context.Provider"></a>Putting it together with Context.Provider</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> themes = &#123;</span><br><span class="line">  light: &#123;</span><br><span class="line">    foreground: <span class="string">&quot;#000000&quot;</span>,</span><br><span class="line">    background: <span class="string">&quot;#eeeeee&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  dark: &#123;</span><br><span class="line">    foreground: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">    background: <span class="string">&quot;#222222&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ThemeContext = React.createContext(themes.light);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;ThemeContext.Provider value=&#123;themes.dark&#125;&gt;</span><br><span class="line">      &lt;Toolbar /&gt;</span><br><span class="line">    &lt;/ThemeContext.Provider&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Toolbar</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;ThemedButton /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ThemedButton</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// useContext의 인자로서 ThemeContext 객체 전달</span></span><br><span class="line">  <span class="comment">// theme = &lt;ThemeContext.Provider&gt;의 value인 &#123;themes.dark&#125; // 객체</span></span><br><span class="line">  <span class="keyword">const</span> theme = useContext(ThemeContext);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;button style=&#123;&#123; <span class="attr">background</span>: theme.background, <span class="attr">color</span>: theme.foreground &#125;&#125;&gt;</span><br><span class="line">      I am styled by theme context!</span><br><span class="line">    &lt;/button&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br />
-
-<br />
-
-
-
-<hr>
-<h3 id="추가-Hooks"><a href="#추가-Hooks" class="headerlink" title="추가 Hooks"></a>추가 Hooks</h3><br />
-
-
-
-<h4 id="useReducer"><a href="#useReducer" class="headerlink" title="useReducer"></a>useReducer</h4><p><code>useState()</code> 의 대체재로서 사용한다. 여러 하위 값을 포함하거나 다음 state가 이전의 state 값에 영향을 받는 복잡한 state 로직을 가진 경우 선호된다.</p>
-<p>컴포넌트의 state 업데이트 로직을 컴포넌트에서 분리하여 컴포넌트 바깥에서 작성하거나 다른 파일에서 작성한 후 불러와서 사용할 수도 있다.</p>
-<p>또한 <code>callback</code> 대신 <code>dispatch</code>를 전달한 수 있어 <strong>deep update</strong>를 요구하는 컴포넌트의 경우 performance를 최적화할 수 있다.</p>
-<blockquote>
-<p><em>What is <strong>deep update</strong> in React?</em></p>
-<p>먼저, React에서 <strong>update</strong>란; <code>useState()</code> 를 사용하는 모든 리액트 컴포넌트에서 사용가능한 함수로, 컴포넌트 state가 변경되었을 때 리액트에게 이를 알림으로써 해당 state에 종속된 UI를 업데이트하기 위해 컴포넌트에게 리렌더링이 필요하다는 것을 전달한다. </p>
-<p>따라서, <strong>deep update</strong>란 <em>deep nested 객체 (many pieces of information과 fixed 스키마를 가진) 를 update</em> 하는 것을 의미한다. </p>
-</blockquote>
-<br />
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, dispatch] = useReducer(reducer, initialArg, init);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><code>useReducer()</code> : <code>reducer</code> 를 받아 현재 <code>state</code>와 짝지어진 <code>dispatch</code> 함수를 반환한다.</p>
-</li>
-<li><p><code>reducer</code> : 현재 <code>state</code>와 <code>action</code> 객체를 파라미터로 받아와서 ( <code>(state, action)</code> ) 새로운 state를 반환하는 함수</p>
-<ul>
-<li><p><code>(state, action) =&gt; newState</code> 의 구조를 가진다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reducer</span>(<span class="params">state, action</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 새로운 state를 만드는 로직</span></span><br><span class="line">  <span class="comment">// const nextState = ...</span></span><br><span class="line">  <span class="keyword">return</span> nextState;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>반환하는 해당 state는 컴포넌트가 지닐 <strong>새로운 state</strong>가 된다.</p>
-</li>
-<li><p><code>action</code> : 업데이트를 위한 정보를 가지고 있다.</p>
-<ul>
-<li><p>주로 <code>type</code> 값을 지닌 객체 형태로 사용한다.</p>
-<blockquote>
-<p><code> type</code> 의 경우, <strong>대문자</strong> 를 사용하거나 <code>_</code> 로 시작하는 관습이 있다.</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>state</code> : 컴포넌트에서 사용할 수 있는 상태</p>
-</li>
-<li><p><code>dispatch</code> : <code>action</code> 을 (인자로 받아) 발생시키는 함수</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dispatch(&#123; <span class="attr">type</span>: <span class="string">&#x27;INCREMENT&#x27;</span> &#125;)</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> initialState = &#123;<span class="attr">count</span>: <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reducer</span>(<span class="params">state, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;increment&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="attr">count</span>: state.count + <span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;decrement&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="attr">count</span>: state.count - <span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Counter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [state, dispatch] = useReducer(reducer, initialState);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      Count: &#123;state.count&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// dispatch의 인자로 action (type) 전달</span></span><br><span class="line">      &lt;button onClick=&#123;<span class="function">() =&gt;</span> dispatch(&#123;<span class="attr">type</span>: <span class="string">&#x27;decrement&#x27;</span>&#125;)&#125;&gt;-&lt;/button&gt;</span><br><span class="line">      &lt;button onClick=&#123;<span class="function">() =&gt;</span> dispatch(&#123;<span class="attr">type</span>: <span class="string">&#x27;increment&#x27;</span>&#125;)&#125;&gt;+&lt;/button&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-<blockquote>
-<p>Note</p>
-<p>리액트는 리렌더링이 되더라도 dispatch 함수의 identity 는 동일하게 유지하기 때문에, useEffect 나 useCallback 의 dependency list에 포함하지 않는다.</p>
-</blockquote>
-<br />
-
-
-
-<h5 id="Specifying-the-Initial-State"><a href="#Specifying-the-Initial-State" class="headerlink" title="Specifying the Initial State"></a>Specifying the Initial State</h5><blockquote>
-<p>초기 state의 구체화</p>
-</blockquote>
-<br />
-
-
-
-<p>useReducer() 의 state를 초기화하는 방법에는 2가지가 있다.</p>
-<ol>
-<li>가장 간단한 방법으로는, initial state를 2번째 인자로 전달하는 방법이 있다.</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, dispatch] = useReducer(</span><br><span class="line">	reducer,</span><br><span class="line">  &#123;<span class="attr">count</span>: initialCount&#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-<h5 id="Lazy-Initialization"><a href="#Lazy-Initialization" class="headerlink" title="Lazy Initialization"></a>Lazy Initialization</h5><blockquote>
-<p> 초기화 지연</p>
-</blockquote>
-<br />
-
-
-
-<ol start="2">
-<li>initial state를 lazily 생성하는 방법으로, init 함수를 3번째 인자로 전달하여 initial state를 init(initialArg) 로 설정할 수 있다.<ul>
-<li>initial state 를 계산하는 로직을 reducer 밖에 정의하여 action 에 따른 state 재설정 시 유용하게 사용할 수 있다.</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// initialization 함수를 외부에 정의</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">initialCount</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;<span class="attr">count</span>: initialCount&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reducer</span>(<span class="params">state, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;increment&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="attr">count</span>: state.count + <span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;decrement&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="attr">count</span>: state.count - <span class="number">1</span>&#125;;</span><br><span class="line">      </span><br><span class="line">    <span class="comment">// 재설정 시 init 함수 호출</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;reset&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> init(action.payload);</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Counter</span>(<span class="params">&#123;initialCount&#125;</span>) </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 3개의 인자 전달 (reducer, initial_value, initialization_function)</span></span><br><span class="line">  <span class="keyword">const</span> [state, dispatch] = useReducer(reducer, initialCount, init);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      Count: &#123;state.count&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 재설정 시 action 객체에 &#123;type, payload&#125; 전달</span></span><br><span class="line">      &lt;button</span><br><span class="line">        onClick=&#123;<span class="function">() =&gt;</span> dispatch(&#123;<span class="attr">type</span>: <span class="string">&#x27;reset&#x27;</span>, <span class="attr">payload</span>: initialCount&#125;)&#125;&gt;</span><br><span class="line">        Reset</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">      &lt;button onClick=&#123;<span class="function">() =&gt;</span> dispatch(&#123;<span class="attr">type</span>: <span class="string">&#x27;decrement&#x27;</span>&#125;)&#125;&gt;-&lt;/button&gt;</span><br><span class="line">      &lt;button onClick=&#123;<span class="function">() =&gt;</span> dispatch(&#123;<span class="attr">type</span>: <span class="string">&#x27;increment&#x27;</span>&#125;)&#125;&gt;+&lt;/button&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>payload</code></p>
-<p>전송되는 데이터</p>
-</blockquote>
-<br />
-
-
-
-<h5 id="Bailing-Out-of-a-Dispatch"><a href="#Bailing-Out-of-a-Dispatch" class="headerlink" title="Bailing Out of a Dispatch"></a>Bailing Out of a Dispatch</h5><blockquote>
-<p> dispatch의 회피</p>
-</blockquote>
-<br />
-
-
-
-<p>앞서 <code>useState()</code> 에서 설명한 것과 같이, Reducer Hook ( <code>useReducer()</code> ) 이 현재 state과 동일한 값을 반환할 경우, 자식을 렌더링하거나 effect를 실행하지 않고 처리 (i.e. 렌더링, 이벤트) 를 종료한다.</p>
-<blockquote>
-<p><strong><code>Object.is()</code> comparison 알고리즘</strong>을 이용</p>
-</blockquote>
-<p>처리를 종료하기 전에 해당 컴포넌트를 다시 렌더링해야 하는 경우가 존재하지만, 그 이상으로 깊게 트리를 탐색하지 않으므로 문제가 되지는 않는다. 만약 렌더링에 <em>비싼 계산 과정</em> 이 포함된다면, <code>useMemo()</code> 를 사용할 수 있다.</p>
-<br />
-
-
-
-<h4 id="useCallback"><a href="#useCallback" class="headerlink" title="useCallback"></a>useCallback</h4><p>memoized callback 을 반환한다.</p>
-<br />
-
-
-
-<blockquote>
-<p><strong><code>memoization</code></strong></p>
-<ol>
-<li><p>비싼 함수의 호출 결과를 저장하고 같은 input이 발생할 경우 저장된 (캐시) 값을 반환하여 프로그램의 수행 속도를 증가시키는 최적화 (optimization) 기술</p>
-</li>
-<li><p>(some sort of) 캐시를 이용하여 (비싼) 함수를 부르는 횟수를 제한하는 것</p>
-<ul>
-<li>특정 input에 대한 캐시값이 없다면, original 함수가 한번 호출되어 (캐시) map에 결과값이 추가된다.</li>
-<li>캐시를 지우지 않는 한 결과는 캐시 map에서 반환된다.</li>
-</ul>
-</li>
-</ol>
-<br />
-
-
-
-<p>👉 <strong><code>useCallback</code> hook 은 다른 기능을 한다.</strong></p>
-</blockquote>
-<p>🌈 <strong><a target="_blank" rel="noopener" href="https://coder.earth/post/usecallback">REFERENCE</a>를 꼭 읽어보세염 (:-&gt;</strong></p>
-<p><code>useCallback()</code> 을 이용하는 이유는, callback 함수인 <code>cb</code>의 <strong>memoized 버전</strong>을 받기 위해서이다.</p>
-<p>컴포넌트가 처음으로 렌더링될 때, 새로운 <code>cb</code> 가 생성되고 똑같은 <code>cb</code> 함수가 <code>useCallback()</code> 에 의해 반환된다.</p>
-<img src="https://coder.earth/static/usecallback_1-aa6572c6cb98757914009ef9063d2204-04c70.png" align="center" />
-
-<br />
-
-
-
-<p>위 예시에서 <code>memoizedCb()</code> 가 호출되면, original <code>cb</code> 콜백함수가 호출되어 결과적으로 original <code>cb 함수</code>를 호출한다.</p>
-<p>컴포넌트가 리렌더링 (2번째) 되면, 새로운 <code>cb</code> 가 생성된다. 하지만 <code>useCallback()</code> 에 전달된 dependency가 변하지 않았기 때문에, 생성된 <code>cb</code>는 버려지고 <code>memoizedCb</code>는 첫번째 렌더링 때 생성된 <code>cb</code>를 유지한다. 결국 이 때의 <code>memoizedCb</code> 호출은 이전과 같이 기존의 (old) <code>cb</code> 를 호출하여 original <code>cb 함수</code>를 호출하게 된다.</p>
-<p>dependency가 변하지 않는 이상, 모든 렌더링은 위와 같은 과정을 반복하여 사용하지 않는 콜백함수를 생성하고 기존의, memoized 콜백을 호출하여 결국 original <code>cb 함수</code>를 호출한다.</p>
-<img src="https://coder.earth/static/usecallback_5-0aacccaf0b04a87b0fa2cf7eab59baaf-04c70.png" align="center" />
-
-<br />
-
-
-
-<p>dependency 가 변한 경우, <code>memoizedCb</code> 도 변한다.</p>
-<p>이전의 <code>memoizedCb</code> 가 첫번째 <code>cb</code>를 호출하는 과정과 비슷하게, 이 때의 <code>memoizedCb</code> 또한 dependency 가 변한 시점부터 첫번째 <code>cb</code> 를 호출한다.</p>
-<img src="https://coder.earth/static/usecallback_7-bd85d59569c0dc834c931abc121027b8-04c70.png" align="center" />
-
-<br />
-
-
-
-<blockquote>
-<p><strong><code>callback</code></strong></p>
-<p>특정 함수 (콜백함수) 를 다른 함수에 전달하고 이를 호출하는 특정 이벤트 (e.g. a query finished or an error occurs) 가 발생하면 콜백함수를 발생시키는 것</p>
-<ul>
-<li>여러 조각의 코드의 소통을 정의하여, 콜백함수를 호출하는 모듈이 결과를 사용하는 것이 아니라 이벤트가 발생했을 때 호출을 받는 함수에 콜백함수를 전달한다.</li>
-<li>여기서 중요한 점은, one piece of code가 콜백함수를 호출하면 다른 (조각의) 코드가 이 호출을 받는다는 것이다. 여기서 어떠한 호출 코드도 잃으면 (생략되면) 안 되기 때문에, 콜백함수를 memoizing하여 모듈 간 소통 line을 끊는 방법이 탄생한 것이다.</li>
-</ul>
-</blockquote>
-<p>결과적으로 <code>useCallback()</code> 이 하는 것은 똑같은 callback 의 횟수를 제한하는 것이다. 결과값들은 캐시에서 반환되지 않고, dependency 가 변한 시점으로부터 첫번째의 <code>cb</code> 와 같은 <code>memoizedCb</code> 를 반환한다.</p>
-<br />
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> memoizedCallback = useCallback(</span><br><span class="line">  () =&gt; &#123;</span><br><span class="line">    doSomething(a, b);</span><br><span class="line">  &#125;,</span><br><span class="line">  [a, b],</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>useCallback()</code> : inline callback 함수와 dependencies 배열을 전달<ul>
-<li><strong>memoized version of the callback</strong>을 반환하며, dependencies가 변했을 때만 memoized version 도 변경된다.</li>
-<li><code>useCallback(fn, deps)</code> === <code>useMemo(() =&gt; fn, deps)</code></li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<p>불필요한 렌더링을 방지하기 위해 reference의 동일성에 의존하는 (동일성에만 영향을 받는) (최적화된) 자식 컴포넌트에 콜백함수를 전달할 때 유용하다.</p>
-<blockquote>
-<p>앞선 <code>useEffect</code>와 마찬가지로, dependencies 배열은 콜백함수에 인자로 전달되지 않는다.</p>
-<p>하지만 정의 자체가, <em>“콜백함수에서 참조하는 모든 값들은 dependencies 배열에 포함되어야 한다”</em> 이다.</p>
-</blockquote>
-<br />
-
-
-
-<h4 id="useMemo"><a href="#useMemo" class="headerlink" title="useMemo"></a>useMemo</h4><p>memoized 값을 반환한다.</p>
-<blockquote>
-<p><code>useMemo</code> vs. <code>useCallback</code></p>
-<p><code>useCallback()</code> : 함수 반환</p>
-<p><code>useMemo()</code> : 값 반환</p>
-</blockquote>
-<br />
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> memoizedValue = useMemo(<span class="function">() =&gt;</span> computeExpensiveValue(a, b), [a, b]);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>useMemo()</code> : <code>create 함수</code>와 <code>dependencies 배열</code> 을 전달<ul>
-<li>dependency 가 변할 때에만 memoized 값을 다시 계산한다. 이를 통해 비싼 계산 과정이 매 렌더링마다 발생하는 것을 방지한다.</li>
-<li>2번째 인자 (<code>dependencies 배열</code> 로서) 에 빈 배열 ( <code>[]</code> ) 이 전달되면, 매 렌더링 마다 새로운 값이 계산된다.</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<p><code>useMemo()</code> 에 전달된 <code>create 함수</code> 는 <em><strong>렌더링 동안</strong></em> 실행된다.</p>
-<blockquote>
-<p>보통 side effect는 <code>useMemo</code> 가 아니라 <strong><code>useEffect</code> 에서 발생</strong>한다. 따라서 렌더링 동안은 다른 행동을 하지 않아야 한다. (당연함 -.-)</p>
-</blockquote>
-<br />
-
-
-
-<blockquote>
-<p>❗️<code>useMemo()</code> 는 성능 최적화에만 사용하고, 큰 의미적 기능 (semantic guarantee) 을 담지 않아야 한다. 따라서 <code>useMemo()</code> 를 사용하지 않고도 동작할 수 있도록 코드를 작성하고, 성능 최적화를 위해 <code>useMemo()</code> 를 추가하도록 한다.</p>
-</blockquote>
-<blockquote>
-<p>앞선 <code>useEffect</code>, <code>useCallback</code> 과 마찬가지로, <code>depedencies 배열</code> 은 콜백함수에 인자로 전달되지 않는다.</p>
-</blockquote>
-<br />
-
-
-
-<h4 id="useRef"><a href="#useRef" class="headerlink" title="useRef"></a>useRef</h4><p>JavaScript를 이용해 특정 <strong>DOM 을 선택</strong>해야 하는 경우 <code>getElementById</code>, <code>querySelector</code> 와 같은 <em>DOM Selector 함수</em> 를 사용한다.</p>
-<p>리액트를 사용할 때도 특정 DOM 을 선택해야 하는 상황이 발생하는데, 이 때 <code>ref</code> 를 사용한다.</p>
-<ul>
-<li><strong>함수형 컴포넌트</strong>에서 <code>ref</code> 를 사용 할 때에는 <code>useRef</code> 라는 <em>Hook 함수</em> 를 사용한다.</li>
-<li><strong>클래스형 컴포넌트</strong>에서는 <em>콜백 함수</em>를 사용하거나 <code>React.createRef</code> 라는 함수를 사용한다.</li>
-</ul>
-<br />
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> refContainer = useRef(initialValue);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>useRef()</code> : <em>(생성된 ref 객체의)</em> <code>.current</code> 프로퍼티 (속성) 가 전달된 인자 (e.g. <code>initialValue</code>) 로 초기화된, <strong>변경 가능한 ref 객체</strong>를 반환한다.<ul>
-<li>변경가능한 값을 넣을 수 있는 <code>.current 프로퍼티</code>를 갖고 있는 <u>“박스”</u> 와 같다.</li>
-<li>해당 객체는 컴포넌트의 <em>full lifetime</em> 동안 지속된다.</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<p><code>useRef()</code> 는 <strong>DOM에 접근</strong>하는 방법으로 많이 사용된다.</p>
-<p><code>useRef()</code> 를 사용하여</p>
-<ol>
-<li><strong>Ref 객체</strong>를 만들고,</li>
-<li>이 객체를 우리가 <strong>선택하고 싶은 DOM (노드) 에 <code>ref</code> 값으로</strong> 설정한다.</li>
-<li>그러면, <strong>Ref 객체의 <code>.current</code> 값은 우리가 원하는 DOM 을 가르키</strong>게 된다.</li>
-</ol>
-<br />
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div ref=&#123;refContainer&#125; /&gt;</span><br></pre></td></tr></table></figure>
-<p><code>refContainer</code> 의 <code>.current</code> 프로퍼티를 해당 ref 객체  ( <code>refContainer</code> ) 를 ref 로 설정한 DOM 노드로 설정하고, 노드가 변경될 때마다 그에 맞게 <code>.current</code> 프로퍼티를 조정한다.</p>
-<blockquote>
-<p>하지만 <code>useRef()</code> 는 <code>.current</code> 에 변경 사항이 존재하더라도 <strong>리렌더링 하지 않</strong>기 때문에, 이에 대해 <strong>notify 하지 않는다</strong>. 만약 리액트가 DOM 노드에 ref 객체를 연결하거나 제거할 때 notify 하고 싶다면, <code>callback ref</code> 를 이용해야 한다.</p>
-</blockquote>
-<br />
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TextInput_With_FocusButton</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// inputEl : ref 객체 (null로 초기화됨)</span></span><br><span class="line">  <span class="keyword">const</span> inputEl = useRef(<span class="literal">null</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// button을 클릭하면 inputEl.current 인 input node에 focus() 를 적용한다.</span></span><br><span class="line">  <span class="keyword">const</span> onButtonClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// `current` points to the mounted text input element</span></span><br><span class="line">    inputEl.current.focus();</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">    	<span class="comment">// inputEl ref 객체를 ref로 설정하여 inputEl.current 프로퍼티를 input node 로 설정한다.</span></span><br><span class="line">      &lt;input ref=&#123;inputEl&#125; type=<span class="string">&quot;text&quot;</span> /&gt;</span><br><span class="line">    </span><br><span class="line">    	<span class="comment">// onClick 시 onButtonClick 함수를 실행하고 // 👉 goto onButtonClick comment</span></span><br><span class="line">      &lt;button onClick=&#123;onButtonClick&#125;&gt;Focus the input&lt;/button&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong><code>HTMLElement.focus()</code></strong></p>
-<p>특정 element 에 <em>(focus를 맞출 수 있을 때)</em> focus를 맞추는 함수로, 해당 element는 키보드 등의 이벤트를 받는 default element로 정의된다.</p>
-</blockquote>
-<br />
-
-
-
-<hr>
-<br />
-
-
-
-<p><code>useRef()</code> 는 ref 속성 외에도, 클래스가 instance field (인스턴스 변수) 를 가지고 있는 것처럼 ref 객체에 변경 가능한 어떠한 값도 담을 수 있다는 장점이 있다.</p>
-<p>이는 <code>useRef()</code> 가 <em>plain JavaScript 객체</em> 를 생성하기 때문인데, 직접 <code>&#123;current: ...&#125;</code> 로 객체를 생성하는 것과 유일한 차이점은 <code>useRef()</code> 는 매 렌더링마다 <strong>똑같은 ref 객체를 제공 (반환) 한다</strong>는 것이다.</p>
-<blockquote>
-<p><strong><code>class field (클래스 변수)</code> vs. <code>instance field (인스턴스 변수)</code></strong></p>
-<ul>
-<li>클래스 변수 : 여러 인스턴스 (서로 다른 객체) 간에 <strong>공유해야 하는 값</strong>을 바인딩</li>
-<li>인스턴스 변수 : 각 인스턴스 (객체) 마다 가지고 있는 고유한 값</li>
-</ul>
-<p>파이썬은 인스턴스를 통해 접근한 이름 (변수) 이 인스턴스의 name_space (name들을 정의한 공간) 에 없을 경우, 그 다음으로 클래스의 name_space에서 찾아본다.</p>
-<p>참고로 클래스 변수에 접근할 때에는 클래스 이름을 사용하여 바로 변수 (값) 에 접근할 수 있다.</p>
-</blockquote>
-<br />
-
-
-
-<h4 id="useImperativeHandle"><a href="#useImperativeHandle" class="headerlink" title="useImperativeHandle"></a>useImperativeHandle</h4><blockquote>
-<p>❗️ref를 사용하는 <em>imperative code</em> 는 되도록이면 피하는 것이 좋다. <strong>):-&lt;</strong></p>
-</blockquote>
-<p>ref를 사용할 때 부모 컴포넌트에 노출되는 <em>인스턴스 값 (변수) 을 커스터마이징</em> 한다.</p>
-<p>즉, forwarding된 ref를 replace할 수 있는 기능을 제공한다.</p>
-<br />
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useImperativeHandle(ref, createHandle, [deps])</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>useImperativeHandle() : <code>ref</code>, <code>콜백함수 (createHandle)</code>, <code>dependnecies 배열</code> 을 전달</p>
-<ul>
-<li><code>createHandle()</code> : 현재 컴포넌트의 값을 부모 컴포넌트가 접근할 수 있도록 하는 콜백함수</li>
-</ul>
-</li>
-<li><p><code>forwardRef()</code> 와 함께 사용되어야 한다.</p>
-<blockquote>
-<p><code>forwardRef()</code> </p>
-<p>(말 그대로) reference를 전달해주는 기능을 하는 함수</p>
-</blockquote>
-</li>
-</ul>
-<br />
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FancyInput</span>(<span class="params">props, ref</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> inputRef = useRef();</span><br><span class="line">  useImperativeHandle(ref, <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    focus: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      inputRef.current.focus();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;));</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">&#123;inputRef&#125;</span> <span class="attr">...</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line">FancyInput = forwardRef(FancyInput);</span><br></pre></td></tr></table></figure>
-<p><code>&lt;FancyInput ref=&#123;inputRef&#125; /&gt;</code> 를 수행 (렌더링) 하는 부모 컴포넌트는 <code>inputRef.current.focus()</code> 를 호출할 수 있다.</p>
-<br />
-
-
-
-<h4 id="useLayoutEffect"><a href="#useLayoutEffect" class="headerlink" title="useLayoutEffect"></a>useLayoutEffect</h4><p><code>useEffect</code> 와 동일한 기능을 DOM 변경 시 동시에 (synchronously) 실행하는 함수로, DOM 에서 레이아웃을 읽음과 동시에 리렌더링을 해야할 때 사용한다.</p>
-<p><code>useLayoutEffect</code> 내부에 정의된 예정된 업데이트 또한 브라우저가 레이아웃을 그리기 이전에, 읽음과 동시에 발생한다.</p>
-<blockquote>
-<p>화면 업데이트를 차단하지 않아도 되는 경우에는 <code>useEffect</code> 를 사용하는 것이 좋다.</p>
-</blockquote>
-<br />
-
-
-
-<blockquote>
-<p> 클래스 컴포넌트에서 코드를 옮길 때 <code>useLayoutEffect()</code> 는 <code>componentDidMount</code> 나 <code>componentDidUpdate</code> 와 같은 단계에서 발생한다. 하지만, 먼저 <code>useEffect</code> 를 시도해보고 에러가 발생할 때 <code>useLayoutEffect</code> 를 사용하는 것이 좋다.</p>
-</blockquote>
-<blockquote>
-<p><strong>SSR (서버 사이드 렌더링)</strong> 의 경우, <code>useLayoutEffect</code> 나 <code>useEffect</code> 는 JavaScript 가 모두 다운되기 전까지는 실행되지 않는다. SSR 컴포넌트가 <code>useLayoutEffect</code> 를 포함한 경우,</p>
-<ul>
-<li>첫 렌더링 시 해당 컴포넌트가 필요하지 않다면 <code>useEffect</code> 로 로직을 옮기고,</li>
-<li><code>useLayoutEffect</code> 가 실행되기 전까지 HTML이 망가져 보인다면 클라이언트 렌더링이 완료될 때까지 해당 컴포넌트를 보여주는 것을 딜레이시킨다.</li>
-</ul>
-<p>서버 렌더링 HTML에서 레이아웃 effect를 필요로 하는 컴포넌트를 제외하기 위해서, </p>
-<ul>
-<li><code>showCild &amp;&amp; &lt;Child /&gt;</code> 를 이용하여 해당 컴포넌트를 조건적으로 렌더링을 하고, </li>
-<li><code>useEffect(() =&gt; &#123; setShowChild(true); &#125;, [])</code> 를 이용하여 보이는 것을 미룬다 (defer).</li>
-</ul>
-<p>이를 통해 HTML이 hydration (<code>useLayoutEffect</code>, <code>useEffect</code> 실행) 이전에 망가져 보이는 것을 방지한다.</p>
-</blockquote>
-<br />
-
-
-
-<h4 id="useDebugValue"><a href="#useDebugValue" class="headerlink" title="useDebugValue"></a>useDebugValue</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useDebugValue(value)</span><br></pre></td></tr></table></figure>
-<p>React DevTools 에서 커스텀 Hooks의 <code>label (value)</code> 을 보여준다.</p>
-<br />
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useFriendStatus</span>(<span class="params">friendID</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [isOnline, setIsOnline] = useState(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Show a label in DevTools next to this Hook</span></span><br><span class="line">  <span class="comment">// e.g. &quot;FriendStatus: Online&quot;</span></span><br><span class="line">  useDebugValue(isOnline ? <span class="string">&#x27;Online&#x27;</span> : <span class="string">&#x27;Offline&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> isOnline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-<blockquote>
-<p>모든 커스텀 Hook에 debug value를 추가하는 것은 좋지 않다.</p>
-<p><strong>shared libraries에 속하는 커스텀 Hooks</strong>에 유용하게 사용될 수 있다.</p>
-</blockquote>
-<br />
-
-
-
-<h5 id="Defer-Formatting-Debug-Values"><a href="#Defer-Formatting-Debug-Values" class="headerlink" title="Defer Formatting Debug Values"></a>Defer Formatting Debug Values</h5><blockquote>
-<p> 디버그 값 포맷팅 지연하기</p>
-</blockquote>
-<br />
-
-
-
-<p>디스플레이 (되는) 값을 포매팅하는 것은 고비용 연산일 수 있고, <em>Hook이 감지되지 않은 경우 사실상 포매팅은 불필요하다</em>. 따라서, <code>useDebugValue</code> 의 (optional한) 2번째 인자로 <code>포매팅 함수</code> 를 전달하여 <strong>Hook이 감지되었을 때만 해당 함수를 호출</strong>하여 포매팅할 수 있다.</p>
-<br />
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useDebugValue(value, <span class="function"><span class="params">value</span> =&gt;</span> value.formatting_function());</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>useDebugValue()</code> : <code>value</code> 와 <code>optional formatting 함수</code> 를 전달<ul>
-<li><code>optional formatting function</code> : <code>debug value</code> 를 인자로 전달하고 <code>formatted display value</code> 를 반환한다.</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useDebugValue(date, <span class="function"><span class="params">date</span> =&gt;</span> date.toDateString());</span><br></pre></td></tr></table></figure>
-<p>2번째 인자로 <code>fomatting function</code> 을 전달하여 Date value 를 반환하는 커스텀 Hook이 <code>toDateString()</code> 을 <strong>불필요하게 호출하는 것을 방지</strong>한다.</p>
-<br />
-
-
-
-<hr>
-<br />
-
-
-
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://ko.reactjs.org/docs/hooks-reference.html">https://ko.reactjs.org/docs/hooks-reference.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://reactjs.org/docs/hooks-reference.html">https://reactjs.org/docs/hooks-reference.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2764,7 +2355,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
