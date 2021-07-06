@@ -163,6 +163,141 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/08/SOAP-Classes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/08/SOAP-Classes/" class="post-title-link" itemprop="url">Classes</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-05-07 23:02:39 / Modified: 15:53:08" itemprop="dateCreated datePublished" datetime="2021-05-07T23:02:39+01:00">2021-05-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/SOAP/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Classes"><a href="#Classes" class="headerlink" title="Classes"></a>Classes</h2><ol>
+<li><p>ES5의 함수보다 <strong>ES6(i.e. ES2015)의 클래스</strong>를 사용하기</p>
+<ul>
+<li>상속이 필요한 경우에는 ES6 클래스를 사용하는 것이 좋음</li>
+<li>하지만 크고 복잡한 객체가 필요하지 않은 경우, 작은 함수를 쓰는 것이 낫다.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Animal = <span class="function"><span class="keyword">function</span>(<span class="params">age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!(<span class="built_in">this</span> <span class="keyword">instanceof</span> Animal)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Instantiate Animal with `new`&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수 설정</span></span><br><span class="line">Animal.prototype.move = <span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">move</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">///////////////</span></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Mammal = <span class="function"><span class="keyword">function</span>(<span class="params">age, furColor</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!(<span class="built_in">this</span> <span class="keyword">instanceof</span> Mammal)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Instantiate Mammal with `new`&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// call 함수를 이용해 age 전달</span></span><br><span class="line">  Animal.call(<span class="built_in">this</span>, age);</span><br><span class="line">  <span class="built_in">this</span>.furColor = furColor;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Mammal.prototype = <span class="built_in">Object</span>.create(Animal.prototype);</span><br><span class="line">Mammal.prototype.constructor = Mammal;</span><br><span class="line"><span class="comment">// 함수 정의</span></span><br><span class="line">Mammal.prototype.liveBirth = <span class="function"><span class="keyword">function</span> <span class="title">liveBirth</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mammal</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">age, furColor</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// super() 을 이용해 상속</span></span><br><span class="line">    <span class="built_in">super</span>(age);</span><br><span class="line">    <span class="built_in">this</span>.furColor = furColor;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">liveBirth</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////</span></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Human = <span class="function"><span class="keyword">function</span>(<span class="params">age, furColor, languageSpoken</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!(<span class="built_in">this</span> <span class="keyword">instanceof</span> Human)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Instantiate Human with `new`&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Mammal.call(<span class="built_in">this</span>, age, furColor);</span><br><span class="line">  <span class="built_in">this</span>.languageSpoken = languageSpoken;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Human.prototype = <span class="built_in">Object</span>.create(Mammal.prototype);</span><br><span class="line">Human.prototype.constructor = Human;</span><br><span class="line">Human.prototype.speak = <span class="function"><span class="keyword">function</span> <span class="title">speak</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Human</span> <span class="keyword">extends</span> <span class="title">Mammal</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">age, furColor, languageSpoken</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(age, furColor);</span><br><span class="line">    <span class="built_in">this</span>.languageSpoken = languageSpoken;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">speak</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p><strong>Method Chaining</strong> 사용하기</p>
+<blockquote>
+<p><em><strong>Method Chaining</strong> 이란?</em></p>
+<p><em>Named Parameter Idiom</em>으로, OOP에서 <strong>여러 메소드를 이어서 호출</strong>하는 문법이다.</p>
+<p>각각의 메소드는 <strong>객체 ( <code>this</code> ) 를 반환</strong>하며, 여러 메소드를 <strong>순차적으로 선언</strong>할 수 있다. 이를 통해 중간 결과값을 따로 변수에 저장하지 않아도 <strong>하나의 문장 만으로 메소드를 이어서 호출</strong>할 수 있다. 따라서 장기적으로는 유지, 보수에 도움이 된다.</p>
+</blockquote>
+<blockquote>
+<p><em><strong>Named Parameter Idiom</strong>이란?</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File f = OpenFile(<span class="string">&quot;foo.txt&quot;</span>, <span class="literal">true</span>, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>File 객체에 대한 설정을 생성자의 인자로써 넘기면 인자의 개수도 많아지고, 헷갈리기 쉽다. 이 때 Named Parameter Idiom 을 사용하면,</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File f = OpenFile(<span class="string">&quot;foo.txt&quot;</span>)</span><br><span class="line">           .readonly()</span><br><span class="line">           .appendWhenWriting();</span><br></pre></td></tr></table></figure>
+
+<p>위와 같이 <strong>method chaining</strong>을 사용하여 간결하게 표현할 수 있으며, parameter의 위치를 기억할 필요가 없으므로 실수를 방지할 수 있다.</p>
+</blockquote>
+<ul>
+<li>객체 ( <code>this</code> ) 를 반환하여 연속적 (순차적) 으로 함수를 호출할 수 있음</li>
+</ul>
+<br />
+
+
+
+</li>
+</ol>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">make, model, color</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.make = make;</span><br><span class="line">    <span class="built_in">this</span>.model = model;</span><br><span class="line">    <span class="built_in">this</span>.color = color;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// bad</span></span><br><span class="line">  <span class="function"><span class="title">setMake</span>(<span class="params">make</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.make = make;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">setModel</span>(<span class="params">model</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.model = model;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">setColor</span>(<span class="params">color</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.color = color;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">save</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.make, <span class="built_in">this</span>.model, <span class="built_in">this</span>.color);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// good</span></span><br><span class="line">  <span class="function"><span class="title">setMake</span>(<span class="params">make</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.make = make;</span><br><span class="line">    <span class="comment">// <span class="doctag">NOTE:</span> Returning this for chaining</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">setModel</span>(<span class="params">model</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.model = model;</span><br><span class="line">    <span class="comment">// <span class="doctag">NOTE:</span> Returning this for chaining</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">setColor</span>(<span class="params">color</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.color = color;</span><br><span class="line">    <span class="comment">// <span class="doctag">NOTE:</span> Returning this for chaining</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">save</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.make, <span class="built_in">this</span>.model, <span class="built_in">this</span>.color);</span><br><span class="line">    <span class="comment">// <span class="doctag">NOTE:</span> Returning this for chaining</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> car = <span class="keyword">new</span> Car(<span class="string">&quot;Ford&quot;</span>, <span class="string">&quot;F-150&quot;</span>, <span class="string">&quot;red&quot;</span>);</span><br><span class="line">car.setColor(<span class="string">&quot;pink&quot;</span>);</span><br><span class="line">car.save();</span><br><span class="line"><span class="comment">// const car = new Car(&quot;Ford&quot;, &quot;F-150&quot;, &quot;red&quot;).setColor(&quot;pink&quot;).save();</span></span><br></pre></td></tr></table></figure>
+
+
+<ol start="3">
+<li><p>상속보다는 <strong>조합</strong>을 사용하기</p>
+<ul>
+<li><code>has-a</code> 관계에서는 조합을 사용해야 함</li>
+</ul>
+<blockquote>
+<p>c.f ) 조합보다 <strong>상속</strong>을 이용하면 좋은 경우</p>
+<ul>
+<li>상속 관계가 <code>has-a</code> 가 아닌 <strong><code>is-a</code></strong> 일 때<ul>
+<li>상속; Human → Animal : <code>is-a</code></li>
+<li>조합; User → UserDetails : <code>has-a</code></li>
+</ul>
+</li>
+<li><em>Base Class</em> 의 코드를 <strong>재사용</strong>할 수 있을 때<ul>
+<li><code>Human</code> can move like all <code> animals</code></li>
+</ul>
+</li>
+<li><em>Base Class를 수정</em> 함으로써 이에 따른 클래스들을 <strong>전체적으로 변경</strong>하고 싶을 때<ul>
+<li>Change the caloric expenditure of <code>all animals</code> when they move.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, email</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.email = email;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad because Employees &quot;have&quot; tax data.</span></span><br><span class="line"><span class="comment">// EmployeeTaxData &quot;is not&quot; a type of Employee.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EmployeeTaxData</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">ssn, salary</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>();</span><br><span class="line">    <span class="built_in">this</span>.ssn = ssn;</span><br><span class="line">    <span class="built_in">this</span>.salary = salary;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// extending보다는 다른 클래스로 생성하고</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EmployeeTaxData</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">ssn, salary</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.ssn = ssn;</span><br><span class="line">    <span class="built_in">this</span>.salary = salary;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, email</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.email = email;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Employee 클래스의 메소드를 통해 EmployeeTaxData 객체를 이용하여 this의 taxData 를 설정한다.</span></span><br><span class="line">  <span class="function"><span class="title">setTaxData</span>(<span class="params">ssn, salary</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.taxData = <span class="keyword">new</span> EmployeeTaxData(ssn, salary);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/05/THUREE-Hooks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2995,128 +3130,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/05/SOAP-Variables/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/05/SOAP-Variables/" class="post-title-link" itemprop="url">Variables</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-04 23:01:36" itemprop="dateCreated datePublished" datetime="2021-04-04T23:01:36+01:00">2021-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-10 04:57:11" itemprop="dateModified" datetime="2021-04-10T04:57:11+01:00">2021-04-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SOPT/SOAP/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
-<li><p>변수 이름</p>
-<ol>
-<li><p>의미 있는</p>
-</li>
-<li><p>발음하기 쉬운</p>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> yyyymmdstr = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> currentDate = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>동일한 유형에 동일한 어휘</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">getUserInfo();</span><br><span class="line">getClientData();</span><br><span class="line">getCustomerRecord();</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">getUser();</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>검색 가능한 이름 지정하기</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, <span class="number">86400000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> MILLISECONDS_IN_A_DAY = <span class="number">86400000</span>;</span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, MILLISECONDS_IN_A_DAY);</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>의도를 나타내는</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> address = <span class="string">&#x27;One Infinite Loop, Cupertino 95014&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> cityZipCodeRegex = <span class="regexp">/^[^,\\]+[,\\\s]+(.+?)\s*(\d&#123;5&#125;)?$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">saveCityZipCode(address.match(cityZipCodeRegex)[<span class="number">1</span>], address.match(cityZipCodeRegex)[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> [, city, zipCode] = address.match(cityZipCodeRegex) || [];</span><br><span class="line">saveCityZipCode(city, zipCode);</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>암시적인 것 X, <strong>명시적인 것</strong></li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> locations = [<span class="string">&#x27;서울&#x27;</span>, <span class="string">&#x27;인천&#x27;</span>, <span class="string">&#x27;수원&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">l</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 잠깐, `l`은 또 뭘까요?</span></span><br><span class="line">  dispatch(l);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">location</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  dispatch(location);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<ol start="7">
-<li>필요없는 것 지우기</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  carMake: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  carModel: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  carColor: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.carColor = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  make: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  model: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  color: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.color = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="8">
-<li>short circuiting보다 <strong>default 매개변수 활용하기</strong><ul>
-<li>default 매개변수 : 매개변수가 <code>undefined</code> 일 때 적용됨</li>
-<li>그 외 (‘’, “”, false, null, 0, NaN 등의 <code>falsy</code> 값 포함) 은 적용되지 않음</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> breweryName = name || <span class="string">&#x27;Hipster Brew Co.&#x27;</span>;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name = <span class="string">&#x27;Hipster Brew Co.&#x27;</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -3184,7 +3201,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">81</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
