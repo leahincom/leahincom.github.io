@@ -163,6 +163,176 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/yarn-dependencies/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/29/yarn-dependencies/" class="post-title-link" itemprop="url">yarn dependencies</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-29 01:28:53" itemprop="dateCreated datePublished" datetime="2021-06-29T01:28:53+01:00">2021-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-28 17:30:17" itemprop="dateModified" datetime="2021-06-28T17:30:17+01:00">2021-06-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a><code>dependencies</code></h5><p>These are your normal dependencies, or rather ones that you need when running your code (e.g. React or ImmutableJS).</p>
+<h5 id="devDependencies"><a href="#devDependencies" class="headerlink" title="devDependencies"></a><code>devDependencies</code></h5><p>These are your development dependencies. Dependencies that you need at some point in the development workflow <strong>but not while running your code</strong> (e.g. Babel or Flow).</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/28/boj-10451/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/28/boj-10451/" class="post-title-link" itemprop="url">BOJ 10451</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-28 11:49:13 / Modified: 04:07:02" itemprop="dateCreated datePublished" datetime="2021-06-28T11:49:13+01:00">2021-06-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/DFS-BFS/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>첫째 줄에 테스트 케이스의 개수 T가 주어진다. </p>
+<p>각 테스트 케이스의 첫째 줄에는 순열의 크기 N (2 ≤ N ≤ 1,000)이 주어진다. </p>
+<p>둘째 줄에는 순열이 주어지며, 각 정수는 공백으로 구분되어 있다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">T = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(T):</span><br><span class="line">  N = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">  P = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br><span class="line">  P.insert(<span class="number">0</span>, <span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h4><ul>
+<li><p>각 index에 들어있는 value를 다시 index로 설정해서 <code>visited[index] == False</code> 일 때까지 이를 반복한다.</p>
+</li>
+<li><p>결국 queue가 빌 때까지 이를 반복한다고 생각하면, BFS로 해결할 수 있다.</p>
+</li>
+<li><p>해당 사이클이 모두 <code>visited</code> 라면, 1을 반환하여 <code>count++</code> 한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span>(<span class="params">idx</span>):</span></span><br><span class="line">  queue = [idx]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> queue:</span><br><span class="line">    now = queue.pop(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> visited[now]:</span><br><span class="line">      visited[now] = <span class="literal">True</span></span><br><span class="line">      val = P[now]</span><br><span class="line">      queue.append(val)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+<li><p>이후 다음 사이클로 넘어가야 하는데, 이는 결국 배열의 모든 요소를 돌아 사이클을 확인해봐야 하는 것과 같다. 따라서 <code>visited</code> 를 활용해 이미 방문한 요소 외의 것들의 사이클을 확인한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">visited = [<span class="literal">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N+<span class="number">1</span>)]</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># idx -&gt; val -&gt; idx 계속 따라가기</span></span><br><span class="line"><span class="keyword">for</span> idx <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, N+<span class="number">1</span>):</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> visited[idx]:</span><br><span class="line">    count += bfs(idx)</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="Better-Solution"><a href="#Better-Solution" class="headerlink" title="Better Solution"></a>Better Solution</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 런타임 에러 바로잡기!!! `sys.setrecursionlimit(2000)`</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">2000</span>) <span class="comment">#최대 재귀를 늘려줘야 런타임 에러를 피할 수 있다</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">x</span>):</span> <span class="comment">#DFS 함수 정의</span></span><br><span class="line">    visited[x] = <span class="literal">True</span> <span class="comment">#방문 체크</span></span><br><span class="line">    number = numbers[x] <span class="comment">#다음 방문 장소</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> visited[number]: <span class="comment">#방문하지 않았다면</span></span><br><span class="line">        dfs(number) <span class="comment">#재귀</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 변수 할당 없이 바로 for문 돌리기! (재사용 안 함)</span></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(<span class="built_in">input</span>())):</span><br><span class="line">    N = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># index를 임의로 설정하기 위해서,</span></span><br><span class="line">    <span class="comment"># - 따로 생성한 뒤 append이든</span></span><br><span class="line">    <span class="comment"># - 초기화 후 insert 하지 않고!</span></span><br><span class="line">    <span class="comment">### `[0] +` 로 생성할 때 바로 임의로 초기화 값 전달!</span></span><br><span class="line">    numbers = [<span class="number">0</span>] + <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># for 문 대신, 동일한 값으로 초기화 시 `*` 사용하기!</span></span><br><span class="line">    visited = [<span class="literal">True</span>] + [<span class="literal">False</span>] * N <span class="comment">#방문여부확인용</span></span><br><span class="line">    result = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, N+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> visited[i]: <span class="comment">#방문하지 않았다면</span></span><br><span class="line">          	<span class="comment"># dfs의 역할:</span></span><br><span class="line">            <span class="comment"># 1. visited 체크</span></span><br><span class="line">            <span class="comment"># 2. 재귀호출로 사이클 체크 (visited)</span></span><br><span class="line">            dfs(i) <span class="comment">#DFS실행</span></span><br><span class="line">            result += <span class="number">1</span> <span class="comment">#결과값 += 1</span></span><br><span class="line">    print(result)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>각 테스트 케이스마다, 입력으로 주어진 순열에 존재하는 순열 사이클의 개수를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(count)  </span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/28/boj-2178/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1154,158 +1324,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/19/python-dict/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/19/python-dict/" class="post-title-link" itemprop="url">딕셔너리와 리스트</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-19 13:48:27 / Modified: 05:52:50" itemprop="dateCreated datePublished" datetime="2021-06-19T13:48:27+01:00">2021-06-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">makeDictionary</span>(<span class="params">array</span>):</span></span><br><span class="line">    dictionary = <span class="built_in">dict</span>()</span><br><span class="line">    <span class="keyword">for</span> idx, val <span class="keyword">in</span> <span class="built_in">enumerate</span>(array):</span><br><span class="line">        <span class="keyword">if</span> idx <span class="keyword">not</span> <span class="keyword">in</span> dictionary:</span><br><span class="line">            dictionary[idx] = [val]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dictionray[idx].append(val)</span><br><span class="line">    <span class="keyword">return</span> dictionary</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/19/python-list/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/19/python-list/" class="post-title-link" itemprop="url">리스트 생성, 정렬, 삽입</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-19 13:44:04 / Modified: 05:48:03" itemprop="dateCreated datePublished" datetime="2021-06-19T13:44:04+01:00">2021-06-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="string-to-char-array"><a href="#string-to-char-array" class="headerlink" title="string to char array"></a>string to char array</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&quot;mystring&quot;</span></span><br><span class="line">l = <span class="built_in">list</span>(s)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">l = [c <span class="keyword">for</span> c <span class="keyword">in</span> <span class="string">&quot;foobar&quot;</span>]</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="정렬"><a href="#정렬" class="headerlink" title="정렬"></a>정렬</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">l.sort() <span class="comment"># ascending</span></span><br><span class="line">l.sort(reverse=<span class="literal">True</span>) <span class="comment"># reverse, descending</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="삽입"><a href="#삽입" class="headerlink" title="삽입"></a>삽입</h3><p><code>array.insert(index, value)</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var=<span class="number">7</span></span><br><span class="line">array = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">array.insert(<span class="number">0</span>, var)</span><br><span class="line">print(array) <span class="comment"># [7, 1, 2, 3, 4, 5, 6]</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1377,7 +1395,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
