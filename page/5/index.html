@@ -163,6 +163,165 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/15/SOAP-Error-Handling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/15/SOAP-Error-Handling/" class="post-title-link" itemprop="url">Error Handling</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-14 23:28:32" itemprop="dateCreated datePublished" datetime="2021-05-14T23:28:32+01:00">2021-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-16 11:10:52" itemprop="dateModified" datetime="2021-05-16T11:10:52+01:00">2021-05-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOPT/SOAP/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h2><br />
+
+
+
+<p><strong>에러가 런타임에서 성공적으로 확인된 경우,</strong></p>
+<ol>
+<li>현재 스택에서 함수 실행을 중단하고</li>
+<li>프로세스 노드에서 프로세스를 종료하고</li>
+<li>스택을 추적해 콘솔에서 사용자에게 에러에 대한 설명을 제공한다.</li>
+</ol>
+<br />
+
+
+
+<ol>
+<li><p>단순히 에러를 확인만 하지 말고, <em><strong>Handling</strong></em> 하자!</p>
+<ul>
+<li><code>console.log</code> 를 사용하면 에러 로그와 헷갈리기 쉽기 때문에 자제하고,</li>
+<li><code>try - catch</code> 문으로 감쌌다면 에러를 예상한 것이므로, 해당 에러에 대한 해결 방안을 마련해 놓아야 한다.</li>
+</ul>
+<p>👇</p>
+<ul>
+<li><p><code>console.error</code> 또는 <code>console.exception</code> 활용하기</p>
+<blockquote>
+<p><img src="https://t1.daumcdn.net/cfile/tistory/990C24345B5FFD3A2E" alt="error"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.debug(<span class="string">&#x27;디버그 메세지&#x27;</span>); </span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">&#x27;정보 메세지&#x27;</span>); </span><br><span class="line"><span class="built_in">console</span>.warn(<span class="string">&#x27;경고 메세지&#x27;</span>); </span><br><span class="line"><span class="built_in">console</span>.error(<span class="string">&#x27;에러 입니다.&#x27;</span>);</span><br></pre></td></tr></table></figure></blockquote>
+</li>
+<li><p>유저에게 error를 알리기</p>
+</li>
+<li><p>서비스 자체에 error를 기록하기</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  functionThatMightThrow();</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="comment">// just logging out</span></span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// error &quot;handling&quot;</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  functionThatMightThrow();</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="comment">// 1. console.error</span></span><br><span class="line">  <span class="comment">// === console.exception</span></span><br><span class="line">  <span class="built_in">console</span>.error(error);</span><br><span class="line">  <span class="comment">// 2. 유저에게 알리기</span></span><br><span class="line">  notifyUserOfError(error);</span><br><span class="line">  <span class="comment">// 3. 서비스 자체에 에러 기록하기</span></span><br><span class="line">  reportErrorToService(error);</span><br><span class="line">  <span class="comment">// ... etc</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>Promise</code> 가 반환한 <code>rejected</code> 를 넘기지 말고, <em><strong>Handling</strong></em> 하자!</p>
+<blockquote>
+<p>Handling 방법은 위와 동일하게, 각 에러에 맞게 정의한다.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">getdata()</span><br><span class="line">.then(data &#x3D;&gt; &#123;</span><br><span class="line">  functionThatMightThrow(data);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(error &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F; just logging out...</span><br><span class="line">  console.log(error);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">getdata()</span><br><span class="line">.then(data &#x3D;&gt; &#123;</span><br><span class="line">  functionThatMightThrow(data);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(error &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F; 1.</span><br><span class="line">  console.error(error);</span><br><span class="line">  &#x2F;&#x2F; 2.</span><br><span class="line">  notifyUserOfError(error);</span><br><span class="line">  &#x2F;&#x2F; 3.</span><br><span class="line">  reportErrorToService(error);</span><br><span class="line">  &#x2F;&#x2F; ...etc</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<br />
+
+
+
+<h3 id="기본적인-Handling-방법"><a href="#기본적인-Handling-방법" class="headerlink" title="기본적인 Handling 방법"></a>기본적인 Handling 방법</h3><blockquote>
+<p>JAVA 기준</p>
+</blockquote>
+<br />
+
+
+
+<ul>
+<li><p>오류 코드보다 <code>예외</code> 를 사용할 것</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendShutDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    tryToShutDown();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (DeviceShutDownError e) &#123;</span><br><span class="line">    logger.log(e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">tryToShutDown</span><span class="params">()</span> <span class="keyword">throws</span> DeviceShutDownError </span>&#123;</span><br><span class="line">  DeviceHandle handle = getHandle(DEV1);</span><br><span class="line">  DeviceRecord record = retrieveDeviceRecord(handle);</span><br><span class="line">  pauseDevice(handle);</span><br><span class="line">  clearDeviceWorkQueue(handle);</span><br><span class="line">  closeDevice(handle);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>try-catch-finally</code> 부터 작성할 것</p>
+<ul>
+<li><code>try</code> 문은 transaction처럼 동작하는 실행코드로, <code>catch</code> 문은 <em>try문에 관계없이 <strong>프로그램을 일관적인 상태로 유지하도록</strong></em> 한다.</li>
+</ul>
+</li>
+<li><p>예외에 의미를 제공할 것</p>
+<ul>
+<li>예외를 던질 때는 전후 상황을 충분히 덧붙인다.</li>
+<li>실패한 연산 이름과 실패 유형도 언급한다.</li>
+</ul>
+</li>
+<li><p>호출자를 고려해 예외 클래스를 정의할 것</p>
+<ul>
+<li>써드파티 라이브러리를 사용하는 경우 그것들을 <strong>wrapping</strong>함으로써 <em>라이브러리 교체 등의 변경이 있는 경우 대응하기 쉬워진다.</em></li>
+<li>Wrapper 클래스를 이용하여 호출하는 라이브러리 API를 감싸면서 예외 유형 하나를 반환하므로 의존성이 크게 감소한다.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  port.open();</span><br><span class="line">&#125; <span class="keyword">catch</span> (PortDeviceFailure e) &#123;</span><br><span class="line">  reportError(e);</span><br><span class="line">  logger.log(e.getMessage(), e);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LocalPort</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      innerPort.open();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (DeviceResponseException e) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> PortDeviceFailure(e);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ATM1212UnlockedException e) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> PortDeviceFailure(e);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (GMXError e) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> PortDeviceFailure(e);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>에러 시 <code>null</code> 을 반환하거나 전달하지 말 것</p>
+</li>
+</ul>
+<br />
+
+
+
+<hr>
+<h3 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h3><p><a target="_blank" rel="noopener" href="https://ibrahimovic.tistory.com/39">https://ibrahimovic.tistory.com/39</a></p>
+<p><a target="_blank" rel="noopener" href="https://nesoy.github.io/articles/2018-02/CleanCode-ErrorHandle">https://nesoy.github.io/articles/2018-02/CleanCode-ErrorHandle</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3134,116 +3293,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/10/const-function/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/10/const-function/" class="post-title-link" itemprop="url">const function</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-10 12:58:41" itemprop="dateCreated datePublished" datetime="2021-04-10T12:58:41+01:00">2021-04-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-30 11:56:17" itemprop="dateModified" datetime="2021-05-30T11:56:17+01:00">2021-05-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Language/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Function-Statement"><a href="#Function-Statement" class="headerlink" title="Function Statement"></a>Function Statement</h3><ul>
-<li><em>hoisted</em> to the top of the <em>full lexical scope</em><ul>
-<li>can break conflicting scripts</li>
-<li>it’s difficult to debug</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>named function is shown in the stack trace<ul>
-<li>easier to debug when error occurs in the function</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function declarations are given two passes,</span></span><br><span class="line"><span class="comment">where the first lifts them to the top (hoisting),</span></span><br><span class="line"><span class="comment">allowing &quot;out of order&quot; usage</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">doTheThing();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTheThing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome number <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAwesome</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Const-Declaration"><a href="#Const-Declaration" class="headerlink" title="Const Declaration"></a>Const Declaration</h3><ul>
-<li><em>edge-case hoisting</em></li>
-</ul>
-<ul>
-<li>declare a variable<ul>
-<li>gives it a block scope</li>
-<li>stops the full hoisting</li>
-</ul>
-</li>
-<li>cannot be re-declared<ul>
-<li>throws exception if re-declared</li>
-<li>easier to debug</li>
-</ul>
-</li>
-<li>won’t be caught until called</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">This shows that, because of block-scoping,</span></span><br><span class="line"><span class="comment">const function references must be invoked in-order</span></span><br><span class="line"><span class="comment">or else things will fail silently.</span></span><br><span class="line"><span class="comment">consts are added serially (in the order in which they appear)</span></span><br><span class="line"><span class="comment">and much of the body isn&#x27;t declared when we first try to invoke or functions</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// use `getAwesome()`</span></span><br><span class="line"><span class="keyword">const</span> tryDoTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is me trying to be awesome <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;getAwesome is not defined&quot;, because it is referenced too early,</span></span><br><span class="line"><span class="comment">// before declaring `getAwesome()` function</span></span><br><span class="line">tryDoTheThing()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getAwesome = <span class="function">() =&gt;</span> (+((<span class="built_in">Math</span>.random() * <span class="number">10000</span>).toString().split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doTheThing = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`This is awesome! <span class="subst">$&#123;getAwesome()&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doTheThing()</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -3315,7 +3364,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
