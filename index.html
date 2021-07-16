@@ -163,6 +163,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/17/react-query-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/17/react-query-basic/" class="post-title-link" itemprop="url">React Query를 이용해 렌더링 해보자</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-16 21:28:40 / Modified: 14:00:00" itemprop="dateCreated datePublished" datetime="2021-07-16T21:28:40+01:00">2021-07-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="React-Query-란"><a href="#React-Query-란" class="headerlink" title="React Query 란?"></a>React Query 란?</h2><p>리액트용 data-fetching 라이브러리로,</p>
+<p>리액트 어플리케이션에서 서버의 상태를 fetching, caching, synchronizing, updating 한다.</p>
+<p>react query는 다음과 같이 4가지 상태를 반환하는데, 반환 상태에 따라 렌더링을 다르게 처리하기 용이하단느 장점이 있다.</p>
+<ol>
+<li><code>isIdle</code> : status === ‘idle’로, fresh/reset된 상태</li>
+<li><code>isLoading</code> : status === ‘loading’으로, mutation이 진행 중인 상태</li>
+<li><code>isError</code> : status === ‘error’로, mutation이 error를 발생시킨 상태</li>
+<li><code>isSuccess</code> : status === ‘success’로, mutation이 성공하여 data 이용이 가능한 상태</li>
+</ol>
+<h3 id="설치하기"><a href="#설치하기" class="headerlink" title="설치하기"></a>설치하기</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm i react-query</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ yarn add react-query</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="기본-예시"><a href="#기본-예시" class="headerlink" title="기본 예시"></a>기본 예시</h3><h4 id="App-tsx"><a href="#App-tsx" class="headerlink" title="App.tsx"></a>App.tsx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import &#123; QueryClient, QueryClientProvider, useQuery &#125; from &#39;react-query&#39;</span><br><span class="line"> </span><br><span class="line"> const queryClient &#x3D; new QueryClient()</span><br><span class="line"> </span><br><span class="line"> export default function App() &#123;</span><br><span class="line">   return (</span><br><span class="line">     &lt;QueryClientProvider client&#x3D;&#123;queryClient&#125;&gt;</span><br><span class="line">       &lt;Example &#x2F;&gt;</span><br><span class="line">     &lt;&#x2F;QueryClientProvider&gt;</span><br><span class="line">   )</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>가장 상단 <code>App.js</code> 에서 최상단 컴포넌트로 <code>QueryClientProvider</code> 을 전달한다.</p>
+</li>
+<li><p>해당 Provider context의 props로 <code>queryClient</code> 객체를 전달한다.</p>
+</li>
+</ul>
+<h4 id="Example-tsx"><a href="#Example-tsx" class="headerlink" title="Example.tsx"></a>Example.tsx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function Example() &#123;</span><br><span class="line">  const &#123; isLoading, error, data &#125; &#x3D; useQuery(&#39;repoData&#39;, () &#x3D;&gt;</span><br><span class="line">    fetch(&#39;https:&#x2F;&#x2F;api.github.com&#x2F;repos&#x2F;tannerlinsley&#x2F;react-query&#39;).then(res &#x3D;&gt;</span><br><span class="line">      res.json()</span><br><span class="line">    )</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>useQuery</code> 에<ul>
+<li><strong>query key</strong> 와</li>
+<li> <code>fetch</code> , <code>axios</code> 등을 이용한 <strong>CRUD 함수</strong> 를 전달한다.</li>
+</ul>
+</li>
+</ul>
+<p><code>useQuery</code> 를 통해 <code>isLoading</code> , <code>error</code> , <code>data</code> 등을 받아 렌더링 한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  if (isLoading) return &#39;Loading...&#39;</span><br><span class="line"></span><br><span class="line">  if (error) return &#39;An error has occurred: &#39; + error.message</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;&#123;data.name&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;p&gt;&#123;data.description&#125;&lt;&#x2F;p&gt;</span><br><span class="line">      &lt;strong&gt;👀 &#123;data.subscribers_count&#125;&lt;&#x2F;strong&gt;&#123;&#39; &#39;&#125;</span><br><span class="line">      &lt;strong&gt;✨ &#123;data.stargazers_count&#125;&lt;&#x2F;strong&gt;&#123;&#39; &#39;&#125;</span><br><span class="line">      &lt;strong&gt;🍴 &#123;data.forks_count&#125;&lt;&#x2F;strong&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>isLoading</code> 일 때는 로딩 렌더링</li>
+<li><code>error</code> 일 때는 에러 렌더링</li>
+<li>이 외, <code>data</code> 를 정상적으로 받아온 경우 컴포넌트를 알맞게 렌더링</li>
+</ul>
+<h3 id="useQuery"><a href="#useQuery" class="headerlink" title="useQuery"></a>useQuery</h3><p><code>useQuery</code> 가 반환하는 프로퍼티와 받는 매개변수는 다음과 같다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">const &#123;</span><br><span class="line">   data,</span><br><span class="line">   dataUpdatedAt,</span><br><span class="line">   error,</span><br><span class="line">   errorUpdatedAt,</span><br><span class="line">   failureCount,</span><br><span class="line">   isError,</span><br><span class="line">   isFetched,</span><br><span class="line">   isFetchedAfterMount,</span><br><span class="line">   isFetching,</span><br><span class="line">   isIdle,</span><br><span class="line">   isLoading,</span><br><span class="line">   isLoadingError,</span><br><span class="line">   isPlaceholderData,</span><br><span class="line">   isPreviousData,</span><br><span class="line">   isRefetchError,</span><br><span class="line">   isStale,</span><br><span class="line">   isSuccess,</span><br><span class="line">   refetch,</span><br><span class="line">   remove,</span><br><span class="line">   status,</span><br><span class="line"> &#125; &#x3D; useQuery(queryKey, queryFn?, &#123;</span><br><span class="line">   cacheTime,</span><br><span class="line">   enabled,</span><br><span class="line">   initialData,</span><br><span class="line">   initialDataUpdatedAt</span><br><span class="line">   isDataEqual,</span><br><span class="line">   keepPreviousData,</span><br><span class="line">   notifyOnChangeProps,</span><br><span class="line">   notifyOnChangePropsExclusions,</span><br><span class="line">   onError,</span><br><span class="line">   onSettled,</span><br><span class="line">   onSuccess,</span><br><span class="line">   queryKeyHashFn,</span><br><span class="line">   refetchInterval,</span><br><span class="line">   refetchIntervalInBackground,</span><br><span class="line">   refetchOnMount,</span><br><span class="line">   refetchOnReconnect,</span><br><span class="line">   refetchOnWindowFocus,</span><br><span class="line">   retry,</span><br><span class="line">   retryOnMount,</span><br><span class="line">   retryDelay,</span><br><span class="line">   select,</span><br><span class="line">   staleTime,</span><br><span class="line">   structuralSharing,</span><br><span class="line">   suspense,</span><br><span class="line">   useErrorBoundary,</span><br><span class="line"> &#125;)</span><br><span class="line"> </span><br><span class="line"> &#x2F;&#x2F; or using the object syntax</span><br><span class="line"> </span><br><span class="line"> const result &#x3D; useQuery(&#123;</span><br><span class="line">   queryKey,</span><br><span class="line">   queryFn,</span><br><span class="line">   enabled,</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+<p>이를 사용한 예시는 다음과 같다.</p>
+<p>먼저, useQuery에 전달할 <code>getCategoryDetail</code> api 함수를 작성해보자.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export const getCategoryList &#x3D; async () &#x3D;&gt; &#123;</span><br><span class="line">  const data &#x3D; await axios.get(&#96;&#x2F;api&#x2F;category&#x2F;&#96;);</span><br><span class="line">  return data.data.result as CategoryList;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>이제 해당 함수를 useQuery에 전달하여 데이터를 받아보자.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; isLoading, error, data: categoryList &#125; &#x3D; useQuery(&#39;categoryList&#39;, getCategoryList);</span><br></pre></td></tr></table></figure>
+<p>여기서 <code>categoryList</code> 는 <strong>query key</strong> 이며, <code>getCategoryList</code> 를 통해 받아온 데이터는 <code>isLoading</code> , <code>error</code> , <code>data</code> 등을 담은 객체에 저장된다.</p>
+<p>여기서 <code>data: categoryList</code> 로 데이터 변수명을 설정하여 컴포넌트를 알맞게 렌더링하면 된다!</p>
+<h3 id="useMutation"><a href="#useMutation" class="headerlink" title="useMutation"></a>useMutation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">export const postItem &#x3D; async (data: Item) &#x3D;&gt; &#123;</span><br><span class="line">  const data &#x3D; await instance.post(</span><br><span class="line">    &#96;&#x2F;api&#x2F;items&#96;,</span><br><span class="line">    &#123;</span><br><span class="line">      category_id: &#96;$&#123;data.category_id&#125;&#96;,</span><br><span class="line">      item_name: &#96;$&#123;data.candy_name&#125;&#96;,</span><br><span class="line">    &#125;,</span><br><span class="line">  );</span><br><span class="line">  return data.data.result as NewItem;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>위와 같이 정의한 <code>postItem</code> api를 받아 mutation을 적용해보자.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const mutation &#x3D; useMutation((data: PutBodyProps) &#x3D;&gt; postItem(data), &#123;</span><br><span class="line">  onSuccess: () &#x3D;&gt; &#123;</span><br><span class="line">    queryClient.invalidateQueries(&#39;items&#39;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>먼저 전달할 인자를 <code>postItem</code> 에 알맞게 전달하고, <code>onSuccess</code> 시 <code>queryClient</code> 를 통해 이전에 정의해놓은 <strong>query key</strong> 값을 전달하여 데이터를 mutate 시킨다.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/10/boj-7576/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1039,79 +1157,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/python-list-index/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/python-list-index/" class="post-title-link" itemprop="url">리스트에서 요소의 index 찾기</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-29 12:43:42 / Modified: 04:45:07" itemprop="dateCreated datePublished" datetime="2021-06-29T12:43:42+01:00">2021-06-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>리스트의 <code>index</code> method 사용하기</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idx = arr.index(num)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1183,7 +1228,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">86</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1196,7 +1241,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

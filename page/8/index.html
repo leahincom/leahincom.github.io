@@ -163,6 +163,134 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/06/16-Web-Components-PWA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/06/16-Web-Components-PWA/" class="post-title-link" itemprop="url">16. Web Components, PWA</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-06 11:27:27" itemprop="dateCreated datePublished" datetime="2021-02-06T11:27:27Z">2021-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-05 02:46:44" itemprop="dateModified" datetime="2021-04-05T02:46:44+01:00">2021-04-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Web-Components"><a href="#Web-Components" class="headerlink" title="Web Components"></a>Web Components</h3><h4 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h4><ol>
+<li>Scoped</li>
+<li>Reusable</li>
+<li>Encapsulated</li>
+</ol>
+<h4 id="Made-by-4-main-technologies"><a href="#Made-by-4-main-technologies" class="headerlink" title="Made by 4 main technologies"></a>Made by 4 main technologies</h4><ol>
+<li>HTML Template</li>
+<li>Custom Elements</li>
+<li>Shadow DOM</li>
+<li>HTML Imports</li>
+</ol>
+<h4 id="Basic-Web-Components"><a href="#Basic-Web-Components" class="headerlink" title="Basic Web Components"></a>Basic Web Components</h4><ul>
+<li>Card Title</li>
+<li>Component Title</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class&#x3D;&quot;card&quot;&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h2&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;&#x2F;...&gt;</span><br></pre></td></tr></table></figure>
+<p>👇</p>
+<ol>
+<li><p>reduce duplicated contents using…<br>&lt;product-card<br>data-header=<br>data-img=<br>data-text=</p>
+<blockquote>
+</product-card></blockquote>
+</li>
+<li><p>with JavaScript!</p>
+</li>
+</ol>
+<ul>
+<li>customElements : global variable</li>
+<li>shadow, secret // outside world can’t get access to it</li>
+</ul>
+<ul>
+<li>shadow DOM<br>a tree-like structure of connected nodes that represents the different elements and strings of text appearing in a markup document (usually an HTML document in the case of web documents).<br>※ font-size =&gt; DON’T use px !!! USE rem</li>
+</ul>
+<h3 id="Progressive-Web-App-PWA"><a href="#Progressive-Web-App-PWA" class="headerlink" title="Progressive Web App (PWA)"></a>Progressive Web App (PWA)</h3><ol>
+<li>Reliable: download and work off-line</li>
+</ol>
+<ul>
+<li>Service worker (downloads content-heavy web, use off-line)</li>
+<li>Pre-caching</li>
+</ul>
+<ol start="2">
+<li>Fast</li>
+<li>Engaging</li>
+</ol>
+<ul>
+<li>No app store needed</li>
+<li>Immersive full screen</li>
+<li>Push Notifications</li>
+</ul>
+<ul>
+<li>Chrome DevTools : Inspect -&gt; LightHouse 이용!!</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/05/15-CSS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -638,7 +766,7 @@
 <li>-&gt; (because a primary key is ordered,) binary_search =&gt; O(logN)</li>
 </ul>
 <h4 id="SQL-Indexes"><a href="#SQL-Indexes" class="headerlink" title="SQL - Indexes"></a>SQL - Indexes</h4><ol start="3">
-<li>SELECT “Email” FROM “Users” WHERE Email = “<a href="mailto:&#x62;&#x69;&#x6c;&#x6c;&#x2e;&#103;&#x61;&#116;&#101;&#115;&#64;&#109;&#105;&#x63;&#114;&#x6f;&#115;&#x6f;&#102;&#116;&#46;&#x63;&#111;&#x6d;">&#x62;&#x69;&#x6c;&#x6c;&#x2e;&#103;&#x61;&#116;&#101;&#115;&#64;&#109;&#105;&#x63;&#114;&#x6f;&#115;&#x6f;&#102;&#116;&#46;&#x63;&#111;&#x6d;</a>“ </li>
+<li>SELECT “Email” FROM “Users” WHERE Email = “<a href="mailto:&#98;&#x69;&#x6c;&#108;&#46;&#103;&#x61;&#x74;&#101;&#x73;&#64;&#109;&#105;&#x63;&#x72;&#111;&#115;&#111;&#x66;&#116;&#x2e;&#x63;&#111;&#109;">&#98;&#x69;&#x6c;&#108;&#46;&#103;&#x61;&#x74;&#101;&#x73;&#64;&#109;&#105;&#x63;&#x72;&#111;&#115;&#111;&#x66;&#116;&#x2e;&#x63;&#111;&#109;</a>“ </li>
 </ol>
 <ul>
 <li>Time Complexity<br>approach table by checking each element =&gt; O(n)</li>
@@ -1310,123 +1438,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/27/7-BFS-DFS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/27/7-BFS-DFS/" class="post-title-link" itemprop="url">7. BFS & DFS</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-26 22:40:08" itemprop="dateCreated datePublished" datetime="2021-01-26T22:40:08Z">2021-01-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 02:46:15" itemprop="dateModified" datetime="2021-04-05T02:46:15+01:00">2021-04-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/Overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p><strong>Breadth First Search</strong></p>
-<ul>
-<li>Queue<br> : go same level node first and go deeper</li>
-</ul>
-<blockquote>
-<ul>
-<li>push root node</li>
-<li>pop root node<ul>
-<li>push children nodes <em>From Left to Right</em></li>
-</ul>
-</li>
-<li>pop child node one by one and…<ul>
-<li>push children nodes from child (((repeat)))</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">queue.enqueue(this);</span><br><span class="line">while (queue.length &gt; 0) &#123;</span><br><span class="line">    current &#x3D; queue.dequeue();</span><br><span class="line">    children &#x3D; current.children;</span><br><span class="line">    for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    	queue.enqueue(children[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p><strong>Depth First Search</strong></p>
-<ul>
-<li>Stack<br> : go down to the leaf node first and move on to the other children</li>
-</ul>
-<blockquote>
-<ul>
-<li>push root node</li>
-<li>pop root node<ul>
-<li>push children nodes <em>From Left To Right</em></li>
-</ul>
-</li>
-<li>pop child node and…<ul>
-<li>push children nodes of child (((repeat)))</li>
-</ul>
-</li>
-<li>pop the leaf node<ul>
-<li>pop other leaf nodes on the same level / push children nodes of the node on the same level</li>
-</ul>
-</li>
-<li>pop parent node and move on (((repeat)))</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">stack.push(this);</span><br><span class="line">while (stack.length &gt; 0) &#123;</span><br><span class="line">  current &#x3D; stack.pop();</span><br><span class="line">  children &#x3D; current.children;</span><br><span class="line">  for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    stack.push(children[i]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1498,7 +1509,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">86</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1511,7 +1522,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
