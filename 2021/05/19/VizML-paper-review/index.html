@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Visualization Recommender Systemlower the barrier to exploring basic visualizations  by automatically generating results for analysts to search and select, not manually specify       Abstract">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VizML: A Machine Learning Approach to Visualization Recommendation 논문 리뷰">
+<meta property="og:url" content="https://leahincom.github.io/2021/05/19/VizML-paper-review/index.html">
+<meta property="og:site_name" content="leah">
+<meta property="og:description" content="Visualization Recommender Systemlower the barrier to exploring basic visualizations  by automatically generating results for analysts to search and select, not manually specify       Abstract">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-images.githubusercontent.com/49134038/118769577-4884f400-b8bb-11eb-98b6-7314c700938f.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/49134038/118769573-47ec5d80-b8bb-11eb-918f-c34c5a51f0e2.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/49134038/118769569-46bb3080-b8bb-11eb-8a7e-548703c05715.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/49134038/118769566-46229a00-b8bb-11eb-9228-6ea36108c95c.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/49134038/118769559-43c04000-b8bb-11eb-9db5-9b2623274252.png">
+<meta property="article:published_time" content="2021-05-18T22:19:37.000Z">
+<meta property="article:modified_time" content="2021-07-24T09:56:50.826Z">
+<meta property="article:author" content="JungHyun">
+<meta property="article:tag" content="recommendation">
+<meta property="article:tag" content="recommendation system">
+<meta property="article:tag" content="visualization">
+<meta property="article:tag" content="data visualization">
+<meta property="article:tag" content="infobiz">
+<meta property="article:tag" content="HCI">
+<meta property="article:tag" content="VizML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/49134038/118769577-4884f400-b8bb-11eb-98b6-7314c700938f.png">
+
+<link rel="canonical" href="https://leahincom.github.io/2021/05/19/VizML-paper-review/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>VizML: A Machine Learning Approach to Visualization Recommendation 논문 리뷰 | leah</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">leah</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">my dev_log</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/19/VizML-paper-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VizML: A Machine Learning Approach to Visualization Recommendation 논문 리뷰
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-18 23:19:37" itemprop="dateCreated datePublished" datetime="2021-05-18T23:19:37+01:00">2021-05-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Graduation-Project/" itemprop="url" rel="index"><span itemprop="name">Graduation Project</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Graduation-Project/Paper-Review/" itemprop="url" rel="index"><span itemprop="name">Paper Review</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<h3 id="Visualization-Recommender-System"><a href="#Visualization-Recommender-System" class="headerlink" title="Visualization Recommender System"></a>Visualization Recommender System</h3><p>lower the barrier to exploring basic visualizations</p>
+<ul>
+<li>by <em>automatically generating results</em></li>
+<li>for analysts to <em>search and select</em>, not manually specify</li>
+</ul>
+</blockquote>
+<br />
+
+
+
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><br />
+
+
+
+<img width="586" aligned="center" alt="Screenshot 2021-05-19 at 14 20 00" src="https://user-images.githubusercontent.com/49134038/118769577-4884f400-b8bb-11eb-98b6-7314c700938f.png">
+
+<br />
+
+
+
+<h4 id="machine-learning-based-approach"><a href="#machine-learning-based-approach" class="headerlink" title="machine learning-based approach"></a>machine learning-based approach</h4><ul>
+<li><strong>learns</strong> visualization <code>design choices</code> </li>
+<li><em>from</em> a large corpus of <code>datasets</code> </li>
+<li><em>from</em> associated <code>visualisations</code> </li>
+</ul>
+<br />
+
+
+
+<h4 id="by…"><a href="#by…" class="headerlink" title="by…"></a>by…</h4><ol>
+<li>identify <strong>five key design choices</strong></li>
+<li>using one million dataset-visualisation pairs</li>
+</ol>
+<br />
+
+
+
+<h4 id="evaluation"><a href="#evaluation" class="headerlink" title="evaluation"></a>evaluation</h4><p><strong>for</strong> : generalizability and uncertainty</p>
+<p><strong>by</strong> : benchmark with a crowdsourced test set</p>
+<p><strong>result</strong> : comparable to human performance</p>
+<br />
+
+
+
+<h2 id="Problem-Formulation"><a href="#Problem-Formulation" class="headerlink" title="Problem Formulation"></a>Problem Formulation</h2><p><strong>Data visualization communicates information <em>by representing data with visual elements</em></strong></p>
+<br />
+
+
+
+<p><code>representations</code> are specified <em>using…</em></p>
+<ul>
+<li><p><code>encodings</code> : map from data to the <code>retinal properties</code> of <code>graphical marks</code></p>
+</li>
+<li><p><code>retinal properties</code></p>
+<ul>
+<li><em>e.g.</em> position, length, colour</li>
+</ul>
+</li>
+<li><p><code>graphical marks</code></p>
+<ul>
+<li><em>e.g.</em> point, line, rectangle</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<p><em>e.g.</em></p>
+<img width="368" aligned="center" alt="Screenshot 2021-05-19 at 15 04 20" src="https://user-images.githubusercontent.com/49134038/118769573-47ec5d80-b8bb-11eb-918f-c34c5a51f0e2.png">
+
+<p>To create <strong>scatterplot</strong> showing the relationship between <em>MPG</em> and <em>Hp</em>,</p>
+<ul>
+<li><p><strong>encoding each pair</strong> of data points of a circle on a 2D plane</p>
+</li>
+<li><p>while <strong>specifying other retinal properties</strong> such as size and colour</p>
+</li>
+</ul>
+<br />
+
+
+
+<h5 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h5><p><code>Vega-lite</code></p>
+<ul>
+<li>selecting  <code>mark type</code> and <code>fields</code> to be <em>encoded along the x- and y-axes</em></li>
+</ul>
+<p><code>Tableau</code></p>
+<ul>
+<li><em>placing the 2 columns</em> onto the respective column and row shelves</li>
+</ul>
+<br />
+
+
+
+<hr>
+<br />
+
+
+
+<ol>
+<li><p><strong>formulate</strong> basic visualization of a <em>dataset</em> <code>d</code> <strong>as</strong> a <em>set of interrelated design choices</em> <code>C = &#123;c&#125;</code></p>
+<blockquote>
+<p> <code>set of choices</code> that result in valid visualizations</p>
+<p>=== a <code>subset</code> of the space of <strong>all possible choices</strong></p>
+</blockquote>
+</li>
+<li><p><strong>automatically suggest</strong> a <em>subset of design choices</em> <code>C_rec ⊆ C</code> that <em>maximize effectiveness</em></p>
+<blockquote>
+<p> <code>effectiveness</code> can be defined by informational measures</p>
+<ul>
+<li><em>e.g.</em> efficiency, accuracy, memorability, emotive measures</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<br />
+
+
+
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h4 id="Rule-based-Visualization-Recommender-Systems"><a href="#Rule-based-Visualization-Recommender-Systems" class="headerlink" title="Rule-based Visualization Recommender Systems"></a>Rule-based Visualization Recommender Systems</h4><br />
+
+
+
+<h4 id="ML-based-Visualization-Recommender-Systems"><a href="#ML-based-Visualization-Recommender-Systems" class="headerlink" title="ML-based Visualization Recommender Systems"></a>ML-based Visualization Recommender Systems</h4><blockquote>
+<h5 id="DeepEye"><a href="#DeepEye" class="headerlink" title="DeepEye"></a>DeepEye</h5><h5 id="Data2Vis"><a href="#Data2Vis" class="headerlink" title="Data2Vis"></a>Data2Vis</h5><h5 id="Draco-Learn"><a href="#Draco-Learn" class="headerlink" title="Draco-Learn"></a>Draco-Learn</h5></blockquote>
+<h5 id="VizML"><a href="#VizML" class="headerlink" title="VizML"></a>VizML</h5><ul>
+<li><p><em>Pros</em></p>
+<ul>
+<li><p><code>learning task</code> : <em>learn to…</em></p>
+<p><strong>predict design choices</strong></p>
+<ul>
+<li>easier to <strong>quantitatively</strong> validate</li>
+<li>easier to provide <strong>interpretable measures</strong> of feature importance</li>
+<li>easily <strong>integrated</strong> into visualization systems</li>
+</ul>
+<blockquote>
+<p>DeepEye : classify and rank visualizations</p>
+<p>Data2Vis : end-to-end generation model</p>
+<p>Draco-Learn : soft constraints weights</p>
+</blockquote>
+</li>
+<li><p><code>data quantity</code> : <em>training corpus is…</em></p>
+<p><strong>orders of magnitude larger</strong> than DeepEye and Data2Vis</p>
+<ul>
+<li>permits the use of <strong>large feature sets</strong> that <em>capture many aspects</em> of a dataset</li>
+<li>permits the use of <strong>high-capacity models</strong> such as deep neural network</li>
+</ul>
+</li>
+<li><p><code>data quality</code> : the datasets used are…</p>
+<p><strong>extremely diverse</strong> in shape, structure, and distribution</p>
+<p>the result of <strong>real visual analysis by analysts</strong> on their own datasets</p>
+<blockquote>
+<p>others</p>
+<ul>
+<li>few datasets used to train</li>
+<li>visualisations are generated by rule-based systems</li>
+<li>evaluated number controlled settings</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<ul>
+<li><em>cons</em><ul>
+<li>only recommends <strong>visual encodings, not data queries</strong></li>
+<li>do not create ★ an <strong>application</strong> that employs the visualization model ★</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><h3 id="Feature-Extraction"><a href="#Feature-Extraction" class="headerlink" title="Feature Extraction"></a>Feature Extraction</h3><p><em>distinguish the feature categories to…</em></p>
+<ol>
+<li>organize <strong>how to</strong> create and interpret features</li>
+<li>observe the <strong>contribution</strong> of different types of features</li>
+<li>to capture if <strong>less generalizable</strong> than other categories</li>
+</ol>
+<br />
+
+
+
+<img width="320" aligned="center" alt="Screenshot 2021-05-19 at 15 26 21" src="https://user-images.githubusercontent.com/49134038/118769569-46bb3080-b8bb-11eb-8a7e-548703c05715.png">
+
+<ul>
+<li><code>Dimensions D</code> : <em>the number of rows</em> in a column</li>
+<li><code>Types T</code> : whether a column is <em>categorical, temporal, or quantitative</em></li>
+<li><code>Values V</code> : <em>the statistical and structural properties</em> of the values within a column</li>
+<li><code>Names N</code> : the <em>column name</em></li>
+</ul>
+<p>👉 <strong>order in <code>D - T - V - N</code></strong>  by <em>how biased</em> the features to be towards the corpus </p>
+<br />
+
+
+
+<h5 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h5><ol>
+<li><p>describe each pair of columns with <code>30 pairwise-column features</code></p>
+</li>
+<li><p>divide into 2 categories : <code>Values</code> and <code>Names</code> </p>
+<blockquote>
+<p>many pairwise-column features depend on the individual column types</p>
+</blockquote>
+</li>
+<li><p>create <code>841dataset-level features</code> by aggregating single- and pairwise-column features using <code>16 aggregation functions</code></p>
+<blockquote>
+<p><strong>aggregation function</strong> : convert single- and pairwise-column features into scalar values</p>
+<ol>
+<li>train separate models per number of columns</li>
+<li>include column features with padding</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<br />
+
+
+
+<h3 id="Design-Choice-Extraction"><a href="#Design-Choice-Extraction" class="headerlink" title="Design Choice Extraction"></a>Design Choice Extraction</h3><p><em>extract an analyst’s design choices to…</em></p>
+<p><strong>parse the traces</strong> because each visualization consists of traces that associate collections of data with visual elements</p>
+<br />
+
+
+
+<h4 id="Encoding-level-Desing-Choices"><a href="#Encoding-level-Desing-Choices" class="headerlink" title="Encoding-level Desing Choices"></a>Encoding-level Desing Choices</h4><ul>
+<li><code>mark type</code> : scatter, etc.</li>
+<li><code>column encoding</code> : which column is represented on which axis, whether or not an X or Y column is the single column represented along that axis</li>
+</ul>
+<br />
+
+
+
+<p><em>by aggregating these choices…</em></p>
+<p>👇 </p>
+<h4 id="Visualization-level-Design-Choices"><a href="#Visualization-level-Design-Choices" class="headerlink" title="Visualization-level Design Choices"></a>Visualization-level Design Choices</h4><ol>
+<li><p>describe the <strong>type shared</strong> among all traces</p>
+</li>
+<li><p>determine whether the visualization has a <strong>shared axis</strong></p>
+</li>
+</ol>
+<br />
+
+
+
+<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><h3 id="Feature-Processing"><a href="#Feature-Processing" class="headerlink" title="Feature Processing"></a>Feature Processing</h3><ol>
+<li><p>apply <code>one-hot encoding</code> to <em>categorical features</em></p>
+</li>
+<li><p>set <code>numeric values</code> <em>above 99% or below 1%</em> to respective cut-offs</p>
+</li>
+<li><p>impute <code>missing categorical values</code> using <em>the mode of non-missing values, and missing numeric values with the mean of non-missing values</em></p>
+</li>
+<li><p><strong>remove</strong> the mean of numeric fields and <strong>scale</strong> to unit variance</p>
+</li>
+<li><p><strong>randomly remove</strong> datasets that are <em>exact deduplicates of each other</em></p>
+<blockquote>
+<p>remove all but one randomly selected dataset per user</p>
+<p>👉 remove bias towards more prolific users</p>
+</blockquote>
+</li>
+</ol>
+<br />
+
+
+
+<h3 id="Prediction-Tasks"><a href="#Prediction-Tasks" class="headerlink" title="Prediction Tasks"></a>Prediction Tasks</h3><h4 id="Two-visualization-level-prediction-tasks"><a href="#Two-visualization-level-prediction-tasks" class="headerlink" title="Two visualization-level prediction tasks"></a>Two visualization-level prediction tasks</h4><p>use <em><strong>dataset-level</strong> features</em></p>
+<img width="298" aligned="center" alt="Screenshot 2021-05-19 at 15 49 37" src="https://user-images.githubusercontent.com/49134038/118769566-46229a00-b8bb-11eb-9228-6ea36108c95c.png">
+
+<p>to predict <strong>visualization-level</strong> design choices</p>
+<br />
+
+
+
+<h4 id="Three-encoding-level-prediction-tasks"><a href="#Three-encoding-level-prediction-tasks" class="headerlink" title="Three encoding-level prediction tasks"></a>Three encoding-level prediction tasks</h4><p>use <em>features about <strong>individual columns</strong></em></p>
+<img width="300" aligned="center" alt="Screenshot 2021-05-19 at 15 49 50" src="https://user-images.githubusercontent.com/49134038/118769559-43c04000-b8bb-11eb-9db5-9b2623274252.png">
+
+<p>to predict <strong>how</strong> they are visually <strong>encoded</strong></p>
+<blockquote>
+<p>consider each column <em>indepedently,</em></p>
+<p>instead of alongside other columns in the same dataset</p>
+</blockquote>
+<br />
+
+
+
+<hr>
+<h5 id="Visualization-Type-amp-Mark-Type-task"><a href="#Visualization-Type-amp-Mark-Type-task" class="headerlink" title="Visualization Type &amp; Mark Type task"></a>Visualization Type &amp; Mark Type task</h5><p>2 class task : line vs. bar</p>
+<p>3 class task : scatter vs. line vs. var</p>
+<hr>
+<h3 id="Neural-Network-and-Baseline-Models"><a href="#Neural-Network-and-Baseline-Models" class="headerlink" title="Neural Network and Baseline Models"></a>Neural Network and Baseline Models</h3><ul>
+<li><p>fully-connected feedforward neural network</p>
+</li>
+<li><p>with 3 hidden layers, each consisting of 1000 neurons</p>
+</li>
+<li><p>with ReLU activation functions</p>
+</li>
+<li><p>split the data in 60/ 20/ 20 (train/ validation/ test sets) 5 times using 5-fold cross-validation</p>
+</li>
+</ul>
+<br />
+
+
+
+<h4 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h4><ol>
+<li>D</li>
+<li>D+T</li>
+<li>D+T+V</li>
+<li>D+T+V+N = ALL</li>
+</ol>
+<br />
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/recommendation/" rel="tag"># recommendation</a>
+              <a href="/tags/recommendation-system/" rel="tag"># recommendation system</a>
+              <a href="/tags/visualization/" rel="tag"># visualization</a>
+              <a href="/tags/data-visualization/" rel="tag"># data visualization</a>
+              <a href="/tags/infobiz/" rel="tag"># infobiz</a>
+              <a href="/tags/HCI/" rel="tag"># HCI</a>
+              <a href="/tags/VizML/" rel="tag"># VizML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/17/SOAP-Concurrency/" rel="prev" title="Concurrency">
+      <i class="fa fa-chevron-left"></i> Concurrency
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/21/Data2Vis-paper-review/" rel="next" title="Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰">
+      Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualization-Recommender-System"><span class="nav-number">1.</span> <span class="nav-text">Visualization Recommender System</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number"></span> <span class="nav-text">Abstract</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#machine-learning-based-approach"><span class="nav-number">0.1.</span> <span class="nav-text">machine learning-based approach</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#by%E2%80%A6"><span class="nav-number">0.2.</span> <span class="nav-text">by…</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#evaluation"><span class="nav-number">0.3.</span> <span class="nav-text">evaluation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Formulation"><span class="nav-number"></span> <span class="nav-text">Problem Formulation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Method"><span class="nav-number">0.0.1.</span> <span class="nav-text">Method</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number"></span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Rule-based-Visualization-Recommender-Systems"><span class="nav-number">0.1.</span> <span class="nav-text">Rule-based Visualization Recommender Systems</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ML-based-Visualization-Recommender-Systems"><span class="nav-number">0.2.</span> <span class="nav-text">ML-based Visualization Recommender Systems</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DeepEye"><span class="nav-number">0.2.1.</span> <span class="nav-text">DeepEye</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Data2Vis"><span class="nav-number">0.2.2.</span> <span class="nav-text">Data2Vis</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Draco-Learn"><span class="nav-number">0.2.3.</span> <span class="nav-text">Draco-Learn</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#VizML"><span class="nav-number">0.2.4.</span> <span class="nav-text">VizML</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data"><span class="nav-number"></span> <span class="nav-text">Data</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-Extraction"><span class="nav-number">1.</span> <span class="nav-text">Feature Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Method-1"><span class="nav-number">1.0.1.</span> <span class="nav-text">Method</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Design-Choice-Extraction"><span class="nav-number">2.</span> <span class="nav-text">Design Choice Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Encoding-level-Desing-Choices"><span class="nav-number">2.1.</span> <span class="nav-text">Encoding-level Desing Choices</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Visualization-level-Design-Choices"><span class="nav-number">2.2.</span> <span class="nav-text">Visualization-level Design Choices</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods"><span class="nav-number"></span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-Processing"><span class="nav-number">1.</span> <span class="nav-text">Feature Processing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prediction-Tasks"><span class="nav-number">2.</span> <span class="nav-text">Prediction Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Two-visualization-level-prediction-tasks"><span class="nav-number">2.1.</span> <span class="nav-text">Two visualization-level prediction tasks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Three-encoding-level-prediction-tasks"><span class="nav-number">2.2.</span> <span class="nav-text">Three encoding-level prediction tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Visualization-Type-amp-Mark-Type-task"><span class="nav-number">2.2.1.</span> <span class="nav-text">Visualization Type &amp; Mark Type task</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Neural-Network-and-Baseline-Models"><span class="nav-number">3.</span> <span class="nav-text">Neural Network and Baseline Models</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Features"><span class="nav-number">3.1.</span> <span class="nav-text">Features</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JungHyun</p>
+  <div class="site-description" itemprop="description">Continuously Growing Developer</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JungHyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
