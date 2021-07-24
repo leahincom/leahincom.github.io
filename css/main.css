@@ -205,8 +205,8 @@ body {
 body {
   background: var(--body-bg-color);
   color: var(--text-color);
-  font-family: 'Noto Sans KR', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 0.9em;
+  font-family: 'Source Code Pro', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 1em;
   line-height: 2;
 }
 @media (max-width: 991px) {
@@ -221,28 +221,28 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Noto Sans KR', 'Noto Sans KR', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Source Code Pro, Noto Sans KR', 'Source Code Pro', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 20px 0 15px;
 }
 h1 {
-  font-size: 0.725em;
+  font-size: 1.5em;
 }
 h2 {
-  font-size: 0.6em;
+  font-size: 1.375em;
 }
 h3 {
-  font-size: 0.475em;
+  font-size: 1.25em;
 }
 h4 {
-  font-size: 0.35em;
+  font-size: 1.125em;
 }
 h5 {
-  font-size: 0.225em;
+  font-size: 1em;
 }
 h6 {
-  font-size: 0.1em;
+  font-size: 0.875em;
 }
 p {
   margin: 0 0 20px 0;
@@ -1005,7 +1005,7 @@ pre .javascript .function {
   border-bottom: none;
   color: var(--brand-color);
   display: inline-block;
-  line-height: 0.85em;
+  line-height: 1.375em;
   padding: 0 40px;
   position: relative;
 }
@@ -1013,8 +1013,8 @@ pre .javascript .function {
   color: var(--brand-hover-color);
 }
 .site-title {
-  font-family: 'Noto Sans KR', 'Noto Sans KR', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 0.85em;
+  font-family: 'Source Code Pro', 'Source Code Pro', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 1.375em;
   font-weight: normal;
   margin: 0;
 }
@@ -1197,7 +1197,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff7328;
+  background: #54ffff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1541,7 +1541,7 @@ pre .javascript .function {
   }
 }
 .post-body {
-  font-family: 'Noto Sans KR', 'Noto Sans KR', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Source Code Pro, Noto Sans KR', 'Source Code Pro', "PingFang SC", "Microsoft YaHei", sans-serif;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
@@ -1839,7 +1839,7 @@ pre .javascript .function {
 }
 .posts-expand .post-meta {
   color: #999;
-  font-family: 'Noto Sans KR', 'Noto Sans KR', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Source Code Pro, Noto Sans KR', 'Source Code Pro', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 0.75em;
   margin: 3px 0 60px 0;
   text-align: center;
