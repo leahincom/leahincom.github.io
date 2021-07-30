@@ -163,6 +163,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/05/SOAP-Variables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/05/SOAP-Variables/" class="post-title-link" itemprop="url">Variables</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-04 23:01:36" itemprop="dateCreated datePublished" datetime="2021-04-04T23:01:36+01:00">2021-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/soap/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
+<li><p>변수 이름</p>
+<ol>
+<li><p>의미 있는</p>
+</li>
+<li><p>발음하기 쉬운</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> yyyymmdstr = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> currentDate = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>동일한 유형에 동일한 어휘</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">getUserInfo();</span><br><span class="line">getClientData();</span><br><span class="line">getCustomerRecord();</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">getUser();</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>검색 가능한 이름 지정하기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, <span class="number">86400000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> MILLISECONDS_IN_A_DAY = <span class="number">86400000</span>;</span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, MILLISECONDS_IN_A_DAY);</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>의도를 나타내는</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> address = <span class="string">&#x27;One Infinite Loop, Cupertino 95014&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> cityZipCodeRegex = <span class="regexp">/^[^,\\]+[,\\\s]+(.+?)\s*(\d&#123;5&#125;)?$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">saveCityZipCode(address.match(cityZipCodeRegex)[<span class="number">1</span>], address.match(cityZipCodeRegex)[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> [, city, zipCode] = address.match(cityZipCodeRegex) || [];</span><br><span class="line">saveCityZipCode(city, zipCode);</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>암시적인 것 X, <strong>명시적인 것</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> locations = [<span class="string">&#x27;서울&#x27;</span>, <span class="string">&#x27;인천&#x27;</span>, <span class="string">&#x27;수원&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">l</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 잠깐, `l`은 또 뭘까요?</span></span><br><span class="line">  dispatch(l);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">location</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  dispatch(location);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>필요없는 것 지우기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  carMake: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  carModel: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  carColor: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.carColor = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  make: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  model: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  color: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.color = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>short circuiting보다 <strong>default 매개변수 활용하기</strong><ul>
+<li>default 매개변수 : 매개변수가 <code>undefined</code> 일 때 적용됨</li>
+<li>그 외 (‘’, “”, false, null, 0, NaN 등의 <code>falsy</code> 값 포함) 은 적용되지 않음</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> breweryName = name || <span class="string">&#x27;Hipster Brew Co.&#x27;</span>;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name = <span class="string">&#x27;Hipster Brew Co.&#x27;</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/04/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-03-04-21/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1536,174 +1654,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/13/20-Observable/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/13/20-Observable/" class="post-title-link" itemprop="url">20. Observable</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-12 19:14:47" itemprop="dateCreated datePublished" datetime="2021-02-12T19:14:47Z">2021-02-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h3><p>angular.io/guide/observables<br>Angular<br>angular.io</p>
-<h4 id="RxJS"><a href="#RxJS" class="headerlink" title="RxJS"></a>RxJS</h4><ul>
-<li>PULLING system<br>producer<br>consumer</li>
-<li>PUSHING system<br>producer: pushes the data to a consumer</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="http://www.youtube.com/watch?v=ei7FsoXKPl0">www.youtube.com/watch?v=ei7FsoXKPl0</a></p>
-<p>Singluar    Plural<br>Synchronous    Value    Iterable<br>Asynchronous    Promise    Observable</p>
-<ul>
-<li>linear vector time</li>
-<li>seperated randomly (spreaded)<br>e.g. User Interaction: key stroke like click button, create event</li>
-<li>receives promises for multiple times</li>
-<li>compatibility: consistancy, handled by observables</li>
-</ul>
-<p>※ Everything is a Stream</p>
-<h4 id="Subscribe"><a href="#Subscribe" class="headerlink" title="Subscribe"></a>Subscribe</h4><ul>
-<li>observable$ =&gt; always with ‘$’</li>
-</ul>
-<h4 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h4><p>observable$.pipe(<br>operator(),<br>…<br>).subscribe(data =&gt; …)</p>
-<ul>
-<li>pipe(): throwing every single element a time</li>
-</ul>
-<ul>
-<li>operators are listed in order</li>
-</ul>
-<ul>
-<li>filter(): Array.filter과 비슷<br>filter() 메서드는 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.</li>
-</ul>
-<ul>
-<li>receiving bunch of events spreaded in time</li>
-<li>not returning an array</li>
-<li>true: pass / false: filtered out</li>
-</ul>
-<ul>
-<li>map()</li>
-</ul>
-<ul>
-<li>take the element and returns the conditioned element</li>
-</ul>
-<ul>
-<li>scan()</li>
-</ul>
-<p>As you can see from above code, similar to reduce function the scan function passes output of first function, as the input to the next function execution but the only difference being that, the result of each function execution is stored in an array and that array is returned as a result.</p>
-<p>You can notice that, the last element of the resulting array is 15which was the output of reduce function.</p>
-<ul>
-<li>subscribe(): final function that receives the information</li>
-</ul>
-<ul>
-<li>make sure it returns anything, not error</li>
-</ul>
-<ul>
-<li>next(): call the next function in the stream</li>
-</ul>
-<ul>
-<li>expressJS<br>Middleware functions are functions that have access to the request object(req), the response object (res), and the next function in the application’s request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.</li>
-</ul>
-<p>Middleware functions can perform the following tasks:<br>Execute any code.<br>Make changes to the request and the response objects.<br>End the request-response cycle.<br>Call the next middleware in the stack.<br>If the current middleware function does not end the request-response cycle, it must call next() to pass control to the next middleware function. Otherwise, the request will be left hanging.</p>
-<p>Starting with Express 5, middleware functions that return a Promise will call next(value) when they reject or throw an error. next will be called with either the rejected value or the thrown Error.</p>
-<ul>
-<li>Angular (angular.io/guide/observables)<br>Note that a next() function could receive, for instance, message strings, or event objects, numeric values, or structures, depending on context. As a general term, we refer to data published by an observable as a stream. Any type of value can be represented with an observable, and the values are published as a stream.</li>
-</ul>
-<ul>
-<li>complete(): close the stream</li>
-</ul>
-<ol>
-<li><dl><dt>Cold Observable<br>: only one subscription at one<br>: receive last value in the stream<br>: stream one direction, prepare data and spread them all at one together</dt><dd>same info to all the users</dd></dl></li>
-<li><dl><dt>Hot Observable<br>: can connect to the same stream the other one<br>: multiple streamers</dt><dd>can use former value after next function</dd></dl></li>
-</ol>
-<ul>
-<li>debounceTime(k): wait for k(ms) after stopped typing and put arg in the stream</li>
-</ul>
-<p>👀 Why do we need both ngOnInit() and constructor()?<br>The Constructor is a default method of the class that is executed when the class is instantiated and ensures proper initialisation of fields in the class and its subclasses. Angular, or better Dependency Injector (DI), analyses the constructor parameters and when it creates a new instance by calling new MyClass() it tries to find providers that match the types of the constructor parameters, resolves them and passes them to the constructor like <code>new MyClass(someArg);</code></p>
-<p>ngOnInit is a life cycle hook called by Angular to indicate that Angular is done creating the component.</p>
-<ul>
-<li>constructor: rendoring first</li>
-</ul>
-<ul>
-<li>initialise mainly properties</li>
-<li>have nothing which could stop executing</li>
-</ul>
-<ul>
-<li>ngOnInit: happen after first rendor, fulfill others</li>
-</ul>
-<ul>
-<li>triggering the function, asking for datas, populate them in the final</li>
-</ul>
-<p>BEM (Block Element Modifier)</p>
-<p>getbem.com/naming</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1771,7 +1725,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
