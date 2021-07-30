@@ -20,24 +20,23 @@
     var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Authentication Authentication: who you are Authorization: what you are authorized to do  The Authorization HeaderHTTP&#x2F;1.1  browser ‘Inspect’ -&gt; Network  TypesBasichttp:&#x2F;&#x2F;www.base64decode.org Base64">
+  <meta name="description" content="Input첫째 줄에 M과 N, 그리고 K가 빈칸을 사이에 두고 차례로 주어진다. M, N, K는 모두 100 이하의 자연수이다. 둘째 줄부터 K개의 줄에는 한 줄에 하나씩 직사각형의 왼쪽 아래 꼭짓점의 x, y좌표값과 오른쪽 위 꼭짓점의 x, y좌표값이 빈칸을 사이에 두고 차례로 주어진다. 모눈종이의 왼쪽 아래 꼭짓점의 좌표는 (0,0)이고, 오른쪽 위 꼭">
 <meta property="og:type" content="article">
-<meta property="og:title" content="26. authentication">
-<meta property="og:url" content="https://leahincom.github.io/2021/03/03/26-authentication/index.html">
+<meta property="og:title" content="BOJ 2583">
+<meta property="og:url" content="https://leahincom.github.io/2021/07/30/boj-2583/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Authentication Authentication: who you are Authorization: what you are authorized to do  The Authorization HeaderHTTP&#x2F;1.1  browser ‘Inspect’ -&gt; Network  TypesBasichttp:&#x2F;&#x2F;www.base64decode.org Base64">
+<meta property="og:description" content="Input첫째 줄에 M과 N, 그리고 K가 빈칸을 사이에 두고 차례로 주어진다. M, N, K는 모두 100 이하의 자연수이다. 둘째 줄부터 K개의 줄에는 한 줄에 하나씩 직사각형의 왼쪽 아래 꼭짓점의 x, y좌표값과 오른쪽 위 꼭짓점의 x, y좌표값이 빈칸을 사이에 두고 차례로 주어진다. 모눈종이의 왼쪽 아래 꼭짓점의 좌표는 (0,0)이고, 오른쪽 위 꼭">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-02T22:31:30.000Z">
-<meta property="article:modified_time" content="2021-07-24T09:56:50.798Z">
+<meta property="article:published_time" content="2021-07-30T14:40:59.000Z">
+<meta property="article:modified_time" content="2021-07-30T06:52:19.317Z">
 <meta property="article:author" content="JungHyun">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="frontend">
-<meta property="article:tag" content="web">
-<meta property="article:tag" content="developer">
-<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="dfs">
+<meta property="article:tag" content="bfs">
+<meta property="article:tag" content="boj">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://leahincom.github.io/2021/03/03/26-authentication/">
+<link rel="canonical" href="https://leahincom.github.io/2021/07/30/boj-2583/">
 
 
 <script id="page-configurations">
@@ -50,7 +49,7 @@
   };
 </script>
 
-  <title>26. authentication | leah</title>
+  <title>BOJ 2583 | leah</title>
   
 
 
@@ -166,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/03/03/26-authentication/">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/30/boj-2583/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpeg">
@@ -179,7 +178,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          26. authentication
+          BOJ 2583
         </h1>
 
         <div class="post-meta">
@@ -188,27 +187,21 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-03-02 22:31:30" itemprop="dateCreated datePublished" datetime="2021-03-02T22:31:30Z">2021-03-02</time>
+              <time title="Created: 2021-07-30 15:40:59 / Modified: 07:52:19" itemprop="dateCreated datePublished" datetime="2021-07-30T15:40:59+01:00">2021-07-30</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
                 </span>
             </span>
 
@@ -230,58 +223,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h2><ul>
-<li>Authentication: who you are</li>
-<li>Authorization: what you are authorized to do</li>
-</ul>
-<h3 id="The-Authorization-Header"><a href="#The-Authorization-Header" class="headerlink" title="The Authorization Header"></a>The Authorization Header</h3><p>HTTP/1.1</p>
+        <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 M과 N, 그리고 K가 빈칸을 사이에 두고 차례로 주어진다. M, N, K는 모두 100 이하의 자연수이다.</p>
+<p>둘째 줄부터 K개의 줄에는 한 줄에 하나씩 직사각형의 왼쪽 아래 꼭짓점의 x, y좌표값과 오른쪽 위 꼭짓점의 x, y좌표값이 빈칸을 사이에 두고 차례로 주어진다. 모눈종이의 왼쪽 아래 꼭짓점의 좌표는 (0,0)이고, 오른쪽 위 꼭짓점의 좌표는(N,M)이다. 입력되는 K개의 직사각형들이 모눈종이 전체를 채우는 경우는 없다.</p>
 <ul>
-<li>browser ‘Inspect’ -&gt; Network</li>
+<li>좌표로 주어지는 직사각형 외의 공간을 구하는 문제이므로, 주어지는 직사각형의 영역은 <code>1</code> 로 표기해둔다.</li>
+<li>이 때, 좌표로 직사각형이 주어지므로 한 칸에 해당하는 좌표와 이를 구분해야 한다.</li>
+<li>즉, 한 칸의 영역은 <code>끝 좌표-1</code> 에 해당한다.</li>
 </ul>
-<h3 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h3><h4 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h4><p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">http://www.base64decode.org</a></p>
-<p>Base64 Decode and Encode - Online</p>
-<p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">www.base64decode.org</a><br>Autehntication based on username and password<br>concatenation with <code>:</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">m, n, k = <span class="built_in">map</span>(<span class="built_in">int</span>, sys.stdin.readline().split())</span><br><span class="line">board = [[<span class="number">0</span>]*(n) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">  x1, y1, x2, y2 = <span class="built_in">map</span>(<span class="built_in">int</span>, sys.stdin.readline().split())</span><br><span class="line">  x2 -= <span class="number">1</span></span><br><span class="line">  y2 -= <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> x_idx <span class="keyword">in</span> <span class="built_in">range</span>(x1, x2+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> y_idx <span class="keyword">in</span> <span class="built_in">range</span>(y1, y2+<span class="number">1</span>):</span><br><span class="line">      board[y_idx][x_idx] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Default"><a href="#Default" class="headerlink" title="Default"></a>Default</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">1000000</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><ul>
+<li><p>연속되는 공간을 찾을 때, 위/아래/양 옆을 체크하므로 <code>dir</code> 을 미리 세팅한다.</p>
+</li>
+<li><p>출력해야 하는 값이 <code>count</code> 와 <code>영역</code> 이므로 이 둘에 해당하는 변수를 생성한다.</p>
+</li>
+<li><p>모든 보드의 칸을 돌면서 <code>0</code> 인 경우 해당 영역의 넓이를 구하고 <code>count+1</code> 을 해야 하므로 가장 바깥쪽이자 전체를 도는 for문을 생성한다.</p>
 <ul>
-<li>Don’t store passwords in raw text, always hash it!</li>
-<li>Don’t use MD5 (Brute Force) since is becoming more insecure with the current computing power</li>
-<li>USE BCrypt(the standard nowadays): hash same input into different everytime<br>npm bcrypt</li>
+<li>0임을 체크하면, 다시 이 영역을 count하면 안 되므로 1로 세팅하고, 해당 영역부터 넓이를 체크해야 하므로 area는 1로 초기화, 그리고 dfs를 돈다.</li>
+<li>area를 <code>global</code> 로 설정하여 해당 변수를 result에 <code>append</code> 하여 이후 출력값을 <code>sort</code> 한다.</li>
+<li>또한, 연속된 0 값을 체크하여 영역을 세는 것이므로 <code>count++</code> 을 수행한다.</li>
 </ul>
-<h4 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h4><ul>
-<li>github personal access tokens<br>random token is shared between the server and the client, usually on another request<br>lasts for short time (normally 30sec)<br>Authorization = Bearer</li>
-</ul>
-<p>clinet: React, Angular …</p>
-<h4 id="JWT-Jason-Web-Tokens"><a href="#JWT-Jason-Web-Tokens" class="headerlink" title="JWT (Jason Web Tokens)"></a>JWT (Jason Web Tokens)</h4><p><a target="_blank" rel="noopener" href="https://jwt.io/">https://jwt.io</a><br>[algorithm &amp; token type]header-[data: that needs to be secured]payload(userId, iat)-[verifying key]verify signature: no one can change the content<br>signature =&gt; only if I have a secret, generates the signature / if input is different, signature will be different too</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="keyword">if</span> board[y][x] == <span class="number">0</span>:</span><br><span class="line">      board[y][x] = <span class="number">1</span></span><br><span class="line">      area = <span class="number">1</span></span><br><span class="line">      dfs(y, x)</span><br><span class="line">      result.append(area)</span><br><span class="line">      count += <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+<li><p>연속된 영역을 파악하기 위해 dfs를 돈다.</p>
 <ul>
-<li>can’t change the payload if the signature hasn’t been changed</li>
+<li>미리 생성해 둔 dir에 따라 연속된 넓이를 체크하고,</li>
+<li>이 때 범위 내의 값일 경우, 위와 동일하게 칸을 1로 세팅, 넓이를 +1하고 dfs를 이어서 수행한다.</li>
 </ul>
-<ul>
-<li>most bearer strategy: the token has all the info needed</li>
-<li>the only thing stored in the server is the stored passphrase</li>
-<li>the token is composed by the encryption information, the payload encoded in base64 and the signature</li>
-<li>less control on the token, the only way not to accept it is by using a blacklist</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">dy, dx</span>):</span></span><br><span class="line">  <span class="keyword">global</span> area</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> dd <span class="keyword">in</span> <span class="built_in">dir</span>:</span><br><span class="line">    x = dd[<span class="number">0</span>] + dx</span><br><span class="line">    y = dd[<span class="number">1</span>] + dy</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="number">0</span> &lt;= x &lt; n <span class="keyword">and</span> <span class="number">0</span> &lt;= y &lt; m:</span><br><span class="line">      <span class="keyword">if</span> board[y][x] == <span class="number">0</span>:</span><br><span class="line">        board[y][x] = <span class="number">1</span></span><br><span class="line">        area += <span class="number">1</span></span><br><span class="line">        dfs(y, x)</span><br></pre></td></tr></table></figure>
+
+
+</li>
 </ul>
-<h3 id="Sesson"><a href="#Sesson" class="headerlink" title="Sesson"></a>Sesson</h3><ul>
-<li>payload of data that relates to a user</li>
-<li>persisted in the server and is tagged with the ID</li>
-<li>writes ID in the cookie (piece of information)-&gt; how we are saved and tracked// and sends it to the browser</li>
-</ul>
-<ul>
-<li>everytime the browser performs a request to the server, it sends back the cookie with the ID in it</li>
-</ul>
-<p>session store: mongodb, file, etc…<br>npm express-session<br>npm helmet</p>
-<ul>
-<li>iframe: build website inside the website (element)</li>
-</ul>
-<h4 id="Oauth"><a href="#Oauth" class="headerlink" title="Oauth"></a>Oauth</h4><ul>
-<li>FireFox</li>
-</ul>
-<ul>
-<li>user, app and authentication provider</li>
-<li>lets us authenticate a user through an authentication provider, who manages the account of the user</li>
-<li>Authenticates a user within the activity of an app</li>
-<li>The credentials are not leaked to the app</li>
-<li>BUT gives the provider the information (e.g. google)<br>passport.js<br>oauth0<br>firebase authentication</li>
-</ul>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 분리되어 나누어지는 영역의 개수를 출력한다.</p>
+<p>둘째 줄에는 각 영역의 넓이를 오름차순으로 정렬하여 빈칸을 사이에 두고 출력한다.</p>
+<blockquote>
+<p><strong>int 배열 값을 str으로 하나씩 출력하는 법</strong></p>
+<p><code>&#39; &#39;.join(map(str, arr))</code> 를 통해 <code>1 7 13</code> 과 같이</p>
+<p><em>int 값을 str로 mapping하고 한 칸 띄어쓰기를 join</em> 한다.</p>
+<blockquote>
+<p> 런타임 에러가 뜰까봐 sys를 이용하는데, 알고리즘은 다 맞아놓고 자꾸 출력 형식에서 틀린다… 바보야…!!!!!!</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">result.sort()</span><br><span class="line">sys.stdout.write(<span class="built_in">str</span>(count))</span><br><span class="line">print()</span><br><span class="line">sys.stdout.write(<span class="string">&#x27; &#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, result)))</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -290,6 +277,12 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+              <a href="/tags/dfs/" rel="tag"># dfs</a>
+              <a href="/tags/bfs/" rel="tag"># bfs</a>
+              <a href="/tags/boj/" rel="tag"># boj</a>
+          </div>
 
         
 
@@ -297,13 +290,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/02/25-Security/" rel="prev" title="25. Security">
-      <i class="fa fa-chevron-left"></i> 25. Security
+    <a href="/2021/07/30/boj-1389/" rel="prev" title="BOJ 1389">
+      <i class="fa fa-chevron-left"></i> BOJ 1389
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/03/04/27-Redux/" rel="next" title="27. Redux">
-      27. Redux <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -362,7 +352,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Authentication"><span class="nav-number">1.</span> <span class="nav-text">Authentication</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Authorization-Header"><span class="nav-number">1.1.</span> <span class="nav-text">The Authorization Header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Types"><span class="nav-number">1.2.</span> <span class="nav-text">Types</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic"><span class="nav-number">1.2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Token"><span class="nav-number">1.2.2.</span> <span class="nav-text">Token</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JWT-Jason-Web-Tokens"><span class="nav-number">1.2.3.</span> <span class="nav-text">JWT (Jason Web Tokens)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sesson"><span class="nav-number">1.3.</span> <span class="nav-text">Sesson</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Oauth"><span class="nav-number">1.3.1.</span> <span class="nav-text">Oauth</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Input"><span class="nav-number">1.</span> <span class="nav-text">Input</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Default"><span class="nav-number">1.1.</span> <span class="nav-text">Default</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DFS"><span class="nav-number">2.</span> <span class="nav-text">DFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
