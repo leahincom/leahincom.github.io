@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source Code Pro:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans KR:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="들어가기에 앞서,Server Side Rendering을 지원하던 기존 Multi Page Form 방식에서 모바일 사용자가 증가함에 따라 React, Angular, Vue 등 Client Side Rendering이 가능한 SPA가 등장하게 되었다. SPA는 1개의 페이지에서 수정되는 부분만 리렌더링하는 등 여러 동작이 이루어진다. 그렇다면 SSR과 C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSR와 SSR의 차이를 토대로 Next.js 알기">
+<meta property="og:url" content="https://leahincom.github.io/2021/08/04/nextjs-basic/index.html">
+<meta property="og:site_name" content="leah">
+<meta property="og:description" content="들어가기에 앞서,Server Side Rendering을 지원하던 기존 Multi Page Form 방식에서 모바일 사용자가 증가함에 따라 React, Angular, Vue 등 Client Side Rendering이 가능한 SPA가 등장하게 되었다. SPA는 1개의 페이지에서 수정되는 부분만 리렌더링하는 등 여러 동작이 이루어진다. 그렇다면 SSR과 C">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.sarah-note.com/static/862e8950181629369ee391b5e4a11578/e5166/p1_ssr.jpg">
+<meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/boveg2/btqTxBHcFIg/zgpFFau2Q5LM5KljvJ8jcK/img.png">
+<meta property="og:image" content="https://media.vlpt.us/images/qkrdudgh052/post/c9c989f9-69e4-40be-98f1-a57c924bc187/2021-02-17%2020;09;29.PNG">
+<meta property="og:image" content="https://www.sarah-note.com/static/2b2c814f10a5726eac67db95d5d625e9/e5166/p1_csr.jpg">
+<meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/EqHVZ/btqTDcmi1nD/uS1y4kirBkLQN7JAy7Z6gk/img.png">
+<meta property="og:image" content="https://media.vlpt.us/images/qkrdudgh052/post/2eea0a96-212e-4bf6-bdcc-77475a25b329/2021-02-17%2020;12;48.PNG">
+<meta property="og:image" content="https://miro.medium.com/max/1400/1*mU0dHw7xyVDVQlopkdVJfA.png">
+<meta property="article:published_time" content="2021-08-03T16:44:02.000Z">
+<meta property="article:modified_time" content="2021-08-03T11:14:37.441Z">
+<meta property="article:author" content="JungHyun">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="next.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.sarah-note.com/static/862e8950181629369ee391b5e4a11578/e5166/p1_ssr.jpg">
+
+<link rel="canonical" href="https://leahincom.github.io/2021/08/04/nextjs-basic/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>CSR와 SSR의 차이를 토대로 Next.js 알기 | leah</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">leah</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">my dev_log</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/04/nextjs-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSR와 SSR의 차이를 토대로 Next.js 알기
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-03 17:44:02 / Modified: 12:14:37" itemprop="dateCreated datePublished" datetime="2021-08-03T17:44:02+01:00">2021-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="들어가기에-앞서"><a href="#들어가기에-앞서" class="headerlink" title="들어가기에 앞서,"></a>들어가기에 앞서,</h2><p>Server Side Rendering을 지원하던 기존 Multi Page Form 방식에서 모바일 사용자가 증가함에 따라 React, Angular, Vue 등 Client Side Rendering이 가능한 SPA가 등장하게 되었다. SPA는 1개의 페이지에서 수정되는 부분만 리렌더링하는 등 여러 동작이 이루어진다. 그렇다면 SSR과 CSR의 차이는 무엇일까?</p>
+<h3 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h3><p><img src="https://www.sarah-note.com/static/862e8950181629369ee391b5e4a11578/e5166/p1_ssr.jpg" alt="overview"></p>
+<p>서버에서 렌더링 작업을 수행하는 SSR은 사용자가 웹페이지에 접근할 때 서버에서 페이지에 대한 요청을 보내고, 서버에서 html, view 등의 리소스가 어떻게 보여질 지 해석되어 렌더링 후 사용자에게 반환하는 방식으로, 전체적인 프로세스는 다음과 같다.</p>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/boveg2/btqTxBHcFIg/zgpFFau2Q5LM5KljvJ8jcK/img.png"></p>
+<p>여기서 첫번째 단계는 다음과 같이 이루어진다.</p>
+<p><img src="https://media.vlpt.us/images/qkrdudgh052/post/c9c989f9-69e4-40be-98f1-a57c924bc187/2021-02-17%2020;09;29.PNG" alt="ssr"></p>
+<blockquote>
+<p>SSR이어도 Ajax 기능을 위해 클라이언트 렌더링 요소가 포함될 수 밖에 없다.</p>
+</blockquote>
+<p>쉽게 설명하면, 페이지를 구성해서 그에 해당하는 html을 다운받아 화면에 렌더링하는 것으로, CSR에 비해 다운 받는 파일이 많지 않아 초기 로딩 속도가 빠르고, 사용자가 빨리 콘텐츠를 볼 수 있다. 근데 이 과정이 <strong>브라우저 👉 프론트 서버 👉 백엔드 서버 👉 데이터 베이스</strong> 를 거쳐 데이터를 받고 역순으로 브라우저까지 데이터를 가져와 그려야 하기 때문에, 페이지 이동/ 클릭 등으로 다른 요청이 생길 때마다 이 과정을 반복하면 변경되지 않은 부분도 계속해서 리렌더링되는 문제점이 있다. (서버 부하 등의 문제를 일으킬 수 있음)</p>
+<h3 id="CSR"><a href="#CSR" class="headerlink" title="CSR"></a>CSR</h3><p><img src="https://www.sarah-note.com/static/2b2c814f10a5726eac67db95d5d625e9/e5166/p1_csr.jpg" alt="overview"></p>
+<p>CSR은 최초 1번만 서버에서 전체 페이지를 렌더링하여 보내주면, 이후에는 사용자의 요청이 올 때마다 리소스를 서버에서 제공받아 클라이언트가 해석하고 렌더링하는 방식이다. 전체적인 프로세스는 다음과 같다.</p>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/EqHVZ/btqTDcmi1nD/uS1y4kirBkLQN7JAy7Z6gk/img.png"></p>
+<p><img src="https://media.vlpt.us/images/qkrdudgh052/post/2eea0a96-212e-4bf6-bdcc-77475a25b329/2021-02-17%2020;12;48.PNG" alt="csr"></p>
+<blockquote>
+<p>SSR에 클라이언트 렌더링 요소가 포함된다면, CSR는 SSR 없이 일관된 코드를 작성할 수 있다. (물론 아닌 경우도 있음)</p>
+</blockquote>
+<p>즉, 먼저 데이터를 제외하고 화면을 그리는 코드들만 프론트 서버에서 다운받아진다. 이는 js 파일에 한번에 묶이기 때문에 첫 다운에 시간이 오래 걸린다. 따라서 초기 구동 속도가 SSR에 비해 느려지는데, 이는 <code>code splitting</code> 으로 해결할 수 있다. 하지만 아직 데이터를 다운 받은 상태가 아니다. 클라이언트의 요청이 발생하면 필요한 데이터만 백엔드 서버에 요청하여 받아온 후 해당 부분을 갱신하는 방식으로 SPA가 작동하기 때문에 서버 부하가 덜하다.</p>
+<blockquote>
+<p>이와 관련된 문제는 검색 엔진 최적화에 취약할 수 있다는 점이다.</p>
+<p>초기에 데이터 없이 html이 다운되기 때문에 검색봇이 해당페이지를 빈 페이지로 착각하여 Search Engine Optimization에 취약할 수 있다.</p>
+</blockquote>
+<h3 id="그래서-차이점은"><a href="#그래서-차이점은" class="headerlink" title="그래서 차이점은?"></a>그래서 차이점은?</h3><ul>
+<li>렌더링 속도</li>
+<li>SEO</li>
+<li>보안</li>
+</ul>
+<p>등의 차이가 있다.</p>
+<p>CSR은 사용자의 요청에 맞게 필요한 부분만 다시 읽기 때문에 서버에서 전체 페이지를 다시 읽는 것보다 빠른 반응 속도를 기대할 수 있다. 하지만 초기 로딩 시</p>
+<ol>
+<li>html 다운: 페이지를 읽고</li>
+<li>js 다운: js를 읽고</li>
+<li>js을 실행하고</li>
+</ol>
+<p>등등을 모두 마무리해야 사용자에게 콘텐츠가 보이기 때문에 <em>화면을 렌더링하기까지의</em> 초기 로딩 속도가 느리다. 하지만 그 이후에는 빠른 반응을 보인다.</p>
+<p>SSR은 서버에서 view를 렌더링하여 가져오기 때문에, 초기 로딩 속도 (초기 화면 렌더링 속도) 가 빠르다.</p>
+<h2 id="Next-js란"><a href="#Next-js란" class="headerlink" title="Next.js란?"></a>Next.js란?</h2><p>그래서 Next는 어떤 SSR과 CSR의 단점을 보완하는 걸까?</p>
+<p>SSR은 불필요한 부분까지 리렌더링 되어 서버 부하가 발생할 수 있다는 점, CSR은 초기 로딩 속도가 느리고 SEO에 취약하다는 단점이 있다.</p>
+<p>Next.js를 사용하여 첫페이지는 백엔드 서버에서 렌더링하여 빈 html이 아닌 데이터가 채워진 html을 받는다면 SEO 문제를 해결할 수 있다. 이후에는 CSR 방식에 따라 필요한 데이터만 받아 갱신한다면 서버 부하도 줄일 수 있다.</p>
+<p><img src="https://miro.medium.com/max/1400/1*mU0dHw7xyVDVQlopkdVJfA.png" alt="diff"></p>
+<h3 id="Next-js를-통해…"><a href="#Next-js를-통해…" class="headerlink" title="Next.js를 통해…"></a>Next.js를 통해…</h3><p>기존의 문제점인</p>
+<ul>
+<li>webpack과 같은 번들러를 통해 code를 번들하고 Babel과 같은 컴파일러로 변환해야 함</li>
+<li>code splitting과 같은 성능 최적화가 필요함</li>
+<li>성능과 SEO를 위해 몇몇 페이지를 pre-render 해야할 수 있음</li>
+<li>React app과 데이터 스토어를 연동하기 위해 SSR 코드를 작성해야 할 수 있음</li>
+<li>그냥, SSR과 CSR를 모두 사용하고 싶음</li>
+</ul>
+<p>을 해결할 수 있다.</p>
+<p>그러니까 Next.js의 특징은</p>
+<ul>
+<li>페이지 기반의 라우팅 시스템 (CRA 시 <code>page</code> folder 생성)</li>
+<li>한 페이지 당 SSG와 SSR을 지원해 pre-rendering 가능</li>
+<li>자동화된 code splitting을 통해 페이지 로딩을 빠르게 함</li>
+<li>Client Side Routing에 최적화된 prefetching을 지원함</li>
+<li>빌트인 CSS, Sass이 지원되며, 모든 CSS-in-JS 라이브러리를 지원함</li>
+<li>빠른 재구동 개발 환경을 지원함</li>
+<li>serverless 함수를 이용해 API를 개발할 수 있게 API 라우터를 지원함</li>
+<li>확장 가능함</li>
+</ul>
+<p>등이 있다.</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a target="_blank" rel="noopener" href="https://nextjs.org/learn/basics/create-nextjs-app">https://nextjs.org/learn/basics/create-nextjs-app</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/web/" rel="tag"># web</a>
+              <a href="/tags/react/" rel="tag"># react</a>
+              <a href="/tags/next-js/" rel="tag"># next.js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/03/boj-14501/" rel="prev" title="BOJ 14501">
+      <i class="fa fa-chevron-left"></i> BOJ 14501
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%93%A4%EC%96%B4%EA%B0%80%EA%B8%B0%EC%97%90-%EC%95%9E%EC%84%9C"><span class="nav-number">1.</span> <span class="nav-text">들어가기에 앞서,</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSR"><span class="nav-number">1.1.</span> <span class="nav-text">SSR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSR"><span class="nav-number">1.2.</span> <span class="nav-text">CSR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B7%B8%EB%9E%98%EC%84%9C-%EC%B0%A8%EC%9D%B4%EC%A0%90%EC%9D%80"><span class="nav-number">1.3.</span> <span class="nav-text">그래서 차이점은?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next-js%EB%9E%80"><span class="nav-number">2.</span> <span class="nav-text">Next.js란?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-js%EB%A5%BC-%ED%86%B5%ED%95%B4%E2%80%A6"><span class="nav-number">2.1.</span> <span class="nav-text">Next.js를 통해…</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">2.1.1.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="JungHyun"
+      src="/images/profile.jpeg">
+  <p class="site-author-name" itemprop="name">JungHyun</p>
+  <div class="site-description" itemprop="description">Continuously Growing Developer</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/leahincom" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;leahincom" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:leahincom@gmail.com" title="E-Mail → mailto:leahincom@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JungHyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
