@@ -163,6 +163,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/boj-2331/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/29/boj-2331/" class="post-title-link" itemprop="url">BOJ 2331</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-29 12:32:24" itemprop="dateCreated datePublished" datetime="2021-06-29T12:32:24+01:00">2021-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-03 02:16:45" itemprop="dateModified" datetime="2021-07-03T02:16:45+01:00">2021-07-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>첫째 줄에 A(1 ≤ A ≤ 9999), P(1 ≤ P ≤ 5)가 주어진다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A, P = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h4><ul>
+<li>반복되는 수를 찾을 때까지 같은 작업 반복</li>
+<li>반복되는 수를 찾았을 경우, 배열에 추가하지 않고 처음에 담겨있는 index를 받아 출력하면 중복되지 않는 수의 개수와 동일하다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">visited = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">num</span>):</span></span><br><span class="line">	.</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 중복되지 않을 경우</span></span><br><span class="line">  visited.append(num)</span><br><span class="line">  digit = [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">str</span>(num)]</span><br><span class="line">  now = <span class="number">0</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> digit:</span><br><span class="line">    now += x ** P</span><br><span class="line">  </span><br><span class="line">  dfs(now)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>첫째 줄에 반복되는 부분을 제외했을 때, 수열에 남게 되는 수들의 개수를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> num <span class="keyword">in</span> visited:</span><br><span class="line">  idx = visited.index(num)</span><br><span class="line">  print(idx)</span><br><span class="line">  <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/yarn-dependencies/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1240,90 +1330,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/21/python-list-set/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/21/python-list-set/" class="post-title-link" itemprop="url">리스트에서 중복 제거하기</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-20 22:33:12" itemprop="dateCreated datePublished" datetime="2021-06-20T22:33:12+01:00">2021-06-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-21 15:50:20" itemprop="dateModified" datetime="2021-06-21T15:50:20+01:00">2021-06-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>자료형 set은 크게 두가지 특징을 가지고 있다.</p>
-<ol>
-<li>중복을 허용하지 않는다.</li>
-<li>set 내부에 있는 값(value) 들은 순서가 존재하지 않는다.</li>
-</ol>
-<p>👉 <code>1</code> 의 특징을 이용하여 중복된 값을 list에서 제거한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listExample = <span class="built_in">list</span>(<span class="built_in">set</span>(listExample))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1395,7 +1401,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
