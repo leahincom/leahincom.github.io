@@ -163,6 +163,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/09/boj-10971/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/09/boj-10971/" class="post-title-link" itemprop="url">BOJ 10971</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-08 20:43:17 / Modified: 12:52:40" itemprop="dateCreated datePublished" datetime="2021-07-08T20:43:17+01:00">2021-07-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 도시의 수 N이 주어진다. (2 ≤ N ≤ 10) </p>
+<p>다음 N개의 줄에는 비용 행렬이 주어진다. 각 행렬의 성분은 1,000,000 이하의 양의 정수이며, 갈 수 없는 경우는 0이 주어진다. W[i][j]는 도시 i에서 j로 가기 위한 비용을 나타낸다.</p>
+<p><em>항상 순회할 수 있는 경우만 입력으로 주어진다.</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">10</span> ** <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">N = <span class="built_in">int</span>(sys.stdin.readline())</span><br><span class="line">cost = [<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, sys.stdin.readline().split())) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N)]</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><ul>
+<li><p>시작점을 모두 다르게 해서 탐색해야 하므로 <code>for</code> 문으로 dfs 실행</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> now <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">  dfs(now, now, <span class="number">0</span>, [now])</span><br></pre></td></tr></table></figure></li>
+<li><p>시작점이 아니며, <code>visited == False</code> 이며, <code>cost != 0</code> 인 경우 dfs 실행</p>
+<ul>
+<li>실행 시 visited <code>True</code> 체크 했다가 모든 확인을 마치고 <code>return</code> 후 dfs를 빠져나오면 해당 노드를 <code>False</code> 체크하여 다음 경우의 수를 검사하도록 함</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> idx <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">  <span class="keyword">if</span> cost[<span class="built_in">next</span>][idx] != <span class="number">0</span> <span class="keyword">and</span> idx <span class="keyword">not</span> <span class="keyword">in</span> visited:</span><br><span class="line">    visited.append(idx)</span><br><span class="line">    dfs(start, idx, total + cost[<span class="built_in">next</span>][idx], visited)</span><br><span class="line">    visited.pop()</span><br></pre></td></tr></table></figure></li>
+<li><p><code>visited</code> 의 길이가 <code>N</code> 인 경우 모든 노드를 방문한 것이므로 <code>start</code> 지점으로 돌아와야 한다. 이 때 <code>cost != 0</code> 이라면 <code>min</code> 을 업데이트한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(visited) == N:</span><br><span class="line">  <span class="keyword">if</span> cost[<span class="built_in">next</span>][start] != <span class="number">0</span>:</span><br><span class="line">    minCost = <span class="built_in">min</span>(minCost, total + cost[<span class="built_in">next</span>][start])</span><br><span class="line">  <span class="keyword">return</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>가장 중요한 것은: <em>현재 <code>total</code> 값이 이미 <code>minCost</code> 를 초과한 경우, <code>return</code> 을 통해 빠져나와야</em> 시간 초과가 뜨지 않는다!!!</strong></p>
+</li>
+</ul>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 외판원의 순회에 필요한 최소 비용을 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> <span class="built_in">len</span>(visited) == N:</span><br><span class="line">    <span class="keyword">if</span> cost[<span class="built_in">next</span>][start] != <span class="number">0</span>:</span><br><span class="line">      minCost = <span class="built_in">min</span>(minCost, total + cost[<span class="built_in">next</span>][start])</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">sys.stdout.write(<span class="built_in">str</span>(minCost))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/08/git-flowchart/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -991,81 +1083,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/yarn-dependencies/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/yarn-dependencies/" class="post-title-link" itemprop="url">yarn dependencies</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-29 01:28:53" itemprop="dateCreated datePublished" datetime="2021-06-29T01:28:53+01:00">2021-06-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-28 17:30:17" itemprop="dateModified" datetime="2021-06-28T17:30:17+01:00">2021-06-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h5 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a><code>dependencies</code></h5><p>These are your normal dependencies, or rather ones that you need when running your code (e.g. React or ImmutableJS).</p>
-<h5 id="devDependencies"><a href="#devDependencies" class="headerlink" title="devDependencies"></a><code>devDependencies</code></h5><p>These are your development dependencies. Dependencies that you need at some point in the development workflow <strong>but not while running your code</strong> (e.g. Babel or Flow).</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1137,7 +1154,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
