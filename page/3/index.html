@@ -163,6 +163,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/05/python-list-initialization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/05/python-list-initialization/" class="post-title-link" itemprop="url">리스트 초기화</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-05 11:42:12 / Modified: 03:44:02" itemprop="dateCreated datePublished" datetime="2021-07-05T11:42:12+01:00">2021-07-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="multiplication-과-for문의-차이"><a href="#multiplication-과-for문의-차이" class="headerlink" title="multiplication 과 for문의 차이"></a>multiplication 과 for문의 차이</h3><ul>
+<li>multiplication</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a =  [[<span class="number">1</span>]*<span class="number">8</span>]*<span class="number">8</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], \</span><br><span class="line"> [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], \</span><br><span class="line"> [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], \</span><br><span class="line"> [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>for</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>A =  [[<span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>)] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>A</span><br><span class="line">[[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], \</span><br><span class="line"> [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], \</span><br><span class="line"> [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], \</span><br><span class="line"> [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+<p>In your first version, you’re creating a list containing the number 1 and by multiplying it 8 times create a list containing 8 1s, and using <em>that</em> list 8 times to create <code>a</code>.</p>
+<p>So <strong>when you change anything in the first version, you’ll see that change everywhere else.</strong> Your problem being that you’re <strong>reusing the same instance,</strong> something that doesn’t happen in the second version.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/03/boj-2468/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -981,240 +1062,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/23/SOPT-diary-app-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/23/SOPT-diary-app-2/" class="post-title-link" itemprop="url">Diary App 만들기 - 2. Diary 구현</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-22 17:13:37" itemprop="dateCreated datePublished" datetime="2021-06-22T17:13:37+01:00">2021-06-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-23 10:16:18" itemprop="dateModified" datetime="2021-06-23T10:16:18+01:00">2021-06-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sopt/web-28th/" itemprop="url" rel="index"><span itemprop="name">WEB_28th</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Diary-App"><a href="#Diary-App" class="headerlink" title="Diary App"></a>Diary App</h2><p>6️⃣</p>
-<p>NewCard에 수정 API 연결하기</p>
-<p><code>api.js</code></p>
-<p>card를 추가함에 따라 기존의 rawData를 수정해야 한다. rawData[year][month]에 카드를 추가하면 데이터가 수정되기 때문. 하지만 json-server에는 수정 API (PUT method) 가 없기 때문에, 기존의 데이터에 수정된 데이터를 붙여 새로운 데이터를 만들어 POST 해줘야 한다.</p>
-<p>PUT과 POST의 차이는 다음과 같다.</p>
-<blockquote>
-<p>The <strong>PUT method</strong> requests that the enclosed entity be stored under the supplied Request-URI. If the Request-URI refers to an already existing resource, the enclosed entity SHOULD be considered as a modified version of the one residing on the origin server.</p>
-<img src="https://i.stack.imgur.com/8D8Z3.png" />
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const instance &#x3D; axios.create(&#123;</span><br><span class="line">  baseURL: &quot;http:&#x2F;&#x2F;localhost:3001&quot;,</span><br><span class="line">  timeout: 1000</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>똑같은 instance를 사용한 method가 2개 이상이 됨에 따라 instance를 생성하여 <code>get</code> , <code>post</code> 와 같은 method를 이용하였다. 이 때 <code>timeout</code> 이란, 해당 시간 동안 (이는 <code>ms</code> 기준이다!) 답을 얻지 못하면 block을 시켜버리는 것이다. 이 시간을 잘 조절해야 한다… (1000ms로 안 되는 데이터 송수신 양은 뜻하지 않게 에러를 부를 수 있다…)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export const createCardData &#x3D; async (userData) &#x3D;&gt; &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    const rawData &#x3D; await instance.post(&quot;&#x2F;posts&quot;, &#123;</span><br><span class="line">      data: userData</span><br><span class="line">    &#125;);</span><br><span class="line">    console.log(&quot;[SUCCESS] POST card data&quot;);</span><br><span class="line">    return rawData.data.data;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p> 수정할 데이터를 인자로 받으면, 이를 <code>post</code> 에 데이터로 전달한다. return data는 rawData라는 data 객체에서 data 파트의 우리가 정의한 data를 읽어와야 하기 때문에 <code>rawData.data.data</code> 가 된다.</p>
-<p><code>Main</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const [userData, setUserData] &#x3D; useState(null);</span><br><span class="line">const [rawData, setRawData] &#x3D; useState(null);</span><br></pre></td></tr></table></figure>
-<p>api로부터 받는 <code>rawData</code> 자체와 이를 year, month에 맞게 가져오는 <code>userData</code> 를 따로 정의한다. </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">  (async () &#x3D;&gt; &#123;</span><br><span class="line">    const data &#x3D; await getCardData();</span><br><span class="line">    setRawData(data);</span><br><span class="line">    data[year] &amp;&amp; setUserData(data[year][month]);</span><br><span class="line">  &#125;)();</span><br><span class="line">&#125;, [year, month]);</span><br></pre></td></tr></table></figure>
-<p><code>getCardData</code> 로 api를 호출하고 이를 rawData로 세팅한다. 이후 데이터가 존재하면, userData에 year과 month를 알맞게 전달하여 데이터를 받아 세팅한다.</p>
-<p>따로 받아오는 이유는 다음과 같은데,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;userData &amp;&amp;</span><br><span class="line">  userData.map((data, index) &#x3D;&gt; &#123;</span><br><span class="line">    return &lt;Card key&#x3D;&#123;index&#125; userData&#x3D;&#123;data&#125; &#x2F;&gt;;</span><br><span class="line">  &#125;)&#125;</span><br></pre></td></tr></table></figure>
-<p><code>Card</code> 에는 <code>userData</code> 를 전달해 데이터를 올바르게 읽어와야 하고,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;NewCard</span><br><span class="line">  year&#x3D;&#123;year&#125;</span><br><span class="line">  month&#x3D;&#123;month&#125;</span><br><span class="line">  rawData&#x3D;&#123;rawData&#125;</span><br><span class="line">  setUserData&#x3D;&#123;setUserData&#125;</span><br><span class="line">&#x2F;&gt;</span><br></pre></td></tr></table></figure>
-<p><code>NewCard</code> 에는 year, month 뿐만 아니라 <code>rawData</code> , <code>setUserData</code> 를 전달해야 하기 때문이다. 이 때 rawData를 전달하는 이유는, 새로운 카드를 생성할 때 그 때의 시점에서 rawData에 데이터를 추가해야 하기 때문이다. 또한, 해당 카드를 사용하기 위해 setUserData를 전달하여 시점을 해당 카드로 이동한다.</p>
-<p><code>NewCard</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const NewCard &#x3D; (&#123; year, month, rawData, setUserData &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  const createCard &#x3D; async () &#x3D;&gt; &#123;</span><br><span class="line">    const cardForm &#x3D; &#123;</span><br><span class="line">      date: getDate(),</span><br><span class="line">      title: &quot;&quot;,</span><br><span class="line">      image: &quot;&quot;,</span><br><span class="line">      weather: &quot;&quot;,</span><br><span class="line">      tags: [],</span><br><span class="line">      summary: &quot;&quot;,</span><br><span class="line">      text: &quot;&quot;</span><br><span class="line">    &#125;;</span><br><span class="line">    rawData[year][month].push(cardForm);</span><br><span class="line">    const data &#x3D; await createCardData(rawData);</span><br><span class="line">    data[year] &amp;&amp; setUserData(data[year][month]);</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
-<p>위에서 내려준 데이터를 받아 카드를 새로 생성하는 컴포넌트이다. createCard는 데이터를 받아 세팅해야 하니 <code>async</code> 로 설정하고, 기본적인 <code>cardForm</code> 을 만들어 이를 rawData의 year, month에 설정함으로써 새로운 데이터를 push한다. 이후 <code>createCardData</code> api를 통해 post하여 data를 생성 (원래는 수정) 한다. 정상적으로 작동할 경우 data를 반환해야 하니 해당 데이터가 반환되는 것이 확인되면, <code>setUserData</code> 를 통해 데이터를 세팅한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className&#x3D;&quot;card&quot; onClick&#x3D;&#123;createCard&#125;&gt;</span><br><span class="line">  &lt;div className&#x3D;&quot;card__text&quot;&gt;+ 추가해 주세요&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>카드를 생성하기 위해서, 클릭했을 때 위에서 정의한 <code>createCard</code> 를 onClick에 대한 함수로 설정한다. 이 때, tag 종류에 상관 없이 onClick이 정의 가능하다! (button, div 등)</p>
-<p><code>Card</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className&#x3D;&quot;card__title&quot;&gt;&#123;title ? title : &quot;제목 없음&quot;&#125;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>기존의 card__title 형식을 {title}에서 조건을 추가하여, title이 없을 경우 “제목 없음”을 렌더링하도록 설정한다.</p>
-<hr>
-<p>7️⃣</p>
-<p>카드 클릭시 Diary 뷰로 이동하기</p>
-<p><code>App.js</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route</span><br><span class="line">  path&#x3D;&quot;&#x2F;diary&#x2F;:id&quot;</span><br><span class="line">  component&#x3D;&#123;() &#x3D;&gt; &lt;Diary year&#x3D;&#123;year&#125; month&#x3D;&#123;month&#125; &#x2F;&gt;&#125;</span><br><span class="line">&#x2F;&gt;</span><br><span class="line">&lt;Route</span><br><span class="line">  path&#x3D;&quot;&#x2F;diary&#x2F;edit&#x2F;:id&quot;</span><br><span class="line">  component&#x3D;&#123;() &#x3D;&gt; &lt;Diary year&#x3D;&#123;year&#125; month&#x3D;&#123;month&#125; &#x2F;&gt;&#125;</span><br><span class="line">&#x2F;&gt;</span><br></pre></td></tr></table></figure>
-<p>기존에는 component에 컴포넌트만 전달했다면, 이제는 year, month를 props로 전달한다.</p>
-<p><code>diary/Card.js</code></p>
-<p>그리고, diary page에서 보이는 card 컴포넌트를 정의한다. diary에서는 카드를 읽고/ 수정할 수 있기 때문에, 이를 url 매칭 여부에 따라 조절한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const Card &#x3D; (&#123; userData, match &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  const isReadOnly &#x3D; match.path &#x3D;&#x3D;&#x3D; &quot;&#x2F;diary&#x2F;:id&quot; ? true : false;</span><br><span class="line">  const &#123; title, date, image, weather, tags, summary, text &#125; &#x3D; userData;</span><br></pre></td></tr></table></figure>
-<p>받아온 userData를 구조분해할당하여 일단 다음과 같이 렌더링 하고,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">return (</span><br><span class="line">  &lt;CardWrap&gt;</span><br><span class="line">    &lt;p&gt;&#123;title&#125;&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;&#123;date&#125;&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;img src&#x3D;&#123;image&#125; width&#x3D;&quot;200&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">    &lt;p&gt;&#123;weather&#125;&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;&#123;tags&#125;&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;&#123;summary&#125;&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;&#123;text&#125;&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;&#x2F;CardWrap&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>match를 이용하기 위해 withRouter를 사용한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export default withRouter(Card);</span><br></pre></td></tr></table></figure>
-
-
-<p><code>Main.js</code></p>
-<p>history 사용을 위해 withRouter를 설정한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import &#123; withRouter &#125; from &quot;react-router-dom&quot;;</span><br><span class="line"></span><br><span class="line">const Main &#x3D; (&#123; year, month, history &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default withRouter(Main);</span><br></pre></td></tr></table></figure>
-
-
-<p>카드를 렌더링한 후 개별적으로 선택할 때마다, history에 각각이 가지고 있는 <code>id</code> 를 포함한 url을 push하여 카드가 렌더링되도록 한다. 이를 위해 Card 컴포넌트에 <code>onClickFunc</code> 을 전달한다. 여기서 이 function을 정의하고 전달하는 이유는, 카드 목록에서 선택한 카드를 렌더링하기 위해서는 목록에서 선택한 후 해당 url로 이동해야 하기 때문이다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Card</span><br><span class="line">  key&#x3D;&#123;index&#125;</span><br><span class="line">  userData&#x3D;&#123;data&#125;</span><br><span class="line">  onClickFunc&#x3D;&#123;() &#x3D;&gt; history.push(&#96;&#x2F;diary&#x2F;$&#123;data.id&#125;&#96;)&#125;</span><br><span class="line">&#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>카드 목록 끝에는 새 카드를 생성하는 NewCard 컴포넌트가 필요하다. 이 때, 생성하는 시점의 year, month, 해당 카드를 추가하기 위한 rawData, 설정하기 위한 setUserData, 그리고 id를 생성해 props로 설정한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;NewCard</span><br><span class="line">  year&#x3D;&#123;year&#125;</span><br><span class="line">  month&#x3D;&#123;month&#125;</span><br><span class="line">  rawData&#x3D;&#123;rawData&#125;</span><br><span class="line">  setUserData&#x3D;&#123;setUserData&#125;</span><br><span class="line">  id&#x3D;&#123;userData ? userData.length + 1 : 1&#125;</span><br><span class="line">&#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p><code>main/Card.js</code></p>
-<p><code>onClickFunc</code> 을 전달하여 onClick 에 대한 함수로 설정한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const Card &#x3D; (&#123; userData, onClickFunc &#125;) &#x3D;&gt; &#123;</span><br><span class="line">	  return (</span><br><span class="line">    &lt;CardWrap&gt;</span><br><span class="line">      &lt;div className&#x3D;&quot;card&quot; onClick&#x3D;&#123;onClickFunc&#125;&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p><code>NewCard.js</code></p>
-<p>위에서 전달한 <code>id</code> 를 받아 cardForm의 프로퍼티로 추가한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const NewCard &#x3D; (&#123; id, year, month, rawData, setUserData &#125;) &#x3D;&gt; &#123;</span><br><span class="line">      const cardForm &#x3D; &#123;</span><br><span class="line">      date: getDate(),</span><br><span class="line">      id: id,</span><br><span class="line">      title: &quot;&quot;,</span><br><span class="line">      image: &quot;&quot;,</span><br><span class="line">      weather: &quot;&quot;,</span><br><span class="line">      tags: [],</span><br><span class="line">      summary: &quot;&quot;,</span><br><span class="line">      text: &quot;&quot;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
-
-
-<p><code>Diary.js</code></p>
-<p>withRouter를 설정하여 match를 사용할 수 있도록 한다음, match에서 전달받은 (현재 선택한) 카드의 id를 받아온다. 이후 api를 사용하여 rawData를 불러와 <code>find</code> 를 통해 해당 id와 일치하는 데이터를 가져와 지금의 diaryData로 세팅한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const Diary &#x3D; (&#123; year, month, match &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  const id &#x3D; match.params.id;</span><br><span class="line">  const [diaryData, setDiaryData] &#x3D; useState(null);</span><br><span class="line"></span><br><span class="line">  useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">    (async () &#x3D;&gt; &#123;</span><br><span class="line">      const data &#x3D; await getCardData();</span><br><span class="line">      data[year] &amp;&amp; setDiaryData(data[year][month].find((el) &#x3D;&gt; el.id &#x3D;&#x3D;&#x3D; id));</span><br><span class="line">    &#125;)();</span><br><span class="line">  &#125;, [id]);</span><br><span class="line">  </span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">export default withRouter(Diary);</span><br></pre></td></tr></table></figure>
-
-
-<p>앞에서 설정한 <code>diaryData</code> 를 가지고 Card 컴포넌트를 렌더링한다. 계속 사용하고 있었지만, api를 사용해서 데이터를 불러와 세팅하는 과정을 useEffect로 포함한다면 이를 올바르게 렌더링하기 위해 (null 값이 뜨는 버그가 발생하지 않게…) 데이터가 존재할 때만 렌더링되도록 <code>&amp;&amp;</code> 조건을 설정해야 한다!</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return diaryData &amp;&amp; &lt;Card diaryData&#x3D;&#123;diaryData&#125; &#x2F;&gt;;</span><br></pre></td></tr></table></figure>
-
-
-<p>8️⃣</p>
-<p>Diary 뷰 Header 구현하기</p>
-<p><code>diary/Card.js</code></p>
-<p>앞서 정의했던 <code>isReadOnly</code> 를 <code>CardHeader</code> 컴포넌트에 전달하여 수정 상태 여부에 따라 다르게 렌더링 될 수 있도록 한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;CardHeader title&#x3D;&#123;title&#125; isReadOnly&#x3D;&#123;isReadOnly&#125; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p><code>diary/CardHeader.js</code></p>
-<p><code>title</code> 의 경우 직접 작성하는 것이므로 <code> input</code> 으로 설정해 수정되는 값을 전달하고 받을 수 있도록 설정한다. 특히 input에서 주의할 점은 value를 설정해야 한다는 것! value를 설정하지 않으면 input이 적절하게 작동하지 않는다..</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const CardHeader &#x3D; (&#123; title, isReadOnly &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;CardHeaderWrap&gt;</span><br><span class="line">      &lt;input</span><br><span class="line">        type&#x3D;&quot;text&quot;</span><br><span class="line">        className&#x3D;&quot;header__title&quot;</span><br><span class="line">        placeholder&#x3D;&quot;제목을 입력해 주세요&quot;</span><br><span class="line">        value&#x3D;&#123;title&#125;</span><br><span class="line">        readOnly&#x3D;&#123;isReadOnly&#125;</span><br><span class="line">      &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>이 외에도 수정, 삭제를 위해 버튼을 생성한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;button className&#x3D;&quot;header__edit&quot;&gt;수정&lt;&#x2F;button&gt;</span><br><span class="line">&lt;button className&#x3D;&quot;header__delete&quot;&gt;삭제&lt;&#x2F;button&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>9️⃣</p>
-<p>Diary 상세기능 뷰 구현하기</p>
-<p><code>Card.js</code> : Card의 모든 내용을 포함하고 있는, 카드 전체</p>
-<p>구조분해할당으로 일일히 가져오던 데이터를 <code>state</code> 에 저장하여 사용하도록 한다. 이유는 onChange에 따른 변화를 저장하기 위함이다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const [state, setState] &#x3D; useState(userData);</span><br><span class="line"></span><br><span class="line">const handleChange &#x3D; (e) &#x3D;&gt; &#123;</span><br><span class="line">  const name &#x3D; e.target.name;</span><br><span class="line"></span><br><span class="line">  setState(&#123;</span><br><span class="line">    ...state,</span><br><span class="line">    [name]: e.target.value</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>이 때 setState에 기본적으로 <code>userData</code> 를 넣어놨기 때문에, 수정된 부분만 반영하기 위해서 <code>...</code> 로 기존의 정보를 풀고, <strong><code>[변수]</code> 을 이용하여 해당 <code>변수</code> 가 담고 있는 값을 가진 프로퍼티를 수정한다.</strong> </p>
-<p>해당 <code>handleChange</code> 를 적용하기 위해, 각 부분에 이를 전달한다. 이 때, 각 컴포넌트는 <code>state</code> 로 전달하는 값을 변경하고 저장한다. 또한, 읽기모드에서는 수정이 불가하게 하기 위해 <code>isReadOnly</code> 를 통해 이를 관리한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;CardHeader</span><br><span class="line">  title&#x3D;&#123;state.title&#125;</span><br><span class="line">  handleChange&#x3D;&#123;handleChange&#125;</span><br><span class="line">  isReadOnly&#x3D;&#123;isReadOnly&#125;</span><br><span class="line">&#x2F;&gt;</span><br><span class="line">&lt;CardInfo</span><br><span class="line">  userData&#x3D;&#123;state&#125;</span><br><span class="line">  isReadOnly&#x3D;&#123;isReadOnly&#125;</span><br><span class="line">  handleChange&#x3D;&#123;handleChange&#125;</span><br><span class="line">&#x2F;&gt;</span><br><span class="line">&lt;textarea</span><br><span class="line">  placeholder&#x3D;&quot;오늘을 기록해 주세요&quot;</span><br><span class="line">  isReadOnly&#x3D;&#123;isReadOnly&#125;</span><br><span class="line">  value&#x3D;&#123;state.text&#125;</span><br><span class="line">  name&#x3D;&quot;text&quot;</span><br><span class="line">  onChange&#x3D;&#123;handleChange&#125;</span><br><span class="line">&#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p><code>CardInfo.js</code> : Card의 상세정보를 담고 있는 컴포넌트</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import FormControl from &quot;@material-ui&#x2F;core&#x2F;FormControl&quot;;</span><br><span class="line">import NativeSelect from &quot;@material-ui&#x2F;core&#x2F;NativeSelect&quot;;</span><br><span class="line">import &#123; makeStyles, withStyles &#125; from &quot;@material-ui&#x2F;core&#x2F;styles&quot;;</span><br><span class="line">import InputBase from &quot;@material-ui&#x2F;core&#x2F;InputBase&quot;;</span><br></pre></td></tr></table></figure>
-<p>위의 라이브러리는 모두 <strong>materialUI</strong> 를 사용하기 위해 import 한 것이다.</p>
-<p>스타일을 사용한 부분은 날씨 select 파트로, 옵션에 스타일을 주기 위해 정의하였다. materialUI에서 선택한 테마를 사용하기 위해 정의한 것들은 다음과 같다.</p>
-<ol>
-<li><p><code>makeStyles</code> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const useStyles &#x3D; makeStyles(&#123;</span><br><span class="line">  select: &#123;</span><br><span class="line">    &quot;&amp; .MuiSvgIcon-root&quot;: &#123;</span><br><span class="line">      display: &quot;none&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const classes &#x3D; useStyles();</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;NativeSelect</span><br><span class="line">              className&#x3D;&#123;classes.select&#125;</span><br><span class="line">  						...</span><br><span class="line">  						&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p><code>withStyles</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const BootstrapInput &#x3D; withStyles((theme) &#x3D;&gt; (&#123;</span><br><span class="line">  input: &#123;</span><br><span class="line">    borderRadius: 5,</span><br><span class="line">    position: &quot;relative&quot;,</span><br><span class="line">    backgroundColor: &quot;white&quot;,</span><br><span class="line">    border: &quot;1px solid #CEA0E3&quot;,</span><br><span class="line">    fontSize: 18,</span><br><span class="line">    padding: &quot;5px 7px&quot;,</span><br><span class="line">    transition: theme.transitions.create([&quot;border-color&quot;, &quot;box-shadow&quot;]),</span><br><span class="line">    background: &#96;url($&#123;Select&#125;) no-repeat 95% 50%&#96;,</span><br><span class="line">    &quot;&amp;:focus&quot;: &#123;</span><br><span class="line">      borderRadius: 5,</span><br><span class="line">      borderColor: &quot;#CEA0E3&quot;,</span><br><span class="line">      backgroundColor: &quot;white&quot;,</span><br><span class="line">      boxShadow: &quot;0 0 0 0.2rem rgba(206,160,227,.25)&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;))(InputBase);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;NativeSelect</span><br><span class="line">              ...</span><br><span class="line">              input&#x3D;&#123;&lt;BootstrapInput &#x2F;&gt;&#125;</span><br><span class="line">            	&gt;</span><br></pre></td></tr></table></figure>
-<p>위와 같은 스타일이 적용된 전체적인 구조는 다음과 같다.</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;날씨&lt;&#x2F;span&gt;</span><br><span class="line">&#123;isReadOnly ? (</span><br><span class="line">  &lt;input</span><br><span class="line">    type&#x3D;&quot;text&quot;</span><br><span class="line">    isReadOnly&#x3D;&#123;isReadOnly&#125;</span><br><span class="line">    value&#x3D;&#123;weather&#125;</span><br><span class="line">    placeholder&#x3D;&quot;날씨를 선택해주세요&quot;</span><br><span class="line">  &#x2F;&gt;</span><br><span class="line">) : (</span><br><span class="line">  &lt;FormControl&gt;</span><br><span class="line">    &lt;NativeSelect</span><br><span class="line">      className&#x3D;&#123;classes.select&#125;</span><br><span class="line">      value&#x3D;&#123;weather&#125;</span><br><span class="line">      name&#x3D;&quot;weather&quot;</span><br><span class="line">      onChange&#x3D;&#123;handleChange&#125;</span><br><span class="line">      input&#x3D;&#123;&lt;BootstrapInput &#x2F;&gt;&#125;</span><br><span class="line">    &gt;</span><br><span class="line">      &lt;option value&#x3D;&quot;&quot; disabled&gt;</span><br><span class="line">        날씨를 선택해주세요</span><br><span class="line">      &lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&#123;&quot;맑음&quot;&#125;&gt;맑음&lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&#123;&quot;구름&quot;&#125;&gt;구름&lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&#123;&quot;흐림&quot;&#125;&gt;흐림&lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&#123;&quot;비&quot;&#125;&gt;비&lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&#123;&quot;눈&quot;&#125;&gt;눈&lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&#123;&quot;바람&quot;&#125;&gt;바람&lt;&#x2F;option&gt;</span><br><span class="line">    &lt;&#x2F;NativeSelect&gt;</span><br><span class="line">  &lt;&#x2F;FormControl&gt;</span><br><span class="line">)&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>태그의 경우, 태그 배열이 비어있지 않은 경우, 즉 길이가 0보다 큰 경우에만 <code>map</code> 으로 배열을 순회하도록 하였다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className&#x3D;&quot;info__tags&quot;&gt;</span><br><span class="line">  &lt;span&gt;태그&lt;&#x2F;span&gt;</span><br><span class="line">  &#123;tags.length &gt; 0 ? (</span><br><span class="line">    tags.map((tag, index) &#x3D;&gt; &#123;</span><br></pre></td></tr></table></figure>
-<p>만약 배열이 비어있다면, <code>input</code> 필드로 락을 걸어놓는다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">  type&#x3D;&quot;text&quot;</span><br><span class="line">  isReadOnly&#x3D;&#123;true&#125;</span><br><span class="line">  value&#x3D;&quot;&quot;</span><br><span class="line">  placeholder&#x3D;&quot;태그를 선택해주세요&quot;</span><br><span class="line">&#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>그 외는 <code>textarea</code> 로 내용을 담는다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;textarea</span><br><span class="line">  placeholder&#x3D;&quot;오늘을 기록해 주세요&quot;</span><br><span class="line">  isReadOnly&#x3D;&#123;isReadOnly&#125;</span><br><span class="line">  value&#x3D;&#123;state.text&#125;</span><br><span class="line">  name&#x3D;&quot;text&quot;</span><br><span class="line">  onChange&#x3D;&#123;handleChange&#125;</span><br><span class="line">&#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>🔟</p>
-<p>카드 수정 기능 구현</p>
-<p><code>diary/Card.js</code></p>
-<p>CardHeader에서 수정 기능을 이용할 수 있도록, 이를 포함하고 있는 diary 페이지의 Main 최상단 컴포넌트 Card에서 <code>handleEdit</code> 을 정의하고 넘겨준다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const id &#x3D; parseInt(match.params.id);  </span><br><span class="line"></span><br><span class="line">  const handleEdit &#x3D; async () &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; const index &#x3D; rawData[year][month].findIndex((data) &#x3D;&gt; data.id &#x3D;&#x3D;&#x3D; id);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; newList를 따로 만드는 이유? rawData가 state의 readOnly 값이기 때문에 newList로 값을 복사해서 사용합니다</span><br><span class="line">    const newList &#x3D; rawData[year].filter((data) &#x3D;&gt; data); &#x2F;&#x2F; 새로운 배열 반환</span><br><span class="line">    newList[month][id] &#x3D; state;</span><br><span class="line">    const data &#x3D; await createCardData(rawData);</span><br><span class="line">    history.goBack();</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">export default withRouter(Card);</span><br></pre></td></tr></table></figure>
-<p>rawData 자체는 읽기 전용이기 때문에, 이를 준수하기 위해 <code>filter</code> 함수를 이용해 새로운 리스트인 <code>newList</code> 를 생성하고 데이터를 담는다. 여기서 id에 맞게 state를 저장한 후, 새롭게 변경된 rawData는 POST api를 통해 (PUT 대신) createCardData로 업로드 해준다. 마지막으로, 수정이 완료되었을 때 완료 버튼을 클릭하여 해당 과정을 진행하는 것이므로, 이를 끝마친 후 확인 상태로 돌아가기 위해 <code>history.goBack()</code> 을 통해 뷰 단계로 돌아간다.</p>
-<p><code>diary/CardHeader.js</code></p>
-<p>Card에서 내려받은 <code>handleEdit</code> 을 이용하여 직접 수정하는 부분은 다음과 같다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const CardHeader &#x3D; (&#123;</span><br><span class="line">  title,</span><br><span class="line">  isReadOnly,</span><br><span class="line">  handleChange,</span><br><span class="line">  handleEdit,</span><br><span class="line">  match,</span><br><span class="line">  history</span><br><span class="line">&#125;) &#x3D;&gt; &#123;</span><br><span class="line">  		const id &#x3D; match.params.id;</span><br><span class="line">      .</span><br><span class="line">      .</span><br><span class="line">      .</span><br><span class="line">      </span><br><span class="line">			&#123;isReadOnly ? (</span><br><span class="line">        &lt;button</span><br><span class="line">          className&#x3D;&quot;header__edit&quot;</span><br><span class="line">          onClick&#x3D;&#123;() &#x3D;&gt; history.push(&#96;&#x2F;diary&#x2F;edit&#x2F;$&#123;id&#125;&#96;)&#125;</span><br><span class="line">        &gt;</span><br><span class="line">          수정</span><br><span class="line">        &lt;&#x2F;button&gt;</span><br><span class="line">      ) : (</span><br><span class="line">        &lt;button className&#x3D;&quot;header__edit&quot; onClick&#x3D;&#123;handleEdit&#125;&gt;</span><br><span class="line">          완료</span><br><span class="line">        &lt;&#x2F;button&gt;</span><br><span class="line">      )&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>수정 버튼을 클릭하면 <code>history.push</code> 를 통해 현재 <code>id</code> 의 edit url로 이동한다.</li>
-<li>완료 버튼을 클릭하면 전달받은 <code>handleEdit</code> 을 실행시켜 변경된 데이터를 저장하고 메인 뷰로 돌아간다.</li>
-</ol>
-<p><code>pages/Diary.js</code></p>
-<p>먼저, year에 맞는 data가 존재한다면 (rough하게 year만 찾기) setDiaryData를 이용해 현재 match의 id 값과 일치하는 데이터를 month 배열에서 찾아 저장한다. 또한, rawData 자체도 저장하여 Card에 이를 전달하여 수정/이용할 수 있도록 한다.</p>
-<p>마찬가지로, null 에러가 뜨지 않기 위해 <code>diaryData &amp;&amp;</code> 를 통해 데이터가 존재할 때만 Card 컴포넌트를 렌더링 하도록 한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const id &#x3D; match.params.id;</span><br><span class="line"></span><br><span class="line">useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">    (async () &#x3D;&gt; &#123;</span><br><span class="line">      const data &#x3D; await getCardData();</span><br><span class="line">      data[year] &amp;&amp; setDiaryData(data[year][month].find((el) &#x3D;&gt; el.id &#x3D;&#x3D;&#x3D; id));</span><br><span class="line">      setRawData(data);</span><br><span class="line">    &#125;)();</span><br><span class="line">  &#125;, [id]);</span><br><span class="line">  </span><br><span class="line">  return (</span><br><span class="line">    diaryData &amp;&amp; (</span><br><span class="line">      &lt;Card userData&#x3D;&#123;diaryData&#125; rawData&#x3D;&#123;rawData&#125; year&#x3D;&#123;year&#125; month&#x3D;&#123;month&#125; &#x2F;&gt;</span><br><span class="line">    )</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
-
-
-<p>카드 삭제 기능 구현</p>
-<p><code>diary/Card.js</code></p>
-<p>삭제 기능은 위의 <code>handleEdit</code> 과 비슷하게, newList를 만들어 그에 변경된 데이터를 집어넣고 POST api를 통해 업로드한 뒤 전 url로 돌아간다.</p>
-<p>여기서 다른 점은, <code>filter</code> 함수를 통해 삭제하고자 하는 현 카드 외의 데이터만 남겨 <code>filteredList</code> 에 반환해야 한다는 점이다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const handleDelete &#x3D; async () &#x3D;&gt; &#123;</span><br><span class="line">  const filteredList &#x3D; rawData[year][month].filter((data) &#x3D;&gt; data.id !&#x3D;&#x3D; id);</span><br><span class="line">  const newList &#x3D; rawData[year].filter((data) &#x3D;&gt; data);</span><br><span class="line">  newList[month] &#x3D; filteredList;</span><br><span class="line">  const data &#x3D; await createCardData(rawData);</span><br><span class="line">  history.goBack();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>이를 CardHeader에 전달하고 CardHeader은 이를 전달받아 onClick 함수로 지정하는 모든 과정은 수정과 동일하다.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1286,7 +1133,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
