@@ -163,6 +163,108 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/31/boj-14916/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/31/boj-14916/" class="post-title-link" itemprop="url">BOJ 14916</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-30 16:10:23 / Modified: 08:23:37" itemprop="dateCreated datePublished" datetime="2021-07-30T16:10:23+01:00">2021-07-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 거스름돈 액수 n(1 ≤ n ≤ 100,000)이 주어진다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>거스름돈 동전의 최소 개수를 출력한다.</p>
+<p>만약 거슬러 줄 수 없으면 -1을 출력한다.</p>
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>최소 거스름돈 개수를 구해야 하기 때문에, 큰 수인 5로 거스름돈을 나누기 시작해야 한다.</p>
+<p>그리고 5로 나눈 나머지를 2로 나누었을 때 0이 되면 그게 정답이 되고, 0이 아니면 5를 줄이고 2를 늘려봐야 한다.</p>
+<p>그래도 답이 안 나오면 거슬러 줄 수 없는 경우(e.g. 1)이므로 -1을 출력하면 됨.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> five <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(n/<span class="number">5</span>), -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">  coin = five</span><br><span class="line">  money = n - (<span class="number">5</span> * five)</span><br><span class="line">  <span class="keyword">if</span> money % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">    coin += <span class="built_in">int</span>(money / <span class="number">2</span>)</span><br><span class="line">    print(coin)</span><br><span class="line">    exit()</span><br><span class="line">    </span><br><span class="line">print(-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Better-Solution"><a href="#Better-Solution" class="headerlink" title="Better Solution"></a>Better Solution</h4><p>DP 문제인 만큼, 형식에 맞게 풀어보자.</p>
+<ol start="0">
+<li><p><strong>Default</strong></p>
+<ul>
+<li>매번 <code>sys.stdin.readline</code>  을 치기보다, 기본처럼 <code>input()</code> 으로 간단하게 처리하기 위해 아래와 같이 세팅한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 나머지</span></span><br><span class="line">num = n % <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 동전 개수</span></span><br><span class="line">count = <span class="number">0</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Exception</strong> : 5보다 작은 수 중 2로 나눌 수 없는 <strong>1이나 3</strong> 일 경우, 2나 5로 나눌 수 없기 때문에 <strong>-1을 출력한다.</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> n == <span class="number">1</span> <span class="keyword">or</span> n == <span class="number">3</span>:</span><br><span class="line">	print(-<span class="number">1</span>)</span><br><span class="line">	exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>5로 먼저 나눈 후, 나머지가 2로 나눠지면</strong> 5로 나눈 몫과 2로 나눈 몫을 더하여 출력한다.</p>
+<blockquote>
+<p>몫을 <code>int(n / 5)</code> 와 같이 처리하지 말고, python의 <code>//</code> 를 활용하자!</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">elif</span> num % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">	print(n // <span class="number">5</span> + num // <span class="number">2</span>)</span><br><span class="line">	exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>나머지가 2로 나눠떨어지지 않는 경우, 5의 몫을 -1하고 (나머지에 5를 더하여) 다시 2로 나눈 몫과 5로 나눈 몫을 더하여 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	print((n // <span class="number">5</span> - <span class="number">1</span>) + (num + <span class="number">5</span>) // <span class="number">2</span>)</span><br><span class="line">	exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/30/boj-2583/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1046,64 +1148,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/08/git-flowchart/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/08/git-flowchart/" class="post-title-link" itemprop="url">git_flowchart</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-07 21:47:00 / Modified: 13:47:00" itemprop="dateCreated datePublished" datetime="2021-07-07T21:47:00+01:00">2021-07-07</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1175,7 +1219,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-count">103</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

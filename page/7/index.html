@@ -163,6 +163,107 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/08/SOAP-Testing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/08/SOAP-Testing/" class="post-title-link" itemprop="url">Testing</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-08 10:03:24" itemprop="dateCreated datePublished" datetime="2021-05-08T10:03:24+01:00">2021-05-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/soap/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><p><strong><em>Testing 은 Shipping (배포) 보다 중요하다.</em></strong></p>
+<p>만약 테스트가 없거나 적절하지 않은 양만큼 (부족한) 만 존재할 경우, 배포할 때마다 코드를 break 했는지 혹은 수정한 코드가 올바르게 작동할지 확신할 수 없다.</p>
+<p>적절한 양을 정하는 요소는 팀과 상황에 따라 다르지만, <strong>100%의 Coverage ( <code>보호 범위</code> , 즉, 모든 statement와 branch가 보호됨)</strong> 를 갖는 것은 개발 시에 안전함과 자신감을 제공한다.</p>
+<p>따라서, <em>testing framework 에 더하여 <strong>good coverage tool</strong> 또한 필요</em> 하다.</p>
+<blockquote>
+<p><em>e.g.</em></p>
+<p><strong>Testing Framework</strong> : Mocha · QUnit · Jasmine · Karma · Intern · AVA, etc.</p>
+<p><strong>Coverage Tool</strong> : istanbul · Cobertura · CodeCover · Coverage.py · EMMA, etc.</p>
+</blockquote>
+<br />
+
+
+
+<h3 id="Test-Driven-Development-TDD"><a href="#Test-Driven-Development-TDD" class="headerlink" title="Test Driven Development (TDD)"></a>Test Driven Development (TDD)</h3><ul>
+<li><strong>모든</strong> feature / module 에 대한 테스트를 정의하자.</li>
+<li><em>목표 coverage 를 도달한 상태에서 <strong>새로운</strong></em> feature을 배포하자.<ul>
+<li>도달하지 못했다면, <strong><code>refactoring</code> 부터</strong> 하자.</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> assert <span class="keyword">from</span> <span class="string">&quot;assert&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">describe(<span class="string">&quot;MomentJS&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// date boundary를 ☹️한 데 모아😡 처리함.</span></span><br><span class="line">  it(<span class="string">&quot;handles date boundaries&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> date;</span><br><span class="line"></span><br><span class="line">    date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;1/1/2015&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">30</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;1/31/2015&quot;</span>, date);</span><br><span class="line"></span><br><span class="line">    date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;2/1/2016&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">28</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;02/29/2016&quot;</span>, date);</span><br><span class="line"></span><br><span class="line">    date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;2/1/2015&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">28</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;03/01/2015&quot;</span>, date);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">describe(<span class="string">&quot;MomentJS&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// date boundary handler를 😄여러 조건으로 나누어🤩 정의함.</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 30일을 가진 month 의 경우</span></span><br><span class="line">  it(<span class="string">&quot;handles 30-day months&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;1/1/2015&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">30</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;1/31/2015&quot;</span>, date);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 윤년의 경우</span></span><br><span class="line">  it(<span class="string">&quot;handles leap year&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;2/1/2016&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">28</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;02/29/2016&quot;</span>, date);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 그 외, 31일을 가진 month &amp;&amp; 윤년이 아닌 경우</span></span><br><span class="line">  it(<span class="string">&quot;handles non-leap year&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> date = <span class="keyword">new</span> MomentJS(<span class="string">&quot;2/1/2015&quot;</span>);</span><br><span class="line">    date.addDays(<span class="number">28</span>);</span><br><span class="line">    assert.equal(<span class="string">&quot;03/01/2015&quot;</span>, date);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/08/SOAP-SOLID/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2939,122 +3040,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/05/SOAP-Objects-and-DSs/" class="post-title-link" itemprop="url">Objects and DSs</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-05 10:20:55" itemprop="dateCreated datePublished" datetime="2021-04-05T10:20:55+01:00">2021-04-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sopt/soap/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Objects-and-Data-Structures"><a href="#Objects-and-Data-Structures" class="headerlink" title="Objects and Data Structures"></a>Objects and Data Structures</h2><ol>
-<li><p><code>Getter</code> and <code>Setter</code></p>
-<ul>
-<li><p>JS는 인터페이스 / 타입 / 접근제어자 (Access Modifier) 을 가지고 있지 않음</p>
-</li>
-<li><p>Object property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨</p>
-</li>
-<li><p><code>set</code> action 시 validation을 추가하는 것이 좋음</p>
-</li>
-<li><p>internal representation을 encapsulating</p>
-</li>
-<li><p><code>get</code>, <code>set</code>시 logging이나 error handling을 추가하는 것이 용이함</p>
-</li>
-<li><p><code>get</code> 시 lazy load 속성을 추가할 수 있음</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>Lazy loading</strong> </p>
-<ul>
-<li>It’s a way to shorten the length of the critical rendering path, which translates into reduced page <strong>load</strong> times</li>
-<li>getting the properties from a server</li>
-</ul>
-<ol>
-<li>identify resources as non-blocking (non-critical)</li>
-<li><strong>load</strong> these only when needed</li>
-</ol>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeBankAccount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    balance: <span class="number">0</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> account = makeBankAccount();</span><br><span class="line">account.balance = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeBankAccount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// private으로 선언된 변수</span></span><br><span class="line">  <span class="keyword">let</span> balance = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 아래 return을 통해 public으로 선언된 &quot;getter&quot;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getBalance</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> balance;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 아래 return을 통해 public으로 선언된 &quot;setter&quot;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setBalance</span>(<span class="params">amount</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ... balance를 업데이트하기 전 검증로직</span></span><br><span class="line">    balance = amount;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    getBalance,</span><br><span class="line">    setBalance</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> account = makeBankAccount();</span><br><span class="line">account.setBalance(<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><p>objects의 properties는 private로 만들기</p>
-<ul>
-<li><code>closures</code></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Employee = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Employee.prototype.getName = <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> employee = <span class="keyword">new</span> Employee(<span class="string">&#x27;John Doe&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br><span class="line"><span class="keyword">delete</span> employee.name;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: undefined</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeEmployee</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="function"><span class="title">getName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> name;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> employee = makeEmployee(<span class="string">&#x27;John Doe&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br><span class="line"><span class="keyword">delete</span> employee.name;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -3126,7 +3111,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-count">103</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

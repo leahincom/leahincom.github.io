@@ -20,23 +20,22 @@
     var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Input첫째 줄에는 컴퓨터의 수가 주어진다. 컴퓨터의 수는 100 이하이고 각 컴퓨터에는 1번 부터 차례대로 번호가 매겨진다.  둘째 줄에는 네트워크 상에서 직접 연결되어 있는 컴퓨터 쌍의 수가 주어진다.  이어서 그 수만큼 한 줄에 한 쌍씩 네트워크 상에서 직접 연결되어 있는 컴퓨터의 번호 쌍이 주어진다. 12345import sysN &#x3D; int(sys">
+  <meta name="description" content="Input입력의 첫째 줄에 계단의 개수가 주어진다. 둘째 줄부터 한 줄에 하나씩 제일 아래에 놓인 계단부터 순서대로 각 계단에 쓰여 있는 점수가 주어진다. 계단의 개수는 300이하의 자연수이고, 계단에 쓰여 있는 점수는 10,000이하의 자연수이다. 12345678import sysinput &#x3D; sys.stdin.readlinen &#x3D; int(input())">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BOJ 2606">
-<meta property="og:url" content="https://leahincom.github.io/2021/07/07/boj-2606/index.html">
+<meta property="og:title" content="BOJ 2579">
+<meta property="og:url" content="https://leahincom.github.io/2021/08/06/boj-2579/index.html">
 <meta property="og:site_name" content="leah">
-<meta property="og:description" content="Input첫째 줄에는 컴퓨터의 수가 주어진다. 컴퓨터의 수는 100 이하이고 각 컴퓨터에는 1번 부터 차례대로 번호가 매겨진다.  둘째 줄에는 네트워크 상에서 직접 연결되어 있는 컴퓨터 쌍의 수가 주어진다.  이어서 그 수만큼 한 줄에 한 쌍씩 네트워크 상에서 직접 연결되어 있는 컴퓨터의 번호 쌍이 주어진다. 12345import sysN &#x3D; int(sys">
+<meta property="og:description" content="Input입력의 첫째 줄에 계단의 개수가 주어진다. 둘째 줄부터 한 줄에 하나씩 제일 아래에 놓인 계단부터 순서대로 각 계단에 쓰여 있는 점수가 주어진다. 계단의 개수는 300이하의 자연수이고, 계단에 쓰여 있는 점수는 10,000이하의 자연수이다. 12345678import sysinput &#x3D; sys.stdin.readlinen &#x3D; int(input())">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-07-07T07:40:01.000Z">
-<meta property="article:modified_time" content="2021-07-06T23:49:38.858Z">
+<meta property="article:published_time" content="2021-08-05T17:06:14.000Z">
+<meta property="article:modified_time" content="2021-08-05T09:17:09.074Z">
 <meta property="article:author" content="JungHyun">
 <meta property="article:tag" content="algorithm">
-<meta property="article:tag" content="dfs">
-<meta property="article:tag" content="bfs">
 <meta property="article:tag" content="boj">
+<meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://leahincom.github.io/2021/07/07/boj-2606/">
+<link rel="canonical" href="https://leahincom.github.io/2021/08/06/boj-2579/">
 
 
 <script id="page-configurations">
@@ -49,7 +48,7 @@
   };
 </script>
 
-  <title>BOJ 2606 | leah</title>
+  <title>BOJ 2579 | leah</title>
   
 
 
@@ -165,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/07/boj-2606/">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/06/boj-2579/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpeg">
@@ -178,7 +177,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          BOJ 2606
+          BOJ 2579
         </h1>
 
         <div class="post-meta">
@@ -189,7 +188,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-07-07 08:40:01 / Modified: 00:49:38" itemprop="dateCreated datePublished" datetime="2021-07-07T08:40:01+01:00">2021-07-07</time>
+              <time title="Created: 2021-08-05 18:06:14 / Modified: 10:17:09" itemprop="dateCreated datePublished" datetime="2021-08-05T18:06:14+01:00">2021-08-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -201,7 +200,7 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
+                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
                 </span>
             </span>
 
@@ -223,34 +222,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에는 컴퓨터의 수가 주어진다. 컴퓨터의 수는 100 이하이고 각 컴퓨터에는 1번 부터 차례대로 번호가 매겨진다. </p>
-<p>둘째 줄에는 네트워크 상에서 직접 연결되어 있는 컴퓨터 쌍의 수가 주어진다. </p>
-<p>이어서 그 수만큼 한 줄에 한 쌍씩 네트워크 상에서 직접 연결되어 있는 컴퓨터의 번호 쌍이 주어진다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">N = <span class="built_in">int</span>(sys.stdin.readline())</span><br><span class="line">pair = <span class="built_in">int</span>(sys.stdin.readline())</span><br><span class="line">connected = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N+<span class="number">1</span>)]</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="연결되어-있는-경우"><a href="#연결되어-있는-경우" class="headerlink" title="연결되어 있는 경우"></a>연결되어 있는 경우</h4><ul>
-<li><code>connected</code>  배열에 연결된 <code>index</code> 를 <strong>append</strong> 한다!</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(pair):</span><br><span class="line">  a, b = <span class="built_in">map</span>(<span class="built_in">int</span>, sys.stdin.readline().split())</span><br><span class="line">  connected[a].append(b)</span><br><span class="line">  connected[b].append(a)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><ul>
-<li>전달된 인자를 <code>visited = True</code> 설정하고,</li>
-<li>해당 인자를 connected의 index로 설정하여 연결된 컴퓨터들을 찾는다.</li>
-<li>이 때, 연결된 컴퓨터가 <code>not visited</code> 일 경우 재귀 호출</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">visited = [<span class="literal">False</span>]*(N+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">now</span>):</span></span><br><span class="line">  <span class="keyword">global</span> count</span><br><span class="line">  count += <span class="number">1</span></span><br><span class="line">  visited[now] = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> <span class="built_in">next</span> <span class="keyword">in</span> connected[now]:</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> visited[<span class="built_in">next</span>]:</span><br><span class="line">      dfs(<span class="built_in">next</span>)</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>1번이 걸린 경우 이어서 걸릴 애들을 세는 것이므로 <code>count = -1</code> 로 초기화하고 세기 시작한다.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count = -<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>1번 컴퓨터가 웜 바이러스에 걸렸을 때, 1번 컴퓨터를 통해 웜 바이러스에 걸리게 되는 컴퓨터의 수를 첫째 줄에 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dfs(<span class="number">1</span>)</span><br><span class="line">sys.stdout.write(<span class="built_in">str</span>(count))</span><br></pre></td></tr></table></figure>
+        <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>입력의 첫째 줄에 계단의 개수가 주어진다.</p>
+<p>둘째 줄부터 한 줄에 하나씩 제일 아래에 놓인 계단부터 순서대로 각 계단에 쓰여 있는 점수가 주어진다. 계단의 개수는 300이하의 자연수이고, 계단에 쓰여 있는 점수는 10,000이하의 자연수이다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">score = [<span class="number">0</span>]*<span class="number">301</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">  score[i] = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">dp = [<span class="number">0</span>]*<span class="number">301</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>배열을 생성할 때 웬만하면 백준에서 주는 최대값을 크기로 해주는게 좋다. 생각보다 IndexError 런타임 에러가 많이 나기 때문… 기본적인 경우로 코딩해놓고 히든케이스 때문에 index가 벗어날 수 있다.</p>
+</blockquote>
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>DP는 규칙을 찾고 코딩하다 내가 말리는 기분이다…</p>
+<p>먼저 처음 접근 방식은 이랬음.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">규칙이 반복되는데 그 중 최대값 구하기 = DP</span></span><br><span class="line"><span class="string">1. 연속적으로 1 / 2 계단만 오를 수 있음</span></span><br><span class="line"><span class="string">2. 점수의 최대값</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- 3개 이상 연속되지 않는 조합</span></span><br><span class="line"><span class="string">- 그 중 최대값</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>나름 규칙 찾고, 2중 중첩 반복문으로 케이스를 모두 비교해서 최대값을 찾아야 하나 싶었음. 나름 끝에서부터 접근하는 방식은 맞았다만, 문제는 시작점부터 어떤 계단을 밟을지 고르는 방법과 동일하게 도착점에서 어떤 계단을 밟고 왔나 고르는 방법으로 풀었다는 거다.</p>
+<p>여기서 생각을 좀 틀어서, 처음부터 더해나가되 어떤 계단을 밟았는지 알고, 고를 수 있는 index부터 어떤 계단을 밟을지 골라야 한다는 거다. 결국 도착점에서 모든 케이스를 비교하는게 아니라, 올라가면서 전까지 밟아온 케이스를 비교하고 골라야 한다는 것.</p>
+<p>그래서 먼저 가능한 케이스를 정의해둔다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>] = score[<span class="number">0</span>]</span><br><span class="line">dp[<span class="number">1</span>] = dp[<span class="number">0</span>] + score[<span class="number">1</span>]</span><br><span class="line">dp[<span class="number">2</span>] = <span class="built_in">max</span>(dp[<span class="number">0</span>] + score[<span class="number">2</span>], score[<span class="number">1</span>] + score[<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+<p>어, 첫번째 칸을 안 밟을 수도 있는데…! 라고 생각했지만 이후 규칙성을 반영해서 일반적인 케이스를 코딩하면 이미 3번째 계단에 있는 내가 첫번째를 안 밟는 케이스를 선택할 수도 있다.</p>
+<p>이후 일반적인 케이스 코딩.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, n):</span><br><span class="line">  dp[i] = <span class="built_in">max</span>(dp[i-<span class="number">3</span>] + score[i-<span class="number">1</span>] + score[i], dp[i-<span class="number">2</span>] + score[i])</span><br></pre></td></tr></table></figure>
+<p>결국 점화식은 다음과 같다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 현재 칸을 밟는다는 가정 하에,</span></span><br><span class="line"><span class="comment"># 이전 칸을 밟은 경우:</span></span><br><span class="line">	<span class="comment"># 전전 칸을 밟았으면 안 됨</span></span><br><span class="line">	dp[i-<span class="number">3</span>] + score[i-<span class="number">1</span>] + score[i]</span><br><span class="line">	</span><br><span class="line"><span class="comment"># 이전 칸을 밟지 않은 경우:</span></span><br><span class="line">	<span class="comment"># 전전 칸까지 밟을 수 있음</span></span><br><span class="line">  dp[i-<span class="number">2</span>] + score[i]</span><br></pre></td></tr></table></figure>
+<p>위 2가지 경우 중에 <code>max</code> 값을 골라 저장하면 된다.</p>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 계단 오르기 게임에서 얻을 수 있는 총 점수의 최댓값을 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(dp[n-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -261,9 +253,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/algorithm/" rel="tag"># algorithm</a>
-              <a href="/tags/dfs/" rel="tag"># dfs</a>
-              <a href="/tags/bfs/" rel="tag"># bfs</a>
               <a href="/tags/boj/" rel="tag"># boj</a>
+              <a href="/tags/dp/" rel="tag"># dp</a>
           </div>
 
         
@@ -272,13 +263,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/07/06/boj-1697/" rel="prev" title="BOJ 1697">
-      <i class="fa fa-chevron-left"></i> BOJ 1697
+    <a href="/2021/08/05/boj-9095/" rel="prev" title="BOJ 9095">
+      <i class="fa fa-chevron-left"></i> BOJ 9095
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/07/08/git-flowchart/" rel="next" title="git_flowchart">
-      git_flowchart <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -337,7 +325,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Input"><span class="nav-number">1.</span> <span class="nav-text">Input</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%97%B0%EA%B2%B0%EB%90%98%EC%96%B4-%EC%9E%88%EB%8A%94-%EA%B2%BD%EC%9A%B0"><span class="nav-number">1.1.</span> <span class="nav-text">연결되어 있는 경우</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DFS"><span class="nav-number">2.</span> <span class="nav-text">DFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Input"><span class="nav-number">1.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DP"><span class="nav-number">2.</span> <span class="nav-text">DP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
