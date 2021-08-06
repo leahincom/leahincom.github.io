@@ -163,6 +163,338 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/17/react-query-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/17/react-query-basic/" class="post-title-link" itemprop="url">React Query를 이용해 api 연동시키기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-16 21:28:40 / Modified: 14:02:57" itemprop="dateCreated datePublished" datetime="2021-07-16T21:28:40+01:00">2021-07-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="React-Query-란"><a href="#React-Query-란" class="headerlink" title="React Query 란?"></a>React Query 란?</h2><p>리액트용 data-fetching 라이브러리로,</p>
+<p>리액트 어플리케이션에서 서버의 상태를 fetching, caching, synchronizing, updating 한다.</p>
+<p>react query는 다음과 같이 4가지 상태를 반환하는데, 반환 상태에 따라 렌더링을 다르게 처리하기 용이하단느 장점이 있다.</p>
+<ol>
+<li><code>isIdle</code> : status === ‘idle’로, fresh/reset된 상태</li>
+<li><code>isLoading</code> : status === ‘loading’으로, mutation이 진행 중인 상태</li>
+<li><code>isError</code> : status === ‘error’로, mutation이 error를 발생시킨 상태</li>
+<li><code>isSuccess</code> : status === ‘success’로, mutation이 성공하여 data 이용이 가능한 상태</li>
+</ol>
+<h3 id="설치하기"><a href="#설치하기" class="headerlink" title="설치하기"></a>설치하기</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm i react-query</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ yarn add react-query</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="기본-예시"><a href="#기본-예시" class="headerlink" title="기본 예시"></a>기본 예시</h3><h4 id="App-tsx"><a href="#App-tsx" class="headerlink" title="App.tsx"></a>App.tsx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import &#123; QueryClient, QueryClientProvider, useQuery &#125; from &#39;react-query&#39;</span><br><span class="line"> </span><br><span class="line"> const queryClient &#x3D; new QueryClient()</span><br><span class="line"> </span><br><span class="line"> export default function App() &#123;</span><br><span class="line">   return (</span><br><span class="line">     &lt;QueryClientProvider client&#x3D;&#123;queryClient&#125;&gt;</span><br><span class="line">       &lt;Example &#x2F;&gt;</span><br><span class="line">     &lt;&#x2F;QueryClientProvider&gt;</span><br><span class="line">   )</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>가장 상단 <code>App.js</code> 에서 최상단 컴포넌트로 <code>QueryClientProvider</code> 을 전달한다.</p>
+</li>
+<li><p>해당 Provider context의 props로 <code>queryClient</code> 객체를 전달한다.</p>
+</li>
+</ul>
+<h4 id="Example-tsx"><a href="#Example-tsx" class="headerlink" title="Example.tsx"></a>Example.tsx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function Example() &#123;</span><br><span class="line">  const &#123; isLoading, error, data &#125; &#x3D; useQuery(&#39;repoData&#39;, () &#x3D;&gt;</span><br><span class="line">    fetch(&#39;https:&#x2F;&#x2F;api.github.com&#x2F;repos&#x2F;tannerlinsley&#x2F;react-query&#39;).then(res &#x3D;&gt;</span><br><span class="line">      res.json()</span><br><span class="line">    )</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>useQuery</code> 에<ul>
+<li><strong>query key</strong> 와</li>
+<li> <code>fetch</code> , <code>axios</code> 등을 이용한 <strong>CRUD 함수</strong> 를 전달한다.</li>
+</ul>
+</li>
+</ul>
+<p><code>useQuery</code> 를 통해 <code>isLoading</code> , <code>error</code> , <code>data</code> 등을 받아 렌더링 한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  if (isLoading) return &#39;Loading...&#39;</span><br><span class="line"></span><br><span class="line">  if (error) return &#39;An error has occurred: &#39; + error.message</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;&#123;data.name&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;p&gt;&#123;data.description&#125;&lt;&#x2F;p&gt;</span><br><span class="line">      &lt;strong&gt;👀 &#123;data.subscribers_count&#125;&lt;&#x2F;strong&gt;&#123;&#39; &#39;&#125;</span><br><span class="line">      &lt;strong&gt;✨ &#123;data.stargazers_count&#125;&lt;&#x2F;strong&gt;&#123;&#39; &#39;&#125;</span><br><span class="line">      &lt;strong&gt;🍴 &#123;data.forks_count&#125;&lt;&#x2F;strong&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>isLoading</code> 일 때는 로딩 렌더링</li>
+<li><code>error</code> 일 때는 에러 렌더링</li>
+<li>이 외, <code>data</code> 를 정상적으로 받아온 경우 컴포넌트를 알맞게 렌더링</li>
+</ul>
+<h3 id="useQuery"><a href="#useQuery" class="headerlink" title="useQuery"></a>useQuery</h3><p><code>useQuery</code> 가 반환하는 프로퍼티와 받는 매개변수는 다음과 같다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">const &#123;</span><br><span class="line">   data,</span><br><span class="line">   dataUpdatedAt,</span><br><span class="line">   error,</span><br><span class="line">   errorUpdatedAt,</span><br><span class="line">   failureCount,</span><br><span class="line">   isError,</span><br><span class="line">   isFetched,</span><br><span class="line">   isFetchedAfterMount,</span><br><span class="line">   isFetching,</span><br><span class="line">   isIdle,</span><br><span class="line">   isLoading,</span><br><span class="line">   isLoadingError,</span><br><span class="line">   isPlaceholderData,</span><br><span class="line">   isPreviousData,</span><br><span class="line">   isRefetchError,</span><br><span class="line">   isStale,</span><br><span class="line">   isSuccess,</span><br><span class="line">   refetch,</span><br><span class="line">   remove,</span><br><span class="line">   status,</span><br><span class="line"> &#125; &#x3D; useQuery(queryKey, queryFn?, &#123;</span><br><span class="line">   cacheTime,</span><br><span class="line">   enabled,</span><br><span class="line">   initialData,</span><br><span class="line">   initialDataUpdatedAt</span><br><span class="line">   isDataEqual,</span><br><span class="line">   keepPreviousData,</span><br><span class="line">   notifyOnChangeProps,</span><br><span class="line">   notifyOnChangePropsExclusions,</span><br><span class="line">   onError,</span><br><span class="line">   onSettled,</span><br><span class="line">   onSuccess,</span><br><span class="line">   queryKeyHashFn,</span><br><span class="line">   refetchInterval,</span><br><span class="line">   refetchIntervalInBackground,</span><br><span class="line">   refetchOnMount,</span><br><span class="line">   refetchOnReconnect,</span><br><span class="line">   refetchOnWindowFocus,</span><br><span class="line">   retry,</span><br><span class="line">   retryOnMount,</span><br><span class="line">   retryDelay,</span><br><span class="line">   select,</span><br><span class="line">   staleTime,</span><br><span class="line">   structuralSharing,</span><br><span class="line">   suspense,</span><br><span class="line">   useErrorBoundary,</span><br><span class="line"> &#125;)</span><br><span class="line"> </span><br><span class="line"> &#x2F;&#x2F; or using the object syntax</span><br><span class="line"> </span><br><span class="line"> const result &#x3D; useQuery(&#123;</span><br><span class="line">   queryKey,</span><br><span class="line">   queryFn,</span><br><span class="line">   enabled,</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+<p>이를 사용한 예시는 다음과 같다.</p>
+<p>먼저, useQuery에 전달할 <code>getCategoryDetail</code> api 함수를 작성해보자.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export const getCategoryList &#x3D; async () &#x3D;&gt; &#123;</span><br><span class="line">  const data &#x3D; await axios.get(&#96;&#x2F;api&#x2F;category&#x2F;&#96;);</span><br><span class="line">  return data.data.result as CategoryList;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>이제 해당 함수를 useQuery에 전달하여 데이터를 받아보자.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; isLoading, error, data: categoryList &#125; &#x3D; useQuery(&#39;categoryList&#39;, getCategoryList);</span><br></pre></td></tr></table></figure>
+<p>여기서 <code>categoryList</code> 는 <strong>query key</strong> 이며, <code>getCategoryList</code> 를 통해 받아온 데이터는 <code>isLoading</code> , <code>error</code> , <code>data</code> 등을 담은 객체에 저장된다.</p>
+<p>여기서 <code>data: categoryList</code> 로 데이터 변수명을 설정하여 컴포넌트를 알맞게 렌더링하면 된다!</p>
+<h3 id="useMutation"><a href="#useMutation" class="headerlink" title="useMutation"></a>useMutation</h3><p><code>useMutation</code> 이 반환하는 프로퍼티와 받는 매개변수는 다음과 같다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const &#123;</span><br><span class="line">   data,</span><br><span class="line">   error,</span><br><span class="line">   isError,</span><br><span class="line">   isIdle,</span><br><span class="line">   isLoading,</span><br><span class="line">   isPaused,</span><br><span class="line">   isSuccess,</span><br><span class="line">   mutate,</span><br><span class="line">   mutateAsync,</span><br><span class="line">   reset,</span><br><span class="line">   status,</span><br><span class="line"> &#125; &#x3D; useMutation(mutationFn, &#123;</span><br><span class="line">   mutationKey,</span><br><span class="line">   onError,</span><br><span class="line">   onMutate,</span><br><span class="line">   onSettled,</span><br><span class="line">   onSuccess,</span><br><span class="line">   useErrorBoundary,</span><br><span class="line"> &#125;)</span><br><span class="line"> </span><br><span class="line"> mutate(variables, &#123;</span><br><span class="line">   onError,</span><br><span class="line">   onSettled,</span><br><span class="line">   onSuccess,</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+<p>이제 useMutation을 사용해보자!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">export const postItem &#x3D; async (data: Item) &#x3D;&gt; &#123;</span><br><span class="line">  const data &#x3D; await instance.post(</span><br><span class="line">    &#96;&#x2F;api&#x2F;items&#96;,</span><br><span class="line">    &#123;</span><br><span class="line">      category_id: &#96;$&#123;data.category_id&#125;&#96;,</span><br><span class="line">      item_name: &#96;$&#123;data.candy_name&#125;&#96;,</span><br><span class="line">    &#125;,</span><br><span class="line">  );</span><br><span class="line">  return data.data.result as NewItem;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>위와 같이 정의한 <code>postItem</code> api를 받아 mutation을 적용해보자.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const mutation &#x3D; useMutation((data: PutBodyProps) &#x3D;&gt; postItem(data), &#123;</span><br><span class="line">  onSuccess: () &#x3D;&gt; &#123;</span><br><span class="line">    queryClient.invalidateQueries(&#39;items&#39;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>먼저 전달할 인자를 <code>postItem</code> 에 알맞게 전달하고, <code>onSuccess</code> 시 <code>queryClient</code> 를 통해 이전에 정의해놓은 <strong>query key</strong> 값을 전달하여 데이터를 mutate 시킨다.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/10/boj-7576/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/10/boj-7576/" class="post-title-link" itemprop="url">BOJ 7576</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-10 05:56:56" itemprop="dateCreated datePublished" datetime="2021-07-10T05:56:56+01:00">2021-07-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-09 22:15:06" itemprop="dateModified" datetime="2021-07-09T22:15:06+01:00">2021-07-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫 줄에는 상자의 크기를 나타내는 두 정수 M,N이 주어진다. M은 상자의 가로 칸의 수, N은 상자의 세로 칸의 수를 나타낸다. 단, 2 ≤ M,N ≤ 1,000 이다. </p>
+<p>둘째 줄부터는 하나의 상자에 저장된 토마토들의 정보가 주어진다. 즉, 둘째 줄부터 N개의 줄에는 상자에 담긴 토마토의 정보가 주어진다. 하나의 줄에는 상자 가로줄에 들어있는 토마토의 상태가 M개의 정수로 주어진다. 정수 1은 익은 토마토, 정수 0은 익지 않은 토마토, 정수 -1은 토마토가 들어있지 않은 칸을 나타낸다.</p>
+<p>토마토가 하나 이상 있는 경우만 입력으로 주어진다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">M, N = <span class="built_in">map</span>(<span class="built_in">int</span>, sys.stdin.readline().split())</span><br><span class="line">tomato = [<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, sys.stdin.readline().split())) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N)]</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><blockquote>
+<p> 트리가 1단계씩 깊어질 때마다 기존의 조건을 동일하게 다시 체크해야 함 == <strong>BFS</strong></p>
+</blockquote>
+<h4 id="사전-준비"><a href="#사전-준비" class="headerlink" title="사전 준비"></a>사전 준비</h4><ul>
+<li><p>인접한 영역(가로,세로 =&gt; <strong><code>dir</code> 로 방향 배열 만들어놓기</strong>)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dir</span> = [[-<span class="number">1</span>,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">0</span>,-<span class="number">1</span>],[<span class="number">0</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure></li>
+<li><p>queue 초기화 시 <code>1</code> 인 위치를 넣어놓는 배열</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ripen = deque()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">    <span class="keyword">if</span> tomato[i][j] == <span class="number">1</span>:</span><br><span class="line">      ripen.append([i, j])</span><br></pre></td></tr></table></figure></li>
+<li><p>이미 모두 <code>1</code> 인 경우를 체크할 <code> isAlready</code> boolean</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isAlready = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+</li>
+</ul>
+<ul>
+<li>체크하고 있는 칸이 범위 내이며 <code>0</code> 일 경우 의 값을 <code>+1</code> 한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span>():</span></span><br><span class="line">  <span class="keyword">global</span> isAlready</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> ripen:</span><br><span class="line">    dx, dy = ripen.popleft()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">dir</span>:</span><br><span class="line">      x = dx + d[<span class="number">0</span>]</span><br><span class="line">      y = dy + d[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> <span class="number">0</span> &lt;= x &lt; N <span class="keyword">and</span> <span class="number">0</span> &lt;= y &lt; M <span class="keyword">and</span> tomato[x][y] == <span class="number">0</span>:</span><br><span class="line">        isAlready = <span class="literal">False</span></span><br><span class="line">        tomato[x][y] = tomato[dx][dy] + <span class="number">1</span></span><br><span class="line">        ripen.append([x, y])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>이미 모두 <code>1</code> 인 경우 <code> isAlready</code> boolean 값을 이용해 조건에 맞게 답을 출력한다.</li>
+<li>배열 전체가 <code>True</code> 가 아닌 경우를 체크해야 하므로 <code>all</code> 을 이용한다.</li>
+<li>이 외, <code>bfs</code> 의 결과 출력을 위해 배열 전체에서 <code>max</code> 값을 추출한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">all</span>(<span class="built_in">map</span>(<span class="built_in">all</span>,tomato)):</span><br><span class="line">  sys.stdout.write(<span class="built_in">str</span>(-<span class="number">1</span>))</span><br><span class="line"><span class="keyword">elif</span> isAlready: sys.stdout.write(<span class="built_in">str</span>(<span class="number">0</span>))</span><br><span class="line"><span class="keyword">else</span>: sys.stdout.write(<span class="built_in">str</span>(<span class="built_in">max</span>(<span class="built_in">map</span>(<span class="built_in">max</span>, tomato))-<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+<p>위 모두에서 유용하게 쓰인 python 문법: <strong>2차원 배열에서 최종값 하나</strong> 출력을 위해…</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">max</span>(<span class="built_in">map</span>(<span class="built_in">max</span>, tomato))</span><br><span class="line"><span class="built_in">all</span>(<span class="built_in">map</span>(<span class="built_in">all</span>,tomato))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>여러분은 토마토가 모두 익을 때까지의 최소 날짜를 출력해야 한다. 만약, 저장될 때부터 모든 토마토가 익어있는 상태이면 0을 출력해야 하고, 토마토가 모두 익지는 못하는 상황이면 -1을 출력해야 한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bfs()</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">all</span>(<span class="built_in">map</span>(<span class="built_in">all</span>,tomato)):</span><br><span class="line">  sys.stdout.write(<span class="built_in">str</span>(-<span class="number">1</span>))</span><br><span class="line"><span class="keyword">elif</span> isAlready: sys.stdout.write(<span class="built_in">str</span>(<span class="number">0</span>))</span><br><span class="line"><span class="keyword">else</span>: sys.stdout.write(<span class="built_in">str</span>(<span class="built_in">max</span>(<span class="built_in">map</span>(<span class="built_in">max</span>, tomato))-<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/09/boj-10971/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/09/boj-10971/" class="post-title-link" itemprop="url">BOJ 10971</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-08 20:43:17 / Modified: 12:52:40" itemprop="dateCreated datePublished" datetime="2021-07-08T20:43:17+01:00">2021-07-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 도시의 수 N이 주어진다. (2 ≤ N ≤ 10) </p>
+<p>다음 N개의 줄에는 비용 행렬이 주어진다. 각 행렬의 성분은 1,000,000 이하의 양의 정수이며, 갈 수 없는 경우는 0이 주어진다. W[i][j]는 도시 i에서 j로 가기 위한 비용을 나타낸다.</p>
+<p><em>항상 순회할 수 있는 경우만 입력으로 주어진다.</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">10</span> ** <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">N = <span class="built_in">int</span>(sys.stdin.readline())</span><br><span class="line">cost = [<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, sys.stdin.readline().split())) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N)]</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><ul>
+<li><p>시작점을 모두 다르게 해서 탐색해야 하므로 <code>for</code> 문으로 dfs 실행</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> now <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">  dfs(now, now, <span class="number">0</span>, [now])</span><br></pre></td></tr></table></figure></li>
+<li><p>시작점이 아니며, <code>visited == False</code> 이며, <code>cost != 0</code> 인 경우 dfs 실행</p>
+<ul>
+<li>실행 시 visited <code>True</code> 체크 했다가 모든 확인을 마치고 <code>return</code> 후 dfs를 빠져나오면 해당 노드를 <code>False</code> 체크하여 다음 경우의 수를 검사하도록 함</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> idx <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">  <span class="keyword">if</span> cost[<span class="built_in">next</span>][idx] != <span class="number">0</span> <span class="keyword">and</span> idx <span class="keyword">not</span> <span class="keyword">in</span> visited:</span><br><span class="line">    visited.append(idx)</span><br><span class="line">    dfs(start, idx, total + cost[<span class="built_in">next</span>][idx], visited)</span><br><span class="line">    visited.pop()</span><br></pre></td></tr></table></figure></li>
+<li><p><code>visited</code> 의 길이가 <code>N</code> 인 경우 모든 노드를 방문한 것이므로 <code>start</code> 지점으로 돌아와야 한다. 이 때 <code>cost != 0</code> 이라면 <code>min</code> 을 업데이트한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(visited) == N:</span><br><span class="line">  <span class="keyword">if</span> cost[<span class="built_in">next</span>][start] != <span class="number">0</span>:</span><br><span class="line">    minCost = <span class="built_in">min</span>(minCost, total + cost[<span class="built_in">next</span>][start])</span><br><span class="line">  <span class="keyword">return</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>가장 중요한 것은: <em>현재 <code>total</code> 값이 이미 <code>minCost</code> 를 초과한 경우, <code>return</code> 을 통해 빠져나와야</em> 시간 초과가 뜨지 않는다!!!</strong></p>
+</li>
+</ul>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 외판원의 순회에 필요한 최소 비용을 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> <span class="built_in">len</span>(visited) == N:</span><br><span class="line">    <span class="keyword">if</span> cost[<span class="built_in">next</span>][start] != <span class="number">0</span>:</span><br><span class="line">      minCost = <span class="built_in">min</span>(minCost, total + cost[<span class="built_in">next</span>][start])</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">sys.stdout.write(<span class="built_in">str</span>(minCost))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/08/git-flowchart/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -828,244 +1160,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/python-list-index/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/python-list-index/" class="post-title-link" itemprop="url">리스트에서 요소의 index 찾기</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-29 12:43:42 / Modified: 04:45:07" itemprop="dateCreated datePublished" datetime="2021-06-29T12:43:42+01:00">2021-06-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>리스트의 <code>index</code> method 사용하기</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idx = arr.index(num)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/boj-2331/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/boj-2331/" class="post-title-link" itemprop="url">BOJ 2331</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-29 12:32:24" itemprop="dateCreated datePublished" datetime="2021-06-29T12:32:24+01:00">2021-06-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-03 02:16:45" itemprop="dateModified" datetime="2021-07-03T02:16:45+01:00">2021-07-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>첫째 줄에 A(1 ≤ A ≤ 9999), P(1 ≤ P ≤ 5)가 주어진다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A, P = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h4><ul>
-<li>반복되는 수를 찾을 때까지 같은 작업 반복</li>
-<li>반복되는 수를 찾았을 경우, 배열에 추가하지 않고 처음에 담겨있는 index를 받아 출력하면 중복되지 않는 수의 개수와 동일하다.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">visited = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">num</span>):</span></span><br><span class="line">	.</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 중복되지 않을 경우</span></span><br><span class="line">  visited.append(num)</span><br><span class="line">  digit = [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">str</span>(num)]</span><br><span class="line">  now = <span class="number">0</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> digit:</span><br><span class="line">    now += x ** P</span><br><span class="line">  </span><br><span class="line">  dfs(now)</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>첫째 줄에 반복되는 부분을 제외했을 때, 수열에 남게 되는 수들의 개수를 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> num <span class="keyword">in</span> visited:</span><br><span class="line">  idx = visited.index(num)</span><br><span class="line">  print(idx)</span><br><span class="line">  <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/yarn-dependencies/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/yarn-dependencies/" class="post-title-link" itemprop="url">yarn dependencies</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-29 01:28:53" itemprop="dateCreated datePublished" datetime="2021-06-29T01:28:53+01:00">2021-06-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-28 17:30:17" itemprop="dateModified" datetime="2021-06-28T17:30:17+01:00">2021-06-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h5 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a><code>dependencies</code></h5><p>These are your normal dependencies, or rather ones that you need when running your code (e.g. React or ImmutableJS).</p>
-<h5 id="devDependencies"><a href="#devDependencies" class="headerlink" title="devDependencies"></a><code>devDependencies</code></h5><p>These are your development dependencies. Dependencies that you need at some point in the development workflow <strong>but not while running your code</strong> (e.g. Babel or Flow).</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1137,7 +1231,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">106</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
