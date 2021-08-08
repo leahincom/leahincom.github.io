@@ -163,6 +163,433 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/11/python-is/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/11/python-is/" class="post-title-link" itemprop="url">is와 ==의 차이</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-11 10:41:48" itemprop="dateCreated datePublished" datetime="2021-06-11T10:41:48+01:00">2021-06-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><code>is</code>는 변수가 같은 <code>Object(객체)</code>를 가리키면 True</li>
+<li><code>==</code>는 변수가 같은 <code>Value(값)</code>을 가지면 True</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/02/heroku-react/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/02/heroku-react/" class="post-title-link" itemprop="url">heroku로 react 배포하기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-02 03:18:19" itemprop="dateCreated datePublished" datetime="2021-06-02T03:18:19+01:00">2021-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/deploy/" itemprop="url" rel="index"><span itemprop="name">Deploy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1. 터미널에서 원하는 폴더 진입</span><br><span class="line">2. npm install -g create-react-app</span><br><span class="line">3. create-react-app <span class="string">&quot;리액트 프로젝트명&quot;</span></span><br><span class="line">4. <span class="built_in">cd</span> <span class="string">&quot;리액트 프로젝트명&quot;</span></span><br><span class="line">5. git init</span><br><span class="line">6. heroku create <span class="string">&quot;프로젝트명&quot;</span> -b https://github.com/mars/create-react-app-buildpack.git</span><br><span class="line">7. git add .</span><br><span class="line">8. git commit -m <span class="string">&quot;커밋 메시지&quot;</span></span><br><span class="line">9. git push heroku master</span><br><span class="line">10. heroku open</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/31/strict-mode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/31/strict-mode/" class="post-title-link" itemprop="url">strict mode</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-30 19:23:11" itemprop="dateCreated datePublished" datetime="2021-05-30T19:23:11+01:00">2021-05-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/javascript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p>JavaScript의 제한된 버전을 선택하여 기본값인 sloppy mode를 해제하는 방법으로, 일반적인 코드와 다른 semantics를 지니고 있다. 하지만 sloppy mode와 strict mode의 코드는 공존할 수 있어, 차후 strict mode를 이용하여 스크립트의 모드를 변경할 수도 있다.</p>
+<br />
+
+
+
+<p><em><strong>그래서 strict mode란 무엇일까?</strong></em></p>
+<ol>
+<li>기존에 문제를 발생시키지 않고 조용히 무시되던 에러들을 throwing한다.</li>
+<li>JavaScript 엔진의 최적화 작업을 어렵게 만드는 실수들을 바로잡는다. 이는 동일한 내용이지만 sloppy mode 코드일 때보다 더 빨리 작동하도록 돕는다.</li>
+<li>이후의 ECMAScript 업데이트로 인한 자동적인 변경을 제한한다.</li>
+<li>모듈은 기본적으로 strict mode이다.</li>
+</ol>
+<br />
+
+
+
+<p>이를 적용하는 조건은 다음과 같다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 스크립트 전체</span></span><br><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 일부</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">strict</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">  &quot;use strict&quot;</span>;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>전체 스크립트 또는 부분 함수에 적용 가능하다.</p>
+<ul>
+<li><p>{} 로 묶여진 블럭문에는 적용되지 않는다. 따라서, context와 같은 곳에 적용을 시도하면 동작하지 않는다.</p>
+</li>
+<li><p>eval, Function 코드, 이벤트 핸들러 속성, setTimeout() 등의 함수에 전달된 문자열은 전체 스크립트로, 적용 가능하다.</p>
+</li>
+</ul>
+<br />
+
+
+
+<h4 id="변경-사항"><a href="#변경-사항" class="headerlink" title="변경 사항"></a>변경 사항</h4><p>이러한 strict mode는 구문과 런타임 동작 등을 모두 변경시킨다. 예를 들어,</p>
+<ol>
+<li>변환 실수를 오류로 해석하거나 (문법 오류/ 런타임 에러 발생),</li>
+<li>특정 이름의 특정 용도에 대한 특정 변수를 계산하는 방법을 단순화하며,</li>
+<li><code>eval</code> 과 <code>arguments</code> 를 단순화하고,</li>
+<li>“안전한 “자바 스크립트를 작성하도록 돕고, </li>
+<li>미래 ECMAScript의 진화에 대비합니다.</li>
+</ol>
+<br />
+
+
+
+<p>위와 같은 변경으로 인해, 기존에는 인정되던 실수를 에러로 인식하여 발생시킨다. </p>
+<ol>
+<li><p>글로벌 변수를 생성하는 것을 금한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line">&#x2F;&#x2F; 전역 변수 mistypedVariable 이 존재한다고 가정</span><br><span class="line">mistypedVaraible &#x3D; 17; &#x2F;&#x2F; ReferenceError 를 발생시킴</span><br></pre></td></tr></table></figure></li>
+<li><p>일반 코드에서 조용히 넘어가는 모든 실패 (쓸 수 없는 전역 또는 프로퍼티에 할당, getter-only 프로퍼티에 할당, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions">확장 불가</a> 객체에 새 프로퍼티 할당) 에 대해 예외를 발생시킨다.</p>
+<ul>
+<li><code>NaN</code> 은 쓸 수 없는 전역 변수 ( <code>NaN</code> 에 할당하는 일반적인 코드는 아무 것도 하지 않는다. ) 로, 예외를 발생시킨다.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 쓸 수 없는 프로퍼티에 할당</span></span><br><span class="line"><span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">5</span>; <span class="comment">// TypeError 발생</span></span><br><span class="line"><span class="keyword">var</span> <span class="literal">Infinity</span> = <span class="number">5</span>; <span class="comment">// TypeError 발생</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 쓸 수 없는 프로퍼티에 할당</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj1, <span class="string">&quot;x&quot;</span>, &#123; <span class="attr">value</span>: <span class="number">42</span>, <span class="attr">writable</span>: <span class="literal">false</span> &#125;);</span><br><span class="line">obj1.x = <span class="number">9</span>; <span class="comment">// TypeError 발생</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// getter-only 프로퍼티에 할당</span></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123; <span class="keyword">get</span> <span class="title">x</span>() &#123; <span class="keyword">return</span> <span class="number">17</span>; &#125; &#125;;</span><br><span class="line">obj2.x = <span class="number">5</span>; <span class="comment">// TypeError 발생</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 확장 불가 객체에 새 프로퍼티 할당</span></span><br><span class="line"><span class="keyword">var</span> fixed = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.preventExtensions(fixed);</span><br><span class="line">fixed.newProp = <span class="string">&quot;ohai&quot;</span>; <span class="comment">// TypeError 발생</span></span><br></pre></td></tr></table></figure></li>
+<li><p>삭제할 수 없는 프로퍼티를 삭제하려 할 때; 시도가 어떤 효과도 없을 때, 예외를 발생시킨다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">Object</span>.prototype; <span class="comment">// TypeError 발생</span></span><br></pre></td></tr></table></figure></li>
+<li><p>일반 코드에서는 마지막으로 중복된 인수가 이전에 지정된 인수를 숨기지만, 유니크한 함수 파라미터 이름을 요구한다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, a, c</span>)</span>&#123; <span class="comment">// !!! 구문 에러</span></span><br><span class="line"><span class="meta">  &quot;use strict&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> a + b + c; <span class="comment">// 코드가 실행되면 잘못된 것임</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+</li>
+</ol>
+<h4 id="장점"><a href="#장점" class="headerlink" title="장점"></a>장점</h4><h5 id="변수-사용-단순화"><a href="#변수-사용-단순화" class="headerlink" title="변수 사용 단순화"></a>변수 사용 단순화</h5><ul>
+<li>코드상의 변수 이름을 특정 변수 정의로 매핑하는 방법을 단순화한다.</li>
+<li>자바스크립트는 때때로 이름을 코드상의 변수 정의로 기본 매핑하는 것을 런타임때까지 실행이 불가하게 하는데, 이것이 발생하는 대부분의 경우를 제거하여 컴파일러가 strict mode 코드를 더 잘 최적화 할 수 있게 한다.</li>
+</ul>
+<ol>
+<li><p><code>with</code> 를 사용하지 못하게 한다.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://whereswalden.com/2011/01/10/new-es5-strict-mode-support-new-vars-created-by-strict-mode-eval-code-are-local-to-that-code-only/">엄격모드 코드의 <code>eval</code> 은 새로운 변수를 주위 스코프에 추가하지 않는다</a>.</p>
+</li>
+<li><p>셋째로, 엄격모드는 일반 이름을 제거하는 것을 금지합니다. 엄격 모드에서 <code>delete name</code> 은 구문 에러입니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x;</span><br><span class="line"><span class="keyword">delete</span> x; <span class="comment">// !!! 구문 에러</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;var y; delete y;&quot;</span>); <span class="comment">// !!! syntax error</span></span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+</li>
+</ol>
+<h5 id="eval-과-arguments-를-더-간단하게-하기"><a href="#eval-과-arguments-를-더-간단하게-하기" class="headerlink" title="eval 과 arguments 를 더 간단하게 하기"></a>eval 과 arguments 를 더 간단하게 하기</h5><blockquote>
+<ul>
+<li><p>바인딩을 추가하거나 삭제하고 바인딩 값을 변경하기 위한 <code>eval</code></p>
+</li>
+<li><p>명명된 인수를 가리키는, indexed 프로퍼티 <code>arguments</code></p>
+</li>
+</ul>
+</blockquote>
+<br />
+
+
+
+<h5 id="JavaScript-“보안”"><a href="#JavaScript-“보안”" class="headerlink" title="JavaScript “보안”"></a>JavaScript “보안”</h5><p>브라우저에서 자바스크립트는 사용자의 개인정보에 접근할 수 있기 때문에, 자바스크립트는 금지된 기능에 접근을 막기 위해 실행 전, 반드시 부분적으로 변경되어야 한다. 하지만 자바스크립트의 유연성으로 인해 런타임 체크없이 이것을 수행하는 것은 사실상 불가능하다. strict mode를 이용하면 특정 방식으로 호출되므로 런타임 검사의 필요성이 크게 줄어든다.</p>
+<ol>
+<li><code>this</code> 로 함수에 전달된 값은 강제로 객체가 되지 않는다 (a.k.a. “boxed”). 즉, 브라우저에서 엄격모드의 함수내 에서는 더 이상 <code>window</code> 객체를 <code>this</code> 를 통해 참조할 수 없다.<ul>
+<li>정의된 <code>this</code> 는 boxed 객체가 되지 않으며,</li>
+<li>정의되지 않은 경우 <code>this</code> 는 <code>undefined</code> 가 된다. </li>
+</ul>
+</li>
+</ol>
+<br />
+
+
+
+<h5 id="미래의-ECMAScript-버전을-위한-준비"><a href="#미래의-ECMAScript-버전을-위한-준비" class="headerlink" title="미래의 ECMAScript 버전을 위한 준비"></a>미래의 ECMAScript 버전을 위한 준비</h5><ul>
+<li>새롭게 선보일 ECMAScript 버전은 새로운 구문을 소개할 것이고, ECMAScript5에서의 엄격 모드는 변환을 쉽게 하기 위해 몇 가지의 제한을 적용한다.</li>
+</ul>
+<br />
+
+
+
+<h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><p>아래와 같은 코드를 <code>index.js</code> 에서 많이 보았을 것이다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;React.StrictMode&gt;</span><br><span class="line">    &lt;App /&gt;</span><br><span class="line">  &lt;/React.StrictMode&gt;,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&quot;root&quot;</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+<p>React에서 strict mode는 <code>&lt;React.StrictMode&gt;&lt;/React.StrictMode&gt;</code> 을 이용해 적용한다.</p>
+<ul>
+<li>StrictMode는 잠재적인 에러를 잡는 툴이다.</li>
+<li>Fragment와 같이, StrictMode는 가시적인 UI를 렌더링하지 않지만, 안에 정의되는 후손 (자식 노드) 들에 추가적인 검사를 시행하고 경고를 띄운다.</li>
+<li>strict mode 체크는 development mode에서만 시행되고, production 빌딩에 영향을 주지 않는다.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ExampleApplication</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;Header /&gt;</span><br><span class="line">      &lt;React.StrictMode&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;ComponentOne /&gt;</span><br><span class="line">          &lt;ComponentTwo /&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/React.StrictMode&gt;</span><br><span class="line">      &lt;Footer /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>StrictMode는 <code>Header</code> 나 <code>Footer</code> 컴포넌트에 영향을 주지 않는다.</li>
+<li>하지만, <code>ComponentOne</code> 과 <code>ComponentTwo</code> 및 그 후손들은 영향을 받는다.</li>
+</ol>
+<br />
+
+
+
+<p><em><strong>React에서 strict mode는 어떻게 작동할까?</strong></em></p>
+<ol>
+<li>안전하지 않은 생명주기를 사용하는 컴포넌트 발견</li>
+<li>레거시 문자열 ref 사용에 대한 경고</li>
+<li>권장되지 않는 findDOMNode 사용에 대한 경고</li>
+<li>예상치 못한 부작용 검사</li>
+<li>레거시 context API 검사</li>
+</ol>
+<br />
+
+
+
+<p>이를 좀 더 자세히 알아보자.</p>
+<br />
+
+
+
+<h4 id="특징"><a href="#특징" class="headerlink" title="특징"></a>특징</h4><h5 id="안전하지-않은-생명주기를-사용하는-컴포넌트-발견"><a href="#안전하지-않은-생명주기를-사용하는-컴포넌트-발견" class="headerlink" title="안전하지 않은 생명주기를 사용하는 컴포넌트 발견"></a>안전하지 않은 생명주기를 사용하는 컴포넌트 발견</h5><p>Strict 모드가 활성화되면, React는 안전하지 않은 생명주기 메서드를 사용하는 모든 클래스 컴포넌트 목록을 정리해 다음과 같이 컴포넌트에 대한 정보가 담긴 경고 로그를 출력한다.</p>
+<p><img src="https://ko.reactjs.org/static/e4fdbff774b356881123e69ad88eda88/1628f/strict-mode-unsafe-lifecycles-warning.png" alt="1"></p>
+<br />
+
+
+
+<h5 id="레거시-문자열-ref-사용에-대한-경고"><a href="#레거시-문자열-ref-사용에-대한-경고" class="headerlink" title="레거시 문자열 ref 사용에 대한 경고"></a>레거시 문자열 ref 사용에 대한 경고</h5><p>이전의 React에서 레거시 문자열 ref API와 콜백 API라는, ref를 관리하는 두 가지 방법을 제공하였었다. 이제는 객체 ref가 문자열 ref를 교체하는 용도로 널리 더해졌기 때문에, Strict 모드는 문자열 ref의 사용에 대해 경고한다.</p>
+<br />
+
+
+
+<h5 id="권장되지-않는-findDOMNode-사용에-대한-경고"><a href="#권장되지-않는-findDOMNode-사용에-대한-경고" class="headerlink" title="권장되지 않는 findDOMNode 사용에 대한 경고"></a>권장되지 않는 findDOMNode 사용에 대한 경고</h5><p>이전의 React에서 주어진 클래스 인스턴스를 바탕으로 트리를 탐색해 DOM 노드를 찾을 수 있는 <code>findDOMNode</code>를 지원하였었다. 이제는 DOM 노드에 바로 ref를 지정할 수 있기 때문에 보통 필요로 하지 않는다.</p>
+<br />
+
+
+
+<h5 id="예상치-못한-부작용-검사"><a href="#예상치-못한-부작용-검사" class="headerlink" title="예상치 못한 부작용 검사"></a>예상치 못한 부작용 검사</h5><p>개념적으로 React는 두 단계로 동작한다.</p>
+<ul>
+<li><code>렌더링 단계</code> 는 특정 환경 (DOM과 같은) 에 어떤 변화가 필요한 지 결정하는 단계로, 이 과정에서 React는 <code>render</code> 를 호출하여 이전 렌더와 결과값을 비교한다.</li>
+<li><code>커밋 단계</code> 는 React가 변경 사항을 반영하는 단계로 (React DOM의 경우 React가 DOM 노드를 추가, 변경 및 제거하는 단계), 이 단계에서 React는 <code>componentDidMount</code> 나 <code>componentDidUpdate</code> 와 같은 생명주기 메서드를 호출한다.</li>
+</ul>
+<p>커밋 단계는 일반적으로 매우 빠르지만, 렌더링 단계는 느릴 수 있어 문제가 발생할 수 있다.</p>
+<p><img width="349" align="center" alt="Screenshot 2021-05-30 at 20 45 33" src="https://user-images.githubusercontent.com/49134038/120103031-a0a7da00-c188-11eb-92d0-a1ca76acb969.png">)</p>
+<p>특히 위의 메서드들은 여러 번 호출될 수 있기 때문에, 부작용을 포함하지 않는 것이 중요하다. Strict 모드가 자동으로 부작용을 찾아주는 것은 불가능하지만, 조금 더 예측할 수 있게끔 만들어서 문제가 되는 부분을 발견할 수 있게 도와준다. </p>
+<p>이를 위해 다음과 같은 함수를 의도적으로 이중으로 호출하여 찾을 수 있다.</p>
+<ul>
+<li>클래스 컴포넌트의 <code>constructor</code>, <code>render</code> 그리고 <code>shouldComponentUpdate</code> 메서드</li>
+<li>클래스 컴포넌트의 <code>getDerivedStateFromProps</code> static 메서드</li>
+<li>함수 컴포넌트 바디</li>
+<li>State updater 함수 (<code>setState</code>의 첫 번째 인자)</li>
+<li><code>useState</code>, <code>useMemo</code> 그리고 <code>useReducer</code>에 전달되는 함수</li>
+</ul>
+<br />
+
+
+
+<h5 id="레거시-context-API-검사"><a href="#레거시-context-API-검사" class="headerlink" title="레거시 context API 검사"></a>레거시 context API 검사</h5><p>레거시 context API는 오류가 발생하기 쉬워 이후 릴리즈에서 삭제될 예정이다.</p>
+<p><img src="https://ko.reactjs.org/static/fca5c5e1fb2ef2e2d59afb100b432c12/51800/warn-legacy-context-in-strict-mode.png" alt="2"></p>
+<br />
+
+
+
+<hr>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode</a></p>
+<p><a target="_blank" rel="noopener" href="https://ko.reactjs.org/docs/strict-mode.html">https://ko.reactjs.org/docs/strict-mode.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/29/7%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-29-05-21/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1691,946 +2118,6 @@ Data2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/21/Data2Vis-paper-review/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/21/Data2Vis-paper-review/" class="post-title-link" itemprop="url">Data2Vis: Automatic Generation of Data Visualizations Using Sequence to Sequence Recurrent Neural Networks 논문 리뷰</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-05-20 16:12:36" itemprop="dateCreated datePublished" datetime="2021-05-20T16:12:36+01:00">2021-05-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/graduation-project/" itemprop="url" rel="index"><span itemprop="name">Graduation Project</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/graduation-project/paper-review/" itemprop="url" rel="index"><span itemprop="name">Paper Review</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p><strong>creating effective visualizations using <em>expressive grammars</em></strong></p>
-<br />
-
-
-
-<img width="452" align="center" alt="Screenshot 2021-05-20 at 17 05 21" src="https://user-images.githubusercontent.com/49134038/119007780-8160be00-b9cc-11eb-8994-a13466e5a568.png">
-
-<br />
-
-
-
-<h4 id="End-to-End-Trainable-Neural-Translation-Model"><a href="#End-to-End-Trainable-Neural-Translation-Model" class="headerlink" title="End-to-End Trainable Neural Translation Model"></a>End-to-End Trainable Neural Translation Model</h4><ul>
-<li><p>visualization generation === language translation problem</p>
-<p><code>formulation</code></p>
-<blockquote>
-<p>Vega-Lite</p>
-</blockquote>
-<ul>
-<li>mapping : data specifications → visualization specifications</li>
-<li>in a declarative language</li>
-</ul>
-<p><code>training</code></p>
-<ul>
-<li><p>a <em>multilayered, attention-based</em> <code>encoder-decoder</code> network</p>
-</li>
-<li><p>with <em>long short-term memory units</em> ( <code>LSTM</code> )</p>
-<blockquote>
-<p><img src="https://developer.nvidia.com/sites/default/files/pictures/2018/lstm.png" alt="LSTM"></p>
-</blockquote>
-</li>
-<li><p>on a corpus of visualization specifications</p>
-</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h4 id="learns…"><a href="#learns…" class="headerlink" title="learns…"></a>learns…</h4><ul>
-<li>the <code>vocabulary</code> and <code>syntax</code> for a valid visualization specification</li>
-<li>appropriate <code>transformations</code><ul>
-<li><em>e.g.</em> count, bins, mean</li>
-</ul>
-</li>
-<li>how to use common <code>data selection patterns</code> that occur within data visualizations</li>
-</ul>
-<br />
-
-
-
-<h2 id="Problem-Formulation"><a href="#Problem-Formulation" class="headerlink" title="Problem Formulation"></a>Problem Formulation</h2><blockquote>
-<p> <em>applies deep learning for <strong>translation and synthesis</strong></em></p>
-</blockquote>
-<br />
-
-
-
-<ol>
-<li><p><strong>data visualization problem === sequence to sequence models</strong> ( <code>seq2seq</code> )</p>
-<ul>
-<li><code>input</code> sequence : dataset<ul>
-<li><em>e.g.</em> fields, values in <em>json format</em></li>
-</ul>
-</li>
-<li><code>output</code> sequence : valid <code>Vega-Lite</code> visualization specification</li>
-</ul>
-</li>
-<li><p><strong>sequence translation === encoder-decoder networks</strong></p>
-<ul>
-<li><code>encoder</code> : reads and encodes a source sequence into <code>a fixed length vector</code></li>
-<li><code>decoder</code> : outputs a <code>translation</code> based on this vector</li>
-</ul>
-<p>👉 jointly trained to <strong>maximize the probability of outputting a correct</strong> translation</p>
-</li>
-</ol>
-<blockquote>
-<p><code>seq2seq</code></p>
-<ol>
-<li><p>generates data that is <em>sequential or temporally dependent</em></p>
-<ul>
-<li><em>e.g.</em> language translation</li>
-</ul>
-</li>
-<li><p>finds applications for problems where the output or input is <em>non-sequential</em></p>
-<ul>
-<li><em>e.g.</em> text summarization, image captioning</li>
-</ul>
-<p>👉 <strong>bidirectional RNN units</strong></p>
-<p>👉 <strong>attention mechanisms</strong></p>
-</li>
-</ol>
-</blockquote>
-<br />
-
-
-
-<h4 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h4><blockquote>
-<p><strong><em>ordinary</em> RNN ( <code>unidirectional</code> )</strong></p>
-<ol>
-<li><p>reads an input sequence x from the first token x_1 to the last x_m</p>
-</li>
-<li><p>generates an encoding only based on the preceding tokens it has seen</p>
-</li>
-</ol>
-<br />
-
-
-
-<p><strong><em>Bidirectional</em> RNN ( <code>BiRNN</code> )</strong></p>
-<ul>
-<li><p>consists of a forward RNN + a backward RNN</p>
-</li>
-<li><p>enables an encoding generation based on both the preceding and following tokens</p>
-</li>
-</ul>
-<ol>
-<li><p>a forward RNN ( <code>→f</code> )</p>
-<ol>
-<li>reads the input sequence as it is ordered from x_1 to x_m</li>
-<li>calculates a sequence of forward hidden states (→h_1, …, →h_m)</li>
-</ol>
-</li>
-<li><p>a backward RNN ( <code>←f</code> )</p>
-<ol>
-<li>reads the sequence in the reverse order from x_m to x_1</li>
-<li>calculates a sequence of backward hidden states (←h_1, …, ←h_m)</li>
-</ol>
-</li>
-<li><p>generates a hidden state <code>→h_j</code></p>
-<p><code>→h_j</code> </p>
-<ul>
-<li>a <u>concatenation</u> of both the forward and backward RNNs <u>( <code>h_j</code> : <code>[→h_j(T); ←h_j(T)]T</code> )</u></li>
-<li>contains summaries of both the preceeding and following tokens</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<blockquote>
-<p><strong>attention mechanism</strong></p>
-<ul>
-<li>focuses on aspects of an input sequence</li>
-<li>generates output tokens</li>
-<li>makes translation models <strong>robust</strong> to performance degradation</li>
-<li>generates <strong>lengthy</strong> sequences</li>
-<li>enables model to <strong>learn mappings</strong> between source and target sequences of <strong>different lengths</strong></li>
-<li>improves the ability to <strong>interpret and debug</strong> sequence to sequence models as providing valuable insights on <em>why a given token is generated at each step</em></li>
-</ul>
-<hr>
-<ul>
-<li><p><em>e.g.</em></p>
-<p><code>image captioning</code></p>
-<ul>
-<li>model <em>focuses on <strong>specific parts</strong> of objects</em> in an image</li>
-<li><em>generates <strong>each word or token</strong></em> in the image caption</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<br />
-
-
-
-<p>👇 <em>enables us to use a <strong>sequence translation model</strong> which…</em> </p>
-<ol>
-<li>first takes into consideration the entire data input (dataset)</li>
-<li>and then focuses on aspects of the input (fields) in generating a visualization specification</li>
-</ol>
-<br />
-
-
-
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h4 id="Encoder-Decoder-Architecture-with-Attention-mechanism"><a href="#Encoder-Decoder-Architecture-with-Attention-mechanism" class="headerlink" title="Encoder-Decoder Architecture with Attention mechanism"></a>Encoder-Decoder Architecture with Attention mechanism</h4><ol>
-<li><p>2-layer <code>Encoder</code> </p>
-<ul>
-<li>bidirectional recurrent neural network (RNN)<ul>
-<li>takes in an input <strong>sequence</strong> of <em>source tokens x</em></li>
-<li>and outputs a <strong>sequence</strong> of <em>states h</em></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>2-layer <code>Decoder</code> </p>
-<ul>
-<li><p>RNN</p>
-<ul>
-<li>computes the <strong>probability</strong> of a <em>target sequence y</em> <u>based on the hidden state h</u></li>
-</ul>
-<blockquote>
-<p><code>probability</code></p>
-<ul>
-<li>generated <em>based on the <strong>recurrent state of the decoder</strong> RNN</em>, <strong>previous tokens</strong> in the target sequence and a <strong>context vector <code>c_i</code></strong> </li>
-</ul>
-<p><code>context vector</code> === <code>attention vector</code></p>
-<ul>
-<li><em><strong>a weighted average</strong> of the source states</em></li>
-<li>and designed to capture the context of source sequence that help <strong>predict</strong> the current target token</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p><em>each with</em> 512 <code>Long Short-Term Memory</code> (LSTM) units (cells)</p>
-<ul>
-<li>better than Gated Recurrent Unit (GRU)</li>
-</ul>
-</li>
-</ol>
-<br />
-
-
-
-<h2 id="Data-and-Preprocessing"><a href="#Data-and-Preprocessing" class="headerlink" title="Data and Preprocessing"></a>Data and Preprocessing</h2><h4 id="Learning-Objectives"><a href="#Learning-Objectives" class="headerlink" title="Learning Objectives"></a>Learning Objectives</h4><p><em>model should…</em></p>
-<ol>
-<li><p>select a subset of fields to focus on, when creating visualizations</p>
-<ul>
-<li>most datasets have multiple fields which cannot all be simultaneously visualized</li>
-</ul>
-</li>
-<li><p>learn differences in data types across the data fields</p>
-<ul>
-<li><em>e.g.</em> numeric, string, temporal, ordinal, categorical, etc.</li>
-</ul>
-</li>
-<li><p>learn the appropriate transformations to apply to a field given its data type</p>
-<ul>
-<li><em>e.g.</em> aggregate transform does not apply to string fields</li>
-</ul>
-<p>👇</p>
-<p><code>Vega-Lite Grammer</code></p>
-</li>
-</ol>
-<ul>
-<li>view-level transforms (aggregate, bin, calculate, filter, timeUnit)<ul>
-<li>field-level transforms (aggregate, bin, sort, timeUnit)</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h4 id="Achieving-Objectives"><a href="#Achieving-Objectives" class="headerlink" title="Achieving Objectives"></a>Achieving Objectives</h4><p><em><strong>character based sequence model</strong></em></p>
-<ul>
-<li><p><strong>Challenge</strong> : a <em>character tokenization strategy</em> requires</p>
-<ul>
-<li><strong>more units</strong> to represent a sequence</li>
-<li>a large amount of <strong>hidden layers</strong></li>
-<li>a large amount of <strong>parameters</strong> <em>to model long term dependencies</em></li>
-</ul>
-</li>
-<li><p>Solution</p>
-<ol>
-<li><p>replace string and numeric field names using a <strong>short notation</strong></p>
-<ul>
-<li>e.g.* “str”, “num” in the source sequence (dataset)</li>
-</ul>
-</li>
-<li><p>a <strong>similar backward transformation</strong> is done in the target sequence</p>
-<ul>
-<li>to maintain consistency in field names</li>
-</ul>
-</li>
-</ol>
-<p>👇</p>
-<ul>
-<li>scaffolds the learning process by reducing the vocabulary size</li>
-<li>prevents the LSTM from learning field names (which are not needed to be memorized)</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/19/VizML-paper-review/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/19/VizML-paper-review/" class="post-title-link" itemprop="url">VizML: A Machine Learning Approach to Visualization Recommendation 논문 리뷰</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-05-18 23:19:37" itemprop="dateCreated datePublished" datetime="2021-05-18T23:19:37+01:00">2021-05-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/graduation-project/" itemprop="url" rel="index"><span itemprop="name">Graduation Project</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/graduation-project/paper-review/" itemprop="url" rel="index"><span itemprop="name">Paper Review</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<h3 id="Visualization-Recommender-System"><a href="#Visualization-Recommender-System" class="headerlink" title="Visualization Recommender System"></a>Visualization Recommender System</h3><p>lower the barrier to exploring basic visualizations</p>
-<ul>
-<li>by <em>automatically generating results</em></li>
-<li>for analysts to <em>search and select</em>, not manually specify</li>
-</ul>
-</blockquote>
-<br />
-
-
-
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><br />
-
-
-
-<img width="586" aligned="center" alt="Screenshot 2021-05-19 at 14 20 00" src="https://user-images.githubusercontent.com/49134038/118769577-4884f400-b8bb-11eb-98b6-7314c700938f.png">
-
-<br />
-
-
-
-<h4 id="machine-learning-based-approach"><a href="#machine-learning-based-approach" class="headerlink" title="machine learning-based approach"></a>machine learning-based approach</h4><ul>
-<li><strong>learns</strong> visualization <code>design choices</code> </li>
-<li><em>from</em> a large corpus of <code>datasets</code> </li>
-<li><em>from</em> associated <code>visualisations</code> </li>
-</ul>
-<br />
-
-
-
-<h4 id="by…"><a href="#by…" class="headerlink" title="by…"></a>by…</h4><ol>
-<li>identify <strong>five key design choices</strong></li>
-<li>using one million dataset-visualisation pairs</li>
-</ol>
-<br />
-
-
-
-<h4 id="evaluation"><a href="#evaluation" class="headerlink" title="evaluation"></a>evaluation</h4><p><strong>for</strong> : generalizability and uncertainty</p>
-<p><strong>by</strong> : benchmark with a crowdsourced test set</p>
-<p><strong>result</strong> : comparable to human performance</p>
-<br />
-
-
-
-<h2 id="Problem-Formulation"><a href="#Problem-Formulation" class="headerlink" title="Problem Formulation"></a>Problem Formulation</h2><p><strong>Data visualization communicates information <em>by representing data with visual elements</em></strong></p>
-<br />
-
-
-
-<p><code>representations</code> are specified <em>using…</em></p>
-<ul>
-<li><p><code>encodings</code> : map from data to the <code>retinal properties</code> of <code>graphical marks</code></p>
-</li>
-<li><p><code>retinal properties</code></p>
-<ul>
-<li><em>e.g.</em> position, length, colour</li>
-</ul>
-</li>
-<li><p><code>graphical marks</code></p>
-<ul>
-<li><em>e.g.</em> point, line, rectangle</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<p><em>e.g.</em></p>
-<img width="368" aligned="center" alt="Screenshot 2021-05-19 at 15 04 20" src="https://user-images.githubusercontent.com/49134038/118769573-47ec5d80-b8bb-11eb-918f-c34c5a51f0e2.png">
-
-<p>To create <strong>scatterplot</strong> showing the relationship between <em>MPG</em> and <em>Hp</em>,</p>
-<ul>
-<li><p><strong>encoding each pair</strong> of data points of a circle on a 2D plane</p>
-</li>
-<li><p>while <strong>specifying other retinal properties</strong> such as size and colour</p>
-</li>
-</ul>
-<br />
-
-
-
-<h5 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h5><p><code>Vega-lite</code></p>
-<ul>
-<li>selecting  <code>mark type</code> and <code>fields</code> to be <em>encoded along the x- and y-axes</em></li>
-</ul>
-<p><code>Tableau</code></p>
-<ul>
-<li><em>placing the 2 columns</em> onto the respective column and row shelves</li>
-</ul>
-<br />
-
-
-
-<hr>
-<br />
-
-
-
-<ol>
-<li><p><strong>formulate</strong> basic visualization of a <em>dataset</em> <code>d</code> <strong>as</strong> a <em>set of interrelated design choices</em> <code>C = &#123;c&#125;</code></p>
-<blockquote>
-<p> <code>set of choices</code> that result in valid visualizations</p>
-<p>=== a <code>subset</code> of the space of <strong>all possible choices</strong></p>
-</blockquote>
-</li>
-<li><p><strong>automatically suggest</strong> a <em>subset of design choices</em> <code>C_rec ⊆ C</code> that <em>maximize effectiveness</em></p>
-<blockquote>
-<p> <code>effectiveness</code> can be defined by informational measures</p>
-<ul>
-<li><em>e.g.</em> efficiency, accuracy, memorability, emotive measures</li>
-</ul>
-</blockquote>
-</li>
-</ol>
-<br />
-
-
-
-<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h4 id="Rule-based-Visualization-Recommender-Systems"><a href="#Rule-based-Visualization-Recommender-Systems" class="headerlink" title="Rule-based Visualization Recommender Systems"></a>Rule-based Visualization Recommender Systems</h4><br />
-
-
-
-<h4 id="ML-based-Visualization-Recommender-Systems"><a href="#ML-based-Visualization-Recommender-Systems" class="headerlink" title="ML-based Visualization Recommender Systems"></a>ML-based Visualization Recommender Systems</h4><blockquote>
-<h5 id="DeepEye"><a href="#DeepEye" class="headerlink" title="DeepEye"></a>DeepEye</h5><h5 id="Data2Vis"><a href="#Data2Vis" class="headerlink" title="Data2Vis"></a>Data2Vis</h5><h5 id="Draco-Learn"><a href="#Draco-Learn" class="headerlink" title="Draco-Learn"></a>Draco-Learn</h5></blockquote>
-<h5 id="VizML"><a href="#VizML" class="headerlink" title="VizML"></a>VizML</h5><ul>
-<li><p><em>Pros</em></p>
-<ul>
-<li><p><code>learning task</code> : <em>learn to…</em></p>
-<p><strong>predict design choices</strong></p>
-<ul>
-<li>easier to <strong>quantitatively</strong> validate</li>
-<li>easier to provide <strong>interpretable measures</strong> of feature importance</li>
-<li>easily <strong>integrated</strong> into visualization systems</li>
-</ul>
-<blockquote>
-<p>DeepEye : classify and rank visualizations</p>
-<p>Data2Vis : end-to-end generation model</p>
-<p>Draco-Learn : soft constraints weights</p>
-</blockquote>
-</li>
-<li><p><code>data quantity</code> : <em>training corpus is…</em></p>
-<p><strong>orders of magnitude larger</strong> than DeepEye and Data2Vis</p>
-<ul>
-<li>permits the use of <strong>large feature sets</strong> that <em>capture many aspects</em> of a dataset</li>
-<li>permits the use of <strong>high-capacity models</strong> such as deep neural network</li>
-</ul>
-</li>
-<li><p><code>data quality</code> : the datasets used are…</p>
-<p><strong>extremely diverse</strong> in shape, structure, and distribution</p>
-<p>the result of <strong>real visual analysis by analysts</strong> on their own datasets</p>
-<blockquote>
-<p>others</p>
-<ul>
-<li>few datasets used to train</li>
-<li>visualisations are generated by rule-based systems</li>
-<li>evaluated number controlled settings</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<ul>
-<li><em>cons</em><ul>
-<li>only recommends <strong>visual encodings, not data queries</strong></li>
-<li>do not create ★ an <strong>application</strong> that employs the visualization model ★</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><h3 id="Feature-Extraction"><a href="#Feature-Extraction" class="headerlink" title="Feature Extraction"></a>Feature Extraction</h3><p><em>distinguish the feature categories to…</em></p>
-<ol>
-<li>organize <strong>how to</strong> create and interpret features</li>
-<li>observe the <strong>contribution</strong> of different types of features</li>
-<li>to capture if <strong>less generalizable</strong> than other categories</li>
-</ol>
-<br />
-
-
-
-<img width="320" aligned="center" alt="Screenshot 2021-05-19 at 15 26 21" src="https://user-images.githubusercontent.com/49134038/118769569-46bb3080-b8bb-11eb-8a7e-548703c05715.png">
-
-<ul>
-<li><code>Dimensions D</code> : <em>the number of rows</em> in a column</li>
-<li><code>Types T</code> : whether a column is <em>categorical, temporal, or quantitative</em></li>
-<li><code>Values V</code> : <em>the statistical and structural properties</em> of the values within a column</li>
-<li><code>Names N</code> : the <em>column name</em></li>
-</ul>
-<p>👉 <strong>order in <code>D - T - V - N</code></strong>  by <em>how biased</em> the features to be towards the corpus </p>
-<br />
-
-
-
-<h5 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h5><ol>
-<li><p>describe each pair of columns with <code>30 pairwise-column features</code></p>
-</li>
-<li><p>divide into 2 categories : <code>Values</code> and <code>Names</code> </p>
-<blockquote>
-<p>many pairwise-column features depend on the individual column types</p>
-</blockquote>
-</li>
-<li><p>create <code>841dataset-level features</code> by aggregating single- and pairwise-column features using <code>16 aggregation functions</code></p>
-<blockquote>
-<p><strong>aggregation function</strong> : convert single- and pairwise-column features into scalar values</p>
-<ol>
-<li>train separate models per number of columns</li>
-<li>include column features with padding</li>
-</ol>
-</blockquote>
-</li>
-</ol>
-<br />
-
-
-
-<h3 id="Design-Choice-Extraction"><a href="#Design-Choice-Extraction" class="headerlink" title="Design Choice Extraction"></a>Design Choice Extraction</h3><p><em>extract an analyst’s design choices to…</em></p>
-<p><strong>parse the traces</strong> because each visualization consists of traces that associate collections of data with visual elements</p>
-<br />
-
-
-
-<h4 id="Encoding-level-Desing-Choices"><a href="#Encoding-level-Desing-Choices" class="headerlink" title="Encoding-level Desing Choices"></a>Encoding-level Desing Choices</h4><ul>
-<li><code>mark type</code> : scatter, etc.</li>
-<li><code>column encoding</code> : which column is represented on which axis, whether or not an X or Y column is the single column represented along that axis</li>
-</ul>
-<br />
-
-
-
-<p><em>by aggregating these choices…</em></p>
-<p>👇 </p>
-<h4 id="Visualization-level-Design-Choices"><a href="#Visualization-level-Design-Choices" class="headerlink" title="Visualization-level Design Choices"></a>Visualization-level Design Choices</h4><ol>
-<li><p>describe the <strong>type shared</strong> among all traces</p>
-</li>
-<li><p>determine whether the visualization has a <strong>shared axis</strong></p>
-</li>
-</ol>
-<br />
-
-
-
-<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><h3 id="Feature-Processing"><a href="#Feature-Processing" class="headerlink" title="Feature Processing"></a>Feature Processing</h3><ol>
-<li><p>apply <code>one-hot encoding</code> to <em>categorical features</em></p>
-</li>
-<li><p>set <code>numeric values</code> <em>above 99% or below 1%</em> to respective cut-offs</p>
-</li>
-<li><p>impute <code>missing categorical values</code> using <em>the mode of non-missing values, and missing numeric values with the mean of non-missing values</em></p>
-</li>
-<li><p><strong>remove</strong> the mean of numeric fields and <strong>scale</strong> to unit variance</p>
-</li>
-<li><p><strong>randomly remove</strong> datasets that are <em>exact deduplicates of each other</em></p>
-<blockquote>
-<p>remove all but one randomly selected dataset per user</p>
-<p>👉 remove bias towards more prolific users</p>
-</blockquote>
-</li>
-</ol>
-<br />
-
-
-
-<h3 id="Prediction-Tasks"><a href="#Prediction-Tasks" class="headerlink" title="Prediction Tasks"></a>Prediction Tasks</h3><h4 id="Two-visualization-level-prediction-tasks"><a href="#Two-visualization-level-prediction-tasks" class="headerlink" title="Two visualization-level prediction tasks"></a>Two visualization-level prediction tasks</h4><p>use <em><strong>dataset-level</strong> features</em></p>
-<img width="298" aligned="center" alt="Screenshot 2021-05-19 at 15 49 37" src="https://user-images.githubusercontent.com/49134038/118769566-46229a00-b8bb-11eb-9228-6ea36108c95c.png">
-
-<p>to predict <strong>visualization-level</strong> design choices</p>
-<br />
-
-
-
-<h4 id="Three-encoding-level-prediction-tasks"><a href="#Three-encoding-level-prediction-tasks" class="headerlink" title="Three encoding-level prediction tasks"></a>Three encoding-level prediction tasks</h4><p>use <em>features about <strong>individual columns</strong></em></p>
-<img width="300" aligned="center" alt="Screenshot 2021-05-19 at 15 49 50" src="https://user-images.githubusercontent.com/49134038/118769559-43c04000-b8bb-11eb-9db5-9b2623274252.png">
-
-<p>to predict <strong>how</strong> they are visually <strong>encoded</strong></p>
-<blockquote>
-<p>consider each column <em>indepedently,</em></p>
-<p>instead of alongside other columns in the same dataset</p>
-</blockquote>
-<br />
-
-
-
-<hr>
-<h5 id="Visualization-Type-amp-Mark-Type-task"><a href="#Visualization-Type-amp-Mark-Type-task" class="headerlink" title="Visualization Type &amp; Mark Type task"></a>Visualization Type &amp; Mark Type task</h5><p>2 class task : line vs. bar</p>
-<p>3 class task : scatter vs. line vs. var</p>
-<hr>
-<h3 id="Neural-Network-and-Baseline-Models"><a href="#Neural-Network-and-Baseline-Models" class="headerlink" title="Neural Network and Baseline Models"></a>Neural Network and Baseline Models</h3><ul>
-<li><p>fully-connected feedforward neural network</p>
-</li>
-<li><p>with 3 hidden layers, each consisting of 1000 neurons</p>
-</li>
-<li><p>with ReLU activation functions</p>
-</li>
-<li><p>split the data in 60/ 20/ 20 (train/ validation/ test sets) 5 times using 5-fold cross-validation</p>
-</li>
-</ul>
-<br />
-
-
-
-<h4 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h4><ol>
-<li>D</li>
-<li>D+T</li>
-<li>D+T+V</li>
-<li>D+T+V+N = ALL</li>
-</ol>
-<br />
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/17/SOAP-Concurrency/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/17/SOAP-Concurrency/" class="post-title-link" itemprop="url">Concurrency</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-05-16 16:20:07" itemprop="dateCreated datePublished" datetime="2021-05-16T16:20:07+01:00">2021-05-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sopt/soap/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h2><blockquote>
-<p>동시성</p>
-</blockquote>
-<br />
-
-
-
-<h3 id="자바스크립트는…"><a href="#자바스크립트는…" class="headerlink" title="자바스크립트는…"></a>자바스크립트는…</h3><p><strong><code>동기식</code>, <code>싱글스레드</code> 언어 이다.</strong> 이는 즉,</p>
-<ul>
-<li><em>호이스팅 이후</em> 순차적으로 코드를 실행함을 의미하며,</li>
-<li>페이지에서 자바스크립트 블록이 실행 중이라면 다른 자바스크립트는 페이지에서 실행되지 못함</li>
-</ul>
-<p>을 의미한다.</p>
-<p>이 때, 싱글스레드 프로그래밍 언어이기 때문에 동기적 방식에 <strong>비동기 처리가 필수적이다.</strong> 비동기 처리는 그 결과가 언제 반환 될지 알 수 없기 때문에 동기식과 같이 결과 반환을 예상할 수 있게 처리하는 기법들이 사용되어야 한다. 자바스크립트에서 이와 같은 비동기 처리의 대표적 방식은 <code>setTimeOut</code> , <code>callback</code> , <code>promise</code> 등이 있다.</p>
-<p>자바스크립트는 <strong>Ajax를 호출하는 등의 기능을 수행할 때만 (자동적으로) 비동기식 언어로 작동</strong>한다. Ajax 호출에 대한 <strong>응답이 돌아와야만 (성공적이든 거절되든) Ajax 호출 실행이 중단되고 다른 (다음) 코드가 실행된다.</strong> 이 때, <strong>콜백함수는 동기적으로 작동한다.</strong> 응답이 돌아오기 전까지, 콜백함수가 실행 중일 때는 다른 코드는 실행되지 않으며 실행 중인 다른 코드 (작동 중인 다른 프로그램) 를 방해하지는 않는다.</p>
-<br />
-
-
-
-<blockquote>
-<p><strong><code>동기(synchronous)적</code> 방식</strong> : 현재 실행 중인 코드가 완료된 후 다음 코드를 실행</p>
-<ul>
-<li>요청 처리가 완료된 후 다음 요청을 처리 하는 방식으로 이전 요청을 처리하는 시간이 다음 요청에 영향을 준다.<ul>
-<li>요청과 응답이 같은 시간대에 있다. (사이에 시간 간격을 두지 않음)</li>
-</ul>
-</li>
-<li>일반적으로 작성한 코드는 보통 동기 방식으로 처리된다.</li>
-</ul>
-<p><strong><code>비동기(asynchronous)적</code> 방식</strong> : 현재 실행 중인 코드의 완료 여부 (매개변수가 아닌 함수 실행 여부) 와 무관하게 즉시 다음 코드로 넘어가서 실행</p>
-<ul>
-<li><p>요청과 응답이 다른 시간대에 일어날 수 있다.</p>
-</li>
-<li><p><code>setTimeout()</code> </p>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<p><strong><code>single-threaded</code></strong></p>
-<p>싱글스레드 언어는 <strong>한 번에 하나의 작업만 수행</strong>할 수 있다.</p>
-<p>🤔 <em>그렇다면 자바스크립트를 주로 사용하는 웹 사이트에서는 어떻게 한번에 여러 요청을 받을까? 그리고 여러 요청이 오갈 수 있는 자바스크립트는 왜 싱글 쓰레드일까?</em></p>
-<p>정확하게 말하면 <strong>자바스크립트의 메인 쓰레드인 이벤트 루프가 싱글 쓰레드</strong>이기 때문에 자바스크립트를 싱글 쓰레드 언어라고 부른다. <em>하지만 이벤트 루프만 독립적으로 실행되지 않고 웹 브라우저나 NodeJS같은 멀티 쓰레드 환경에서 실행된다.</em> <strong>즉, 자바스크립트 자체는 싱글 쓰레드가 맞지만 자바스크립트 런타임은 싱글 쓰레드가 아니다.</strong></p>
-</blockquote>
-<br />
-
-
-
-<h4 id="콜백-지옥"><a href="#콜백-지옥" class="headerlink" title="콜백 지옥"></a>콜백 지옥</h4><p>콜백 함수를 익명 함수로 전달하는 과정이 반복되어 코드의 복잡도가 커지는 현상으로, 엄청나게 많은 중괄호 중첩을 사용하여 가독성이 떨어지고 코드를 수정하기 어려움. </p>
-<ul>
-<li>이벤트 처리나 서버 통신과 같은 비동기적인 작업을 수행하기 위해 콜백 함수를 이용함</li>
-</ul>
-<p><em>e.g.</em> 아래 코드는 0.5초마다 커피 목록을 수집하고 출력합니다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(</span><br><span class="line">  (name) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> coffeeList = name;</span><br><span class="line">    <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">setTimeout</span>(</span><br><span class="line">      (name) =&gt; &#123;</span><br><span class="line">        coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">        <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">setTimeout</span>(</span><br><span class="line">          (name) =&gt; &#123;</span><br><span class="line">            coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">            <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line"></span><br><span class="line">            <span class="built_in">setTimeout</span>(</span><br><span class="line">              (name) =&gt; &#123;</span><br><span class="line">                coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">                <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">              &#125;,</span><br><span class="line">              <span class="number">500</span>,</span><br><span class="line">              <span class="string">&#x27;Latte&#x27;</span>,</span><br><span class="line">            );</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="number">500</span>,</span><br><span class="line">          <span class="string">&#x27;Mocha&#x27;</span>,</span><br><span class="line">        );</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="number">500</span>,</span><br><span class="line">      <span class="string">&#x27;Americano&#x27;</span>,</span><br><span class="line">    );</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="number">500</span>,</span><br><span class="line">  <span class="string">&#x27;Espresso&#x27;</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; 출력값</span><br><span class="line">Espresso (0.5초)</span><br><span class="line">Espresso, Americano (1.0초)</span><br><span class="line">Espresso, Americano, Mocha (1.5초)</span><br><span class="line">Espresso, Americano, Mocha, Latte (2.0초)</span><br></pre></td></tr></table></figure>
-<p>각 콜백은 커피 이름을 전달하고 목록에 이름을 추가합니다. 정상적으로 실행되지만 들여쓰기 수준이 과도하게 깊어지고 값이 아래에서 위로 전달되어 가독성이 떨어집니다.</p>
-<br />
-
-
-
-<h5 id="콜백-지옥-탈출"><a href="#콜백-지옥-탈출" class="headerlink" title="콜백 지옥 탈출"></a>콜백 지옥 탈출</h5><ul>
-<li><p><code>기명함수</code> : 가독성 문제와 어색함을 동시에 해결하는 가장 간단한 방법은 익명의 콜백 함수를 모두 기명함수로 전환하는 것입니다.</p>
-<ul>
-<li>코드의 가독성을 높일 수 있고 함수 선언과 함수 호출만 구분할 수 있다면 위에서부터 아래로 순서대로 읽는데 어려움이 없다.</li>
-<li>일회성 함수를 전부 변수에 할당하는 것은 코드명을 일일이 따라다녀야 하기 때문에 오히려 헷갈림을 유발할 소지가 있다.</li>
-</ul>
-<p><em>e.g.</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> coffeeList = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addEspresso = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList = name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="built_in">setTimeout</span>(addAmericano, <span class="number">500</span>, <span class="string">&#x27;Americano&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addAmericano = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="built_in">setTimeout</span>(addMocha, <span class="number">500</span>, <span class="string">&#x27;Mocha&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addMocha = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="built_in">setTimeout</span>(addLatte, <span class="number">500</span>, <span class="string">&#x27;Latte&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addLatte = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  coffeeList += <span class="string">&#x27;, &#x27;</span> + name;</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(addEspresso, <span class="number">500</span>, <span class="string">&#x27;Espresso&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
-<li><p><code>Promise</code></p>
-<ul>
-<li><code>new</code> 연산자와 함께 호출한, <code>Promise</code> 의 인자로 넘겨주는 <code>콜백 함수</code> 는 <em>호출 시 바로 실행되지만</em> <strong>(비동기적)</strong> <em>그 내부에 <code>resolve</code> 또는 <code>reject</code>함수를 호출하는 구문이 있을 경우 둘 중 하나가 실행되기 전까지는 <code>then</code>또는 <code>catch</code>로 넘어가지 않는다</em> <strong>(동기적)</strong>. 따라서 비동기 작업이 완료될 때 <code>resolve</code> 또는 <code>reject</code> 를 호출하는 방법으로 비동기 작업의 동기적 표현이 가능해진다.</li>
-</ul>
-<p><em>e.g.</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="string">&#x27;Espresso&#x27;</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(name);</span><br><span class="line">    resolve(name);</span><br><span class="line">  &#125;, <span class="number">500</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> name = prevName + <span class="string">&#x27;, Americano&#x27;</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">        resolve(name);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> name = prevName + <span class="string">&#x27;, Mocha&#x27;</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">        resolve(name);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> name = prevName + <span class="string">&#x27;, Latte&#x27;</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">        resolve(name);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-<p>아래는 위 코드와 같은 내용을 간결하게 표현한 코드이다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addCoffee = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">prevName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newName = prevName ? <span class="string">`<span class="subst">$&#123;prevName&#125;</span>, <span class="subst">$&#123;name&#125;</span>`</span> : name;</span><br><span class="line">        <span class="built_in">console</span>.log(newName);</span><br><span class="line">        resolve(newName);</span><br><span class="line">      &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">addCoffee(<span class="string">&#x27;Espresso&#x27;</span>)()</span><br><span class="line">  .then(addCoffee(<span class="string">&#x27;Americano&#x27;</span>))</span><br><span class="line">  .then(addCoffee(<span class="string">&#x27;Mocha&#x27;</span>))</span><br><span class="line">  .then(addCoffee(<span class="string">&#x27;Latte&#x27;</span>));</span><br></pre></td></tr></table></figure></li>
-<li><p><code>Generator</code></p>
-<ul>
-<li><code>Generator</code> 함수 : <code>function* () &#123;&#125;</code> </li>
-<li><code>Generator</code> 함수를 실행하면 <code>Iterator</code>가 반환되는데, <code>Iterator </code>는 <code>next </code>메서드를 가지고 있다. 이 <code>next</code> 메서드를 호출하면 앞서 멈췄던 부분부터 시작해서 그 다음에 등장하는 <code>yield</code> 전까지 코드를 실행한다. 따라서 비동기 작업이 완료되는 시점마다 <code>next</code> 메서드를 호출하면 <code>Generator</code> 함수 내부의 소스가 위에서부터 아래로 순차적으로 진행되는 것과 같다.</li>
-</ul>
-<p><em>e.g.</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addCoffee = <span class="function">(<span class="params">prevName, name</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    coffeeMaker.next(prevName ? <span class="string">`<span class="subst">$&#123;prevName&#125;</span>, <span class="subst">$&#123;name&#125;</span>`</span> : name);</span><br><span class="line">  &#125;, <span class="number">500</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> coffeeGenerator = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> espresso = <span class="keyword">yield</span> addCoffee(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;Espresso&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(espresso);</span><br><span class="line">  <span class="keyword">const</span> americano = <span class="keyword">yield</span> addCoffee(espresso, <span class="string">&#x27;Americano&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(americano);</span><br><span class="line">  <span class="keyword">const</span> mocha = <span class="keyword">yield</span> addCoffee(americano, <span class="string">&#x27;Mocha&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(mocha);</span><br><span class="line">  <span class="keyword">const</span> latte = <span class="keyword">yield</span> addCoffee(mocha, <span class="string">&#x27;Latte&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(latte);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> coffeeMaker = coffeeGenerator();</span><br><span class="line">coffeeMaker.next();</span><br></pre></td></tr></table></figure></li>
-<li><p><code>Promise</code> + <code>async/ await</code></p>
-<ul>
-<li>비동기 작업을 수행하고자 하는 함수 앞에 <code>async</code> 를 붙이고, 함수 내부에서 비동기 작업이 필요한 위치에 <code>await</code> 를 붙임으로써 해당 라인의 코드 내용을 <code>Promise</code> 로 (자동) 전환하고 해당 내용이 <code>resolve</code> 된 이후에야 그에 대한 코드가 진행된다.</li>
-</ul>
-<p><em>e.g.</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addCoffee = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      resolve(name);</span><br><span class="line">    &#125;, <span class="number">500</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> coffeeMaker = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> coffeeList = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">let</span> _addCoffee = <span class="keyword">async</span> (name) =&gt; &#123;</span><br><span class="line">    coffeeList += (coffeeList ? <span class="string">&#x27;, &#x27;</span> : <span class="string">&#x27;&#x27;</span>) + (<span class="keyword">await</span> addCoffee(name));</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Espresso&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Americano&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Mocha&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">  <span class="keyword">await</span> _addCoffee(<span class="string">&#x27;Latte&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(coffeeList);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">coffeeMaker();</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-</li>
-</ul>
-<hr>
-<br />
-
-
-
-<ol>
-<li><p>Callback 대신 <code>Promise</code> 사용하기</p>
-<ul>
-<li>ES2015/ ES6 기준</li>
-<li>콜백 지옥 방지</li>
-</ul>
-</li>
-</ol>
-   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request&#x27;</span>)</span><br><span class="line">  .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>, 	<span class="function">(<span class="params">requestErr, response</span>) =&gt;</span> &#123; <span class="comment">// 1차 콜백</span></span><br><span class="line">  	<span class="comment">// catch 구문</span></span><br><span class="line">    <span class="keyword">if</span> (requestErr) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(requestErr);</span><br><span class="line">    &#125; </span><br><span class="line">  	<span class="comment">// then 구문 ... 반복</span></span><br><span class="line">  	<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line">        .writeFile(<span class="string">&#x27;article.html&#x27;</span>,</span><br><span class="line">          response.body, <span class="function">(<span class="params">writeErr</span>) =&gt;</span> &#123; <span class="comment">// 2차 콜백</span></span><br><span class="line">            <span class="keyword">if</span> (writeErr) &#123;</span><br><span class="line">              <span class="built_in">console</span>.error(writeErr);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        );</span><br><span class="line">      &#125;</span><br><span class="line">	&#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line">  .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>)</span><br><span class="line">	<span class="comment">// Promise가 resolved를 반환하였을 때</span></span><br><span class="line">  .then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">  &#125;)</span><br><span class="line">	<span class="comment">// 다음 Promise</span></span><br><span class="line">  .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">	<span class="comment">// Promise가 rejected를 반환하였을 때</span></span><br><span class="line">  .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><p><code>Async/ Await</code> 은 Promise보다 더욱 깔끔하다.</p>
-<ul>
-<li>ES2017/ ES8 기준</li>
-<li>콜백에 대한 Promise을 단독으로 이용할 때보다 더 깔끔한 해결책으로, Promise을 활용한 방식이다.</li>
-<li>함수 앞에 <code>async</code> 붙이기</li>
-<li>함수의 연속적인 처리 (논리적으로 연결) 를 위해 <code>then</code> 을 계속 이어붙여 코드를 작성하지 않아도 됨</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// not bad</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line">.get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>)</span><br><span class="line">  .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line"><span class="comment">// better</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getCleanCodeArticle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// then 구문</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// then 작성 없이 await으로 synchronization</span></span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="built_in">require</span>(<span class="string">&#x27;request-promise&#x27;</span>)</span><br><span class="line"> .get(<span class="string">&#x27;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&#x27;</span>);</span><br><span class="line">    <span class="comment">// then 구문 // await로 Promise 처리</span></span><br><span class="line">    <span class="keyword">await</span> <span class="built_in">require</span>(<span class="string">&#x27;fs-promise&#x27;</span>).writeFile(<span class="string">&#x27;article.html&#x27;</span>, response);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File written&#x27;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// catch 구문</span></span><br><span class="line">  <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-</li>
-</ol>
-<hr>
-<h3 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h3><p><a target="_blank" rel="noopener" href="https://velog.io/@yujo/JS%EC%BD%9C%EB%B0%B1-%EC%A7%80%EC%98%A5%EA%B3%BC-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%A0%9C%EC%96%B4">https://velog.io/@yujo/JS%EC%BD%9C%EB%B0%B1-%EC%A7%80%EC%98%A5%EA%B3%BC-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%A0%9C%EC%96%B4</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2702,7 +2189,7 @@ Data2Vis를 이해하기 위해, 이와 연관된 연구이자 기본에 충실�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">107</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
