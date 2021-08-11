@@ -163,6 +163,732 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/28/8-Bitwise-Operation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/28/8-Bitwise-Operation/" class="post-title-link" itemprop="url">8. Bitwise Operation</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-27 23:37:53" itemprop="dateCreated datePublished" datetime="2021-01-27T23:37:53Z">2021-01-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Bitwise-Operation"><a href="#Bitwise-Operation" class="headerlink" title="Bitwise Operation"></a>Bitwise Operation</h2><p>num[index] * 2^(index-1)</p>
+<h3 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h3><p><code>both</code><br><strong>&amp; : return 1 if both has 1 (same)</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>&amp;<blockquote>
+<p>5 &amp; 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<h2 id="amp-1001"><a href="#amp-1001" class="headerlink" title="&amp;1001"></a>&amp;1001</h2><p>0001(2) –&gt; 1</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h3><p><code>at least</code><br><strong>| : return 1 if at least one has 1</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>|<blockquote>
+<p>5 | 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<table>
+<thead>
+<tr>
+<th>1001</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1101(2) –&gt; 13</td>
+</tr>
+</tbody></table>
+</blockquote>
+</li>
+</ol>
+<h3 id="XOR"><a href="#XOR" class="headerlink" title="XOR"></a>XOR</h3><p><code>just one</code><br><strong>^ : return 1 if the value is different, return 0 if same</strong></p>
+<ol>
+<li>change num into bitwise</li>
+<li>^<blockquote>
+<p>5 ^ 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
+<h2 id="1001"><a href="#1001" class="headerlink" title="^1001"></a>^1001</h2><p>1100(2) –&gt; 12</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="NOT"><a href="#NOT" class="headerlink" title="NOT"></a>NOT</h3><p><strong>~ : return the oppostie value</strong></p>
+<blockquote>
+<p>actually, there are 0 as many as the size of the integer range(&lt;=256, thus 8개) in front of the bits</p>
+</blockquote>
+<ul>
+<li>-(x) -1 (// in JS)</li>
+<li>negative<ul>
+<li>starts from -1</li>
+<li>meaning of 0, 1 is swtiched: 0 -&gt; decrement<blockquote>
+<p>~5<br>5 –&gt; 0101(2)</p>
+<h2 id="0101-2"><a href="#0101-2" class="headerlink" title="~0101(2)"></a>~0101(2)</h2><p>1010(2) –&gt; -6 (in JS, normally -5) // 1011(2) –&gt; -5 in JS</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Left-Shift"><a href="#Left-Shift" class="headerlink" title="Left Shift"></a>Left Shift</h3><p><strong>&lt;&lt; n : shift bits to the left to the n extent and fill the right bit with 0</strong></p>
+<blockquote>
+<p>5 &lt;&lt; 1<br>0101(2)<br>—– &lt;&lt; 1<br>1010(2)</p>
+</blockquote>
+<h3 id="Sign-propagating-Right-Shift"><a href="#Sign-propagating-Right-Shift" class="headerlink" title="Sign-propagating Right Shift"></a>Sign-propagating Right Shift</h3><p><strong>&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with the same one as the original last right value which is sign property</strong></p>
+<blockquote>
+<p>8 &gt;&gt;&gt; 1<br>0…1000(2)<br>———– &gt;&gt; 1<br>00…0100(2)  // 4<br>-8 &gt;&gt;&gt; 1<br>1…1000(2)<br>———– &gt;&gt; 1<br>11…1100(2) // -4</p>
+</blockquote>
+<h3 id="Zero-fill-Right-Shift"><a href="#Zero-fill-Right-Shift" class="headerlink" title="Zero-fill Right Shift"></a>Zero-fill Right Shift</h3><p><strong>&gt;&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with 0</strong></p>
+<blockquote>
+<p>[1]1…0111 // -8<br>——— &gt;&gt;&gt; 1<br>[0]1…1011 // 2147483644</p>
+</blockquote>
+<p>blog.logrocket.com/interesting-use-cases-for-javascript-bitwise-operators/<br>Interesting use cases for JavaScript bitwise operators - LogRocket Blog<br>Although we don’t often see bitwise operators used in JavaScript, they have some cool use cases. Learn their theory and implementation.<br>blog.logrocket.com</p>
+<hr>
+<dl><dt><em>compare <code>multiple values</code> together</em></dt><dd>first comparison -&gt; compare with the next one -&gt; (((repeat)))</dd></dl><h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>qiao.github.io/PathFinding.js/visual/<br>PathFinding.js<br>qiao.github.io</p>
+<h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><ul>
+<li>only need the weight</li>
+<li>evaluate all the nodes -&gt; slower</li>
+</ul>
+<ol>
+<li>set the weight of starting point to 0, and others to INF (as not started yet)</li>
+</ol>
+<h3 id="A"><a href="#A" class="headerlink" title="A*"></a>A*</h3><ul>
+<li>only evaluate shorter distance -&gt;faster</li>
+<li>need weight and distance both</li>
+</ul>
+<ol>
+<li>set additional array with distance</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/27/7-BFS-DFS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/27/7-BFS-DFS/" class="post-title-link" itemprop="url">7. BFS & DFS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-26 22:40:08" itemprop="dateCreated datePublished" datetime="2021-01-26T22:40:08Z">2021-01-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p><strong>Breadth First Search</strong></p>
+<ul>
+<li>Queue<br> : go same level node first and go deeper</li>
+</ul>
+<blockquote>
+<ul>
+<li>push root node</li>
+<li>pop root node<ul>
+<li>push children nodes <em>From Left to Right</em></li>
+</ul>
+</li>
+<li>pop child node one by one and…<ul>
+<li>push children nodes from child (((repeat)))</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">queue.enqueue(this);</span><br><span class="line">while (queue.length &gt; 0) &#123;</span><br><span class="line">    current &#x3D; queue.dequeue();</span><br><span class="line">    children &#x3D; current.children;</span><br><span class="line">    for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    	queue.enqueue(children[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p><strong>Depth First Search</strong></p>
+<ul>
+<li>Stack<br> : go down to the leaf node first and move on to the other children</li>
+</ul>
+<blockquote>
+<ul>
+<li>push root node</li>
+<li>pop root node<ul>
+<li>push children nodes <em>From Left To Right</em></li>
+</ul>
+</li>
+<li>pop child node and…<ul>
+<li>push children nodes of child (((repeat)))</li>
+</ul>
+</li>
+<li>pop the leaf node<ul>
+<li>pop other leaf nodes on the same level / push children nodes of the node on the same level</li>
+</ul>
+</li>
+<li>pop parent node and move on (((repeat)))</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">stack.push(this);</span><br><span class="line">while (stack.length &gt; 0) &#123;</span><br><span class="line">  current &#x3D; stack.pop();</span><br><span class="line">  children &#x3D; current.children;</span><br><span class="line">  for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    stack.push(children[i]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/24/6-Complexity-Analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/24/6-Complexity-Analysis/" class="post-title-link" itemprop="url">6. Complexity Analysis</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-23 23:43:59" itemprop="dateCreated datePublished" datetime="2021-01-23T23:43:59Z">2021-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h2><ul>
+<li>like a recipe</li>
+<li>concrete steps to solve the problem</li>
+<li>language independent (logic itself)</li>
+</ul>
+<h3 id="Complexity-Analysis"><a href="#Complexity-Analysis" class="headerlink" title="Complexity Analysis"></a>Complexity Analysis</h3><ul>
+<li>Objective Criteria</li>
+</ul>
+<ul>
+<li><code>time</code>, <code>space</code></li>
+<li>best, average, worst (always think in worst case!)</li>
+<li>Big O</li>
+</ul>
+<h5 id="Be-aware-of-the-Complexity"><a href="#Be-aware-of-the-Complexity" class="headerlink" title="Be aware of the Complexity"></a>Be aware of the Complexity</h5><h5 id="Recognise-patterns"><a href="#Recognise-patterns" class="headerlink" title="Recognise patterns"></a>Recognise patterns</h5><h5 id="Think-if-you-can-bring-it-down"><a href="#Think-if-you-can-bring-it-down" class="headerlink" title="Think if you can bring it down"></a>Think if you can bring it down</h5><h3 id="Big-O"><a href="#Big-O" class="headerlink" title="Big O"></a>Big O</h3><p><em>DROP the constant in front of the N</em></p>
+<ol>
+<li>Constant - O(k) <em>(k: constant number)</em><br>: stays the same independently of the size of the problem</li>
+<li>Linear - O(n) <em>(n: number of items)</em><br>: grows proportional to the size of the problem<br>e.g. for loop, linked list- find the item</li>
+<li>Logarithmic - O(logn)</li>
+</ol>
+<ul>
+<li>random array =&gt; cut half =&gt; repeat until find the element (Binary Search)</li>
+<li>sorted =&gt; increase by one<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let count &#x3D; 0;</span><br><span class="line">let limit &#x3D; 100;</span><br><span class="line"></span><br><span class="line">for (let i&#x3D;0; i&lt;limit; i++) &#123;</span><br><span class="line">  limit &#x2F;&#x3D; 2;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li>Quadratic - O(n^2)<br>: nested for loop</li>
+<li>N log n - O (nlogn)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let count &#x3D; 0;</span><br><span class="line">let limit &#x3D; 100;</span><br><span class="line"></span><br><span class="line">for (let i&#x3D;0; i&lt;limit; i++) &#123;</span><br><span class="line">  limit &#x2F;&#x3D; 2;</span><br><span class="line">  for (let j&#x3D;0; j&lt;limit; j++) &#123;</span><br><span class="line">    count++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+e.g. mergeSort</li>
+</ol>
+<h4 id="BAD-Time-Complexity"><a href="#BAD-Time-Complexity" class="headerlink" title="BAD Time Complexity"></a>BAD Time Complexity</h4><ol start="6">
+<li>Exponential - O(2^n)</li>
+<li>Factorial - O(n!)<br>e.g. Queen Problem</li>
+</ol>
+<blockquote>
+<p>Hash Table: O(1) average and amortized case complexity, however it suffers from O(n) worst case time complexity.</p>
+<ul>
+<li>Worst Case</li>
+</ul>
+<ol>
+<li>If too many elements were hashed into the same key: looking inside this key may take O(n) time.</li>
+<li>Once a hash table has passed its load balance - it has to rehash [create a new bigger table, and re-insert each element to the table]. </li>
+</ol>
+<ul>
+<li>average and amortized case</li>
+</ul>
+<ol>
+<li>It is very rare that many items will be hashed to the same key [if you chose a good hash function and you don’t have too big load balance.</li>
+<li>The rehash operation, which is O(n), can at most happen after n/2 ops, which are all assumed O(1): Thus when you sum the average time per op, you get : (n*O(1) + O(n)) / n) = O(1)</li>
+</ol>
+</blockquote>
+<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p><a target="_blank" rel="noopener" href="http://www.bigocheatsheet.com/">www.bigocheatsheet.com/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/23/5-Data-Structure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/23/5-Data-Structure/" class="post-title-link" itemprop="url">5. Data Structure</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-22 22:03:51" itemprop="dateCreated datePublished" datetime="2021-01-22T22:03:51Z">2021-01-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Data-Structure"><a href="#Data-Structure" class="headerlink" title="Data Structure"></a>Data Structure</h2><ul>
+<li>The way to organize the data</li>
+</ul>
+<h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><p><code>push</code> : put at the top<br><code>pop</code> : remove from the top</p>
+<ul>
+<li><strong>LIFO (Last In First Out)</strong></li>
+<li>Call Stack (e.g. factorial function)<ul>
+<li>always interact with the top element</li>
+</ul>
+</li>
+</ul>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><p><code>enqueue</code> : put at the back<br><code>dequeue</code> : remove from the first</p>
+<ul>
+<li><strong>FIFO (First In First Out)</strong></li>
+</ul>
+<h3 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked-List"></a>Linked-List</h3><p><code>head</code><br><code>tail</code><br><code>next</code></p>
+<ul>
+<li>Node and Pointer<ul>
+<li>just store two nodes as a pointer (head/ tail)</li>
+</ul>
+</li>
+<li>No need to initialise</li>
+<li>No need to relocate (linking)</li>
+<li>No need of indices (head / tail linking)<ul>
+<li>change the point of next when add the element<blockquote>
+<p>Block Chain<br>Delegation Chain</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="What-If-we-want-to-go-back"><a href="#What-If-we-want-to-go-back" class="headerlink" title="What If we want to go back?"></a>What If we want to go back?</h4><h3 id="Double-Linked-List"><a href="#Double-Linked-List" class="headerlink" title="Double-Linked-List"></a>Double-Linked-List</h3><ul>
+<li>first : <code>H -&gt; null, T -&gt; null</code></li>
+<li>add the node : <code>H, T -&gt; node</code></li>
+<li>add one more : <code>H -&gt; new node, T -&gt; old node, new -&gt; old node</code></li>
+</ul>
+<blockquote>
+<p>LL: {head: Node7, tail: Node29}<br>Node7: {val: 7, next: Node34}<br>Node34: {val: 34, next: Node29}<br>Node29: {val: 29, next: null}</p>
+</blockquote>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><h3 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h3><ul>
+<li><strong>Can’t Have a LOOP</strong></li>
+<li>subTree<ul>
+<li>Root</li>
+<li>Children / Parent</li>
+<li>Siblings</li>
+<li>Cousins</li>
+<li>Descendent</li>
+</ul>
+</li>
+<li>Leaf Node: bottom node without any children (null)</li>
+</ul>
+<hr>
+<blockquote>
+<p>Implementations</p>
+</blockquote>
+<h4 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h4><h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><hr>
+<h3 id="Hash-Table-Hash-Map"><a href="#Hash-Table-Hash-Map" class="headerlink" title="Hash Table/ Hash Map"></a>Hash Table/ Hash Map</h3><ul>
+<li>Object in JS: Hash Table/ Map</li>
+<li>same input -&gt; same output</li>
+<li>elements are evenly distributed along the range using <strong>hash function</strong><ul>
+<li>hash function: MAX === size of the array</li>
+<li>multiple values in the same key: contains() -&gt; return true;<br><code>Array</code> : used to keep objecs as elements<br>=&gt; arr = [obj1, obj2, …]<br><code>Linked-List</code> : used to link the elements that object has<br>=&gt; obj1 = {[<code>key</code>, <code>value</code>] -&gt; [<code>key</code>, <code>value</code>], …}<br>e.g. Person = [name: ‘Lisa’] -&gt; [age: 28] -&gt; …</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>해시 테이블은 (Key, Value)로 데이터를 저장하는 자료구조 중 하나로 빠르게 데이터를 검색할 수 있는 자료구조이다. 해시 테이블이 빠른 검색속도를 제공하는 이유는 내부적으로 배열(버킷)을 사용하여 데이터를 저장하기 때문이다. 해시 테이블은 각각의 Key값에 해시함수를 적용해 배열의 고유한 index를 생성하고, 이 index를 활용해 값을 저장하거나 검색하게 된다. 여기서 실제 값이 저장되는 장소를 버킷 또는 슬롯이라고 한다.<br>예를 들어 우리가 (Key, Value)가 (“John Smith”, “521-1234”)인 데이터를 크기가 16인 해시 테이블에 저장한다고 하자. 그러면 먼저 index = hash_function(“John Smith”) % 16 연산을 통해 index 값을 계산한다. 그리고 array[index] = “521-1234” 로 전화번호를 저장하게 된다.</p>
+</blockquote>
+<p><strong>REF</strong><br>mangkyu.tistory.com/102</p>
+<hr>
+<h4 id="Tree-Family"><a href="#Tree-Family" class="headerlink" title="Tree Family"></a>Tree Family</h4><h3 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h3><ul>
+<li>type of Tree</li>
+<li>parent has higher priority than children (root: most important)</li>
+<li>highest property is retrieved first</li>
+</ul>
+<h3 id="Binary-Heap"><a href="#Binary-Heap" class="headerlink" title="Binary Heap"></a>Binary Heap</h3><p><code>Add</code> : the leaf node, check the priority through the entire tree by going up<br><code>Delete</code> : the root node, put the last leaf node in the root and check the priority by going down the entire tree layer by layer</p>
+<ul>
+<li>Max Heap</li>
+<li>Min Heap</li>
+<li>fully filled layer by layer, with at most 2 leaf nodes</li>
+</ul>
+<p><strong>REF</strong><br><a target="_blank" rel="noopener" href="http://www.cs.usfca.edu/~galles/visualization/Heap.html">www.cs.usfca.edu/~galles/visualization/Heap.html</a></p>
+<h3 id="Binary-Search-Tree-BST"><a href="#Binary-Search-Tree-BST" class="headerlink" title="Binary Search Tree (BST)"></a>Binary Search Tree (BST)</h3><ul>
+<li>divide the tree into two parts<ul>
+<li>Left: smaller than the root node</li>
+<li>Right: bigger than the root node</li>
+</ul>
+</li>
+<li><strong>UNBALANCED TREE</strong>: if adds onlly bigger/ smaller elements, the height of the tree will be longer, thus unbalanced</li>
+</ul>
+<p><strong>REF</strong><br><a target="_blank" rel="noopener" href="http://www.cs.usfca.edu/~galles/visualization/BST.html">www.cs.usfca.edu/~galles/visualization/BST.html</a></p>
+<h3 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B-Tree"></a>B-Tree</h3><ul>
+<li>evolution of the binary search tree</li>
+<li>can have more than 2 children</li>
+<li>can have more than 1 key in 1 node<blockquote>
+<p>one key -&gt; 2 children<br>two keys -&gt; 3 children<br>three keys -&gt; divide into 2 keys with promotting the mid-value to the parent node</p>
+</blockquote>
+</li>
+<li>maintain a balance (complement the cons of a BST)</li>
+<li>can have duplicated keys</li>
+</ul>
+<p><strong>REF</strong><br><a target="_blank" rel="noopener" href="http://www.cs.usfca.edu/~galles/visualization/BTree.html">www.cs.usfca.edu/~galles/visualization/BTree.html</a></p>
+<h3 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h3><p><code>path</code><br><code>adjacency</code></p>
+<ul>
+<li>connection between edges with weights (e.g. facebook familiarity)</li>
+<li>pair of sets (Vertices: V, Edges: E)</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/14/2-Unit-Testing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/14/2-Unit-Testing/" class="post-title-link" itemprop="url">2. Unit Testing</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-13 22:46:23" itemprop="dateCreated datePublished" datetime="2021-01-13T22:46:23Z">2021-01-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><p>not in the production, just for element checking before a deployment</p>
+<blockquote>
+<p>Automated Tests<br>반복되는 test 작업을 줄임</p>
+</blockquote>
+<ol>
+<li><p>Unit<br>receives a single case input, return certain type of output<br><em>wouldn’t pass unless the entire process works out</em><br>e.g. validation email &amp; password -&gt; similar word -&gt; set the function as a unit with diff. input</p>
+</li>
+<li><p>Integration<br>multiple single inputs -&gt; integrates into a single output<br>e.g. email / pw -&gt; basic email : password</p>
+</li>
+<li><p>E2E<br><code>end-to-end</code><br>user-perspective, operation on the browser, entire process without manually fixing it<br><em>hard to point where the error comes out</em></p>
+</li>
+</ol>
+<hr>
+<h2 id="TDD"><a href="#TDD" class="headerlink" title="TDD"></a>TDD</h2><blockquote>
+<p>Test Driven Development<br><code>fail-fix-refactor</code></p>
+</blockquote>
+<ul>
+<li>one test at a time</li>
+</ul>
+<h2 id="BDD"><a href="#BDD" class="headerlink" title="BDD"></a>BDD</h2><blockquote>
+<p>Bahaviour Driven Development<br><code>E2E</code></p>
+</blockquote>
+<ul>
+<li>testing single unit, element to test entirely</li>
+<li>implemented in non-technical env. -&gt; no coding</li>
+</ul>
+<p><code>diff: technical or not</code></p>
+<hr>
+<h4 id="Testing-Frameworks-the-function-to-run-the-tests-in-JS-Mocha-Jasmine-React-Jest"><a href="#Testing-Frameworks-the-function-to-run-the-tests-in-JS-Mocha-Jasmine-React-Jest" class="headerlink" title="Testing Frameworks: the function to run the tests (in JS - Mocha, Jasmine(React), Jest)"></a>Testing Frameworks: the function to run the tests (in JS - Mocha, Jasmine(React), Jest)</h4><p><code># : e.g. #func() : recall all the elements including func()</code></p>
+<ul>
+<li>describe()</li>
+<li>it()</li>
+<li>Hooks; rather than list singly, wrap it for organizing<ul>
+<li>start a server, create DB</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">describe(&#39;hooks&#39;, function() &#123;</span><br><span class="line">  before(function() &#123;</span><br><span class="line">    &#x2F;&#x2F; runs once before the first test in this block</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  after(function() &#123;</span><br><span class="line">    &#x2F;&#x2F; runs once after the last test in this block</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  beforeEach(function() &#123;</span><br><span class="line">    &#x2F;&#x2F; runs before each test in this block</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  afterEach(function() &#123;</span><br><span class="line">    &#x2F;&#x2F; runs after each test in this block</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; test cases</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>inside each hooks: it()</em></p>
+</blockquote>
+<hr>
+<h3 id="Assertion"><a href="#Assertion" class="headerlink" title="Assertion"></a>Assertion</h3><ol>
+<li><p>assert -&gt; technical, not readable</p>
+<ul>
+<li>built-in in Node.js</li>
+</ul>
+<ul>
+<li>typeOf(var, typeof, [msg])</li>
+<li>equal(var, val, [msg])</li>
+<li>lengthOf(var, length, [msg])</li>
+</ul>
+</li>
+<li><p>expect<br><code> e.g. expect(foo).to.not.equal(&#39;bar&#39;)</code></p>
+</li>
+<li><p>should<br><code>e.g. foo.should.not.equal(&#39;bar&#39;)</code></p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">function add (a, b) &#123;</span><br><span class="line">	if (typeof a &#x3D;&#x3D;&#x3D; &#39;number&#39; &amp;&amp; b &#x3D;&#x3D;&#x3D; undefined) return a;</span><br><span class="line">    if (typeof a !&#x3D;&#x3D; &#39;number&#39; || typeof b !&#x3D;&#x3D; &#39;number&#39;) return undefined;</span><br><span class="line">	&#x2F;&#x2F; return 8;</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; write the test first</span><br><span class="line">var should &#x3D; require(&#39;chai&#39;).should();</span><br><span class="line"></span><br><span class="line">describe(&#39;Add&#39;, function () &#123;</span><br><span class="line">	it(&#39;should sum two numbers&#39;, function () &#123;</span><br><span class="line">    	add(3, 5).should.equal(8);</span><br><span class="line">        &#x2F;&#x2F; add another ex to fail add(a,b) &#123;return 8;&#125; function</span><br><span class="line">        add(2, 7).should.equal(9);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    it(&#39;should return undefined when is not passed numbers&#39;, function () &#123;</span><br><span class="line">    	should.equal(add(&#39;hello&#39;, &#39;world&#39;), undefined);</span><br><span class="line">        &#x2F;&#x2F; add(&#39;&#39;).should.equal이 아닌 이유:</span><br><span class="line">        &#x2F;&#x2F; undefined을 반환하면 undefined.should.equal()이 되고,</span><br><span class="line">        &#x2F;&#x2F; 이는 error(cannot read the property)를 반환 (undefined의 function 정의 불가)</span><br><span class="line">        &#x2F;&#x2F; 따라서 should.equal(add(&#39;&#39;))의 결과와 undefined를 matching</span><br><span class="line">        </span><br><span class="line">        should.equal(add(1, &#39;world&#39;), undefined);</span><br><span class="line">        should.equal(add(&#39;hello&#39;, 1), undefined);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    it(&#39;should return the number if only one is passed&#39;, function () &#123;</span><br><span class="line">    	should.equal(add(8), 8);</span><br><span class="line">        &#x2F;&#x2F; add(8).should.equal(8);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h3><p>kent c.dodds web<br>mochajs.com</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/13/function-with-multiple-invocations/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -402,20 +1128,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">65</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

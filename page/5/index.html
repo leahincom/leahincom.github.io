@@ -163,6 +163,436 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/03/boj-2667/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/03/boj-2667/" class="post-title-link" itemprop="url">BOJ 2667</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-03 10:16:21 / Modified: 02:26:22" itemprop="dateCreated datePublished" datetime="2021-07-03T10:16:21+01:00">2021-07-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>첫 번째 줄에는 지도의 크기 N(정사각형이므로 가로와 세로의 크기는 같으며 5≤N≤25)이 입력되고,</p>
+<p>그 다음 N줄에는 각각 N개의 자료(0혹은 1)가 입력된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">apt = [<span class="built_in">list</span>(<span class="built_in">int</span>(c) <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">input</span>()) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N)]</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h4><ul>
+<li>배열의 요소를 하나씩 방문하면서, 1일 경우 위/아래/왼/오가 1인지 체크하고,</li>
+<li><em>1일 경우, 방문했던 곳이 아니라면</em> 동일한 방법으로 체크한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">visited = [[<span class="literal">False</span>]*N <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N)] <span class="comment"># apt for문 돌면서 중복해서 방문하지 않도록 체크</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">dir</span> = [[<span class="number">0</span>,<span class="number">1</span>], [<span class="number">0</span>,-<span class="number">1</span>], [<span class="number">1</span>,<span class="number">0</span>], [-<span class="number">1</span>,<span class="number">0</span>]]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">    <span class="keyword">if</span> apt[i][j] == <span class="number">1</span> <span class="keyword">and</span> <span class="keyword">not</span> visited[i][j]:</span><br><span class="line">      count = <span class="number">0</span></span><br><span class="line">      dfs(i, j)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">dir</span>:</span><br><span class="line">  y = dy + d[<span class="number">0</span>]</span><br><span class="line">  x = dx + d[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> <span class="number">0</span> &lt;= y &lt; N <span class="keyword">and</span> <span class="number">0</span> &lt;= x &lt; N:</span><br><span class="line">    <span class="keyword">if</span> apt[y][x] <span class="keyword">and</span> <span class="keyword">not</span> visited[y][x]:</span><br><span class="line">      dfs(y, x)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>이 때, 단지별 아파트 개수를 출력하기 위해 <code>count+1</code> 을 수행한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">dy, dx</span>):</span></span><br><span class="line">  visited[dy][dx] = <span class="literal">True</span></span><br><span class="line">  <span class="keyword">global</span> count</span><br><span class="line">  count += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>apt[i][j] == 0 or visited[i][j] == True</code> 이면 더 이상 <code>dfs</code> 를 호출하지 않고, 이는 즉 단지가 구성되었음을 의미</li>
+<li>다음 단지로 넘어가기 전 <code>sort</code> 를 사용하기 위해 list에 count를 append한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> apt[i][j] == <span class="number">1</span> <span class="keyword">and</span> <span class="keyword">not</span> visited[i][j]:</span><br><span class="line">  count = <span class="number">0</span></span><br><span class="line">  dfs(i, j)</span><br><span class="line">  countList.append(count)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>첫 번째 줄에는 총 단지수를 출력하시오. </p>
+<p>그리고 각 단지내 집의 수를 <strong>오름차순</strong>으로 정렬하여 <strong>한 줄에 하나씩</strong> 출력하시오.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">countList.sort()</span><br><span class="line">print(<span class="built_in">len</span>(countList))</span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> countList:</span><br><span class="line">  print(num)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/python-list-index/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/29/python-list-index/" class="post-title-link" itemprop="url">리스트에서 요소의 index 찾기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-29 12:43:42 / Modified: 04:45:07" itemprop="dateCreated datePublished" datetime="2021-06-29T12:43:42+01:00">2021-06-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>리스트의 <code>index</code> method 사용하기</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idx = arr.index(num)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/boj-2331/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/29/boj-2331/" class="post-title-link" itemprop="url">BOJ 2331</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-29 12:32:24" itemprop="dateCreated datePublished" datetime="2021-06-29T12:32:24+01:00">2021-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-03 02:16:45" itemprop="dateModified" datetime="2021-07-03T02:16:45+01:00">2021-07-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>첫째 줄에 A(1 ≤ A ≤ 9999), P(1 ≤ P ≤ 5)가 주어진다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A, P = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h4><ul>
+<li>반복되는 수를 찾을 때까지 같은 작업 반복</li>
+<li>반복되는 수를 찾았을 경우, 배열에 추가하지 않고 처음에 담겨있는 index를 받아 출력하면 중복되지 않는 수의 개수와 동일하다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">visited = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">num</span>):</span></span><br><span class="line">	.</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 중복되지 않을 경우</span></span><br><span class="line">  visited.append(num)</span><br><span class="line">  digit = [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">str</span>(num)]</span><br><span class="line">  now = <span class="number">0</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> digit:</span><br><span class="line">    now += x ** P</span><br><span class="line">  </span><br><span class="line">  dfs(now)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>첫째 줄에 반복되는 부분을 제외했을 때, 수열에 남게 되는 수들의 개수를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> num <span class="keyword">in</span> visited:</span><br><span class="line">  idx = visited.index(num)</span><br><span class="line">  print(idx)</span><br><span class="line">  <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/29/yarn-dependencies/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/29/yarn-dependencies/" class="post-title-link" itemprop="url">yarn dependencies</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-29 01:28:53" itemprop="dateCreated datePublished" datetime="2021-06-29T01:28:53+01:00">2021-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-28 17:30:17" itemprop="dateModified" datetime="2021-06-28T17:30:17+01:00">2021-06-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a><code>dependencies</code></h5><p>These are your normal dependencies, or rather ones that you need when running your code (e.g. React or ImmutableJS).</p>
+<h5 id="devDependencies"><a href="#devDependencies" class="headerlink" title="devDependencies"></a><code>devDependencies</code></h5><p>These are your development dependencies. Dependencies that you need at some point in the development workflow <strong>but not while running your code</strong> (e.g. Babel or Flow).</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/28/boj-10451/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/28/boj-10451/" class="post-title-link" itemprop="url">BOJ 10451</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-28 11:49:13 / Modified: 04:07:02" itemprop="dateCreated datePublished" datetime="2021-06-28T11:49:13+01:00">2021-06-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>첫째 줄에 테스트 케이스의 개수 T가 주어진다. </p>
+<p>각 테스트 케이스의 첫째 줄에는 순열의 크기 N (2 ≤ N ≤ 1,000)이 주어진다. </p>
+<p>둘째 줄에는 순열이 주어지며, 각 정수는 공백으로 구분되어 있다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">T = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(T):</span><br><span class="line">  N = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">  P = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br><span class="line">  P.insert(<span class="number">0</span>, <span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h4><ul>
+<li><p>각 index에 들어있는 value를 다시 index로 설정해서 <code>visited[index] == False</code> 일 때까지 이를 반복한다.</p>
+</li>
+<li><p>결국 queue가 빌 때까지 이를 반복한다고 생각하면, BFS로 해결할 수 있다.</p>
+</li>
+<li><p>해당 사이클이 모두 <code>visited</code> 라면, 1을 반환하여 <code>count++</code> 한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span>(<span class="params">idx</span>):</span></span><br><span class="line">  queue = [idx]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> queue:</span><br><span class="line">    now = queue.pop(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> visited[now]:</span><br><span class="line">      visited[now] = <span class="literal">True</span></span><br><span class="line">      val = P[now]</span><br><span class="line">      queue.append(val)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+<li><p>이후 다음 사이클로 넘어가야 하는데, 이는 결국 배열의 모든 요소를 돌아 사이클을 확인해봐야 하는 것과 같다. 따라서 <code>visited</code> 를 활용해 이미 방문한 요소 외의 것들의 사이클을 확인한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">visited = [<span class="literal">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N+<span class="number">1</span>)]</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># idx -&gt; val -&gt; idx 계속 따라가기</span></span><br><span class="line"><span class="keyword">for</span> idx <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, N+<span class="number">1</span>):</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> visited[idx]:</span><br><span class="line">    count += bfs(idx)</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="Better-Solution"><a href="#Better-Solution" class="headerlink" title="Better Solution"></a>Better Solution</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 런타임 에러 바로잡기!!! `sys.setrecursionlimit(2000)`</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">2000</span>) <span class="comment">#최대 재귀를 늘려줘야 런타임 에러를 피할 수 있다</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">x</span>):</span> <span class="comment">#DFS 함수 정의</span></span><br><span class="line">    visited[x] = <span class="literal">True</span> <span class="comment">#방문 체크</span></span><br><span class="line">    number = numbers[x] <span class="comment">#다음 방문 장소</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> visited[number]: <span class="comment">#방문하지 않았다면</span></span><br><span class="line">        dfs(number) <span class="comment">#재귀</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 변수 할당 없이 바로 for문 돌리기! (재사용 안 함)</span></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(<span class="built_in">input</span>())):</span><br><span class="line">    N = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># index를 임의로 설정하기 위해서,</span></span><br><span class="line">    <span class="comment"># - 따로 생성한 뒤 append이든</span></span><br><span class="line">    <span class="comment"># - 초기화 후 insert 하지 않고!</span></span><br><span class="line">    <span class="comment">### `[0] +` 로 생성할 때 바로 임의로 초기화 값 전달!</span></span><br><span class="line">    numbers = [<span class="number">0</span>] + <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># for 문 대신, 동일한 값으로 초기화 시 `*` 사용하기!</span></span><br><span class="line">    visited = [<span class="literal">True</span>] + [<span class="literal">False</span>] * N <span class="comment">#방문여부확인용</span></span><br><span class="line">    result = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, N+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> visited[i]: <span class="comment">#방문하지 않았다면</span></span><br><span class="line">          	<span class="comment"># dfs의 역할:</span></span><br><span class="line">            <span class="comment"># 1. visited 체크</span></span><br><span class="line">            <span class="comment"># 2. 재귀호출로 사이클 체크 (visited)</span></span><br><span class="line">            dfs(i) <span class="comment">#DFS실행</span></span><br><span class="line">            result += <span class="number">1</span> <span class="comment">#결과값 += 1</span></span><br><span class="line">    print(result)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>각 테스트 케이스마다, 입력으로 주어진 순열에 존재하는 순열 사이클의 개수를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(count)  </span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/28/boj-2178/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -738,574 +1168,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/22/SOPT-diary-app-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/22/SOPT-diary-app-1/" class="post-title-link" itemprop="url">Diary App 만들기 - 1. Main 구현</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-22 15:04:25" itemprop="dateCreated datePublished" datetime="2021-06-22T15:04:25+01:00">2021-06-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-23 10:17:51" itemprop="dateModified" datetime="2021-06-23T10:17:51+01:00">2021-06-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sopt/web-28th/" itemprop="url" rel="index"><span itemprop="name">WEB_28th</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Diary-App"><a href="#Diary-App" class="headerlink" title="Diary App"></a>Diary App</h2><p>0️⃣</p>
-<p><code>data.json</code> 파일</p>
-<ul>
-<li>이 mock data 파일은 <code>npx create-react-app</code> 으로 생성된 리액트 폴더의 root에 저장해야 한다. ( <code>src</code> 폴더 밖에 )</li>
-<li>해당 파일을 읽기 위해<ol>
-<li> <code>npm i json-server --save-dev</code> 을 통해 json-server을 설치하고</li>
-<li> <code>npx json-server --watch data.json --port port#</code> 을 통해 json-server을 실행하여 읽을 data 파일과 서버 포트 번호를 지정해준다.</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;posts&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;2021&quot;</span>: [</span><br></pre></td></tr></table></figure>
-<p>여기서 posts는 <code>/posts</code> url을 의미하고, data는 그 페이지 안에 들어있는 data 묶음을 의미한다.</p>
-<p>data 안에는 2021년에 대한 data 배열이 있는데, 이를 자세히 보면</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&quot;2021&quot;: [</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;id&quot;</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="attr">&quot;date&quot;</span>: <span class="number">20210501</span>,</span><br><span class="line">            <span class="attr">&quot;title&quot;</span>: <span class="string">&quot;다이어리 제목 어쩌고 저쩌고&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;image&quot;</span>: <span class="string">&quot;https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a1108dc0-bf35-418b-956d-338d154a5911/image1.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210508%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210508T050603Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=4c752ad0fba5a98411eafd63ba9c406626003981a362eb9b675739cd386846e0&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22image1.jpg%22&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;weather&quot;</span>: <span class="string">&quot;맑음&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;tags&quot;</span>: [<span class="string">&quot;태그1&quot;</span>, <span class="string">&quot;태그2&quot;</span>]</span><br><span class="line">          &#125;,</span><br><span class="line">          .</span><br><span class="line">          .</span><br><span class="line">          .</span><br><span class="line">        ],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        [],</span><br><span class="line">        []</span><br><span class="line">      ]</span><br></pre></td></tr></table></figure>
-<p>이렇게 12개의 배열이 담겨있다. 즉, 월별 데이터가 각 배열에 들어있다는 의미.</p>
-<hr>
-<p>1️⃣</p>
-<p><code>component 구조</code></p>
-<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/3ebb4c18-d088-4dd1-bc95-15c4faa703d7/1st_44.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210622%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210622T061543Z&X-Amz-Expires=86400&X-Amz-Signature=e86ddcce1f6c25f34d52836d59964477848d4c9c83f0625ac077add46b0f5b86&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%221st_44.jpg%22" align="center" />
-
-<ol>
-<li> <code>/components</code></li>
-</ol>
-<p>Main 페이지를 보면, <strong>크게</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├ MainHeader</span><br><span class="line">├ Calendar</span><br><span class="line">├ Title</span><br><span class="line">├ Main</span><br><span class="line">	├ Card</span><br><span class="line">	├ NewCard</span><br><span class="line">├ Footer</span><br></pre></td></tr></table></figure>
-<p>이렇게 나뉜다.</p>
-<p>여기서 <strong>공통적</strong>으로 적용되는 부분은</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;common</span><br><span class="line">├ MainHeader</span><br><span class="line">├ Calendar</span><br><span class="line">├ Title</span><br><span class="line">├ Footer</span><br></pre></td></tr></table></figure>
-<p>이다.</p>
-<p>이 외에 <strong>페이지 (Main / Diary) 에 따라</strong> 달라지는 부분은</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;main</span><br><span class="line">├ Card</span><br><span class="line">├ NewCard</span><br><span class="line">&#x2F;diary</span><br><span class="line">├ ...</span><br></pre></td></tr></table></figure>
-<p>가 있을 것이다.</p>
-<ol start="2">
-<li> <code>pages</code></li>
-</ol>
-<p>위의 컴포넌트를 모두 적용시킨 페이지의 경우 따로 폴더를 만들어 페이지별로 컴포넌트를 생성한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;pages</span><br><span class="line">├ Main</span><br><span class="line">├ Diary</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>그 외…</li>
-</ol>
-<ul>
-<li> <code>assets</code></li>
-<li><code>lib</code></li>
-</ul>
-<hr>
-<p>2️⃣</p>
-<p><code>App.js</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import React from &quot;react&quot;;</span><br><span class="line">import &#123; BrowserRouter, Route, Switch &#125; from &quot;react-router-dom&quot;;</span><br><span class="line">import MainHeader from &quot;.&#x2F;components&#x2F;common&#x2F;MainHeader&quot;;</span><br><span class="line">import Calendar from &quot;.&#x2F;components&#x2F;common&#x2F;Calendar&quot;;</span><br><span class="line">import Title from &quot;.&#x2F;components&#x2F;common&#x2F;Title&quot;;</span><br><span class="line">import Footer from &quot;.&#x2F;components&#x2F;common&#x2F;Footer&quot;;</span><br><span class="line">import Main from &quot;.&#x2F;pages&#x2F;Main&quot;;</span><br><span class="line">import Diary from &quot;.&#x2F;pages&#x2F;Diary&quot;;</span><br><span class="line">&#x2F;&#x2F; Card와 NewCard를 제외하고 모두 불러와주세요!</span><br></pre></td></tr></table></figure>
-<p>root ( <code>App.js</code> ) 에서 부를 모든 컴포넌트 import 하기</p>
-<p>데이터 이동이 있는 등 리렌더링이 진행되는 컴포넌트는 모두 <code>BrowserRouter</code> 에 넣는다. main, diary 페이지가 모두 사용하는 <code>MainHeader</code> , <code>Calendar</code> , <code>Title</code> 가 이에 해당하며, 특히 컴포넌트 클릭시 url이 바뀌고 렌더링 되는 컴포넌트가 달라져야 하는 경우 <code>Switch</code> 안에 넣는다. Switch 내에는 <code>Route</code> 로 url 별 컴포넌트 렌더링을 달리 정의한다.</p>
-<p>여기서 main은 <code>path=&quot;/&quot;</code> 일 때이므로 exact를 설정해 Main을 넘겨주고, <code>/diary</code> 일 때는 Diary 컴포넌트를, 그 외에는 <code>Page Not Found</code> 를 띄워준다. <code>Route</code> 는 위에서부터 차례로 내려가며 path를 비교해 <strong>처음으로</strong> 매칭되는 컴포넌트를 렌더링한다!</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; BrowserRouter 내부에 모두 넣어줍시다</span><br><span class="line">&#x2F;&#x2F; Switch를 사용하는 이유 -&gt; URL이 path에 없으면 Page Not Found를 불러오기 위해서</span><br><span class="line">function App() &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &lt;BrowserRouter&gt;</span><br><span class="line">        &lt;MainHeader &#x2F;&gt;</span><br><span class="line">        &lt;Calendar &#x2F;&gt;</span><br><span class="line">        &lt;Title &#x2F;&gt;</span><br><span class="line">        &lt;Switch&gt;</span><br><span class="line">          &lt;Route exact path&#x3D;&quot;&#x2F;&quot; component&#x3D;&#123;Main&#125; &#x2F;&gt;</span><br><span class="line">          &lt;Route path&#x3D;&quot;&#x2F;diary&#x2F;:id&quot; component&#x3D;&#123;Diary&#125; &#x2F;&gt;</span><br><span class="line">          &lt;Route component&#x3D;&#123;() &#x3D;&gt; &lt;div&gt;Page Not Found&lt;&#x2F;div&gt;&#125; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Switch&gt;</span><br><span class="line">      &lt;&#x2F;BrowserRouter&gt;</span><br><span class="line">      &lt;Footer &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>exact에 대한 자세한 설명은 다음을 참고하자.</p>
-<blockquote>
-<p>For example, imagine we had a <code>Users</code> component that displayed a list of users. We also have a <code>CreateUser</code> component that is used to create users. The url for <code>CreateUsers</code> should be nested under <code>Users</code>. So our setup could look something like this:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Switch&gt;</span><br><span class="line">  &lt;Route path=<span class="string">&quot;/users&quot;</span> component=&#123;Users&#125; /&gt;</span><br><span class="line">  &lt;Route path=<span class="string">&quot;/users/create&quot;</span> component=&#123;CreateUser&#125; /&gt;</span><br><span class="line">&lt;/Switch&gt;</span><br></pre></td></tr></table></figure>
-
-<p>Now the problem here, when we go to <code>http://app.com/users</code> the router will go through all of our defined routes and return the FIRST match it finds. So in this case, it would find the <code>Users</code> route first and then return it. All good.</p>
-<p>But, if we went to <code>http://app.com/users/create</code>, it would again go through all of our defined routes and return the FIRST match it finds. React router does partial matching, so <code>/users</code> partially matches <code>/users/create</code>, so it would incorrectly return the <code>Users</code> route again!</p>
-<p>The <code>exact</code> param disables the partial matching for a route and makes sure that it only returns the route if the path is an EXACT match to the current url.</p>
-<p>So in this case, we should add <code>exact</code> to our <code>Users</code> route so that it will only match on <code>/users</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Switch&gt;</span><br><span class="line">  &lt;Route exact path&#x3D;&quot;&#x2F;users&quot; component&#x3D;&#123;Users&#125; &#x2F;&gt;</span><br><span class="line">  &lt;Route path&#x3D;&quot;&#x2F;users&#x2F;create&quot; component&#x3D;&#123;CreateUser&#125; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;Switch&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<hr>
-<p>3️⃣</p>
-<p>공통 컴포넌트 update!</p>
-<ol>
-<li><code>MainHeader.js</code></li>
-</ol>
-<blockquote>
-<h2 id="Router-Props"><a href="#Router-Props" class="headerlink" title="Router Props"></a><strong>Router Props</strong></h2><p>브라우저와 리액트앱의 라우터를 연결하게 되면 그 결과 라우터가 history api에 접근할 수 있게 되며 <strong>각각의 Route와 연결된 컴포넌트에 props로 match, location, history라는 객체를 전달하게 된다.</strong></p>
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbRLIbr%2FbtqBgEoPo8a%2FMEMteDVODq4zH2k3VTZbLK%2Fimg.png" align="center" />
-
-<h3 id="Match"><a href="#Match" class="headerlink" title="Match"></a><strong>Match</strong></h3><p><strong>match 객체에는 <Route path>와 URL이 매칭된 대한 정보가 담겨져있다.</strong> 대표적으로 match.params로 path에 설정한 파라미터값을 가져올 수 있다.</p>
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbyxn34%2FbtqBgD4x6VK%2Fq7EWXRnRivdZ99U5PBvci0%2Fimg.png" />
-
-<h3 id="Location"><a href="#Location" class="headerlink" title="Location"></a><strong>Location</strong></h3><p><strong>location 객체에는 현재 페이지의 정보를 가지고 있다.</strong> 대표적으로 location.search로 현재 url의 쿼리 스트링을 가져올 수 있다.</p>
- <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FoU9Bn%2FbtqBh0Y2TXE%2FICzkxw2pK20f49o8owXdF1%2Fimg.png" />
-
-<p>👆 요청 url</p>
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb6COzX%2FbtqBkpJUrQy%2FHTSMnlRGJc2kVDB8nnvyrk%2Fimg.png" />
-
-<h3 id="History"><a href="#History" class="headerlink" title="History"></a><strong>History</strong></h3><p>history 객체는 브라우저의 history와 유사하다. <strong>스택(stack)에 현재까지 이동한 url 경로들이 담겨있는 형태로 주소를 임의로 변경하거나 되돌아갈 수 있도록 해준다.</strong></p>
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRRFXi%2FbtqBjCwnKb8%2F7GKGdzmyC8tWANyA5ktRoK%2Fimg.png" />
-</blockquote>
-<p><code>withRouter</code> 을 이용해 컴포넌트를 감싸면 컴포넌트 자체에서도 <code>location</code> , <code>history</code> 와 같이 url을 활용할 수 있도록 한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Route가 아닌 요소에서 location을 사용하기 위해서 withRouter를 사용합니다</span><br><span class="line">import &#123; withRouter &#125; from &quot;react-router-dom&quot;;</span><br><span class="line">import styled from &quot;styled-components&quot;;</span><br><span class="line">import MenuIcon from &quot;..&#x2F;..&#x2F;assets&#x2F;MenuIcon.svg&quot;;</span><br><span class="line">import ProfileIcon from &quot;..&#x2F;..&#x2F;assets&#x2F;ProfileIcon.svg&quot;;</span><br><span class="line"></span><br><span class="line">export default withRouter(MainHeader);</span><br><span class="line"></span><br><span class="line">const MainHeaderWrap &#x3D; styled.div&#96;</span><br><span class="line">  .header &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-direction: row;</span><br><span class="line">    align-items: center;</span><br><span class="line">    justify-content: space-between;</span><br><span class="line">    height: 91px;</span><br><span class="line"></span><br><span class="line">    &amp;__title &#123;</span><br><span class="line">      font-size: 36px;</span><br><span class="line">      font-weight: bold;</span><br><span class="line">      font-style: italic;</span><br><span class="line">      color: #cea0e3;</span><br><span class="line">      &amp;:hover &#123;</span><br><span class="line">        cursor: pointer;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;__profile &#123;</span><br><span class="line">      margin-right: 10px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;__hr &#123;</span><br><span class="line">      width: 1200px;</span><br><span class="line">      height: 13px;</span><br><span class="line">      background: linear-gradient(90deg, white, #cea0e3);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#96;;</span><br></pre></td></tr></table></figure>
-
-
-<p>props에 <code>history</code> 을 받아와 컴포넌트 간 이동을 컨트롤한다. <code>history.push()</code> 를 통해 url 이동이 가능하다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const MainHeader &#x3D; (&#123; history &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  &#x2F;&#x2F; history를 props로 가져옵니다.</span><br><span class="line">  return (</span><br><span class="line">    &lt;MainHeaderWrap&gt;</span><br><span class="line">      &lt;div className&#x3D;&quot;header&quot;&gt;</span><br><span class="line">        &#123;&#x2F;* header는 menu, title, profile의 flex-container 입니다. *&#x2F;&#125;</span><br><span class="line">        &lt;img className&#x3D;&quot;header__menu&quot; src&#x3D;&#123;MenuIcon&#125; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">        &lt;div className&#x3D;&quot;header__title&quot; onClick&#x3D;&#123;() &#x3D;&gt; history.push(&quot;&#x2F;&quot;)&#125;&gt;</span><br><span class="line">          &#123;&#x2F;* title을 누르면 path&#x3D;&quot;&#x2F;&quot;, 즉 Main 페이지로 이동 *&#x2F;&#125;</span><br><span class="line">          Diary App</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;img className&#x3D;&quot;header__profile&quot; src&#x3D;&#123;ProfileIcon&#125; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div className&#x3D;&quot;header__hr&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">      &#123;&#x2F;* hr은 위의 menu, title, profile과 수직상에 있기 때문에 flex를 적용시키지 않기 위해 밖으로 뺐습니다 *&#x2F;&#125;</span><br><span class="line">      &#123;&#x2F;* hr을 header div 안으로 넣으면 menu, title, profile과 동일 선상에서 가로로 정렬됩니다. 궁금하면 넣어보세요 ㅎㅅㅎ *&#x2F;&#125;</span><br><span class="line">    &lt;&#x2F;MainHeaderWrap&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-<ol start="2">
-<li> <code>Title.js</code></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const Title &#x3D; (&#123; location &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  &#x2F;&#x2F; location을 props로 가져옵니다 (현재 페이지 정보를 담고 있는 객체)</span><br><span class="line">  &#x2F;&#x2F; location.pathname이 &quot;&#x2F;&quot;이면 &quot;이번 달 일기&quot;를 저장하고, 아니면 &quot;오늘의 일기&quot;를 저장합니다.</span><br><span class="line">  const title &#x3D; location.pathname &#x3D;&#x3D;&#x3D; &quot;&#x2F;&quot; ? &quot;이번 달 일기&quot; : &quot;오늘의 일기&quot;;</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;TitleWrap&gt;</span><br><span class="line">      &lt;div className&#x3D;&quot;title&quot;&gt;&#123;title&#125;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;TitleWrap&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-<ol start="3">
-<li> <code>Footer.js</code></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const Footer &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;FooterWrap&gt;</span><br><span class="line">      &lt;div className&#x3D;&quot;footer&quot;&gt;</span><br><span class="line">        Copyright&amp;copy; 2021. BE SOPT Web part. All rights reserved.</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;FooterWrap&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><code>&amp;copy</code> 는 Copyright 표시인 © 를 보여주는 html 요소이다 👾</p>
-<ol start="4">
-<li><code>Calendar.js</code></li>
-</ol>
-<p>Calendar 컴포넌트 및 다른 컴포넌트에도 공통된 state를 내려주기 위해 App.js에서 공통된 state를 생성 및 설정하고, props로 내려준다.</p>
-<blockquote>
-<p>App.js에서 년도와 월을 저장한 후, 데이터를 Calendar.js로 전달해주는 방식입니다!</p>
-</blockquote>
-<p><code>App.js</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState &#125; from &#39;react&#39;; &#x2F;&#x2F; state를 사용하기 위해 useState를 불러옵니다</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Default 값으로 현재 연도와 월을 저장하기 위해, 현재 연도와 월을 불러오는 함수입니다</span><br><span class="line">const getCurrDate &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  const now &#x3D; new Date();</span><br><span class="line">  const currYear &#x3D; now.getFullYear();</span><br><span class="line">  const currMonth &#x3D; now.getMonth();</span><br><span class="line">  return &#123; year: currYear, month: currMonth &#125;; &#x2F;&#x2F; 객체로 한 번에 리턴해줍시다</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function App() &#123;</span><br><span class="line">	&#x2F;&#x2F; state를 각각 선언해주세요~ useState()의 인자로 각각 현재 연도와 월을 전달합니다</span><br><span class="line">  const [year, setYear] &#x3D; useState(getCurrDate().year); </span><br><span class="line">  const [month, setMonth] &#x3D; useState(getCurrDate().month);</span><br><span class="line">  return (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &lt;BrowserRouter&gt;</span><br><span class="line">        &lt;MainHeader &#x2F;&gt;</span><br><span class="line">        &lt;Calendar</span><br><span class="line">          currYear&#x3D;&#123;year&#125;</span><br><span class="line">          setCurrYear&#x3D;&#123;setYear&#125;</span><br><span class="line">          currMonth&#x3D;&#123;month&#125;</span><br><span class="line">          setCurrMonth&#x3D;&#123;setMonth&#125;</span><br><span class="line">        &#x2F;&gt; &#123;&#x2F;&#x2F; Calendar 컴포넌트에 state로 선언한 모든 것들을 props로 전달합니다 &#125;</span><br></pre></td></tr></table></figure>
-
-
-<p><code>Calendar.js</code></p>
-<p>App.js에서 넘겨준 props를 받아준다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const Calendar &#x3D; (&#123; currYear, setCurrYear, currMonth, setCurrMonth &#125;) &#x3D;&gt; &#123;</span><br></pre></td></tr></table></figure>
-
-
-<p>useRef는 DOM 요소를 조작하기 위해 생성하는 상응하는 리액트 내 DOM 객체이다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; useRef를 사용하여 &quot;DOM 요소를 가져올 수 있는 변수&quot;를 선언합니다</span><br><span class="line">const leftButton &#x3D; useRef();</span><br><span class="line">const rightButton &#x3D; useRef();</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const isMain &#x3D; location.pathname &#x3D;&#x3D;&#x3D; &quot;&#x2F;&quot; ? true : false;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;img</span><br><span class="line">  src&#x3D;&#123;LeftOff&#125;</span><br><span class="line">  alt&#x3D;&quot;&quot;</span><br><span class="line">  onClick&#x3D;&#123;() &#x3D;&gt; isMain &amp;&amp; setCurrYear(currYear - 1)&#125;</span><br><span class="line">  onMouseEnter&#x3D;&#123;() &#x3D;&gt; (leftButton.current.src &#x3D; LeftOn)&#125;</span><br><span class="line">  onMouseLeave&#x3D;&#123;() &#x3D;&gt; (leftButton.current.src &#x3D; LeftOff)&#125;</span><br><span class="line">  ref&#x3D;&#123;leftButton&#125;</span><br><span class="line">  className&#x3D;&quot;calendar__year--left&quot;</span><br><span class="line">  &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-<p><code>onClick</code> 시에는 year를 다시 세팅해야 하므로 props로 받은 setCurrYear 함수를 이용해 year를 알맞게 설정한다. 이 때, url이 “/“ 인 경우에만 월 이동이 가능하게 설정하기 위해 <code>isMain &amp;&amp;</code> 조건을 적용한다.</p>
-<p><code>onMouseEnter</code> 과 <code>onMouseLeave</code> 의 경우에는 마우스를 DOM 요소에 호버 온/오프 했을 때의 변화를 설정하는 것이므로, ref를 전달하고 해당 ref의 <code>current.src</code> 에 알맞은 <code>svg</code> 을 전달하여 알맞은 아이콘을 렌더링하도록 한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className&#x3D;&quot;calendar__month&quot;&gt;</span><br><span class="line">  &#123;monthList.map((month) &#x3D;&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div</span><br><span class="line">        key&#x3D;&#123;month&#125;</span><br><span class="line">        onClick&#x3D;&#123;() &#x3D;&gt; setCurrMonth(month)&#125;</span><br><span class="line">        style&#x3D;&#123;</span><br><span class="line">          month &#x3D;&#x3D;&#x3D; currMonth</span><br><span class="line">            ? &#123; fontSize: &quot;22px&quot;, fontWeight: &quot;bold&quot; &#125;</span><br><span class="line">            : &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        className&#x3D;&quot;calendar__month--button&quot;</span><br><span class="line">      &gt;</span><br><span class="line">        &#123;month&#125;월</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;)&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p><code>map</code> 함수를 사용할 시, 되도록 <code>key</code> props를 설정하도록 습관을 들이자! 또한, map 사용 시 꼭 <code>return</code> 문을 사용해야하는 것은 아니지만, 만약 사용한다면 <code>&#123;&#125;</code> 로 return 문을 감싸야 한다!</p>
-<p>여기서는 월을 선택했을 때 <code>currMonth</code> 을 다시 세팅하고, 그에 맞는 스타일을 적용해야 하므로 style 객체에 조건문을 설정하여 알맞게 렌더링되도록 한다. 여기서 <strong>jsx</strong> 의 특성을 엿볼 수 있는데, 일단 javascript 문법이 들어가기 때문에 <code>style=&#123;&#125;</code> 로 문법임을 선언해주고, 이 안에 조건문을 설정한 후 실제 스타일 객체는 <code>&#123;&#125;</code> 로 전달해준다!</p>
-<hr>
-<p>4️⃣</p>
-<p>Card 설정</p>
-<p><code>Main.js</code></p>
-<p>Main 페이지는 Card를 포함하는 최상단 페이지이므로, 자식 컴포넌트로 Card를 렌더링하고 props로 userData를 전달한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">return (</span><br><span class="line">  &lt;MainWrap&gt;</span><br><span class="line">    &lt;Card userData&#x3D;&#123;userData&#125; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;MainWrap&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-
-<p><code>Card.js</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 서버에 date가 20200509 형식으로 저장되어있기 때문에, 이를 &quot;5월 9일&quot; 형태로 반환하는 함수입니다</span><br><span class="line">const getDateFormat &#x3D; (date) &#x3D;&gt; &#123;</span><br><span class="line">  const month &#x3D; parseInt((date % 10000) &#x2F; 100);</span><br><span class="line">  const day &#x3D; date % 100;</span><br><span class="line">  return &#96;$&#123;month&#125;월 $&#123;day&#125;일&#96;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-<p>props로 받은 <code>userData</code> 객체를 구조분해할당하여 개별적인 변수에 담는다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const Card &#x3D; (&#123; userData &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  const &#123; date, title, image, weather, tags &#125; &#x3D; userData;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// <span class="selector-tag">text</span> 길이가 길어지면 ... 로 생략하는 방법(아래의 3가지 속성을 세트로 사용합니다)</span><br><span class="line">// <span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>; <span class="selector-tag">-</span>&gt; <span class="selector-tag">text</span>가 길면 보통 다음 줄로 넘어가는데, &quot;한 줄에만; <span class="selector-tag">nowrap</span>&quot; 작성하여 넘치게 합니다</span><br><span class="line">// <span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>; <span class="selector-tag">-</span>&gt; 넘친 텍스트를 숨깁니다</span><br><span class="line">// <span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>; <span class="selector-tag">-</span>&gt; 넘친 텍스트를 ... 로 표시합니다</span><br><span class="line"></span><br><span class="line">&amp;__<span class="selector-tag">title</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">25px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">12px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: left;</span><br><span class="line">  <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>5️⃣</p>
-<p>API 설정</p>
-<p>Main 컴포넌트 자체만 넘기지 않고 props도 함께 전달하기 위해 Route 내 component props을 변경한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Main 컴포넌트에서는 &quot;해당 월의 데이터만&quot; 가지고 있어야하므로 Main에 현재 연도와 월을 넘겨줍니다</span><br><span class="line">&#x2F;&#x2F; ex) 2021년 5월에 해당하는 데이터만 가지고 오기 위함! 연도나 월이 변경되면 자동으로 API를 다시 요청합니다</span><br><span class="line">&lt;Switch&gt;</span><br><span class="line">          &lt;Route</span><br><span class="line">            exact</span><br><span class="line">            path&#x3D;&quot;&#x2F;&quot;</span><br><span class="line">            component&#x3D;&#123;&lt;Main year&#x3D;&#123;year&#125; month&#x3D;&#123;month&#125; &#x2F;&gt;&#125;</span><br><span class="line">          &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-
-<blockquote>
-<p>GetUserData API를 작성하여 json-server에 있는 data를 가져옵니다. 실제로 가져오기 전에 Postman으로 테스트 해보면 좋겠죠?</p>
-</blockquote>
-<p>api 요청 함수는 무조건 <code>async</code> , <code>await</code> 으로 작성하여 비동기 처리한다! 데이터를 받지 않으면 진행되지 않아야 버그를 방지한다.</p>
-<p>get url 의 경우, 앞서 <code>data.json</code> 에서 설명했듯이 설정한 서버 포트 넘버 3001번에서 <code>/posts</code> url 에서 data를 가져온다. 이 때, api로 가져오는 data는 객체 내에 data에 대한 metadata와 함께 data를 가져오므로 기본적으로 다음과 같은 구조를 가지고 있다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rawData &#123;</span><br><span class="line">	...metadata,</span><br><span class="line">	data: &#123;</span><br><span class="line">		.</span><br><span class="line">		.</span><br><span class="line">		.</span><br><span class="line">		data: &#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>여기서는 <code>data</code> 라고 명명하였으므로, data 내 data에 접근하여 data를 가져온다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export const getCardData &#x3D; async () &#x3D;&gt; &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    const rawData &#x3D; await axios.get(&quot;http:&#x2F;&#x2F;localhost:3001&#x2F;posts&quot;);</span><br><span class="line">    return rawData.data.data;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>App.js에서 내려준 <code>year</code> , <code>month</code> 를 props로 받아 data의 property로서 접근하여 알맞은 데이터를 가져온다. api에서 data를 받아올 것이므로 초기값은 <code>null</code> 로 설정하고, <code>useEffect</code> 를 이용해 setState한다. 이 때, useEffect 에 전달하는 callback 함수의 경우 밖에서 정의 후 전달하는 것이 아닌 함수 내에서 정의하는 것이므로, <strong>IFFY</strong> 를 위해 기본적인 함수 생성문 <code>() =&gt; &#123;&#125;</code> 정의 후 내부에 IFFY를 위한 <code>(() =&gt; &#123;&#125;)()</code> 를 정의한다. 이 때, api를 이용해 data를 호출하므로 async, await로 data를 받아오고 설정해야 한다. (api 함수 자체가 async, await 함수이므로) 또한, year과 month가 바뀔 때에만 리렌더링을 해야하므로 dependency 배열에 이 두 변수를 설정한다. 즉, dependencies가 year, month 이므로 year와 month가 변경되면 api를 다시 요청하게 된다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const Main &#x3D; (&#123; year, month &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  &#x2F;&#x2F; useState를 사용하여 전체 데이터 값을 저장합니다. 여기서는 테스트를 위해 초기값으로 더미 데이터를 넣었습니다!</span><br><span class="line">  &#x2F;&#x2F; 이후에는 서버에서 API 요청 결과값을 받으면 userData에 저장합니다.</span><br><span class="line">  const [userData, setUserData] &#x3D; useState(null);</span><br><span class="line"></span><br><span class="line">  useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">    (async () &#x3D;&gt; &#123;</span><br><span class="line">      const data &#x3D; await getCardData();</span><br><span class="line">      data[year] &amp;&amp; setUserData(data[year][month]);</span><br><span class="line">    &#125;)();</span><br><span class="line">  &#125;, [year, month]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>Router : <a target="_blank" rel="noopener" href="https://gongbu-ing.tistory.com/45">https://gongbu-ing.tistory.com/45</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/22/python-list-reverse/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/22/python-list-reverse/" class="post-title-link" itemprop="url">리스트 요소 reverse 시키기</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-22 11:55:07 / Modified: 07:34:20" itemprop="dateCreated datePublished" datetime="2021-06-22T11:55:07+01:00">2021-06-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="오리지널-리스트-바꾸기"><a href="#오리지널-리스트-바꾸기" class="headerlink" title="오리지널 리스트 바꾸기"></a>오리지널 리스트 바꾸기</h3><ol>
-<li>reverse() 이용</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr.reverse() <span class="comment">#reversing using reverse()</span></span><br><span class="line"><span class="comment"># reversing Array</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="새로운-리스트-반환하기"><a href="#새로운-리스트-반환하기" class="headerlink" title="새로운 리스트 반환하기"></a>새로운 리스트 반환하기</h3><ol>
-<li>슬라이싱 이용</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = arr[::-<span class="number">1</span>] <span class="comment">#reversing using list slicing</span></span><br><span class="line"><span class="comment"># new reversed array</span></span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>reversed() 이용</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result=<span class="built_in">list</span>(<span class="built_in">reversed</span>(arr)) <span class="comment">#reversing using reversed()</span></span><br><span class="line"><span class="comment"># new reversed Array</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/21/python-list-set/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/21/python-list-set/" class="post-title-link" itemprop="url">리스트에서 중복 제거하기</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-20 22:33:12" itemprop="dateCreated datePublished" datetime="2021-06-20T22:33:12+01:00">2021-06-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-21 15:50:20" itemprop="dateModified" datetime="2021-06-21T15:50:20+01:00">2021-06-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>자료형 set은 크게 두가지 특징을 가지고 있다.</p>
-<ol>
-<li>중복을 허용하지 않는다.</li>
-<li>set 내부에 있는 값(value) 들은 순서가 존재하지 않는다.</li>
-</ol>
-<p>👉 <code>1</code> 의 특징을 이용하여 중복된 값을 list에서 제거한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listExample = <span class="built_in">list</span>(<span class="built_in">set</span>(listExample))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/19/python-dict/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/19/python-dict/" class="post-title-link" itemprop="url">딕셔너리와 리스트</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-19 13:48:27 / Modified: 05:52:50" itemprop="dateCreated datePublished" datetime="2021-06-19T13:48:27+01:00">2021-06-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">makeDictionary</span>(<span class="params">array</span>):</span></span><br><span class="line">    dictionary = <span class="built_in">dict</span>()</span><br><span class="line">    <span class="keyword">for</span> idx, val <span class="keyword">in</span> <span class="built_in">enumerate</span>(array):</span><br><span class="line">        <span class="keyword">if</span> idx <span class="keyword">not</span> <span class="keyword">in</span> dictionary:</span><br><span class="line">            dictionary[idx] = [val]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dictionray[idx].append(val)</span><br><span class="line">    <span class="keyword">return</span> dictionary</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/06/19/python-list/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/19/python-list/" class="post-title-link" itemprop="url">리스트 생성, 정렬, 삽입</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-19 13:44:04 / Modified: 05:48:03" itemprop="dateCreated datePublished" datetime="2021-06-19T13:44:04+01:00">2021-06-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="string-to-char-array"><a href="#string-to-char-array" class="headerlink" title="string to char array"></a>string to char array</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&quot;mystring&quot;</span></span><br><span class="line">l = <span class="built_in">list</span>(s)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">l = [c <span class="keyword">for</span> c <span class="keyword">in</span> <span class="string">&quot;foobar&quot;</span>]</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="정렬"><a href="#정렬" class="headerlink" title="정렬"></a>정렬</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">l.sort() <span class="comment"># ascending</span></span><br><span class="line">l.sort(reverse=<span class="literal">True</span>) <span class="comment"># reverse, descending</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="삽입"><a href="#삽입" class="headerlink" title="삽입"></a>삽입</h3><p><code>array.insert(index, value)</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var=<span class="number">7</span></span><br><span class="line">array = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">array.insert(<span class="number">0</span>, var)</span><br><span class="line">print(array) <span class="comment"># [7, 1, 2, 3, 4, 5, 6]</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1377,20 +1239,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">65</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
