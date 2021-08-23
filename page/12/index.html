@@ -163,6 +163,446 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/10/18-Angular/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/10/18-Angular/" class="post-title-link" itemprop="url">18. Angular</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-10 12:28:55" itemprop="dateCreated datePublished" datetime="2021-02-10T12:28:55Z">2021-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h2><h3 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h3><p><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/docs/handbook/intro.html">www.typescriptlang.org/docs/handbook/intro.html</a></p>
+<p>Handbook - The TypeScript Handbook<br>Your first step to learn TypeScript<br><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">www.typescriptlang.org</a></p>
+<p>let [varName] : [varType] = [value];</p>
+<ul>
+<li>enum : dictionary</li>
+<li>function =&gt; need to specify the types of parameters</li>
+</ul>
+<ul>
+<li>getting rid of any error of classes…</li>
+<li>testing if we generate any error</li>
+<li>typing faster</li>
+</ul>
+<p>imraccoon-developer.tistory.com/11</p>
+<p>TypeScript, 왜 써야되나?? (feat. 장단점)<br>JavaScript가 es6로 바뀌면서 큰 인기를 끌기 시작했습니다. 또한, Node.js로 할 수 있는 것들이 점점 많아졌으며, 지금도 많아지고 있습니다. 처음에는 웹에서 사용하기 위한 스크립트 언어로 활용되<br>imraccoon-developer.tistory.com</p>
+<h3 id="Angular-Architecture"><a href="#Angular-Architecture" class="headerlink" title="Angular Architecture"></a>Angular Architecture</h3><ul>
+<li>Modules</li>
+<li>Components</li>
+<li>Services<br>…</li>
+</ul>
+<h4 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h4><ul>
+<li>connected through Metadata</li>
+<li>Component === View</li>
+<li>Service: share functionality through entire app</li>
+<li>dependency injector</li>
+</ul>
+<p>@NgModule: function</p>
+<ul>
+<li>bootstrap: starting point, start compiling</li>
+<li>decorators: annotate data to give extra info to(of) the target</li>
+</ul>
+<p>–&gt; decorating: NgModule targeting AppModule</p>
+<h4 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h4><ul>
+<li><p>A class meant to be as reusable (when applies) as possible</p>
+</li>
+<li><p>Defines application data and logic</p>
+</li>
+<li><p>Bound to a template, an HTML file</p>
+</li>
+<li><blockquote>
+<p>give users all the functionality of the app</p>
+</blockquote>
+</li>
+<li><p>create DOM and add components thus drawing a tree: [tree] template -&gt; components (+ template) -&gt; … </p>
+</li>
+<li><p>communicate with each other and give access of information to users</p>
+</li>
+<li><p>component = instance of a class, independent element but communicate with others as a class</p>
+</li>
+<li><p>render the DOM as a new node</p>
+</li>
+<li><dl><dt>shadow DOM to encapsulate the component, not affected by exeternal interventions<br>Shadow DOM</dt><dd>different DOM, OWN capsulated environment</dd></dl></li>
+</ul>
+<p>polymer-library.polymer-project.org/2.0/docs/devguide/shadow-dom<br>Shadow DOM is a new DOM feature that helps you build components. You can think of shadow DOM as a scoped subtreeinside your element.</p>
+<ul>
+<li>Root Component</li>
+</ul>
+<ul>
+<li>contain everything</li>
+</ul>
+<ul>
+<li>Root Template</li>
+</ul>
+<ul>
+<li>Navigation Component: works itself, alone</li>
+<li>Container Component: including other components</li>
+</ul>
+<ul>
+<li>Filtering Component</li>
+</ul>
+<ul>
+<li>receive the input data</li>
+<li>render into different components (list, map)</li>
+</ul>
+<p>e.g. Scenario<br>if like one of the list component item -&gt; passed up to the container -&gt; reflect that to the map component<br>filtering info in the filter component -&gt; passed up to the container -&gt; reflect that to the map component</p>
+<h4 id="Data-Binding"><a href="#Data-Binding" class="headerlink" title="Data Binding"></a>Data Binding</h4><p>when user gives the input, then DOM will communicate using property in [(ng-model)] = “property”</p>
+<ul>
+<li>handler: function declared component </li>
+</ul>
+<p>object =&gt; {}</p>
+<ul>
+<li>2 way binding: class component &lt;-&gt; template </li>
+</ul>
+<ul>
+<li>selector: ‘movie-details’ –&gt; director obj go in trhough selector</li>
+</ul>
+<h4 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h4><ul>
+<li>private: TS property, can’t access it from other classes</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/" class="post-title-link" itemprop="url">Data Sitting from MongoDB to GraphQL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-09 16:47:19" itemprop="dateCreated datePublished" datetime="2021-02-09T16:47:19Z">2021-02-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="TRY-THIS-🌈✨"><a href="#TRY-THIS-🌈✨" class="headerlink" title="TRY THIS 🌈✨"></a>TRY THIS 🌈✨</h4><p>buddy.works/tutorials/how-to-connect-mongodb-to-graphql-server</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/09/17-GraphQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/09/17-GraphQL/" class="post-title-link" itemprop="url">17. GraphQL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-08 21:44:47" itemprop="dateCreated datePublished" datetime="2021-02-08T21:44:47Z">2021-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h2><ul>
+<li>more efficient</li>
+<li>alternative to REST API</li>
+</ul>
+<ul>
+<li>Not a Framework!</li>
+<li>similar to router</li>
+</ul>
+<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><ul>
+<li>pattern, standard for APIs</li>
+<li>interface that tells the external how to get the datas</li>
+<li>have endpoints (e.g. ‘/messages’)</li>
+</ul>
+<dl><dt>/teams/CH</dt><dd>send all the info</dd></dl><p>–&gt; moduler<br>/teams/CH/info<br>/teams/CH/players<br>/teams/CH/matches</p>
+<ul>
+<li>Query Language (Standard)</li>
+</ul>
+<p>order also matches!</p>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><ol>
+<li>Schema<ul>
+<li>Types</li>
+</ul>
+</li>
+</ol>
+<p>id =&gt; unique<br>[]! =&gt; need [] type, you need to pass [] thing<br>team: Team! =&gt; team is related to type Team (Team: object)</p>
+<ol start="2">
+<li>Resolvers</li>
+</ol>
+<ul>
+<li>Scalar Types<br>(Built-In)</li>
+</ul>
+<ul>
+<li>Int</li>
+<li>Float</li>
+<li>String</li>
+<li>Boolean</li>
+<li>ID<br>(Custom Scalar)</li>
+<li>Date, Url, EmailAddress …<br>id, name, age: primitive type<br>team: object -&gt; sub-doc. type =&gt; repeat the same process to find the type</li>
+</ul>
+<ol start="3">
+<li>Queries &amp; Mutations<br>one single endpoint</li>
+</ol>
+<p>-&gt; perform queries</p>
+<ul>
+<li>Sub-Selection<br>pass the object to the type -&gt; give the right interface of information of that object</li>
+</ul>
+<ul>
+<li>have to ask the property of the object</li>
+</ul>
+<ul>
+<li><p>Arguments</p>
+</li>
+<li><p>Variables</p>
+</li>
+</ul>
+<p>put “DEF” into $position var</p>
+<ul>
+<li><ul>
+<li><ul>
+<li>fetching data - - -<br>👇</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>change (mutate) data - - -</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Mutations</p>
+</li>
+</ul>
+<ul>
+<li>another type of action like query that performs changes on the resources</li>
+<li>diff is like <code>GET - POST</code>: doesn’t change anything in the server - change something in the server<br> -&gt; do st that doesn’t suppose to do, run semantic, perform changes by manipulating inside my DB</li>
+</ul>
+<ol>
+<li>create new data <code>POST</code></li>
+<li>update existing data <code>PUT</code></li>
+<li>delete existing data <code>DELETE</code></li>
+</ol>
+<p>name, position: response<br>1st: input type checking -&gt; 2nd: actually executing the mutation</p>
+<ul>
+<li>ID: created internally by the program</li>
+</ul>
+<ul>
+<li>send the request to the root (4000-graphQL as the endpoint)</li>
+<li>reliable, flexible</li>
+</ul>
+<ul>
+<li>Execution<br>search for syntax error</li>
+</ul>
+<p>undefined height -&gt; null, name ~ pass height ~ go inside team obj</p>
+<ul>
+<li>Resolvers<br>Schema: define, Resolver: interact =&gt; interplay to call server flexibly</li>
+</ul>
+<p>get id:42 from upper example</p>
+<ul>
+<li>obj : the previous resolved obj, parent element that has been previously resolved</li>
+<li>args : the arguments object for the field in the query, include id .. all the args that we want to pass</li>
+<li>context : shared object provided to every resolver, communicate and share information, later function can access to it (i.e. ctx in Koa)</li>
+<li>info : extra information about the current query to mutate, etc.</li>
+</ul>
+<h4 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h4><p>typeDefs: routers<br>resolvers: controllers</p>
+<ul>
+<li><p>index.js</p>
+</li>
+<li><p>typeDefs.js</p>
+</li>
+</ul>
+<ul>
+<li>resolvers.js</li>
+</ul>
+<p>not using obj =&gt; replace it with <code>_</code><br>👇</p>
+<ul>
+<li>resolvers.js</li>
+</ul>
+<p>※ express / koa : REST API = apollo-server : gql</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/06/16-Web-Components-PWA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -766,7 +1206,7 @@
 <li>-&gt; (because a primary key is ordered,) binary_search =&gt; O(logN)</li>
 </ul>
 <h4 id="SQL-Indexes"><a href="#SQL-Indexes" class="headerlink" title="SQL - Indexes"></a>SQL - Indexes</h4><ol start="3">
-<li>SELECT “Email” FROM “Users” WHERE Email = “<a href="mailto:&#x62;&#x69;&#x6c;&#108;&#x2e;&#103;&#x61;&#116;&#101;&#x73;&#64;&#x6d;&#x69;&#x63;&#114;&#111;&#115;&#x6f;&#x66;&#x74;&#x2e;&#99;&#111;&#109;">&#x62;&#x69;&#x6c;&#108;&#x2e;&#103;&#x61;&#116;&#101;&#x73;&#64;&#x6d;&#x69;&#x63;&#114;&#111;&#115;&#x6f;&#x66;&#x74;&#x2e;&#99;&#111;&#109;</a>“ </li>
+<li>SELECT “Email” FROM “Users” WHERE Email = “<a href="mailto:&#x62;&#x69;&#108;&#x6c;&#46;&#x67;&#x61;&#116;&#x65;&#115;&#64;&#109;&#x69;&#x63;&#x72;&#111;&#115;&#111;&#x66;&#x74;&#x2e;&#x63;&#111;&#x6d;">&#x62;&#x69;&#108;&#x6c;&#46;&#x67;&#x61;&#116;&#x65;&#115;&#64;&#109;&#x69;&#x63;&#x72;&#111;&#115;&#111;&#x66;&#x74;&#x2e;&#x63;&#111;&#x6d;</a>“ </li>
 </ol>
 <ul>
 <li>Time Complexity<br>approach table by checking each element =&gt; O(n)</li>
@@ -1014,430 +1454,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/30/10-Back-end-Frameworks/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/30/10-Back-end-Frameworks/" class="post-title-link" itemprop="url">10. Back-end Frameworks</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-29 21:49:40" itemprop="dateCreated datePublished" datetime="2021-01-29T21:49:40Z">2021-01-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Back-end-Frameworks"><a href="#Back-end-Frameworks" class="headerlink" title="Back-end Frameworks"></a>Back-end Frameworks</h2><h3 id="Back-end"><a href="#Back-end" class="headerlink" title="Back-end"></a>Back-end</h3><p>executed on server</p>
-<h3 id="Front-end"><a href="#Front-end" class="headerlink" title="Front-end"></a>Front-end</h3><p>executed on clinet (browser, mobile, tablet…)</p>
-<h3 id="Web-server"><a href="#Web-server" class="headerlink" title="Web server"></a>Web server</h3><p>software on the physical machine (hardware)</p>
-<h3 id="Node-JS"><a href="#Node-JS" class="headerlink" title="Node JS"></a>Node JS</h3><ul>
-<li>server side javascript<ul>
-<li>interact with file (operating) systems</li>
-<li>FIFO</li>
-<li>time difference: 1sec ~ 28hours</li>
-</ul>
-</li>
-<li>non-blocking === asynchronous Input/Output<ul>
-<li>allows other operation on the other side</li>
-<li>delegate to someone something and do other stuff =&gt; higher efficiency</li>
-<li>multi-threads (<em>JS: single-thread</em>) : e.g. one looking for the answer / one doing help request</li>
-</ul>
-</li>
-<li>allows to use the same language on client and server</li>
-</ul>
-<h4 id="Npm"><a href="#Npm" class="headerlink" title="Npm"></a>Npm</h4><ul>
-<li>npm init<ul>
-<li>initialise the packages</li>
-</ul>
-</li>
-<li>package . json<ul>
-<li>list all dependencies</li>
-</ul>
-</li>
-<li>npm install / uninstall (–save-dev)</li>
-<li>npm publish<ul>
-<li>create lib -&gt; give authority as an open source</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>weekly download counts</li>
-<li>last publish (updated) version</li>
-</ul>
-<h4 id="Async"><a href="#Async" class="headerlink" title="Async"></a>Async</h4><p>Sync: fs 설정 시 다른 scope에서도 접근 가능하지만<br>Async: fs 안에서만 data 접근 가능, 밖 scope에서 접근 불가</p>
-<h4 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h4><p>msg sending to client: “Hello World”</p>
-<h4 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h4><ul>
-<li>Node.js: common js Module</li>
-</ul>
-<ul>
-<li>Module: object</li>
-<li>require: read exports and take object’s properties in it, assign to the variable which is reading the require, follow the execution in the file</li>
-<li>module.exports : what the file does/ passes</li>
-</ul>
-<p>touch: create file<br>nodemon: watches the file, automatically restart (reload, update) the file</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/29/9-Networking/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/29/9-Networking/" class="post-title-link" itemprop="url">9. Networking</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-28 23:09:31" itemprop="dateCreated datePublished" datetime="2021-01-28T23:09:31Z">2021-01-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Networking"><a href="#Networking" class="headerlink" title="Networking"></a>Networking</h2><h3 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h3><ol>
-<li>Data formats<br>e.g. language</li>
-<li>Address formats<br>e.g. location</li>
-<li>Routing</li>
-<li>Acknowledgements and Errors</li>
-</ol>
-<h3 id="IP-addresses-and-ports"><a href="#IP-addresses-and-ports" class="headerlink" title="IP addresses and ports"></a>IP addresses and ports</h3><ul>
-<li>IPV4: 32 bits, 4 groups of 8 bits(0~256), 2^32 combinations</li>
-<li>IPV6: 128 bits, 16 groups of 8 bits, 2^128 combinations</li>
-<li>Port range: 0-65535 (first 1023 reserved)</li>
-</ul>
-<p>e.g. IPV4- 192.168.0.4:3000<br>IPV6- [2001:0db8:85a3:0000:0000:8a2e:0370:7334]:3000</p>
-<h3 id="LAN-and-WAN"><a href="#LAN-and-WAN" class="headerlink" title="LAN and WAN"></a>LAN and WAN</h3><p>make connection<br>LAN: office, wifi<br>-&gt; internal (private IP address) -&gt;<br>WAN: extended envir</p>
-<h3 id="Data-serialization-and-transport"><a href="#Data-serialization-and-transport" class="headerlink" title="Data serialization and transport"></a>Data serialization and transport</h3><p>breakdown the data into chunks, called packets<br>protocol controls which packet to deliver</p>
-<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><p>scheme://host[:prt]/path[?query#fragment] =&gt; key-value pairs<br>e.g. https://(ip)218.24.0.93:443 or (address)mydomain.com/recipes?unit=metric&amp;ingredients=bananas</p>
-<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><dl><dt>Domain Name System</dt><dd>receives queries, give corresponding address</dd></dl><h3 id="HTTP-s"><a href="#HTTP-s" class="headerlink" title="HTTP(s)"></a>HTTP(s)</h3><p>Hyper-Tags Transfer Protocol</p>
-<ul>
-<li>HTTPs -&gt; safer </li>
-</ul>
-<ul>
-<li>Request / Response<ul>
-<li>server can’t initiate request, only client can initiate﻿</li>
-</ul>
-</li>
-<li>Stateless<ul>
-<li>protocol(http) doesn’t remember any information, server and client do</li>
-</ul>
-</li>
-</ul>
-<h3 id="REST-API-amp-Methods"><a href="#REST-API-amp-Methods" class="headerlink" title="REST API &amp; Methods"></a>REST API &amp; Methods</h3><p>Representational State Transfer<br><a target="_blank" rel="noopener" href="http://server/entities">http://server/entities</a>(messages, topics, hosts, …)</p>
-<ul>
-<li>indicated (pre-defined) methods to know what to do with entities</li>
-<li>attached to the header of packets</li>
-</ul>
-<ul>
-<li>GET<ul>
-<li>only the safe method, not changing anything</li>
-</ul>
-</li>
-<li>POST</li>
-<li>PUT</li>
-<li>DELETE</li>
-<li>more…</li>
-</ul>
-<p>important to receive good response to smoothly communicate —&gt;</p>
-<h3 id="Status-Codes"><a href="#Status-Codes" class="headerlink" title="Status Codes"></a>Status Codes</h3><p>1xx: Hold on<br>2xx: Here you go<br>e.g. 201: created(posted) successfully<br>3xx: Go away<br>4xx: You fucked up (syntax / fulfilled)<br>e.g. 404: not found<br>5xx: I fucked up</p>
-<p>en.wikipedia.org/wiki/List_of_HTTP_status_codes<br>List of HTTP status codes - Wikipedia<br>From Wikipedia, the free encyclopedia Jump to navigation Jump to search Response codes of the Hypertext Transfer Protocol This is a list of Hypertext Transfer Protocol (HTTP) response status codes. Status codes are issued by a server in response to a clien<br>en.wikipedia.org</p>
-<h3 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h3><p>setting the origin (server) of the client<br>request: carrying around the data to send and receive<br>cb: callback -&gt; assign function, passing the function to the API and api returns the data<br>e.g. cb = fcName</p>
-<ul>
-<li>shouldn’t access the WAPI as it would be from a different origin<br>but ok if we do it using a script —&gt;<ul>
-<li>security check if it’s done indirectly</li>
-</ul>
-</li>
-</ul>
-<h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p>update the scripts (.js)</p>
-<p>callback the function and run the code: callback -&gt; displayWeather func -&gt; put data as an arg</p>
-<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>Client Origin Resource Sharing<br>each server can decide whether to accept the JSON callback from client or not<br>give right (bypass the inability) to access third party APIs</p>
-<ol>
-<li>preflight request -&gt; decide allow or not</li>
-<li>main request</li>
-</ol>
-<h3 id="WebSockets"><a href="#WebSockets" class="headerlink" title="WebSockets"></a>WebSockets</h3><h3 id="WebRTC"><a href="#WebRTC" class="headerlink" title="WebRTC"></a>WebRTC</h3><p>Real Time Communication<br>WebRTC 는 웹 브라우저 간에 플러그인의 도움 없이 서로 통신할 수 있도록 설계된 API이다.<br>e.g. chatroulette</p>
-<p>: Chatroulette is an online chatwebsite that pairs random users for webcam-based conversations. Visitors to the website begin an online chat (text, audio, and video) with another visitor. At any point, either user may leave the current chat by initiating another random connection.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/28/8-Bitwise-Operation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/28/8-Bitwise-Operation/" class="post-title-link" itemprop="url">8. Bitwise Operation</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-27 23:37:53" itemprop="dateCreated datePublished" datetime="2021-01-27T23:37:53Z">2021-01-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Bitwise-Operation"><a href="#Bitwise-Operation" class="headerlink" title="Bitwise Operation"></a>Bitwise Operation</h2><p>num[index] * 2^(index-1)</p>
-<h3 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h3><p><code>both</code><br><strong>&amp; : return 1 if both has 1 (same)</strong></p>
-<ol>
-<li>change num into bitwise</li>
-<li>&amp;<blockquote>
-<p>5 &amp; 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
-<h2 id="amp-1001"><a href="#amp-1001" class="headerlink" title="&amp;1001"></a>&amp;1001</h2><p>0001(2) –&gt; 1</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h3><p><code>at least</code><br><strong>| : return 1 if at least one has 1</strong></p>
-<ol>
-<li>change num into bitwise</li>
-<li>|<blockquote>
-<p>5 | 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
-<table>
-<thead>
-<tr>
-<th>1001</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1101(2) –&gt; 13</td>
-</tr>
-</tbody></table>
-</blockquote>
-</li>
-</ol>
-<h3 id="XOR"><a href="#XOR" class="headerlink" title="XOR"></a>XOR</h3><p><code>just one</code><br><strong>^ : return 1 if the value is different, return 0 if same</strong></p>
-<ol>
-<li>change num into bitwise</li>
-<li>^<blockquote>
-<p>5 ^ 9<br>5 –&gt; 0101(2)<br>9 –&gt; 1001(2)<br> 0101</p>
-<h2 id="1001"><a href="#1001" class="headerlink" title="^1001"></a>^1001</h2><p>1100(2) –&gt; 12</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="NOT"><a href="#NOT" class="headerlink" title="NOT"></a>NOT</h3><p><strong>~ : return the oppostie value</strong></p>
-<blockquote>
-<p>actually, there are 0 as many as the size of the integer range(&lt;=256, thus 8개) in front of the bits</p>
-</blockquote>
-<ul>
-<li>-(x) -1 (// in JS)</li>
-<li>negative<ul>
-<li>starts from -1</li>
-<li>meaning of 0, 1 is swtiched: 0 -&gt; decrement<blockquote>
-<p>~5<br>5 –&gt; 0101(2)</p>
-<h2 id="0101-2"><a href="#0101-2" class="headerlink" title="~0101(2)"></a>~0101(2)</h2><p>1010(2) –&gt; -6 (in JS, normally -5) // 1011(2) –&gt; -5 in JS</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Left-Shift"><a href="#Left-Shift" class="headerlink" title="Left Shift"></a>Left Shift</h3><p><strong>&lt;&lt; n : shift bits to the left to the n extent and fill the right bit with 0</strong></p>
-<blockquote>
-<p>5 &lt;&lt; 1<br>0101(2)<br>—– &lt;&lt; 1<br>1010(2)</p>
-</blockquote>
-<h3 id="Sign-propagating-Right-Shift"><a href="#Sign-propagating-Right-Shift" class="headerlink" title="Sign-propagating Right Shift"></a>Sign-propagating Right Shift</h3><p><strong>&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with the same one as the original last right value which is sign property</strong></p>
-<blockquote>
-<p>8 &gt;&gt;&gt; 1<br>0…1000(2)<br>———– &gt;&gt; 1<br>00…0100(2)  // 4<br>-8 &gt;&gt;&gt; 1<br>1…1000(2)<br>———– &gt;&gt; 1<br>11…1100(2) // -4</p>
-</blockquote>
-<h3 id="Zero-fill-Right-Shift"><a href="#Zero-fill-Right-Shift" class="headerlink" title="Zero-fill Right Shift"></a>Zero-fill Right Shift</h3><p><strong>&gt;&gt;&gt; n : shift bits to the right to the n extent and fill the left bit with 0</strong></p>
-<blockquote>
-<p>[1]1…0111 // -8<br>——— &gt;&gt;&gt; 1<br>[0]1…1011 // 2147483644</p>
-</blockquote>
-<p>blog.logrocket.com/interesting-use-cases-for-javascript-bitwise-operators/<br>Interesting use cases for JavaScript bitwise operators - LogRocket Blog<br>Although we don’t often see bitwise operators used in JavaScript, they have some cool use cases. Learn their theory and implementation.<br>blog.logrocket.com</p>
-<hr>
-<dl><dt><em>compare <code>multiple values</code> together</em></dt><dd>first comparison -&gt; compare with the next one -&gt; (((repeat)))</dd></dl><h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>qiao.github.io/PathFinding.js/visual/<br>PathFinding.js<br>qiao.github.io</p>
-<h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><ul>
-<li>only need the weight</li>
-<li>evaluate all the nodes -&gt; slower</li>
-</ul>
-<ol>
-<li>set the weight of starting point to 0, and others to INF (as not started yet)</li>
-</ol>
-<h3 id="A"><a href="#A" class="headerlink" title="A*"></a>A*</h3><ul>
-<li>only evaluate shorter distance -&gt;faster</li>
-<li>need weight and distance both</li>
-</ul>
-<ol>
-<li>set additional array with distance</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1509,20 +1525,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">129</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-count">68</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
