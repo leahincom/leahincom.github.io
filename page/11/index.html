@@ -163,6 +163,521 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/04/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-03-04-21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/04/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-03-04-21/" class="post-title-link" itemprop="url">1차 세미나_03/04/21</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-04 15:33:21" itemprop="dateCreated datePublished" datetime="2021-04-04T15:33:21+01:00">2021-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/web-28th/" itemprop="url" rel="index"><span itemprop="name">WEB_28th</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1차-세미나"><a href="#1차-세미나" class="headerlink" title="1차 세미나"></a>1차 세미나</h1><h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><ol>
+<li>버전 관리 용이<ol>
+<li>수정한 내용 비교 가능</li>
+<li>파일을 이전 상태로 돌릴 수 있음</li>
+<li>프로젝트 자체를 이전 상태로 돌릴 수 있음</li>
+<li>누가, 언제 만들었는지 추적할 수 있음</li>
+<li>파일 복구 가능</li>
+</ol>
+</li>
+<li>협업 용이<ol>
+<li>브랜치로 분기를 지정하여 기능별로 분리하여 작업할 수 있음<ul>
+<li>feature</li>
+<li>develop</li>
+<li>release</li>
+<li>master</li>
+</ul>
+</li>
+<li>glt flow를 이용하여 브랜치 병합 과정에서 충돌을 최대한 피하기 위해서<ul>
+<li>충돌 시<ol>
+<li><code>pull request</code> 을 이용하여 자동으로 merge되는 것을 방지함</li>
+<li>버전 선택 가능</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>각자 다른 부분을 작업한 후 합칠 수 있음</li>
+</ol>
+</li>
+<li>브랜치를 통한 비선형적인 개발</li>
+<li>원격 저장소가 있다면 어디서나 개발 가능 (Github)<ol>
+<li>어디서나 clone 받을 수 있음</li>
+<li>하나의 repository를 여러 사람과 공유할 수 있음</li>
+<li>remote가 남아있다면 복구 가능</li>
+</ol>
+</li>
+</ol>
+<img width="467" alt="image-20210403152928735" src="https://user-images.githubusercontent.com/49134038/113500846-4b6e9400-955c-11eb-8bc8-1c728ce78d8c.png">
+
+<ul>
+<li>LOCAL<ul>
+<li>Working Directory<ul>
+<li>새로 생성: Untracked</li>
+<li>변경됨: Modified</li>
+</ul>
+</li>
+<li>Staging Area<ul>
+<li>Commit할 파일들을 모아놓는 공간</li>
+</ul>
+</li>
+<li>Repository<ul>
+<li>Commit 후에 버전이 기록되는 공간</li>
+<li>history 관리</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>REMOTE</li>
+</ul>
+<h3 id="Git-관련-용어"><a href="#Git-관련-용어" class="headerlink" title="Git 관련 용어"></a>Git 관련 용어</h3><ul>
+<li>Working Tree</li>
+<li>Commit</li>
+<li>Branch</li>
+<li>Merge</li>
+<li>HEAD</li>
+</ul>
+<h3 id="Git-기본-명령어"><a href="#Git-기본-명령어" class="headerlink" title="Git 기본 명령어"></a>Git 기본 명령어</h3><img width="342" alt="Screenshot 2021-04-03 at 14 47 31" src="https://user-images.githubusercontent.com/49134038/113500867-68a36280-955c-11eb-9e81-06acb37c0358.png">
+
+
+
+<h4 id="개인-작업-시"><a href="#개인-작업-시" class="headerlink" title="개인 작업 시"></a>개인 작업 시</h4><ol>
+<li>local</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init &lt;folder name&gt;</span><br><span class="line"></span><br><span class="line">cd &lt;folder name&gt;</span><br><span class="line"></span><br><span class="line">code .</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>git</p>
+<ul>
+<li><p>new Repository 생성</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin &lt;address&gt;</span><br><span class="line">git remote -v &#x2F;&#x2F; 상태 확인</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>update</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;initial commit&quot;</span><br><span class="line">git status</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log &#x2F;&#x2F; log 확인</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master &#x2F;&#x2F; 원격 저장소 master 브랜치 업데이트</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="WEB-동작-원리"><a href="#WEB-동작-원리" class="headerlink" title="WEB 동작 원리"></a>WEB 동작 원리</h3><img width="488" alt="Screenshot 2021-04-03 at 14 55 24" src="https://user-images.githubusercontent.com/49134038/113500818-077b8f00-955c-11eb-8e06-20d3057a4732.png">
+
+<img width="495" alt="image-20210403145603056" src="https://user-images.githubusercontent.com/49134038/113500879-82dd4080-955c-11eb-952c-0dc7a117a090.png">
+
+<ul>
+<li>DNS (Domain Name Server)</li>
+<li>3-way / 4-way handshake</li>
+</ul>
+<h4 id="URL-URI"><a href="#URL-URI" class="headerlink" title="URL / URI"></a>URL / URI</h4><ul>
+<li>URL<ul>
+<li><code>http://sopt.org:80/wp</code></li>
+<li>인터넷 상의 자원의 위치</li>
+</ul>
+</li>
+<li>URI<ul>
+<li><code>http://sopt.org:80/wp/url.pdf</code></li>
+<li>인터넷에 있는 자원을 나타내는 식별자</li>
+</ul>
+</li>
+</ul>
+<p><code>http://sopt.org:80/wp/?page_od=2519</code></p>
+<ul>
+<li>protocol<ul>
+<li><code>http</code></li>
+<li>원거리 통신 장비 사이에서 메시지를 주고받는 규칙</li>
+<li>http는 www 상에서 하이퍼텍스트를 주고받는 규칙</li>
+<li>// 없어도 작동함</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>domain name</p>
+<ul>
+<li><code>sopt.org</code></li>
+<li>네트워크 상에서 컴퓨터를 식별하는 호스트명</li>
+<li>DNS에서 IP 주소로 변경해준다</li>
+<li>e.g. 172.217.25.238 : google.com</li>
+</ul>
+</li>
+<li><p>port</p>
+<ul>
+<li><code>80</code></li>
+<li>네트워크 서비스나 특정 프로세스를 식별하는 논리 단위</li>
+<li>다른 방으로 들어가는 문과 같다</li>
+<li>e.g. 80번: HTTP, 443번: HTTPS</li>
+</ul>
+</li>
+<li><p>path</p>
+<ul>
+<li><code>wp</code></li>
+<li>요청한 자원에 대한 웹 서버 내 경로</li>
+</ul>
+</li>
+<li><p>query</p>
+<ul>
+<li><code>?page_id=2519</code></li>
+<li>웹 서버에 제공하는 추가 파라미터</li>
+</ul>
+</li>
+<li><p>IP</p>
+<ul>
+<li>통신에 필요한 각 장치를 나타내는 주소</li>
+</ul>
+</li>
+<li><p>HTTP</p>
+<ul>
+<li><p>request</p>
+<img width="498" alt="image-20210403150515508" src="https://user-images.githubusercontent.com/49134038/113500900-ab653a80-955c-11eb-9f1a-3201fdf3e920.png">
+
+<ul>
+<li>http method</li>
+</ul>
+</li>
+<li><p>reponse</p>
+<img width="662" alt="Screenshot 2021-04-03 at 15 24 58" src="https://user-images.githubusercontent.com/49134038/113500816-06e2f880-955c-11eb-8e4e-7fe2b2906461.png">
+
+<ul>
+<li>status code</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p><em>HyperText Markup Language</em></p>
+<p>웹 페이지의 뼈대를 담당한다.</p>
+<ul>
+<li><p>HyperText</p>
+<ul>
+<li>참조를 통해 한 문서에서 다른 문서로 즉시 접근할 수 있는 텍스트</li>
+<li>웹 상에 존재하는 여러 문서끼리 참조할 수 있는 기술</li>
+</ul>
+</li>
+<li><p>Markup Language</p>
+<ul>
+<li>태그 등을 이용하여 문서나 데이터의 구조를 명기하는 언어의 한 가지</li>
+<li>데이터를 기술하는 정도로만 사용되기에 프로그래밍 언어가 아님</li>
+<li>e.g. 마크다운</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<HTML5>
+
+<ul>
+<li><code>&lt;!DOCTYPE html&gt;</code> 명시</li>
+<li>semantic tag 지원</li>
+<li>form 기능 개선</li>
+<li>다양한 API 지원</li>
+</ul>
+</blockquote>
+<h3 id="Tag"><a href="#Tag" class="headerlink" title="Tag"></a>Tag</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tag</span> <span class="attr">attribute</span>=<span class="string">&quot;value&quot;</span>&gt;</span> ...content... <span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>태그 이름은 대소문자 구분이 없다</p>
+</li>
+<li><p>태그가 엇갈려서 중첩되면 안 된다</p>
+</li>
+<li><p>여러 속성이 tag에 들어갈 수 있음</p>
+</li>
+<li><p>content</p>
+<ul>
+<li>텍스트 / 다른 태그</li>
+<li>감싸진 태그의 자식노드가 됨</li>
+</ul>
+</li>
+<li><p><code>&lt;단독 태그 /&gt;</code></p>
+<img width="484" alt="image-20210403153939010" src="https://user-images.githubusercontent.com/49134038/113500915-c2a42800-955c-11eb-91bc-120bb421d096.png">
+
+
+
+</li>
+</ul>
+<h4 id="구성-Tag"><a href="#구성-Tag" class="headerlink" title="구성 Tag"></a>구성 Tag</h4><p><code>&lt;html&gt;</code></p>
+<ul>
+<li>전체 html 을 감싼다</li>
+<li><code>&lt;!DOCTYPE html&gt;</code> 을 벗어날 수 없음</li>
+</ul>
+<p><code>&lt;head&gt;</code></p>
+<img width="199" alt="Screenshot 2021-04-03 at 15 41 15" src="https://user-images.githubusercontent.com/49134038/113500815-064a6200-955c-11eb-9c55-4cf7d088be50.png">
+
+<ul>
+<li><code>&lt;meta&gt;</code><ul>
+<li>metadata // 기타 정보</li>
+</ul>
+</li>
+<li><code>&lt;style&gt;</code><ul>
+<li>외부 style이 아닌 내부에 정의 가능</li>
+</ul>
+</li>
+</ul>
+<p><code>&lt;body&gt;</code></p>
+<img width="331" alt="Screenshot 2021-04-03 at 15 42 21" src="https://user-images.githubusercontent.com/49134038/113500814-05b1cb80-955c-11eb-9de6-986788ebd2cc.png">
+
+<ul>
+<li>space / enter 많이 해도 한개 이외에는 반영 안 됨</li>
+</ul>
+<img width="424" alt="Screenshot 2021-04-03 at 15 47 30" src="https://user-images.githubusercontent.com/49134038/113500813-05193500-955c-11eb-807d-77a1092ce588.png">
+
+<img width="364" alt="Screenshot 2021-04-03 at 15 54 09" src="https://user-images.githubusercontent.com/49134038/113500812-05193500-955c-11eb-9470-a0108e9fa9a8.png">
+
+<ul>
+<li><code>iframe</code> 은 보안 문제가 있으므로 <code>embed</code> 이용하기</li>
+</ul>
+<h4 id="블록-인라인"><a href="#블록-인라인" class="headerlink" title="블록 / 인라인"></a>블록 / 인라인</h4><ol>
+<li>블록<ul>
+<li>줄 바꿈이 일어나는 형태</li>
+<li>영역의 너비가 상위 영역의 전체 너비만큼 늘어남</li>
+<li>내부에 다른 요소를 포함할 수 있음</li>
+<li><code>&lt;div&gt;</code> 로 블록 요소를 그룹화</li>
+</ul>
+</li>
+<li>인라인<ul>
+<li>줄 바꿈이 일어나지 않는 형태</li>
+<li>영역의 너비가 하위 영역의 전체 너비만큼 늘어남</li>
+<li>내부에 다른 요소를 포함할 수 없음</li>
+<li><code>&lt;span&gt;</code> 으로 인라인 요소를 그룹화</li>
+</ul>
+</li>
+</ol>
+<h4 id="Semantic-Tag"><a href="#Semantic-Tag" class="headerlink" title="Semantic Tag"></a>Semantic Tag</h4><ul>
+<li>컴퓨터가 이해하기 쉽도록 구분한 태그</li>
+<li>의미를 가지고 있는 블록 요소</li>
+</ul>
+<img width="370" alt="Screenshot 2021-04-03 at 15 59 40" src="https://user-images.githubusercontent.com/49134038/113500810-04809e80-955c-11eb-9cab-64a032247f7a.png">
+
+
+
+<h4 id="기타"><a href="#기타" class="headerlink" title="기타"></a>기타</h4><ul>
+<li>주석</li>
+<li>특수 문자</li>
+</ul>
+<img width="180" alt="Screenshot 2021-04-03 at 16 00 28" src="https://user-images.githubusercontent.com/49134038/113500809-03e80800-955c-11eb-89c5-a570bb0dc5a0.png">
+
+
+
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><blockquote>
+<p>CSS3</p>
+<ul>
+<li>웹 문서용</li>
+<li>모듈 기반<ul>
+<li>원하는 모듈만 탑재 가능</li>
+<li>필요한 모듈만 빠르게 업데이트 가능</li>
+</ul>
+</li>
+<li>기존의 도구 없이도 화려하고 동적인 스타일 구현 가능</li>
+</ul>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tag</span> <span class="attr">style</span>=<span class="string">&quot;color: red;&quot;</span>&gt;</span> ...content... <span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>tag 별로 style 첨부</p>
+</li>
+<li><p><code>&lt;head&gt;</code> 안에 style 첨부</p>
+</li>
+<li><p>외부 css 파일 import</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; href&#x3D;&quot;*.css&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h3 id="적용-우선순위"><a href="#적용-우선순위" class="headerlink" title="적용 우선순위"></a>적용 우선순위</h3><h4 id="중요도-선언-위치"><a href="#중요도-선언-위치" class="headerlink" title="중요도 (선언 위치)"></a>중요도 (선언 위치)</h4><ol>
+<li>태그 내부의 style</li>
+<li><code>&lt;head&gt;</code> 의 <code>&lt;style&gt;</code></li>
+<li>2 내의 @import</li>
+<li><code>&lt;link&gt;</code>로 연결된 css 파일</li>
+<li>4 내의 @import</li>
+<li>브라우저의 기본 css</li>
+</ol>
+<h4 id="대상의-명시도"><a href="#대상의-명시도" class="headerlink" title="대상의 명시도"></a>대상의 명시도</h4><ol>
+<li>!important</li>
+<li>inline 스타일</li>
+<li>id 선택자</li>
+<li>클래스 / 가상 선택자</li>
+<li>태그 선택자</li>
+<li>상속된 스타일</li>
+</ol>
+<h4 id="코드-순서"><a href="#코드-순서" class="headerlink" title="코드 순서"></a>코드 순서</h4><p>늦게 선언된 스타일을 우선 적용</p>
+<h3 id="Selector-선택자"><a href="#Selector-선택자" class="headerlink" title="Selector (선택자)"></a>Selector (선택자)</h3><ol>
+<li>전체 선택자 <code>*</code></li>
+<li>태그 선택자</li>
+<li>id 선택자 <code>#</code></li>
+<li>class 선택자 <code>.</code></li>
+</ol>
+<h4 id="다중-값-적용-방법"><a href="#다중-값-적용-방법" class="headerlink" title="다중 값 적용 방법"></a>다중 값 적용 방법</h4><ul>
+<li>다중 태그는 <code>,</code> 로 구분</li>
+<li>다중 속성은 <code>;</code> 로 구분</li>
+<li>다중 속성 값은 <code>,</code> 로 나열</li>
+</ul>
+<h4 id="복합-선택자"><a href="#복합-선택자" class="headerlink" title="복합 선택자"></a>복합 선택자</h4><ul>
+<li><p>선택자 사이의 띄어쓰기: 선택자 조합</p>
+<p><code>h3 p &#123;...&#125;</code></p>
+<ul>
+<li>h3 태그 내부의 모든 p 태그</li>
+</ul>
+</li>
+<li><p>선택자 사이의 <code>&gt;</code> : 자식 선택자</p>
+<p><code>h3 &gt; p &#123;...&#125;</code></p>
+<ul>
+<li>h3 태그 바로 아래의 p 태그</li>
+</ul>
+</li>
+</ul>
+<h4 id="가상-클래스-선택자"><a href="#가상-클래스-선택자" class="headerlink" title="가상 클래스 선택자"></a>가상 클래스 선택자</h4><img width="274" alt="Screenshot 2021-04-03 at 16 33 53" src="https://user-images.githubusercontent.com/49134038/113500808-03e80800-955c-11eb-841b-e004875cac2c.png">
+
+
+
+<h4 id="Attribute-속성"><a href="#Attribute-속성" class="headerlink" title="Attribute (속성)"></a>Attribute (속성)</h4><img width="397" alt="Screenshot 2021-04-03 at 16 34 27" src="https://user-images.githubusercontent.com/49134038/113500806-034f7180-955c-11eb-8f0f-dbf15b63a4a0.png">
+
+<ul>
+<li><code>text-transform</code><ul>
+<li>UPPERCASE</li>
+<li>LOWERCASE</li>
+</ul>
+</li>
+</ul>
+<img width="430" alt="Screenshot 2021-04-03 at 16 36 26" src="https://user-images.githubusercontent.com/49134038/113500805-02b6db00-955c-11eb-8908-bc6bd2145ab2.png">
+
+<ul>
+<li><p><code>position</code></p>
+<ul>
+<li>absolute<ul>
+<li>parent-context에 맞게</li>
+<li>context에 관계 없이 사용자가 지정한 위치에 고정되어서</li>
+</ul>
+</li>
+<li>relative<ul>
+<li>child-context에 맞게</li>
+<li>context에 따라 위치 다르게 적용</li>
+</ul>
+</li>
+<li>fixed<ul>
+<li>위치 변하지 않음</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>overflow</code></p>
+<ul>
+<li>auto<ul>
+<li>스크롤 하지 않을 때는 보이지 않음</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img width="438" alt="Screenshot 2021-04-03 at 16 39 17" src="https://user-images.githubusercontent.com/49134038/113500803-0185ae00-955c-11eb-9915-3ba81fd94324.png">
+
+<ul>
+<li><code>box-sizing</code><ul>
+<li>border-box 설정<ul>
+<li>border를 포함한 전체 box의 크기가 설정한 값과 일치하게</li>
+</ul>
+</li>
+<li>설정 안 하는 경우<ul>
+<li>추가 border 등의 값이 반영되어 box size가 달라짐</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>transform, transition 만으로 animation 효과 줄 수 있음</li>
+</ul>
+<h4 id="Box-Model"><a href="#Box-Model" class="headerlink" title="Box Model"></a>Box Model</h4><img width="241" alt="Screenshot 2021-04-03 at 16 45 43" src="https://user-images.githubusercontent.com/49134038/113500801-ffbbea80-955b-11eb-9d07-4a66cbed4072.png">
+
+<ol>
+<li>content : 요소가 차지하는 공간</li>
+<li>padding : 요소와 테두리 사이의 공간</li>
+<li>border : 테두리</li>
+<li>margin : 다른 요소 사이의 빈 공간</li>
+</ol>
+<h4 id="Flexible-Box"><a href="#Flexible-Box" class="headerlink" title="Flexible Box"></a>Flexible Box</h4><img width="228" alt="image-20210403164800193" src="https://user-images.githubusercontent.com/49134038/113500980-2c243680-955d-11eb-828b-c1242391ea30.png">
+
+<ol>
+<li>flex container<ul>
+<li>display</li>
+<li>flex-direction</li>
+<li>flex-wrap : 줄 바꿈</li>
+<li>justify-content : 주 축의 정렬 방법</li>
+<li>align-items : 교차 축의 정렬 방법</li>
+</ul>
+</li>
+<li>flex items<ul>
+<li>flex-grow : 증가 너비 비율</li>
+<li>flex-shrink : 감소 너비 비율</li>
+<li>flex-basis<ul>
+<li>default: <code>0 1 auto</code></li>
+<li>많이 설정: <code>1 0 auto</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/03/04/27-Redux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1185,115 +1700,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/11/19-Decorators/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/11/19-Decorators/" class="post-title-link" itemprop="url">19. Decorators</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-11 11:50:45" itemprop="dateCreated datePublished" datetime="2021-02-11T11:50:45Z">2021-02-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h3><h3 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h3><p>take the logic</p>
-<h3 id="Data-Binding"><a href="#Data-Binding" class="headerlink" title="Data Binding"></a>Data Binding</h3><ul>
-<li>[(ngModel)] = “property” : binding input property with handling model</li>
-</ul>
-<h2 id="Typescript-and-Angular-Decorators"><a href="#Typescript-and-Angular-Decorators" class="headerlink" title="Typescript and Angular Decorators"></a>Typescript and Angular Decorators</h2><h3 id="Typescript-Decorators"><a href="#Typescript-Decorators" class="headerlink" title="Typescript Decorators"></a>Typescript Decorators</h3><p><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/docs/handbook/decorators.html">www.typescriptlang.org/docs/handbook/decorators.html</a><br>Documentation - Decorators<br>TypeScript Decorators overview<br><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">www.typescriptlang.org</a></p>
-<ul>
-<li>meta programming changing target without modifying metadata (classes)</li>
-<li>annotate or modify the target</li>
-<li></li>
-</ul>
-<p>labelling the target</p>
-<p>@function: function decorator, decorator creater(factory)</p>
-<ul>
-<li>return function (target) =&gt; put class into the target</li>
-<li>return what you decorate (classDecorator -&gt; return class info …)</li>
-</ul>
-<p>…toppings: string[] –&gt; toppings = [‘tomato’, ‘mozzarella’, ‘basil’]</p>
-<p>memoize() : // _.memoize(func)</p>
-<p>Memoizes a given function by caching the computed result.<br>Useful for speeding up slow-running computations.<br>You may assume that the memoized function takes only one argument and that it is a primitive.<br>Memoize should return a function that when called, will check if it has already computed the result for the given argument and return that value instead of recomputing it.</p>
-<h2 id="Object-Properties"><a href="#Object-Properties" class="headerlink" title="Object Properties"></a>Object Properties</h2><h3 id="How-to-define-a-property"><a href="#How-to-define-a-property" class="headerlink" title="How to define a property?"></a>How to define a property?</h3><p>ob.foo = ‘bar’; // direct<br>// Object.defineProperty(obj, ‘foo’, {value: ‘bar’}); //(ppt, ppt_name, object// describe the behaviour of the ppt //ppt_value)</p>
-<blockquote>
-<p>Attribute name</p>
-</blockquote>
-<ul>
-<li>Value (Any type) // actual value<br>// default values of 3 boolean functions of defineProperty(): false // if we define obj with assigning it, then default == true !!!</li>
-<li>Writable (Boolean) // whether the property value can be changed or not</li>
-<li>Enumerable (Boolean) // makes it appear to be in loops (listed in ‘for-in’ enumeration)<br>// 💥 Is Array enumerable?</li>
-<li>Configurable (Boolean) // +Writable +Enumerable // whether we can delete the property or change any attribute apart from attr // configurable lets us change the writable property, writable lets us change the value property</li>
-</ul>
-<h3 id="Angular-Decorators"><a href="#Angular-Decorators" class="headerlink" title="Angular Decorators"></a>Angular Decorators</h3><h4 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h4><p>target: class MyComponent</p>
-<h4 id="Injectable"><a href="#Injectable" class="headerlink" title="Injectable"></a>Injectable</h4><h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>@Input: input decorator =&gt; able to pass the value from parent template using the tag to the child component class</p>
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>@Output: output decorator =&gt; sen the info to the parent element<br>💥 Child’s view<br>input is meant to receive information from the parent element<br>output is meant to send info to the parent</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1365,7 +1771,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">129</span>
+          <span class="site-state-item-count">130</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

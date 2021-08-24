@@ -163,6 +163,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/24/python-regex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/24/python-regex/" class="post-title-link" itemprop="url">문자열에 정규식 활용하기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-24 15:06:38 / Modified: 07:28:34" itemprop="dateCreated datePublished" datetime="2021-08-24T15:06:38+01:00">2021-08-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>정규식 문자열 앞에 <code>r</code> 문자를 삽입하면 이 정규식은 Raw String 규칙에 의하여 <strong>백슬래시 2개 대신 1개만 써도 2개를 쓴 것과 동일한</strong> 의미를 갖게 된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">r&#x27;\&#x27;) ## &#x27;</span>\\<span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>※ 만약 백슬래시를 사용하지 않는 정규식이라면 r의 유무에 상관없이 동일한 정규식이 될 것이다.</p>
+</blockquote>
+<h3 id="re-sub"><a href="#re-sub" class="headerlink" title="re.sub()"></a>re.sub()</h3><p><code>re.sub(pattern, repl, string, count=0, flag=0)</code></p>
+<p>: <code>pattern</code> 을 <code>repl</code> 로 대체한 <code>string</code> 을 반환한다.</p>
+<ul>
+<li><code>repl</code> 내 <code>\</code> 가 존재할 경우 <strong>backslash escape</strong> 가 적용된다.</li>
+</ul>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><ul>
+<li><p>알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.)를 제외한 모든 문자를 제거</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">r&quot;[^a-z0-9-_.]&quot;</span>, <span class="string">&quot;&quot;</span>, answer)</span><br><span class="line"><span class="comment"># &#x27;[^a-z\d\-\_\.]&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>마침표(.)가 2번 이상 연속된 부분을 하나의 마침표(.)로 치환</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">&#x27;\.\.+&#x27;</span>, <span class="string">&#x27;.&#x27;</span>, answer)</span><br><span class="line"><span class="comment"># &#x27;((.)\\2&#123;1,&#125;)&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>마침표(.)가 처음이나 끝에 위치한다면 제거</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">&quot;^[.]|[.]$&quot;</span>, <span class="string">&quot;&quot;</span>, answer)</span><br><span class="line"><span class="comment"># &#x27;^\.|\.$&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/boj-1181/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -985,91 +1074,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/16/boj-2422/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/16/boj-2422/" class="post-title-link" itemprop="url">BOJ 2422</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-16 14:39:53 / Modified: 06:44:24" itemprop="dateCreated datePublished" datetime="2021-08-16T14:39:53+01:00">2021-08-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 정수 N과 M이 주어진다. N은 아이스크림 종류의 수이고, M은 섞어먹으면 안 되는 조합의 개수이다. </p>
-<p>아래 M개의 줄에는 섞어먹으면 안 되는 조합의 번호가 주어진다. 같은 조합은 두 번 이상 나오지 않는다. (1 ≤ N ≤ 200, 0 ≤ M ≤ 10,000)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n, m = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">s = [[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">  j, k = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">  s[j][k] = -<span class="number">1</span></span><br><span class="line">  s[k][j] = -<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>먼저 접근한 방식은 매 케이스마다 해당 조합을 제외한 n개의 요소 중 가능한 조합을 찾아서 더하는 방식이었는데, 주어진 케이스로부터도 알 수 있듯이 불필요하게 반복을 하는 경우도 존재하게 된다.</p>
-<p>따라서 2차원 배열을 생성해 각 숫자와 불가능한 조합을 저장해두고, 어차피 순열이 아닌 조합이므로 중첩 반복문의 index가 순차적으로 증가하도록 설정한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">  <span class="keyword">for</span> b <span class="keyword">in</span> <span class="built_in">range</span>(a+<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(b+<span class="number">1</span>, n+<span class="number">1</span>):</span><br></pre></td></tr></table></figure>
-<p>그리고 불가능한 조합이 아니면 count를 증가시키면 됨</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">    <span class="keyword">if</span> s[a][b] == -<span class="number">1</span>: <span class="keyword">continue</span></span><br><span class="line">    ...</span><br><span class="line">      <span class="keyword">if</span> s[a][c] == -<span class="number">1</span> <span class="keyword">or</span> s[b][c] == -<span class="number">1</span>: <span class="keyword">continue</span></span><br><span class="line">      ret += <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에, 가능한 방법이 총 몇 개 있는지 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(ret)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1141,7 +1145,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">129</span>
+          <span class="site-state-item-count">130</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
