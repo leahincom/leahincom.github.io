@@ -163,6 +163,310 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/09/07/web-oauth/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/07/web-oauth/" class="post-title-link" itemprop="url">OAuth 2.0 프로토콜</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-06 22:29:55 / Modified: 14:32:50" itemprop="dateCreated datePublished" datetime="2021-09-06T22:29:55+01:00">2021-09-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>사용자가 usernames, passwords, 그리고 기타 <strong>개인적인 정보를 가지고 특정 서비스에 저장된 자신의 데이터를 다른 서비스에서 접근할 수 있도록</strong> 허락해주는 프로토콜</li>
+<li>e.g. 구글의 서비스에서 관리되고 있는 사용자의 데이터를 다른 서비스가 접근할 수 있도록 구글 API를 제공</li>
+</ul>
+<h2 id="특징"><a href="#특징" class="headerlink" title="특징"></a>특징</h2><ul>
+<li>여러 장치를 통해 시시각각 바뀌는 사용자의 연락처 정보를 실시간으로 업데이트 받을 수 있음</li>
+<li>타 서비스에 저장된 사용자 데이터를 접근해도 되는지 사용자에게 <em>명시적으로</em> 허락을 받음</li>
+</ul>
+<h2 id="OAuth-2-0-flow-for-JavaScript-implicit-grant-flow"><a href="#OAuth-2-0-flow-for-JavaScript-implicit-grant-flow" class="headerlink" title="OAuth 2.0 flow for JavaScript: implicit grant flow"></a>OAuth 2.0 flow for JavaScript: implicit grant flow</h2><ul>
+<li><strong>Implicit</strong> <strong>Grant</strong></li>
+<li>자바스크립트 라이브러리로 개발되는 SPA에서는 implicit grant 방식이 많이 사용됨</li>
+<li>user가 present 할 때만 API에 접근 가능하며, 기밀 정보는 따로 저장되지 않음</li>
+</ul>
+<ol>
+<li>사용자는 API를 제공받고자 하는 서비스에 로그인 한 후, API를 사용하고자 하는 어플리케이션에서 요청하는 권한을 확인하고, 해당 권한을 허용한다.</li>
+<li>Google Authorization Server는 사용자를 사전에 등록된 <code>redirect uri</code> 로 리다이렉트 시키면서 <code>access token</code> 을 애플리케이션에 보낸다.</li>
+<li>어플리케이션은 이 <code>access token</code> 을 이용해서 구글 API를 호출하여 원하는 정보를 얻는다.</li>
+</ol>
+<h2 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h2><ol>
+<li><strong>Request</strong> : 클라이언트 어플리케이션은 Google Authorization Server에 <code>access token</code> 을 요청하고,</li>
+<li><strong>Response</strong> : response로부터 <code>token</code> 을 추출한다.</li>
+<li><strong>Validation</strong> : 이후 접근하고자 하는 Google API에 <code>token</code> 을 보낸다.</li>
+</ol>
+<p><img src="https://developers.google.com/identity/protocols/oauth2/images/flows/implicit.png" alt="oauth2.0_javascript"></p>
+<h2 id="Example-Google-People-API"><a href="#Example-Google-People-API" class="headerlink" title="Example: Google People API"></a>Example: Google People API</h2><ol>
+<li><p>구글 API를 호출하기 위해서는 가장 먼저, 구글에 API를 사용하고자 하는 어플리케이션을 클라이언트로 등록하고 <code>client_id</code> 를 발급받아야 한다.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://console.developers.google.com/apis">구글 API 콘솔</a> 에서 프로젝트를 생성 → 사용자 인증 정보 만들기 에서 OAuth 클라이언트 ID를 선택 → 웹 어플리케이션 → 승인된 리디렉션 URI 설정 (e.g. <code>[http://localhost:3000/](http://localhost:3000/)</code> ) → 클라이언트 ID 생성</li>
+</ul>
+</li>
+<li><p>Google Authorization Server에 접속하여 사용자 <code>token</code> 을 받아야 한다.</p>
+<ul>
+<li><code>CLIENT_ID</code>: 위에서 발급받은 클라이언트 ID</li>
+<li><code>AUTHORIZE_URI</code>: 구글에서 OAuth를 제공하는 기본 URI</li>
+<li><code>queryStr</code>: 위 <code>AUTHORIZE_URI</code>에 붙일 사용자 개인 정보 (쿼리), URL 생성용<ul>
+<li><code>client_id</code></li>
+<li><code>redirect_uri</code>: 실습 애플리케이션은 페이지가 하나 밖에 없는 SPA이기 때문에, 현재 URL을 <code>redirect_uri</code>로 설정</li>
+<li><code>response_type</code>: 어떤 OAuth 방식을 사용하는지를 결정하는 속성으로, <code>token</code> 으로 설정하면  <em>implicit grant</em> 방식이 적용</li>
+<li><code>scope</code>: 사용자의 어떤 데이터와 어떤 작업에 대한 권한을 요청하는지, 즉 어떤 구글 API를 요청하는지</li>
+</ul>
+</li>
+<li><code>loginUrl</code>: <code>AUTHORIZE_URI</code>에 <code>queryStr</code>을 붙여 만든 구글 로그인 authorization URL</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CLIENT_ID = <span class="string">&quot;YOUR CLIENT ID&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> AUTHORIZE_URI = <span class="string">&quot;https://accounts.google.com/o/oauth2/v2/auth&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> queryStr = qs.stringify(&#123;</span><br><span class="line">  client_id: CLIENT_ID,</span><br><span class="line">  redirect_uri: <span class="built_in">window</span>.location.href,</span><br><span class="line">  response_type: <span class="string">&quot;token&quot;</span>,</span><br><span class="line">  scope: <span class="string">&quot;https://www.googleapis.com/auth/contacts.readonly&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> loginUrl = AUTHORIZE_URI + <span class="string">&quot;?&quot;</span> + queryStr;</span><br></pre></td></tr></table></figure></li>
+<li><p>Google Authorization Server가 <code>redirect URI</code>로 <code>access token</code>을 보내주면, 이를 이용해 token validation을 진행한다.</p>
+<ul>
+<li>access token은 redirect uri의 hash 부분에 포함되므로, DOM의 Location API인 <code>window.location.hash</code> 를 이용해 가져온다.</li>
+<li>만약 access token이 없을 경우, grant server URL로 이동한다.</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; access_token &#125; = qs.parse(<span class="built_in">window</span>.location.hash.substring(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!access_token) &#123;</span><br><span class="line">    <span class="built_in">window</span>.location.assign(loginUrl);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>access token을 이용해 구글 API를 호출한다.</p>
+<ul>
+<li><code>Bearer</code> 문자열을 <code>access token</code> 앞에 붙여 <code>Authorization header</code>로 넘긴다.</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PEOPLE_URI = <span class="string">&quot;https://people.googleapis.com/v1/contactGroups&quot;</span>;</span><br><span class="line"></span><br><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    fetch(PEOPLE_URI, &#123;</span><br><span class="line">      headers: &#123; <span class="attr">Authorization</span>: <span class="string">&quot;Bearer &quot;</span> + access_token &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">      .then(<span class="function">(<span class="params">data</span>) =&gt;</span> setContactGroups(data.contactGroups));</span><br><span class="line">  &#125;, [access_token]);</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h3 id="전체-코드"><a href="#전체-코드" class="headerlink" title="전체 코드"></a>전체 코드</h3><p><strong>qs</strong><br>npm 패키지: A querystring parsing and stringifying library with some added security.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">&quot;qs&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> CLIENT_ID = <span class="string">&quot;YOUR CLIENT ID&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> AUTHORIZE_URI = <span class="string">&quot;https://accounts.google.com/o/oauth2/v2/auth&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> PEOPLE_URI = <span class="string">&quot;https://people.googleapis.com/v1/contactGroups&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> queryStr = qs.stringify(&#123;</span><br><span class="line">  client_id: CLIENT_ID,</span><br><span class="line">  redirect_uri: <span class="built_in">window</span>.location.href,</span><br><span class="line">  response_type: <span class="string">&quot;token&quot;</span>,</span><br><span class="line">  scope: <span class="string">&quot;https://www.googleapis.com/auth/contacts.readonly&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> loginUrl = AUTHORIZE_URI + <span class="string">&quot;?&quot;</span> + queryStr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; access_token &#125; = qs.parse(<span class="built_in">window</span>.location.hash.substring(<span class="number">1</span>));</span><br><span class="line">  <span class="keyword">const</span> [contactGroups, setContactGroups] = useState([]);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    fetch(PEOPLE_URI, &#123;</span><br><span class="line">      headers: &#123; <span class="attr">Authorization</span>: <span class="string">&quot;Bearer &quot;</span> + access_token &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">      .then(<span class="function">(<span class="params">data</span>) =&gt;</span> setContactGroups(data.contactGroups));</span><br><span class="line">  &#125;, [access_token]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!access_token) &#123;</span><br><span class="line">    <span class="built_in">window</span>.location.assign(loginUrl);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &lt;h2&gt;Contact Groups&lt;/h2&gt;</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &#123;contactGroups &amp;&amp;</span><br><span class="line">          contactGroups.map(<span class="function">(<span class="params">&#123; resourceName, name, memberCount &#125;</span>) =&gt;</span> (</span><br><span class="line">            &lt;li key=&#123;resourceName&#125;&gt;</span><br><span class="line">              &#123;name&#125; (&#123;memberCount&#125;)</span><br><span class="line">            &lt;/li&gt;</span><br><span class="line">          ))&#125;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.daleseo.com/google-oauth/">OAuth 2.0으로 구글 API 호출하기</a></p>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/youtube/v3/guides/auth/client-side-web-apps?hl=ko">OAuth 2.0 Flow: Client-side web apps | YouTube Data API</a></p>
+<ul>
+<li>OAuth 2.0 프로토콜 문서</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/identity/protocols/oauth2">Using OAuth 2.0 to Access Google APIs | Google Identity</a></p>
+<ul>
+<li>OAuth 2.0 JavaScript 문서</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow#js-client-library">OAuth 2.0 for Client-side Web Applications | Google Identity</a></p>
+<ul>
+<li>Google People API 문서</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/people/api/rest/v1/contactGroups/get">Method: contactGroups.get | People API | Google Developers</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/09/07/react-without-cra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/07/react-without-cra/" class="post-title-link" itemprop="url">CRA 없이 React + TypeScript 세팅하기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-06 22:24:41 / Modified: 14:28:30" itemprop="dateCreated datePublished" datetime="2021-09-06T22:24:41+01:00">2021-09-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>보통, cra typescript를 위해서</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app [project-name] --template typescript</span><br></pre></td></tr></table></figure>
+<p>를 쓰지만, </p>
+<p>이번에는 직접 만들어보면서 react library의 작동 원리를 살펴보려고 한다.</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://create-react-app.dev/docs/adding-typescript/">Adding TypeScript | Create React App</a></p>
+</blockquote>
+<h3 id="세팅-과정"><a href="#세팅-과정" class="headerlink" title="세팅 과정"></a>세팅 과정</h3><ol>
+<li><p>npm을 세팅한다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init -y <span class="comment">// -y로 default 설정 적용</span></span><br></pre></td></tr></table></figure></li>
+<li><p>npm pkg를 설치한다.</p>
+<ol>
+<li><p>typescript</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s typescript @types/react @types/react-dom</span><br></pre></td></tr></table></figure></li>
+<li><p>react</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s react react-dom</span><br></pre></td></tr></table></figure></li>
+<li><p>babel</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s-d babel-loader @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript</span><br></pre></td></tr></table></figure></li>
+<li><p>webpack</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s-d webpack webpack-dev-server webpack-cli</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>타입스크립트 설정하기</p>
+<ol>
+<li><p>타입스크립트 설정 파일을 만들기 위해,</p>
+<ul>
+<li>전역으로 설치된 경우 <code>tsc --init</code></li>
+<li>해당 프로젝트에만 설치된 경우 직접 파일을 명시해야 하기 때문에 <code>node_modules/.bin/tsc --init</code></li>
+</ul>
+<p>을 수행한다.</p>
+</li>
+<li><p>그럼 <code>tsconfig.json</code> 이 생성되는데, 다음과 같이 주석을 해지해주면 된다. (꼭 밑과 같지 않아도, 경우에 맞게/ 입맛에 맞게 <em>설정해두면 두고두고 용이함</em>!)</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;outDir&quot;</span>: <span class="string">&quot;./dist/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;sourceMap&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;noImplicitAny&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;module&quot;</span>: <span class="string">&quot;commonjs&quot;</span>,</span><br><span class="line">    <span class="string">&quot;target&quot;</span>: <span class="string">&quot;es5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;jsx&quot;</span>: <span class="string">&quot;react&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;include&quot;</span>: [<span class="string">&quot;./src/**/*&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>리액트 Entry File 설정</p>
+<p>보통 cra 시 다음과 같은 디렉토리를 갖게 된다. (직접 만들어야 하는 파일만 명시해둠)</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">node_modules</span><br><span class="line">public</span><br><span class="line">	index.html</span><br><span class="line">src</span><br><span class="line">	App.tsx</span><br><span class="line">	index.tsx</span><br><span class="line">package.json</span><br><span class="line">tsconfig.json</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>따라서 먼저 Component를 만들어보자.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;<span class="comment">// 함수형 컴포넌트const App: React.FunctionComponent&lt;&#123; name: string &#125;&gt; = (&#123; children, name &#125;) =&gt; (  &lt;div title=&#123;name&#125;&gt;&#123;children&#125;&lt;/div&gt;);export default App;</span></span><br></pre></td></tr></table></figure>
+<p>그리고 html에서 script로 읽을 <code>index.js</code>를 생성하자.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;<span class="keyword">import</span> * <span class="keyword">as</span> ReactDOM <span class="keyword">from</span> <span class="string">&quot;react-dom&quot;</span>;<span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&quot;./App&quot;</span>;<span class="comment">// 클래스형 컴포넌트class Root extends React.Component &#123;  render() &#123;    return (      &lt;div&gt;        &lt;App name=&quot;test&quot;&gt; test &lt;/App&gt;      &lt;/div&gt;    );  &#125;&#125;ReactDOM.render(&lt;Root /&gt;, document.getElementById(&quot;root&quot;));</span></span><br></pre></td></tr></table></figure>
+<p>원래는 따로 클래스 정의 없이 <code>ReactDOM.render()</code> 에 클래스 컴포넌트 렌더 안에 들어있는 코드를 적어 바로 컴포넌트를 전달한다. 축약하면 다음과 같다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(  <span class="xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span>,  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<p>이제 최종적으로 js 파일을 전달할 <code>public/index.html</code> 을 정의하자!</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;<span class="xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span>  <span class="tag">&lt;<span class="name">head</span>&gt;</span>    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span>    <span class="tag">&lt;<span class="name">title</span>&gt;</span>채용 프로세스 이메일 템플릿<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  <span class="tag">&lt;/<span class="name">head</span>&gt;</span>  <span class="tag">&lt;<span class="name">body</span>&gt;</span>    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>    <span class="comment">&lt;!-- 번들 파일 추가 --&gt;</span>    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>  <span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>html은 <code>id=&quot;root&quot;</code> 를 통해 index 파일의 <code>document.getElementById(&quot;root&quot;)</code> 를 읽어나가기 때문에, 따로 script를 적용하지 않는다. 하지만, 이 <code>src/index.js</code> 를 읽기 위해 webpack 번들러를 설정하였으므로, 해당 <code>bundle.js</code> 파일을 script로 적용해야 한다!</p>
+<blockquote>
+<p>꼭 <div id="root"></div> 밑에 전달해야 한단다.<br>내 생각에는 html을 읽는 순서 때문에 그런듯.</p>
+</blockquote>
+</li>
+<li><p>Babel 설정하기</p>
+<ol>
+<li><p>trans-compile을 위해 <code>.babelrc</code> 나 <code>babel.config.js</code> 로 설정한다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;  <span class="string">&quot;presets&quot;</span>: [    <span class="string">&quot;@babel/preset-env&quot;</span>,    <span class="string">&quot;@babel/preset-react&quot;</span>,    <span class="string">&quot;@babel/preset-typescript&quot;</span>  ]&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>webpack 설정하기</p>
+<ol>
+<li><p>이 모든 과정을 연결하기 위해 번들러 webpack을 설정한다. 바벨과 같이 <code>webpack.config.js</code> 를 루트 폴더에 만들면 됨!</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;  <span class="attr">entry</span>: [<span class="string">&quot;./src/index.tsx&quot;</span>],  <span class="attr">output</span>: &#123; <span class="attr">filename</span>: <span class="string">&quot;bundle.js&quot;</span>, <span class="attr">publicPath</span>: <span class="string">&quot;/&quot;</span>, <span class="attr">path</span>: __dirname + <span class="string">&quot;dist&quot;</span> &#125;,  <span class="attr">module</span>: &#123;    <span class="attr">rules</span>: [      &#123;        <span class="attr">test</span>: <span class="regexp">/\.(js|jsx|ts|tsx)$/</span>,        exclude: <span class="regexp">/node_modules/</span>,        use: [<span class="string">&quot;babel-loader&quot;</span>]      &#125;    ]  &#125;,  <span class="attr">resolve</span>: &#123; <span class="attr">extensions</span>: [<span class="string">&quot;*&quot;</span>, <span class="string">&quot;.js&quot;</span>, <span class="string">&quot;.jsx&quot;</span>, <span class="string">&quot;.ts&quot;</span>, <span class="string">&quot;.tsx&quot;</span>] &#125;&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>resolve</code>: 확장자나 경로를 알아서 처리할 수 있도록 설정하는 옵션이다.<br><code>module</code>: 이 옵션에 설치한 ts-loader와 babel-loader를 설정하면 된다. loader들은 오른쪽에서 왼쪽 방향으로 적용되기 때문에 ts-loader를 babel-loader보다 오른쪽에 위치시켜야 한다.<br><code>output</code>: 번들화 된 파일을 export할 경로와 파일명을 설정한다.</p>
+</li>
+</ol>
+</li>
+<li><p>마지막으로, <code>package.json</code> 에서 <code>script</code> 를 설정해주면 된다.</p>
+<ol>
+<li><p><code>npm start</code> 또는 <code>npm run start</code> 로 script를 실행할 수 있도록 다음과 같이 설정하면 됨!</p>
+<p>npm run 시 script 내부의 명령어을 적용할 수 있다!</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;    <span class="string">&quot;start&quot;</span>: <span class="string">&quot;webpack-dev-server --config ./webpack.config.js --mode development&quot;</span>,    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>  &#125;,</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><ul>
+<li><p>웹팩 설정에서 사용된 <code>inline</code> 모드는 무엇일까?</p>
+<p>네트워크 방화벽 구성과 동일하게 모든 트래픽이 해당 보안장비를 거쳐야만 목적지로 전송될 수 있도록 네트워크를 구성하는 방식</p>
+<p><a target="_blank" rel="noopener" href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=yoodh0713&logNo=221558145702">[네트워크] 인라인 모드와 미러링(스니핑) 모드의 차이점</a></p>
+</li>
+<li><p><code>hot</code> 모드는?</p>
+<p>Hot Module Replacement(HMR)는 응용프로그램 실행 중에 추가 또는 제거된 모듈들을 페이지 리로드 없이 교체하는 기능입니다.</p>
+</li>
+</ul>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://flymogi.tistory.com/69">리액트 - 타입스크립트 시작하기 (without CRA)</a></p>
+<p>위 블로그 기반으로,</p>
+<p><a target="_blank" rel="noopener" href="https://chanyeong.com/blog/post/7">CRA없이 React + TypeScript 셋팅하기! - chanyeong</a></p>
+<p>위 블로그는 심화형임</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/09/05/git-rebase-pull/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -866,194 +1170,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/22/boj-18511/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/22/boj-18511/" class="post-title-link" itemprop="url">BOJ 18511</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-22 10:16:22 / Modified: 02:18:58" itemprop="dateCreated datePublished" datetime="2021-08-22T10:16:22+01:00">2021-08-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 <em>N</em>, <em>K</em>의 원소의 개수가 공백을 기준으로 구분되어 자연수로 주어진다. (10 ≤ <em>N</em> ≤ 100,000,000, 1 ≤ <em>K</em>의 원소의 개수 ≤ 3) </p>
-<p>둘째 줄에 <em>K</em>의 원소들이 공백을 기준으로 구분되어 주어진다. 각 원소는 1부터 9까지의 자연수다.</p>
-<p>단, 항상 <em>K</em>의 원소로만 구성된 <em>N</em>보다 작거나 같은 자연수를 만들 수 있는 경우만 입력으로 주어진다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n, k = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">s = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><ul>
-<li><p>주어진 범위 내의 수를 하나씩 체크</p>
-</li>
-<li><p>가장 큰 수를 찾으면 출력하고 프로그램 종료</p>
-</li>
-<li><p>N보다 작거나 같은</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">  ret = i</span><br></pre></td></tr></table></figure></li>
-<li><p>주어진 숫자의 모든 자리수가 주어진 <code>k</code> 에 존재해야 함</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ret &gt; <span class="number">0</span>:</span><br><span class="line">  <span class="keyword">if</span> ret % <span class="number">10</span> <span class="keyword">in</span> s:</span><br><span class="line">      ret //= <span class="number">10</span></span><br><span class="line">  <span class="keyword">else</span>: <span class="keyword">break</span></span><br></pre></td></tr></table></figure></li>
-<li><p>조건을 만족시킬 경우 외에는 <code>ret</code> 가 0이 될 수 없음</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ret == <span class="number">0</span>:</span><br><span class="line">  print(i)</span><br><span class="line">  exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/22/boj-5568/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/22/boj-5568/" class="post-title-link" itemprop="url">BOJ 5568</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-22 09:53:11 / Modified: 01:57:55" itemprop="dateCreated datePublished" datetime="2021-08-22T09:53:11+01:00">2021-08-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 n이, </p>
-<p>둘째 줄에 k가 주어진다. </p>
-<p>셋째 줄부터 n개 줄에는 카드에 적혀있는 수가 주어진다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>().rstrip())</span><br><span class="line">k = <span class="built_in">int</span>(<span class="built_in">input</span>().rstrip())</span><br><span class="line">s = [<span class="built_in">input</span>().strip() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><ul>
-<li><p>순회하는 순서에 따라 조합이 달라짐 = <strong>순열</strong></p>
-<blockquote>
-<p>python library <code>itertools.permutations</code></p>
-<ul>
-<li>input: iterable[, choice]</li>
-<li>output: possible combinations (iterable)</li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 순열</span></span><br><span class="line"><span class="comment"># nPk</span></span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> permutations</span><br></pre></td></tr></table></figure></li>
-<li><p>결과가 같은 경우는 제외 = <strong>set</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="built_in">set</span>()</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># k-length possible combinations (tuples)</span></span><br><span class="line"><span class="keyword">for</span> per <span class="keyword">in</span> permutations(s, k):</span><br><span class="line">  ret.add(<span class="string">&#x27;&#x27;</span>.join(per))</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 상근이가 만들 수 있는 정수의 개수를 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="built_in">len</span>(ret))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1125,7 +1241,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">131</span>
+          <span class="site-state-item-count">133</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1138,7 +1254,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">75</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
