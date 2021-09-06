@@ -332,7 +332,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-09-06 22:24:41 / Modified: 14:28:30" itemprop="dateCreated datePublished" datetime="2021-09-06T22:24:41+01:00">2021-09-06</time>
+              <time title="Created: 2021-09-06 22:24:41 / Modified: 14:40:13" itemprop="dateCreated datePublished" datetime="2021-09-06T22:24:41+01:00">2021-09-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -407,7 +407,7 @@
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;<span class="xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span>  <span class="tag">&lt;<span class="name">head</span>&gt;</span>    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span>    <span class="tag">&lt;<span class="name">title</span>&gt;</span>채용 프로세스 이메일 템플릿<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  <span class="tag">&lt;/<span class="name">head</span>&gt;</span>  <span class="tag">&lt;<span class="name">body</span>&gt;</span>    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>    <span class="comment">&lt;!-- 번들 파일 추가 --&gt;</span>    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>  <span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 <p>html은 <code>id=&quot;root&quot;</code> 를 통해 index 파일의 <code>document.getElementById(&quot;root&quot;)</code> 를 읽어나가기 때문에, 따로 script를 적용하지 않는다. 하지만, 이 <code>src/index.js</code> 를 읽기 위해 webpack 번들러를 설정하였으므로, 해당 <code>bundle.js</code> 파일을 script로 적용해야 한다!</p>
 <blockquote>
-<p>꼭 <div id="root"></div> 밑에 전달해야 한단다.<br>내 생각에는 html을 읽는 순서 때문에 그런듯.</p>
+<p>꼭 <code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code> 밑에 전달해야 한단다.<br>내 생각에는 html을 읽는 순서 때문에 그런듯.</p>
 </blockquote>
 </li>
 <li><p>Babel 설정하기</p>
