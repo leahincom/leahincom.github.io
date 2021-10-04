@@ -163,6 +163,303 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/27/THUREE-Redux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/27/THUREE-Redux/" class="post-title-link" itemprop="url">Redux</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-27 12:56:54" itemprop="dateCreated datePublished" datetime="2021-05-27T12:56:54+01:00">2021-05-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/thuree/" itemprop="url" rel="index"><span itemprop="name">THUREE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p style="color: orange; font-weight: bold;">많은 상태를 관리할 필요가 생겨났다.</p>
+
+<blockquote>
+<p> <code>상태</code> </p>
+<p> 서버 응답, 캐시 데이터, 지역적으로 생성해서 사용하고 있지만 아직 서버에 저장되지 않은 데이터,</p>
+<p> 활성화된 라우트, 선택된 탭, 로딩을 보여줄지 여부, 페이지네이션 컨트롤 등 다양한 UI 상태</p>
+</blockquote>
+<p>모델이 다른 모델을 업데이트하고, 그리고 뷰가 모델을 업데이트 할 수 있고, 이 뷰가 다시 다른 모델을 업데이트하고, 이에 따라 또 다른 뷰가 업데이트 된다.</p>
+<p>더하여, <strong>프론트엔트 제품 개발에 있어서 새로 갖춰야할 복잡한 요건들이 늘어나고 있다.</strong> 낙관적 업데이트(Optimistic update), 서버 렌더링, 라우트가 일어나기 전에 데이터 가져오기 등이 이에 해당한다. 이러한 복잡함은 <code>변화(mutation)</code> 나 <code>비동기(asyncronicity)</code> 와 같이 사람이 연동하여 추론하기 어려운 개념을 <em>섞어서 사용한다</em> 는 데서 비롯된다.</p>
+<blockquote>
+<p><strong>비관적(pessimistic) 업데이트</strong></p>
+<p><code>사용자 입력 -&gt; 수정 요청 -&gt; 성공 시 화면 갱신</code></p>
+<ul>
+<li>사용자에게는 불편하지만, 개발자에게는 쉬움</li>
+</ul>
+<p><strong>낙관적(optimistic) 업데이트</strong></p>
+<p><code>사용자 입력 -&gt; 바로 화면 먼저 갱신 -&gt; 수정 요청</code></p>
+<ul>
+<li>e.g. slack, trello</li>
+</ul>
+</blockquote>
+<br />
+
+
+
+<h3 style="color: purple">Redux</h3>
+
+<ul>
+<li><p>자바스크립트 앱을 위한 <strong>예측 가능한 상태 컨테이너</strong></p>
+</li>
+<li><p><strong>일관적</strong>, 서로 <strong>다른 환경</strong>(서버, 클라이언트, 네이티브)에서 작동, <strong>테스트하기 쉬운</strong> 앱 작성을 도와준다.</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app my-app --template redux</span><br><span class="line">npm install redux</span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+<ol>
+<li><p><strong>애플리케이션의 모든 <u>상태</u>는 하나의 <u>저장소</u> 안에 하나의 <u>객체 트리 구조</u>로 저장</strong></p>
+<ul>
+<li>범용적인 애플리케이션(universal application, 하나의 코드 베이스로 다양한 환경에서 실행 가능한 코드)을 만들기 쉽다.</li>
+<li>서버로부터 가져온 <code>상태</code> 는 연결되거나(serialized) 수화되어(hydrated) 전달되며 클라이언트에서 추가적인 코딩 없이도 사용할 수 있다.</li>
+</ul>
+</li>
+<li><p><strong>상태를 변화시키는 유일한 방법은 무슨 일이 벌어지는 지를 묘사하는 <u>액션</u> 객체를 전달하는 방법뿐</strong></p>
+<ul>
+<li>뷰나 네트워크 콜백 등에서 상태를 직접 바꾸지 못 하도록 보장한다.</li>
+</ul>
+</li>
+<li><p><strong>변화는 <u>순수 함수</u>로 작성되어야</strong></p>
+<ul>
+<li><code>reducer</code>는 <code>이전 상태</code> 와 <code>액션</code> 을 받아 다음 상태를 반환하는 순수 함수이다. 이 때, 이전 상태를 변경하는 대신 <strong>새로운 상태 객체를 생성</strong>해서 반환해야한다.</li>
+<li>처음에는 하나의 reducer 만으로 충분하지만, 애플리케이션이 성장해나가면 상태 트리의 특정한 부분들을 조작하는 더 <strong>작은 개별적인 리듀서들</strong>로 나누는 것도 가능하다. (React 의 경우 하나의 루트 컴포넌트에서 시작해서 여러 작은 컴포넌트의 조합으로 나누는 것과 동일)</li>
+</ul>
+</li>
+</ol>
+<br />
+
+
+
+<h2 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h2><h3 id="상태"><a href="#상태" class="headerlink" title="상태"></a>상태</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type State &#x3D; any</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>상태</strong>(<strong>상태 트리</strong>)는 넓은 의미의 단어이지만, Redux API에서는 보통 저장소에 의해 관리되고 <a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#getState"><code>getState()</code></a>에 의해 반환되는 <em>하나의 상태값</em> 을 지칭한다.</p>
+</li>
+<li><p>(넓은 의미의) 상태는 Redux 애플리케이션의 <em>전체 상태</em> 를 나타내며, 보통 <strong>깊게 중첩되어 있는 객체</strong>입니다.</p>
+</li>
+</ul>
+<br />
+
+
+
+<h3 id="액션"><a href="#액션" class="headerlink" title="액션"></a>액션</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type Action &#x3D; Object</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>액션</strong>은 상태를 변화시키려는 객체이다.</li>
+<li>어떤 형태의 액션이 행해질지 표시하는 <code>type</code> 필드를 가져야 한다. type은 상수로 정의되고 다른 모듈에서 임포트할 수 있다.</li>
+</ul>
+<br />
+
+
+
+<h3 id="리듀서"><a href="#리듀서" class="headerlink" title="리듀서"></a>리듀서</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type Reducer&lt;S, A&gt; &#x3D; (state: S, action: A) &#x3D;&gt; S</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>리듀서</strong>(<strong>리듀싱 함수</strong>)는 <code>누적(state)값</code> 과 <code>(누적될) 값</code> 을 받아서 <em>새로운 누적값을 반환</em> 하는 함수이다. 이들은 값들의 컬렉션을 받아서 하나의 값으로 줄이는데 사용된다.</p>
+</li>
+<li><p>Redux에서 <strong>누적”값”은 상태 객체이고, 누적”될” 값은 액션</strong>이다. 리듀서는 주어진 이전 상태와 액션에서 <strong>새로운 상태</strong>를 계산한다. </p>
+</li>
+<li><p>반드시 <em>같은 입력이 있으면 같은 출력을 반환</em> 하는 <strong>순수 함수</strong>여야 한다.</p>
+</li>
+</ul>
+<hr>
+<p>![image-20210527130716974](/Users/JungHyunLah/Library/Application Support/typora-user-images/image-20210527130716974.png)</p>
+<br />
+
+
+
+<h3 id="디스패치-함수"><a href="#디스패치-함수" class="headerlink" title="디스패치 함수"></a>디스패치 함수</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 기본 디스패치 함수</span></span><br><span class="line">type BaseDispatch = <span class="function">(<span class="params">a: Action</span>) =&gt;</span> Action</span><br><span class="line"><span class="comment">// 비동기 디스패치 함수 (보통 디스패치 함수)</span></span><br><span class="line">type Dispatch = <span class="function">(<span class="params">a: Action | AsyncAction</span>) =&gt;</span> any</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>디스패치 함수</strong>는 액션이나 비동기 액션을 받는 함수이다.</p>
+<blockquote>
+<ol>
+<li><p>저장소 인스턴스가 미들웨어를 거치지 않고 제공하는 <strong>기본 <a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#dispatchaction"><code>dispatch</code></a> 함수</strong></p>
+<ul>
+<li><strong>반드시</strong> <em>동기적으로</em> 저장소의 리듀서에 액션을 보내야 한다. 그러면 리듀서는 저장소가 반환한 이전 상태와 함께 새 상태를 계산한다.</li>
+<li>👾 리듀서를 사용하기 위해서 액션은 평범한 객체여야 한다.</li>
+</ul>
+</li>
+<li><p>비동기 dispatch 함수 (<strong>보통 dispatch 함수</strong>)</p>
+<ul>
+<li><em>미들웨어를 통해</em> 디스패치 함수는 <strong>비동기 액션</strong>을 처리할 수도 있다. 미들웨어가 기본 디스패치 함수를 감쌈으로써 액션이나 비동기 액션을 다음 미들웨어에 넘기기 전에, 변환하거나, 지연시키거나, 무시하거나, 해석할 수 있다.</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<br />
+
+
+
+<h3 id="액션-생산자"><a href="#액션-생산자" class="headerlink" title="액션 생산자"></a>액션 생산자</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type ActionCreator&lt;A, P <span class="keyword">extends</span> any[] = any[]&gt; = <span class="function">(<span class="params">...args: P</span>) =&gt;</span> Action | AsyncAction</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>액션 생산자</strong>는 단지 액션을 만드는 함수이다. 이 때, 액션은 정보의 묶음이고, 액션 생산자는 액션을 만드는 곳이다.</p>
+</li>
+<li><p>액션 생산자를 호출하면 <em>액션을 만들어낼 뿐 dispatch하지는 않는다.</em> 따라서 저장소를 <strong>변경하기 위해서는 <code>dispatch</code> 함수</strong>를 호출해야 한다.</p>
+<ul>
+<li>액션 생산자를 호출해 그 결과를 저장소 인스턴스로 바로 dispatch하는 함수를 <strong>바인드된 액션 생산자</strong>라고 부르기도 한다.</li>
+<li><strong>비동기 액션</strong>은 디스패치 함수로 보내지는 값이지만 <em>아직 reducer에게 받아들여질 준비가 되어 있지 않아,</em> 기본 <code>dispatch()</code> 함수로 전달되기 전에 미들웨어를 통해 액션(이나 일련의 액션들)으로 바뀌어야 한다.<ul>
+<li>이들은 종종 <code>Promise</code> 나 <code>Thunk</code> 와 같은 비동기 기본형으로, 리듀서에게 직접 전달되지는 않지만, 작업이 완료되면 액션을 보낸다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<h3 id="미들웨어"><a href="#미들웨어" class="headerlink" title="미들웨어"></a>미들웨어</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type MiddlewareAPI = &#123; <span class="attr">dispatch</span>: Dispatch, <span class="attr">getState</span>: <span class="function">() =&gt;</span> State &#125;</span><br><span class="line">type Middleware = <span class="function">(<span class="params">api: MiddlewareAPI</span>) =&gt;</span> <span class="function">(<span class="params">next: Dispatch</span>) =&gt;</span> Dispatch</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>중간 (단계) 역할자</p>
+</blockquote>
+<ul>
+<li>미들웨어는 dispatch 함수를 결합해서 새 dispatch 함수를 반환하는 고차함수이다. </li>
+<li>종종 비동기 액션을 액션으로 전환한다.</li>
+</ul>
+<br />
+
+
+
+<h3 id="저장소"><a href="#저장소" class="headerlink" title="저장소"></a>저장소</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">type Store = &#123;</span><br><span class="line">  dispatch: Dispatch,</span><br><span class="line">  getState: <span class="function">() =&gt;</span> State,</span><br><span class="line">  subscribe: <span class="function">(<span class="params">listener: () =&gt; <span class="keyword">void</span></span>) =&gt;</span> <span class="function">() =&gt;</span> <span class="keyword">void</span>,</span><br><span class="line">  replaceReducer: <span class="function">(<span class="params">reducer: Reducer</span>) =&gt;</span> <span class="keyword">void</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>저장소는 애플리케이션의 상태 트리를 가지고 있는 객체이다. <u>reducer 수준 (상태 관리)</u> 에서 결합이 일어나기 때문에, Redux 앱에는 <strong>단 하나의 저장소만</strong> 있어야 한다.<ul>
+<li><a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#dispatchaction"><code>dispatch(action)</code> </a>: 기본 디스패치 함수</li>
+<li><a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#getState"><code>getState()</code></a> : 저장소의 현재 상태를 반환</li>
+<li><a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#subscribelistener"><code>subscribe(listener)</code></a> : 상태가 바뀔 때 호출될 함수를 등록</li>
+<li><a target="_blank" rel="noopener" href="https://ko.redux.js.org/api/store#replacereducernextreducer"><code>replaceReducer(nextReducer)</code></a> : 핫 리로딩과 코드 분할을 구현할때 사용</li>
+</ul>
+</li>
+</ul>
+<br />
+
+
+
+<h3 id="저장소-생산자"><a href="#저장소-생산자" class="headerlink" title="저장소 생산자"></a>저장소 생산자</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type StoreCreator &#x3D; (reducer: Reducer, preloadedState: ?State) &#x3D;&gt; Store</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Redux 저장소를 만드는 함수</li>
+</ul>
+<br />
+
+
+
+<h3 id="저장소-인핸서"><a href="#저장소-인핸서" class="headerlink" title="저장소 인핸서"></a>저장소 인핸서</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type StoreEnhancer &#x3D; (next: StoreCreator) &#x3D;&gt; StoreCreator</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>저장소 생산자를 결합</strong>하여 강화된 새 저장소 생산자를 반환하는 고차함수</li>
+<li>미들웨어와 비슷하게 <em>조합가능</em> 한 방식으로 저장소 인터페이스를 바꿀 수 있도록 한다.</li>
+</ul>
+<br />
+
+
+
+<h2 id="Do-I-really-need"><a href="#Do-I-really-need" class="headerlink" title="Do I really need?"></a>Do I really need?</h2><p>Redux를 사용하기 적절한 때는,</p>
+<ul>
+<li><strong>계속해서 바뀌는 상당한 양</strong>의 데이터가 있다</li>
+<li>상태를 위한 <strong>단 하나의 근원</strong> (루트 저장소) 이 필요하다</li>
+<li>최상위 컴포넌트가 <strike><strong>모든 상태를 가지고 있는 것</strong></strike>은 더 이상 적절하지 않다.</li>
+</ul>
+<br />
+
+
+
+<h2 id="Basic-Example"><a href="#Basic-Example" class="headerlink" title="Basic Example"></a>Basic Example</h2><ol>
+<li><p>앱의 <strong>상태 전부</strong>는 하나의 저장소(<em>store</em>)안에 있는 객체 트리에 저장된다.</p>
+</li>
+<li><p><strong>상태 트리를 변경하</strong>는 유일한 방법은 무엇이 일어날지 서술하는 객체인 액션(<em>action</em>)을 보내는 것 뿐이며,</p>
+</li>
+<li><p><strong>액션이 상태 트리를 어떻게 변경할지</strong> 명시하기 위해 리듀서(<em>reducer</em>)를 작성해야 한다.</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 이것이 (state, action) =&gt; state 형태의 순수 함수인 리듀서입니다.</span></span><br><span class="line"><span class="comment"> * 리듀서는 액션이 어떻게 상태를 다음 상태로 변경하는지 서술합니다.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">counter</span>(<span class="params">state = <span class="number">0</span>, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;INCREMENT&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state + <span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;DECREMENT&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state - <span class="number">1</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 앱의 상태를 보관하는 Redux 저장소를 만듭니다.</span></span><br><span class="line"><span class="comment">// API로는 &#123; subscribe, dispatch, getState &#125;가 있습니다.</span></span><br><span class="line"><span class="keyword">let</span> store = createStore(counter)</span><br><span class="line"></span><br><span class="line"><span class="comment">// subscribe()를 이용해 상태 변화에 따라 UI가 변경되게 할 수 있습니다.</span></span><br><span class="line"><span class="comment">// 보통은 subscribe()를 직접 사용하기보다는,</span></span><br><span class="line"><span class="comment">// 뷰 바인딩 라이브러리(예를 들어 React Redux)를 사용합니다.</span></span><br><span class="line"><span class="comment">// 하지만 현재 상태를 localStorage에 영속적으로 저장할 때도 편리합니다.</span></span><br><span class="line">store.subscribe(<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(store.getState())))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 내부 상태를 변경하는 유일한 방법은 액션을 보내는 것뿐입니다.</span></span><br><span class="line"><span class="comment">// 액션은 직렬화할수도, 로깅할수도, 저장할수도 있으며 나중에 재실행할수도 있습니다.</span></span><br><span class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">&#x27;INCREMENT&#x27;</span> &#125;)</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">&#x27;INCREMENT&#x27;</span> &#125;)</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">&#x27;DECREMENT&#x27;</span> &#125;)</span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>상태를 바로 변경하는 대신, <strong>액션</strong>이라 불리는 평범한 객체를 통해 일어날 변경을 명시한다. </p>
+<p>그리고 각각의 액션이 전체 애플리케이션의 상태를 어떻게 변경할지 결정하는 특별한 함수인 <strong>리듀서</strong>를 작성합니다.</p>
+<ul>
+<li>보통의 Redux 앱에는 <strong>하나의 루트 리듀서 함수를 가진 단 하나의 저장소</strong>가 있다. </li>
+</ul>
+<br />
+
+
+
+<h2 id="Sample"><a href="#Sample" class="headerlink" title="Sample"></a>Sample</h2><p>action은 <code>setter</code> 가 없는 모델(클래스)과 같은 객체이다. 다른 코드가 임의로 이를 수정할 수 없기 때문에, 버그 발생률을 낮춘다.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  todos: [&#123;</span><br><span class="line">    text: &#x27;Eat food&#x27;,</span><br><span class="line">    completed: true</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    text: &#x27;Exercise&#x27;,</span><br><span class="line">    completed: false</span><br><span class="line">  &#125;],</span><br><span class="line">  visibilityFilter: &#x27;SHOW_COMPLETED&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>state을 바꾸기 위해서는 action을 dispatch 해야 한다.</strong> action은 (플레인) 자바스크립트 객체로 전달한다.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; type: &#x27;ADD_TODO&#x27;, text: &#x27;Go to swimming pool&#x27; &#125;</span><br><span class="line">&#123; type: &#x27;TOGGLE_TODO&#x27;, index: 1 &#125;</span><br><span class="line">&#123; type: &#x27;SET_VISIBILITY_FILTER&#x27;, filter: &#x27;SHOW_ALL&#x27; &#125;</span><br></pre></td></tr></table></figure>
+<p>이렇게 모든 변화를 action으로 표현하는 것은 앱의 세부적인 변화부터 전체적인 변화까지 파악할 수 있도록 한다.</p>
+<p>이러한 state과 action을 묶기 위해서, reducer를 사용한다. 다만, reducer은 큰 규모로 다루는 것보다 <em>작은 규모로 나누어서 함수당 하나의 역할을 담당</em> 하도록 한다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// reducer 1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">visibilityFilter</span>(<span class="params">state = <span class="string">&#x27;SHOW_ALL&#x27;</span>, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (action.type === <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> action.filter</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// reducer 2</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">todos</span>(<span class="params">state = [], action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ADD_TODO&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state.concat([&#123; <span class="attr">text</span>: action.text, <span class="attr">completed</span>: <span class="literal">false</span> &#125;])</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;TOGGLE_TODO&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state.map(<span class="function">(<span class="params">todo, index</span>) =&gt;</span></span><br><span class="line">        action.index === index</span><br><span class="line">          ? &#123; <span class="attr">text</span>: todo.text, <span class="attr">completed</span>: !todo.completed &#125;</span><br><span class="line">          : todo</span><br><span class="line">      )</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>최종적으로, 위와 같이 잘게 나눈 reducer를 통합하여 전체적인 reducer 기능을 하는 루트 reducer를 생성한다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">todoApp</span>(<span class="params">state = &#123;&#125;, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    todos: todos(state.todos, action),</span><br><span class="line">    visibilityFilter: visibilityFilter(state.visibilityFilter, action)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/26/basic-Python/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2077,420 +2374,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/08/4%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-08-05-21/" class="post-title-link" itemprop="url">4차 세미나_08/05/21</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-05-08 14:38:42" itemprop="dateCreated datePublished" datetime="2021-05-08T14:38:42+01:00">2021-05-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sopt/web-28th/" itemprop="url" rel="index"><span itemprop="name">WEB_28th</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="React-실전"><a href="#React-실전" class="headerlink" title="React 실전"></a>React 실전</h2><br />
-
-
-
-<h3 id="조건부-렌더링"><a href="#조건부-렌더링" class="headerlink" title="조건부 렌더링"></a>조건부 렌더링</h3><blockquote>
-<p><code>if-else</code> : 조건에 따라 다른 컴포넌트를 렌더링할 때 사용한다. </p>
-</blockquote>
-<ol>
-<li><code>&amp;&amp;</code> : 조건이 <code>true</code> 면 다음 컴포넌트 (설정값) 를 보여줌 / 다음 조건으로 넘어감</li>
-<li><code>삼항연산자</code> : 조건이 <code>true</code> 면 첫번째, 조건이 <code>false</code> 면 두번째 설정값 보여줌</li>
-<li><code>switch</code> : 조건이 <code>여러 개 </code> 일 때 사용하면 좋음</li>
-</ol>
-<br />
-
-
-
-<h3 id="List-amp-Key"><a href="#List-amp-Key" class="headerlink" title="List &amp; Key"></a>List &amp; Key</h3><ul>
-<li><strong>list를 렌더링</strong> 할 때는 반드시 <em><strong>props에 key를 설정해야 한다.</strong></em></li>
-<li>key를 설정하지 않으면 오류 메시지가 뜬다.</li>
-<li>key 는 각 요소의 <strong>고유값</strong> (id, index 등) 으로 설정해야 한다.</li>
-<li>key가 있어야 배열을 <em>효율적으로 렌더링</em> 할 수 있다.<ul>
-<li>배열이 변경되면, <strong>바뀌는 부분만 업데이트</strong> 한다.</li>
-<li>key를 <em>설정하지 않으면, 하나만 바뀌어도 전체가 리렌더링</em> 됨</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h3 id="BEM-방법론"><a href="#BEM-방법론" class="headerlink" title="BEM 방법론"></a>BEM 방법론</h3><blockquote>
-<p>Block Element Modifier</p>
-</blockquote>
-<br />
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.block__element--modifier</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>css className</strong>을 정하는 방법론 중 하나<ul>
-<li><em>class 이름</em> 에만 사용 가능함</li>
-<li><strong>camelCase는 class 이름에는 사용하지 않음</strong><ul>
-<li>대신 <code>camel-case</code> 처럼 <code>하이픈</code> 사용!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>구조를 쉽게 파악</strong>할 수 있다는 장점이 있음</li>
-</ul>
-<br />
-
-
-
-<img align="center" src="https://user-images.githubusercontent.com/49134038/117648288-011aab80-b1c9-11eb-8ed3-0e1035d6829c.png" />
-
-<ol>
-<li><code>block</code> : <strong>재사용 가능</strong>한, <strong>기능적으로 독립적</strong>인 컴포넌트</li>
-<li><code>element</code> : <em>block을 구성</em> 하는 단위</li>
-<li><code>modifier</code> : block 이나 element 의 <strong>속성</strong></li>
-</ol>
-<br />
-
-
-
-<table>
-  <thead>
-      <th>
-      장점
-    </th>
-    <th>
-      단점
-    </th>
-  </thead>
-  <tbody>
-      <tr>
-        <td>
-          className의 중복 방지
-      </td>
-      <td>
-          className이 길고 복잡해질 수 있음
-      </td>
-    </tr>
-    <tr>
-        <td>
-          className 만으로 마크업 구조 파악 가능
-      </td>
-    </tr>
-    <tr>
-        <td>
-          SASS에서 부모 선택자와 사용하면 편리함
-      </td>
-    </tr>
-    <tr>
-        <td>
-          유지 보수에 유리함
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<br />
-
-
-
-<h3 id="SASS"><a href="#SASS" class="headerlink" title="SASS"></a>SASS</h3><blockquote>
-<p>Syntactically Awesome Style Sheets</p>
-</blockquote>
-<br />
-
-
-
-<ul>
-<li><p>CSS <u>Pre-processor (전처리기)</u></p>
-<ul>
-<li>SASS 문법으로 작성하나 CSS로 컴파일 됨</li>
-</ul>
-</li>
-<li><p>CSS의 불편한 점들을 보완하고, 확장된 기능을 사용할 수 있다.</p>
-<ul>
-<li>CSS의 확장판으로 볼 수 있으나, 문법이 다르다.</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h3 id="SCSS"><a href="#SCSS" class="headerlink" title="SCSS"></a>SCSS</h3><blockquote>
-<p>Sassy CCS</p>
-</blockquote>
-<br />
-
-
-
-<ul>
-<li><p>SASS의 기능을 지원하는 <em>CSS의 Superset</em></p>
-<ul>
-<li>CSS의 확장판</li>
-</ul>
-</li>
-<li><p>기존의 CSS 문법과 유사하고, SASS보다 사용성이 높다.</p>
-</li>
-<li><p>변수, 연산자, 내장함수, 중첩 등 다양한 기능 지원</p>
-<ul>
-<li><p><code>변수</code></p>
-<ul>
-<li><code>$</code> 로 변수 선언</li>
-<li>block scope</li>
-<li>재할당 가능</li>
-</ul>
-</li>
-<li><p><code>연산</code></p>
-<ul>
-<li>연산자 사용 가능 (e.g. +, -, *, /, %, ==, !=)</li>
-</ul>
-</li>
-<li><p><code>import</code></p>
-<ul>
-<li><code>@import &quot;다른 스타일 파일&quot;</code></li>
-<li>scss 확장자 생략 가능</li>
-<li><code>_</code> 로 시작하는 파일은 컴파일되지 않음</li>
-</ul>
-</li>
-<li><p><code>extend</code></p>
-<ul>
-<li><code>@extend</code> 로 상속</li>
-</ul>
-</li>
-<li><p><code>mixin</code></p>
-<ul>
-<li><code>@mixin</code> 으로 인수를 받을 수 있음</li>
-<li><code>@include</code> 를 이용해 <em>선언한 mixin 사용</em></li>
-</ul>
-</li>
-<li><p><code>중첩</code></p>
-<ul>
-<li>선택자 중첩 가능</li>
-<li><code>&amp;</code> 로 부모 선택자 사용</li>
-</ul>
-<img align="center" src="https://user-images.githubusercontent.com/49134038/117648295-024bd880-b1c9-11eb-8585-7705099e333b.png" />
-
-</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h3 id="Grid-Layout"><a href="#Grid-Layout" class="headerlink" title="Grid Layout"></a>Grid Layout</h3><blockquote>
-<p>2차원 레이아웃 시스템</p>
-</blockquote>
-<img align="center" src="https://miro.medium.com/max/871/1*kI78qZQjw_ax1kJo4lPOcw.png" />
-
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># <span class="selector-tag">Grid</span> <span class="selector-tag">Layout</span> 적용</span><br><span class="line"><span class="selector-tag">display</span>: <span class="selector-tag">grid</span>;</span><br><span class="line"></span><br><span class="line"># 가로/ 세로 기준 나열 방법</span><br><span class="line"><span class="selector-tag">grid-template-columns</span>: 1<span class="selector-tag">fr</span> 2<span class="selector-tag">fr</span> 3<span class="selector-tag">fr</span>;</span><br><span class="line"><span class="selector-tag">grid-template-rows</span>: 100<span class="selector-tag">px</span> 200<span class="selector-tag">px</span>;</span><br><span class="line"></span><br><span class="line"># 속성값으로 사용할 수 있는 함수</span><br><span class="line"><span class="selector-tag">repeat</span>(반복횟수, 반복값)</span><br><span class="line"><span class="selector-tag">minmax</span>(최소값, 최대값)</span><br><span class="line"><span class="selector-tag">repeat</span>(<span class="selector-tag">auto-fit</span>, <span class="selector-tag">minmax</span>(20%, <span class="selector-tag">auto</span>))</span><br><span class="line"></span><br><span class="line"># <span class="selector-tag">Grid</span> 셀을 병합할 때</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">grid-column-start</span>: 2;</span><br><span class="line"><span class="selector-tag">grid-column-end</span>: 4;</span><br><span class="line">### <span class="selector-tag">grid-column</span>: 2 / 4;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">grid-row-start</span>: 1;</span><br><span class="line"><span class="selector-tag">grid-row-end</span>: 3;</span><br><span class="line">### <span class="selector-tag">grid-row</span>: 1 / 3;</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-<ul>
-<li>row 또는 column 만을 사용한 1차원 (i.e. Flexbox) 을 넘어 2차원 시스템 (i.e. Grid) 으로 유연하게 레이아웃 배치 및 사용 가능</li>
-<li>왼쪽 위부터 차례대로 1번~ 순서 할당</li>
-<li><strong>보통 repeat의 반복값에 <em>minmax</em> 함수 이용</strong></li>
-<li><code>auto-fill</code> : 간격이 자동적으로 조절됨, 균등하게 나누어짐</li>
-<li><code>auto-fit</code> : 정해진 구역에서 자리 할당</li>
-<li><code>grid-@@-end</code> : 끝나는 자리 <strong>+1</strong> 값<ul>
-<li>e.g. <code>grid-column-end = 3</code> 일 때, <strong>end 위치는 2</strong>임</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h3 id="React-Router"><a href="#React-Router" class="headerlink" title="React Router"></a>React Router</h3><blockquote>
-<p>화면 전환을 도와주는 React의 서드파티 라이브러리</p>
-</blockquote>
-<br />
-
-
-
-<ul>
-<li><p>SPA에서는 하나의 html 파일로 변화하는 부분만 교체함</p>
-</li>
-<li><p>SPA에서는 React Router의 <code>Link</code> 를 이용해서 페이지 이동</p>
-<ul>
-<li><code>a</code> tag 사용하면 안 됨 ( 기존의 웹 페이지는 <code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code> 로 페이지 이동 )</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<ol>
-<li><p>Link</p>
-<ul>
-<li><p>페이지 이동</p>
-</li>
-<li><p>브라우저의 주소만 변경되고 레이아웃에서 변경된 부분만 리렌더링 됨, 전체 화면은 동일 (Single Page Application) 하다!</p>
-</li>
-</ul>
-</li>
-<li><p>Route</p>
-<ul>
-<li>주소가 path 일 때, component를 렌더링한다.</li>
-<li><code>exact</code> : <strong>path가 정확하게 일치할 때만</strong> 이동</li>
-</ul>
-</li>
-<li><p>Router</p>
-<ul>
-<li>Link, Route 태그를 묶는 인터페이스<ul>
-<li><code>&lt;BrowserRouter&gt;</code> 태그 안에 <code>&lt;Route&gt;</code> 태그가 존재해야 함!</li>
-</ul>
-</li>
-<li>최상위에 하나만 존재한다.</li>
-<li>BrowserRouter &gt;&gt; HashRouter<ul>
-<li>BrowserRouter : <strong>history 데이터</strong> (API) 가 내장됨</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Switch</p>
-<ul>
-<li>첫번째로 매칭되는 path의 component를 렌더링한다.</li>
-<li>Default 처리를 할 때 유용하다. (e.g. “Page Not Found”)</li>
-<li><strong>Switch를 사용하지 않은 상태에서 path가 없는 컴포넌트가 밑에 있을 경우 순서에 상관 없이 해당 컴포넌트부터 렌더링 된다. (순서가 무너지게 됨)</strong></li>
-</ul>
-</li>
-<li><p>withRouter</p>
-<ul>
-<li>고차 컴포넌트 <strong>( Higher Order Component )</strong></li>
-<li><strong>Route가 아닌 컴포넌트에서</strong> <code>match</code>, <code>history</code>, <code>location</code> 사용 가능</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; withRouter &#125; <span class="keyword">from</span> <span class="string">&#x27;react-router-dom&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ComponentName = <span class="function">(<span class="params">&#123; history &#125;</span>) =&gt;</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withRouter(ComponentName);</span><br></pre></td></tr></table></figure>
-<br />
-
-
-
-</li>
-</ol>
-<h4 id="Route의-기본-props"><a href="#Route의-기본-props" class="headerlink" title="Route의 기본 props"></a>Route의 기본 props</h4><ol>
-<li>history<ul>
-<li>주소를 임의로 변경하거나 돌아갈 수 있음</li>
-<li><code>history.push()</code> : 새로운 경로를 history stack에 push하여 이동</li>
-<li>history stack에 방문 기록을 저장하기 때문에 go / goBack 등이 가능함</li>
-</ul>
-</li>
-<li>match<ul>
-<li>Route path와 URL 매칭에 대한 정보</li>
-<li><code>match.params</code> :  path 설정값<ul>
-<li>현재 주소창의 위치를 반환</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>location<ul>
-<li>현재 페이지의 정보</li>
-<li><code>location.search</code> : url 쿼리스트링</li>
-<li><em>history의 속성에도 location이 있음</em></li>
-</ul>
-</li>
-</ol>
-<br />
-
-
-
-<h3 id="React-Hooks"><a href="#React-Hooks" class="headerlink" title="React Hooks"></a>React Hooks</h3><ul>
-<li><p><code>useRef</code></p>
-<blockquote>
-<p>React에서 <strong>DOM 요소</strong>를 가져올 때 사용함</p>
-</blockquote>
-<ul>
-<li><p><code>const 변수명 = useRef();</code> 로 선언한다.</p>
-</li>
-<li><p><em>가져올 요소의</em> attribute에 <code>ref=&#123;변수명&#125;</code> 을 추가한다.</p>
-</li>
-<li><p><code>변수명.current</code> 로 DOM 요소를 <em>가져올</em> 수 있다.</p>
-</li>
-</ul>
-</li>
-</ul>
-<br />
-
-
-
-<h3 id="json-server"><a href="#json-server" class="headerlink" title="json-server"></a>json-server</h3><blockquote>
-<p>JSON 파일로 로컬에 연습용 서버 만들기</p>
-</blockquote>
-<br />
-
-
-
-<ul>
-<li>src 폴더 밖에 data.json 파일을 생성한 후, 더미 데이터 넣기</li>
-<li><strong>React 기본 port가 3000번</strong>이기 때문에, 서버는 다르게 지정할 것!</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2562,7 +2445,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
