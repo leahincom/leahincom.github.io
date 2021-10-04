@@ -163,6 +163,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/python-functools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/23/python-functools/" class="post-title-link" itemprop="url">유용한 python methods</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-23 11:49:12 / Modified: 04:03:16" itemprop="dateCreated datePublished" datetime="2021-08-23T11:49:12+01:00">2021-08-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="lambda"><a href="#lambda" class="headerlink" title="lambda"></a>lambda</h2><p>JavaScript의 arrow function과 비슷하다. 함수를 재사용하지 않고 익명함수로 선언할 때 유용하게 사용해서, <strong>callback</strong> 함수로 적절</p>
+<h3 id="Basic-Syntax"><a href="#Basic-Syntax" class="headerlink" title="Basic Syntax"></a>Basic Syntax</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span> args: exp</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p><em>iterables</em> 에 사용 가능하며, 모든 요소에 함수를 적용하여 결과값을 반환한다. 새로운 리스트에 해당 요소들을 받고 싶으면 <code>list()</code> 를 사용하면 됨. 여러 iterables를 전달할 수 있다.</p>
+<h3 id="Basic-Syntax-1"><a href="#Basic-Syntax-1" class="headerlink" title="Basic Syntax"></a>Basic Syntax</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>(function, iterable[, ...iterables])</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h2><p>마찬가지로 iterables에 사용 가능. 함수의 결과값이 <code>True</code> 인 요소만 반환한다. 하나의 iterable만 전달 가능함.</p>
+<h3 id="Basic-Syntax-2"><a href="#Basic-Syntax-2" class="headerlink" title="Basic Syntax"></a>Basic Syntax</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">filter</span>(function, iterable)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Reduce"><a href="#Reduce" class="headerlink" title="Reduce"></a>Reduce</h2><p>사실 이 함수 때문에 글을 작성하게 됐는데, <strong><em>functools</em></strong> 라이브러리를 사용한 reduce는 반복문 대신 사용하기 유용한 듯.</p>
+<ul>
+<li><code>(acc, val)</code> 이기 때문에, lambda 작성 시 arguments로 <code>(acc, val)</code> 을 전달</li>
+</ul>
+<h3 id="Basic-Syntax-3"><a href="#Basic-Syntax-3" class="headerlink" title="Basic Syntax"></a>Basic Syntax</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reduce(function, iterable)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line">li = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="built_in">sum</span> = reduce((<span class="keyword">lambda</span> x, y: x + y), li) <span class="comment"># output: 15</span></span><br><span class="line"><span class="comment"># (1)+2</span></span><br><span class="line"><span class="comment"># ((1)+2)+3</span></span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/boj-2217/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -990,91 +1081,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/11/boj-19532/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/11/boj-19532/" class="post-title-link" itemprop="url">BOJ 19532</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-11 10:08:27 / Modified: 02:09:59" itemprop="dateCreated datePublished" datetime="2021-08-11T10:08:27+01:00">2021-08-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>정수 a, b, c, d, e, f가 공백으로 구분되어 차례대로 주어진다. (−999≤a,b,c,d,e,f≤999)</p>
-<p>문제에서 언급한 방정식을 만족하는 (x,y)가 유일하게 존재하고, 이 때 x와 y가 각각 −999 이상 999 이하의 정수인 경우만 입력으로 주어짐이 보장된다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>pypy3으로 제출</p>
-<ul>
-<li>(x, y)는 유일함</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(-<span class="number">999</span>, <span class="number">1000</span>):</span><br><span class="line">  <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(-<span class="number">999</span>, <span class="number">1000</span>):</span><br><span class="line">    check1 = (f[<span class="number">0</span>] * x + f[<span class="number">1</span>] * y == f[<span class="number">2</span>])</span><br><span class="line">    check2 = (f[<span class="number">3</span>] * x + f[<span class="number">4</span>] * y == f[<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> check1 <span class="keyword">and</span> check2:</span><br><span class="line">      print(<span class="string">&quot;%d %d&quot;</span> % (x, y))</span><br><span class="line">      exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>문제의 답인 x와 y를 공백으로 구분해 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> check1 <span class="keyword">and</span> check2:</span><br><span class="line">  print(<span class="string">&quot;%d %d&quot;</span> % (x, y))</span><br><span class="line">  exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1146,7 +1152,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
