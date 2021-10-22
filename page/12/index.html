@@ -163,6 +163,1497 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/05/SOAP-Objects-and-DSs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/05/SOAP-Objects-and-DSs/" class="post-title-link" itemprop="url">Objects and DSs</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-05 10:20:55" itemprop="dateCreated datePublished" datetime="2021-04-05T10:20:55+01:00">2021-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/soap/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Objects-and-Data-Structures"><a href="#Objects-and-Data-Structures" class="headerlink" title="Objects and Data Structures"></a>Objects and Data Structures</h2><ol>
+<li><p><code>Getter</code> and <code>Setter</code></p>
+<ul>
+<li><p>JS는 인터페이스 / 타입 / 접근제어자 (Access Modifier) 을 가지고 있지 않음</p>
+</li>
+<li><p>Object property를 가져오는 것 이상 (e.g., modify) 의 action을 하고 싶을 때, 일일이 접근제어자를 불러 action을 취하지 않아도 됨</p>
+</li>
+<li><p><code>set</code> action 시 validation을 추가하는 것이 좋음</p>
+</li>
+<li><p>internal representation을 encapsulating</p>
+</li>
+<li><p><code>get</code>, <code>set</code>시 logging이나 error handling을 추가하는 것이 용이함</p>
+</li>
+<li><p><code>get</code> 시 lazy load 속성을 추가할 수 있음</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Lazy loading</strong> </p>
+<ul>
+<li>It’s a way to shorten the length of the critical rendering path, which translates into reduced page <strong>load</strong> times</li>
+<li>getting the properties from a server</li>
+</ul>
+<ol>
+<li>identify resources as non-blocking (non-critical)</li>
+<li><strong>load</strong> these only when needed</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeBankAccount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    balance: <span class="number">0</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> account = makeBankAccount();</span><br><span class="line">account.balance = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeBankAccount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// private으로 선언된 변수</span></span><br><span class="line">  <span class="keyword">let</span> balance = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 아래 return을 통해 public으로 선언된 &quot;getter&quot;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getBalance</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> balance;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 아래 return을 통해 public으로 선언된 &quot;setter&quot;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setBalance</span>(<span class="params">amount</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ... balance를 업데이트하기 전 검증로직</span></span><br><span class="line">    balance = amount;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    getBalance,</span><br><span class="line">    setBalance</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> account = makeBankAccount();</span><br><span class="line">account.setBalance(<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>objects의 properties는 private로 만들기</p>
+<ul>
+<li><code>closures</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Employee = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Employee.prototype.getName = <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> employee = <span class="keyword">new</span> Employee(<span class="string">&#x27;John Doe&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br><span class="line"><span class="keyword">delete</span> employee.name;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: undefined</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeEmployee</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="function"><span class="title">getName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> name;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> employee = makeEmployee(<span class="string">&#x27;John Doe&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br><span class="line"><span class="keyword">delete</span> employee.name;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Employee name: <span class="subst">$&#123;employee.getName()&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// Employee name: John Doe</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/05/SOAP-Functions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/05/SOAP-Functions/" class="post-title-link" itemprop="url">Functions</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-05 10:18:28" itemprop="dateCreated datePublished" datetime="2021-04-05T10:18:28+01:00">2021-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/soap/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><ol>
+<li><p>함수 parameter / argument는 2개 이하</p>
+<blockquote>
+<p>함수 테스팅을 쉽게 만들어 주기 때문</p>
+</blockquote>
+<ul>
+<li><p>3개 이상인 경우: 통합하기</p>
+</li>
+<li><p>higher-level object의 경우 1개로 충분함</p>
+</li>
+<li><p>객체를 생성하고 활용하기</p>
+<ul>
+<li>적은 boilerplate으로도 객체를 만들기 쉬우므로, argument가 많이 필요한 경우 객체를 생성해서 활용하기</li>
+</ul>
+<blockquote>
+<p><code>boilerplate</code> : 변경 없이 계속 재사용할 수 있는 코드, 프로그램</p>
+</blockquote>
+<ul>
+<li><p><strong>Destructuring</strong></p>
+<blockquote>
+<p><strong>구조 분해 할당</strong> 구문은 배열이나 객체의 속성을 해체하여 그 값을 개별 변수에 담을 수 있게 하는 JavaScript 표현식입니다.</p>
+</blockquote>
+<ul>
+<li><code>function signature</code> (argument, return type) 등을 통해 어떤 값이 전달되고 이용되는지 알 수 있음</li>
+<li>simulate <code>named parameters</code></li>
+</ul>
+<blockquote>
+<p><strong>named parameters</strong> : function calls that clearly state the <em>name</em> of each <em>parameter</em> within the function call</p>
+</blockquote>
+<ul>
+<li><code>전달된 argument</code>에 default 값을 복제함, <em>argument로부터 destructure된 object / array는 복제되지 않음</em></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMenu</span>(<span class="params">title, body, buttonText, cancellable</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createMenu(<span class="string">&quot;Foo&quot;</span>, <span class="string">&quot;Bar&quot;</span>, <span class="string">&quot;Baz&quot;</span>, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMenu</span>(<span class="params">&#123; title, body, buttonText, cancellable &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createMenu(&#123;</span><br><span class="line">  title: <span class="string">&quot;Foo&quot;</span>,</span><br><span class="line">  body: <span class="string">&quot;Bar&quot;</span>,</span><br><span class="line">  buttonText: <span class="string">&quot;Baz&quot;</span>,</span><br><span class="line">  cancellable: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>하나의 함수는 하나의 행동만</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">emailClients</span>(<span class="params">clients</span>) </span>&#123;</span><br><span class="line">  clients.forEach(<span class="function"><span class="params">client</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 1-1. check the client : look up the client</span></span><br><span class="line">    <span class="keyword">const</span> clientRecord = database.lookup(client);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 1-2. check the client : check the client status</span></span><br><span class="line">    <span class="keyword">if</span> (clientRecord.isActive()) &#123;</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 2. email the client</span></span><br><span class="line">      email(client);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">emailClients</span>(<span class="params">clients</span>) </span>&#123;</span><br><span class="line">  clients</span><br><span class="line">    .filter(isClientActive)</span><br><span class="line">    .forEach(email);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isClientActive</span>(<span class="params">client</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 1-1.</span></span><br><span class="line">  <span class="keyword">const</span> clientRecord = database.lookup(client);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 1-2.</span></span><br><span class="line">  <span class="keyword">return</span> clientRecord.isActive();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>함수명은 명시적으로 action을 정의하기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">AddToDate</span>(<span class="params">date, month</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 뭘 추가하는 건지 이름만 보고 알아내기 힘듭니다.</span></span><br><span class="line">AddToDate(date, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">AddMonthToDate</span>(<span class="params">date, month</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">AddMonthToDate(date, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>(2)와 비슷한 맥락으로, 재사용 가능하고 테스트가 용이할 수 있도록 하나의 함수는 one level of abstraction을 담당하도록 한다.</li>
+</ol>
+<blockquote>
+<p>❓(2)와 어떤 차이가 있는지?</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function parseBetterJSAlternative(code) &#123;</span><br><span class="line">  const REGEXES &#x3D; [</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 1. tokenize</span><br><span class="line">  const statements &#x3D; code.split(&#39; &#39;);</span><br><span class="line">  const tokens &#x3D; [];</span><br><span class="line">  REGEXES.forEach(REGEX &#x3D;&gt; &#123;</span><br><span class="line">    statements.forEach(statement &#x3D;&gt; &#123;</span><br><span class="line">      &#x2F;&#x2F; ...</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 2. lexer (lexical analysis)</span><br><span class="line">  const ast &#x3D; [];</span><br><span class="line">  tokens.forEach(token &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; lex...</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 3. parse</span><br><span class="line">  ast.forEach(node &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; parse...</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function tokenize(code) &#123;</span><br><span class="line">  const REGEXES &#x3D; [</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  const statements &#x3D; code.split(&#39; &#39;);</span><br><span class="line">  const tokens &#x3D; [];</span><br><span class="line">  REGEXES.forEach(REGEX &#x3D;&gt; &#123;</span><br><span class="line">    statements.forEach(statement &#x3D;&gt; &#123;</span><br><span class="line">      tokens.push( &#x2F;* ... *&#x2F; );</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  return tokens;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function lexer(tokens) &#123;</span><br><span class="line">  const ast &#x3D; [];</span><br><span class="line">  tokens.forEach(token &#x3D;&gt; &#123;</span><br><span class="line">    ast.push( &#x2F;* ... *&#x2F; );</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  return ast;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function parseBetterJSAlternative(code) &#123;</span><br><span class="line">  const tokens &#x3D; tokenize(code);</span><br><span class="line">  const ast &#x3D; lexer(tokens);</span><br><span class="line">  ast.forEach(node &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; parse...</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li><p>중복된 코드는 삭제하기</p>
+<ul>
+<li><p>비슷한 일을 하는 함수들이 사소한 차이로 개별적으로 존재하는 경우</p>
+<p>👉 <code>추상화 </code> 를 통해 하나의 함수/ 모듈/ 클래스를 사용하여 사소한 차이점을 (argument 등으로) 다루기  : 한 곳만 수정해도 다른 코드에 반영할 수 있음</p>
+<blockquote>
+<p>e.g. JAVA의 class</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showDeveloperList</span>(<span class="params">developers</span>) </span>&#123;</span><br><span class="line">  developers.forEach(<span class="function"><span class="params">developers</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> expectedSalary = developer.calculateExpectedSalary();</span><br><span class="line">    <span class="keyword">const</span> experience = developer.getExperience();</span><br><span class="line">    <span class="keyword">const</span> githubLink = developer.getGithubLink(); <span class="comment">// 👈 difference</span></span><br><span class="line">    <span class="keyword">const</span> data = &#123;</span><br><span class="line">      expectedSalary,</span><br><span class="line">      experience,</span><br><span class="line">      githubLink</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    render(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showManagerList</span>(<span class="params">managers</span>) </span>&#123;</span><br><span class="line">  managers.forEach(<span class="function"><span class="params">manager</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> expectedSalary = manager.calculateExpectedSalary();</span><br><span class="line">    <span class="keyword">const</span> experience = manager.getExperience();</span><br><span class="line">    <span class="keyword">const</span> portfolio = manager.getMBAProjects(); <span class="comment">// 👈 difference</span></span><br><span class="line">    <span class="keyword">const</span> data = &#123;</span><br><span class="line">      expectedSalary,</span><br><span class="line">      experience,</span><br><span class="line">      portfolio</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    render(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showEmployeeList</span>(<span class="params">employees</span>) </span>&#123;</span><br><span class="line">  employees.forEach(<span class="function">(<span class="params">employee</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> expectedSalary = employee.calculateExpectedSalary();</span><br><span class="line">    <span class="keyword">const</span> experience = employee.getExperience();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> portfolio = employee.getGithubLink();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (employee.type === <span class="string">&#x27;manager&#x27;</span>) &#123;</span><br><span class="line">      portfolio = employee.getMBAProjects();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> data = &#123;</span><br><span class="line">      expectedSalary,</span><br><span class="line">      experience,</span><br><span class="line">      portfolio</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    render(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>Object.assign</code> 으로 default object 만들기</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> menuConfig = &#123;</span><br><span class="line">  title: <span class="literal">null</span>,</span><br><span class="line">  body: <span class="string">&quot;Bar&quot;</span>,</span><br><span class="line">  buttonText: <span class="literal">null</span>,</span><br><span class="line">  cancellable: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMenu</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  config.title = config.title || <span class="string">&quot;Foo&quot;</span>;</span><br><span class="line">  config.body = config.body || <span class="string">&quot;Bar&quot;</span>;</span><br><span class="line">  config.buttonText = config.buttonText || <span class="string">&quot;Baz&quot;</span>;</span><br><span class="line">  config.cancellable =</span><br><span class="line">    config.cancellable !== <span class="literal">undefined</span> ? config.cancellable : <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createMenu(menuConfig);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> menuConfig = &#123;</span><br><span class="line">  <span class="comment">// minimize null value and set default values to inherit them</span></span><br><span class="line">  title: <span class="string">&quot;Order&quot;</span>,</span><br><span class="line">  <span class="comment">// User did not include &#x27;body&#x27; key</span></span><br><span class="line">  buttonText: <span class="string">&quot;Send&quot;</span>,</span><br><span class="line">  cancellable: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMenu</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> finalConfig = <span class="built_in">Object</span>.assign(</span><br><span class="line">    &#123;</span><br><span class="line">      title: <span class="string">&quot;Foo&quot;</span>,</span><br><span class="line">      body: <span class="string">&quot;Bar&quot;</span>,</span><br><span class="line">      buttonText: <span class="string">&quot;Baz&quot;</span>,</span><br><span class="line">      cancellable: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    config</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">return</span> finalConfig</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// follow the order so...</span></span><br><span class="line">  <span class="comment">// config now equals: &#123;title: &quot;Order&quot;, body: &quot;Bar&quot;, buttonText: &quot;Send&quot;, cancellable: true&#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createMenu(menuConfig);</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>function parameter에 flags 전달하지 않기<ul>
+<li><code>flags</code> 는 그 자체로 하나 이상의 기능을 하는 것을 의미하므로, 단일 기능을 하는 함수로 나누기!</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>플래그(flags)</strong></p>
+<p>정규 표현식을 생성할 때 플래그를 사용하여 기본 검색 설정을 변경할 수 있습니다.</p>
+<p>이렇게 설정된 플래그는 나중에 추가되거나 삭제될 수 없습니다.</p>
+<table>
+<thead>
+<tr>
+<th align="center">플래그(flag)</th>
+<th align="center">설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">i</td>
+<td align="center">검색 패턴을 비교할 때 대소문자를 구분하지 않도록 설정함.</td>
+</tr>
+<tr>
+<td align="center">g</td>
+<td align="center">검색 패턴을 비교할 때 일치하는 모든 부분을 선택하도록 설정함.</td>
+</tr>
+<tr>
+<td align="center">m</td>
+<td align="center">검색 패턴을 비교할 때 여러 줄의 입력 문자열을 그 상태 그대로 여러 줄로 비교하도록 설정함.</td>
+</tr>
+<tr>
+<td align="center">y</td>
+<td align="center">대상 문자열의 현재 위치부터 비교를 시작하도록 설정함.</td>
+</tr>
+</tbody></table>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFile</span>(<span class="params">name, temp</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (temp) &#123;</span><br><span class="line">    fs.create(<span class="string">`./temp/<span class="subst">$&#123;name&#125;</span>`</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    fs.create(name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// temp(flags)를 기능별로 개별적인 함수로 나눔</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFile</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  fs.create(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createTempFile</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  createFile(<span class="string">`./temp/<span class="subst">$&#123;name&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li><p>Side Effect</p>
+<blockquote>
+<p>함수가 <code>take a value in and return another value / values</code> 외의 action을 할 경우 side effect가 발생함</p>
+<p>e.g. writing to a file, modifying some global variable, etc.</p>
+</blockquote>
+<ul>
+<li>side effect를 발생시키는 함수를 정의할 경우, <code>centralize where you are doing this</code> (하나의 함수로 통일할 것!)<ul>
+<li>pitfall (uncatchable error) 을 피하기 위함</li>
+<li>e.g. sharing state between objects without any elucidation / saving, using mutable data types that can be written to anything 👉 <code>TypeScript</code> 이용하기, not centralizing where your side effects occur</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="comment">// Global variable referenced by following function.</span></span><br><span class="line"><span class="comment">// If we had another function that used this name, now it&#x27;d be an array and it could break the logic it originally had.</span></span><br><span class="line"><span class="keyword">let</span> name = <span class="string">&quot;Ryan McDermott&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">splitIntoFirstAndLastName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  name = name.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">splitIntoFirstAndLastName();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// [&#x27;Ryan&#x27;, &#x27;McDermott&#x27;];</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">splitIntoFirstAndLastName</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> name.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">&quot;Ryan McDermott&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> newName = splitIntoFirstAndLastName(name);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// &#x27;Ryan McDermott&#x27;;</span></span><br><span class="line"><span class="built_in">console</span>.log(newName); <span class="comment">// [&#x27;Ryan&#x27;, &#x27;McDermott&#x27;];</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Handling changeable (mutable) values / data by <code>cloning</code><ul>
+<li>input object를 직접적으로 mutate하는 경우는 많지 않으므로, <code>clone - edit - return</code> 하기</li>
+<li>improve performance efficiency using <a target="_blank" rel="noopener" href="https://facebook.github.io/immutable-js/">great libraries</a></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> addItemToCart = <span class="function">(<span class="params">cart, item</span>) =&gt;</span> &#123;</span><br><span class="line">  cart.push(&#123; item, <span class="attr">date</span>: <span class="built_in">Date</span>.now() &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> addItemToCart = <span class="function">(<span class="params">cart, item</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// new array</span></span><br><span class="line">  <span class="keyword">return</span> [...cart, &#123; item, <span class="attr">date</span> : <span class="built_in">Date</span>.now() &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>global function 사용하지 않기</p>
+<ul>
+<li>내장된 library와 충돌할 수 있음<ul>
+<li>똑같은 이름의 함수가 다른 action</li>
+<li>다른 이름의 함수가 같은 action</li>
+</ul>
+</li>
+<li>error handling, exception 처리 없이는 해당 API를 사용할 때 문제 발생</li>
+</ul>
+<p>👉 <code>inheritance</code> 이용하기!</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.diff = <span class="function"><span class="keyword">function</span> <span class="title">diff</span>(<span class="params">comparisonArray</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> hash = <span class="keyword">new</span> <span class="built_in">Set</span>(comparisonArray);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.filter(<span class="function"><span class="params">elem</span> =&gt;</span> !hash.has(elem));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// inheritance</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperArray</span> <span class="keyword">extends</span> <span class="title">Array</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">diff</span>(<span class="params">comparisonArray</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> hash = <span class="keyword">new</span> <span class="built_in">Set</span>(comparisonArray);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.filter(<span class="function"><span class="params">elem</span> =&gt;</span> !hash.has(elem));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="10">
+<li><p>imperative 보다 favor(functional) programming 하기</p>
+<blockquote>
+<p><strong>Imperative programming</strong> : writing your program as a series of instructions (statements) that can actively modify memory (variables, arrays)</p>
+<ul>
+<li>focuses on <strong>how</strong> : express the logic of your program based on how the computer would execute it</li>
+</ul>
+<p><strong>Functional programming</strong> : writing your program in terms of functions and other mathematical structures</p>
+<ul>
+<li>A function is just a rule that maps input elements to output</li>
+<li>concentrates on the <strong>what</strong> : trying to let you specify the logic of your program as close to actual logic as possible</li>
+<li><strong>more expressive</strong> : writing less code</li>
+<li><strong>safer</strong> : more bugs are prevented by the language ahead of time</li>
+<li>side-effects are controlled</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> programmerOutput = [</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">&#x27;Uncle Bobby&#x27;</span>,</span><br><span class="line">    linesOfCode: <span class="number">500</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: <span class="string">&#x27;Suzie Q&#x27;</span>,</span><br><span class="line">    linesOfCode: <span class="number">1500</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: <span class="string">&#x27;Jimmy Gosling&#x27;</span>,</span><br><span class="line">    linesOfCode: <span class="number">150</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: <span class="string">&#x27;Gracie Hopper&#x27;</span>,</span><br><span class="line">    linesOfCode: <span class="number">1000</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">let</span> totalOutput = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; programmerOutput.length; i++) &#123;</span><br><span class="line">  totalOutput += programmerOutput[i].linesOfCode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> totalOutput = programmerOutput</span><br><span class="line">  .map(<span class="function"><span class="params">programmer</span> =&gt;</span> programmer.linesOfCode)</span><br><span class="line">  .reduce(<span class="function">(<span class="params">acc, linesOfCode</span>) =&gt;</span> acc + linesOfCode, INITIAL_VALUE);</span><br></pre></td></tr></table></figure>
+<ol start="11">
+<li>조건문(Conditionals) Encapsulation</li>
+</ol>
+<blockquote>
+<p><strong>Encapsulation</strong></p>
+<p>bundling data and methods that work on that data within one unit</p>
+<ul>
+<li>hide the internal representation, or state, of an object from the outside</li>
+<li>e.g., a class in Java</li>
+</ul>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">if</span> (fsm.state === <span class="string">&#x27;fetching&#x27;</span> &amp;&amp; isEmpty(listNode)) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldShowSpinner</span>(<span class="params">fsm, listNode</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> fsm.state === <span class="string">&#x27;fetching&#x27;</span> &amp;&amp; isEmpty(listNode);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (shouldShowSpinner(fsmInstance, listNodeInstance)) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="12">
+<li>부정조건문 피하기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isDOMNodeNotPresent</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!isDOMNodeNotPresent(node)) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isDOMNodePresent</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (isDOMNodePresent(node)) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="13">
+<li>조건문 피하기</li>
+</ol>
+<ul>
+<li>조건문 자체가 함수가 하나 이상의 일을 하고 있음을 의미함</li>
+</ul>
+<p>👉 각 case에 해당되는 함수 개별적으로 만들기</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Airplane</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="function"><span class="title">getCruisingAltitude</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (<span class="built_in">this</span>.type) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;777&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude() - <span class="built_in">this</span>.getPassengerCount();</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;Air Force One&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude();</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;Cessna&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude() - <span class="built_in">this</span>.getFuelExpenditure();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Airplane</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Boeing777</span> <span class="keyword">extends</span> <span class="title">Airplane</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="function"><span class="title">getCruisingAltitude</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude() - <span class="built_in">this</span>.getPassengerCount();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AirForceOne</span> <span class="keyword">extends</span> <span class="title">Airplane</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="function"><span class="title">getCruisingAltitude</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cessna</span> <span class="keyword">extends</span> <span class="title">Airplane</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="function"><span class="title">getCruisingAltitude</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.getMaxAltitude() - <span class="built_in">this</span>.getFuelExpenditure();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="14">
+<li>Type-checking 피하기</li>
+</ol>
+<ul>
+<li><p><code>consistent APIs</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">travelToTexas</span>(<span class="params">vehicle</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (vehicle <span class="keyword">instanceof</span> Bicycle) &#123;</span><br><span class="line">    vehicle.pedal(<span class="built_in">this</span>.currentLocation, <span class="keyword">new</span> Location(<span class="string">&#x27;texas&#x27;</span>));</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (vehicle <span class="keyword">instanceof</span> Car) &#123;</span><br><span class="line">    vehicle.drive(<span class="built_in">this</span>.currentLocation, <span class="keyword">new</span> Location(<span class="string">&#x27;texas&#x27;</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// case 별로 move function을 달리 하는 것이 아니라,</span></span><br><span class="line"><span class="comment">// `move`로 동일하게 생성</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">travelToTexas</span>(<span class="params">vehicle</span>) </span>&#123;</span><br><span class="line">  vehicle.move(<span class="built_in">this</span>.currentLocation, <span class="keyword">new</span> Location(<span class="string">&#x27;texas&#x27;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>TypeScript</code></p>
+<ul>
+<li>basic primitive를 이용해서 polymorphism 속성을 활용할 수 없을 때</li>
+<li>provides you with static typing on top of standard JavaScript syntax</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">combine</span>(<span class="params">val1, val2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> val1 === <span class="string">&#x27;number&#x27;</span> &amp;&amp; <span class="keyword">typeof</span> val2 === <span class="string">&#x27;number&#x27;</span> ||</span><br><span class="line">      <span class="keyword">typeof</span> val1 === <span class="string">&#x27;string&#x27;</span> &amp;&amp; <span class="keyword">typeof</span> val2 === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> val1 + val2;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;Must be of type String or Number&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// ※ with Typescript</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">combine</span>(<span class="params">val1, val2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> val1 + val2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="15">
+<li><p>over-optimising 피하기</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/petkaantonov/bluebird/wiki/Optimization-killers">There are good resources</a> 를 통해 optimisation is lacking 부분만 체크하고 고치기</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="comment">// On old browsers, each iteration with &quot;uncached&quot; `list.length` would be costly</span></span><br><span class="line"><span class="comment">// (need to recomputate every time it runs for loop)</span></span><br><span class="line"><span class="comment">// because of `list.length` recomputation. In modern browsers, this is optimized.</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = list.length; i &lt; len; i++) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; list.length; i++) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Dead Code 지우기</p>
+<ul>
+<li>If it’s not being called, get rid of it!<ul>
+<li>keep it in your version history if you still need it</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">oldRequestModule</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">newRequestModule</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> req = newRequestModule;</span><br><span class="line">inventoryTracker(<span class="string">&#x27;apples&#x27;</span>, req, <span class="string">&#x27;www.inventory-awesome.io&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">newRequestModule</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> req = newRequestModule;</span><br><span class="line">inventoryTracker(<span class="string">&#x27;apples&#x27;</span>, req, <span class="string">&#x27;www.inventory-awesome.io&#x27;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/05/SOAP-Variables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/05/SOAP-Variables/" class="post-title-link" itemprop="url">Variables</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-04 23:01:36" itemprop="dateCreated datePublished" datetime="2021-04-04T23:01:36+01:00">2021-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/soap/" itemprop="url" rel="index"><span itemprop="name">SOAP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
+<li><p>변수 이름</p>
+<ol>
+<li><p>의미 있는</p>
+</li>
+<li><p>발음하기 쉬운</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> yyyymmdstr = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> currentDate = moment().format(<span class="string">&#x27;YYYY/MM/DD&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>동일한 유형에 동일한 어휘</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">getUserInfo();</span><br><span class="line">getClientData();</span><br><span class="line">getCustomerRecord();</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">getUser();</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>검색 가능한 이름 지정하기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, <span class="number">86400000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> MILLISECONDS_IN_A_DAY = <span class="number">86400000</span>;</span><br><span class="line"><span class="built_in">setTimeout</span>(blastOff, MILLISECONDS_IN_A_DAY);</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>의도를 나타내는</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> address = <span class="string">&#x27;One Infinite Loop, Cupertino 95014&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> cityZipCodeRegex = <span class="regexp">/^[^,\\]+[,\\\s]+(.+?)\s*(\d&#123;5&#125;)?$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">saveCityZipCode(address.match(cityZipCodeRegex)[<span class="number">1</span>], address.match(cityZipCodeRegex)[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> [, city, zipCode] = address.match(cityZipCodeRegex) || [];</span><br><span class="line">saveCityZipCode(city, zipCode);</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>암시적인 것 X, <strong>명시적인 것</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> locations = [<span class="string">&#x27;서울&#x27;</span>, <span class="string">&#x27;인천&#x27;</span>, <span class="string">&#x27;수원&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">l</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 잠깐, `l`은 또 뭘까요?</span></span><br><span class="line">  dispatch(l);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">locations.forEach(<span class="function"><span class="params">location</span> =&gt;</span> &#123;</span><br><span class="line">  doStuff();</span><br><span class="line">  doSomeOtherStuff();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  dispatch(location);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>필요없는 것 지우기</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  carMake: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  carModel: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  carColor: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.carColor = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">const</span> Car = &#123;</span><br><span class="line">  make: <span class="string">&#x27;BMW&#x27;</span>,</span><br><span class="line">  model: <span class="string">&#x27;M3&#x27;</span>,</span><br><span class="line">  color: <span class="string">&#x27;파란색&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">paintCar</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">  car.color = <span class="string">&#x27;빨간색&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>short circuiting보다 <strong>default 매개변수 활용하기</strong><ul>
+<li>default 매개변수 : 매개변수가 <code>undefined</code> 일 때 적용됨</li>
+<li>그 외 (‘’, “”, false, null, 0, NaN 등의 <code>falsy</code> 값 포함) 은 적용되지 않음</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> breweryName = name || <span class="string">&#x27;Hipster Brew Co.&#x27;</span>;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createMicrobrewery</span>(<span class="params">name = <span class="string">&#x27;Hipster Brew Co.&#x27;</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/04/04/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-03-04-21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/04/1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-03-04-21/" class="post-title-link" itemprop="url">1차 세미나_03/04/21</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-04 15:33:21" itemprop="dateCreated datePublished" datetime="2021-04-04T15:33:21+01:00">2021-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/" itemprop="url" rel="index"><span itemprop="name">SOPT</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sopt/web-28th/" itemprop="url" rel="index"><span itemprop="name">WEB_28th</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1차-세미나"><a href="#1차-세미나" class="headerlink" title="1차 세미나"></a>1차 세미나</h1><h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><ol>
+<li>버전 관리 용이<ol>
+<li>수정한 내용 비교 가능</li>
+<li>파일을 이전 상태로 돌릴 수 있음</li>
+<li>프로젝트 자체를 이전 상태로 돌릴 수 있음</li>
+<li>누가, 언제 만들었는지 추적할 수 있음</li>
+<li>파일 복구 가능</li>
+</ol>
+</li>
+<li>협업 용이<ol>
+<li>브랜치로 분기를 지정하여 기능별로 분리하여 작업할 수 있음<ul>
+<li>feature</li>
+<li>develop</li>
+<li>release</li>
+<li>master</li>
+</ul>
+</li>
+<li>glt flow를 이용하여 브랜치 병합 과정에서 충돌을 최대한 피하기 위해서<ul>
+<li>충돌 시<ol>
+<li><code>pull request</code> 을 이용하여 자동으로 merge되는 것을 방지함</li>
+<li>버전 선택 가능</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>각자 다른 부분을 작업한 후 합칠 수 있음</li>
+</ol>
+</li>
+<li>브랜치를 통한 비선형적인 개발</li>
+<li>원격 저장소가 있다면 어디서나 개발 가능 (Github)<ol>
+<li>어디서나 clone 받을 수 있음</li>
+<li>하나의 repository를 여러 사람과 공유할 수 있음</li>
+<li>remote가 남아있다면 복구 가능</li>
+</ol>
+</li>
+</ol>
+<img width="467" alt="image-20210403152928735" src="https://user-images.githubusercontent.com/49134038/113500846-4b6e9400-955c-11eb-8bc8-1c728ce78d8c.png">
+
+<ul>
+<li>LOCAL<ul>
+<li>Working Directory<ul>
+<li>새로 생성: Untracked</li>
+<li>변경됨: Modified</li>
+</ul>
+</li>
+<li>Staging Area<ul>
+<li>Commit할 파일들을 모아놓는 공간</li>
+</ul>
+</li>
+<li>Repository<ul>
+<li>Commit 후에 버전이 기록되는 공간</li>
+<li>history 관리</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>REMOTE</li>
+</ul>
+<h3 id="Git-관련-용어"><a href="#Git-관련-용어" class="headerlink" title="Git 관련 용어"></a>Git 관련 용어</h3><ul>
+<li>Working Tree</li>
+<li>Commit</li>
+<li>Branch</li>
+<li>Merge</li>
+<li>HEAD</li>
+</ul>
+<h3 id="Git-기본-명령어"><a href="#Git-기본-명령어" class="headerlink" title="Git 기본 명령어"></a>Git 기본 명령어</h3><img width="342" alt="Screenshot 2021-04-03 at 14 47 31" src="https://user-images.githubusercontent.com/49134038/113500867-68a36280-955c-11eb-9e81-06acb37c0358.png">
+
+
+
+<h4 id="개인-작업-시"><a href="#개인-작업-시" class="headerlink" title="개인 작업 시"></a>개인 작업 시</h4><ol>
+<li>local</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init &lt;folder name&gt;</span><br><span class="line"></span><br><span class="line">cd &lt;folder name&gt;</span><br><span class="line"></span><br><span class="line">code .</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>git</p>
+<ul>
+<li><p>new Repository 생성</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin &lt;address&gt;</span><br><span class="line">git remote -v &#x2F;&#x2F; 상태 확인</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>update</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;initial commit&quot;</span><br><span class="line">git status</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log &#x2F;&#x2F; log 확인</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master &#x2F;&#x2F; 원격 저장소 master 브랜치 업데이트</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="WEB-동작-원리"><a href="#WEB-동작-원리" class="headerlink" title="WEB 동작 원리"></a>WEB 동작 원리</h3><img width="488" alt="Screenshot 2021-04-03 at 14 55 24" src="https://user-images.githubusercontent.com/49134038/113500818-077b8f00-955c-11eb-8e06-20d3057a4732.png">
+
+<img width="495" alt="image-20210403145603056" src="https://user-images.githubusercontent.com/49134038/113500879-82dd4080-955c-11eb-952c-0dc7a117a090.png">
+
+<ul>
+<li>DNS (Domain Name Server)</li>
+<li>3-way / 4-way handshake</li>
+</ul>
+<h4 id="URL-URI"><a href="#URL-URI" class="headerlink" title="URL / URI"></a>URL / URI</h4><ul>
+<li>URL<ul>
+<li><code>http://sopt.org:80/wp</code></li>
+<li>인터넷 상의 자원의 위치</li>
+</ul>
+</li>
+<li>URI<ul>
+<li><code>http://sopt.org:80/wp/url.pdf</code></li>
+<li>인터넷에 있는 자원을 나타내는 식별자</li>
+</ul>
+</li>
+</ul>
+<p><code>http://sopt.org:80/wp/?page_od=2519</code></p>
+<ul>
+<li>protocol<ul>
+<li><code>http</code></li>
+<li>원거리 통신 장비 사이에서 메시지를 주고받는 규칙</li>
+<li>http는 www 상에서 하이퍼텍스트를 주고받는 규칙</li>
+<li>// 없어도 작동함</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>domain name</p>
+<ul>
+<li><code>sopt.org</code></li>
+<li>네트워크 상에서 컴퓨터를 식별하는 호스트명</li>
+<li>DNS에서 IP 주소로 변경해준다</li>
+<li>e.g. 172.217.25.238 : google.com</li>
+</ul>
+</li>
+<li><p>port</p>
+<ul>
+<li><code>80</code></li>
+<li>네트워크 서비스나 특정 프로세스를 식별하는 논리 단위</li>
+<li>다른 방으로 들어가는 문과 같다</li>
+<li>e.g. 80번: HTTP, 443번: HTTPS</li>
+</ul>
+</li>
+<li><p>path</p>
+<ul>
+<li><code>wp</code></li>
+<li>요청한 자원에 대한 웹 서버 내 경로</li>
+</ul>
+</li>
+<li><p>query</p>
+<ul>
+<li><code>?page_id=2519</code></li>
+<li>웹 서버에 제공하는 추가 파라미터</li>
+</ul>
+</li>
+<li><p>IP</p>
+<ul>
+<li>통신에 필요한 각 장치를 나타내는 주소</li>
+</ul>
+</li>
+<li><p>HTTP</p>
+<ul>
+<li><p>request</p>
+<img width="498" alt="image-20210403150515508" src="https://user-images.githubusercontent.com/49134038/113500900-ab653a80-955c-11eb-9f1a-3201fdf3e920.png">
+
+<ul>
+<li>http method</li>
+</ul>
+</li>
+<li><p>reponse</p>
+<img width="662" alt="Screenshot 2021-04-03 at 15 24 58" src="https://user-images.githubusercontent.com/49134038/113500816-06e2f880-955c-11eb-8e4e-7fe2b2906461.png">
+
+<ul>
+<li>status code</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p><em>HyperText Markup Language</em></p>
+<p>웹 페이지의 뼈대를 담당한다.</p>
+<ul>
+<li><p>HyperText</p>
+<ul>
+<li>참조를 통해 한 문서에서 다른 문서로 즉시 접근할 수 있는 텍스트</li>
+<li>웹 상에 존재하는 여러 문서끼리 참조할 수 있는 기술</li>
+</ul>
+</li>
+<li><p>Markup Language</p>
+<ul>
+<li>태그 등을 이용하여 문서나 데이터의 구조를 명기하는 언어의 한 가지</li>
+<li>데이터를 기술하는 정도로만 사용되기에 프로그래밍 언어가 아님</li>
+<li>e.g. 마크다운</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<HTML5>
+
+<ul>
+<li><code>&lt;!DOCTYPE html&gt;</code> 명시</li>
+<li>semantic tag 지원</li>
+<li>form 기능 개선</li>
+<li>다양한 API 지원</li>
+</ul>
+</blockquote>
+<h3 id="Tag"><a href="#Tag" class="headerlink" title="Tag"></a>Tag</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tag</span> <span class="attr">attribute</span>=<span class="string">&quot;value&quot;</span>&gt;</span> ...content... <span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>태그 이름은 대소문자 구분이 없다</p>
+</li>
+<li><p>태그가 엇갈려서 중첩되면 안 된다</p>
+</li>
+<li><p>여러 속성이 tag에 들어갈 수 있음</p>
+</li>
+<li><p>content</p>
+<ul>
+<li>텍스트 / 다른 태그</li>
+<li>감싸진 태그의 자식노드가 됨</li>
+</ul>
+</li>
+<li><p><code>&lt;단독 태그 /&gt;</code></p>
+<img width="484" alt="image-20210403153939010" src="https://user-images.githubusercontent.com/49134038/113500915-c2a42800-955c-11eb-91bc-120bb421d096.png">
+
+
+
+</li>
+</ul>
+<h4 id="구성-Tag"><a href="#구성-Tag" class="headerlink" title="구성 Tag"></a>구성 Tag</h4><p><code>&lt;html&gt;</code></p>
+<ul>
+<li>전체 html 을 감싼다</li>
+<li><code>&lt;!DOCTYPE html&gt;</code> 을 벗어날 수 없음</li>
+</ul>
+<p><code>&lt;head&gt;</code></p>
+<img width="199" alt="Screenshot 2021-04-03 at 15 41 15" src="https://user-images.githubusercontent.com/49134038/113500815-064a6200-955c-11eb-9c55-4cf7d088be50.png">
+
+<ul>
+<li><code>&lt;meta&gt;</code><ul>
+<li>metadata // 기타 정보</li>
+</ul>
+</li>
+<li><code>&lt;style&gt;</code><ul>
+<li>외부 style이 아닌 내부에 정의 가능</li>
+</ul>
+</li>
+</ul>
+<p><code>&lt;body&gt;</code></p>
+<img width="331" alt="Screenshot 2021-04-03 at 15 42 21" src="https://user-images.githubusercontent.com/49134038/113500814-05b1cb80-955c-11eb-9de6-986788ebd2cc.png">
+
+<ul>
+<li>space / enter 많이 해도 한개 이외에는 반영 안 됨</li>
+</ul>
+<img width="424" alt="Screenshot 2021-04-03 at 15 47 30" src="https://user-images.githubusercontent.com/49134038/113500813-05193500-955c-11eb-807d-77a1092ce588.png">
+
+<img width="364" alt="Screenshot 2021-04-03 at 15 54 09" src="https://user-images.githubusercontent.com/49134038/113500812-05193500-955c-11eb-9470-a0108e9fa9a8.png">
+
+<ul>
+<li><code>iframe</code> 은 보안 문제가 있으므로 <code>embed</code> 이용하기</li>
+</ul>
+<h4 id="블록-인라인"><a href="#블록-인라인" class="headerlink" title="블록 / 인라인"></a>블록 / 인라인</h4><ol>
+<li>블록<ul>
+<li>줄 바꿈이 일어나는 형태</li>
+<li>영역의 너비가 상위 영역의 전체 너비만큼 늘어남</li>
+<li>내부에 다른 요소를 포함할 수 있음</li>
+<li><code>&lt;div&gt;</code> 로 블록 요소를 그룹화</li>
+</ul>
+</li>
+<li>인라인<ul>
+<li>줄 바꿈이 일어나지 않는 형태</li>
+<li>영역의 너비가 하위 영역의 전체 너비만큼 늘어남</li>
+<li>내부에 다른 요소를 포함할 수 없음</li>
+<li><code>&lt;span&gt;</code> 으로 인라인 요소를 그룹화</li>
+</ul>
+</li>
+</ol>
+<h4 id="Semantic-Tag"><a href="#Semantic-Tag" class="headerlink" title="Semantic Tag"></a>Semantic Tag</h4><ul>
+<li>컴퓨터가 이해하기 쉽도록 구분한 태그</li>
+<li>의미를 가지고 있는 블록 요소</li>
+</ul>
+<img width="370" alt="Screenshot 2021-04-03 at 15 59 40" src="https://user-images.githubusercontent.com/49134038/113500810-04809e80-955c-11eb-9cab-64a032247f7a.png">
+
+
+
+<h4 id="기타"><a href="#기타" class="headerlink" title="기타"></a>기타</h4><ul>
+<li>주석</li>
+<li>특수 문자</li>
+</ul>
+<img width="180" alt="Screenshot 2021-04-03 at 16 00 28" src="https://user-images.githubusercontent.com/49134038/113500809-03e80800-955c-11eb-89c5-a570bb0dc5a0.png">
+
+
+
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><blockquote>
+<p>CSS3</p>
+<ul>
+<li>웹 문서용</li>
+<li>모듈 기반<ul>
+<li>원하는 모듈만 탑재 가능</li>
+<li>필요한 모듈만 빠르게 업데이트 가능</li>
+</ul>
+</li>
+<li>기존의 도구 없이도 화려하고 동적인 스타일 구현 가능</li>
+</ul>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tag</span> <span class="attr">style</span>=<span class="string">&quot;color: red;&quot;</span>&gt;</span> ...content... <span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>tag 별로 style 첨부</p>
+</li>
+<li><p><code>&lt;head&gt;</code> 안에 style 첨부</p>
+</li>
+<li><p>외부 css 파일 import</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; href&#x3D;&quot;*.css&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h3 id="적용-우선순위"><a href="#적용-우선순위" class="headerlink" title="적용 우선순위"></a>적용 우선순위</h3><h4 id="중요도-선언-위치"><a href="#중요도-선언-위치" class="headerlink" title="중요도 (선언 위치)"></a>중요도 (선언 위치)</h4><ol>
+<li>태그 내부의 style</li>
+<li><code>&lt;head&gt;</code> 의 <code>&lt;style&gt;</code></li>
+<li>2 내의 @import</li>
+<li><code>&lt;link&gt;</code>로 연결된 css 파일</li>
+<li>4 내의 @import</li>
+<li>브라우저의 기본 css</li>
+</ol>
+<h4 id="대상의-명시도"><a href="#대상의-명시도" class="headerlink" title="대상의 명시도"></a>대상의 명시도</h4><ol>
+<li>!important</li>
+<li>inline 스타일</li>
+<li>id 선택자</li>
+<li>클래스 / 가상 선택자</li>
+<li>태그 선택자</li>
+<li>상속된 스타일</li>
+</ol>
+<h4 id="코드-순서"><a href="#코드-순서" class="headerlink" title="코드 순서"></a>코드 순서</h4><p>늦게 선언된 스타일을 우선 적용</p>
+<h3 id="Selector-선택자"><a href="#Selector-선택자" class="headerlink" title="Selector (선택자)"></a>Selector (선택자)</h3><ol>
+<li>전체 선택자 <code>*</code></li>
+<li>태그 선택자</li>
+<li>id 선택자 <code>#</code></li>
+<li>class 선택자 <code>.</code></li>
+</ol>
+<h4 id="다중-값-적용-방법"><a href="#다중-값-적용-방법" class="headerlink" title="다중 값 적용 방법"></a>다중 값 적용 방법</h4><ul>
+<li>다중 태그는 <code>,</code> 로 구분</li>
+<li>다중 속성은 <code>;</code> 로 구분</li>
+<li>다중 속성 값은 <code>,</code> 로 나열</li>
+</ul>
+<h4 id="복합-선택자"><a href="#복합-선택자" class="headerlink" title="복합 선택자"></a>복합 선택자</h4><ul>
+<li><p>선택자 사이의 띄어쓰기: 선택자 조합</p>
+<p><code>h3 p &#123;...&#125;</code></p>
+<ul>
+<li>h3 태그 내부의 모든 p 태그</li>
+</ul>
+</li>
+<li><p>선택자 사이의 <code>&gt;</code> : 자식 선택자</p>
+<p><code>h3 &gt; p &#123;...&#125;</code></p>
+<ul>
+<li>h3 태그 바로 아래의 p 태그</li>
+</ul>
+</li>
+</ul>
+<h4 id="가상-클래스-선택자"><a href="#가상-클래스-선택자" class="headerlink" title="가상 클래스 선택자"></a>가상 클래스 선택자</h4><img width="274" alt="Screenshot 2021-04-03 at 16 33 53" src="https://user-images.githubusercontent.com/49134038/113500808-03e80800-955c-11eb-841b-e004875cac2c.png">
+
+
+
+<h4 id="Attribute-속성"><a href="#Attribute-속성" class="headerlink" title="Attribute (속성)"></a>Attribute (속성)</h4><img width="397" alt="Screenshot 2021-04-03 at 16 34 27" src="https://user-images.githubusercontent.com/49134038/113500806-034f7180-955c-11eb-8f0f-dbf15b63a4a0.png">
+
+<ul>
+<li><code>text-transform</code><ul>
+<li>UPPERCASE</li>
+<li>LOWERCASE</li>
+</ul>
+</li>
+</ul>
+<img width="430" alt="Screenshot 2021-04-03 at 16 36 26" src="https://user-images.githubusercontent.com/49134038/113500805-02b6db00-955c-11eb-8908-bc6bd2145ab2.png">
+
+<ul>
+<li><p><code>position</code></p>
+<ul>
+<li>absolute<ul>
+<li>parent-context에 맞게</li>
+<li>context에 관계 없이 사용자가 지정한 위치에 고정되어서</li>
+</ul>
+</li>
+<li>relative<ul>
+<li>child-context에 맞게</li>
+<li>context에 따라 위치 다르게 적용</li>
+</ul>
+</li>
+<li>fixed<ul>
+<li>위치 변하지 않음</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>overflow</code></p>
+<ul>
+<li>auto<ul>
+<li>스크롤 하지 않을 때는 보이지 않음</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img width="438" alt="Screenshot 2021-04-03 at 16 39 17" src="https://user-images.githubusercontent.com/49134038/113500803-0185ae00-955c-11eb-9915-3ba81fd94324.png">
+
+<ul>
+<li><code>box-sizing</code><ul>
+<li>border-box 설정<ul>
+<li>border를 포함한 전체 box의 크기가 설정한 값과 일치하게</li>
+</ul>
+</li>
+<li>설정 안 하는 경우<ul>
+<li>추가 border 등의 값이 반영되어 box size가 달라짐</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>transform, transition 만으로 animation 효과 줄 수 있음</li>
+</ul>
+<h4 id="Box-Model"><a href="#Box-Model" class="headerlink" title="Box Model"></a>Box Model</h4><img width="241" alt="Screenshot 2021-04-03 at 16 45 43" src="https://user-images.githubusercontent.com/49134038/113500801-ffbbea80-955b-11eb-9d07-4a66cbed4072.png">
+
+<ol>
+<li>content : 요소가 차지하는 공간</li>
+<li>padding : 요소와 테두리 사이의 공간</li>
+<li>border : 테두리</li>
+<li>margin : 다른 요소 사이의 빈 공간</li>
+</ol>
+<h4 id="Flexible-Box"><a href="#Flexible-Box" class="headerlink" title="Flexible Box"></a>Flexible Box</h4><img width="228" alt="image-20210403164800193" src="https://user-images.githubusercontent.com/49134038/113500980-2c243680-955d-11eb-828b-c1242391ea30.png">
+
+<ol>
+<li>flex container<ul>
+<li>display</li>
+<li>flex-direction</li>
+<li>flex-wrap : 줄 바꿈</li>
+<li>justify-content : 주 축의 정렬 방법</li>
+<li>align-items : 교차 축의 정렬 방법</li>
+</ul>
+</li>
+<li>flex items<ul>
+<li>flex-grow : 증가 너비 비율</li>
+<li>flex-shrink : 감소 너비 비율</li>
+<li>flex-basis<ul>
+<li>default: <code>0 1 auto</code></li>
+<li>많이 설정: <code>1 0 auto</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/03/04/27-Redux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/04/27-Redux/" class="post-title-link" itemprop="url">27. Redux</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-03 19:49:00" itemprop="dateCreated datePublished" datetime="2021-03-03T19:49:00Z">2021-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="State-Manager"><a href="#State-Manager" class="headerlink" title="State Manager"></a>State Manager</h3><ul>
+<li>Without<br>each component has its own storage =&gt; spaghetti code</li>
+<li>With<br>has one store without having each storage</li>
+</ul>
+<ul>
+<li>predictable state container for JavaScript applications<ul>
+<li>unpredictable; random bugs, hard to fix</li>
+</ul>
+</li>
+<li>application-wide state</li>
+<li>reduce function</li>
+</ul>
+<p>react component = view</p>
+<h4 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h4><ul>
+<li>can have multiple reducers</li>
+<li>receives a state and do an action</li>
+</ul>
+<ul>
+<li>reduce function</li>
+<li>specify how the application’s state changes in response</li>
+<li>pure function</li>
+<li>never do something like : mutate arguments, callign an API, call non-pure function</li>
+</ul>
+<p>identity reducer</p>
+<ul>
+<li>getState()</li>
+<li>dispatch(action)</li>
+<li>subscribe(listener)</li>
+</ul>
+<p>👇but normally uses hooks👇 </p>
+<h4 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h4><p>※ for React<br>react-query.tanstack.com/reference/useQuery<br>useQuery<br>Subscribe to our newsletter The latest TanStack news, articles, and resources, sent to your inbox.<br>react-query.tanstack.com<br>useReducer<br>ko.reactjs.org/docs/hooks-reference.html<br>Hooks API Reference – React<br>A JavaScript library for building user interfaces<br>ko.reactjs.org</p>
+<h3 id="Making-To-Do-List"><a href="#Making-To-Do-List" class="headerlink" title="Making To-Do List"></a>Making To-Do List</h3><p>🚀 redux devTools</p>
+<p>Do one thing -&gt; make sure it is working -&gt; move on to next one﻿</p>
+<h4 id="overview-Tree"><a href="#overview-Tree" class="headerlink" title="overview Tree"></a>overview Tree</h4><p>big loop</p>
+<ul>
+<li>dispatch: sends the action to the reducer =&gt; actions in loop</li>
+</ul>
+<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><p>👇simplified</p>
+<ul>
+<li>&lt; TodoItem todo = {todo} onChange={onChangeTodo} &gt;</li>
+</ul>
+<p>※ Single component as a single responsibility</p>
+<ul>
+<li>Presentational Component<br>blog.naver.com/backsajang420/221368885149<br>[React] Presentational and Container Components<br>[React] 프레젠테이션 컴포넌트와 컨테이너 컴포넌트 (Presentational and Container Components)# 시…<br>blog.naver.com</li>
+</ul>
+<blockquote>
+<p>프레젠테이션 컴포넌트 (Presentational Component)<br>프레젠테이션 컴포넌트(Presentational Component) 는 아래와 같은 성질을 갖는다.<br>● 어떻게 보여지는 지를 책임진다.<br>컨테이너 컴포넌트 (Container Component)<br>컨테이너 컴포넌트(Container Component) 는 아래와 같은 성질을 갖는다.<br>● 어떻게 동작해야 할지를 책임진다.</p>
+</blockquote>
+<h4 id="React-with-Redux"><a href="#React-with-Redux" class="headerlink" title="React with Redux"></a>React with Redux</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/03/03/26-authentication/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/03/26-authentication/" class="post-title-link" itemprop="url">26. authentication</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-02 22:31:30" itemprop="dateCreated datePublished" datetime="2021-03-02T22:31:30Z">2021-03-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h2><ul>
+<li>Authentication: who you are</li>
+<li>Authorization: what you are authorized to do</li>
+</ul>
+<h3 id="The-Authorization-Header"><a href="#The-Authorization-Header" class="headerlink" title="The Authorization Header"></a>The Authorization Header</h3><p>HTTP/1.1</p>
+<ul>
+<li>browser ‘Inspect’ -&gt; Network</li>
+</ul>
+<h3 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h3><h4 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h4><p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">http://www.base64decode.org</a></p>
+<p>Base64 Decode and Encode - Online</p>
+<p><a target="_blank" rel="noopener" href="http://www.base64decode.org/">www.base64decode.org</a><br>Autehntication based on username and password<br>concatenation with <code>:</code></p>
+<ul>
+<li>Don’t store passwords in raw text, always hash it!</li>
+<li>Don’t use MD5 (Brute Force) since is becoming more insecure with the current computing power</li>
+<li>USE BCrypt(the standard nowadays): hash same input into different everytime<br>npm bcrypt</li>
+</ul>
+<h4 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h4><ul>
+<li>github personal access tokens<br>random token is shared between the server and the client, usually on another request<br>lasts for short time (normally 30sec)<br>Authorization = Bearer</li>
+</ul>
+<p>clinet: React, Angular …</p>
+<h4 id="JWT-Jason-Web-Tokens"><a href="#JWT-Jason-Web-Tokens" class="headerlink" title="JWT (Jason Web Tokens)"></a>JWT (Jason Web Tokens)</h4><p><a target="_blank" rel="noopener" href="https://jwt.io/">https://jwt.io</a><br>[algorithm &amp; token type]header-[data: that needs to be secured]payload(userId, iat)-[verifying key]verify signature: no one can change the content<br>signature =&gt; only if I have a secret, generates the signature / if input is different, signature will be different too</p>
+<ul>
+<li>can’t change the payload if the signature hasn’t been changed</li>
+</ul>
+<ul>
+<li>most bearer strategy: the token has all the info needed</li>
+<li>the only thing stored in the server is the stored passphrase</li>
+<li>the token is composed by the encryption information, the payload encoded in base64 and the signature</li>
+<li>less control on the token, the only way not to accept it is by using a blacklist</li>
+</ul>
+<h3 id="Sesson"><a href="#Sesson" class="headerlink" title="Sesson"></a>Sesson</h3><ul>
+<li>payload of data that relates to a user</li>
+<li>persisted in the server and is tagged with the ID</li>
+<li>writes ID in the cookie (piece of information)-&gt; how we are saved and tracked// and sends it to the browser</li>
+</ul>
+<ul>
+<li>everytime the browser performs a request to the server, it sends back the cookie with the ID in it</li>
+</ul>
+<p>session store: mongodb, file, etc…<br>npm express-session<br>npm helmet</p>
+<ul>
+<li>iframe: build website inside the website (element)</li>
+</ul>
+<h4 id="Oauth"><a href="#Oauth" class="headerlink" title="Oauth"></a>Oauth</h4><ul>
+<li>FireFox</li>
+</ul>
+<ul>
+<li>user, app and authentication provider</li>
+<li>lets us authenticate a user through an authentication provider, who manages the account of the user</li>
+<li>Authenticates a user within the activity of an app</li>
+<li>The credentials are not leaked to the app</li>
+<li>BUT gives the provider the information (e.g. google)<br>passport.js<br>oauth0<br>firebase authentication</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/03/02/25-Security/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/02/25-Security/" class="post-title-link" itemprop="url">25. Security</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-01 22:39:07" itemprop="dateCreated datePublished" datetime="2021-03-01T22:39:07Z">2021-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Web-Security"><a href="#Web-Security" class="headerlink" title="Web Security"></a>Web Security</h2><ul>
+<li>Assume the worst case *</li>
+</ul>
+<ul>
+<li>Exposed to threats<ul>
+<li>Data theft/ destruction</li>
+<li>System attacks</li>
+</ul>
+</li>
+<li>vulnerabilities</li>
+<li>defencsive using automated alerts</li>
+</ul>
+<h3 id="Attack-Types"><a href="#Attack-Types" class="headerlink" title="Attack Types"></a>Attack Types</h3><ul>
+<li>Malicious code execution</li>
+<li>Cryptography attacks: hide secrets</li>
+<li>Data interception</li>
+<li>Denial of Service</li>
+</ul>
+<p>owasp.org/www-project-top-ten/<br>OWASP Top Ten Web Application Security Risks | OWASP<br>The OWASP Top 10 is the reference standard for the most critical web application security risks. Adopting the OWASP Top 10 is perhaps the most effective first step towards changing your software development culture focused on producing secure code.<br>owasp.org</p>
+<h4 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h4><ul>
+<li>Cross-Site Scripting: request from one domain to another domain<br> -&gt; html entities</li>
+<li>A type of injection</li>
+<li>Malicious scripts are injected into web sites</li>
+<li>scripts could be entered on any inputs</li>
+</ul>
+<h4 id="XSS-Solutions"><a href="#XSS-Solutions" class="headerlink" title="XSS Solutions"></a>XSS Solutions</h4><p>Escape/ Sanitiza all user inputs<br>Escape all the input before actually putting it on sensible places<br>XSS Protection Cheatsheet</p>
+<h4 id="SQL-Injection"><a href="#SQL-Injection" class="headerlink" title="SQL Injection"></a>SQL Injection</h4><ul>
+<li>just USE <code>Sequelize</code></li>
+</ul>
+<ul>
+<li>parameterized statements</li>
+<li>escaping user inputs</li>
+<li>privileges control</li>
+<li>SQL Injection Prevention Cheatsheet</li>
+</ul>
+<h4 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h4><ul>
+<li>Cross-Site Request Forgery</li>
+<li>forces a user to input st unauthorized</li>
+</ul>
+<h4 id="CSRF-Solutions"><a href="#CSRF-Solutions" class="headerlink" title="CSRF Solutions"></a>CSRF Solutions</h4><ul>
+<li>Identifying source origin</li>
+<li>access-control-allow-origin</li>
+<li>Synchronizer Tokens</li>
+</ul>
+<h4 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h4><ul>
+<li>http is not safe, HTTPS is same with http over TLS</li>
+<li>only expose the host to a DNS server and the target IP<br> &lt; Secured things &gt;<ul>
+<li>path</li>
+<li>query</li>
+<li>payload</li>
+<li>every method</li>
+</ul>
+</li>
+</ul>
+<h5 id="The-Handshake"><a href="#The-Handshake" class="headerlink" title="The Handshake"></a>The Handshake</h5><ul>
+<li>negociation the certificate</li>
+</ul>
+<p>Heroku / Let’s Encrypt<br>gives HTTP certificate for free</p>
+<p>Hack Bounties<br>to test the security</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/22/DCGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/22/DCGAN/" class="post-title-link" itemprop="url">DCGAN</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-21 22:14:52" itemprop="dateCreated datePublished" datetime="2021-02-21T22:14:52Z">2021-02-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h3><p><a target="_blank" rel="noopener" href="https://www.goeduhub.com/10614/generate-convolutional-generative-adversarial-networks">https://www.goeduhub.com/10614/generate-convolutional-generative-adversarial-networks</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/18/24-Server-to-Client/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -380,1037 +1871,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/17/22-React-Component/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/17/22-React-Component/" class="post-title-link" itemprop="url">22. React Component</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-16 19:15:07" itemprop="dateCreated datePublished" datetime="2021-02-16T19:15:07Z">2021-02-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="React-Component-Lifecycle"><a href="#React-Component-Lifecycle" class="headerlink" title="React Component Lifecycle"></a>React Component Lifecycle</h3><ul>
-<li>Mounting</li>
-<li>Updating</li>
-<li>Unmounting: remove the component =&gt; without any re-rendering or updating</li>
-</ul>
-<p>render -&gt; mount -&gt; (setState()) -&gt; render -&gt; update</p>
-<h3 id="The-form-tag"><a href="#The-form-tag" class="headerlink" title="The form tag"></a>The <code>form</code> tag</h3><h3 id="Controlled-Components"><a href="#Controlled-Components" class="headerlink" title="Controlled Components"></a>Controlled Components</h3><p>export the parent element -&gt; pass to the child data -&gt; repeat … to the grandchild<br>LIKE A TREE</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/16/21-React/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/16/21-React/" class="post-title-link" itemprop="url">21. React</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-15 15:01:26" itemprop="dateCreated datePublished" datetime="2021-02-15T15:01:26Z">2021-02-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><ul>
-<li>not framework (collection of libraries) =&gt; same as express(Angular)/ koa (React)<ul>
-<li>libary for creating interactive UIs</li>
-<li>rendering engine -&gt; need 3rd party lib</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>component-based</li>
-<li>unopinionated</li>
-<li>JSX template</li>
-<li>every component receives props(transfer from parent to the child) and/or handle its own state(own obj handled by the component itself)</li>
-</ul>
-<h3 id="React-Component-Class"><a href="#React-Component-Class" class="headerlink" title="React Component (Class)"></a>React Component (Class)</h3><ul>
-<li>render()</li>
-</ul>
-<p>return JSX template –&gt; html element</p>
-<p>inherit in the parent component</p>
-<h3 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h3><h3 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h3><dl><dt>name=”Sara” -&gt; this.props.name (this ctx: MyComponent)</dt><dd>this.props =&gt; 해당 class를 부르는 child component attribute 전달 및 실행</dd></dl><p>App- Parent- Child</p>
-<h3 id="State"><a href="#State" class="headerlink" title="State"></a>State</h3><h3 id="React-Application"><a href="#React-Application" class="headerlink" title="React Application"></a>React Application</h3><ul>
-<li>ReactDOM.render()</li>
-</ul>
-<p>-&gt; replace the normal DOM with virtual DOM (ReactDOM)</p>
-<h3 id="Conditional-Rendering"><a href="#Conditional-Rendering" class="headerlink" title="Conditional Rendering"></a>Conditional Rendering</h3><h4 id="Loop-Rendering"><a href="#Loop-Rendering" class="headerlink" title="Loop Rendering"></a>Loop Rendering</h4><p>{} : act as JavaScript</p>
-<h3 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h3><p>flows data from parent to children<br>handleChange (e) {} === handleChange = (e) =&gt; {}<br>*** arrow function =&gt; solves a lot of problems because it gets rid of the ctx of passing argument but passes the function scope which called it to <code>this</code> context</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/13/20-Observable/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/13/20-Observable/" class="post-title-link" itemprop="url">20. Observable</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-12 19:14:47" itemprop="dateCreated datePublished" datetime="2021-02-12T19:14:47Z">2021-02-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h3><p>angular.io/guide/observables<br>Angular<br>angular.io</p>
-<h4 id="RxJS"><a href="#RxJS" class="headerlink" title="RxJS"></a>RxJS</h4><ul>
-<li>PULLING system<br>producer<br>consumer</li>
-<li>PUSHING system<br>producer: pushes the data to a consumer</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="http://www.youtube.com/watch?v=ei7FsoXKPl0">www.youtube.com/watch?v=ei7FsoXKPl0</a></p>
-<p>Singluar    Plural<br>Synchronous    Value    Iterable<br>Asynchronous    Promise    Observable</p>
-<ul>
-<li>linear vector time</li>
-<li>seperated randomly (spreaded)<br>e.g. User Interaction: key stroke like click button, create event</li>
-<li>receives promises for multiple times</li>
-<li>compatibility: consistancy, handled by observables</li>
-</ul>
-<p>※ Everything is a Stream</p>
-<h4 id="Subscribe"><a href="#Subscribe" class="headerlink" title="Subscribe"></a>Subscribe</h4><ul>
-<li>observable$ =&gt; always with ‘$’</li>
-</ul>
-<h4 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h4><p>observable$.pipe(<br>operator(),<br>…<br>).subscribe(data =&gt; …)</p>
-<ul>
-<li>pipe(): throwing every single element a time</li>
-</ul>
-<ul>
-<li>operators are listed in order</li>
-</ul>
-<ul>
-<li>filter(): Array.filter과 비슷<br>filter() 메서드는 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.</li>
-</ul>
-<ul>
-<li>receiving bunch of events spreaded in time</li>
-<li>not returning an array</li>
-<li>true: pass / false: filtered out</li>
-</ul>
-<ul>
-<li>map()</li>
-</ul>
-<ul>
-<li>take the element and returns the conditioned element</li>
-</ul>
-<ul>
-<li>scan()</li>
-</ul>
-<p>As you can see from above code, similar to reduce function the scan function passes output of first function, as the input to the next function execution but the only difference being that, the result of each function execution is stored in an array and that array is returned as a result.</p>
-<p>You can notice that, the last element of the resulting array is 15which was the output of reduce function.</p>
-<ul>
-<li>subscribe(): final function that receives the information</li>
-</ul>
-<ul>
-<li>make sure it returns anything, not error</li>
-</ul>
-<ul>
-<li>next(): call the next function in the stream</li>
-</ul>
-<ul>
-<li>expressJS<br>Middleware functions are functions that have access to the request object(req), the response object (res), and the next function in the application’s request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.</li>
-</ul>
-<p>Middleware functions can perform the following tasks:<br>Execute any code.<br>Make changes to the request and the response objects.<br>End the request-response cycle.<br>Call the next middleware in the stack.<br>If the current middleware function does not end the request-response cycle, it must call next() to pass control to the next middleware function. Otherwise, the request will be left hanging.</p>
-<p>Starting with Express 5, middleware functions that return a Promise will call next(value) when they reject or throw an error. next will be called with either the rejected value or the thrown Error.</p>
-<ul>
-<li>Angular (angular.io/guide/observables)<br>Note that a next() function could receive, for instance, message strings, or event objects, numeric values, or structures, depending on context. As a general term, we refer to data published by an observable as a stream. Any type of value can be represented with an observable, and the values are published as a stream.</li>
-</ul>
-<ul>
-<li>complete(): close the stream</li>
-</ul>
-<ol>
-<li><dl><dt>Cold Observable<br>: only one subscription at one<br>: receive last value in the stream<br>: stream one direction, prepare data and spread them all at one together</dt><dd>same info to all the users</dd></dl></li>
-<li><dl><dt>Hot Observable<br>: can connect to the same stream the other one<br>: multiple streamers</dt><dd>can use former value after next function</dd></dl></li>
-</ol>
-<ul>
-<li>debounceTime(k): wait for k(ms) after stopped typing and put arg in the stream</li>
-</ul>
-<p>👀 Why do we need both ngOnInit() and constructor()?<br>The Constructor is a default method of the class that is executed when the class is instantiated and ensures proper initialisation of fields in the class and its subclasses. Angular, or better Dependency Injector (DI), analyses the constructor parameters and when it creates a new instance by calling new MyClass() it tries to find providers that match the types of the constructor parameters, resolves them and passes them to the constructor like <code>new MyClass(someArg);</code></p>
-<p>ngOnInit is a life cycle hook called by Angular to indicate that Angular is done creating the component.</p>
-<ul>
-<li>constructor: rendoring first</li>
-</ul>
-<ul>
-<li>initialise mainly properties</li>
-<li>have nothing which could stop executing</li>
-</ul>
-<ul>
-<li>ngOnInit: happen after first rendor, fulfill others</li>
-</ul>
-<ul>
-<li>triggering the function, asking for datas, populate them in the final</li>
-</ul>
-<p>BEM (Block Element Modifier)</p>
-<p>getbem.com/naming</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/11/19-Decorators/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/11/19-Decorators/" class="post-title-link" itemprop="url">19. Decorators</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-11 11:50:45" itemprop="dateCreated datePublished" datetime="2021-02-11T11:50:45Z">2021-02-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h3><h3 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h3><p>take the logic</p>
-<h3 id="Data-Binding"><a href="#Data-Binding" class="headerlink" title="Data Binding"></a>Data Binding</h3><ul>
-<li>[(ngModel)] = “property” : binding input property with handling model</li>
-</ul>
-<h2 id="Typescript-and-Angular-Decorators"><a href="#Typescript-and-Angular-Decorators" class="headerlink" title="Typescript and Angular Decorators"></a>Typescript and Angular Decorators</h2><h3 id="Typescript-Decorators"><a href="#Typescript-Decorators" class="headerlink" title="Typescript Decorators"></a>Typescript Decorators</h3><p><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/docs/handbook/decorators.html">www.typescriptlang.org/docs/handbook/decorators.html</a><br>Documentation - Decorators<br>TypeScript Decorators overview<br><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">www.typescriptlang.org</a></p>
-<ul>
-<li>meta programming changing target without modifying metadata (classes)</li>
-<li>annotate or modify the target</li>
-<li></li>
-</ul>
-<p>labelling the target</p>
-<p>@function: function decorator, decorator creater(factory)</p>
-<ul>
-<li>return function (target) =&gt; put class into the target</li>
-<li>return what you decorate (classDecorator -&gt; return class info …)</li>
-</ul>
-<p>…toppings: string[] –&gt; toppings = [‘tomato’, ‘mozzarella’, ‘basil’]</p>
-<p>memoize() : // _.memoize(func)</p>
-<p>Memoizes a given function by caching the computed result.<br>Useful for speeding up slow-running computations.<br>You may assume that the memoized function takes only one argument and that it is a primitive.<br>Memoize should return a function that when called, will check if it has already computed the result for the given argument and return that value instead of recomputing it.</p>
-<h2 id="Object-Properties"><a href="#Object-Properties" class="headerlink" title="Object Properties"></a>Object Properties</h2><h3 id="How-to-define-a-property"><a href="#How-to-define-a-property" class="headerlink" title="How to define a property?"></a>How to define a property?</h3><p>ob.foo = ‘bar’; // direct<br>// Object.defineProperty(obj, ‘foo’, {value: ‘bar’}); //(ppt, ppt_name, object// describe the behaviour of the ppt //ppt_value)</p>
-<blockquote>
-<p>Attribute name</p>
-</blockquote>
-<ul>
-<li>Value (Any type) // actual value<br>// default values of 3 boolean functions of defineProperty(): false // if we define obj with assigning it, then default == true !!!</li>
-<li>Writable (Boolean) // whether the property value can be changed or not</li>
-<li>Enumerable (Boolean) // makes it appear to be in loops (listed in ‘for-in’ enumeration)<br>// 💥 Is Array enumerable?</li>
-<li>Configurable (Boolean) // +Writable +Enumerable // whether we can delete the property or change any attribute apart from attr // configurable lets us change the writable property, writable lets us change the value property</li>
-</ul>
-<h3 id="Angular-Decorators"><a href="#Angular-Decorators" class="headerlink" title="Angular Decorators"></a>Angular Decorators</h3><h4 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h4><p>target: class MyComponent</p>
-<h4 id="Injectable"><a href="#Injectable" class="headerlink" title="Injectable"></a>Injectable</h4><h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>@Input: input decorator =&gt; able to pass the value from parent template using the tag to the child component class</p>
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>@Output: output decorator =&gt; sen the info to the parent element<br>💥 Child’s view<br>input is meant to receive information from the parent element<br>output is meant to send info to the parent</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/10/18-Angular/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/10/18-Angular/" class="post-title-link" itemprop="url">18. Angular</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-10 12:28:55" itemprop="dateCreated datePublished" datetime="2021-02-10T12:28:55Z">2021-02-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h2><h3 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h3><p><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/docs/handbook/intro.html">www.typescriptlang.org/docs/handbook/intro.html</a></p>
-<p>Handbook - The TypeScript Handbook<br>Your first step to learn TypeScript<br><a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">www.typescriptlang.org</a></p>
-<p>let [varName] : [varType] = [value];</p>
-<ul>
-<li>enum : dictionary</li>
-<li>function =&gt; need to specify the types of parameters</li>
-</ul>
-<ul>
-<li>getting rid of any error of classes…</li>
-<li>testing if we generate any error</li>
-<li>typing faster</li>
-</ul>
-<p>imraccoon-developer.tistory.com/11</p>
-<p>TypeScript, 왜 써야되나?? (feat. 장단점)<br>JavaScript가 es6로 바뀌면서 큰 인기를 끌기 시작했습니다. 또한, Node.js로 할 수 있는 것들이 점점 많아졌으며, 지금도 많아지고 있습니다. 처음에는 웹에서 사용하기 위한 스크립트 언어로 활용되<br>imraccoon-developer.tistory.com</p>
-<h3 id="Angular-Architecture"><a href="#Angular-Architecture" class="headerlink" title="Angular Architecture"></a>Angular Architecture</h3><ul>
-<li>Modules</li>
-<li>Components</li>
-<li>Services<br>…</li>
-</ul>
-<h4 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h4><ul>
-<li>connected through Metadata</li>
-<li>Component === View</li>
-<li>Service: share functionality through entire app</li>
-<li>dependency injector</li>
-</ul>
-<p>@NgModule: function</p>
-<ul>
-<li>bootstrap: starting point, start compiling</li>
-<li>decorators: annotate data to give extra info to(of) the target</li>
-</ul>
-<p>–&gt; decorating: NgModule targeting AppModule</p>
-<h4 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h4><ul>
-<li><p>A class meant to be as reusable (when applies) as possible</p>
-</li>
-<li><p>Defines application data and logic</p>
-</li>
-<li><p>Bound to a template, an HTML file</p>
-</li>
-<li><blockquote>
-<p>give users all the functionality of the app</p>
-</blockquote>
-</li>
-<li><p>create DOM and add components thus drawing a tree: [tree] template -&gt; components (+ template) -&gt; … </p>
-</li>
-<li><p>communicate with each other and give access of information to users</p>
-</li>
-<li><p>component = instance of a class, independent element but communicate with others as a class</p>
-</li>
-<li><p>render the DOM as a new node</p>
-</li>
-<li><dl><dt>shadow DOM to encapsulate the component, not affected by exeternal interventions<br>Shadow DOM</dt><dd>different DOM, OWN capsulated environment</dd></dl></li>
-</ul>
-<p>polymer-library.polymer-project.org/2.0/docs/devguide/shadow-dom<br>Shadow DOM is a new DOM feature that helps you build components. You can think of shadow DOM as a scoped subtreeinside your element.</p>
-<ul>
-<li>Root Component</li>
-</ul>
-<ul>
-<li>contain everything</li>
-</ul>
-<ul>
-<li>Root Template</li>
-</ul>
-<ul>
-<li>Navigation Component: works itself, alone</li>
-<li>Container Component: including other components</li>
-</ul>
-<ul>
-<li>Filtering Component</li>
-</ul>
-<ul>
-<li>receive the input data</li>
-<li>render into different components (list, map)</li>
-</ul>
-<p>e.g. Scenario<br>if like one of the list component item -&gt; passed up to the container -&gt; reflect that to the map component<br>filtering info in the filter component -&gt; passed up to the container -&gt; reflect that to the map component</p>
-<h4 id="Data-Binding"><a href="#Data-Binding" class="headerlink" title="Data Binding"></a>Data Binding</h4><p>when user gives the input, then DOM will communicate using property in [(ng-model)] = “property”</p>
-<ul>
-<li>handler: function declared component </li>
-</ul>
-<p>object =&gt; {}</p>
-<ul>
-<li>2 way binding: class component &lt;-&gt; template </li>
-</ul>
-<ul>
-<li>selector: ‘movie-details’ –&gt; director obj go in trhough selector</li>
-</ul>
-<h4 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h4><ul>
-<li>private: TS property, can’t access it from other classes</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/10/Data-Sitting-from-MongoDB-to-GraphQL/" class="post-title-link" itemprop="url">Data Sitting from MongoDB to GraphQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-09 16:47:19" itemprop="dateCreated datePublished" datetime="2021-02-09T16:47:19Z">2021-02-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="TRY-THIS-🌈✨"><a href="#TRY-THIS-🌈✨" class="headerlink" title="TRY THIS 🌈✨"></a>TRY THIS 🌈✨</h4><p>buddy.works/tutorials/how-to-connect-mongodb-to-graphql-server</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/09/17-GraphQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/09/17-GraphQL/" class="post-title-link" itemprop="url">17. GraphQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-08 21:44:47" itemprop="dateCreated datePublished" datetime="2021-02-08T21:44:47Z">2021-02-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h2><ul>
-<li>more efficient</li>
-<li>alternative to REST API</li>
-</ul>
-<ul>
-<li>Not a Framework!</li>
-<li>similar to router</li>
-</ul>
-<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><ul>
-<li>pattern, standard for APIs</li>
-<li>interface that tells the external how to get the datas</li>
-<li>have endpoints (e.g. ‘/messages’)</li>
-</ul>
-<dl><dt>/teams/CH</dt><dd>send all the info</dd></dl><p>–&gt; moduler<br>/teams/CH/info<br>/teams/CH/players<br>/teams/CH/matches</p>
-<ul>
-<li>Query Language (Standard)</li>
-</ul>
-<p>order also matches!</p>
-<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><ol>
-<li>Schema<ul>
-<li>Types</li>
-</ul>
-</li>
-</ol>
-<p>id =&gt; unique<br>[]! =&gt; need [] type, you need to pass [] thing<br>team: Team! =&gt; team is related to type Team (Team: object)</p>
-<ol start="2">
-<li>Resolvers</li>
-</ol>
-<ul>
-<li>Scalar Types<br>(Built-In)</li>
-</ul>
-<ul>
-<li>Int</li>
-<li>Float</li>
-<li>String</li>
-<li>Boolean</li>
-<li>ID<br>(Custom Scalar)</li>
-<li>Date, Url, EmailAddress …<br>id, name, age: primitive type<br>team: object -&gt; sub-doc. type =&gt; repeat the same process to find the type</li>
-</ul>
-<ol start="3">
-<li>Queries &amp; Mutations<br>one single endpoint</li>
-</ol>
-<p>-&gt; perform queries</p>
-<ul>
-<li>Sub-Selection<br>pass the object to the type -&gt; give the right interface of information of that object</li>
-</ul>
-<ul>
-<li>have to ask the property of the object</li>
-</ul>
-<ul>
-<li><p>Arguments</p>
-</li>
-<li><p>Variables</p>
-</li>
-</ul>
-<p>put “DEF” into $position var</p>
-<ul>
-<li><ul>
-<li><ul>
-<li>fetching data - - -<br>👇</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>change (mutate) data - - -</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Mutations</p>
-</li>
-</ul>
-<ul>
-<li>another type of action like query that performs changes on the resources</li>
-<li>diff is like <code>GET - POST</code>: doesn’t change anything in the server - change something in the server<br> -&gt; do st that doesn’t suppose to do, run semantic, perform changes by manipulating inside my DB</li>
-</ul>
-<ol>
-<li>create new data <code>POST</code></li>
-<li>update existing data <code>PUT</code></li>
-<li>delete existing data <code>DELETE</code></li>
-</ol>
-<p>name, position: response<br>1st: input type checking -&gt; 2nd: actually executing the mutation</p>
-<ul>
-<li>ID: created internally by the program</li>
-</ul>
-<ul>
-<li>send the request to the root (4000-graphQL as the endpoint)</li>
-<li>reliable, flexible</li>
-</ul>
-<ul>
-<li>Execution<br>search for syntax error</li>
-</ul>
-<p>undefined height -&gt; null, name ~ pass height ~ go inside team obj</p>
-<ul>
-<li>Resolvers<br>Schema: define, Resolver: interact =&gt; interplay to call server flexibly</li>
-</ul>
-<p>get id:42 from upper example</p>
-<ul>
-<li>obj : the previous resolved obj, parent element that has been previously resolved</li>
-<li>args : the arguments object for the field in the query, include id .. all the args that we want to pass</li>
-<li>context : shared object provided to every resolver, communicate and share information, later function can access to it (i.e. ctx in Koa)</li>
-<li>info : extra information about the current query to mutate, etc.</li>
-</ul>
-<h4 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h4><p>typeDefs: routers<br>resolvers: controllers</p>
-<ul>
-<li><p>index.js</p>
-</li>
-<li><p>typeDefs.js</p>
-</li>
-</ul>
-<ul>
-<li>resolvers.js</li>
-</ul>
-<p>not using obj =&gt; replace it with <code>_</code><br>👇</p>
-<ul>
-<li>resolvers.js</li>
-</ul>
-<p>※ express / koa : REST API = apollo-server : gql</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/06/16-Web-Components-PWA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/06/16-Web-Components-PWA/" class="post-title-link" itemprop="url">16. Web Components, PWA</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-06 11:27:27" itemprop="dateCreated datePublished" datetime="2021-02-06T11:27:27Z">2021-02-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Web-Components"><a href="#Web-Components" class="headerlink" title="Web Components"></a>Web Components</h3><h4 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h4><ol>
-<li>Scoped</li>
-<li>Reusable</li>
-<li>Encapsulated</li>
-</ol>
-<h4 id="Made-by-4-main-technologies"><a href="#Made-by-4-main-technologies" class="headerlink" title="Made by 4 main technologies"></a>Made by 4 main technologies</h4><ol>
-<li>HTML Template</li>
-<li>Custom Elements</li>
-<li>Shadow DOM</li>
-<li>HTML Imports</li>
-</ol>
-<h4 id="Basic-Web-Components"><a href="#Basic-Web-Components" class="headerlink" title="Basic Web Components"></a>Basic Web Components</h4><ul>
-<li>Card Title</li>
-<li>Component Title</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class&#x3D;&quot;card&quot;&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h2&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;&#x2F;...&gt;</span><br></pre></td></tr></table></figure>
-<p>👇</p>
-<ol>
-<li><p>reduce duplicated contents using…<br>&lt;product-card<br>data-header=<br>data-img=<br>data-text=</p>
-<blockquote>
-</product-card></blockquote>
-</li>
-<li><p>with JavaScript!</p>
-</li>
-</ol>
-<ul>
-<li>customElements : global variable</li>
-<li>shadow, secret // outside world can’t get access to it</li>
-</ul>
-<ul>
-<li>shadow DOM<br>a tree-like structure of connected nodes that represents the different elements and strings of text appearing in a markup document (usually an HTML document in the case of web documents).<br>※ font-size =&gt; DON’T use px !!! USE rem</li>
-</ul>
-<h3 id="Progressive-Web-App-PWA"><a href="#Progressive-Web-App-PWA" class="headerlink" title="Progressive Web App (PWA)"></a>Progressive Web App (PWA)</h3><ol>
-<li>Reliable: download and work off-line</li>
-</ol>
-<ul>
-<li>Service worker (downloads content-heavy web, use off-line)</li>
-<li>Pre-caching</li>
-</ul>
-<ol start="2">
-<li>Fast</li>
-<li>Engaging</li>
-</ol>
-<ul>
-<li>No app store needed</li>
-<li>Immersive full screen</li>
-<li>Push Notifications</li>
-</ul>
-<ul>
-<li>Chrome DevTools : Inspect -&gt; LightHouse 이용!!</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1478,7 +1942,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">143</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1491,7 +1955,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-count">93</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

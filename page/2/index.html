@@ -163,6 +163,837 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/09/07/web-oauth/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/07/web-oauth/" class="post-title-link" itemprop="url">OAuth 2.0 프로토콜</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-06 22:29:55 / Modified: 14:32:50" itemprop="dateCreated datePublished" datetime="2021-09-06T22:29:55+01:00">2021-09-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>사용자가 usernames, passwords, 그리고 기타 <strong>개인적인 정보를 가지고 특정 서비스에 저장된 자신의 데이터를 다른 서비스에서 접근할 수 있도록</strong> 허락해주는 프로토콜</li>
+<li>e.g. 구글의 서비스에서 관리되고 있는 사용자의 데이터를 다른 서비스가 접근할 수 있도록 구글 API를 제공</li>
+</ul>
+<h2 id="특징"><a href="#특징" class="headerlink" title="특징"></a>특징</h2><ul>
+<li>여러 장치를 통해 시시각각 바뀌는 사용자의 연락처 정보를 실시간으로 업데이트 받을 수 있음</li>
+<li>타 서비스에 저장된 사용자 데이터를 접근해도 되는지 사용자에게 <em>명시적으로</em> 허락을 받음</li>
+</ul>
+<h2 id="OAuth-2-0-flow-for-JavaScript-implicit-grant-flow"><a href="#OAuth-2-0-flow-for-JavaScript-implicit-grant-flow" class="headerlink" title="OAuth 2.0 flow for JavaScript: implicit grant flow"></a>OAuth 2.0 flow for JavaScript: implicit grant flow</h2><ul>
+<li><strong>Implicit</strong> <strong>Grant</strong></li>
+<li>자바스크립트 라이브러리로 개발되는 SPA에서는 implicit grant 방식이 많이 사용됨</li>
+<li>user가 present 할 때만 API에 접근 가능하며, 기밀 정보는 따로 저장되지 않음</li>
+</ul>
+<ol>
+<li>사용자는 API를 제공받고자 하는 서비스에 로그인 한 후, API를 사용하고자 하는 어플리케이션에서 요청하는 권한을 확인하고, 해당 권한을 허용한다.</li>
+<li>Google Authorization Server는 사용자를 사전에 등록된 <code>redirect uri</code> 로 리다이렉트 시키면서 <code>access token</code> 을 애플리케이션에 보낸다.</li>
+<li>어플리케이션은 이 <code>access token</code> 을 이용해서 구글 API를 호출하여 원하는 정보를 얻는다.</li>
+</ol>
+<h2 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h2><ol>
+<li><strong>Request</strong> : 클라이언트 어플리케이션은 Google Authorization Server에 <code>access token</code> 을 요청하고,</li>
+<li><strong>Response</strong> : response로부터 <code>token</code> 을 추출한다.</li>
+<li><strong>Validation</strong> : 이후 접근하고자 하는 Google API에 <code>token</code> 을 보낸다.</li>
+</ol>
+<p><img src="https://developers.google.com/identity/protocols/oauth2/images/flows/implicit.png" alt="oauth2.0_javascript"></p>
+<h2 id="Example-Google-People-API"><a href="#Example-Google-People-API" class="headerlink" title="Example: Google People API"></a>Example: Google People API</h2><ol>
+<li><p>구글 API를 호출하기 위해서는 가장 먼저, 구글에 API를 사용하고자 하는 어플리케이션을 클라이언트로 등록하고 <code>client_id</code> 를 발급받아야 한다.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://console.developers.google.com/apis">구글 API 콘솔</a> 에서 프로젝트를 생성 → 사용자 인증 정보 만들기 에서 OAuth 클라이언트 ID를 선택 → 웹 어플리케이션 → 승인된 리디렉션 URI 설정 (e.g. <code>[http://localhost:3000/](http://localhost:3000/)</code> ) → 클라이언트 ID 생성</li>
+</ul>
+</li>
+<li><p>Google Authorization Server에 접속하여 사용자 <code>token</code> 을 받아야 한다.</p>
+<ul>
+<li><code>CLIENT_ID</code>: 위에서 발급받은 클라이언트 ID</li>
+<li><code>AUTHORIZE_URI</code>: 구글에서 OAuth를 제공하는 기본 URI</li>
+<li><code>queryStr</code>: 위 <code>AUTHORIZE_URI</code>에 붙일 사용자 개인 정보 (쿼리), URL 생성용<ul>
+<li><code>client_id</code></li>
+<li><code>redirect_uri</code>: 실습 애플리케이션은 페이지가 하나 밖에 없는 SPA이기 때문에, 현재 URL을 <code>redirect_uri</code>로 설정</li>
+<li><code>response_type</code>: 어떤 OAuth 방식을 사용하는지를 결정하는 속성으로, <code>token</code> 으로 설정하면  <em>implicit grant</em> 방식이 적용</li>
+<li><code>scope</code>: 사용자의 어떤 데이터와 어떤 작업에 대한 권한을 요청하는지, 즉 어떤 구글 API를 요청하는지</li>
+</ul>
+</li>
+<li><code>loginUrl</code>: <code>AUTHORIZE_URI</code>에 <code>queryStr</code>을 붙여 만든 구글 로그인 authorization URL</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CLIENT_ID = <span class="string">&quot;YOUR CLIENT ID&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> AUTHORIZE_URI = <span class="string">&quot;https://accounts.google.com/o/oauth2/v2/auth&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> queryStr = qs.stringify(&#123;</span><br><span class="line">  client_id: CLIENT_ID,</span><br><span class="line">  redirect_uri: <span class="built_in">window</span>.location.href,</span><br><span class="line">  response_type: <span class="string">&quot;token&quot;</span>,</span><br><span class="line">  scope: <span class="string">&quot;https://www.googleapis.com/auth/contacts.readonly&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> loginUrl = AUTHORIZE_URI + <span class="string">&quot;?&quot;</span> + queryStr;</span><br></pre></td></tr></table></figure></li>
+<li><p>Google Authorization Server가 <code>redirect URI</code>로 <code>access token</code>을 보내주면, 이를 이용해 token validation을 진행한다.</p>
+<ul>
+<li>access token은 redirect uri의 hash 부분에 포함되므로, DOM의 Location API인 <code>window.location.hash</code> 를 이용해 가져온다.</li>
+<li>만약 access token이 없을 경우, grant server URL로 이동한다.</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; access_token &#125; = qs.parse(<span class="built_in">window</span>.location.hash.substring(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!access_token) &#123;</span><br><span class="line">    <span class="built_in">window</span>.location.assign(loginUrl);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>access token을 이용해 구글 API를 호출한다.</p>
+<ul>
+<li><code>Bearer</code> 문자열을 <code>access token</code> 앞에 붙여 <code>Authorization header</code>로 넘긴다.</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PEOPLE_URI = <span class="string">&quot;https://people.googleapis.com/v1/contactGroups&quot;</span>;</span><br><span class="line"></span><br><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    fetch(PEOPLE_URI, &#123;</span><br><span class="line">      headers: &#123; <span class="attr">Authorization</span>: <span class="string">&quot;Bearer &quot;</span> + access_token &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">      .then(<span class="function">(<span class="params">data</span>) =&gt;</span> setContactGroups(data.contactGroups));</span><br><span class="line">  &#125;, [access_token]);</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h3 id="전체-코드"><a href="#전체-코드" class="headerlink" title="전체 코드"></a>전체 코드</h3><p><strong>qs</strong><br>npm 패키지: A querystring parsing and stringifying library with some added security.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">&quot;qs&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> CLIENT_ID = <span class="string">&quot;YOUR CLIENT ID&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> AUTHORIZE_URI = <span class="string">&quot;https://accounts.google.com/o/oauth2/v2/auth&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> PEOPLE_URI = <span class="string">&quot;https://people.googleapis.com/v1/contactGroups&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> queryStr = qs.stringify(&#123;</span><br><span class="line">  client_id: CLIENT_ID,</span><br><span class="line">  redirect_uri: <span class="built_in">window</span>.location.href,</span><br><span class="line">  response_type: <span class="string">&quot;token&quot;</span>,</span><br><span class="line">  scope: <span class="string">&quot;https://www.googleapis.com/auth/contacts.readonly&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> loginUrl = AUTHORIZE_URI + <span class="string">&quot;?&quot;</span> + queryStr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; access_token &#125; = qs.parse(<span class="built_in">window</span>.location.hash.substring(<span class="number">1</span>));</span><br><span class="line">  <span class="keyword">const</span> [contactGroups, setContactGroups] = useState([]);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    fetch(PEOPLE_URI, &#123;</span><br><span class="line">      headers: &#123; <span class="attr">Authorization</span>: <span class="string">&quot;Bearer &quot;</span> + access_token &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">      .then(<span class="function">(<span class="params">data</span>) =&gt;</span> setContactGroups(data.contactGroups));</span><br><span class="line">  &#125;, [access_token]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!access_token) &#123;</span><br><span class="line">    <span class="built_in">window</span>.location.assign(loginUrl);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &lt;h2&gt;Contact Groups&lt;/h2&gt;</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &#123;contactGroups &amp;&amp;</span><br><span class="line">          contactGroups.map(<span class="function">(<span class="params">&#123; resourceName, name, memberCount &#125;</span>) =&gt;</span> (</span><br><span class="line">            &lt;li key=&#123;resourceName&#125;&gt;</span><br><span class="line">              &#123;name&#125; (&#123;memberCount&#125;)</span><br><span class="line">            &lt;/li&gt;</span><br><span class="line">          ))&#125;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.daleseo.com/google-oauth/">OAuth 2.0으로 구글 API 호출하기</a></p>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/youtube/v3/guides/auth/client-side-web-apps?hl=ko">OAuth 2.0 Flow: Client-side web apps | YouTube Data API</a></p>
+<ul>
+<li>OAuth 2.0 프로토콜 문서</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/identity/protocols/oauth2">Using OAuth 2.0 to Access Google APIs | Google Identity</a></p>
+<ul>
+<li>OAuth 2.0 JavaScript 문서</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow#js-client-library">OAuth 2.0 for Client-side Web Applications | Google Identity</a></p>
+<ul>
+<li>Google People API 문서</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/people/api/rest/v1/contactGroups/get">Method: contactGroups.get | People API | Google Developers</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/09/07/react-without-cra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/07/react-without-cra/" class="post-title-link" itemprop="url">CRA 없이 React + TypeScript 세팅하기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-06 22:24:41 / Modified: 14:40:13" itemprop="dateCreated datePublished" datetime="2021-09-06T22:24:41+01:00">2021-09-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>보통, cra typescript를 위해서</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app [project-name] --template typescript</span><br></pre></td></tr></table></figure>
+<p>를 쓰지만, </p>
+<p>이번에는 직접 만들어보면서 react library의 작동 원리를 살펴보려고 한다.</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://create-react-app.dev/docs/adding-typescript/">Adding TypeScript | Create React App</a></p>
+</blockquote>
+<h3 id="세팅-과정"><a href="#세팅-과정" class="headerlink" title="세팅 과정"></a>세팅 과정</h3><ol>
+<li><p>npm을 세팅한다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init -y <span class="comment">// -y로 default 설정 적용</span></span><br></pre></td></tr></table></figure></li>
+<li><p>npm pkg를 설치한다.</p>
+<ol>
+<li><p>typescript</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s typescript @types/react @types/react-dom</span><br></pre></td></tr></table></figure></li>
+<li><p>react</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s react react-dom</span><br></pre></td></tr></table></figure></li>
+<li><p>babel</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s-d babel-loader @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript</span><br></pre></td></tr></table></figure></li>
+<li><p>webpack</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s-d webpack webpack-dev-server webpack-cli</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>타입스크립트 설정하기</p>
+<ol>
+<li><p>타입스크립트 설정 파일을 만들기 위해,</p>
+<ul>
+<li>전역으로 설치된 경우 <code>tsc --init</code></li>
+<li>해당 프로젝트에만 설치된 경우 직접 파일을 명시해야 하기 때문에 <code>node_modules/.bin/tsc --init</code></li>
+</ul>
+<p>을 수행한다.</p>
+</li>
+<li><p>그럼 <code>tsconfig.json</code> 이 생성되는데, 다음과 같이 주석을 해지해주면 된다. (꼭 밑과 같지 않아도, 경우에 맞게/ 입맛에 맞게 <em>설정해두면 두고두고 용이함</em>!)</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;outDir&quot;</span>: <span class="string">&quot;./dist/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;sourceMap&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;noImplicitAny&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;module&quot;</span>: <span class="string">&quot;commonjs&quot;</span>,</span><br><span class="line">    <span class="string">&quot;target&quot;</span>: <span class="string">&quot;es5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;jsx&quot;</span>: <span class="string">&quot;react&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;include&quot;</span>: [<span class="string">&quot;./src/**/*&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>리액트 Entry File 설정</p>
+<p>보통 cra 시 다음과 같은 디렉토리를 갖게 된다. (직접 만들어야 하는 파일만 명시해둠)</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">node_modules</span><br><span class="line">public</span><br><span class="line">	index.html</span><br><span class="line">src</span><br><span class="line">	App.tsx</span><br><span class="line">	index.tsx</span><br><span class="line">package.json</span><br><span class="line">tsconfig.json</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>따라서 먼저 Component를 만들어보자.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;<span class="comment">// 함수형 컴포넌트const App: React.FunctionComponent&lt;&#123; name: string &#125;&gt; = (&#123; children, name &#125;) =&gt; (  &lt;div title=&#123;name&#125;&gt;&#123;children&#125;&lt;/div&gt;);export default App;</span></span><br></pre></td></tr></table></figure>
+<p>그리고 html에서 script로 읽을 <code>index.js</code>를 생성하자.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;<span class="keyword">import</span> * <span class="keyword">as</span> ReactDOM <span class="keyword">from</span> <span class="string">&quot;react-dom&quot;</span>;<span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&quot;./App&quot;</span>;<span class="comment">// 클래스형 컴포넌트class Root extends React.Component &#123;  render() &#123;    return (      &lt;div&gt;        &lt;App name=&quot;test&quot;&gt; test &lt;/App&gt;      &lt;/div&gt;    );  &#125;&#125;ReactDOM.render(&lt;Root /&gt;, document.getElementById(&quot;root&quot;));</span></span><br></pre></td></tr></table></figure>
+<p>원래는 따로 클래스 정의 없이 <code>ReactDOM.render()</code> 에 클래스 컴포넌트 렌더 안에 들어있는 코드를 적어 바로 컴포넌트를 전달한다. 축약하면 다음과 같다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(  <span class="xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span>,  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<p>이제 최종적으로 js 파일을 전달할 <code>public/index.html</code> 을 정의하자!</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;<span class="xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span>  <span class="tag">&lt;<span class="name">head</span>&gt;</span>    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span>    <span class="tag">&lt;<span class="name">title</span>&gt;</span>채용 프로세스 이메일 템플릿<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  <span class="tag">&lt;/<span class="name">head</span>&gt;</span>  <span class="tag">&lt;<span class="name">body</span>&gt;</span>    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>    <span class="comment">&lt;!-- 번들 파일 추가 --&gt;</span>    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>  <span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>html은 <code>id=&quot;root&quot;</code> 를 통해 index 파일의 <code>document.getElementById(&quot;root&quot;)</code> 를 읽어나가기 때문에, 따로 script를 적용하지 않는다. 하지만, 이 <code>src/index.js</code> 를 읽기 위해 webpack 번들러를 설정하였으므로, 해당 <code>bundle.js</code> 파일을 script로 적용해야 한다!</p>
+<blockquote>
+<p>꼭 <code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code> 밑에 전달해야 한단다.<br>내 생각에는 html을 읽는 순서 때문에 그런듯.</p>
+</blockquote>
+</li>
+<li><p>Babel 설정하기</p>
+<ol>
+<li><p>trans-compile을 위해 <code>.babelrc</code> 나 <code>babel.config.js</code> 로 설정한다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;  <span class="string">&quot;presets&quot;</span>: [    <span class="string">&quot;@babel/preset-env&quot;</span>,    <span class="string">&quot;@babel/preset-react&quot;</span>,    <span class="string">&quot;@babel/preset-typescript&quot;</span>  ]&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>webpack 설정하기</p>
+<ol>
+<li><p>이 모든 과정을 연결하기 위해 번들러 webpack을 설정한다. 바벨과 같이 <code>webpack.config.js</code> 를 루트 폴더에 만들면 됨!</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;  <span class="attr">entry</span>: [<span class="string">&quot;./src/index.tsx&quot;</span>],  <span class="attr">output</span>: &#123; <span class="attr">filename</span>: <span class="string">&quot;bundle.js&quot;</span>, <span class="attr">publicPath</span>: <span class="string">&quot;/&quot;</span>, <span class="attr">path</span>: __dirname + <span class="string">&quot;dist&quot;</span> &#125;,  <span class="attr">module</span>: &#123;    <span class="attr">rules</span>: [      &#123;        <span class="attr">test</span>: <span class="regexp">/\.(js|jsx|ts|tsx)$/</span>,        exclude: <span class="regexp">/node_modules/</span>,        use: [<span class="string">&quot;babel-loader&quot;</span>]      &#125;    ]  &#125;,  <span class="attr">resolve</span>: &#123; <span class="attr">extensions</span>: [<span class="string">&quot;*&quot;</span>, <span class="string">&quot;.js&quot;</span>, <span class="string">&quot;.jsx&quot;</span>, <span class="string">&quot;.ts&quot;</span>, <span class="string">&quot;.tsx&quot;</span>] &#125;&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>resolve</code>: 확장자나 경로를 알아서 처리할 수 있도록 설정하는 옵션이다.<br><code>module</code>: 이 옵션에 설치한 ts-loader와 babel-loader를 설정하면 된다. loader들은 오른쪽에서 왼쪽 방향으로 적용되기 때문에 ts-loader를 babel-loader보다 오른쪽에 위치시켜야 한다.<br><code>output</code>: 번들화 된 파일을 export할 경로와 파일명을 설정한다.</p>
+</li>
+</ol>
+</li>
+<li><p>마지막으로, <code>package.json</code> 에서 <code>script</code> 를 설정해주면 된다.</p>
+<ol>
+<li><p><code>npm start</code> 또는 <code>npm run start</code> 로 script를 실행할 수 있도록 다음과 같이 설정하면 됨!</p>
+<p>npm run 시 script 내부의 명령어을 적용할 수 있다!</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;    <span class="string">&quot;start&quot;</span>: <span class="string">&quot;webpack-dev-server --config ./webpack.config.js --mode development&quot;</span>,    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>  &#125;,</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><ul>
+<li><p>웹팩 설정에서 사용된 <code>inline</code> 모드는 무엇일까?</p>
+<p>네트워크 방화벽 구성과 동일하게 모든 트래픽이 해당 보안장비를 거쳐야만 목적지로 전송될 수 있도록 네트워크를 구성하는 방식</p>
+<p><a target="_blank" rel="noopener" href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=yoodh0713&logNo=221558145702">[네트워크] 인라인 모드와 미러링(스니핑) 모드의 차이점</a></p>
+</li>
+<li><p><code>hot</code> 모드는?</p>
+<p>Hot Module Replacement(HMR)는 응용프로그램 실행 중에 추가 또는 제거된 모듈들을 페이지 리로드 없이 교체하는 기능입니다.</p>
+</li>
+</ul>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://flymogi.tistory.com/69">리액트 - 타입스크립트 시작하기 (without CRA)</a></p>
+<p>위 블로그 기반으로,</p>
+<p><a target="_blank" rel="noopener" href="https://chanyeong.com/blog/post/7">CRA없이 React + TypeScript 셋팅하기! - chanyeong</a></p>
+<p>위 블로그는 심화형임</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/09/05/git-rebase-pull/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/05/git-rebase-pull/" class="post-title-link" itemprop="url">git에서 rebase와 pull의 차이</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-05 14:52:45 / Modified: 09:53:20" itemprop="dateCreated datePublished" datetime="2021-09-05T14:52:45+01:00">2021-09-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><ul>
+<li>말 그대로, <strong>Re</strong><em>base</em> : base를 변경하는 것</li>
+<li>현재 브랜치의 작업 내용을 변경하지 않고 rebase 하고자 하는 base의 상태를 가져오는 것</li>
+</ul>
+<h2 id="Pull"><a href="#Pull" class="headerlink" title="Pull"></a>Pull</h2><ul>
+<li>pull하고자 하는 브랜치의 모든 내용을 가져오는 것</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/24/python-regex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/24/python-regex/" class="post-title-link" itemprop="url">문자열에 정규식 활용하기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-24 15:06:38 / Modified: 07:28:34" itemprop="dateCreated datePublished" datetime="2021-08-24T15:06:38+01:00">2021-08-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>정규식 문자열 앞에 <code>r</code> 문자를 삽입하면 이 정규식은 Raw String 규칙에 의하여 <strong>백슬래시 2개 대신 1개만 써도 2개를 쓴 것과 동일한</strong> 의미를 갖게 된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">r&#x27;\&#x27;) ## &#x27;</span>\\<span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>※ 만약 백슬래시를 사용하지 않는 정규식이라면 r의 유무에 상관없이 동일한 정규식이 될 것이다.</p>
+</blockquote>
+<h3 id="re-sub"><a href="#re-sub" class="headerlink" title="re.sub()"></a>re.sub()</h3><p><code>re.sub(pattern, repl, string, count=0, flag=0)</code></p>
+<p>: <code>pattern</code> 을 <code>repl</code> 로 대체한 <code>string</code> 을 반환한다.</p>
+<ul>
+<li><code>repl</code> 내 <code>\</code> 가 존재할 경우 <strong>backslash escape</strong> 가 적용된다.</li>
+</ul>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><ul>
+<li><p>알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.)를 제외한 모든 문자를 제거</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">r&quot;[^a-z0-9-_.]&quot;</span>, <span class="string">&quot;&quot;</span>, answer)</span><br><span class="line"><span class="comment"># &#x27;[^a-z\d\-\_\.]&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>마침표(.)가 2번 이상 연속된 부분을 하나의 마침표(.)로 치환</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">&#x27;\.\.+&#x27;</span>, <span class="string">&#x27;.&#x27;</span>, answer)</span><br><span class="line"><span class="comment"># &#x27;((.)\\2&#123;1,&#125;)&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>마침표(.)가 처음이나 끝에 위치한다면 제거</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">&quot;^[.]|[.]$&quot;</span>, <span class="string">&quot;&quot;</span>, answer)</span><br><span class="line"><span class="comment"># &#x27;^\.|\.$&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/boj-1181/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/23/boj-1181/" class="post-title-link" itemprop="url">BOJ 1181</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-23 13:44:03 / Modified: 05:46:03" itemprop="dateCreated datePublished" datetime="2021-08-23T13:44:03+01:00">2021-08-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/sort/" itemprop="url" rel="index"><span itemprop="name">Sort</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 단어의 개수 N이 주어진다. (1 ≤ N ≤ 20,000) </p>
+<p>둘째 줄부터 N개의 줄에 걸쳐 알파벳 소문자로 이루어진 단어가 한 줄에 하나씩 주어진다. 주어지는 문자열의 길이는 50을 넘지 않는다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">s = <span class="built_in">set</span>(<span class="built_in">input</span>().rstrip() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><ul>
+<li>같은 단어가 여러번 입력된 경우에는 한 번씩만 출력해야 하므로 <code>set</code> 를 이용하고,</li>
+<li>조건에 따라 <code>sort</code> 를 구현하는데, <code>set</code> 에는 <code>sort</code> 가 없으므로 <strong><code>sorted</code></strong> 를 이용해야 한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">sorted</span>(s, key=(<span class="keyword">lambda</span> x: (<span class="built_in">len</span>(x), x)))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>조건에 따라 정렬하여 단어들을 출력한다. 단, 같은 단어가 여러 번 입력된 경우에는 한 번씩만 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> s:</span><br><span class="line">  print(word)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/boj-11650/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/23/boj-11650/" class="post-title-link" itemprop="url">BOJ 11650</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-23 13:29:32 / Modified: 05:40:22" itemprop="dateCreated datePublished" datetime="2021-08-23T13:29:32+01:00">2021-08-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/sort/" itemprop="url" rel="index"><span itemprop="name">Sort</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 점의 개수 N (1 ≤ N ≤ 100,000)이 주어진다. </p>
+<p>둘째 줄부터 N개의 줄에는 i번점의 위치 xi와 yi가 주어진다. (-100,000 ≤ xi, yi ≤ 100,000) 좌표는 항상 정수이고, 위치가 같은 두 점은 없다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">s = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">  s.append(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><p><code>sort</code> 함수에 <code>key</code> 를 이용하면 쉽게 해결되는데, 이를 위해서 <code>sort</code> 함수를 살펴보자.</p>
+<blockquote>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><h4 id="Basic-Syntax"><a href="#Basic-Syntax" class="headerlink" title="Basic Syntax"></a>Basic Syntax</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>.sort(key=..., reverse=...)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h3><ul>
+<li><p><code>key</code> : sort 수행 시 <strong>비교</strong> 를 위해 적용되는 함수</p>
+<ul>
+<li><p>e.g. 1D</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>.sort(key=<span class="built_in">len</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>len</code> 함수에 따라 리스트의 요소의 길이가 정렬 기준이 된다.</p>
+</li>
+<li><p>e.g. 2D</p>
+<p>tuple의 경우, <strong>첫번째 파라미터가 디폴트로 정렬 기준이 된다</strong>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># random list</span></span><br><span class="line">random = [(<span class="number">2</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">4</span>, <span class="number">1</span>), (<span class="number">1</span>, <span class="number">3</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># sort list with key</span></span><br><span class="line">random.sort(key=(<span class="keyword">lambda</span> x: x[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment">### lambda to function declaration</span></span><br><span class="line"><span class="comment"># key=takeSecond</span></span><br><span class="line"><span class="comment"># def takeSecond(elem):</span></span><br><span class="line"><span class="comment">#     return elem[1]</span></span><br></pre></td></tr></table></figure>
+
+<p>위의 예시에서는, 튜플 <code>x</code> 의 2번째 파라미터를 기준으로 정렬을 수행한다.</p>
+</li>
+</ul>
+</li>
+<li><p><code>reverse</code> : 기본 오름차순, <code>True</code> 시 내림차순</p>
+</li>
+</ul>
+<h3 id="Return-Value"><a href="#Return-Value" class="headerlink" title="Return Value"></a>Return Value</h3><p><code>None</code> 👉 원본을 수정한다.</p>
+<blockquote>
+<h3 id="sorted"><a href="#sorted" class="headerlink" title="sorted()"></a>sorted()</h3><p><code>sorted list</code> 👉 원본을 수정하지 않고, 새로운 리스트를 반환한다.</p>
+</blockquote>
+</blockquote>
+<p>위에 따라 <code>key</code> 를 지정해서 <code>sort</code> 함수를 커스터마이징하면,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.sort(key=(<span class="keyword">lambda</span> x: (x[<span class="number">0</span>], x[<span class="number">1</span>])))</span><br></pre></td></tr></table></figure>
+<p>이는 즉, <strong>튜플 <code>x</code> 의 1번째 인자를 첫 기준으로 두고, 2번째 인자를 두번째 기준으로 둔다</strong> 는 의미이다.</p>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄부터 N개의 줄에 점을 정렬한 결과를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">  print(i[<span class="number">0</span>], i[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/boj-10989/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/23/boj-10989/" class="post-title-link" itemprop="url">BOJ 10989</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-23 13:19:58 / Modified: 05:22:22" itemprop="dateCreated datePublished" datetime="2021-08-23T13:19:58+01:00">2021-08-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/sort/" itemprop="url" rel="index"><span itemprop="name">Sort</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 수의 개수 N(1 ≤ N ≤ 10,000,000)이 주어진다. </p>
+<p>둘째 줄부터 N개의 줄에는 숫자가 주어진다. 이 수는 10,000보다 작거나 같은 자연수이다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><p>기존의 <code>sort</code> 나 <code>sorted</code> 를 사용하면 메모리 초과가 난다.</p>
+<p>새로운 방식으로 접근해야 함.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s = [<span class="number">0</span>]*<span class="number">10001</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">  s[<span class="built_in">int</span>(<span class="built_in">input</span>())] += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>같은 요소가 여러개 있는 경우, 중복으로 저장하는 것이 아닌, 2차원 배열 형식을 이용하여 중복되는 만큼 count를 한 후 count 만큼 해당 index를 출력하면 된다. 메모리 낭비를 없앨 수 있음.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(s)):</span><br><span class="line">  <span class="keyword">if</span> s[i] &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(s[i]):</span><br><span class="line">      print(i)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/boj-13305/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/23/boj-13305/" class="post-title-link" itemprop="url">BOJ 13305</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-23 12:43:37 / Modified: 04:49:04" itemprop="dateCreated datePublished" datetime="2021-08-23T12:43:37+01:00">2021-08-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/greedy/" itemprop="url" rel="index"><span itemprop="name">Greedy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>표준 입력으로 다음 정보가 주어진다.</p>
+<p>첫 번째 줄에는 도시의 개수를 나타내는 정수 N(2 ≤ N ≤ 100,000)이 주어진다. </p>
+<p>다음 줄에는 인접한 두 도시를 연결하는 도로의 길이가 제일 왼쪽 도로부터 N-1개의 자연수로 주어진다. </p>
+<p>다음 줄에는 주유소의 리터당 가격이 제일 왼쪽 도시부터 순서대로 N개의 자연수로 주어진다. </p>
+<p>제일 왼쪽 도시부터 제일 오른쪽 도시까지의 거리는 1이상 1,000,000,000 이하의 자연수이다. 리터당 가격은 1 이상 1,000,000,000 이하의 자연수이다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>().rstrip())</span><br><span class="line">km = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br><span class="line">p = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Greedy"><a href="#Greedy" class="headerlink" title="Greedy"></a>Greedy</h3><p>그리디는 일단 <strong>현재 상황에서 할 수 있는 최선의 선택을 하고보는</strong> 타입이다. 이 문제가 대표적인 예시 같은데,</p>
+<ul>
+<li><p>현재 위치 기준 바로 다음 주유소의 가격이 싸면 일단 간다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> p[now] &gt; p[now+<span class="number">1</span>]:</span><br><span class="line">  ret += p[now] * km[now]</span><br><span class="line">  now += <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+<li><p>비싸면 지금보다는 싼 주유소를 찾을 때까지 계속 찾고, 싼 곳을 찾으면 거기로 이동한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  dist = <span class="number">0</span></span><br><span class="line">  <span class="built_in">next</span> = <span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> <span class="built_in">next</span> <span class="keyword">in</span> <span class="built_in">range</span>(now + <span class="number">1</span>, n):</span><br><span class="line">    dist += km[<span class="built_in">next</span>-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> p[now] &gt; p[<span class="built_in">next</span>]:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  ret += dist * p[now]</span><br><span class="line">  now = <span class="built_in">next</span></span><br></pre></td></tr></table></figure></li>
+<li><p>이 모든 건 도착지 전까지만 해당, 도착지에 도달할 경우 종료해야 한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> now &lt; n-<span class="number">1</span>:</span><br></pre></td></tr></table></figure>
+<p>완전 탐색처럼 가장 싼 곳을 찾아서 움직이면 안 된다. 중간중간에 절약할 수 있는 경우에는 일단 절약하고 봐야 함.</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/python-functools/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -339,752 +1170,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/22/boj-18511/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/22/boj-18511/" class="post-title-link" itemprop="url">BOJ 18511</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-22 10:16:22 / Modified: 02:18:58" itemprop="dateCreated datePublished" datetime="2021-08-22T10:16:22+01:00">2021-08-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 <em>N</em>, <em>K</em>의 원소의 개수가 공백을 기준으로 구분되어 자연수로 주어진다. (10 ≤ <em>N</em> ≤ 100,000,000, 1 ≤ <em>K</em>의 원소의 개수 ≤ 3) </p>
-<p>둘째 줄에 <em>K</em>의 원소들이 공백을 기준으로 구분되어 주어진다. 각 원소는 1부터 9까지의 자연수다.</p>
-<p>단, 항상 <em>K</em>의 원소로만 구성된 <em>N</em>보다 작거나 같은 자연수를 만들 수 있는 경우만 입력으로 주어진다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n, k = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">s = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><ul>
-<li><p>주어진 범위 내의 수를 하나씩 체크</p>
-</li>
-<li><p>가장 큰 수를 찾으면 출력하고 프로그램 종료</p>
-</li>
-<li><p>N보다 작거나 같은</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">  ret = i</span><br></pre></td></tr></table></figure></li>
-<li><p>주어진 숫자의 모든 자리수가 주어진 <code>k</code> 에 존재해야 함</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ret &gt; <span class="number">0</span>:</span><br><span class="line">  <span class="keyword">if</span> ret % <span class="number">10</span> <span class="keyword">in</span> s:</span><br><span class="line">      ret //= <span class="number">10</span></span><br><span class="line">  <span class="keyword">else</span>: <span class="keyword">break</span></span><br></pre></td></tr></table></figure></li>
-<li><p>조건을 만족시킬 경우 외에는 <code>ret</code> 가 0이 될 수 없음</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ret == <span class="number">0</span>:</span><br><span class="line">  print(i)</span><br><span class="line">  exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/22/boj-5568/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/22/boj-5568/" class="post-title-link" itemprop="url">BOJ 5568</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-22 09:53:11 / Modified: 01:57:55" itemprop="dateCreated datePublished" datetime="2021-08-22T09:53:11+01:00">2021-08-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 n이, </p>
-<p>둘째 줄에 k가 주어진다. </p>
-<p>셋째 줄부터 n개 줄에는 카드에 적혀있는 수가 주어진다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>().rstrip())</span><br><span class="line">k = <span class="built_in">int</span>(<span class="built_in">input</span>().rstrip())</span><br><span class="line">s = [<span class="built_in">input</span>().strip() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><ul>
-<li><p>순회하는 순서에 따라 조합이 달라짐 = <strong>순열</strong></p>
-<blockquote>
-<p>python library <code>itertools.permutations</code></p>
-<ul>
-<li>input: iterable[, choice]</li>
-<li>output: possible combinations (iterable)</li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 순열</span></span><br><span class="line"><span class="comment"># nPk</span></span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> permutations</span><br></pre></td></tr></table></figure></li>
-<li><p>결과가 같은 경우는 제외 = <strong>set</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="built_in">set</span>()</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># k-length possible combinations (tuples)</span></span><br><span class="line"><span class="keyword">for</span> per <span class="keyword">in</span> permutations(s, k):</span><br><span class="line">  ret.add(<span class="string">&#x27;&#x27;</span>.join(per))</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 상근이가 만들 수 있는 정수의 개수를 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="built_in">len</span>(ret))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/17/boj-17626/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/17/boj-17626/" class="post-title-link" itemprop="url">BOJ 17626</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-17 13:04:21 / Modified: 05:11:39" itemprop="dateCreated datePublished" datetime="2021-08-17T13:04:21+01:00">2021-08-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>입력은 표준입력을 사용한다. 입력은 자연수 <em>n</em>을 포함하는 한 줄로 구성된다. 여기서, 1 ≤ <em>n</em> ≤ 50,000이다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>().strip())</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><ul>
-<li>최적의 조합을 찾아서 기존의 값을 계속 업데이트 해야 한다는 점</li>
-<li><code>min</code> 값을 찾아야 한다는 점</li>
-</ul>
-<p>이 DP의 조건이었다. 배열을 사용해서 풀어야 하고, 어떻게 접근해야 할지도 감은 잡았는데, brute force로 풀어보려니 안 풀렸었다. 문제 유형을 올바르게 파악할 것..</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br></pre></td></tr></table></figure>
-<p>채워야 하는 <code>n</code> 까지 배열을 초기화시키고, <code>i</code> 가 제곱근일 경우 1이 되므로 알맞게 다시 초기화</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n+<span class="number">1</span>):</span><br><span class="line">  <span class="keyword">if</span> i == <span class="built_in">int</span>(math.sqrt(i)) ** <span class="number">2</span>:</span><br><span class="line">    dp[i] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>다시 2부터 n까지 돌면서 이번엔 값을 알맞게 넣어야 함.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n+<span class="number">1</span>):</span><br></pre></td></tr></table></figure></li>
-<li><p>현재 체크하고 있는 <code>i</code> 를 기준으로 더 작은 값 <code>j</code> 를 제곱하여 뺐을 때, 기존의 값*(1로만 더한 개수)* 와 다른 제곱근을 활용한 개수를 비교해서 <strong>min</strong> 값을 넣는다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">int</span>(math.sqrt(i)) + <span class="number">1</span>):</span><br><span class="line">  dp[i] = <span class="built_in">min</span>(dp[i], dp[j ** <span class="number">2</span>] + dp[i - j ** <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>출력은 표준출력을 사용한다. 합이 <em>n</em>과 같게 되는 제곱수들의 최소 개수를 한 줄에 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(dp[n])</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/16/boj-2422/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/16/boj-2422/" class="post-title-link" itemprop="url">BOJ 2422</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-16 14:39:53 / Modified: 06:44:24" itemprop="dateCreated datePublished" datetime="2021-08-16T14:39:53+01:00">2021-08-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 정수 N과 M이 주어진다. N은 아이스크림 종류의 수이고, M은 섞어먹으면 안 되는 조합의 개수이다. </p>
-<p>아래 M개의 줄에는 섞어먹으면 안 되는 조합의 번호가 주어진다. 같은 조합은 두 번 이상 나오지 않는다. (1 ≤ N ≤ 200, 0 ≤ M ≤ 10,000)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n, m = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">s = [[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">  j, k = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">  s[j][k] = -<span class="number">1</span></span><br><span class="line">  s[k][j] = -<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>먼저 접근한 방식은 매 케이스마다 해당 조합을 제외한 n개의 요소 중 가능한 조합을 찾아서 더하는 방식이었는데, 주어진 케이스로부터도 알 수 있듯이 불필요하게 반복을 하는 경우도 존재하게 된다.</p>
-<p>따라서 2차원 배열을 생성해 각 숫자와 불가능한 조합을 저장해두고, 어차피 순열이 아닌 조합이므로 중첩 반복문의 index가 순차적으로 증가하도록 설정한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">  <span class="keyword">for</span> b <span class="keyword">in</span> <span class="built_in">range</span>(a+<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(b+<span class="number">1</span>, n+<span class="number">1</span>):</span><br></pre></td></tr></table></figure>
-<p>그리고 불가능한 조합이 아니면 count를 증가시키면 됨</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">    <span class="keyword">if</span> s[a][b] == -<span class="number">1</span>: <span class="keyword">continue</span></span><br><span class="line">    ...</span><br><span class="line">      <span class="keyword">if</span> s[a][c] == -<span class="number">1</span> <span class="keyword">or</span> s[b][c] == -<span class="number">1</span>: <span class="keyword">continue</span></span><br><span class="line">      ret += <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에, 가능한 방법이 총 몇 개 있는지 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(ret)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/16/boj-2503/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/16/boj-2503/" class="post-title-link" itemprop="url">BOJ 2503</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-16 13:48:43 / Modified: 05:54:53" itemprop="dateCreated datePublished" datetime="2021-08-16T13:48:43+01:00">2021-08-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에는 민혁이가 영수에게 몇 번이나 질문을 했는지를 나타내는 1 이상 100 이하의 자연수 N이 주어진다. </p>
-<p>이어지는 N개의 줄에는 각 줄마다 민혁이가 질문한 세 자리 수와 영수가 답한 스트라이크 개수를 나타내는 정수와 볼의 개수를 나타내는 정수, 이렇게 총 세 개의 정수가 빈칸을 사이에 두고 주어진다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">num = [] <span class="comment"># string</span></span><br><span class="line">s = []</span><br><span class="line">b = []</span><br><span class="line"></span><br><span class="line">t = <span class="built_in">int</span>(<span class="built_in">input</span>().strip())</span><br><span class="line">ret = [<span class="literal">False</span>]*<span class="number">1000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(t):</span><br><span class="line">  temp_num, temp_s, temp_b = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">  num.append(<span class="built_in">str</span>(temp_num))</span><br><span class="line">  s.append(temp_s)</span><br><span class="line">  b.append(temp_b)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>완전 탐색을 어떻게 접근해야 하는지 감을 잡았다. 중첩 반복문의 끝이라 런타임 에러든 뭐든 틀릴 줄 알았는데 맞아서 쩌매 당황;;</p>
-<p>이 문제는 1~9 중 서로 다른 digit number을 가진 3자리 자연수 중 <code>strike</code> , <code>ball</code> 을 만족시키는 경우를 고르면 된다.</p>
-<ul>
-<li><p>일단 가능한 경우의 숫자를 모두 만들어놓고</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">      <span class="keyword">if</span> i != j <span class="keyword">and</span> j != k <span class="keyword">and</span> i != k:</span><br><span class="line">        ret[i*<span class="number">100</span> + j*<span class="number">10</span> + k] = <span class="literal">True</span></span><br></pre></td></tr></table></figure></li>
-<li><p>여기서 조건에 맞는 경우는 남기고 아닌 경우는 제외시키면 됨</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> strike != s[idx] <span class="keyword">or</span> ball != b[idx]:</span><br><span class="line">  ret[t] = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>strike: 숫자도 위치도 같은 경우</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> temp[d] == now[d]:</span><br><span class="line">  strike += <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
-<li><p>ball: 숫자는 같되 위치가 다른 경우</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">elif</span> now.count(temp[d]) &gt; <span class="number">0</span>:</span><br><span class="line">  ball += <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫 줄에 영수가 생각하고 있을 가능성이 있는 답의 총 개수를 출력한다.</p>
-<ul>
-<li><p><code>True</code> <code>False</code> 를 이용했기 때문에 <code>sum</code> 을 이용하면 바로 <code>len</code> 을 출력할 수 있음</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="built_in">sum</span>(ret))</span><br></pre></td></tr></table></figure>
-
-
-
-
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/16/boj-1969/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/16/boj-1969/" class="post-title-link" itemprop="url">BOJ 1969</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-16 12:50:55 / Modified: 04:57:25" itemprop="dateCreated datePublished" datetime="2021-08-16T12:50:55+01:00">2021-08-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫 줄에 DNA의 수 N과 문자열의 길이 M이 주어진다. </p>
-<p>그리고 둘째 줄부터 N+1번째 줄까지 N개의 DNA가 주어진다. N은 1,000보다 작거나 같은 자연수이고, M은 50보다 작거나 같은 자연수이다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n, m = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">s = [<span class="built_in">input</span>().upper() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>hamming distance가 작다 = string.charAt(index)가 가장 빈번한 글자를 택하면 됨</p>
-<p>원래는 <strong>dict</strong> 를 활용해서 풀었는데 주어진 케이스는 모두 맞았지만 틀렸다고 해서 배열에 <code>ord</code> 를 사용하는 코드로 바꿨더니 맞았다. 뭐가 다른 거지, 히든 케이스가 뭐였을까</p>
-<p><em>기존 코드</em></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">count = [&#123;<span class="string">&#x27;A&#x27;</span>: <span class="number">0</span>, <span class="string">&#x27;T&#x27;</span>: <span class="number">0</span>, <span class="string">&#x27;G&#x27;</span>: <span class="number">0</span>, <span class="string">&#x27;C&#x27;</span>: <span class="number">0</span>&#125; <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]</span><br><span class="line"></span><br><span class="line">		count[j][now] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">  ret += <span class="built_in">max</span>(count[i].items(), key=operator.itemgetter(<span class="number">1</span>))[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-<p><em>변경 코드</em></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">count = [[<span class="number">0</span>]*<span class="number">26</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]</span><br><span class="line"></span><br><span class="line">    count[j][<span class="built_in">ord</span>(now)-<span class="number">65</span>] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">  ret += <span class="built_in">chr</span>(count[i].index(<span class="built_in">max</span>(count[i])) + <span class="number">65</span>)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 Hamming Distance의 합이 가장 작은 DNA 를 출력하고, </p>
-<p>둘째 줄에는 그 Hamming Distance의 합을 출력하시오. 그러한 DNA가 여러 개 있을 때에는 사전순으로 가장 앞서는 것을 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">  word = s[i]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">    <span class="keyword">if</span> word[j] != ret[j]:</span><br><span class="line">      ans += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(ret)</span><br><span class="line">print(ans)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/11/boj-15721/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/11/boj-15721/" class="post-title-link" itemprop="url">BOJ 15721</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-11 10:42:54 / Modified: 02:47:46" itemprop="dateCreated datePublished" datetime="2021-08-11T10:42:54+01:00">2021-08-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 게임을 진행하는 사람 A명이 주어진다. A는 2,000보다 작거나 같은 자연수이다.</p>
-<p>둘째 줄에는 구하고자 하는 번째 T가 주어진다. (T ≤ 10000)</p>
-<p>셋째 줄에는 구하고자 하는 구호가 “뻔”이면 0, “데기”면 1로 주어진다. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">a = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">t = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"><span class="comment"># w = 0(뻔) 1(데기)</span></span><br><span class="line">w = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>반복문이 중첩될 때는 어떤 반복문이 어떤 걸 담당하는지 정확히 해야한다.</p>
-<ul>
-<li><p>게임이 1라운드 진행될 때마다 똑같은 형식의 점화식이 반복되어야 한다.</p>
-<ul>
-<li>새로운 배열을 생성하여 해당 라운드에 가능한 경우를 모두 저장한다.</li>
-<li>해당 라운드가 끝날 때까지 조건을 만족하는 경우가 없다면 배열의 길이만큼 진행 횟수를 더한다.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, t+<span class="number">1</span>):</span><br><span class="line">  <span class="comment">### t번째: 0 - 1 - 0 - 1 - 0 * (t-1) - 1 * (t-1)</span></span><br><span class="line">  s = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>] + [<span class="number">0</span>]*(i+<span class="number">1</span>) + [<span class="number">1</span>]*(i+<span class="number">1</span>)</span><br><span class="line">  </span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">  </span><br><span class="line">  ret += <span class="built_in">len</span>(s)</span><br></pre></td></tr></table></figure></li>
-<li><p>해당 라운드의 배열을 하나씩 탐색해야 한다.</p>
-<ul>
-<li>만약 조건을 만족하는 경우가 있다면, 지금까지의 진행 횟수를 모두 더하여 인원 수만큼 나눈 나머지를 취하면 된다.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># p: number of person</span></span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">  now = s[p]</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> now == w:</span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> count == t:</span><br><span class="line">      print((ret + p) % a)</span><br><span class="line">      exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 구하고자 하는 사람이 원탁에서 몇 번째에 있는지 정수로 출력한다. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> count == t:</span><br><span class="line">  print((ret + p) % a)</span><br><span class="line">  exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/11/boj-18312/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/11/boj-18312/" class="post-title-link" itemprop="url">BOJ 18312</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-11 10:20:04 / Modified: 02:22:49" itemprop="dateCreated datePublished" datetime="2021-08-11T10:20:04+01:00">2021-08-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 정수 <em>N</em>과 <em>K</em>가 공백을 기준으로 구분되어 주어진다. (0≤<em>N</em>≤23, 0≤<em>K</em>≤9)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n, k = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">count = <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><ul>
-<li>n시 59분 59초까지</li>
-<li>k가 시/ 분/ 초에 포함된 경우 count</li>
-<li><strong>hidden case</strong> : k == 0인 경우<ul>
-<li>시/ 분/ 초가 10보다 작을 경우 0을 붙여야 0 케이스 체크 가능</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> h <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>):</span><br><span class="line">  <span class="keyword">for</span> m <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>):</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>):</span><br><span class="line">      check_hour = (<span class="built_in">str</span>(k) <span class="keyword">in</span> add_zero(h))</span><br><span class="line">      check_min = (<span class="built_in">str</span>(k) <span class="keyword">in</span> add_zero(m))</span><br><span class="line">      check_sec = (<span class="built_in">str</span>(k) <span class="keyword">in</span> add_zero(s))</span><br><span class="line">      <span class="keyword">if</span> check_hour <span class="keyword">or</span> check_min <span class="keyword">or</span> check_sec:</span><br><span class="line">        count += <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>00시 00분 00초부터 <em>N</em>시 59분 59초까지의 모든 시각 중에서 <em>K</em>가 하나라도 포함되는 시각들의 수를 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(count)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1152,7 +1241,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">143</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1165,7 +1254,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-count">93</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

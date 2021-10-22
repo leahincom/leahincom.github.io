@@ -163,6 +163,776 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/10/22/react-draft-wysiwyg-custom-button/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/22/react-draft-wysiwyg-custom-button/" class="post-title-link" itemprop="url">React-draft-wysiwyg에서 custom button 생성 및 설정하기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-22 14:30:01 / Modified: 08:49:48" itemprop="dateCreated datePublished" datetime="2021-10-22T14:30:01+01:00">2021-10-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Default-code"><a href="#Default-code" class="headerlink" title="Default code"></a>Default code</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomOption</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">    onChange: PropTypes.func,</span><br><span class="line">    editorState: PropTypes.object,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  addStar: <span class="built_in">Function</span> = (): <span class="function"><span class="params">void</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; editorState, onChange &#125; = <span class="built_in">this</span>.props;</span><br><span class="line">    <span class="keyword">const</span> contentState = Modifier.replaceText(</span><br><span class="line">      editorState.getCurrentContent(),</span><br><span class="line">      editorState.getSelection(),</span><br><span class="line">      <span class="string">&#x27;⭐&#x27;</span>,</span><br><span class="line">      editorState.getCurrentInlineStyle(),</span><br><span class="line">    );</span><br><span class="line">    onChange(EditorState.push(editorState, contentState, <span class="string">&#x27;insert-characters&#x27;</span>));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div onClick=&#123;<span class="built_in">this</span>.addStar&#125;&gt;⭐&lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>class 컴포넌트에서 함수형 컴포넌트로 리팩토링</p>
+<p>👇</p>
+<h2 id="함수형-컴포넌트"><a href="#함수형-컴포넌트" class="headerlink" title="함수형 컴포넌트"></a>함수형 컴포넌트</h2><ul>
+<li>화살표 함수로 정의한 함수형 컴포넌트 내 메소드와 같이 한 단위의 함수인 <code>addStar</code> 을 설정하고, 반환하는 컴포넌트에 이를 <code>onClick</code> 의 속성으로 설정한다.</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CustomOption = (&#123;</span><br><span class="line">    currentEditorState,</span><br><span class="line">    ...props</span><br><span class="line">  &#125;: CustomOptionProps) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> addStar = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> currentContentState =</span><br><span class="line">        currentEditorState &amp;&amp;</span><br><span class="line">        Modifier.replaceText(</span><br><span class="line">          currentEditorState.getCurrentContent(),</span><br><span class="line">          currentEditorState.getSelection(),</span><br><span class="line">          <span class="string">&#x27;⭐&#x27;</span>,</span><br><span class="line">          currentEditorState.getCurrentInlineStyle(),</span><br><span class="line">        );</span><br><span class="line">      currentEditorState &amp;&amp;</span><br><span class="line">        currentContentState &amp;&amp;</span><br><span class="line">        props.onChange(</span><br><span class="line">          EditorState.push(</span><br><span class="line">            currentEditorState,</span><br><span class="line">            currentContentState,</span><br><span class="line">            <span class="string">&#x27;insert-characters&#x27;</span>,</span><br><span class="line">          ),</span><br><span class="line">        );</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;OptionButton aria-hidden=<span class="string">&quot;true&quot;</span> onClick=&#123;addStar&#125; onKeyDown=&#123;addStar&#125;&gt;</span><br><span class="line">      	⭐</span><br><span class="line">      &lt;/OptionButton&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>onChange</code> 를 받기 위해 React Component를 extend한 인터페이스를 설정한다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">interface CustomOptionProps extends ComponentProps&lt;React.ElementType&gt; &#123;</span><br><span class="line">  currentEditorState: EditorState | undefined;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>그리고 최종적으로, 이를 기존의 Editor에 옵션으로 넣어줘야 한다.</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">toolbarCustomButtons=&#123;[</span><br><span class="line">          &lt;CustomOption currentEditorState=&#123;editorState&#125; /&gt;,</span><br><span class="line">        ]&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="기타-eslint를-위한-설정"><a href="#기타-eslint를-위한-설정" class="headerlink" title="기타 eslint를 위한 설정"></a>기타 eslint를 위한 설정</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">click-events-have-key-events</span><br></pre></td></tr></table></figure>
+<ul>
+<li>event에 key를 바인딩해야 안전함 (event 발생할 방법이 따로 없는 경우 key 사용)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aria hidden</span><br></pre></td></tr></table></figure>
+<ul>
+<li>event이므로 accessibility 속성을 기본적으로 설정해야 한다.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/10/22/react-useref/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/22/react-useref/" class="post-title-link" itemprop="url">useRef를 이용해 여러 ref object 관리하기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-22 14:20:10 / Modified: 08:48:30" itemprop="dateCreated datePublished" datetime="2021-10-22T14:20:10+01:00">2021-10-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="createRef-와-useRef-의-차이점"><a href="#createRef-와-useRef-의-차이점" class="headerlink" title="createRef()와 useRef()의 차이점"></a>createRef()와 useRef()의 차이점</h2><p><code>createRef</code> : 클래스형 컴포넌트에서 사용</p>
+<p><code>useRef</code> : 함수형 컴포넌트에서 사용</p>
+<ul>
+<li>클래스형 컴포넌트는 인스턴스를 생성 후 <strong>render 코드 블록 쪽만 리랜더링</strong>후 다시 실행</li>
+<li>함수형 컴포넌트는 <strong>함수 블록 안에 있는 모든 것</strong>을 리랜더링시 마다 다시 실행</li>
+<li><em>함수형 컴포넌트</em>에서 createRef를 사용 할 시 <em>ref 값이 초기화</em> 되어서 원하는 값을 얻지 못하기 떄문에, <em>리액트 훅인 useRef를 사용:</em> 리액트 훅을 사용하면 <em>useState 값을 리랜더링 할 때</em> <strong>내부적으로 값을 기억</strong>하듯이 useRef도 내부적으로 ref 값을 기억함.</li>
+</ul>
+<h2 id="useRef-Hook"><a href="#useRef-Hook" class="headerlink" title="useRef Hook"></a>useRef Hook</h2><p>React 컴포넌트는 기본적으로 <strong>내부 상태(state)가 변할 때 마다 다시 랜더링(rendering)이 된다.</strong> 컴포넌트 함수가 다시 호출이 된다는 것은 <strong>함수 내부의 변수들이 모두 초기화가 되고 함수의 모든 로직이 다시 실행된다</strong>는 것을 의미한다.</p>
+<hr>
+<p><strong>다시 렌더링 되어도 동일한 참조값을 유지하려면?</strong></p>
+<p>리렌더링 시 함수 내부의 변수들이 기존에 저장하고 있는 값들을 잃어버리고 초기화되는데, 간혹 다시 랜더링이 되더라도 <strong><em>기존에 참조하고 있던 컴포넌트 함수 내의 값이 그대로 보존되야 하는 경우</em></strong>가 있다.</p>
+<p><strong><code>useRef</code></strong> 는 <strong>current 속성을 가지고 있는 객체를 반환</strong>하는데, <strong>인자로 넘어온 초기값을 current 속성에 할당</strong>한다. <strong>이 current 속성은 값을 변경해도 상태를 변경할 때처럼 React 컴포넌트가 다시 랜더링되지 않는다.</strong> <strong>React 컴포넌트가 다시 랜더링될 때도 마찬가지로 이 current 속성의 값이 유실되지 않는다.</strong></p>
+<h3 id="useRef-를-사용하는-경우"><a href="#useRef-를-사용하는-경우" class="headerlink" title="useRef()를 사용하는 경우"></a>useRef()를 사용하는 경우</h3><ul>
+<li><p>DOM 노드나 React 엘리먼트에 직접 접근하기 위해서</p>
+<p>React의 <code>ref</code> prop은 <strong>HTML 엘리먼트의 레퍼런스를 변수에 저장</strong>하기 위해서 사용한다.</p>
+<p>예를 들어, 다음과 같이 <code>&lt;input&gt;</code> 엘리먼트에 <code>ref</code> prop으로 <code>inputRef</code>라는 변수를 넘기게 되면, 우리는 이 <code>inputRef</code> 객체의 <code>current</code> 속성을 통해서 <code>&lt;input&gt;</code> 엘리먼트에 접근할 수 있고, DOM API를 이용하여 제어할 수 있습니다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input ref=&#123;inputRef&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>input 엘리먼트 제어</strong></li>
+<li>audio 엘리먼트 제어</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ol>
+<li><p>useRef에 ref element들을 할당해야 하므로 배열로 초기값 선언</p>
+<blockquote>
+<p>객체를 할당해도 된다.</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> refs = useRef([]);</span><br></pre></td></tr></table></figure></li>
+<li><p>위와 같이 빈 배열(객체)을 전달하면, 여러개의 DOM element를 refs에 담을 수 있다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">	&lt;div ref=&#123;<span class="function"><span class="params">el</span> =&gt;</span> (refs.current[<span class="number">0</span>] = el)&#125; /&gt;</span><br><span class="line">	&lt;div ref=&#123;<span class="function"><span class="params">el</span> =&gt;</span> (refs.current[<span class="number">1</span>] = el)&#125; /&gt;</span><br><span class="line">	&lt;div ref=&#123;<span class="function"><span class="params">el</span> =&gt;</span> (refs.current[<span class="number">2</span>] = el)&#125; /&gt;</span><br><span class="line">	&lt;div ref=&#123;<span class="function"><span class="params">el</span> =&gt;</span> (refs.current[<span class="number">3</span>] = el)&#125; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>각 div의 ref에는 useRef 자체가 아니라 useRef 배열의 index를 설정해주어야 한다.</li>
+<li>객체를 할당할 때에는 property로 접근하면 된다.</li>
+</ul>
+</li>
+<li><p>할당한 객체에 맞게 접근하기 위해, ref.current에서 배열의 index나 객체의 property를 이용하여 접근한다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">refs.current[currentInput]</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h3 id="Uncontrolled-Component-문제"><a href="#Uncontrolled-Component-문제" class="headerlink" title="Uncontrolled Component 문제"></a>Uncontrolled Component 문제</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CustomTextInput</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// textInput must be declared here so the ref can refer to it</span></span><br><span class="line">  <span class="keyword">const</span> textInput = useRef(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">const</span> numberInput = useRef(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> handleTextInputClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    textInput.current.focus();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> handleNumberInputClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    numberInput.current.focus();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;input</span><br><span class="line">        type=<span class="string">&quot;text&quot;</span></span><br><span class="line">        ref=&#123;textInput&#125; /&gt;</span><br><span class="line">      &lt;input</span><br><span class="line">        type=<span class="string">&quot;number&quot;</span></span><br><span class="line">        ref=&#123;numberInput&#125; /&gt;</span><br><span class="line">      &lt;input</span><br><span class="line">        type=<span class="string">&quot;button&quot;</span></span><br><span class="line">        value=<span class="string">&quot;Focus the text input&quot;</span></span><br><span class="line">        onClick=&#123;handleTextInputClick&#125;</span><br><span class="line">      /&gt;</span><br><span class="line">      &lt;input</span><br><span class="line">        type=<span class="string">&quot;button&quot;</span></span><br><span class="line">        value=<span class="string">&quot;Focus the number input&quot;</span></span><br><span class="line">        onClick=&#123;handleNumberInputClick&#125;</span><br><span class="line">      /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>관리해야 할 엘리먼트들이 늘어날수록, 정의해야 할 useRef 또한 정비례하여 증가하게 된다.</li>
+</ul>
+<blockquote>
+<p>useRef를 <strong><em>정의하는 곳과 사용하는 곳이 한 곳에 존재</em></strong>하면, react hooks의 특성상 <strong>동적으로 그 개수를 늘려가며 선언할 수 없다.</strong> 반면 방법1과 방법2에서는 동적으로 늘어나도 동일한 매커니즘으로 동작할 수 있다.</p>
+</blockquote>
+<h3 id="해결-방안1-Controlled-Component-Uncontrolled-Component"><a href="#해결-방안1-Controlled-Component-Uncontrolled-Component" class="headerlink" title="해결 방안1. Controlled Component + Uncontrolled Component"></a>해결 방안1. Controlled Component + Uncontrolled Component</h3><ul>
+<li><strong>리액트스러움</strong>: DOM을 제어하는 부분을 가려둔채 컴포넌트로만 보게 되면, CustomTextInput 를 사용하는 입장에서 <strong>내부 구현을 알 수 없는채로 “무엇”이 나타나길 기대하며 그 방법을 알지 못해도 된다는 점에서 “선언적”</strong>이라고 볼 수 있다.</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CustomTextInput</span>(<span class="params">&#123;focused&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// textInput must be declared here so the ref can refer to it</span></span><br><span class="line">  <span class="keyword">const</span> textInput = useRef(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> handleClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    textInput.current.focus();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!focused)&#123;</span><br><span class="line">      <span class="keyword">return</span> </span><br><span class="line">    &#125;</span><br><span class="line">    textInput.current.focus();</span><br><span class="line">  &#125;,[])</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;input</span><br><span class="line">      type=<span class="string">&quot;text&quot;</span></span><br><span class="line">      ref=&#123;textInput&#125; /&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> InputID = &#123;</span><br><span class="line">  first:<span class="string">&#x27;first&#x27;</span>,</span><br><span class="line">  second:<span class="string">&#x27;second&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Form</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [focused, setFocused] = useState(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> changeFocus = <span class="function">(<span class="params">id</span>) =&gt;</span> &#123; setFocused(id) &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">CustomTextInput</span> <span class="attr">focused</span>=<span class="string">&#123;focused</span>===<span class="string">InputID.first&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">CustomTextInput</span> <span class="attr">focused</span>=<span class="string">&#123;focused</span>===<span class="string">InputID.second&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>changeFocus(InputID.first)&#125; &gt;focus first<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>changeFocus(InputID.second)&#125; &gt;focus second<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>useRef를 관리할 엘리먼트 수만큼 정의해야 하는 단점이 있지만, 이 경우에 그 기능이 각 컴포넌트와 props로 가려지기 때문에 복잡한 상태를 최소한의 노력으로 관리할 수 있다.</li>
+</ul>
+<h3 id="해결-방안2-Uncontrolled-Component"><a href="#해결-방안2-Uncontrolled-Component" class="headerlink" title="해결 방안2. Uncontrolled Component"></a>해결 방안2. Uncontrolled Component</h3><ul>
+<li>한정된 기능만 제공: 해당 컴포넌트를 <strong>“어떻게” 제어해야 하는지 그대로 노출</strong>하고 있다.</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Form</span>(<span class="params">&#123;focused&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> inputRefs = useRef([]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> handleFocus = <span class="function">(<span class="params">index</span>) =&gt;</span> &#123;</span><br><span class="line">    inputRefs.current[index]?.focus();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> ref=&#123;<span class="function">(<span class="params">elem</span>) =&gt;</span> inputRefs.current[<span class="number">0</span>] = elem&#125; /&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> ref=&#123;<span class="function">(<span class="params">elem</span>) =&gt;</span> inputRefs.current[<span class="number">1</span>] = elem&#125; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;button type=<span class="string">&quot;button&quot;</span> onClick=&#123;<span class="function">()=&gt;</span>handleFocus(<span class="number">0</span>)&#125; &gt;focus first&lt;/button&gt;</span><br><span class="line">    &lt;button type=<span class="string">&quot;button&quot;</span> onClick=&#123;<span class="function">()=&gt;</span>handleFocus(<span class="number">1</span>)&#125; &gt;focus second&lt;/button&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/10/22/react-draft-wysiwyg/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/22/react-draft-wysiwyg/" class="post-title-link" itemprop="url">react-draft-wysiwyg로 텍스트 에디터 구현하기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-22 12:12:29 / Modified: 08:42:04" itemprop="dateCreated datePublished" datetime="2021-10-22T12:12:29+01:00">2021-10-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Draft-js의-state"><a href="#Draft-js의-state" class="headerlink" title="Draft.js의 state"></a>Draft.js의 state</h2><p><code>useState</code> hook을 이용해서 구현</p>
+<h3 id="ContentState"><a href="#ContentState" class="headerlink" title="ContentState"></a>ContentState</h3><ul>
+<li>text editor의 본문 (editor)</li>
+</ul>
+<h3 id="EditorState"><a href="#EditorState" class="headerlink" title="EditorState"></a>EditorState</h3><ul>
+<li>전체 text editor (toolbar, 옵션 등 포함)</li>
+</ul>
+<h2 id="react-draft-wysiwyg의-hashtag-decorator"><a href="#react-draft-wysiwyg의-hashtag-decorator" class="headerlink" title="react-draft-wysiwyg의 hashtag decorator"></a>react-draft-wysiwyg의 hashtag decorator</h2><ol>
+<li><code>react-draft-wysiwyg/src/Editor/index.js</code></li>
+</ol>
+<ul>
+<li><code>this.props.hashtag</code> : Wysiwyg 컴포넌트에 전달하는 Props 중 hashtag 속성에 객체 전달</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">getCompositeDecorator = <span class="function"><span class="params">toolbar</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> decorators = [</span><br><span class="line">      ...this.props.customDecorators,</span><br><span class="line">      getLinkDecorator(&#123;</span><br><span class="line">        showOpenOptionOnHover: toolbar.link.showOpenOptionOnHover,</span><br><span class="line">      &#125;),</span><br><span class="line">    ];</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.props.mention) &#123;</span><br><span class="line">      decorators.push(</span><br><span class="line">        ...getMentionDecorators(&#123;</span><br><span class="line">          ...this.props.mention,</span><br><span class="line">          onChange: <span class="built_in">this</span>.onChange,</span><br><span class="line">          getEditorState: <span class="built_in">this</span>.getEditorState,</span><br><span class="line">          getSuggestions: <span class="built_in">this</span>.getSuggestions,</span><br><span class="line">          getWrapperRef: <span class="built_in">this</span>.getWrapperRef,</span><br><span class="line">          modalHandler: <span class="built_in">this</span>.modalHandler,</span><br><span class="line">        &#125;)</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.props.hashtag) &#123;</span><br><span class="line">      decorators.push(getHashtagDecorator(<span class="built_in">this</span>.props.hashtag));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> CompositeDecorator(decorators);</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+
+<ol start="2">
+<li><code>react-draft-wysiwyg/src/decorators/HashTag/index.js</code></li>
+</ol>
+<ul>
+<li><code>hashCharacter</code>: trigger로 작용</li>
+<li><code>separator</code>: endpoint로 작용</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params">config</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.className = config.className;</span><br><span class="line">    <span class="built_in">this</span>.hashCharacter = config.hashCharacter || <span class="string">&quot;#&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.separator = config.separator || <span class="string">&quot; &quot;</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/10/22/web-curl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/22/web-curl/" class="post-title-link" itemprop="url">CURL이란?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-22 12:10:13 / Modified: 08:41:10" itemprop="dateCreated datePublished" datetime="2021-10-22T12:10:13+01:00">2021-10-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>클라이언트에서 커맨드 라인이나 소스코드로 손 쉽게 <strong>웹 브라우저 처럼 활동</strong>할 수 있도록 해주는 기술 (커맨드라인 Tool 혹은 라이브러리)</p>
+<ul>
+<li><p><strong>서버와 통신</strong>할 수 있는 커맨드 명령어 툴</p>
+</li>
+<li><p>무료 오픈소스</p>
+</li>
+<li><p>다양한 지원 프로토콜들</p>
+<blockquote>
+<p> DICT, FILE, FTP, FTPS, Gopher, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMB, SMBS, SMTP, SMTPS, Telnet, TFTP</p>
+</blockquote>
+</li>
+<li><p>SSL 인증 방식 가능</p>
+</li>
+<li><p><em>url을 가지고 할 수 있는 것들은 다할 수 있다.</em></p>
+<ul>
+<li>eg. http 프로토콜을 이용해 웹 페이지의 소스를 가져온다거나 파일을 다운받을 수 있다.</li>
+<li>eg. ftp 프로토콜을 이용해 파일을 받을 수 있을 뿐 아니라 올릴 수도 있다. </li>
+<li>eg. SMTP 프로토콜을 이용해 메일도 보낼 수 있다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="사용법"><a href="#사용법" class="headerlink" title="사용법"></a>사용법</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl [-option] url</span><br><span class="line">&gt;&gt;&gt; 소스가 화면으로 출력된다.</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/10/22/react-dotenv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/22/react-dotenv/" class="post-title-link" itemprop="url">React에서 dotenv(.env) 파일 사용하기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-22 12:07:10 / Modified: 08:40:01" itemprop="dateCreated datePublished" datetime="2021-10-22T12:07:10+01:00">2021-10-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>프로젝트의 루트 경로에 <code>.env</code> 파일을 만든다.</li>
+<li><code>.env</code> 파일에 설정하고 싶은 변수를 작성한다.<ul>
+<li><em>가장 중요한 점</em> 은, React에서 <code>.env</code> 파일의 변수를 사용하려면 변수명 앞에 <strong>prefix로 <code>REACT_APP_</code> 을 붙여야 한다</strong>는 점!</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">REACT_APP_API_KEY &#x3D; &quot;blabla&quot;</span><br><span class="line">REACT_APP_SECRET_KEY &#x3D; &quot;blablabla&quot;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>프로젝트에서 다음과 같이 사용하면 된다.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const API_KEY &#x3D; process.env.REACT_APP_API_KEY;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>잊지 않고 <code>.env</code> 파일을 <code>.gitignore</code> 에 추가해준다.</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/10/22/react-useeffect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/22/react-useeffect/" class="post-title-link" itemprop="url">React의 useEffect</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-22 12:04:38 / Modified: 08:39:39" itemprop="dateCreated datePublished" datetime="2021-10-22T12:04:38+01:00">2021-10-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>useEffect()의 return문</strong></p>
+<ul>
+<li><p><code>componentDidMount</code> 직전 useEffect의 return문 출력하고, 이후 useEffect 내용이 실행된다.</p>
+</li>
+<li><p>그 이후 리렌더 때 return문을 실행한다.</p>
+</li>
+<li><p>useEffect 함수의 return <strong>===</strong> 일반적인 class기반 컴포넌트의 Lifecycle에서 <code>componentWillUnmount</code></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> App = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> [number, setNumber] = useState(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;component did mount with useEffect!&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&quot;component will unmount&quot;</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;, [number]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h2&gt;number is &#123;number&#125;&lt;/h2&gt;</span><br><span class="line">                &lt;button</span><br><span class="line">                    onClick=&#123;<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                        setNumber(number + <span class="number">1</span>);</span><br><span class="line">                    &#125;&#125;</span><br><span class="line">                &gt;</span><br><span class="line">                Increment</span><br><span class="line">            &lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 상태</span></span><br><span class="line"><span class="keyword">var</span> &gt;&gt;&gt; number state가 <span class="number">1</span>씩 증가</span><br><span class="line"><span class="built_in">console</span> &gt;&gt;&gt;</span><br><span class="line">component will unmount</span><br><span class="line">component did mount <span class="keyword">with</span> useEffect!</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p><strong>dependency array</strong></p>
+<ul>
+<li>Giving it an <strong>empty array</strong> acts like <code>componentDidMount</code> as in, it <strong>only runs once.</strong></li>
+<li>Giving it <strong>no second argument</strong> acts as both <code>componentDidMount</code> and <code>componentDidUpdate</code>, as in it <strong>runs first on mount and then on every re-render.</strong></li>
+<li>Giving it an array as <strong>second argument with any value</strong> inside (eg. <code>[variable1]</code>) will only execute the code inside your <code>useEffect</code> hook <strong>ONCE on mount, as well as whenever that particular variable (eg. <code>variable1</code>) changes</strong>.</li>
+</ul>
+<hr>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://jsdev.kr/t/react-useeffect-return/5676">React 에서 useEffect의 return 호출 조건이 이해가 안됩니다!</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/10/22/js-date-timestamp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/22/js-date-timestamp/" class="post-title-link" itemprop="url">JavaScript에서의 Date와 timestamp</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-22 12:02:25 / Modified: 08:33:42" itemprop="dateCreated datePublished" datetime="2021-10-22T12:02:25+01:00">2021-10-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/javascript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>moment</code> 라이브러리 대신 내장 Date 함수를 사용하면 충분하다.</p>
+<ul>
+<li>JavaScript의 두 날짜를 <strong>&lt;,&lt;=,&gt;및&gt;=와 같은 비교 연산자</strong>로 직접 비교할 수 있다.</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> date1 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;2020-10-23&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> date2 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;2020-10-22&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(date1 &gt; date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 &gt;= date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 &lt; date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 &lt;= date2);</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">false</span></span><br><span class="line"><span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>하지만, <strong>등호 연산자</strong>를 사용하여 직접 Date 객체를 비교할 수 없다. JavaScript에서 다른 객체는 동일하지 않기 때문이다.</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date1 = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">let</span> date2 = <span class="keyword">new</span> <span class="built_in">Date</span>(date1);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(date1 == date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 === date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 != date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 !== date2);</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="literal">false</span></span><br><span class="line"><span class="literal">false</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/10/22/google-apps-mail/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/22/google-apps-mail/" class="post-title-link" itemprop="url">Google Apps Mail로 정적 HTML 폼 데이터를 메일로 보내기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-22 11:26:46 / Modified: 08:33:15" itemprop="dateCreated datePublished" datetime="2021-10-22T11:26:46+01:00">2021-10-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>사실 Gmail API를 사용해서 메일을 보내면 되는 태스크인데, api에 종속되지 않고 메일을 보낼 수 있는 방법이어서 시도해봤다. 서버 없이 프론트에서 form을 이용해 메일을 보낼 수 있는 방법이라 알아두면 유용할 것 같다.</p>
+<h3 id="Google-apps-script"><a href="#Google-apps-script" class="headerlink" title="Google apps script"></a>Google apps script</h3><p>본인 계정의 지메일로 구글 스프레드 시트를 <strong>deploy</strong> 함. (구글 드라이브에서 확인 가능)</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/">https://docs.google.com/spreadsheets/</a>… → Tools 탭 → Script Editor</p>
+</blockquote>
+<p><strong>* 테스트 후 <code>Manage Deployment</code> 에서 권한 <em>Only Myself</em> 로 설정! *</strong></p>
+<hr>
+<ul>
+<li><p>보내는 사람: <code>Google Apps</code> 를 deploy한 사람</p>
+</li>
+<li><p>받는 사람: <code>mailData.receiver</code> (내 form의 <code>name=&quot;receiver&quot;</code> 이 받는 사람이기 때문)</p>
+<blockquote>
+<p>it defaults to the email provided by the form’s data attribute</p>
+</blockquote>
+</li>
+<li><p><code>var mailData = e.parameters</code> === FormData body</p>
+<ul>
+<li><p><code>e</code> : formData</p>
+<blockquote>
+<p><code>e</code> is the data received from the POST</p>
+</blockquote>
+</li>
+<li><p><code>e.parameters</code> === mailData : <code>formData.data</code></p>
+<blockquote>
+<p>shorter name for form data</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">formData // e</span></span><br><span class="line"><span class="comment">	data // e.parameters</span></span><br><span class="line"><span class="comment">		&#123;&quot;receiver&quot;: &quot;&quot;, ...&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;data&quot;</span>:<span class="string">&quot;&#123;\\&quot;</span>receiver\\<span class="string">&quot;:[\\&quot;</span>aaa@gmail.com\\<span class="string">&quot;],\\&quot;</span>title\\<span class="string">&quot;:[\\&quot;</span>z\\<span class="string">&quot;],\\&quot;</span>message\\<span class="string">&quot;:[\\&quot;</span>q\\<span class="string">&quot;]&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<hr>
+<p>위는 내 폼 형식에 맞게 중요한 부분만 적어두었는데, 단계별로 진행해보고 싶다면 밑 레퍼런스를 참고하면 된다.</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://zzinise.tistory.com/12">내 홈페이지에 이메일 보내기 기능 넣기! | form태그에서 이메일 전송 기능 구현하기 | 서버없이! html과 javascript로만! | 내 html에 추가하기 | html 이메일 보내기 기능 | 웹페이지에 이메일 기능 넣..</a></p>
+<p><a target="_blank" rel="noopener" href="https://kutar37.tistory.com/entry/%EC%A0%95%EC%A0%81-HTML-form%ED%83%9C%EA%B7%B8%EC%97%90%EC%84%9C-%EB%A9%94%EC%9D%BC%EB%B3%B4%EB%82%B4%EA%B8%B0-Google-Apps-Mail">정적 HTML form태그에서 메일보내기 : Google Apps Mail</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server#how">GitHub - dwyl/learn-to-send-email-via-google-script-html-no-server: An Example of using an HTML form (e.g: “Contact Us” on a website) to send Email without a Backend Server (using a Google Script) perfect for static websites that need to collect data.</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/10/05/python-itertools/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -327,841 +1097,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/09/07/web-oauth/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/07/web-oauth/" class="post-title-link" itemprop="url">OAuth 2.0 프로토콜</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-09-06 22:29:55 / Modified: 14:32:50" itemprop="dateCreated datePublished" datetime="2021-09-06T22:29:55+01:00">2021-09-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>사용자가 usernames, passwords, 그리고 기타 <strong>개인적인 정보를 가지고 특정 서비스에 저장된 자신의 데이터를 다른 서비스에서 접근할 수 있도록</strong> 허락해주는 프로토콜</li>
-<li>e.g. 구글의 서비스에서 관리되고 있는 사용자의 데이터를 다른 서비스가 접근할 수 있도록 구글 API를 제공</li>
-</ul>
-<h2 id="특징"><a href="#특징" class="headerlink" title="특징"></a>특징</h2><ul>
-<li>여러 장치를 통해 시시각각 바뀌는 사용자의 연락처 정보를 실시간으로 업데이트 받을 수 있음</li>
-<li>타 서비스에 저장된 사용자 데이터를 접근해도 되는지 사용자에게 <em>명시적으로</em> 허락을 받음</li>
-</ul>
-<h2 id="OAuth-2-0-flow-for-JavaScript-implicit-grant-flow"><a href="#OAuth-2-0-flow-for-JavaScript-implicit-grant-flow" class="headerlink" title="OAuth 2.0 flow for JavaScript: implicit grant flow"></a>OAuth 2.0 flow for JavaScript: implicit grant flow</h2><ul>
-<li><strong>Implicit</strong> <strong>Grant</strong></li>
-<li>자바스크립트 라이브러리로 개발되는 SPA에서는 implicit grant 방식이 많이 사용됨</li>
-<li>user가 present 할 때만 API에 접근 가능하며, 기밀 정보는 따로 저장되지 않음</li>
-</ul>
-<ol>
-<li>사용자는 API를 제공받고자 하는 서비스에 로그인 한 후, API를 사용하고자 하는 어플리케이션에서 요청하는 권한을 확인하고, 해당 권한을 허용한다.</li>
-<li>Google Authorization Server는 사용자를 사전에 등록된 <code>redirect uri</code> 로 리다이렉트 시키면서 <code>access token</code> 을 애플리케이션에 보낸다.</li>
-<li>어플리케이션은 이 <code>access token</code> 을 이용해서 구글 API를 호출하여 원하는 정보를 얻는다.</li>
-</ol>
-<h2 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h2><ol>
-<li><strong>Request</strong> : 클라이언트 어플리케이션은 Google Authorization Server에 <code>access token</code> 을 요청하고,</li>
-<li><strong>Response</strong> : response로부터 <code>token</code> 을 추출한다.</li>
-<li><strong>Validation</strong> : 이후 접근하고자 하는 Google API에 <code>token</code> 을 보낸다.</li>
-</ol>
-<p><img src="https://developers.google.com/identity/protocols/oauth2/images/flows/implicit.png" alt="oauth2.0_javascript"></p>
-<h2 id="Example-Google-People-API"><a href="#Example-Google-People-API" class="headerlink" title="Example: Google People API"></a>Example: Google People API</h2><ol>
-<li><p>구글 API를 호출하기 위해서는 가장 먼저, 구글에 API를 사용하고자 하는 어플리케이션을 클라이언트로 등록하고 <code>client_id</code> 를 발급받아야 한다.</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://console.developers.google.com/apis">구글 API 콘솔</a> 에서 프로젝트를 생성 → 사용자 인증 정보 만들기 에서 OAuth 클라이언트 ID를 선택 → 웹 어플리케이션 → 승인된 리디렉션 URI 설정 (e.g. <code>[http://localhost:3000/](http://localhost:3000/)</code> ) → 클라이언트 ID 생성</li>
-</ul>
-</li>
-<li><p>Google Authorization Server에 접속하여 사용자 <code>token</code> 을 받아야 한다.</p>
-<ul>
-<li><code>CLIENT_ID</code>: 위에서 발급받은 클라이언트 ID</li>
-<li><code>AUTHORIZE_URI</code>: 구글에서 OAuth를 제공하는 기본 URI</li>
-<li><code>queryStr</code>: 위 <code>AUTHORIZE_URI</code>에 붙일 사용자 개인 정보 (쿼리), URL 생성용<ul>
-<li><code>client_id</code></li>
-<li><code>redirect_uri</code>: 실습 애플리케이션은 페이지가 하나 밖에 없는 SPA이기 때문에, 현재 URL을 <code>redirect_uri</code>로 설정</li>
-<li><code>response_type</code>: 어떤 OAuth 방식을 사용하는지를 결정하는 속성으로, <code>token</code> 으로 설정하면  <em>implicit grant</em> 방식이 적용</li>
-<li><code>scope</code>: 사용자의 어떤 데이터와 어떤 작업에 대한 권한을 요청하는지, 즉 어떤 구글 API를 요청하는지</li>
-</ul>
-</li>
-<li><code>loginUrl</code>: <code>AUTHORIZE_URI</code>에 <code>queryStr</code>을 붙여 만든 구글 로그인 authorization URL</li>
-</ul>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CLIENT_ID = <span class="string">&quot;YOUR CLIENT ID&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> AUTHORIZE_URI = <span class="string">&quot;https://accounts.google.com/o/oauth2/v2/auth&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> queryStr = qs.stringify(&#123;</span><br><span class="line">  client_id: CLIENT_ID,</span><br><span class="line">  redirect_uri: <span class="built_in">window</span>.location.href,</span><br><span class="line">  response_type: <span class="string">&quot;token&quot;</span>,</span><br><span class="line">  scope: <span class="string">&quot;https://www.googleapis.com/auth/contacts.readonly&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> loginUrl = AUTHORIZE_URI + <span class="string">&quot;?&quot;</span> + queryStr;</span><br></pre></td></tr></table></figure></li>
-<li><p>Google Authorization Server가 <code>redirect URI</code>로 <code>access token</code>을 보내주면, 이를 이용해 token validation을 진행한다.</p>
-<ul>
-<li>access token은 redirect uri의 hash 부분에 포함되므로, DOM의 Location API인 <code>window.location.hash</code> 를 이용해 가져온다.</li>
-<li>만약 access token이 없을 경우, grant server URL로 이동한다.</li>
-</ul>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; access_token &#125; = qs.parse(<span class="built_in">window</span>.location.hash.substring(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!access_token) &#123;</span><br><span class="line">    <span class="built_in">window</span>.location.assign(loginUrl);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>access token을 이용해 구글 API를 호출한다.</p>
-<ul>
-<li><code>Bearer</code> 문자열을 <code>access token</code> 앞에 붙여 <code>Authorization header</code>로 넘긴다.</li>
-</ul>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PEOPLE_URI = <span class="string">&quot;https://people.googleapis.com/v1/contactGroups&quot;</span>;</span><br><span class="line"></span><br><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    fetch(PEOPLE_URI, &#123;</span><br><span class="line">      headers: &#123; <span class="attr">Authorization</span>: <span class="string">&quot;Bearer &quot;</span> + access_token &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">      .then(<span class="function">(<span class="params">data</span>) =&gt;</span> setContactGroups(data.contactGroups));</span><br><span class="line">  &#125;, [access_token]);</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<h3 id="전체-코드"><a href="#전체-코드" class="headerlink" title="전체 코드"></a>전체 코드</h3><p><strong>qs</strong><br>npm 패키지: A querystring parsing and stringifying library with some added security.</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">&quot;qs&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> CLIENT_ID = <span class="string">&quot;YOUR CLIENT ID&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> AUTHORIZE_URI = <span class="string">&quot;https://accounts.google.com/o/oauth2/v2/auth&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> PEOPLE_URI = <span class="string">&quot;https://people.googleapis.com/v1/contactGroups&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> queryStr = qs.stringify(&#123;</span><br><span class="line">  client_id: CLIENT_ID,</span><br><span class="line">  redirect_uri: <span class="built_in">window</span>.location.href,</span><br><span class="line">  response_type: <span class="string">&quot;token&quot;</span>,</span><br><span class="line">  scope: <span class="string">&quot;https://www.googleapis.com/auth/contacts.readonly&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> loginUrl = AUTHORIZE_URI + <span class="string">&quot;?&quot;</span> + queryStr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; access_token &#125; = qs.parse(<span class="built_in">window</span>.location.hash.substring(<span class="number">1</span>));</span><br><span class="line">  <span class="keyword">const</span> [contactGroups, setContactGroups] = useState([]);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    fetch(PEOPLE_URI, &#123;</span><br><span class="line">      headers: &#123; <span class="attr">Authorization</span>: <span class="string">&quot;Bearer &quot;</span> + access_token &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">      .then(<span class="function">(<span class="params">data</span>) =&gt;</span> setContactGroups(data.contactGroups));</span><br><span class="line">  &#125;, [access_token]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!access_token) &#123;</span><br><span class="line">    <span class="built_in">window</span>.location.assign(loginUrl);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &lt;h2&gt;Contact Groups&lt;/h2&gt;</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &#123;contactGroups &amp;&amp;</span><br><span class="line">          contactGroups.map(<span class="function">(<span class="params">&#123; resourceName, name, memberCount &#125;</span>) =&gt;</span> (</span><br><span class="line">            &lt;li key=&#123;resourceName&#125;&gt;</span><br><span class="line">              &#123;name&#125; (&#123;memberCount&#125;)</span><br><span class="line">            &lt;/li&gt;</span><br><span class="line">          ))&#125;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.daleseo.com/google-oauth/">OAuth 2.0으로 구글 API 호출하기</a></p>
-<p><a target="_blank" rel="noopener" href="https://developers.google.com/youtube/v3/guides/auth/client-side-web-apps?hl=ko">OAuth 2.0 Flow: Client-side web apps | YouTube Data API</a></p>
-<ul>
-<li>OAuth 2.0 프로토콜 문서</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://developers.google.com/identity/protocols/oauth2">Using OAuth 2.0 to Access Google APIs | Google Identity</a></p>
-<ul>
-<li>OAuth 2.0 JavaScript 문서</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow#js-client-library">OAuth 2.0 for Client-side Web Applications | Google Identity</a></p>
-<ul>
-<li>Google People API 문서</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://developers.google.com/people/api/rest/v1/contactGroups/get">Method: contactGroups.get | People API | Google Developers</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/09/07/react-without-cra/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/07/react-without-cra/" class="post-title-link" itemprop="url">CRA 없이 React + TypeScript 세팅하기</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-09-06 22:24:41 / Modified: 14:40:13" itemprop="dateCreated datePublished" datetime="2021-09-06T22:24:41+01:00">2021-09-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>보통, cra typescript를 위해서</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app [project-name] --template typescript</span><br></pre></td></tr></table></figure>
-<p>를 쓰지만, </p>
-<p>이번에는 직접 만들어보면서 react library의 작동 원리를 살펴보려고 한다.</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://create-react-app.dev/docs/adding-typescript/">Adding TypeScript | Create React App</a></p>
-</blockquote>
-<h3 id="세팅-과정"><a href="#세팅-과정" class="headerlink" title="세팅 과정"></a>세팅 과정</h3><ol>
-<li><p>npm을 세팅한다.</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init -y <span class="comment">// -y로 default 설정 적용</span></span><br></pre></td></tr></table></figure></li>
-<li><p>npm pkg를 설치한다.</p>
-<ol>
-<li><p>typescript</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s typescript @types/react @types/react-dom</span><br></pre></td></tr></table></figure></li>
-<li><p>react</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s react react-dom</span><br></pre></td></tr></table></figure></li>
-<li><p>babel</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s-d babel-loader @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript</span><br></pre></td></tr></table></figure></li>
-<li><p>webpack</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --s-d webpack webpack-dev-server webpack-cli</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-<li><p>타입스크립트 설정하기</p>
-<ol>
-<li><p>타입스크립트 설정 파일을 만들기 위해,</p>
-<ul>
-<li>전역으로 설치된 경우 <code>tsc --init</code></li>
-<li>해당 프로젝트에만 설치된 경우 직접 파일을 명시해야 하기 때문에 <code>node_modules/.bin/tsc --init</code></li>
-</ul>
-<p>을 수행한다.</p>
-</li>
-<li><p>그럼 <code>tsconfig.json</code> 이 생성되는데, 다음과 같이 주석을 해지해주면 된다. (꼭 밑과 같지 않아도, 경우에 맞게/ 입맛에 맞게 <em>설정해두면 두고두고 용이함</em>!)</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;outDir&quot;</span>: <span class="string">&quot;./dist/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;sourceMap&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;noImplicitAny&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;module&quot;</span>: <span class="string">&quot;commonjs&quot;</span>,</span><br><span class="line">    <span class="string">&quot;target&quot;</span>: <span class="string">&quot;es5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;jsx&quot;</span>: <span class="string">&quot;react&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;include&quot;</span>: [<span class="string">&quot;./src/**/*&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-<li><p>리액트 Entry File 설정</p>
-<p>보통 cra 시 다음과 같은 디렉토리를 갖게 된다. (직접 만들어야 하는 파일만 명시해둠)</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">node_modules</span><br><span class="line">public</span><br><span class="line">	index.html</span><br><span class="line">src</span><br><span class="line">	App.tsx</span><br><span class="line">	index.tsx</span><br><span class="line">package.json</span><br><span class="line">tsconfig.json</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>따라서 먼저 Component를 만들어보자.</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;<span class="comment">// 함수형 컴포넌트const App: React.FunctionComponent&lt;&#123; name: string &#125;&gt; = (&#123; children, name &#125;) =&gt; (  &lt;div title=&#123;name&#125;&gt;&#123;children&#125;&lt;/div&gt;);export default App;</span></span><br></pre></td></tr></table></figure>
-<p>그리고 html에서 script로 읽을 <code>index.js</code>를 생성하자.</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;<span class="keyword">import</span> * <span class="keyword">as</span> ReactDOM <span class="keyword">from</span> <span class="string">&quot;react-dom&quot;</span>;<span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&quot;./App&quot;</span>;<span class="comment">// 클래스형 컴포넌트class Root extends React.Component &#123;  render() &#123;    return (      &lt;div&gt;        &lt;App name=&quot;test&quot;&gt; test &lt;/App&gt;      &lt;/div&gt;    );  &#125;&#125;ReactDOM.render(&lt;Root /&gt;, document.getElementById(&quot;root&quot;));</span></span><br></pre></td></tr></table></figure>
-<p>원래는 따로 클래스 정의 없이 <code>ReactDOM.render()</code> 에 클래스 컴포넌트 렌더 안에 들어있는 코드를 적어 바로 컴포넌트를 전달한다. 축약하면 다음과 같다.</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(  <span class="xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span>,  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>));</span><br></pre></td></tr></table></figure>
-<p>이제 최종적으로 js 파일을 전달할 <code>public/index.html</code> 을 정의하자!</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;<span class="xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span>  <span class="tag">&lt;<span class="name">head</span>&gt;</span>    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span>    <span class="tag">&lt;<span class="name">title</span>&gt;</span>채용 프로세스 이메일 템플릿<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  <span class="tag">&lt;/<span class="name">head</span>&gt;</span>  <span class="tag">&lt;<span class="name">body</span>&gt;</span>    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>    <span class="comment">&lt;!-- 번들 파일 추가 --&gt;</span>    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>  <span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>html은 <code>id=&quot;root&quot;</code> 를 통해 index 파일의 <code>document.getElementById(&quot;root&quot;)</code> 를 읽어나가기 때문에, 따로 script를 적용하지 않는다. 하지만, 이 <code>src/index.js</code> 를 읽기 위해 webpack 번들러를 설정하였으므로, 해당 <code>bundle.js</code> 파일을 script로 적용해야 한다!</p>
-<blockquote>
-<p>꼭 <code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code> 밑에 전달해야 한단다.<br>내 생각에는 html을 읽는 순서 때문에 그런듯.</p>
-</blockquote>
-</li>
-<li><p>Babel 설정하기</p>
-<ol>
-<li><p>trans-compile을 위해 <code>.babelrc</code> 나 <code>babel.config.js</code> 로 설정한다.</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;  <span class="string">&quot;presets&quot;</span>: [    <span class="string">&quot;@babel/preset-env&quot;</span>,    <span class="string">&quot;@babel/preset-react&quot;</span>,    <span class="string">&quot;@babel/preset-typescript&quot;</span>  ]&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-<li><p>webpack 설정하기</p>
-<ol>
-<li><p>이 모든 과정을 연결하기 위해 번들러 webpack을 설정한다. 바벨과 같이 <code>webpack.config.js</code> 를 루트 폴더에 만들면 됨!</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;  <span class="attr">entry</span>: [<span class="string">&quot;./src/index.tsx&quot;</span>],  <span class="attr">output</span>: &#123; <span class="attr">filename</span>: <span class="string">&quot;bundle.js&quot;</span>, <span class="attr">publicPath</span>: <span class="string">&quot;/&quot;</span>, <span class="attr">path</span>: __dirname + <span class="string">&quot;dist&quot;</span> &#125;,  <span class="attr">module</span>: &#123;    <span class="attr">rules</span>: [      &#123;        <span class="attr">test</span>: <span class="regexp">/\.(js|jsx|ts|tsx)$/</span>,        exclude: <span class="regexp">/node_modules/</span>,        use: [<span class="string">&quot;babel-loader&quot;</span>]      &#125;    ]  &#125;,  <span class="attr">resolve</span>: &#123; <span class="attr">extensions</span>: [<span class="string">&quot;*&quot;</span>, <span class="string">&quot;.js&quot;</span>, <span class="string">&quot;.jsx&quot;</span>, <span class="string">&quot;.ts&quot;</span>, <span class="string">&quot;.tsx&quot;</span>] &#125;&#125;;</span><br></pre></td></tr></table></figure>
-<p><code>resolve</code>: 확장자나 경로를 알아서 처리할 수 있도록 설정하는 옵션이다.<br><code>module</code>: 이 옵션에 설치한 ts-loader와 babel-loader를 설정하면 된다. loader들은 오른쪽에서 왼쪽 방향으로 적용되기 때문에 ts-loader를 babel-loader보다 오른쪽에 위치시켜야 한다.<br><code>output</code>: 번들화 된 파일을 export할 경로와 파일명을 설정한다.</p>
-</li>
-</ol>
-</li>
-<li><p>마지막으로, <code>package.json</code> 에서 <code>script</code> 를 설정해주면 된다.</p>
-<ol>
-<li><p><code>npm start</code> 또는 <code>npm run start</code> 로 script를 실행할 수 있도록 다음과 같이 설정하면 됨!</p>
-<p>npm run 시 script 내부의 명령어을 적용할 수 있다!</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;    <span class="string">&quot;start&quot;</span>: <span class="string">&quot;webpack-dev-server --config ./webpack.config.js --mode development&quot;</span>,    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>  &#125;,</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><ul>
-<li><p>웹팩 설정에서 사용된 <code>inline</code> 모드는 무엇일까?</p>
-<p>네트워크 방화벽 구성과 동일하게 모든 트래픽이 해당 보안장비를 거쳐야만 목적지로 전송될 수 있도록 네트워크를 구성하는 방식</p>
-<p><a target="_blank" rel="noopener" href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=yoodh0713&logNo=221558145702">[네트워크] 인라인 모드와 미러링(스니핑) 모드의 차이점</a></p>
-</li>
-<li><p><code>hot</code> 모드는?</p>
-<p>Hot Module Replacement(HMR)는 응용프로그램 실행 중에 추가 또는 제거된 모듈들을 페이지 리로드 없이 교체하는 기능입니다.</p>
-</li>
-</ul>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://flymogi.tistory.com/69">리액트 - 타입스크립트 시작하기 (without CRA)</a></p>
-<p>위 블로그 기반으로,</p>
-<p><a target="_blank" rel="noopener" href="https://chanyeong.com/blog/post/7">CRA없이 React + TypeScript 셋팅하기! - chanyeong</a></p>
-<p>위 블로그는 심화형임</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/09/05/git-rebase-pull/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/05/git-rebase-pull/" class="post-title-link" itemprop="url">git에서 rebase와 pull의 차이</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-09-05 14:52:45 / Modified: 09:53:20" itemprop="dateCreated datePublished" datetime="2021-09-05T14:52:45+01:00">2021-09-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><ul>
-<li>말 그대로, <strong>Re</strong><em>base</em> : base를 변경하는 것</li>
-<li>현재 브랜치의 작업 내용을 변경하지 않고 rebase 하고자 하는 base의 상태를 가져오는 것</li>
-</ul>
-<h2 id="Pull"><a href="#Pull" class="headerlink" title="Pull"></a>Pull</h2><ul>
-<li>pull하고자 하는 브랜치의 모든 내용을 가져오는 것</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/24/python-regex/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/24/python-regex/" class="post-title-link" itemprop="url">문자열에 정규식 활용하기</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-24 15:06:38 / Modified: 07:28:34" itemprop="dateCreated datePublished" datetime="2021-08-24T15:06:38+01:00">2021-08-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>정규식 문자열 앞에 <code>r</code> 문자를 삽입하면 이 정규식은 Raw String 규칙에 의하여 <strong>백슬래시 2개 대신 1개만 써도 2개를 쓴 것과 동일한</strong> 의미를 갖게 된다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">r&#x27;\&#x27;) ## &#x27;</span>\\<span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>※ 만약 백슬래시를 사용하지 않는 정규식이라면 r의 유무에 상관없이 동일한 정규식이 될 것이다.</p>
-</blockquote>
-<h3 id="re-sub"><a href="#re-sub" class="headerlink" title="re.sub()"></a>re.sub()</h3><p><code>re.sub(pattern, repl, string, count=0, flag=0)</code></p>
-<p>: <code>pattern</code> 을 <code>repl</code> 로 대체한 <code>string</code> 을 반환한다.</p>
-<ul>
-<li><code>repl</code> 내 <code>\</code> 가 존재할 경우 <strong>backslash escape</strong> 가 적용된다.</li>
-</ul>
-<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><ul>
-<li><p>알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.)를 제외한 모든 문자를 제거</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">r&quot;[^a-z0-9-_.]&quot;</span>, <span class="string">&quot;&quot;</span>, answer)</span><br><span class="line"><span class="comment"># &#x27;[^a-z\d\-\_\.]&#x27;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>마침표(.)가 2번 이상 연속된 부분을 하나의 마침표(.)로 치환</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">&#x27;\.\.+&#x27;</span>, <span class="string">&#x27;.&#x27;</span>, answer)</span><br><span class="line"><span class="comment"># &#x27;((.)\\2&#123;1,&#125;)&#x27;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>마침표(.)가 처음이나 끝에 위치한다면 제거</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.sub(<span class="string">&quot;^[.]|[.]$&quot;</span>, <span class="string">&quot;&quot;</span>, answer)</span><br><span class="line"><span class="comment"># &#x27;^\.|\.$&#x27;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/boj-1181/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/23/boj-1181/" class="post-title-link" itemprop="url">BOJ 1181</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-23 13:44:03 / Modified: 05:46:03" itemprop="dateCreated datePublished" datetime="2021-08-23T13:44:03+01:00">2021-08-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/sort/" itemprop="url" rel="index"><span itemprop="name">Sort</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 단어의 개수 N이 주어진다. (1 ≤ N ≤ 20,000) </p>
-<p>둘째 줄부터 N개의 줄에 걸쳐 알파벳 소문자로 이루어진 단어가 한 줄에 하나씩 주어진다. 주어지는 문자열의 길이는 50을 넘지 않는다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">s = <span class="built_in">set</span>(<span class="built_in">input</span>().rstrip() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n))</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><ul>
-<li>같은 단어가 여러번 입력된 경우에는 한 번씩만 출력해야 하므로 <code>set</code> 를 이용하고,</li>
-<li>조건에 따라 <code>sort</code> 를 구현하는데, <code>set</code> 에는 <code>sort</code> 가 없으므로 <strong><code>sorted</code></strong> 를 이용해야 한다.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">sorted</span>(s, key=(<span class="keyword">lambda</span> x: (<span class="built_in">len</span>(x), x)))</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>조건에 따라 정렬하여 단어들을 출력한다. 단, 같은 단어가 여러 번 입력된 경우에는 한 번씩만 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> s:</span><br><span class="line">  print(word)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/boj-11650/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/23/boj-11650/" class="post-title-link" itemprop="url">BOJ 11650</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-23 13:29:32 / Modified: 05:40:22" itemprop="dateCreated datePublished" datetime="2021-08-23T13:29:32+01:00">2021-08-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/sort/" itemprop="url" rel="index"><span itemprop="name">Sort</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 점의 개수 N (1 ≤ N ≤ 100,000)이 주어진다. </p>
-<p>둘째 줄부터 N개의 줄에는 i번점의 위치 xi와 yi가 주어진다. (-100,000 ≤ xi, yi ≤ 100,000) 좌표는 항상 정수이고, 위치가 같은 두 점은 없다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">s = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">  s.append(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())))</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><p><code>sort</code> 함수에 <code>key</code> 를 이용하면 쉽게 해결되는데, 이를 위해서 <code>sort</code> 함수를 살펴보자.</p>
-<blockquote>
-<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><h4 id="Basic-Syntax"><a href="#Basic-Syntax" class="headerlink" title="Basic Syntax"></a>Basic Syntax</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>.sort(key=..., reverse=...)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h3><ul>
-<li><p><code>key</code> : sort 수행 시 <strong>비교</strong> 를 위해 적용되는 함수</p>
-<ul>
-<li><p>e.g. 1D</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>.sort(key=<span class="built_in">len</span>)</span><br></pre></td></tr></table></figure>
-
-<p><code>len</code> 함수에 따라 리스트의 요소의 길이가 정렬 기준이 된다.</p>
-</li>
-<li><p>e.g. 2D</p>
-<p>tuple의 경우, <strong>첫번째 파라미터가 디폴트로 정렬 기준이 된다</strong>.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># random list</span></span><br><span class="line">random = [(<span class="number">2</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">4</span>, <span class="number">1</span>), (<span class="number">1</span>, <span class="number">3</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># sort list with key</span></span><br><span class="line">random.sort(key=(<span class="keyword">lambda</span> x: x[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment">### lambda to function declaration</span></span><br><span class="line"><span class="comment"># key=takeSecond</span></span><br><span class="line"><span class="comment"># def takeSecond(elem):</span></span><br><span class="line"><span class="comment">#     return elem[1]</span></span><br></pre></td></tr></table></figure>
-
-<p>위의 예시에서는, 튜플 <code>x</code> 의 2번째 파라미터를 기준으로 정렬을 수행한다.</p>
-</li>
-</ul>
-</li>
-<li><p><code>reverse</code> : 기본 오름차순, <code>True</code> 시 내림차순</p>
-</li>
-</ul>
-<h3 id="Return-Value"><a href="#Return-Value" class="headerlink" title="Return Value"></a>Return Value</h3><p><code>None</code> 👉 원본을 수정한다.</p>
-<blockquote>
-<h3 id="sorted"><a href="#sorted" class="headerlink" title="sorted()"></a>sorted()</h3><p><code>sorted list</code> 👉 원본을 수정하지 않고, 새로운 리스트를 반환한다.</p>
-</blockquote>
-</blockquote>
-<p>위에 따라 <code>key</code> 를 지정해서 <code>sort</code> 함수를 커스터마이징하면,</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.sort(key=(<span class="keyword">lambda</span> x: (x[<span class="number">0</span>], x[<span class="number">1</span>])))</span><br></pre></td></tr></table></figure>
-<p>이는 즉, <strong>튜플 <code>x</code> 의 1번째 인자를 첫 기준으로 두고, 2번째 인자를 두번째 기준으로 둔다</strong> 는 의미이다.</p>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄부터 N개의 줄에 점을 정렬한 결과를 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">  print(i[<span class="number">0</span>], i[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/boj-10989/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/23/boj-10989/" class="post-title-link" itemprop="url">BOJ 10989</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-23 13:19:58 / Modified: 05:22:22" itemprop="dateCreated datePublished" datetime="2021-08-23T13:19:58+01:00">2021-08-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/sort/" itemprop="url" rel="index"><span itemprop="name">Sort</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 수의 개수 N(1 ≤ N ≤ 10,000,000)이 주어진다. </p>
-<p>둘째 줄부터 N개의 줄에는 숫자가 주어진다. 이 수는 10,000보다 작거나 같은 자연수이다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><p>기존의 <code>sort</code> 나 <code>sorted</code> 를 사용하면 메모리 초과가 난다.</p>
-<p>새로운 방식으로 접근해야 함.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s = [<span class="number">0</span>]*<span class="number">10001</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">  s[<span class="built_in">int</span>(<span class="built_in">input</span>())] += <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>같은 요소가 여러개 있는 경우, 중복으로 저장하는 것이 아닌, 2차원 배열 형식을 이용하여 중복되는 만큼 count를 한 후 count 만큼 해당 index를 출력하면 된다. 메모리 낭비를 없앨 수 있음.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(s)):</span><br><span class="line">  <span class="keyword">if</span> s[i] &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(s[i]):</span><br><span class="line">      print(i)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/boj-13305/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/23/boj-13305/" class="post-title-link" itemprop="url">BOJ 13305</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-23 12:43:37 / Modified: 04:49:04" itemprop="dateCreated datePublished" datetime="2021-08-23T12:43:37+01:00">2021-08-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/greedy/" itemprop="url" rel="index"><span itemprop="name">Greedy</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>표준 입력으로 다음 정보가 주어진다.</p>
-<p>첫 번째 줄에는 도시의 개수를 나타내는 정수 N(2 ≤ N ≤ 100,000)이 주어진다. </p>
-<p>다음 줄에는 인접한 두 도시를 연결하는 도로의 길이가 제일 왼쪽 도로부터 N-1개의 자연수로 주어진다. </p>
-<p>다음 줄에는 주유소의 리터당 가격이 제일 왼쪽 도시부터 순서대로 N개의 자연수로 주어진다. </p>
-<p>제일 왼쪽 도시부터 제일 오른쪽 도시까지의 거리는 1이상 1,000,000,000 이하의 자연수이다. 리터당 가격은 1 이상 1,000,000,000 이하의 자연수이다. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>().rstrip())</span><br><span class="line">km = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br><span class="line">p = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Greedy"><a href="#Greedy" class="headerlink" title="Greedy"></a>Greedy</h3><p>그리디는 일단 <strong>현재 상황에서 할 수 있는 최선의 선택을 하고보는</strong> 타입이다. 이 문제가 대표적인 예시 같은데,</p>
-<ul>
-<li><p>현재 위치 기준 바로 다음 주유소의 가격이 싸면 일단 간다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> p[now] &gt; p[now+<span class="number">1</span>]:</span><br><span class="line">  ret += p[now] * km[now]</span><br><span class="line">  now += <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
-<li><p>비싸면 지금보다는 싼 주유소를 찾을 때까지 계속 찾고, 싼 곳을 찾으면 거기로 이동한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  dist = <span class="number">0</span></span><br><span class="line">  <span class="built_in">next</span> = <span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> <span class="built_in">next</span> <span class="keyword">in</span> <span class="built_in">range</span>(now + <span class="number">1</span>, n):</span><br><span class="line">    dist += km[<span class="built_in">next</span>-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> p[now] &gt; p[<span class="built_in">next</span>]:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  ret += dist * p[now]</span><br><span class="line">  now = <span class="built_in">next</span></span><br></pre></td></tr></table></figure></li>
-<li><p>이 모든 건 도착지 전까지만 해당, 도착지에 도달할 경우 종료해야 한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> now &lt; n-<span class="number">1</span>:</span><br></pre></td></tr></table></figure>
-<p>완전 탐색처럼 가장 싼 곳을 찾아서 움직이면 안 된다. 중간중간에 절약할 수 있는 경우에는 일단 절약하고 봐야 함.</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1229,7 +1168,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">143</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1242,7 +1181,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-count">93</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

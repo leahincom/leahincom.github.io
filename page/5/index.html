@@ -163,6 +163,835 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/06/boj-2579/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/06/boj-2579/" class="post-title-link" itemprop="url">BOJ 2579</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-05 18:06:14 / Modified: 10:17:09" itemprop="dateCreated datePublished" datetime="2021-08-05T18:06:14+01:00">2021-08-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>입력의 첫째 줄에 계단의 개수가 주어진다.</p>
+<p>둘째 줄부터 한 줄에 하나씩 제일 아래에 놓인 계단부터 순서대로 각 계단에 쓰여 있는 점수가 주어진다. 계단의 개수는 300이하의 자연수이고, 계단에 쓰여 있는 점수는 10,000이하의 자연수이다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">score = [<span class="number">0</span>]*<span class="number">301</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">  score[i] = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">dp = [<span class="number">0</span>]*<span class="number">301</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>배열을 생성할 때 웬만하면 백준에서 주는 최대값을 크기로 해주는게 좋다. 생각보다 IndexError 런타임 에러가 많이 나기 때문… 기본적인 경우로 코딩해놓고 히든케이스 때문에 index가 벗어날 수 있다.</p>
+</blockquote>
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>DP는 규칙을 찾고 코딩하다 내가 말리는 기분이다…</p>
+<p>먼저 처음 접근 방식은 이랬음.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">규칙이 반복되는데 그 중 최대값 구하기 = DP</span></span><br><span class="line"><span class="string">1. 연속적으로 1 / 2 계단만 오를 수 있음</span></span><br><span class="line"><span class="string">2. 점수의 최대값</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- 3개 이상 연속되지 않는 조합</span></span><br><span class="line"><span class="string">- 그 중 최대값</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>나름 규칙 찾고, 2중 중첩 반복문으로 케이스를 모두 비교해서 최대값을 찾아야 하나 싶었음. 나름 끝에서부터 접근하는 방식은 맞았다만, 문제는 시작점부터 어떤 계단을 밟을지 고르는 방법과 동일하게 도착점에서 어떤 계단을 밟고 왔나 고르는 방법으로 풀었다는 거다.</p>
+<p>여기서 생각을 좀 틀어서, 처음부터 더해나가되 어떤 계단을 밟았는지 알고, 고를 수 있는 index부터 어떤 계단을 밟을지 골라야 한다는 거다. 결국 도착점에서 모든 케이스를 비교하는게 아니라, 올라가면서 전까지 밟아온 케이스를 비교하고 골라야 한다는 것.</p>
+<p>그래서 먼저 가능한 케이스를 정의해둔다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>] = score[<span class="number">0</span>]</span><br><span class="line">dp[<span class="number">1</span>] = dp[<span class="number">0</span>] + score[<span class="number">1</span>]</span><br><span class="line">dp[<span class="number">2</span>] = <span class="built_in">max</span>(dp[<span class="number">0</span>] + score[<span class="number">2</span>], score[<span class="number">1</span>] + score[<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+<p>어, 첫번째 칸을 안 밟을 수도 있는데…! 라고 생각했지만 이후 규칙성을 반영해서 일반적인 케이스를 코딩하면 이미 3번째 계단에 있는 내가 첫번째를 안 밟는 케이스를 선택할 수도 있다.</p>
+<p>이후 일반적인 케이스 코딩.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, n):</span><br><span class="line">  dp[i] = <span class="built_in">max</span>(dp[i-<span class="number">3</span>] + score[i-<span class="number">1</span>] + score[i], dp[i-<span class="number">2</span>] + score[i])</span><br></pre></td></tr></table></figure>
+<p>결국 점화식은 다음과 같다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 현재 칸을 밟는다는 가정 하에,</span></span><br><span class="line"><span class="comment"># 이전 칸을 밟은 경우:</span></span><br><span class="line">	<span class="comment"># 전전 칸을 밟았으면 안 됨</span></span><br><span class="line">	dp[i-<span class="number">3</span>] + score[i-<span class="number">1</span>] + score[i]</span><br><span class="line">	</span><br><span class="line"><span class="comment"># 이전 칸을 밟지 않은 경우:</span></span><br><span class="line">	<span class="comment"># 전전 칸까지 밟을 수 있음</span></span><br><span class="line">  dp[i-<span class="number">2</span>] + score[i]</span><br></pre></td></tr></table></figure>
+<p>위 2가지 경우 중에 <code>max</code> 값을 골라 저장하면 된다.</p>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 계단 오르기 게임에서 얻을 수 있는 총 점수의 최댓값을 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(dp[n-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/05/boj-9095/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/05/boj-9095/" class="post-title-link" itemprop="url">BOJ 9095</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-05 13:49:28 / Modified: 05:55:46" itemprop="dateCreated datePublished" datetime="2021-08-05T13:49:28+01:00">2021-08-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 테스트 케이스의 개수 T가 주어진다.</p>
+<p>각 테스트 케이스는 한 줄로 이루어져 있고, 정수 n이 주어진다. n은 양수이며 11보다 작다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(<span class="built_in">input</span>())):</span><br><span class="line">  n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>굳이 t 변수를 생성하지 않아도 됨</p>
+</blockquote>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>각 테스트 케이스마다, n을 1, 2, 3의 합으로 나타내는 방법의 수를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(ret[n-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>가장 중요한 건, 규칙성을 파악하는 것이다.</p>
+<p>DFS나 BFS와는 다르게 DP는 규칙성을 파악하는게 더 어려운 것 같다. 무조건 반복이 아니라 규칙에 따라 기존의 값을 활용해야 하기 때문인가…</p>
+<p>이 문제도 규칙성을 파악하면 점화식을 만드는 건 하나도 어렵지 않음.</p>
+<p>예를 들어<code>n = 4</code> 라고 한다면,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">규칙</span></span><br><span class="line"><span class="string">1 = 1</span></span><br><span class="line"><span class="string">2 = 1+1</span></span><br><span class="line"><span class="string">  = 2</span></span><br><span class="line"><span class="string">3 = 1+1+1</span></span><br><span class="line"><span class="string">  = 2+1</span></span><br><span class="line"><span class="string">  = 1+2</span></span><br><span class="line"><span class="string">  = 3</span></span><br><span class="line"><span class="string">4 = 1+1+1+1 =&gt; 3 ++1</span></span><br><span class="line"><span class="string">  = 2+1+1 =&gt; 3 ++1</span></span><br><span class="line"><span class="string">  = 1+2+1 =&gt; 3 ++1</span></span><br><span class="line"><span class="string">  = 1+1+2 =&gt; 2 ++2</span></span><br><span class="line"><span class="string">  = 2+2 =&gt; 2 ++2</span></span><br><span class="line"><span class="string">  = 3+1 =&gt; 3 ++1</span></span><br><span class="line"><span class="string">  = 1+3 =&gt; 1 ++3</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>결국 1,2,3으로 숫자를 만들어야 하니 1,2,3 자체만 default로 경우의 수를 배열에 세팅해놓은 다음 이를 토대로 4부터 조합을 찾아가면 된다.</p>
+<p>4의 경우 3의 모든 경우에 +1씩 하면 되고 (4 = 3+1 이니,) 2에 +2씩, 1에 +3씩 하면 된다. 즉, 점화식은 다음과 같다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ret[n] = ret[n-<span class="number">1</span>] + ret[n-<span class="number">2</span>] + ret[n-<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>코드는 다음과 같다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ret = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, n):</span><br><span class="line">  ret.append(ret[i-<span class="number">1</span>] + ret[i-<span class="number">2</span>] + ret[i-<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/05/boj-1463/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/05/boj-1463/" class="post-title-link" itemprop="url">BOJ 1463</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-05 13:23:54 / Modified: 05:30:37" itemprop="dateCreated datePublished" datetime="2021-08-05T13:23:54+01:00">2021-08-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 1보다 크거나 같고, 106보다 작거나 같은 정수 N이 주어진다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 연산을 하는 횟수의 최솟값을 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(dp[n])</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><ol>
+<li>X가 3으로 나누어 떨어지면, 3으로 나눈다.</li>
+<li>X가 2로 나누어 떨어지면, 2로 나눈다.</li>
+<li>1을 뺀다.</li>
+</ol>
+<p>조건이 위와 같이 주어져 있는 상태에서,</p>
+<p>정수 N이 주어졌을 때, 위와 같은 연산 세 개를 적절히 사용해서 1을 만들려고 한다. 연산을 사용하는 횟수의 <code>최솟값</code> 을 출력하시오.</p>
+<p>최소 연산 횟수을 구하는 문제이니, <strong>DP</strong> 를 활용해야 한다.</p>
+<p>DP를 위해 <em>점화식</em> 을 구해보면 다음과 같다. 조건 그대로 정리하면 매우 간단.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp(N) = <span class="built_in">min</span>(dp(N//<span class="number">3</span>)+<span class="number">1</span>, dp(N//<span class="number">2</span>)+<span class="number">1</span> , dp(N-<span class="number">1</span>)+<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>먼저</p>
+<ul>
+<li>default: 1을 뺀다, 즉, index가 1 증가하면 연산 횟수도 1 증가한다.</li>
+<li><code>x % 3 == 0</code> : 1을 빼는 경우 vs 3으로 나눈 몫의 연산 횟수 값에 1 증가시키기</li>
+<li><code>x % 2 == 0</code> : 1을 빼는 경우 vs 2으로 나눈 몫의 연산 횟수 값에 1 증가시키기</li>
+</ul>
+<p>이 3가지를 모두 체크해봐야 하므로 모두 <code>if</code> 문으로 처리 (<code>elif</code> 가 아님)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n+<span class="number">1</span>):</span><br><span class="line">  dp[i] = dp[i-<span class="number">1</span>] + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> i % <span class="number">3</span> == <span class="number">0</span>:</span><br><span class="line">    dp[i] = <span class="built_in">min</span>(dp[i], dp[i // <span class="number">3</span>] + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">    dp[i] = <span class="built_in">min</span>(dp[i], dp[i // <span class="number">2</span>] + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>구하고자 하는 <code>n</code> 까지 도달하면 <code>dp[n]</code> 에는 최소 연산 횟수가 담겨있을 것이므로 출력하면 됨.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/05/boj-2748/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/05/boj-2748/" class="post-title-link" itemprop="url">BOJ 2748</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-05 13:04:43 / Modified: 05:06:19" itemprop="dateCreated datePublished" datetime="2021-08-05T13:04:43+01:00">2021-08-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 n이 주어진다. n은 90보다 작거나 같은 자연수이다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 n번째 피보나치 수를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(arr[-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>재귀로 풀면 안 된다. 시간 초과 남</p>
+<p>DP로 배열 써서 풀어야 한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n+<span class="number">1</span>):</span><br><span class="line">  arr.append(arr[i-<span class="number">2</span>] + arr[i-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/04/boj-1600/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/04/boj-1600/" class="post-title-link" itemprop="url">BOJ 1600</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-04 13:56:51 / Modified: 06:17:58" itemprop="dateCreated datePublished" datetime="2021-08-04T13:56:51+01:00">2021-08-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>코드를 복사 붙여넣기 할 때는 조건을 잘 수정하자…</p>
+<p>-이상 조건 하나 잘못 넣어서 삽질하는 바람에 시간 초과 뜬 인간이..</p>
+</blockquote>
+<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 정수 K가 주어진다.</p>
+<p>둘째 줄에 격자판의 가로길이 W, 세로길이 H가 주어진다.</p>
+<p>그 다음 H줄에 걸쳐 W개의 숫자가 주어지는데, 0은 아무것도 없는 평지, 1은 장애물을 뜻한다. 장애물이 있는 곳으로는 이동할 수 없다. 시작점과 도착점은 항상 평지이다.</p>
+<p>W와 H는 1이상 200이하의 자연수이고, K는 0이상 30이하의 정수이다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">k = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">w, h = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">board = [<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(h)]</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 원숭이의 동작수의 최솟값을 출력한다.</p>
+<p>시작점에서 도착점까지 갈 수 없는 경우엔 -1을 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> q:</span><br><span class="line">	<span class="keyword">if</span> y == h-<span class="number">1</span> <span class="keyword">and</span> x == w-<span class="number">1</span>: <span class="keyword">return</span> visited[y][x][z]</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>한 경우에 트리를 파고 들어가는 형식이라 DFS라고 생각했는데, BFS로 풀어야 했다.</p>
+<p>이유는</p>
+<ul>
+<li>동일한 시작점과 도착점을 가지는 와중에</li>
+<li>방향에 따라 경우를 파서 들어가야 하기 때문이고,</li>
+<li>모든 값을 저장하는 것이 아니라 먼저 조건을 만나는 경우에 출력하고 끝내기 때문이다.</li>
+</ul>
+<p>이 문제의 조건은 다음과 같다.</p>
+<ol>
+<li>k 번만 말과 같이 이동 가능</li>
+<li>이후에는 인접한 칸 (상하좌우) 이동 가능</li>
+</ol>
+<p>과정은</p>
+<ul>
+<li>시작점은 (0,0)으로 동일 &amp; 도착점은 (w-1,h-1)으로 동일</li>
+<li>가능한 모든 direction을 시도해봐야 함</li>
+<li>하나의 경우가 끝나면 count append, visited 초기화</li>
+</ul>
+<p>이래서 DFS를 시도했으나, BFS와 3차원 배열을 활용하고 <strong>킥 포인트로 <code>최소값 == 가장 먼저 break point를 만나는 경우</code></strong> 를 체크하면 됐다.</p>
+<p>그래서 위의 과정을 수정해보면,</p>
+<ul>
+<li><strong>시작점과 도착점이 동일한 상태에서 여러번의 경우의 수</strong>가 존재하므로 <strong>bfs</strong>를 이용한다!</li>
+<li><strong>3차원 배열</strong>을 생성하여 가능한 <strong>모든 좌표에 대하여 k의 경우의 수를 포함</strong>한다.</li>
+<li>초기화 하는 것이 아닌, 최소값을 구하는 경우이므로 <strong>가장 먼저 break point를 만나는 경우를 출력하고 종료</strong>하면 됨.</li>
+</ul>
+<p>먼저, 정해진 direction이 존재하니 이걸 배열에 저장해 놓고,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># [dy, dx]</span></span><br><span class="line">horse = [[<span class="number">2</span>, -<span class="number">1</span>], [-<span class="number">2</span>, <span class="number">1</span>], [-<span class="number">1</span>, -<span class="number">2</span>], [-<span class="number">1</span>, <span class="number">2</span>], [<span class="number">2</span>, -<span class="number">1</span>], [<span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, -<span class="number">2</span>], [<span class="number">1</span>, <span class="number">2</span>]]</span><br><span class="line"><span class="built_in">dir</span> = [[-<span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, -<span class="number">1</span>], [<span class="number">0</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">0</span>]]</span><br></pre></td></tr></table></figure>
+<p>bfs를 정의한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span>():</span></span><br><span class="line">  q = deque()</span><br><span class="line">  q.append((<span class="number">0</span>,<span class="number">0</span>,k))</span><br><span class="line">  visited = [[[<span class="number">0</span>]*<span class="number">31</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(w)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(h)]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>여기서! k가 0 이상 30 이하이므로 31번 만큼 visited 배열을 더해서 3차원 배열을 만든다. 즉, <em>visited를 별도의 배열이 아니라 기존 board에 추가하는 것.</em></li>
+</ul>
+<p>break point를 설정하고,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> q:</span><br><span class="line">  y, x, z = q.popleft()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 가장 먼저 도착하는 경우가 최소 횟수</span></span><br><span class="line">  <span class="keyword">if</span> y == h-<span class="number">1</span> <span class="keyword">and</span> x == w-<span class="number">1</span>: <span class="keyword">return</span> visited[y][x][z]</span><br></pre></td></tr></table></figure>
+<p>default direction을 수행한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># default direction 먼저 append 하고</span></span><br><span class="line"><span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">dir</span>:</span><br><span class="line">  dy, dx = d</span><br><span class="line">  ny = y + dy</span><br><span class="line">  nx = x + dx</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> <span class="number">0</span> &lt;= ny &lt; h <span class="keyword">and</span> <span class="number">0</span> &lt;= nx &lt; w <span class="keyword">and</span> board[ny][nx] != <span class="number">1</span> <span class="keyword">and</span> visited[ny][nx][z] == <span class="number">0</span>:</span><br><span class="line">    visited[ny][nx][z] = visited[y][x][z] + <span class="number">1</span></span><br><span class="line">    q.append((ny, nx, z))</span><br></pre></td></tr></table></figure>
+<p>더하여, 말의 이동경로는 디폴트가 아니라 경우를 따져야 하므로 밑에 조건을 덧붙인다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># k &gt; 0 인 경우 따로 경우를 더한다.</span></span><br><span class="line"><span class="keyword">if</span> z &gt; <span class="number">0</span>:</span><br><span class="line">  <span class="keyword">for</span> d <span class="keyword">in</span> horse:</span><br><span class="line">    dy, dx = d</span><br><span class="line">    ny = y + dy</span><br><span class="line">    nx = x + dx</span><br><span class="line"></span><br><span class="line">    <span class="comment">### 복붙할 때는 조건을 완벽히 확인하자...</span></span><br><span class="line">    <span class="keyword">if</span> <span class="number">0</span> &lt;= ny &lt; h <span class="keyword">and</span> <span class="number">0</span> &lt;= nx &lt; w <span class="keyword">and</span> board[ny][nx] != <span class="number">1</span> <span class="keyword">and</span> visited[ny][nx][z-<span class="number">1</span>] == <span class="number">0</span>:</span><br><span class="line">      visited[ny][nx][z-<span class="number">1</span>] = visited[y][x][z] + <span class="number">1</span></span><br><span class="line">      q.append((ny, nx, z-<span class="number">1</span>))      </span><br></pre></td></tr></table></figure>
+<p>큐에서 break point를 만나지 못한 상태로 break 되면, 경우의 수가 존재하지 않는 것이므로 조건에 따라 -1을 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/04/boj-2491/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/04/boj-2491/" class="post-title-link" itemprop="url">BOJ 2491</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-04 12:08:15 / Modified: 06:18:34" itemprop="dateCreated datePublished" datetime="2021-08-04T12:08:15+01:00">2021-08-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에는 수열의 길이 N이 주어지고,</p>
+<p>둘째 줄에는 N개의 숫자가 빈칸을 사이에 두고 주어진다.</p>
+<p>N은 1 이상 100,000 이하의 정수이다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">1000000</span>)</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">num = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 가장 긴 길이를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> index == N-<span class="number">1</span>:</span><br><span class="line">  print(<span class="built_in">max</span>(<span class="built_in">map</span>(<span class="built_in">max</span>, increment, decrement)))</span><br><span class="line">  <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>체크해야 할 경우는 2가지인데,</p>
+<ol>
+<li>연속해서 증가하는 경우</li>
+<li>연속해서 감소하는 경우</li>
+</ol>
+<p>위 2가지 중 더 긴 수열의 길이를 출력하면 된다.</p>
+<p>따라서 default로 길이가 본인의 길이인 1로 초기화된 배열을 2개 생성하고,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">increment = [<span class="number">1</span>]*N</span><br><span class="line">decrement = [<span class="number">1</span>]*N</span><br></pre></td></tr></table></figure>
+<p>재귀함수를 정의한다.</p>
+<ul>
+<li><p>break point: index가 끝에 도달하면 max 값을 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> index == N-<span class="number">1</span>:</span><br><span class="line">  print(<span class="built_in">max</span>(<span class="built_in">map</span>(<span class="built_in">max</span>, increment, decrement)))</span><br><span class="line">  <span class="keyword">return</span></span><br></pre></td></tr></table></figure></li>
+<li><p>연속해서 증가하는 경우: increment 배열에 <code>그 전까지의 길이+1</code> 를 append 한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> num[index + <span class="number">1</span>] &gt;= num[index]:</span><br><span class="line">  increment[index+<span class="number">1</span>] += increment[index]</span><br></pre></td></tr></table></figure></li>
+<li><p>연속해서 감소하는 경우: decrement 배열에 <code>그 전까지의 길이+1</code> 를 append 한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> num[index + <span class="number">1</span>] &lt;= num[index]:</span><br><span class="line">  decrement[index+<span class="number">1</span>] += decrement[index]</span><br></pre></td></tr></table></figure></li>
+<li><p>진행하기 위해서 재귀 함수를 호출한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> lengthen(index+<span class="number">1</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>첫 시작을 위해서,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lengthen(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/04/boj-17175/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/04/boj-17175/" class="post-title-link" itemprop="url">BOJ 17175</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-04 12:00:49 / Modified: 04:07:52" itemprop="dateCreated datePublished" datetime="2021-08-04T12:00:49+01:00">2021-08-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><h4 id="Default"><a href="#Default" class="headerlink" title="Default"></a>Default</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">100000</span>)</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br></pre></td></tr></table></figure>
+
+
+<p><em>fibonacci</em> 함수에 인자로 입력할 <em>n</em>이 주어진다. (0 ≤ <em>n</em> ≤ 50)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p><em>fibonacci</em> 함수가 호출된 횟수를 출력한다.</p>
+<p>출력값이 매우 커질 수 있으므로 정답을 1,000,000,007 로 나눈 나머지를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> n &lt; <span class="number">2</span>: print(num[n])</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  print(num[n] % <span class="number">1000000007</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><ul>
+<li><p>일단 <strong>호출 횟수</strong> 를 출력해야 한다는 점!</p>
+</li>
+<li><p>재귀함수를 사용하면 피보나치 수열을 진행하는 동시에 count도 해야하므로 <em>시간 초과</em> 가 발생한다…</p>
+</li>
+<li><p>따라서 <strong>배열</strong> 을 사용해서 count 횟수만 진행한다! 이러면 for문으로 충분함</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = [<span class="number">1</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li><p><code>n &lt; 2</code> 인 경우에는 위에서 바로 출력하면 됨</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> n &lt; <span class="number">2</span>: print(num[n])</span><br></pre></td></tr></table></figure></li>
+<li><p>그 외의 경우에는 배열을 증가시키고 출력해야 함</p>
+<ul>
+<li>횟수는 default로 <code>n &lt; 2</code> 의 경우에는 <code>1번</code> 이고, 그 이후에는 <code>fibonacci(n-2) + fibonacci(n-1)</code> 에 따라 <code>num[본인-1] + num[본인-2] + 본인 호출 횟수 1</code> 을 append 한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>):</span><br><span class="line">    <span class="comment"># fibonacci(n-2) + fibonacci(n-1)에 자기 자신 호출 횟수 +1</span></span><br><span class="line">    num.append(num[-<span class="number">1</span>] + num[-<span class="number">2</span>] + <span class="number">1</span>)</span><br><span class="line">  </span><br><span class="line">  print(num[n] % <span class="number">1000000007</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/04/nextjs-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/04/nextjs-basic/" class="post-title-link" itemprop="url">CSR와 SSR의 차이를 토대로 Next.js 알기</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-03 17:44:02 / Modified: 12:14:37" itemprop="dateCreated datePublished" datetime="2021-08-03T17:44:02+01:00">2021-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="들어가기에-앞서"><a href="#들어가기에-앞서" class="headerlink" title="들어가기에 앞서,"></a>들어가기에 앞서,</h2><p>Server Side Rendering을 지원하던 기존 Multi Page Form 방식에서 모바일 사용자가 증가함에 따라 React, Angular, Vue 등 Client Side Rendering이 가능한 SPA가 등장하게 되었다. SPA는 1개의 페이지에서 수정되는 부분만 리렌더링하는 등 여러 동작이 이루어진다. 그렇다면 SSR과 CSR의 차이는 무엇일까?</p>
+<h3 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h3><p><img src="https://www.sarah-note.com/static/862e8950181629369ee391b5e4a11578/e5166/p1_ssr.jpg" alt="overview"></p>
+<p>서버에서 렌더링 작업을 수행하는 SSR은 사용자가 웹페이지에 접근할 때 서버에서 페이지에 대한 요청을 보내고, 서버에서 html, view 등의 리소스가 어떻게 보여질 지 해석되어 렌더링 후 사용자에게 반환하는 방식으로, 전체적인 프로세스는 다음과 같다.</p>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/boveg2/btqTxBHcFIg/zgpFFau2Q5LM5KljvJ8jcK/img.png"></p>
+<p>여기서 첫번째 단계는 다음과 같이 이루어진다.</p>
+<p><img src="https://media.vlpt.us/images/qkrdudgh052/post/c9c989f9-69e4-40be-98f1-a57c924bc187/2021-02-17%2020;09;29.PNG" alt="ssr"></p>
+<blockquote>
+<p>SSR이어도 Ajax 기능을 위해 클라이언트 렌더링 요소가 포함될 수 밖에 없다.</p>
+</blockquote>
+<p>쉽게 설명하면, 페이지를 구성해서 그에 해당하는 html을 다운받아 화면에 렌더링하는 것으로, CSR에 비해 다운 받는 파일이 많지 않아 초기 로딩 속도가 빠르고, 사용자가 빨리 콘텐츠를 볼 수 있다. 근데 이 과정이 <strong>브라우저 👉 프론트 서버 👉 백엔드 서버 👉 데이터 베이스</strong> 를 거쳐 데이터를 받고 역순으로 브라우저까지 데이터를 가져와 그려야 하기 때문에, 페이지 이동/ 클릭 등으로 다른 요청이 생길 때마다 이 과정을 반복하면 변경되지 않은 부분도 계속해서 리렌더링되는 문제점이 있다. (서버 부하 등의 문제를 일으킬 수 있음)</p>
+<h3 id="CSR"><a href="#CSR" class="headerlink" title="CSR"></a>CSR</h3><p><img src="https://www.sarah-note.com/static/2b2c814f10a5726eac67db95d5d625e9/e5166/p1_csr.jpg" alt="overview"></p>
+<p>CSR은 최초 1번만 서버에서 전체 페이지를 렌더링하여 보내주면, 이후에는 사용자의 요청이 올 때마다 리소스를 서버에서 제공받아 클라이언트가 해석하고 렌더링하는 방식이다. 전체적인 프로세스는 다음과 같다.</p>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/EqHVZ/btqTDcmi1nD/uS1y4kirBkLQN7JAy7Z6gk/img.png"></p>
+<p><img src="https://media.vlpt.us/images/qkrdudgh052/post/2eea0a96-212e-4bf6-bdcc-77475a25b329/2021-02-17%2020;12;48.PNG" alt="csr"></p>
+<blockquote>
+<p>SSR에 클라이언트 렌더링 요소가 포함된다면, CSR는 SSR 없이 일관된 코드를 작성할 수 있다. (물론 아닌 경우도 있음)</p>
+</blockquote>
+<p>즉, 먼저 데이터를 제외하고 화면을 그리는 코드들만 프론트 서버에서 다운받아진다. 이는 js 파일에 한번에 묶이기 때문에 첫 다운에 시간이 오래 걸린다. 따라서 초기 구동 속도가 SSR에 비해 느려지는데, 이는 <code>code splitting</code> 으로 해결할 수 있다. 하지만 아직 데이터를 다운 받은 상태가 아니다. 클라이언트의 요청이 발생하면 필요한 데이터만 백엔드 서버에 요청하여 받아온 후 해당 부분을 갱신하는 방식으로 SPA가 작동하기 때문에 서버 부하가 덜하다.</p>
+<blockquote>
+<p>이와 관련된 문제는 검색 엔진 최적화에 취약할 수 있다는 점이다.</p>
+<p>초기에 데이터 없이 html이 다운되기 때문에 검색봇이 해당페이지를 빈 페이지로 착각하여 Search Engine Optimization에 취약할 수 있다.</p>
+</blockquote>
+<h3 id="그래서-차이점은"><a href="#그래서-차이점은" class="headerlink" title="그래서 차이점은?"></a>그래서 차이점은?</h3><ul>
+<li>렌더링 속도</li>
+<li>SEO</li>
+<li>보안</li>
+</ul>
+<p>등의 차이가 있다.</p>
+<p>CSR은 사용자의 요청에 맞게 필요한 부분만 다시 읽기 때문에 서버에서 전체 페이지를 다시 읽는 것보다 빠른 반응 속도를 기대할 수 있다. 하지만 초기 로딩 시</p>
+<ol>
+<li>html 다운: 페이지를 읽고</li>
+<li>js 다운: js를 읽고</li>
+<li>js을 실행하고</li>
+</ol>
+<p>등등을 모두 마무리해야 사용자에게 콘텐츠가 보이기 때문에 <em>화면을 렌더링하기까지의</em> 초기 로딩 속도가 느리다. 하지만 그 이후에는 빠른 반응을 보인다.</p>
+<p>SSR은 서버에서 view를 렌더링하여 가져오기 때문에, 초기 로딩 속도 (초기 화면 렌더링 속도) 가 빠르다.</p>
+<h2 id="Next-js란"><a href="#Next-js란" class="headerlink" title="Next.js란?"></a>Next.js란?</h2><p>그래서 Next는 어떤 SSR과 CSR의 단점을 보완하는 걸까?</p>
+<p>SSR은 불필요한 부분까지 리렌더링 되어 서버 부하가 발생할 수 있다는 점, CSR은 초기 로딩 속도가 느리고 SEO에 취약하다는 단점이 있다.</p>
+<p>Next.js를 사용하여 첫페이지는 백엔드 서버에서 렌더링하여 빈 html이 아닌 데이터가 채워진 html을 받는다면 SEO 문제를 해결할 수 있다. 이후에는 CSR 방식에 따라 필요한 데이터만 받아 갱신한다면 서버 부하도 줄일 수 있다.</p>
+<p><img src="https://miro.medium.com/max/1400/1*mU0dHw7xyVDVQlopkdVJfA.png" alt="diff"></p>
+<h3 id="Next-js를-통해…"><a href="#Next-js를-통해…" class="headerlink" title="Next.js를 통해…"></a>Next.js를 통해…</h3><p>기존의 문제점인</p>
+<ul>
+<li>webpack과 같은 번들러를 통해 code를 번들하고 Babel과 같은 컴파일러로 변환해야 함</li>
+<li>code splitting과 같은 성능 최적화가 필요함</li>
+<li>성능과 SEO를 위해 몇몇 페이지를 pre-render 해야할 수 있음</li>
+<li>React app과 데이터 스토어를 연동하기 위해 SSR 코드를 작성해야 할 수 있음</li>
+<li>그냥, SSR과 CSR를 모두 사용하고 싶음</li>
+</ul>
+<p>을 해결할 수 있다.</p>
+<p>그러니까 Next.js의 특징은</p>
+<ul>
+<li>페이지 기반의 라우팅 시스템 (CRA 시 <code>page</code> folder 생성)</li>
+<li>한 페이지 당 SSG와 SSR을 지원해 pre-rendering 가능</li>
+<li>자동화된 code splitting을 통해 페이지 로딩을 빠르게 함</li>
+<li>Client Side Routing에 최적화된 prefetching을 지원함</li>
+<li>빌트인 CSS, Sass이 지원되며, 모든 CSS-in-JS 라이브러리를 지원함</li>
+<li>빠른 재구동 개발 환경을 지원함</li>
+<li>serverless 함수를 이용해 API를 개발할 수 있게 API 라우터를 지원함</li>
+<li>확장 가능함</li>
+</ul>
+<p>등이 있다.</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a target="_blank" rel="noopener" href="https://nextjs.org/learn/basics/create-nextjs-app">https://nextjs.org/learn/basics/create-nextjs-app</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/03/boj-14501/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -340,788 +1169,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/31/boj-14916/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/31/boj-14916/" class="post-title-link" itemprop="url">BOJ 14916</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-30 16:10:23 / Modified: 08:23:37" itemprop="dateCreated datePublished" datetime="2021-07-30T16:10:23+01:00">2021-07-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 거스름돈 액수 n(1 ≤ n ≤ 100,000)이 주어진다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>거스름돈 동전의 최소 개수를 출력한다.</p>
-<p>만약 거슬러 줄 수 없으면 -1을 출력한다.</p>
-<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>최소 거스름돈 개수를 구해야 하기 때문에, 큰 수인 5로 거스름돈을 나누기 시작해야 한다.</p>
-<p>그리고 5로 나눈 나머지를 2로 나누었을 때 0이 되면 그게 정답이 되고, 0이 아니면 5를 줄이고 2를 늘려봐야 한다.</p>
-<p>그래도 답이 안 나오면 거슬러 줄 수 없는 경우(e.g. 1)이므로 -1을 출력하면 됨.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> five <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(n/<span class="number">5</span>), -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">  coin = five</span><br><span class="line">  money = n - (<span class="number">5</span> * five)</span><br><span class="line">  <span class="keyword">if</span> money % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">    coin += <span class="built_in">int</span>(money / <span class="number">2</span>)</span><br><span class="line">    print(coin)</span><br><span class="line">    exit()</span><br><span class="line">    </span><br><span class="line">print(-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="Better-Solution"><a href="#Better-Solution" class="headerlink" title="Better Solution"></a>Better Solution</h4><p>DP 문제인 만큼, 형식에 맞게 풀어보자.</p>
-<ol start="0">
-<li><p><strong>Default</strong></p>
-<ul>
-<li>매번 <code>sys.stdin.readline</code>  을 치기보다, 기본처럼 <code>input()</code> 으로 간단하게 처리하기 위해 아래와 같이 세팅한다.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 나머지</span></span><br><span class="line">num = n % <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 동전 개수</span></span><br><span class="line">count = <span class="number">0</span></span><br></pre></td></tr></table></figure></li>
-<li><p><strong>Exception</strong> : 5보다 작은 수 중 2로 나눌 수 없는 <strong>1이나 3</strong> 일 경우, 2나 5로 나눌 수 없기 때문에 <strong>-1을 출력한다.</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> n == <span class="number">1</span> <span class="keyword">or</span> n == <span class="number">3</span>:</span><br><span class="line">	print(-<span class="number">1</span>)</span><br><span class="line">	exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>5로 먼저 나눈 후, 나머지가 2로 나눠지면</strong> 5로 나눈 몫과 2로 나눈 몫을 더하여 출력한다.</p>
-<blockquote>
-<p>몫을 <code>int(n / 5)</code> 와 같이 처리하지 말고, python의 <code>//</code> 를 활용하자!</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">elif</span> num % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">	print(n // <span class="number">5</span> + num // <span class="number">2</span>)</span><br><span class="line">	exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p>나머지가 2로 나눠떨어지지 않는 경우, 5의 몫을 -1하고 (나머지에 5를 더하여) 다시 2로 나눈 몫과 5로 나눈 몫을 더하여 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	print((n // <span class="number">5</span> - <span class="number">1</span>) + (num + <span class="number">5</span>) // <span class="number">2</span>)</span><br><span class="line">	exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/30/boj-2583/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/30/boj-2583/" class="post-title-link" itemprop="url">BOJ 2583</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-30 15:40:59 / Modified: 07:52:19" itemprop="dateCreated datePublished" datetime="2021-07-30T15:40:59+01:00">2021-07-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 M과 N, 그리고 K가 빈칸을 사이에 두고 차례로 주어진다. M, N, K는 모두 100 이하의 자연수이다.</p>
-<p>둘째 줄부터 K개의 줄에는 한 줄에 하나씩 직사각형의 왼쪽 아래 꼭짓점의 x, y좌표값과 오른쪽 위 꼭짓점의 x, y좌표값이 빈칸을 사이에 두고 차례로 주어진다. 모눈종이의 왼쪽 아래 꼭짓점의 좌표는 (0,0)이고, 오른쪽 위 꼭짓점의 좌표는(N,M)이다. 입력되는 K개의 직사각형들이 모눈종이 전체를 채우는 경우는 없다.</p>
-<ul>
-<li>좌표로 주어지는 직사각형 외의 공간을 구하는 문제이므로, 주어지는 직사각형의 영역은 <code>1</code> 로 표기해둔다.</li>
-<li>이 때, 좌표로 직사각형이 주어지므로 한 칸에 해당하는 좌표와 이를 구분해야 한다.</li>
-<li>즉, 한 칸의 영역은 <code>끝 좌표-1</code> 에 해당한다.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">m, n, k = <span class="built_in">map</span>(<span class="built_in">int</span>, sys.stdin.readline().split())</span><br><span class="line">board = [[<span class="number">0</span>]*(n) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">  x1, y1, x2, y2 = <span class="built_in">map</span>(<span class="built_in">int</span>, sys.stdin.readline().split())</span><br><span class="line">  x2 -= <span class="number">1</span></span><br><span class="line">  y2 -= <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> x_idx <span class="keyword">in</span> <span class="built_in">range</span>(x1, x2+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> y_idx <span class="keyword">in</span> <span class="built_in">range</span>(y1, y2+<span class="number">1</span>):</span><br><span class="line">      board[y_idx][x_idx] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-<h4 id="Default"><a href="#Default" class="headerlink" title="Default"></a>Default</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">1000000</span>)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><ul>
-<li><p>연속되는 공간을 찾을 때, 위/아래/양 옆을 체크하므로 <code>dir</code> 을 미리 세팅한다.</p>
-</li>
-<li><p>출력해야 하는 값이 <code>count</code> 와 <code>영역</code> 이므로 이 둘에 해당하는 변수를 생성한다.</p>
-</li>
-<li><p>모든 보드의 칸을 돌면서 <code>0</code> 인 경우 해당 영역의 넓이를 구하고 <code>count+1</code> 을 해야 하므로 가장 바깥쪽이자 전체를 도는 for문을 생성한다.</p>
-<ul>
-<li>0임을 체크하면, 다시 이 영역을 count하면 안 되므로 1로 세팅하고, 해당 영역부터 넓이를 체크해야 하므로 area는 1로 초기화, 그리고 dfs를 돈다.</li>
-<li>area를 <code>global</code> 로 설정하여 해당 변수를 result에 <code>append</code> 하여 이후 출력값을 <code>sort</code> 한다.</li>
-<li>또한, 연속된 0 값을 체크하여 영역을 세는 것이므로 <code>count++</code> 을 수행한다.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="keyword">if</span> board[y][x] == <span class="number">0</span>:</span><br><span class="line">      board[y][x] = <span class="number">1</span></span><br><span class="line">      area = <span class="number">1</span></span><br><span class="line">      dfs(y, x)</span><br><span class="line">      result.append(area)</span><br><span class="line">      count += <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
-<li><p>연속된 영역을 파악하기 위해 dfs를 돈다.</p>
-<ul>
-<li>미리 생성해 둔 dir에 따라 연속된 넓이를 체크하고,</li>
-<li>이 때 범위 내의 값일 경우, 위와 동일하게 칸을 1로 세팅, 넓이를 +1하고 dfs를 이어서 수행한다.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">dy, dx</span>):</span></span><br><span class="line">  <span class="keyword">global</span> area</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> dd <span class="keyword">in</span> <span class="built_in">dir</span>:</span><br><span class="line">    x = dd[<span class="number">0</span>] + dx</span><br><span class="line">    y = dd[<span class="number">1</span>] + dy</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="number">0</span> &lt;= x &lt; n <span class="keyword">and</span> <span class="number">0</span> &lt;= y &lt; m:</span><br><span class="line">      <span class="keyword">if</span> board[y][x] == <span class="number">0</span>:</span><br><span class="line">        board[y][x] = <span class="number">1</span></span><br><span class="line">        area += <span class="number">1</span></span><br><span class="line">        dfs(y, x)</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 분리되어 나누어지는 영역의 개수를 출력한다.</p>
-<p>둘째 줄에는 각 영역의 넓이를 오름차순으로 정렬하여 빈칸을 사이에 두고 출력한다.</p>
-<blockquote>
-<p><strong>int 배열 값을 str으로 하나씩 출력하는 법</strong></p>
-<p><code>&#39; &#39;.join(map(str, arr))</code> 를 통해 <code>1 7 13</code> 과 같이</p>
-<p><em>int 값을 str로 mapping하고 한 칸 띄어쓰기를 join</em> 한다.</p>
-<blockquote>
-<p> 런타임 에러가 뜰까봐 sys를 이용하는데, 알고리즘은 다 맞아놓고 자꾸 출력 형식에서 틀린다… 바보야…!!!!!!</p>
-</blockquote>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">result.sort()</span><br><span class="line">sys.stdout.write(<span class="built_in">str</span>(count))</span><br><span class="line">print()</span><br><span class="line">sys.stdout.write(<span class="string">&#x27; &#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, result)))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/30/boj-1389/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/30/boj-1389/" class="post-title-link" itemprop="url">BOJ 1389</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-30 15:00:05 / Modified: 07:08:01" itemprop="dateCreated datePublished" datetime="2021-07-30T15:00:05+01:00">2021-07-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 유저의 수 N (2 ≤ N ≤ 100)과 친구 관계의 수 M (1 ≤ M ≤ 5,000)이 주어진다.</p>
-<p>둘째 줄부터 M개의 줄에는 친구 관계가 주어진다. 친구 관계는 A와 B로 이루어져 있으며, A와 B가 친구라는 뜻이다. A와 B가 친구이면, B와 A도 친구이며, A와 B가 같은 경우는 없다. 친구 관계는 중복되어 들어올 수도 있으며, 친구가 한 명도 없는 사람은 없다. 또, 모든 사람은 친구 관계로 연결되어져 있다. 사람의 번호는 1부터 N까지이며, 두 사람이 같은 번호를 갖는 경우는 없다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n, m = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br></pre></td></tr></table></figure>
-<p>먼저 친구 관계 👉 <strong>트리 구조</strong> 이므로 <code>adj</code> 를 생성하고, bfs를 위해 <code>visited</code> 도 생성한다.</p>
-<p>그리고, 답을 저장한 뒤 <code>min</code> 을 출력해야 하므로 <code>answer</code> 도 생성한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adj = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line">visited = [<span class="number">0</span>]*(n+<span class="number">1</span>)</span><br><span class="line">answer = [<span class="number">0</span>]*(n+<span class="number">1</span>)</span><br><span class="line">answer[<span class="number">0</span>] = sys.maxsize</span><br></pre></td></tr></table></figure>
-<p>친구 관계를 저장할 adj에 입력값 저장!</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">  a, b = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">  adj[a].append(b)</span><br><span class="line">  adj[b].append(a)</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="Default"><a href="#Default" class="headerlink" title="Default"></a>Default</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line">sys.setrecursionlimit(<span class="number">100000</span>)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>연속적으로 이어진 값을 더해나가는 문제이기 때문에, 어제 배운 새로운 접근 방식에 따라 <strong>bfs</strong> 를 적용하여 <strong>queue</strong> 를 이용해 답을 구해봤다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span>(<span class="params">start</span>):</span></span><br><span class="line">  queue = deque()</span><br><span class="line">  queue.appendleft(start)</span><br></pre></td></tr></table></figure>
-<p>queue에 값이 존재하는 동안</p>
-<ul>
-<li>start 자신이 아니며, 아직 방문하지 않은 노드에 대해서</li>
-<li>queue에 <code>append</code> 하고 <code>+1</code> 을 수행한다.</li>
-</ul>
-<blockquote>
-<p>이 때, <strong><code>pop</code>  이 아니라 <code>popleft</code> 임!!!</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> queue:</span><br><span class="line">  now = queue.popleft() <span class="comment"># pop()이 아니라 popleft()!!!</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> friend <span class="keyword">in</span> adj[now]:</span><br><span class="line">    <span class="keyword">if</span> visited[friend] == <span class="number">0</span> <span class="keyword">and</span> friend != start:</span><br><span class="line">      queue.append(friend)</span><br><span class="line">      visited[friend] = visited[now] + <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 BOJ의 유저 중에서 케빈 베이컨의 수가 가장 작은 사람을 출력한다. 그런 사람이 여러 명일 경우에는 번호가 가장 작은 사람을 출력한다.</p>
-<ul>
-<li>모든 n 사람에 대해서 bfs를 시행해야 하므로 for문을 돌리고,</li>
-<li>visited 값을 모두 더한 값이 케빈 베이컨의 값이므로 sum을 이용한다.</li>
-<li>이후 visited를 다시 초기화시켜야 한다.</li>
-</ul>
-<blockquote>
-<p> <code>index</code> 함수는 찾는 값의 index가 여러개일 경우 가장 첫번째 index를 반환하므로, 자동적으로 조건을 만족시킨다.</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">  bfs(i)</span><br><span class="line">  answer[i] = <span class="built_in">sum</span>(visited)</span><br><span class="line">  visited = [<span class="number">0</span>]*(n+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">print(answer.index(<span class="built_in">min</span>(answer)))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/30/boj-2644/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/30/boj-2644/" class="post-title-link" itemprop="url">BOJ 2644</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-29 23:48:03 / Modified: 16:07:29" itemprop="dateCreated datePublished" datetime="2021-07-29T23:48:03+01:00">2021-07-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/dfs-bfs/" itemprop="url" rel="index"><span itemprop="name">DFS/BFS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>일단 기본으로</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">100000</span>)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>recursion limit 설정 값을 잘 파악하자</p>
-</blockquote>
-<p>입력 파일의 첫째 줄에는 전체 사람의 수 n이 주어지고,</p>
-<p>둘째 줄에는 촌수를 계산해야 하는 서로 다른 두 사람의 번호가 주어진다.</p>
-<p>그리고 셋째 줄에는 부모 자식들 간의 관계의 개수 m이 주어진다.</p>
-<p>넷째 줄부터는 부모 자식간의 관계를 나타내는 두 번호 x,y가 각 줄에 나온다. 이때 앞에 나오는 번호 x는 뒤에 나오는 정수 y의 부모 번호를 나타낸다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">x, y = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p>일단 촌수를 세는 규칙을 파악해야 하는데, 굉장히 간단하다.</p>
-<p>트리 구조를 토대로, 위아래로만 count를 더해나가면 된다. 즉, 부모/ 형제 만을 기준으로 트리를 순회하면 됨.</p>
-<ul>
-<li><p>연속적으로 <code>adj</code> 을 체크하므로 배열을 만들고</p>
-</li>
-<li><p>기본적으로 DFS라면, <code>visited</code> 를 생성하자.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adj = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line">visited = [<span class="literal">False</span>] * (n+<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(<span class="built_in">input</span>())):</span><br><span class="line">  a, b = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">  adj[a].append(b)</span><br><span class="line">  adj[b].append(a)</span><br></pre></td></tr></table></figure></li>
-<li><p>관련이 없을 때는 -1을 출력해야 하므로, 이를 체크할 <code>boolean</code> 변수를 생성하자.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">check = <span class="literal">False</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>break point</strong> : 현재 체크하고 있는 값과 target 값이 같다면, 지금까지의 <code>count</code> 값을 출력하고 끝낸다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> now == target:</span><br><span class="line">  print(count)</span><br><span class="line">  check = <span class="literal">True</span></span><br><span class="line">  <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
-<p>이제 <code>adj</code>  배열에서 방문하지 않은 child에 대해 bfs를 진행한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">now, target, count</span>):</span></span><br><span class="line">  visited[now] = <span class="literal">True</span></span><br><span class="line">  <span class="keyword">global</span> check</span><br><span class="line"></span><br><span class="line">	  <span class="keyword">for</span> child <span class="keyword">in</span> adj[now]:</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> visited[child]:</span><br><span class="line">      dfs(child, target, count+<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Another-Solution"><a href="#Another-Solution" class="headerlink" title="Another Solution"></a>Another Solution</h3><p>BFS로 <strong>queue</strong> 를 이용하는데, 모든 경우를 체크하는 경우이므로 이어서 값을 확인하기 좋다.</p>
-<p>특히 깊이가 깊어질 때마다 <code>count+1</code> 을 수행하기에 큐가 적합하다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> q:</span><br><span class="line">        d = q.popleft()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> s[d]:</span><br><span class="line">            <span class="keyword">if</span> visit[i] == <span class="number">0</span>:</span><br><span class="line">                visit[i] = <span class="number">1</span></span><br><span class="line">                result[i] = result[d] + <span class="number">1</span></span><br><span class="line">                q.append(i)</span><br></pre></td></tr></table></figure>
-<p>이렇게 count를 배열로 설정하여 하나씩 더해가고, 정답을 출력하기 위해</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(result[b] <span class="keyword">if</span> result[b] != <span class="number">0</span> <span class="keyword">else</span> -<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>해당 index로 바로 접근해서 출력하고 아닌 경우도 쉽게 예외 처리할 수 있다.</p>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>입력에서 요구한 두 사람의 촌수를 나타내는 정수를 출력한다.</p>
-<p>어떤 경우에는 두 사람의 친척 관계가 전혀 없어 촌수를 계산할 수 없을 때가 있다. 이때에는 -1을 출력해야 한다.</p>
-<ul>
-<li>여기서 위에서 생성한 <code>check</code> 변수를 활용하면 된다. <code>global</code> 로 선언하였기 때문에, 비동기 처리되어 dfs가 모두 끝난 뒤 if문을 체크하게 된다.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dfs(x, y, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> check:</span><br><span class="line">  print(-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/25/python-date-primitive/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/25/python-date-primitive/" class="post-title-link" itemprop="url">Date Primitives</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-07-24 18:35:04" itemprop="dateCreated datePublished" datetime="2021-07-24T18:35:04+01:00">2021-07-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-27 14:32:57" itemprop="dateModified" datetime="2021-07-27T14:32:57+01:00">2021-07-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="FirstEvent"><a href="#FirstEvent" class="headerlink" title="FirstEvent"></a>FirstEvent</h3><h3 id="ToTimeZone"><a href="#ToTimeZone" class="headerlink" title="ToTimeZone"></a>ToTimeZone</h3><h3 id="DayName"><a href="#DayName" class="headerlink" title="DayName"></a>DayName</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/25/python-cumulative-primitive/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/25/python-cumulative-primitive/" class="post-title-link" itemprop="url">Cumulative Primitives</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-24 18:34:53 / Modified: 10:37:46" itemprop="dateCreated datePublished" datetime="2021-07-24T18:34:53+01:00">2021-07-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="TimeSinceLastFalse"><a href="#TimeSinceLastFalse" class="headerlink" title="TimeSinceLastFalse"></a>TimeSinceLastFalse</h3><h3 id="TimeSinceLastTrue"><a href="#TimeSinceLastTrue" class="headerlink" title="TimeSinceLastTrue"></a>TimeSinceLastTrue</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/25/python-count-primitive/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/25/python-count-primitive/" class="post-title-link" itemprop="url">Count Primitives</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-24 18:33:58 / Modified: 10:37:04" itemprop="dateCreated datePublished" datetime="2021-07-24T18:33:58+01:00">2021-07-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="AboveMean"><a href="#AboveMean" class="headerlink" title="AboveMean"></a>AboveMean</h3><h3 id="BelowMean"><a href="#BelowMean" class="headerlink" title="BelowMean"></a>BelowMean</h3><h3 id="GreaterThan"><a href="#GreaterThan" class="headerlink" title="GreaterThan"></a>GreaterThan</h3><h3 id="LessThan"><a href="#LessThan" class="headerlink" title="LessThan"></a>LessThan</h3><h3 id="InsideRange"><a href="#InsideRange" class="headerlink" title="InsideRange"></a>InsideRange</h3><h3 id="OutsideRange"><a href="#OutsideRange" class="headerlink" title="OutsideRange"></a>OutsideRange</h3><h3 id="InsideNthRange"><a href="#InsideNthRange" class="headerlink" title="InsideNthRange"></a>InsideNthRange</h3><h3 id="OutsideNthRange"><a href="#OutsideNthRange" class="headerlink" title="OutsideNthRange"></a>OutsideNthRange</h3><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/17/react-query-basic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/17/react-query-basic/" class="post-title-link" itemprop="url">React Query를 이용해 api 연동시키기</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-16 21:28:40 / Modified: 14:02:57" itemprop="dateCreated datePublished" datetime="2021-07-16T21:28:40+01:00">2021-07-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="React-Query-란"><a href="#React-Query-란" class="headerlink" title="React Query 란?"></a>React Query 란?</h2><p>리액트용 data-fetching 라이브러리로,</p>
-<p>리액트 어플리케이션에서 서버의 상태를 fetching, caching, synchronizing, updating 한다.</p>
-<p>react query는 다음과 같이 4가지 상태를 반환하는데, 반환 상태에 따라 렌더링을 다르게 처리하기 용이하단느 장점이 있다.</p>
-<ol>
-<li><code>isIdle</code> : status === ‘idle’로, fresh/reset된 상태</li>
-<li><code>isLoading</code> : status === ‘loading’으로, mutation이 진행 중인 상태</li>
-<li><code>isError</code> : status === ‘error’로, mutation이 error를 발생시킨 상태</li>
-<li><code>isSuccess</code> : status === ‘success’로, mutation이 성공하여 data 이용이 가능한 상태</li>
-</ol>
-<h3 id="설치하기"><a href="#설치하기" class="headerlink" title="설치하기"></a>설치하기</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm i react-query</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ yarn add react-query</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="기본-예시"><a href="#기본-예시" class="headerlink" title="기본 예시"></a>기본 예시</h3><h4 id="App-tsx"><a href="#App-tsx" class="headerlink" title="App.tsx"></a>App.tsx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import &#123; QueryClient, QueryClientProvider, useQuery &#125; from &#39;react-query&#39;</span><br><span class="line"> </span><br><span class="line"> const queryClient &#x3D; new QueryClient()</span><br><span class="line"> </span><br><span class="line"> export default function App() &#123;</span><br><span class="line">   return (</span><br><span class="line">     &lt;QueryClientProvider client&#x3D;&#123;queryClient&#125;&gt;</span><br><span class="line">       &lt;Example &#x2F;&gt;</span><br><span class="line">     &lt;&#x2F;QueryClientProvider&gt;</span><br><span class="line">   )</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>가장 상단 <code>App.js</code> 에서 최상단 컴포넌트로 <code>QueryClientProvider</code> 을 전달한다.</p>
-</li>
-<li><p>해당 Provider context의 props로 <code>queryClient</code> 객체를 전달한다.</p>
-</li>
-</ul>
-<h4 id="Example-tsx"><a href="#Example-tsx" class="headerlink" title="Example.tsx"></a>Example.tsx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function Example() &#123;</span><br><span class="line">  const &#123; isLoading, error, data &#125; &#x3D; useQuery(&#39;repoData&#39;, () &#x3D;&gt;</span><br><span class="line">    fetch(&#39;https:&#x2F;&#x2F;api.github.com&#x2F;repos&#x2F;tannerlinsley&#x2F;react-query&#39;).then(res &#x3D;&gt;</span><br><span class="line">      res.json()</span><br><span class="line">    )</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>useQuery</code> 에<ul>
-<li><strong>query key</strong> 와</li>
-<li> <code>fetch</code> , <code>axios</code> 등을 이용한 <strong>CRUD 함수</strong> 를 전달한다.</li>
-</ul>
-</li>
-</ul>
-<p><code>useQuery</code> 를 통해 <code>isLoading</code> , <code>error</code> , <code>data</code> 등을 받아 렌더링 한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  if (isLoading) return &#39;Loading...&#39;</span><br><span class="line"></span><br><span class="line">  if (error) return &#39;An error has occurred: &#39; + error.message</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;&#123;data.name&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;p&gt;&#123;data.description&#125;&lt;&#x2F;p&gt;</span><br><span class="line">      &lt;strong&gt;👀 &#123;data.subscribers_count&#125;&lt;&#x2F;strong&gt;&#123;&#39; &#39;&#125;</span><br><span class="line">      &lt;strong&gt;✨ &#123;data.stargazers_count&#125;&lt;&#x2F;strong&gt;&#123;&#39; &#39;&#125;</span><br><span class="line">      &lt;strong&gt;🍴 &#123;data.forks_count&#125;&lt;&#x2F;strong&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>isLoading</code> 일 때는 로딩 렌더링</li>
-<li><code>error</code> 일 때는 에러 렌더링</li>
-<li>이 외, <code>data</code> 를 정상적으로 받아온 경우 컴포넌트를 알맞게 렌더링</li>
-</ul>
-<h3 id="useQuery"><a href="#useQuery" class="headerlink" title="useQuery"></a>useQuery</h3><p><code>useQuery</code> 가 반환하는 프로퍼티와 받는 매개변수는 다음과 같다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">const &#123;</span><br><span class="line">   data,</span><br><span class="line">   dataUpdatedAt,</span><br><span class="line">   error,</span><br><span class="line">   errorUpdatedAt,</span><br><span class="line">   failureCount,</span><br><span class="line">   isError,</span><br><span class="line">   isFetched,</span><br><span class="line">   isFetchedAfterMount,</span><br><span class="line">   isFetching,</span><br><span class="line">   isIdle,</span><br><span class="line">   isLoading,</span><br><span class="line">   isLoadingError,</span><br><span class="line">   isPlaceholderData,</span><br><span class="line">   isPreviousData,</span><br><span class="line">   isRefetchError,</span><br><span class="line">   isStale,</span><br><span class="line">   isSuccess,</span><br><span class="line">   refetch,</span><br><span class="line">   remove,</span><br><span class="line">   status,</span><br><span class="line"> &#125; &#x3D; useQuery(queryKey, queryFn?, &#123;</span><br><span class="line">   cacheTime,</span><br><span class="line">   enabled,</span><br><span class="line">   initialData,</span><br><span class="line">   initialDataUpdatedAt</span><br><span class="line">   isDataEqual,</span><br><span class="line">   keepPreviousData,</span><br><span class="line">   notifyOnChangeProps,</span><br><span class="line">   notifyOnChangePropsExclusions,</span><br><span class="line">   onError,</span><br><span class="line">   onSettled,</span><br><span class="line">   onSuccess,</span><br><span class="line">   queryKeyHashFn,</span><br><span class="line">   refetchInterval,</span><br><span class="line">   refetchIntervalInBackground,</span><br><span class="line">   refetchOnMount,</span><br><span class="line">   refetchOnReconnect,</span><br><span class="line">   refetchOnWindowFocus,</span><br><span class="line">   retry,</span><br><span class="line">   retryOnMount,</span><br><span class="line">   retryDelay,</span><br><span class="line">   select,</span><br><span class="line">   staleTime,</span><br><span class="line">   structuralSharing,</span><br><span class="line">   suspense,</span><br><span class="line">   useErrorBoundary,</span><br><span class="line"> &#125;)</span><br><span class="line"> </span><br><span class="line"> &#x2F;&#x2F; or using the object syntax</span><br><span class="line"> </span><br><span class="line"> const result &#x3D; useQuery(&#123;</span><br><span class="line">   queryKey,</span><br><span class="line">   queryFn,</span><br><span class="line">   enabled,</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
-<p>이를 사용한 예시는 다음과 같다.</p>
-<p>먼저, useQuery에 전달할 <code>getCategoryDetail</code> api 함수를 작성해보자.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export const getCategoryList &#x3D; async () &#x3D;&gt; &#123;</span><br><span class="line">  const data &#x3D; await axios.get(&#96;&#x2F;api&#x2F;category&#x2F;&#96;);</span><br><span class="line">  return data.data.result as CategoryList;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>이제 해당 함수를 useQuery에 전달하여 데이터를 받아보자.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; isLoading, error, data: categoryList &#125; &#x3D; useQuery(&#39;categoryList&#39;, getCategoryList);</span><br></pre></td></tr></table></figure>
-<p>여기서 <code>categoryList</code> 는 <strong>query key</strong> 이며, <code>getCategoryList</code> 를 통해 받아온 데이터는 <code>isLoading</code> , <code>error</code> , <code>data</code> 등을 담은 객체에 저장된다.</p>
-<p>여기서 <code>data: categoryList</code> 로 데이터 변수명을 설정하여 컴포넌트를 알맞게 렌더링하면 된다!</p>
-<h3 id="useMutation"><a href="#useMutation" class="headerlink" title="useMutation"></a>useMutation</h3><p><code>useMutation</code> 이 반환하는 프로퍼티와 받는 매개변수는 다음과 같다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const &#123;</span><br><span class="line">   data,</span><br><span class="line">   error,</span><br><span class="line">   isError,</span><br><span class="line">   isIdle,</span><br><span class="line">   isLoading,</span><br><span class="line">   isPaused,</span><br><span class="line">   isSuccess,</span><br><span class="line">   mutate,</span><br><span class="line">   mutateAsync,</span><br><span class="line">   reset,</span><br><span class="line">   status,</span><br><span class="line"> &#125; &#x3D; useMutation(mutationFn, &#123;</span><br><span class="line">   mutationKey,</span><br><span class="line">   onError,</span><br><span class="line">   onMutate,</span><br><span class="line">   onSettled,</span><br><span class="line">   onSuccess,</span><br><span class="line">   useErrorBoundary,</span><br><span class="line"> &#125;)</span><br><span class="line"> </span><br><span class="line"> mutate(variables, &#123;</span><br><span class="line">   onError,</span><br><span class="line">   onSettled,</span><br><span class="line">   onSuccess,</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
-<p>이제 useMutation을 사용해보자!</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">export const postItem &#x3D; async (data: Item) &#x3D;&gt; &#123;</span><br><span class="line">  const data &#x3D; await instance.post(</span><br><span class="line">    &#96;&#x2F;api&#x2F;items&#96;,</span><br><span class="line">    &#123;</span><br><span class="line">      category_id: &#96;$&#123;data.category_id&#125;&#96;,</span><br><span class="line">      item_name: &#96;$&#123;data.candy_name&#125;&#96;,</span><br><span class="line">    &#125;,</span><br><span class="line">  );</span><br><span class="line">  return data.data.result as NewItem;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>위와 같이 정의한 <code>postItem</code> api를 받아 mutation을 적용해보자.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const mutation &#x3D; useMutation((data: PutBodyProps) &#x3D;&gt; postItem(data), &#123;</span><br><span class="line">  onSuccess: () &#x3D;&gt; &#123;</span><br><span class="line">    queryClient.invalidateQueries(&#39;items&#39;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>먼저 전달할 인자를 <code>postItem</code> 에 알맞게 전달하고, <code>onSuccess</code> 시 <code>queryClient</code> 를 통해 이전에 정의해놓은 <strong>query key</strong> 값을 전달하여 데이터를 mutate 시킨다.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1189,7 +1240,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">143</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1202,7 +1253,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-count">93</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
