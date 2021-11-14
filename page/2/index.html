@@ -163,6 +163,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/10/05/python-bisect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/05/python-bisect/" class="post-title-link" itemprop="url">python 이분탐색 함수 bisect</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-05 02:44:08" itemprop="dateCreated datePublished" datetime="2021-10-05T02:44:08+01:00">2021-10-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-04 18:48:21" itemprop="dateModified" datetime="2021-10-04T18:48:21+01:00">2021-10-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="bisect-라이브러리"><a href="#bisect-라이브러리" class="headerlink" title="bisect 라이브러리"></a>bisect 라이브러리</h2><p><code>bisect</code> : <strong>정렬된 배열을 유지</strong>하면서 특정 값을 배열에 추가할 때, <strong>몇 번째 인덱스에 넣어야하는지 반환</strong>하는 함수</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bisect <span class="keyword">import</span> bisect_left, bisect_right</span><br><span class="line"></span><br><span class="line">nums = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line">n = <span class="number">5</span></span><br><span class="line">print(bisect_left(nums, n)) &gt;&gt;&gt; <span class="number">5</span></span><br><span class="line">print(bisect_right(nums, n)) &gt;&gt;&gt; <span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p><code>bisect_left(literable, value)</code> : 왼쪽 인덱스를 구하기</p>
+<p><code>bisect_right(literable, value)</code> : 오른쪽 인덱스를 구하기</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/09/07/web-oauth/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1081,95 +1162,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/23/boj-2217/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/23/boj-2217/" class="post-title-link" itemprop="url">BOJ 2217</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-23 11:36:09 / Modified: 03:41:20" itemprop="dateCreated datePublished" datetime="2021-08-23T11:36:09+01:00">2021-08-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/greedy/" itemprop="url" rel="index"><span itemprop="name">Greedy</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 정수 N이 주어진다. </p>
-<p>다음 N개의 줄에는 각 로프가 버틸 수 있는 최대 중량이 주어진다. 이 값은 10,000을 넘지 않는 자연수이다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">s = [<span class="built_in">int</span>(<span class="built_in">input</span>().rstrip()) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Greedy"><a href="#Greedy" class="headerlink" title="Greedy"></a>Greedy</h3><p>처음에는 문제 이해를 잘못 했었음. 여러 물체를 들 수 있는 줄 알았지.. 근데 생각해보면 이건 그냥 sum을 구하는 문제다 ㅋㅋ 암튼</p>
-<ul>
-<li>물체는 최대 중량으로 한 개 들어야 함</li>
-<li>여러 로프로 나누어 들어도 되고, 모든 로프를 쓸 필요는 없음</li>
-</ul>
-<p>일단 <code>sorted</code> 부터 써야 한다. 가장 작은 중량치를 가진 로프를 기준으로 할 건지, 큰 중량치를 기준으로 할 건지부터 정해야 하기 때문.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">sorted</span>(s)</span><br><span class="line">ret = s[-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>작은 중량치가 기준일 경우: n배</li>
-<li>큰 중량치가 기준일 경우: 해당 중량 = 최대</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>):</span><br><span class="line">  ret = <span class="built_in">max</span>(s[i] * (n - i), ret)</span><br></pre></td></tr></table></figure>
-<p>이걸 처음엔 중첩 for문으로 작성했었다. 근데 생각해보면 쓸데없는 계산이 들어갔었음. 위와 같이 줄일 수 있다.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1241,7 +1233,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-count">144</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1254,7 +1246,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">96</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

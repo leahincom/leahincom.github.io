@@ -163,6 +163,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/11/boj-2231/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/11/boj-2231/" class="post-title-link" itemprop="url">BOJ 2231</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-11 10:01:37 / Modified: 02:03:27" itemprop="dateCreated datePublished" datetime="2021-08-11T10:01:37+01:00">2021-08-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/brute-force/" itemprop="url" rel="index"><span itemprop="name">Brute Force</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 자연수 N(1 ≤ N ≤ 1,000,000)이 주어진다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><ul>
+<li>n보다 작은 자연수이고</li>
+<li>분해합이 같아야 함</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n):</span><br><span class="line">  <span class="built_in">sum</span> = i</span><br><span class="line">  div = i</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> div // <span class="number">10</span> &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">sum</span> += div % <span class="number">10</span></span><br><span class="line">    div = div // <span class="number">10</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">sum</span> += div</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">sum</span> == n:</span><br><span class="line">    print(i)</span><br><span class="line">    exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 답을 출력한다. 생성자가 없는 경우에는 0을 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> <span class="built_in">sum</span> == n:</span><br><span class="line">    print(i)</span><br><span class="line">    exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/11/boj-2798/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1071,103 +1155,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/06/boj-11726/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/06/boj-11726/" class="post-title-link" itemprop="url">BOJ 11726</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-06 11:40:13 / Modified: 03:54:15" itemprop="dateCreated datePublished" datetime="2021-08-06T11:40:13+01:00">2021-08-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 n이 주어진다. (1 ≤ n ≤ 1,000)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>처음 접근했던 방식은 다음과 같다.</p>
-<p>나름 찾았던 조건과 규칙성이,</p>
-<ul>
-<li>가로 막대를 놓으면 밑에도 가로여야 하며, 얘네는 마치 세로 막대가 2개 묶인 것처럼 취급한다. 따라서, 세로 막대 개수를 <code>n - i</code> 인 것처럼 생각한다.</li>
-<li>전체 <code>n - i</code> 개의 막대 중에서 <code>i</code> 개의 가로 막대를 고른다. 즉, 조합처럼 생각해서 <code>(n-i)C(i)</code> 를 cnt에 더한다.</li>
-</ul>
-<p>그래서 다음과 같이 코드를 짰다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">ava = n // <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span>(<span class="params">i</span>):</span></span><br><span class="line">  <span class="keyword">if</span> i &lt; <span class="number">2</span>:</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> i * factorial(i-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 가로 막대 i개</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(ava+<span class="number">1</span>):</span><br><span class="line">  <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">    cnt += <span class="number">1</span></span><br><span class="line">  <span class="keyword">elif</span> n - i &lt; i:</span><br><span class="line">    cnt += <span class="number">1</span></span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    div = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">      div *= (n - i - k)</span><br><span class="line">    cnt += div / factorial(i)</span><br></pre></td></tr></table></figure>
-<p>근데 틀림.</p>
-<p>답은 간단하다.</p>
-<p>n을 1부터 체크해나가면 다음과 같은 규칙성을 보인다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">n = 1 -&gt; cnt = 1</span></span><br><span class="line"><span class="string">n = 2 -&gt; cnt = 2</span></span><br><span class="line"><span class="string">n = 3 -&gt; cnt = 3</span></span><br><span class="line"><span class="string">n = 4 -&gt; cnt = 1+1+3 = 2+3 = 5</span></span><br><span class="line"><span class="string">n = 5 -&gt; cnt = 1+4+3 = 5+3 = 8</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
-<p>따라서, 점화식은 다음과 같다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">점화식: cnt[i] = cnt[i-<span class="number">1</span>] + cnt[i-<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-<p>이걸 그대로 코딩하면 된다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cnt = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, n+<span class="number">1</span>):</span><br><span class="line">  cnt.append(cnt[i-<span class="number">2</span>]+cnt[i-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>여기서 덧붙이면, DP는 배열을 사용하기 때문에 <code>index out of list</code> Error가 잘 날 수 있다.</p>
-<p>따라서, 그냥 배열 크기를 문제에 주어진 최대 범위로 설정해놓자.</p>
-</blockquote>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 2×n 크기의 직사각형을 채우는 방법의 수를 10,007로 나눈 나머지를 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(cnt[n] % <span class="number">10007</span>)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1239,7 +1226,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-count">144</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1252,7 +1239,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">96</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

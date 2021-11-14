@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source Code Pro:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans KR:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"leahincom.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="이 글은 이화여자대학교 2021-2학기 캡스톤디자인프로젝트A - 그로쓰7팀(이화BTS) 나정현의 기술 블로그 제출물입니다. 본 팀은 Data2Vis의 Encoder-Decoder 모델, Seq2Seq2 모델에 기반하여 “EDA를 위한 데이터 데이터 시각화 추천 시스템” 을 주제로 웹 서비스를 개발하고 있습니다. 해당 프로젝트에서 필자는 프론트엔드 개발 및">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSR을 기반으로, 효율적인 EDA를 위한 에디터 형식의 추천 시스템 서비스 개발하기">
+<meta property="og:url" content="https://leahincom.github.io/2021/11/14/erp-frontend/index.html">
+<meta property="og:site_name" content="leah">
+<meta property="og:description" content="이 글은 이화여자대학교 2021-2학기 캡스톤디자인프로젝트A - 그로쓰7팀(이화BTS) 나정현의 기술 블로그 제출물입니다. 본 팀은 Data2Vis의 Encoder-Decoder 모델, Seq2Seq2 모델에 기반하여 “EDA를 위한 데이터 데이터 시각화 추천 시스템” 을 주제로 웹 서비스를 개발하고 있습니다. 해당 프로젝트에서 필자는 프론트엔드 개발 및">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdnl.tblsft.com/sites/default/files/pages/superstore_forecast_creator_server.png">
+<meta property="og:image" content="https://www.sarah-note.com/static/862e8950181629369ee391b5e4a11578/e5166/p1_ssr.jpg">
+<meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/boveg2/btqTxBHcFIg/zgpFFau2Q5LM5KljvJ8jcK/img.png">
+<meta property="og:image" content="https://media.vlpt.us/images/qkrdudgh052/post/c9c989f9-69e4-40be-98f1-a57c924bc187/2021-02-17%2020;09;29.PNG">
+<meta property="og:image" content="https://miro.medium.com/max/1400/1*mU0dHw7xyVDVQlopkdVJfA.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/49134038/141684548-c4e5d207-f6a2-4b24-b9ff-527efee37f42.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/49134038/141684553-e7a23bb5-9f46-49da-b80b-00a25e8ef56d.png">
+<meta property="article:published_time" content="2021-11-14T13:52:02.000Z">
+<meta property="article:modified_time" content="2021-11-14T14:07:40.139Z">
+<meta property="article:author" content="JungHyun">
+<meta property="article:tag" content="recommendation system">
+<meta property="article:tag" content="data visualization">
+<meta property="article:tag" content="frontend">
+<meta property="article:tag" content="plot library">
+<meta property="article:tag" content="vega lite">
+<meta property="article:tag" content="FE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdnl.tblsft.com/sites/default/files/pages/superstore_forecast_creator_server.png">
+
+<link rel="canonical" href="https://leahincom.github.io/2021/11/14/erp-frontend/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>SSR을 기반으로, 효율적인 EDA를 위한 에디터 형식의 추천 시스템 서비스 개발하기 | leah</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">leah</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">my dev_log</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/11/14/erp-frontend/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SSR을 기반으로, 효율적인 EDA를 위한 에디터 형식의 추천 시스템 서비스 개발하기
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-11-14 13:52:02 / Modified: 14:07:40" itemprop="dateCreated datePublished" datetime="2021-11-14T13:52:02Z">2021-11-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/graduation-project/" itemprop="url" rel="index"><span itemprop="name">Graduation Project</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/graduation-project/about/" itemprop="url" rel="index"><span itemprop="name">About</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><em>이 글은 이화여자대학교 2021-2학기 캡스톤디자인프로젝트A - 그로쓰7팀(이화BTS) 나정현의 기술 블로그 제출물입니다.</em></p>
+<p>본 팀은 Data2Vis의 Encoder-Decoder 모델, Seq2Seq2 모델에 기반하여 <strong>“EDA를 위한 데이터 데이터 시각화 추천 시스템”</strong> 을 주제로 웹 서비스를 개발하고 있습니다. 해당 프로젝트에서 필자는 프론트엔드 개발 및 Node.js 백엔드 수정을 담당하였으며, 모델의 개략을 설명한 저번 포스팅에 이어 이번 포스팅에서는 모델을 웹 서비스에 올리고 그 중간 결과물을 만들기까지의 과정을 소개하고자 합니다.</p>
+<blockquote>
+<p>GitHub 소스코드 : <a target="_blank" rel="noopener" href="https://github.com/leahincom/erp-frontend">https://github.com/leahincom/erp-frontend</a></p>
+<p>(※ 현재 비공개인 상태입니다.)</p>
+</blockquote>
+<br />
+
+
+
+<hr style="margin: 0 auto; height: auto; width: 50%; border-bottom: 5px solid lightblue" />
+
+<br />
+
+
+
+<h2 align="center">
+  Project Overview
+</h2>
+
+<p>먼저, 해당 포스팅에 대한 이해를 돕기 위해 저번 포스팅과 같이 <strong>추천 시스템</strong> 과 ERP를 개발하게 된 이유에 대해 간략히 설명하면서 시작해보고자 한다.</p>
+<p><em>Visualization Recommender System이란,</em> 이름 그대로 전문가가 일일이 차트를 만들지 않아도 제공되는 차트 리스트 중에 가장 적합한 것을 고를 수 있도록 자동적으로 차트를 만들어 주는 추천 시스템이다. 본 팀은 정형화된 데이터셋을 이용하여 학습시킨 모델을 통해 시각화 타입과 디자인 초이스를 추천해주는 시스템을 설계하고, 이를 웹에 올려 Visualization 추천 시스템을 제공하는 ERP를 제작하고자 한다.</p>
+<p>data를 활용하는 일이 급진적으로 증가하고 있고, 이에 따라 data specialist도 많아지고 있다. 이 트렌드에 맞게 굳이 플랏을 그리기까지의 모든 과정을 다 컨트롤하지 않아도 자동적으로 플랏을 추천해주는 서비스에 대한 요구도 증가하고 있다. 실제로 이에 가장 유명한 서비스는 <strong>Tableau</strong> 인데, 직접 사용해 본 결과 UI 도 복잡하고 UX도 좋지 못하다고 느꼈다. 하나의 윈도우에 너무 많은 정보가 한꺼번에 떠있는 느낌이었고, UX 플로우가 원활하지 못해 그리는 동안 어려움과 불편함을 느꼈다.</p>
+<img src="https://cdnl.tblsft.com/sites/default/files/pages/superstore_forecast_creator_server.png" alt="from tableau server image" />
+
+<p>이를 보완하기 위해, 사용성이 뛰어난 <strong>노션</strong> 의 UI와 UX를 차용하여 위 서비스를 editor 형식을 이용한 사용자 중심 서비스로 탈바꿈하고자 한다. 본 팀의 서비스는 가장 중요한 분야 중 하나인 data 의 활용을 돕고 사용성을 증대시키고자 하며, 이를 통해 전문가가 데이터를 활용함에 있어서 중요한 부분에 집중할 수 있도록 돕고자 한다.</p>
+<br />
+
+
+
+<p>그렇다면, 본 팀의 프론트엔드와 백엔드에는 어떤 tech stack이 사용되었으며, 특히 프론트엔드에서 사용한 라이브러리는 어떤 것들이 있는지 살펴보고 간단한 튜토리얼을 통해 사용법을 알아보자.</p>
+<br />
+
+
+
+<hr style="margin: 0 auto; height: auto; width: 50%; border-bottom: 5px solid lightblue" />
+
+<br />
+
+
+
+<h2 align="center">
+  WEB
+</h2>
+
+<p>웹에 사용한 테크 스택은 다음과 같다.</p>
+<ul>
+<li>React</li>
+<li>Styled-components</li>
+<li>Next.js</li>
+<li>Recoil</li>
+<li>Node.js</li>
+<li>Express.js</li>
+<li>Flask</li>
+<li>Tensorflow</li>
+<li>MongoDB</li>
+<li>Google Cloud Platform</li>
+</ul>
+<br />
+
+
+
+<h3 align="center">
+  1. Next.js를 채택한 이유
+</h3>
+
+<p>Server Side Rendering을 지원하던 기존 Multi Page Form 방식에서 모바일 사용자가 증가함에 따라 React, Angular, Vue 등 Client Side Rendering이 가능한 SPA가 등장하게 되었다. SPA는 1개의 페이지에서 수정되는 부분만 리렌더링하는 등 여러 동작이 이루어진다. 그렇다면 CSR이 아닌 SSR은 무엇이고, SSR 기반의 Next.js는 무엇일까?</p>
+<br />
+
+
+
+<h3 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h3><p><img src="https://www.sarah-note.com/static/862e8950181629369ee391b5e4a11578/e5166/p1_ssr.jpg" alt="overview"></p>
+<p>서버에서 렌더링 작업을 수행하는 SSR은 사용자가 웹페이지에 접근할 때 서버에서 페이지에 대한 요청을 보내고, 서버에서 html, view 등의 리소스가 어떻게 보여질 지 해석되어 렌더링 후 사용자에게 반환하는 방식으로, 전체적인 프로세스는 다음과 같다.</p>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/boveg2/btqTxBHcFIg/zgpFFau2Q5LM5KljvJ8jcK/img.png"></p>
+<p>여기서 첫번째 단계는 다음과 같이 이루어진다.</p>
+<p><img src="https://media.vlpt.us/images/qkrdudgh052/post/c9c989f9-69e4-40be-98f1-a57c924bc187/2021-02-17%2020;09;29.PNG" alt="ssr"></p>
+<blockquote>
+<p>SSR이어도 Ajax 기능을 위해 클라이언트 렌더링 요소가 포함될 수 밖에 없다.</p>
+</blockquote>
+<p>쉽게 설명하면, 페이지를 구성해서 그에 해당하는 html을 다운받아 화면에 렌더링하는 것으로, CSR에 비해 다운 받는 파일이 많지 않아 초기 로딩 속도가 빠르고, 사용자가 빨리 콘텐츠를 볼 수 있다. 근데 이 과정이 <strong>브라우저 👉 프론트 서버 👉 백엔드 서버 👉 데이터 베이스</strong> 를 거쳐 데이터를 받고 역순으로 브라우저까지 데이터를 가져와 그려야 하기 때문에, 페이지 이동/ 클릭 등으로 다른 요청이 생길 때마다 이 과정을 반복하면 변경되지 않은 부분도 계속해서 리렌더링되는 문제점이 있다. (서버 부하 등의 문제를 일으킬 수 있음)</p>
+<br />
+
+
+
+<h3 id="Next-js란"><a href="#Next-js란" class="headerlink" title="Next.js란?"></a>Next.js란?</h3><p>그래서 Next는 어떤 SSR과 CSR의 단점을 보완하는 걸까?</p>
+<p>SSR은 불필요한 부분까지 리렌더링 되어 서버 부하가 발생할 수 있다는 점, CSR은 초기 로딩 속도가 느리고 SEO에 취약하다는 단점이 있다.</p>
+<p>Next.js를 사용하여 첫페이지는 백엔드 서버에서 렌더링하여 빈 html이 아닌 데이터가 채워진 html을 받는다면 SEO 문제를 해결할 수 있다. 이후에는 CSR 방식에 따라 필요한 데이터만 받아 갱신한다면 서버 부하도 줄일 수 있다.</p>
+<p><img src="https://miro.medium.com/max/1400/1*mU0dHw7xyVDVQlopkdVJfA.png" alt="diff"></p>
+<br />
+
+
+
+<h3 id="Next-js를-통해…"><a href="#Next-js를-통해…" class="headerlink" title="Next.js를 통해…"></a>Next.js를 통해…</h3><p>기존의 문제점인</p>
+<ul>
+<li>webpack과 같은 번들러를 통해 code를 번들하고 Babel과 같은 컴파일러로 변환해야 함</li>
+<li>code splitting과 같은 성능 최적화가 필요함</li>
+<li>성능과 SEO를 위해 몇몇 페이지를 pre-render 해야할 수 있음</li>
+<li>React app과 데이터 스토어를 연동하기 위해 SSR 코드를 작성해야 할 수 있음</li>
+<li>그냥, SSR과 CSR를 모두 사용하고 싶음</li>
+</ul>
+<p>을 해결할 수 있다.</p>
+<p>그러니까 Next.js의 특징은</p>
+<ul>
+<li>페이지 기반의 라우팅 시스템 (CRA 시 <code>page</code> folder 생성)</li>
+<li>한 페이지 당 SSG와 SSR을 지원해 pre-rendering 가능</li>
+<li>자동화된 code splitting을 통해 페이지 로딩을 빠르게 함</li>
+<li>Client Side Routing에 최적화된 prefetching을 지원함</li>
+<li>빌트인 CSS, Sass이 지원되며, 모든 CSS-in-JS 라이브러리를 지원함</li>
+<li>빠른 재구동 개발 환경을 지원함</li>
+<li>serverless 함수를 이용해 API를 개발할 수 있게 API 라우터를 지원함</li>
+<li>확장 가능함</li>
+</ul>
+<p>등이 있다.</p>
+<br />
+
+
+
+<h3 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h3><ol>
+<li>먼저, CRA가 아닌 <code>create-next-app</code> 을 이용해 프로젝트 폴더를 생성한다. 이 때, 필자는 <strong>typescript</strong> 를 이용하였기 때문에 해당 옵션 <code>--ts</code> (또는  <code>--typescript</code>)을 추가하였다.</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-next-app erp-example --ts</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>이후 기존 CRA는 <code>npm start</code> 로 로컬호스트에서 라이브 서버를 실행했다면, next의 경우 <code>npm run dev</code> 를 통해 스크립트를 실행한다.</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>next는 page를 <code>/pages</code> 폴더에서 관리하기 때문에, 해당 폴더 안의 <code>/pages/_app.tsx</code> 가 기존의 <code>index.js</code> 와 동일한 시작점으로 작용한다.</p>
+</li>
+<li><p>이 때 주의해야 할 점은, 필자는 <strong>styled-components</strong> 를 사용하였기 때문에 추가적으로 <code>/pages/_document.tsx</code> 를 생성해주어야 한다!</p>
+<blockquote>
+<p>여기서 해당 파일을 추가해주지 않으면, styled-components가 컴파일 후 생성하는 클래스명을 next가 인식하지 못해 렌더링 시 스타일 적용이 되지 않는다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Warning : Props <span class="string">&#x27;className&#x27;</span> did not match ...</span><br></pre></td></tr></table></figure>
+
+<p>위의 warning이 그로 인한 이슈이다.</p>
+</blockquote>
+</li>
+<li><p>이후에는 CRA 이후와 동일하게 <code>app.js</code> 대신 <code>index.tsx</code> 를 이용해 개발을 시작하면 된다!</p>
+</li>
+</ol>
+<br />
+
+
+
+<h3 align="center">
+  2. 전역 상태 관리 Recoil
+</h3>
+
+<p>먼저 전역 상태 관리 라이브러리를 사용하기 전에, 어떤 값들을 상태로 관리해야 하는지, 이 중에서도 전역 상태로 사용해야 할 값들은 어떤 것들인지 추리는 것이 중요하다. 상태를 많이 사용하다보면 dependency가 과도하게 생성되어 사소한 값을 변경할 때도 불필요한 렌더링과 의도치 않은 값 변경 등 코드의 복잡도가 매우 높아질 수 있다. 따라서 hook을 이용한 상태 관리는 최소화하는 것이 좋기 때문에, 다음과 같은 사항을 고려한 후 상태값을 생성하는 것이 중요하다.</p>
+<ul>
+<li>꼭 전역 상태로 관리해야 할까?</li>
+<li>용도에 따라 상태값 분리</li>
+<li>데이터 별로 동기/ 비동기 생각하기</li>
+<li>데이터가 변경되는 시점, 영향을 주고받는 의존성 파악하기</li>
+</ul>
+<p>필자는 전역 상태 관리를 위해 <strong>recoil.js</strong> 라이브러리를 사용하였는데, 이를 선택한 이유는</p>
+<ul>
+<li>React를 개발한 Facebook이 내놓은 라이브러리</li>
+<li>따라서 React에 가장 적합한 상태 관리 기능을 제공할 것이라 생각</li>
+<li>러닝 커브가 낮아 배우기 쉽고 사용이 편리</li>
+</ul>
+<p>등등이 있다.</p>
+<p>Context API나 Redux, MobX보다 훨씬 간편하게 사용이 가능하고 필요한 기능은 모두 포함되었기 때문에 Recoil이면 충분하다고 생각했다.</p>
+<p>그렇다면 Recoil은 무엇이고 어떤 기능을 제공할까? </p>
+<br />
+
+
+
+<h3 id="왜-Recoil을-사용해야-할까"><a href="#왜-Recoil을-사용해야-할까" class="headerlink" title="왜 Recoil을 사용해야 할까?"></a>왜 Recoil을 사용해야 할까?</h3><blockquote>
+<p><strong>데이터 플로우를 잘 관리해서 의존성을 갖는 상태를 잘 관리하는 것</strong></p>
+</blockquote>
+<p>State changes flow from the roots of this graph (which we call atoms) through pure functions (which we call selectors) and into components.</p>
+<br />
+
+
+
+<h3 id="기본-개념"><a href="#기본-개념" class="headerlink" title="기본 개념"></a>기본 개념</h3><ol>
+<li>RecoilRoot</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  RecoilRoot</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&#x27;recoil&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;RecoilRoot&gt;</span><br><span class="line">      &lt;Component /&gt;</span><br><span class="line">    &lt;/RecoilRoot&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>define in a root component</li>
+</ul>
+<ol start="2">
+<li>Atoms</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fontSizeState = atom(&#123;</span><br><span class="line">  key: <span class="string">&#x27;fontSizeState&#x27;</span>,</span><br><span class="line">  <span class="keyword">default</span>: <span class="number">14</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>units of state</li>
+<li>updateable and subscribable: when an atom is updated, each subscribed component is re-rendered with the new value</li>
+<li>Components that read the value of an atom are implicitly <strong>subscribed</strong> to that atom</li>
+<li>unique key: two atoms to have the same key, so make sure they’re globally unique</li>
+</ul>
+<hr>
+<ul>
+<li><p>useRecoilState</p>
+<ul>
+<li>read and write an atom from a component</li>
+<li>just like React’s <code>useState</code> which can be shared between components</li>
+</ul>
+</li>
+<li><p>useRecoilValue</p>
+<ul>
+<li>To read the contents of this atom, we can use the <code>useRecoilValue()</code> hook in our <code>TodoList</code> component</li>
+</ul>
+</li>
+<li><p>useSetRecoilState</p>
+<ul>
+<li>We can use the <code>useSetRecoilState()</code> hook to get a setter function in our <code>TodoItemCreator</code> component</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>Selector</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fontSizeLabelState = selector(&#123;</span><br><span class="line">  key: <span class="string">&#x27;fontSizeLabelState&#x27;</span>,</span><br><span class="line">  get: <span class="function">(<span class="params">&#123;get&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> fontSize = get(fontSizeState);</span><br><span class="line">    <span class="keyword">const</span> unit = <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;fontSize&#125;</span><span class="subst">$&#123;unit&#125;</span>`</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>pure function that accepts atoms or other selectors as input → upstream atoms or selectors are updated, the selector function will be re-evaluated</li>
+<li>Components can subscribe to selectors just like atoms, and will then be re-rendered when the selectors change</li>
+<li>calculate derived data that is based on state</li>
+<li><strong>derived state: transformation</strong> of state = the output of passing state to a pure function that modifies the given state</li>
+<li>minimal set of state is stored in atoms, while everything else is efficiently computed as a function of that minimal state</li>
+<li>selectors keep track of what components need them and what state they depend on</li>
+</ul>
+<hr>
+<ul>
+<li><p>get</p>
+<ul>
+<li><code>get</code> property is the function that is to be computed</li>
+<li>access the value of atoms and other selectors</li>
+<li>accesses another atom or selector, a dependency relationship is created</li>
+</ul>
+</li>
+<li><p>useRecoilValue</p>
+<ul>
+<li>takes an atom or selector as an argument and returns the corresponding value</li>
+</ul>
+</li>
+</ul>
+<hr>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [fontSize, setFontSize] = useRecoilState(fontSizeState);</span><br><span class="line"><span class="keyword">const</span> fontSizeLabel = useRecoilValue(fontSizeLabelState);</span><br></pre></td></tr></table></figure>
+
+
+<br />
+
+
+
+<p>그렇다면, 본 프로젝트에서 중점적으로 recoil을 이용해 전역 상태 관리를 하고자 한 이유인 <strong>비동기 데이터 쿼리</strong> 에 대해 알아보고, 간단한 예시를 통해 작동 원리를 파악해보자.</p>
+<h3 id="비동기-데이터-쿼리"><a href="#비동기-데이터-쿼리" class="headerlink" title="비동기 데이터 쿼리"></a>비동기 데이터 쿼리</h3><ul>
+<li>these are just selectors, other selectors can also depend on them to further transform the data</li>
+<li>the functions in the graph can also be asynchronous</li>
+<li>asynchronous functions in synchronous React component render functions</li>
+<li>mix synchronous and asynchronous functions in your data-flow graph of selectors</li>
+<li><strong>return a Promise to a value instead of the value itself from a selector <code>get</code> callback, the interface remains exactly the same</strong></li>
+<li>one way to incorporate asynchronous data into the Recoil data-flow graph</li>
+<li>a given set of inputs they should always produce the same results (because selector evaluations may be cached, restarted, or executed multiple times)</li>
+</ul>
+<hr>
+<ul>
+<li>Synchronous</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> currentUserIDState = atom(&#123;</span><br><span class="line">  key: <span class="string">&#x27;CurrentUserID&#x27;</span>,</span><br><span class="line">  <span class="keyword">default</span>: <span class="number">1</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> currentUserNameState = selector(&#123;</span><br><span class="line">  key: <span class="string">&#x27;CurrentUserName&#x27;</span>,</span><br><span class="line">  get: <span class="function">(<span class="params">&#123;get&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> tableOfUsers[get(currentUserIDState)].name;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CurrentUserInfo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> userName = useRecoilValue(currentUserNameState);</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;userName&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyApp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;RecoilRoot&gt;</span><br><span class="line">      &lt;CurrentUserInfo /&gt;</span><br><span class="line">    &lt;/RecoilRoot&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Asynchronous</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> currentUserNameQuery = selector(&#123;</span><br><span class="line">  key: <span class="string">&#x27;CurrentUserName&#x27;</span>,</span><br><span class="line">  get: <span class="keyword">async</span> (&#123;get&#125;) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> myDBQuery(&#123;</span><br><span class="line">      userID: get(currentUserIDState),</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> response.name;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CurrentUserInfo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> userName = useRecoilValue(currentUserNameQuery);</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;userName&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+<h3 id="Tutorial-1"><a href="#Tutorial-1" class="headerlink" title="Tutorial"></a>Tutorial</h3><ol>
+<li><p>먼저 프로젝트를 생성한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app my-app</span><br></pre></td></tr></table></figure></li>
+<li><p>recoil을 설치한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install recoil</span><br></pre></td></tr></table></figure></li>
+<li><p>recoil을 이용하기 위해서는 state가 필요한 컴포넌트의 부모 트리 혹은 최상단에 <code>RecoilRoot</code> 를 넣어야 한다. 기존의 Context API에서 Context Provider를 부모 트리에 넣고 안에 Consumer을 정의하는 것과 같은 원리이다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import React from &#39;react&#39;;</span><br><span class="line">import &#123;</span><br><span class="line">  RecoilRoot,</span><br><span class="line">  atom,</span><br><span class="line">  selector,</span><br><span class="line">  useRecoilState,</span><br><span class="line">  useRecoilValue,</span><br><span class="line">&#125; from &#39;recoil&#39;;</span><br><span class="line"></span><br><span class="line">function App() &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;RecoilRoot&gt;</span><br><span class="line">      &lt;CharacterCounter &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;RecoilRoot&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>이후 state 정의를 위한 <code>atom</code> 과 <code>selector</code> 의 생성은 위의 기본 개념 파트를 참고하면 된다 :)</p>
+</li>
+</ol>
+<br />
+
+
+
+<h3 align="center">
+  3. 사용한 라이브러리
+</h3>
+
+<p>React는 커뮤니티가 활성화되어 있어 사용할 수 있는 라이브러리가 많고, 그에 따라 효과적, 효율적으로 기능을 추가할 수 있다. 특히 처음부터 모든 기능을 직접 구현하다 보면 각 기능에서 발생 가능한 이슈를 핸들링하느라 수고가 늘어나는데, 라이브러리는 각 피쳐에 집중적으로 개발이 되었기 때문에 발생 가능한 이슈를 자체적으로 핸들링하고, 유지 보수가 잘 되고 있는 라이브러리는 이를 계속 체크업하기 때문에 더더욱 유용하게 사용할 수 있다.</p>
+<p>하지만 개발하는 서비스에 맞게 커스터마이징을 힘든 경우가 있기 때문에, 라이브러리를 선택할 때는 여러 요건을 고려하여야 한다. 이에 가장 기본적인 요건은</p>
+<ul>
+<li>사용자 수 (활성화된 커뮤니티)</li>
+<li>꾸준한 유지 보수</li>
+<li>다양한 커스터마이징 기능?</li>
+</ul>
+<p>등등이 있다. </p>
+<p>해당 프로젝트에서는 editor 형식으로 대시보드를 구현하였기 때문에 다양한 라이브러리를 사용해 효과적으로 개발하고자 노력하였으며, 모델을 올리는 경우에도 vega 측에서 제공하는 리액트 용 <code>vega-lite</code> 라이브러리를 이용하여 사용하는 모델의 기능을 최대한 제공할 수 있도록 하였다. 본 프로젝트의 프론트엔드 <code>package.json</code> 은 다음과 같다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;@fortawesome/fontawesome-svg-core&quot;</span>: <span class="string">&quot;^1.2.36&quot;</span>,</span><br><span class="line"><span class="string">&quot;@fortawesome/free-brands-svg-icons&quot;</span>: <span class="string">&quot;^5.15.4&quot;</span>,</span><br><span class="line"><span class="string">&quot;@fortawesome/free-regular-svg-icons&quot;</span>: <span class="string">&quot;^5.15.4&quot;</span>,</span><br><span class="line"><span class="string">&quot;@fortawesome/free-solid-svg-icons&quot;</span>: <span class="string">&quot;^5.15.4&quot;</span>,</span><br><span class="line"><span class="string">&quot;@fortawesome/react-fontawesome&quot;</span>: <span class="string">&quot;^0.1.15&quot;</span>,</span><br><span class="line"><span class="string">&quot;fontsource-nunito-sans&quot;</span>: <span class="string">&quot;^4.0.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;fontsource-roboto&quot;</span>: <span class="string">&quot;^4.0.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;json-server&quot;</span>: <span class="string">&quot;^0.16.3&quot;</span>,</span><br><span class="line"><span class="string">&quot;match-sorter&quot;</span>: <span class="string">&quot;^6.3.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;next&quot;</span>: <span class="string">&quot;11.1.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;next-cookies&quot;</span>: <span class="string">&quot;^2.0.3&quot;</span>,</span><br><span class="line"><span class="string">&quot;next-images&quot;</span>: <span class="string">&quot;^1.8.1&quot;</span>,</span><br><span class="line"><span class="string">&quot;react&quot;</span>: <span class="string">&quot;17.0.2&quot;</span>,</span><br><span class="line"><span class="string">&quot;react-beautiful-dnd&quot;</span>: <span class="string">&quot;^13.1.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;react-contenteditable&quot;</span>: <span class="string">&quot;^3.3.6&quot;</span>,</span><br><span class="line"><span class="string">&quot;react-dom&quot;</span>: <span class="string">&quot;17.0.2&quot;</span>,</span><br><span class="line"><span class="string">&quot;react-vega&quot;</span>: <span class="string">&quot;^7.4.4&quot;</span>,</span><br><span class="line"><span class="string">&quot;recoil&quot;</span>: <span class="string">&quot;^0.4.1&quot;</span>,</span><br><span class="line"><span class="string">&quot;styled-components&quot;</span>: <span class="string">&quot;^5.3.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;vega&quot;</span>: <span class="string">&quot;^5.21.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;vega-lite&quot;</span>: <span class="string">&quot;^5.1.1&quot;</span></span><br><span class="line"><span class="string">&quot;isomorphic-dompurify&quot;</span>: <span class="string">&quot;^0.15.0&quot;</span>,</span><br></pre></td></tr></table></figure>
+<br />
+
+
+
+<hr style="margin: 0 auto; height: auto; width: 50%; border-bottom: 5px solid lightblue" />
+
+<br />
+
+
+
+<h2 align="center">
+  ERP의 #FE
+</h2>
+
+<p>그래서, 현 ERP의 프론트엔드는 어느 시점까지 개발되었을까?</p>
+<p>현재 사용자가 정형화된 csv 형식의 데이터를 업로드하면 학습된 추천 시스템 모델을 통해 여러 추천 플랏이 반환되며, 사용자는 각 플랏을 선택하여 자세하게 이를 확인할 수 있다.</p>
+<img width="1265" alt="Screenshot 2021-11-14 at 21 07 53" src="https://user-images.githubusercontent.com/49134038/141684548-c4e5d207-f6a2-4b24-b9ff-527efee37f42.png">
+
+<p>이는 데이터의 <code>spec</code> 과 <code>data</code> 부분을 분리하여 <code>VegaLite</code> 라이브러리 컴포넌트를 이용하여 구현하였다. 각 플랏 당 해당 플랏을 저장하거나, 데이터 코드를 볼 수 있는 기능 등이 포함된 옵션을 제공하므로 플랏 오른쪽 상단에 위치한 옵션 버튼을 선택하면 다양한 기능을 확인해볼 수 있다.</p>
+<p>또한, 에디터 형식의 대시보드를 구현하여 기본적인 텍스트와 이미지 업로드를 통한 보고서 작성이 가능하다. 사용자가 로드한 데이터 별로 플랏을 저장하여 차후 데이터 요약 보고서 생성 시 로드한 데이터를 선택해 저장한 플랏을 불러오고 에디터에 원하는 플랏을 업로드할 수 있다.</p>
+<img width="1264" alt="Screenshot 2021-11-14 at 21 07 15" src="https://user-images.githubusercontent.com/49134038/141684553-e7a23bb5-9f46-49da-b80b-00a25e8ef56d.png">
+
+<br />
+
+
+
+<hr style="margin: 0 auto; height: auto; width: 50%; border-bottom: 5px solid lightblue" />
+
+<br />
+
+
+
+<h2 align="center">
+  Conclusion
+</h2>
+
+<p>본 팀은 최종 발표까지 남은 기간 +a의 기간 동안 QA 진행 및 유저 피드백을 반영하여 기능을 수정 및 보완하고, 배포와 리팩토링을 진행할 예정이다. 더하여 프리미엄 버전으로 사용자가 실제로 데이터 요약 보고서를 사용함에 있어서 더욱 정교하게 추천 시스템을 활용하여 효율적이고 능률적으로 서비스를 이용할 수 있도록 여러 기능을 덧붙여 볼 예정이다.</p>
+<p>결론적으로 목표하는 바는 효과적인 EDA를 위한 Customizing Recommended Data Visualization Plots 서비스를 제공하고 유지, 보수 관리를 꾸준히 이어나가는 것이다.</p>
+<br />
+
+
+
+<hr style="margin: 0 auto; height: auto; width: 50%; border-bottom: 5px solid lightblue" />
+
+<br />
+
+
+
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a target="_blank" rel="noopener" href="https://nextjs.org/learn/basics/create-nextjs-app">https://nextjs.org/learn/basics/create-nextjs-app</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/recommendation-system/" rel="tag"># recommendation system</a>
+              <a href="/tags/data-visualization/" rel="tag"># data visualization</a>
+              <a href="/tags/frontend/" rel="tag"># frontend</a>
+              <a href="/tags/plot-library/" rel="tag"># plot library</a>
+              <a href="/tags/vega-lite/" rel="tag"># vega lite</a>
+              <a href="/tags/fe/" rel="tag"># FE</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/22/react-draft-wysiwyg-custom-button/" rel="prev" title="React-draft-wysiwyg에서 custom button 생성 및 설정하기">
+      <i class="fa fa-chevron-left"></i> React-draft-wysiwyg에서 custom button 생성 및 설정하기
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">
+  Project Overview
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">
+  WEB
+</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">
+  1. Next.js를 채택한 이유
+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSR"><span class="nav-number">2.2.</span> <span class="nav-text">SSR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-js%EB%9E%80"><span class="nav-number">2.3.</span> <span class="nav-text">Next.js란?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-js%EB%A5%BC-%ED%86%B5%ED%95%B4%E2%80%A6"><span class="nav-number">2.4.</span> <span class="nav-text">Next.js를 통해…</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tutorial"><span class="nav-number">2.5.</span> <span class="nav-text">Tutorial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.6.</span> <span class="nav-text">
+  2. 전역 상태 관리 Recoil
+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%99%9C-Recoil%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C"><span class="nav-number">2.7.</span> <span class="nav-text">왜 Recoil을 사용해야 할까?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90"><span class="nav-number">2.8.</span> <span class="nav-text">기본 개념</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%B9%84%EB%8F%99%EA%B8%B0-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%BF%BC%EB%A6%AC"><span class="nav-number">2.9.</span> <span class="nav-text">비동기 데이터 쿼리</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tutorial-1"><span class="nav-number">2.10.</span> <span class="nav-text">Tutorial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.11.</span> <span class="nav-text">
+  3. 사용한 라이브러리
+</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">
+  ERP의 #FE
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">
+  Conclusion
+</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">4.0.1.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="JungHyun"
+      src="/images/profile.jpeg">
+  <p class="site-author-name" itemprop="name">JungHyun</p>
+  <div class="site-description" itemprop="description">Continuously Growing Developer</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/leahincom" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;leahincom" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:leahincom@gmail.com" title="E-Mail → mailto:leahincom@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JungHyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
