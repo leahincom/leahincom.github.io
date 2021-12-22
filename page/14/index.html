@@ -163,6 +163,291 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/06/16-Web-Components-PWA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/06/16-Web-Components-PWA/" class="post-title-link" itemprop="url">16. Web Components, PWA</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-06 11:27:27" itemprop="dateCreated datePublished" datetime="2021-02-06T11:27:27Z">2021-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Web-Components"><a href="#Web-Components" class="headerlink" title="Web Components"></a>Web Components</h3><h4 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h4><ol>
+<li>Scoped</li>
+<li>Reusable</li>
+<li>Encapsulated</li>
+</ol>
+<h4 id="Made-by-4-main-technologies"><a href="#Made-by-4-main-technologies" class="headerlink" title="Made by 4 main technologies"></a>Made by 4 main technologies</h4><ol>
+<li>HTML Template</li>
+<li>Custom Elements</li>
+<li>Shadow DOM</li>
+<li>HTML Imports</li>
+</ol>
+<h4 id="Basic-Web-Components"><a href="#Basic-Web-Components" class="headerlink" title="Basic Web Components"></a>Basic Web Components</h4><ul>
+<li>Card Title</li>
+<li>Component Title</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class&#x3D;&quot;card&quot;&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h2&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;&#x2F;...&gt;</span><br></pre></td></tr></table></figure>
+<p>👇</p>
+<ol>
+<li><p>reduce duplicated contents using…<br>&lt;product-card<br>data-header=<br>data-img=<br>data-text=</p>
+<blockquote>
+</product-card></blockquote>
+</li>
+<li><p>with JavaScript!</p>
+</li>
+</ol>
+<ul>
+<li>customElements : global variable</li>
+<li>shadow, secret // outside world can’t get access to it</li>
+</ul>
+<ul>
+<li>shadow DOM<br>a tree-like structure of connected nodes that represents the different elements and strings of text appearing in a markup document (usually an HTML document in the case of web documents).<br>※ font-size =&gt; DON’T use px !!! USE rem</li>
+</ul>
+<h3 id="Progressive-Web-App-PWA"><a href="#Progressive-Web-App-PWA" class="headerlink" title="Progressive Web App (PWA)"></a>Progressive Web App (PWA)</h3><ol>
+<li>Reliable: download and work off-line</li>
+</ol>
+<ul>
+<li>Service worker (downloads content-heavy web, use off-line)</li>
+<li>Pre-caching</li>
+</ul>
+<ol start="2">
+<li>Fast</li>
+<li>Engaging</li>
+</ol>
+<ul>
+<li>No app store needed</li>
+<li>Immersive full screen</li>
+<li>Push Notifications</li>
+</ul>
+<ul>
+<li>Chrome DevTools : Inspect -&gt; LightHouse 이용!!</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/05/15-CSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/05/15-CSS/" class="post-title-link" itemprop="url">15. CSS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-05 12:37:14" itemprop="dateCreated datePublished" datetime="2021-02-05T12:37:14Z">2021-02-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Advanced-HTML-CSS"><a href="#Advanced-HTML-CSS" class="headerlink" title="Advanced HTML - CSS"></a>Advanced HTML - CSS</h2><h3 id="Everything-is-a-BOX"><a href="#Everything-is-a-BOX" class="headerlink" title="Everything is a BOX"></a>Everything is a BOX</h3><h4 id="Box-sizing"><a href="#Box-sizing" class="headerlink" title="Box-sizing"></a>Box-sizing</h4><p>developer.mozilla.org/ko/docs/Web/CSS/box-sizing</p>
+<ul>
+<li>border box : the way we calculate the box size is just a/c the content</li>
+<li><ul>
+<li>{ // * : everything<br>box-sizing: border-box;<br>}</li>
+</ul>
+</li>
+</ul>
+<h4 id="Position"><a href="#Position" class="headerlink" title="Position"></a>Position</h4><p>developer.mozilla.org/ko/docs/Web/CSS/position</p>
+<p>CSS position 속성은 문서 상에 요소를 배치하는 방법을 지정합니다. top, right, bottom, left 속성이 요소를 배치할 최종 위치를 결정합니다.</p>
+<ul>
+<li>position : static / relative / absolute / fixed</li>
+</ul>
+<ul>
+<li><p>static: <em>default</em><br>요소를 일반적인 문서 흐름에 따라 배치합니다. top, right, bottom, left, z-index 속성이 아무런 영향도 주지 않습니다. 기본값입니다.</p>
+</li>
+<li><p>relative: have elements<br>요소를 일반적인 문서 흐름에 따라 배치하고, 자기 자신을 기준으로 top, right, bottom, left의 값에 따라 오프셋을 적용합니다. 오프셋은 다른 요소에는 영향을 주지 않습니다. 따라서 페이지 레이아웃에서 요소가 차지하는 공간은 static일 때와 같습니다.</p>
+<ul>
+<li>sticky:<br>요소를 일반적인 문서 흐름에 따라 배치하고, 테이블 관련 요소를 포함해 가장 가까운, 스크롤 되는 조상과, 표 관련 요소를 포함한 컨테이닝 블록(가장 가까운 블록 레벨 조상) 을 기준으로 top, right, bottom, left의 값에 따라 오프셋을 적용합니다. 오프셋은 다른 요소에는 영향을 주지 않습니다.<br>이 값은 항상 새로운 쌓임 맥락을 생성합니다. 끈끈한 요소는 “스크롤 동작”(overflow가 hidden, scroll, auto 혹은 overlay)이 존재하는 가장 가까운 조상에 달라붙으며, 사실 그 조상은 스크롤 불가하며 실제로 스크롤 가능한 조상이 따로 존재할 경우 “끈끈한” 동작을 보이지 않는 점에 주의하세요.</li>
+</ul>
+</li>
+<li><p>absolute: relative to its first position parent(e.g. body), not static, everything opposite to static<br>not affected to the scrolling<br>요소를 일반적인 문서 흐름에서 제거하고, 페이지 레이아웃에 공간도 배정하지 않습니다. 대신 가장 가까운 위치 지정 조상 요소에 대해 상대적으로 배치합니다. 단, 조상 중 위치 지정 요소가 없다면 초기 컨테이닝 블록을 기준으로 삼습니다. 최종 위치는 top, right, bottom, left 값이 지정합니다.</p>
+</li>
+<li><p>fixed: 스크롤을 하더라도 fixed된 top-left-right-bottom 위치에 고정<br>요소를 일반적인 문서 흐름에서 제거하고, 페이지 레이아웃에 공간도 배정하지 않습니다. 대신 뷰포트의 초기 컨테이닝 블록을 기준으로 삼아 배치합니다. 단, 요소의 조상 중 하나가 transform, perspective, filter 속성 중 어느 하나라도 none이 아니라면 (CSS Transforms 명세 참조) 뷰포트 대신 그 조상을 컨테이닝 블록으로 삼습니다. (perspective와 filter의 경우 브라우저별로 결과가 다름에 유의) 최종 위치는 top, right, bottom, left 값이 지정합니다.</p>
+</li>
+</ul>
+<ul>
+<li>class =&gt; CSS, id =&gt; JavaScript</li>
+</ul>
+<h4 id="Display"><a href="#Display" class="headerlink" title="Display"></a>Display</h4><ul>
+<li>display: block / inline / inline-block / dom / flex</li>
+</ul>
+<ul>
+<li>block : vertical alignment, take as much as horizontal place they can</li>
+<li>inline : take the CONTENT as horizontal alignment, ignore any width value</li>
+<li>inline-block :</li>
+</ul>
+<ol>
+<li>Compared to ‘display: inline’, the major difference is that ‘display: inline-block’ allows to set a width and height on the element.</li>
+<li>Compared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements.</li>
+</ol>
+<ul>
+<li>dom : can check the dom (test) but not rendered inside the dom</li>
+<li>flex (Flexbox) : This defines a flex container; inline or block depending on the given value. It enables a flex context for all its direct children.<br>css-tricks.com/snippets/css/a-guide-to-flexbox/<pre><code>&gt; start / center / space-between / space-around / space-evenly</code></pre>
+</li>
+</ul>
+<p>developer.mozilla.org/en-US/docs/Web/CSS/justify-content</p>
+<ul>
+<li>order : arbitrarily set the orders<br>.box:first-child {<br>order: 3<br>}<br>.box:last-child {<br>order: 1<br>}</li>
+</ul>
+<h4 id="Units"><a href="#Units" class="headerlink" title="Units"></a>Units</h4><ul>
+<li>percentages / absolute </li>
+</ul>
+<ul>
+<li>percentages<ul>
+<li>vw : Viewpoint Width</li>
+<li>vh : Viewpoint Height</li>
+<li>em : Relative to the font-size of the element (2em means 2 times the size of the current font)</li>
+<li>rem : Relative to font-size of the root element</li>
+</ul>
+</li>
+<li>absolute<ul>
+<li>px : pixels</li>
+<li>pt : 72pts = one inch</li>
+</ul>
+</li>
+</ul>
+<h4 id="Z-index"><a href="#Z-index" class="headerlink" title="Z-index"></a>Z-index</h4><p>control overlapping -&gt; no need for static (which considers content layouts)</p>
+<p>DIV num 따라 구조화 하고 -&gt; DIV에 포함된 DIV의 z-index는 소수점으로 판단된다!<br>=&gt; DIV<br>#1 : 5<br>#2: 2<br>#3: 4</p>
+<ul>
+<li>#4: 4.6</li>
+<li>#5: 4.1</li>
+<li>#6: 4.3</li>
+</ul>
+<h4 id="Vendor-Prefixes"><a href="#Vendor-Prefixes" class="headerlink" title="Vendor Prefixes"></a>Vendor Prefixes</h4><ul>
+<li>webkit<br>WebKit is a web browser engine used by browsers such as Safari and Chrome. You can make use of WebKit features such as animation, transform, transition, and more through the use of the -webkit prefix in your CSS</li>
+</ul>
+<h4 id="Transformations"><a href="#Transformations" class="headerlink" title="Transformations"></a>Transformations</h4><h4 id="Animations"><a href="#Animations" class="headerlink" title="Animations"></a>Animations</h4><p>@keyframes [name] {<br>}</p>
+<h4 id="Transition"><a href="#Transition" class="headerlink" title="Transition"></a>Transition</h4><p>:hover : not switch, interpolating</p>
+<h3 id="Responsive-Web"><a href="#Responsive-Web" class="headerlink" title="Responsive Web"></a>Responsive Web</h3><h4 id="Media-queries"><a href="#Media-queries" class="headerlink" title="Media queries"></a>Media queries</h4><h3 id="CSS-Preprocessors"><a href="#CSS-Preprocessors" class="headerlink" title="CSS Preprocessors"></a>CSS Preprocessors</h3><h4 id="SASS"><a href="#SASS" class="headerlink" title="SASS"></a>SASS</h4><p>CSS with Super-power</p>
+<h4 id="LESS"><a href="#LESS" class="headerlink" title="LESS"></a>LESS</h4><h4 id="CSSnext"><a href="#CSSnext" class="headerlink" title="CSSnext"></a>CSSnext</h4><h3 id="CSS-Frameworks"><a href="#CSS-Frameworks" class="headerlink" title="CSS Frameworks"></a>CSS Frameworks</h3><h4 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h4><h4 id="Skeleton"><a href="#Skeleton" class="headerlink" title="Skeleton"></a>Skeleton</h4><h4 id="Materialize"><a href="#Materialize" class="headerlink" title="Materialize"></a>Materialize</h4><h4 id="Bulma"><a href="#Bulma" class="headerlink" title="Bulma"></a>Bulma</h4><h4 id="Antd"><a href="#Antd" class="headerlink" title="Antd"></a>Antd</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/02/05/14-NoSQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -481,7 +766,7 @@
 <li>-&gt; (because a primary key is ordered,) binary_search =&gt; O(logN)</li>
 </ul>
 <h4 id="SQL-Indexes"><a href="#SQL-Indexes" class="headerlink" title="SQL - Indexes"></a>SQL - Indexes</h4><ol start="3">
-<li>SELECT “Email” FROM “Users” WHERE Email = “<a href="mailto:&#98;&#x69;&#x6c;&#108;&#46;&#x67;&#97;&#116;&#x65;&#115;&#x40;&#109;&#x69;&#x63;&#114;&#111;&#115;&#111;&#x66;&#x74;&#x2e;&#x63;&#x6f;&#x6d;">&#98;&#x69;&#x6c;&#108;&#46;&#x67;&#97;&#116;&#x65;&#115;&#x40;&#109;&#x69;&#x63;&#114;&#111;&#115;&#111;&#x66;&#x74;&#x2e;&#x63;&#x6f;&#x6d;</a>“ </li>
+<li>SELECT “Email” FROM “Users” WHERE Email = “<a href="mailto:&#98;&#105;&#108;&#108;&#46;&#103;&#97;&#116;&#x65;&#115;&#x40;&#109;&#x69;&#99;&#114;&#111;&#x73;&#x6f;&#x66;&#x74;&#x2e;&#99;&#x6f;&#x6d;">&#98;&#105;&#108;&#108;&#46;&#103;&#97;&#116;&#x65;&#115;&#x40;&#109;&#x69;&#99;&#114;&#111;&#x73;&#x6f;&#x66;&#x74;&#x2e;&#99;&#x6f;&#x6d;</a>“ </li>
 </ol>
 <ul>
 <li>Time Complexity<br>approach table by checking each element =&gt; O(n)</li>
@@ -1153,250 +1438,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/27/7-BFS-DFS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/27/7-BFS-DFS/" class="post-title-link" itemprop="url">7. BFS & DFS</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-26 22:40:08" itemprop="dateCreated datePublished" datetime="2021-01-26T22:40:08Z">2021-01-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p><strong>Breadth First Search</strong></p>
-<ul>
-<li>Queue<br> : go same level node first and go deeper</li>
-</ul>
-<blockquote>
-<ul>
-<li>push root node</li>
-<li>pop root node<ul>
-<li>push children nodes <em>From Left to Right</em></li>
-</ul>
-</li>
-<li>pop child node one by one and…<ul>
-<li>push children nodes from child (((repeat)))</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">queue.enqueue(this);</span><br><span class="line">while (queue.length &gt; 0) &#123;</span><br><span class="line">    current &#x3D; queue.dequeue();</span><br><span class="line">    children &#x3D; current.children;</span><br><span class="line">    for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    	queue.enqueue(children[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p><strong>Depth First Search</strong></p>
-<ul>
-<li>Stack<br> : go down to the leaf node first and move on to the other children</li>
-</ul>
-<blockquote>
-<ul>
-<li>push root node</li>
-<li>pop root node<ul>
-<li>push children nodes <em>From Left To Right</em></li>
-</ul>
-</li>
-<li>pop child node and…<ul>
-<li>push children nodes of child (((repeat)))</li>
-</ul>
-</li>
-<li>pop the leaf node<ul>
-<li>pop other leaf nodes on the same level / push children nodes of the node on the same level</li>
-</ul>
-</li>
-<li>pop parent node and move on (((repeat)))</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">stack.push(this);</span><br><span class="line">while (stack.length &gt; 0) &#123;</span><br><span class="line">  current &#x3D; stack.pop();</span><br><span class="line">  children &#x3D; current.children;</span><br><span class="line">  for (let i&#x3D;0; i&lt;children.length; i++) &#123;</span><br><span class="line">    stack.push(children[i]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/01/24/6-Complexity-Analysis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/24/6-Complexity-Analysis/" class="post-title-link" itemprop="url">6. Complexity Analysis</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-23 23:43:59" itemprop="dateCreated datePublished" datetime="2021-01-23T23:43:59Z">2021-01-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 10:56:50" itemprop="dateModified" datetime="2021-07-24T10:56:50+01:00">2021-07-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/overview/" itemprop="url" rel="index"><span itemprop="name">Overview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h2><ul>
-<li>like a recipe</li>
-<li>concrete steps to solve the problem</li>
-<li>language independent (logic itself)</li>
-</ul>
-<h3 id="Complexity-Analysis"><a href="#Complexity-Analysis" class="headerlink" title="Complexity Analysis"></a>Complexity Analysis</h3><ul>
-<li>Objective Criteria</li>
-</ul>
-<ul>
-<li><code>time</code>, <code>space</code></li>
-<li>best, average, worst (always think in worst case!)</li>
-<li>Big O</li>
-</ul>
-<h5 id="Be-aware-of-the-Complexity"><a href="#Be-aware-of-the-Complexity" class="headerlink" title="Be aware of the Complexity"></a>Be aware of the Complexity</h5><h5 id="Recognise-patterns"><a href="#Recognise-patterns" class="headerlink" title="Recognise patterns"></a>Recognise patterns</h5><h5 id="Think-if-you-can-bring-it-down"><a href="#Think-if-you-can-bring-it-down" class="headerlink" title="Think if you can bring it down"></a>Think if you can bring it down</h5><h3 id="Big-O"><a href="#Big-O" class="headerlink" title="Big O"></a>Big O</h3><p><em>DROP the constant in front of the N</em></p>
-<ol>
-<li>Constant - O(k) <em>(k: constant number)</em><br>: stays the same independently of the size of the problem</li>
-<li>Linear - O(n) <em>(n: number of items)</em><br>: grows proportional to the size of the problem<br>e.g. for loop, linked list- find the item</li>
-<li>Logarithmic - O(logn)</li>
-</ol>
-<ul>
-<li>random array =&gt; cut half =&gt; repeat until find the element (Binary Search)</li>
-<li>sorted =&gt; increase by one<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let count &#x3D; 0;</span><br><span class="line">let limit &#x3D; 100;</span><br><span class="line"></span><br><span class="line">for (let i&#x3D;0; i&lt;limit; i++) &#123;</span><br><span class="line">  limit &#x2F;&#x3D; 2;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ol start="4">
-<li>Quadratic - O(n^2)<br>: nested for loop</li>
-<li>N log n - O (nlogn)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let count &#x3D; 0;</span><br><span class="line">let limit &#x3D; 100;</span><br><span class="line"></span><br><span class="line">for (let i&#x3D;0; i&lt;limit; i++) &#123;</span><br><span class="line">  limit &#x2F;&#x3D; 2;</span><br><span class="line">  for (let j&#x3D;0; j&lt;limit; j++) &#123;</span><br><span class="line">    count++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-e.g. mergeSort</li>
-</ol>
-<h4 id="BAD-Time-Complexity"><a href="#BAD-Time-Complexity" class="headerlink" title="BAD Time Complexity"></a>BAD Time Complexity</h4><ol start="6">
-<li>Exponential - O(2^n)</li>
-<li>Factorial - O(n!)<br>e.g. Queen Problem</li>
-</ol>
-<blockquote>
-<p>Hash Table: O(1) average and amortized case complexity, however it suffers from O(n) worst case time complexity.</p>
-<ul>
-<li>Worst Case</li>
-</ul>
-<ol>
-<li>If too many elements were hashed into the same key: looking inside this key may take O(n) time.</li>
-<li>Once a hash table has passed its load balance - it has to rehash [create a new bigger table, and re-insert each element to the table]. </li>
-</ol>
-<ul>
-<li>average and amortized case</li>
-</ul>
-<ol>
-<li>It is very rare that many items will be hashed to the same key [if you chose a good hash function and you don’t have too big load balance.</li>
-<li>The rehash operation, which is O(n), can at most happen after n/2 ops, which are all assumed O(1): Thus when you sum the average time per op, you get : (n*O(1) + O(n)) / n) = O(1)</li>
-</ol>
-</blockquote>
-<h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><p><a target="_blank" rel="noopener" href="http://www.bigocheatsheet.com/">www.bigocheatsheet.com/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1468,20 +1509,20 @@ e.g. mergeSort</li>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">146</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-count">101</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

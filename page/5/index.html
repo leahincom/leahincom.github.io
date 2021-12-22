@@ -163,6 +163,211 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/06/boj-15486/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/06/boj-15486/" class="post-title-link" itemprop="url">BOJ 15486</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-06 13:14:57 / Modified: 05:36:18" itemprop="dateCreated datePublished" datetime="2021-08-06T13:14:57+01:00">2021-08-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 N (1 ≤ N ≤ 1,500,000)이 주어진다.</p>
+<p>둘째 줄부터 N개의 줄에 Ti와 Pi가 공백으로 구분되어서 주어지며, 1일부터 N일까지 순서대로 주어진다. (1 ≤ Ti ≤ 50, 1 ≤ Pi ≤ 1,000)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">T = []</span><br><span class="line">P = []</span><br><span class="line">dp = [<span class="number">0</span>]*(n+<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">  t, p = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">  T.append(t)</span><br><span class="line">  P.append(p)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>퇴사1 문제의 코드는 시간 초과가 떴는데, 차이는 빌트인 <code>input</code> 대신 <code>sys.stdin.readline</code> 을 썼다는 점이다.</p>
+</blockquote>
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>처음부터 시작하는 방식으로 문제를 풀어봤으나, 당연히 스킵해도 될 만한 케이스까지 체크하고 있었다. 이전에 퇴사1 문제에서 뒤에서부터 접근하며 문제를 풀었던 기억이 있어, 뒤에서부터 시작하는 방식으로 문제를 풀어나가니 필요없는 과정은 스킵하고 비교해야 할 대상만 비교하고 있었다. 그래서 뒤에서부터 접근하는 방식을 토대로 문제를 풀어봄.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 최대값을 구하기 위해 기존 dp 값과 대상값 비교</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br></pre></td></tr></table></figure>
+<p>일단 기본적으로, 연속적으로 답을 구해나가는 게 아니라 기존의 값보다 큰 값이 존재할 경우 대체해야 하는 최대값 구하기 문제이기 때문에,</p>
+<ul>
+<li>max를 사용하여 <code>기존의 dp 값</code> 과 <code>이전 값 + 현재 값</code> 을 비교해서 큰 값을 dp 에 저장</li>
+</ul>
+<p>해야 한다는 것만 대강 잡고 문제를 풀어나갔다.</p>
+<p>주어진 조건이</p>
+<ul>
+<li>퇴사 이후에는 일을 할 수 없음</li>
+</ul>
+<p>이기 때문에, <code>i + T[i] &gt; n</code> 일 경우에는 P를 계산하는 과정이 스킵된다. 난 조건을 만족하는 경우에만 체크하는 if문을 작성하고 dp를 애초에 0으로 초기화해서, else로 예외처리를 안 해도 된다고 착각했는데 <strong>if를 사용할 때는 꼭 else 조건도 생각해보자!</strong> 해당 범위를 벗어나는 경우에는 P는 계산하지 않지만 이전의 dp 값을 받아와야 한다. 즉, 0으로 무조건 초기화하면 안 되고 dp를 가져와야 한다는 것… 주어진 예시에서는 퇴사 직전에만 일자를 벗어나지만 중간에 범위를 벗어나는 경우에는 0으로 초기화하면 dp 값을 제대로 전달하지 못한다. 반례로</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">7</span></span><br><span class="line"><span class="string">3 10</span></span><br><span class="line"><span class="string">5 20</span></span><br><span class="line"><span class="string">1 10</span></span><br><span class="line"><span class="string">5 20</span></span><br><span class="line"><span class="string">2 15</span></span><br><span class="line"><span class="string">4 40</span></span><br><span class="line"><span class="string">2 200</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>위의 경우에서 T[3]은 5이기 때문에 퇴사 일자를 넘어서는데, dp[3]에 0을 저장하면 정상적으로 코드가 작동하지 않을 것임.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  dp[i] = dp[i+<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>퇴사 전에 일이 해결될 경우,</p>
+<ul>
+<li><p>마지막 날이라면 P를 그대로 받아오고 (dp를 0으로 초기화해서 생성했기 때문에)</p>
+</li>
+<li><p>그 외에는</p>
+<ol>
+<li>해당 일자의 일을 스킵할 경우</li>
+<li>해당 일자의 일을 받아들일 경우</li>
+</ol>
+<p>위 2가지 경우 중 <code>max</code> 값을 취하면 된다.</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 퇴사 전까지만</span></span><br><span class="line"><span class="keyword">if</span> i + T[i] &lt;= n:</span><br><span class="line">  <span class="keyword">if</span> i == n-<span class="number">1</span>:</span><br><span class="line">    dp[i] = P[i]</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    dp[i] = <span class="built_in">max</span>(dp[i+<span class="number">1</span>], dp[i + T[i]] + P[i])</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(dp[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/06/boj-11722/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/06/boj-11722/" class="post-title-link" itemprop="url">BOJ 11722</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-06 12:16:13 / Modified: 04:25:24" itemprop="dateCreated datePublished" datetime="2021-08-06T12:16:13+01:00">2021-08-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 수열 A의 크기 N (1 ≤ N ≤ 1,000)이 주어진다.</p>
+<p>둘째 줄에는 수열 A를 이루고 있는 Ai가 주어진다. (1 ≤ Ai ≤ 1,000)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">A = [<span class="number">1000</span>]*<span class="number">1000</span></span><br><span class="line">A[:n] = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>비슷한 문제를 풀어봤던 기억이 있어서, 그 방법대로 접근하려 했지만 문제를 풀어보니 내가 그 방식으로 풀고 있지 않았다.</p>
+<p>원래는 체크하고 있는 값보다 큰 값의 index를 dp에 저장하고 n-1부터 시작해서 dp에 저장된 index를 연속적으로 방문하며 cnt+1 해나가는 방식을 썼던 것 같은데,</p>
+<p>이번 문제는 index를 저장하는 것이 아닌, 체크하는 index 기준 긴 수열의 길이를 max로 비교하며 dp에 저장해나가고, 최종적으로 가장 큰 값을 출력하면 됐다.</p>
+<p>예시를 풀어보면 다음과 같이 되는데,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">A   = [10, 30, 10, 20, 20, 10]</span></span><br><span class="line"><span class="string">dp  = [ 1,  1,  2,  2,  2,  3]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>여기서 히든 케이스는 <code>max</code> 를 이용해 기존에 저장된 길이와 비교하여 큰 값으로 대체해야 한다는 점이다.</p>
+<p>히든 케이스를 예시로 들어보면,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">A   = [10, 40, 30, 40, 10, 20, 20, 10]</span></span><br><span class="line"><span class="string">dp  = [ 1,  1,  2,  1,  3,  3,  3,  4]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>푸는 방식을 일반화 해보니, 앞에서부터 체크해나가되 dp 값을 저장하기 위해서는 해당 index로부터 뒤로 가고 있더라. 코드로 짜보면 다음과 같다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n):</span><br><span class="line">  <span class="keyword">for</span> b <span class="keyword">in</span> <span class="built_in">range</span>(a-<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> A[b] &gt; A[a]:</span><br><span class="line">      dp[a] = <span class="built_in">max</span>(dp[a], dp[b] + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>전 값과 비교하면서</p>
+<ul>
+<li>전 값이 클 경우, 기존 <code>dp[a]</code> 에 저장된 길이와 <code>dp[b]</code> 를 비교해 <code>max</code> 값을 저장한다.</li>
+<li>여기서 끝내지 않고 index=0까지 방문하기 때문에 최외곽 index 기준으로 가장 긴 수열의 길이를 저장하게 된다.</li>
+</ul>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 수열 A의 가장 긴 감소하는 부분 수열의 길이를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="built_in">max</span>(dp))</span><br></pre></td></tr></table></figure>
+<p>IndexError로 인한 런타임 에러를 방지하기 위해 최대 길이의 배열을 생성했으므로… <code>dp[n-1]</code> 이 아닌 <code>max</code> 를 이용해 가장 큰 값에 접근해야 한다.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/06/boj-11726/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -952,229 +1157,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/04/nextjs-basic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/04/nextjs-basic/" class="post-title-link" itemprop="url">CSR와 SSR의 차이를 토대로 Next.js 알기</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-03 17:44:02 / Modified: 12:14:37" itemprop="dateCreated datePublished" datetime="2021-08-03T17:44:02+01:00">2021-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/react/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="들어가기에-앞서"><a href="#들어가기에-앞서" class="headerlink" title="들어가기에 앞서,"></a>들어가기에 앞서,</h2><p>Server Side Rendering을 지원하던 기존 Multi Page Form 방식에서 모바일 사용자가 증가함에 따라 React, Angular, Vue 등 Client Side Rendering이 가능한 SPA가 등장하게 되었다. SPA는 1개의 페이지에서 수정되는 부분만 리렌더링하는 등 여러 동작이 이루어진다. 그렇다면 SSR과 CSR의 차이는 무엇일까?</p>
-<h3 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h3><p><img src="https://www.sarah-note.com/static/862e8950181629369ee391b5e4a11578/e5166/p1_ssr.jpg" alt="overview"></p>
-<p>서버에서 렌더링 작업을 수행하는 SSR은 사용자가 웹페이지에 접근할 때 서버에서 페이지에 대한 요청을 보내고, 서버에서 html, view 등의 리소스가 어떻게 보여질 지 해석되어 렌더링 후 사용자에게 반환하는 방식으로, 전체적인 프로세스는 다음과 같다.</p>
-<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/boveg2/btqTxBHcFIg/zgpFFau2Q5LM5KljvJ8jcK/img.png"></p>
-<p>여기서 첫번째 단계는 다음과 같이 이루어진다.</p>
-<p><img src="https://media.vlpt.us/images/qkrdudgh052/post/c9c989f9-69e4-40be-98f1-a57c924bc187/2021-02-17%2020;09;29.PNG" alt="ssr"></p>
-<blockquote>
-<p>SSR이어도 Ajax 기능을 위해 클라이언트 렌더링 요소가 포함될 수 밖에 없다.</p>
-</blockquote>
-<p>쉽게 설명하면, 페이지를 구성해서 그에 해당하는 html을 다운받아 화면에 렌더링하는 것으로, CSR에 비해 다운 받는 파일이 많지 않아 초기 로딩 속도가 빠르고, 사용자가 빨리 콘텐츠를 볼 수 있다. 근데 이 과정이 <strong>브라우저 👉 프론트 서버 👉 백엔드 서버 👉 데이터 베이스</strong> 를 거쳐 데이터를 받고 역순으로 브라우저까지 데이터를 가져와 그려야 하기 때문에, 페이지 이동/ 클릭 등으로 다른 요청이 생길 때마다 이 과정을 반복하면 변경되지 않은 부분도 계속해서 리렌더링되는 문제점이 있다. (서버 부하 등의 문제를 일으킬 수 있음)</p>
-<h3 id="CSR"><a href="#CSR" class="headerlink" title="CSR"></a>CSR</h3><p><img src="https://www.sarah-note.com/static/2b2c814f10a5726eac67db95d5d625e9/e5166/p1_csr.jpg" alt="overview"></p>
-<p>CSR은 최초 1번만 서버에서 전체 페이지를 렌더링하여 보내주면, 이후에는 사용자의 요청이 올 때마다 리소스를 서버에서 제공받아 클라이언트가 해석하고 렌더링하는 방식이다. 전체적인 프로세스는 다음과 같다.</p>
-<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/EqHVZ/btqTDcmi1nD/uS1y4kirBkLQN7JAy7Z6gk/img.png"></p>
-<p><img src="https://media.vlpt.us/images/qkrdudgh052/post/2eea0a96-212e-4bf6-bdcc-77475a25b329/2021-02-17%2020;12;48.PNG" alt="csr"></p>
-<blockquote>
-<p>SSR에 클라이언트 렌더링 요소가 포함된다면, CSR는 SSR 없이 일관된 코드를 작성할 수 있다. (물론 아닌 경우도 있음)</p>
-</blockquote>
-<p>즉, 먼저 데이터를 제외하고 화면을 그리는 코드들만 프론트 서버에서 다운받아진다. 이는 js 파일에 한번에 묶이기 때문에 첫 다운에 시간이 오래 걸린다. 따라서 초기 구동 속도가 SSR에 비해 느려지는데, 이는 <code>code splitting</code> 으로 해결할 수 있다. 하지만 아직 데이터를 다운 받은 상태가 아니다. 클라이언트의 요청이 발생하면 필요한 데이터만 백엔드 서버에 요청하여 받아온 후 해당 부분을 갱신하는 방식으로 SPA가 작동하기 때문에 서버 부하가 덜하다.</p>
-<blockquote>
-<p>이와 관련된 문제는 검색 엔진 최적화에 취약할 수 있다는 점이다.</p>
-<p>초기에 데이터 없이 html이 다운되기 때문에 검색봇이 해당페이지를 빈 페이지로 착각하여 Search Engine Optimization에 취약할 수 있다.</p>
-</blockquote>
-<h3 id="그래서-차이점은"><a href="#그래서-차이점은" class="headerlink" title="그래서 차이점은?"></a>그래서 차이점은?</h3><ul>
-<li>렌더링 속도</li>
-<li>SEO</li>
-<li>보안</li>
-</ul>
-<p>등의 차이가 있다.</p>
-<p>CSR은 사용자의 요청에 맞게 필요한 부분만 다시 읽기 때문에 서버에서 전체 페이지를 다시 읽는 것보다 빠른 반응 속도를 기대할 수 있다. 하지만 초기 로딩 시</p>
-<ol>
-<li>html 다운: 페이지를 읽고</li>
-<li>js 다운: js를 읽고</li>
-<li>js을 실행하고</li>
-</ol>
-<p>등등을 모두 마무리해야 사용자에게 콘텐츠가 보이기 때문에 <em>화면을 렌더링하기까지의</em> 초기 로딩 속도가 느리다. 하지만 그 이후에는 빠른 반응을 보인다.</p>
-<p>SSR은 서버에서 view를 렌더링하여 가져오기 때문에, 초기 로딩 속도 (초기 화면 렌더링 속도) 가 빠르다.</p>
-<h2 id="Next-js란"><a href="#Next-js란" class="headerlink" title="Next.js란?"></a>Next.js란?</h2><p>그래서 Next는 어떤 SSR과 CSR의 단점을 보완하는 걸까?</p>
-<p>SSR은 불필요한 부분까지 리렌더링 되어 서버 부하가 발생할 수 있다는 점, CSR은 초기 로딩 속도가 느리고 SEO에 취약하다는 단점이 있다.</p>
-<p>Next.js를 사용하여 첫페이지는 백엔드 서버에서 렌더링하여 빈 html이 아닌 데이터가 채워진 html을 받는다면 SEO 문제를 해결할 수 있다. 이후에는 CSR 방식에 따라 필요한 데이터만 받아 갱신한다면 서버 부하도 줄일 수 있다.</p>
-<p><img src="https://miro.medium.com/max/1400/1*mU0dHw7xyVDVQlopkdVJfA.png" alt="diff"></p>
-<h3 id="Next-js를-통해…"><a href="#Next-js를-통해…" class="headerlink" title="Next.js를 통해…"></a>Next.js를 통해…</h3><p>기존의 문제점인</p>
-<ul>
-<li>webpack과 같은 번들러를 통해 code를 번들하고 Babel과 같은 컴파일러로 변환해야 함</li>
-<li>code splitting과 같은 성능 최적화가 필요함</li>
-<li>성능과 SEO를 위해 몇몇 페이지를 pre-render 해야할 수 있음</li>
-<li>React app과 데이터 스토어를 연동하기 위해 SSR 코드를 작성해야 할 수 있음</li>
-<li>그냥, SSR과 CSR를 모두 사용하고 싶음</li>
-</ul>
-<p>을 해결할 수 있다.</p>
-<p>그러니까 Next.js의 특징은</p>
-<ul>
-<li>페이지 기반의 라우팅 시스템 (CRA 시 <code>page</code> folder 생성)</li>
-<li>한 페이지 당 SSG와 SSR을 지원해 pre-rendering 가능</li>
-<li>자동화된 code splitting을 통해 페이지 로딩을 빠르게 함</li>
-<li>Client Side Routing에 최적화된 prefetching을 지원함</li>
-<li>빌트인 CSS, Sass이 지원되며, 모든 CSS-in-JS 라이브러리를 지원함</li>
-<li>빠른 재구동 개발 환경을 지원함</li>
-<li>serverless 함수를 이용해 API를 개발할 수 있게 API 라우터를 지원함</li>
-<li>확장 가능함</li>
-</ul>
-<p>등이 있다.</p>
-<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a target="_blank" rel="noopener" href="https://nextjs.org/learn/basics/create-nextjs-app">https://nextjs.org/learn/basics/create-nextjs-app</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/03/boj-14501/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/03/boj-14501/" class="post-title-link" itemprop="url">BOJ 14501</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-03 15:44:39 / Modified: 08:04:15" itemprop="dateCreated datePublished" datetime="2021-08-03T15:44:39+01:00">2021-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>첫째 줄에 N (1 ≤ N ≤ 15)이 주어진다.</p>
-<p>둘째 줄부터 N개의 줄에 Ti와 Pi가 공백으로 구분되어서 주어지며, 1일부터 N일까지 순서대로 주어진다. (1 ≤ Ti ≤ 5, 1 ≤ Pi ≤ 1,000)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">T = []</span><br><span class="line">P = []</span><br><span class="line">dp = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">  t, p = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">  T.append(t)</span><br><span class="line">  P.append(p)</span><br><span class="line">  dp.append(p)</span><br><span class="line">dp.append(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>첫째 줄에 백준이가 얻을 수 있는 최대 이익을 출력한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(dp[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>역순으로 접근해 <strong>무조건 index 0</strong> 값에 최대를 담도록 함.</p>
-<ul>
-<li><p>현재 일자 <code>i</code> 에 기간 <code>T[i]</code> 를 더했을 때 <code>N+1</code> 보다 작아야 하므로, 예외의 경우 이전 값 <code>dp[p+1]</code> 을 유지한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> i+T[i] &gt; N:</span><br><span class="line">  dp[i] = dp[i+<span class="number">1</span>]</span><br></pre></td></tr></table></figure></li>
-<li><p>범위 내에 드는 경우 최대 이익을 구하는 <strong>조합</strong> 을 구해야 하므로, 이전 값 <code>dp[i+1]</code> 과 현재 비용 <code>P[i]</code> 에 <code>T[i]</code> 이후의 비용을 더한 값 중 max 값을 취한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  dp[i] = <span class="built_in">max</span>(dp[i+<span class="number">1</span>], P[i]+dp[i+T[i]])</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1246,20 +1228,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">146</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-count">101</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
