@@ -163,6 +163,108 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/04/boj-17175/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/04/boj-17175/" class="post-title-link" itemprop="url">BOJ 17175</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-04 12:00:49 / Modified: 04:07:52" itemprop="dateCreated datePublished" datetime="2021-08-04T12:00:49+01:00">2021-08-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/dp/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><h4 id="Default"><a href="#Default" class="headerlink" title="Default"></a>Default</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">100000</span>)</span><br><span class="line"><span class="built_in">input</span> = sys.stdin.readline</span><br></pre></td></tr></table></figure>
+
+
+<p><em>fibonacci</em> 함수에 인자로 입력할 <em>n</em>이 주어진다. (0 ≤ <em>n</em> ≤ 50)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p><em>fibonacci</em> 함수가 호출된 횟수를 출력한다.</p>
+<p>출력값이 매우 커질 수 있으므로 정답을 1,000,000,007 로 나눈 나머지를 출력한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> n &lt; <span class="number">2</span>: print(num[n])</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  print(num[n] % <span class="number">1000000007</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><ul>
+<li><p>일단 <strong>호출 횟수</strong> 를 출력해야 한다는 점!</p>
+</li>
+<li><p>재귀함수를 사용하면 피보나치 수열을 진행하는 동시에 count도 해야하므로 <em>시간 초과</em> 가 발생한다…</p>
+</li>
+<li><p>따라서 <strong>배열</strong> 을 사용해서 count 횟수만 진행한다! 이러면 for문으로 충분함</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = [<span class="number">1</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li><p><code>n &lt; 2</code> 인 경우에는 위에서 바로 출력하면 됨</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> n &lt; <span class="number">2</span>: print(num[n])</span><br></pre></td></tr></table></figure></li>
+<li><p>그 외의 경우에는 배열을 증가시키고 출력해야 함</p>
+<ul>
+<li>횟수는 default로 <code>n &lt; 2</code> 의 경우에는 <code>1번</code> 이고, 그 이후에는 <code>fibonacci(n-2) + fibonacci(n-1)</code> 에 따라 <code>num[본인-1] + num[본인-2] + 본인 호출 횟수 1</code> 을 append 한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>):</span><br><span class="line">    <span class="comment"># fibonacci(n-2) + fibonacci(n-1)에 자기 자신 호출 횟수 +1</span></span><br><span class="line">    num.append(num[-<span class="number">1</span>] + num[-<span class="number">2</span>] + <span class="number">1</span>)</span><br><span class="line">  </span><br><span class="line">  print(num[n] % <span class="number">1000000007</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/08/04/nextjs-basic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1059,77 +1161,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/07/25/python-count-primitive/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/25/python-count-primitive/" class="post-title-link" itemprop="url">Count Primitives</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-24 18:33:58 / Modified: 10:37:04" itemprop="dateCreated datePublished" datetime="2021-07-24T18:33:58+01:00">2021-07-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="AboveMean"><a href="#AboveMean" class="headerlink" title="AboveMean"></a>AboveMean</h3><h3 id="BelowMean"><a href="#BelowMean" class="headerlink" title="BelowMean"></a>BelowMean</h3><h3 id="GreaterThan"><a href="#GreaterThan" class="headerlink" title="GreaterThan"></a>GreaterThan</h3><h3 id="LessThan"><a href="#LessThan" class="headerlink" title="LessThan"></a>LessThan</h3><h3 id="InsideRange"><a href="#InsideRange" class="headerlink" title="InsideRange"></a>InsideRange</h3><h3 id="OutsideRange"><a href="#OutsideRange" class="headerlink" title="OutsideRange"></a>OutsideRange</h3><h3 id="InsideNthRange"><a href="#InsideNthRange" class="headerlink" title="InsideNthRange"></a>InsideNthRange</h3><h3 id="OutsideNthRange"><a href="#OutsideNthRange" class="headerlink" title="OutsideNthRange"></a>OutsideNthRange</h3><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1201,7 +1232,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1214,7 +1245,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">101</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

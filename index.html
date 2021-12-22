@@ -163,6 +163,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/12/23/js-mouseevent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpeg">
+      <meta itemprop="name" content="JungHyun">
+      <meta itemprop="description" content="Continuously Growing Developer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="leah">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/23/js-mouseevent/" class="post-title-link" itemprop="url">js-mouseevent</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-22 15:27:43 / Modified: 06:30:27" itemprop="dateCreated datePublished" datetime="2021-12-22T15:27:43Z">2021-12-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/javascript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>여기서, <strong>onmouseup과 onclick의 차이</strong> 는 무엇일까?</p>
+<p>마우스를 버튼에서 누른 상태에서 버튼의 영역을 벗어나서 버튼을 놓았을때 차이가 존재한다.</p>
+<ul>
+<li><p><code>onClick</code> 이벤트 : 이벤트 함수가 실행이 <strong>안 됨</strong>, 왼쪽 클릭에 한하여 이벤트 발생</p>
+</li>
+<li><p><code>onMouseUp</code> 이벤트 : 이벤트 함수가 실행이 <strong>됨</strong>, 모든 클릭 적용</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/12/22/notion-editableblock/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -188,7 +267,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-12-22 13:40:56 / Modified: 06:26:39" itemprop="dateCreated datePublished" datetime="2021-12-22T13:40:56Z">2021-12-22</time>
+              <time title="Created: 2021-12-22 13:40:56 / Modified: 06:27:27" itemprop="dateCreated datePublished" datetime="2021-12-22T13:40:56Z">2021-12-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,14 +353,6 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">handleMouseUp</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.contentEditable.current) &#123;</span><br><span class="line">      <span class="keyword">const</span> block = <span class="built_in">this</span>.contentEditable.current;</span><br><span class="line">      <span class="keyword">const</span> &#123; selectionStart, selectionEnd &#125; = getSelection(block);</span><br><span class="line">      <span class="keyword">if</span> (selectionStart !== selectionEnd) &#123;</span><br><span class="line">        <span class="built_in">this</span>.openActionMenu(block, <span class="string">&#x27;TEXT_SELECTION&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
 <p>2의 경우 블록 오른쪽에 위치한, drag-n-drop 표시를 위한 아이콘을 onclick 한 상태이므로, <code>&#39;DRAG_HANDLE_CLICK&#39;</code> 를 키로 전달한다. 이 경우 아이콘 바로 왼쪽에 actionMenu가 오픈되어야 한다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">handleDragHandleClick</span>(<span class="params">e: any</span>)</span> &#123;</span><br><span class="line">   <span class="keyword">if</span> (e.target) &#123;</span><br><span class="line">     <span class="keyword">const</span> dragHandle = e.target;</span><br><span class="line">     <span class="built_in">this</span>.openActionMenu(dragHandle, <span class="string">&#x27;DRAG_HANDLE_CLICK&#x27;</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>여기서, <strong>onmouseup과 onclick의 차이</strong> 는 무엇일까?</p>
-<p>마우스를 버튼에서 누른 상태에서 버튼의 영역을 벗어나서 버튼을 놓았을때 차이가 존재한다.</p>
-<ul>
-<li><p><code>onClick</code> 이벤트 : 이벤트 함수가 실행이 <strong>안 됨</strong>, 왼쪽 클릭에 한하여 이벤트 발생</p>
-</li>
-<li><p><code>onMouseUp</code> 이벤트 : 이벤트 함수가 실행이 <strong>됨</strong>, 모든 클릭 적용</p>
-</li>
-</ul>
 <hr>
 <p>actionMenu가 open된 후 발생하는 클릭 이벤트를 핸들링 하기 위해서는, range의 변경이 완료되었다고 판단하는 시간을 0.1초로 가정하고 이벤트 핸들러로 하여금 작동하도록 한다. 이러지 않으면, 사용자가 텍스트를 드래그하여 Range를 정하는 것과 맞물려 작동해 에러가 발생할 수 있으므로 불편을 초래할 수 있다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">openActionMenu</span>(<span class="params">parent: any, trigger: string</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; x, y &#125; = <span class="built_in">this</span>.calculateActionMenuPosition(parent, trigger);</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      ...this.state,</span><br><span class="line">      actionMenuPosition: &#123; x, y &#125;,</span><br><span class="line">      actionMenuOpen: <span class="literal">true</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">document</span>.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="built_in">this</span>.closeActionMenu);</span><br><span class="line">    &#125;, <span class="number">100</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
@@ -357,7 +428,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-22 06:25:08" itemprop="dateModified" datetime="2021-12-22T06:25:08Z">2021-12-22</time>
+                <time title="Modified: 2021-12-22 06:30:16" itemprop="dateModified" datetime="2021-12-22T06:30:16Z">2021-12-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -388,7 +459,12 @@
 <p>이 과정 없이 <code>focus</code> 를 취하면 커서의 위치는 텍스트의 처음으로 설정된다.</p>
 <ul>
 <li>element의 타입은 HTMLElement이다.</li>
+<li>Selection은 Node 조작이 가능한 범위를 지정해주는 window (global) 메소드 이용</li>
+<li>Range는 개별 Node를 생성하는 것이므로 document 메소드 이용</li>
 </ul>
+<blockquote>
+<p>document는 window의 프로퍼티 (window.document는 document에 대한 레퍼런스를 리턴한다) 이다.</p>
+</blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Fragment of a document that can contain nodes and parts of text nodes</span></span><br><span class="line">  <span class="keyword">const</span> range = <span class="built_in">document</span>.createRange();</span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Selection object representing the range of text selected by the user or the current position of the caret</span></span><br><span class="line">  <span class="keyword">const</span> selection = <span class="built_in">window</span>.getSelection();</span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sets the Range to the contents of a Node</span></span><br><span class="line">  range.selectNodeContents(element);</span><br></pre></td></tr></table></figure>
@@ -1414,85 +1490,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://leahincom.github.io/2021/10/22/js-date-timestamp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpeg">
-      <meta itemprop="name" content="JungHyun">
-      <meta itemprop="description" content="Continuously Growing Developer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="leah">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/22/js-date-timestamp/" class="post-title-link" itemprop="url">JavaScript에서의 Date와 timestamp</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-10-22 12:02:25 / Modified: 08:33:42" itemprop="dateCreated datePublished" datetime="2021-10-22T12:02:25+01:00">2021-10-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/javascript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><code>moment</code> 라이브러리 대신 내장 Date 함수를 사용하면 충분하다.</p>
-<ul>
-<li>JavaScript의 두 날짜를 <strong>&lt;,&lt;=,&gt;및&gt;=와 같은 비교 연산자</strong>로 직접 비교할 수 있다.</li>
-</ul>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> date1 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;2020-10-23&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> date2 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;2020-10-22&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(date1 &gt; date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 &gt;= date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 &lt; date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 &lt;= date2);</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">false</span></span><br><span class="line"><span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>하지만, <strong>등호 연산자</strong>를 사용하여 직접 Date 객체를 비교할 수 없다. JavaScript에서 다른 객체는 동일하지 않기 때문이다.</li>
-</ul>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date1 = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">let</span> date2 = <span class="keyword">new</span> <span class="built_in">Date</span>(date1);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(date1 == date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 === date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 != date2);</span><br><span class="line"><span class="built_in">console</span>.log(date1 !== date2);</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="literal">false</span></span><br><span class="line"><span class="literal">false</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1564,7 +1561,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1577,7 +1574,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">101</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
